@@ -193,6 +193,11 @@ const SCALES = { share: { breaks: [.5, 2, 5, 15, 30, 50], ticks: ['', '0.5%', '2
 const SEQ = dark ? ['#2B211B', '#4A2C24', '#6B3129', '#8E3430', '#B33A37', '#D45A55', '#F08A80'] : ['#F2E6DA', '#EACAB6', '#E0A88E', '#D2836A', '#BF5C48', '#A6362E', '#7A1B1E'];
 const classOf = (v) => SCALES[measure].breaks.filter((b) => v >= b).length;
 const fmt = (v) => v == null ? t('nodata') : measure === 'count' ? nf().format(v) : `${v < 10 ? v.toFixed(1) : Math.round(v)}%`;
+// Wikidata names scripts in English: the common ones in the reader's language
+const SCRIPT = { 'Cyrillic script': ['Kiril', 'Кириллица'], 'Latin script': ['Latın', 'Латиница'], 'Arabic script': ['Ərəb', 'Арабское письмо'], 'Arabic alphabet': ['Ərəb əlifbası', 'Арабский алфавит'],
+  'Georgian scripts': ['Gürcü yazısı', 'Грузинское письмо'], 'Mkhedruli': ['Mxedruli', 'Мхедрули'], 'Asomtavruli': ['Asomtavruli', 'Асомтаврули'], 'Armenian alphabet': ['Erməni əlifbası', 'Армянский алфавит'],
+  'Turkish alphabet': ['Türk əlifbası', 'Турецкий алфавит'], 'Avar alphabet': ['Avar əlifbası', 'Аварский алфавит'], 'Tat alphabet': ['Tat əlifbası', 'Татский алфавит'] };
+const scriptName = (n) => lang === 'en' ? n : SCRIPT[n]?.[lang === 'az' ? 0 : 1] ?? n;
 const pname = (p) => { const x = info[p]; return x ? x[lang] : p; };
 
 const map = new maplibregl.Map({
@@ -303,7 +308,7 @@ function drawSide() {
     <p><span class="k">${t('language')}:</span> ${lg.wiki ? `<a href="${esc(lg.wiki)}" target="_blank" rel="noopener">${esc(x.langName?.[LI[lang]] ?? '')}</a>` : esc(x.langName?.[LI[lang]] ?? '')}</p>
     ${x.family?.name ? `<p><span class="k">${t('family')}:</span> ${esc(x.family.name[LI[lang]])}</p>` : ''}
     ${lg.unesco ? `<p><span class="k">${t('status')}:</span> <span class="badge u${lg.unesco}">${t('unesco')[lg.unesco]}</span></p>` : ''}
-    ${lg.scripts?.length ? `<p><span class="k">${t('scripts')}:</span> ${esc(lg.scripts.join(', '))}</p>` : ''}
+    ${lg.scripts?.length ? `<p><span class="k">${t('scripts')}:</span> ${esc(lg.scripts.map(scriptName).join(', '))}</p>` : ''}
     ${spark(people)}
   </div>
   <section class="rank"><h2>${t('districts')}</h2><ol>${units.map((u) => ({ u, c: count(u) })).filter((z) => z.c && z.c.n).sort((a, b) => b.c.n - a.c.n).slice(0, 8).map((z, i) => `<li><button type="button" data-u="${z.u.fid}"><span class="v">${i + 1}</span><span>${esc(L(z.u))}</span><span class="v">${nf().format(z.c.n)} · ${(z.c.total ? z.c.n / z.c.total * 100 : 0).toFixed(1)}%</span></button></li>`).join('')}</ol></section>` : '';
