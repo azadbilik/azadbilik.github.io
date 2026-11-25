@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Xanlıqlar · Azad Bilik</title>
+<meta name="description" content="Azərbaycan xanlıqları təxminən 1800-cü ildə: Quba, Bakı, Şirvan, Şəki, Gəncə, Qarabağ, Talış, Cavad, Naxçıvan, İrəvan və Arazın cənubundakılar. Təxmini sərhədlər. The khanates of Azerbaijan around 1800, approximate borders.">
+<meta name="theme-color" content="#F4EFE6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14100D" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://azadbilik.org/atlas/xanliqlar/">
+<meta property="og:title" content="Xanlıqlar · The khanates, c. 1800">
+<meta property="og:description" content="Azərbaycan xanlıqları təxminən 1800-cü ildə, təxmini sərhədlərlə.">
+<meta property="og:image" content="https://azadbilik.org/atlas/xanliqlar/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+<link rel="stylesheet" href="/shared/story-map.css">
+<style>
+  .controls { padding: .9rem 1.5rem; border-bottom: 1px solid var(--rule); display: grid; gap: .5rem; }
+  .check { display: flex; align-items: center; gap: .5rem; font-size: .8125rem; color: var(--muted); cursor: pointer; }
+  .check input { accent-color: var(--accent); }
+  .caveat { margin: 1rem 1.5rem 0; padding: .6rem .75rem; border: 1px dashed color-mix(in srgb, var(--accent) 55%, transparent); border-radius: 4px; font-size: .8125rem; }
+  .sec { padding: .9rem 1.5rem .35rem; font: 500 .75rem var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .klist { list-style: none; padding: 0 0 .5rem; }
+  .klist button { display: grid; grid-template-columns: .8rem 1fr auto; gap: .6rem; align-items: center; width: 100%; text-align: left; padding: .35rem 1.5rem; font-size: .875rem; }
+  .klist button:hover { background: var(--rule); }
+  .klist i { width: .8rem; height: .8rem; border-radius: 2px; }
+  .klist i.pt { border-radius: 50%; border: 2px solid var(--ink); background: transparent !important; width: .7rem; height: .7rem; }
+  .klist .v { font-size: .75rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .back { display: block; padding: 1rem 1.5rem 0; font-size: .8125rem; color: var(--muted); }
+  .back:hover { color: var(--ink); }
+  .card { padding: .5rem 1.5rem 0; display: grid; gap: .45rem; font-size: .875rem; }
+  .card h2 { font: 400 1.5rem/1.15 var(--serif); display: flex; gap: .5rem; align-items: center; }
+  .card h2 i { width: .9rem; height: .9rem; border-radius: 2px; flex: none; }
+  .card .k { color: var(--muted); font-size: .8125rem; }
+  .card a { color: inherit; }
+  .legend .row { display: flex; align-items: center; gap: .45rem; }
+  .legend .sw { width: 1.4rem; height: .7rem; border: 1.5px dashed var(--ink); border-radius: 2px; opacity: .7; }
+  .legend .pt { width: .6rem; height: .6rem; border-radius: 50%; border: 2px solid var(--ink); }
+  .legend .ln { width: 1.4rem; border-top: 1.5px dashed var(--ink); opacity: .7; }
+  @media (max-width: 48rem) { .controls { padding-inline: 1rem; } .caveat { margin-inline: 1rem; } .sec, .klist button, .back, .card { padding-inline: 1rem; } }
+</style>
+</head>
+<body>
+<div id="map" role="region" aria-label="Xəritə"></div>
+
+<aside class="panel">
+  <div class="head">
+    <div class="top"><a class="brand" href="/" data-keep-lang><svg viewBox="0 0 512 512" aria-hidden="true"><g class="star"><rect x="126" y="126" width="260" height="260"/><polygon points="256,72 440,256 256,440 72,256"/></g><polygon class="gem" points="256,196 316,256 256,316 196,256"/></svg>Azad Bilik</a><nav><a href="/atlas/" data-keep-lang>Atlas</a><span class="langs" role="group" aria-label="Dil · Язык · Language"><button type="button" data-lang="az">AZ</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="en">EN</button></span></nav></div>
+    <h1 data-i18n="title">Xanlıqlar</h1>
+    <p class="sub" data-i18n="sub">Azərbaycan xanlıqları, təxminən 1800</p>
+  </div>
+  <div class="body" id="body">
+    <div class="controls">
+      <label class="check"><input type="checkbox" id="u1897"> <span data-i18n="u1897">1897-ci ilin qəzaları</span></label>
+      <label class="check"><input type="checkbox" id="today"> <span data-i18n="today">Bugünkü rayon sərhədləri</span></label>
+    </div>
+    <div id="side" aria-live="polite"></div>
+  </div>
+</aside>
+
+<div class="legend" id="legend"></div>
+
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script>
+(() => {
+const dark = matchMedia('(prefers-color-scheme: dark)').matches;
+const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+const still = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+const LANGS = ['az', 'ru', 'en'];
+let lang = (() => {
+  const q = new URLSearchParams(location.search).get('lang');
+  if (LANGS.includes(q)) return q;
+  try { const s = localStorage.getItem('lang'); if (LANGS.includes(s)) return s; } catch {}
+  return 'az';
+})();
+const LI = { az: 0, ru: 1, en: 2 };
+const T = {
+  az: { doc: 'Xanlıqlar · Azad Bilik', title: 'Xanlıqlar', sub: 'Azərbaycan xanlıqları, təxminən 1800', u1897: '1897-ci ilin qəzaları', today: 'Bugünkü rayon sərhədləri',
+    caveat: 'Sərhədlər təxminidir. Arazın şimalında hər xanlıq Rusiya idarəsinin onun torpaqlarından düzəltdiyi 1897-ci il qəzaları ilə çəkilib; İrəvan və Naxçıvan OpenHistoricalMap-in konturları ilə; Arazın cənubundakılar yalnız paytaxtları ilə.',
+    north: 'Arazın şimalında', south: 'Arazın cənubunda və Dərbənd', annexed: (y) => `Rusiyaya keçib: ${y}`, capital: 'Paytaxtı', drawn: 'Necə çəkilib', from1897: (u) => `1897-ci ilin qəzaları: ${u}`, fromOhm: 'OpenHistoricalMap konturu', back: '← Bütün xanlıqlar', wiki: 'Vikipediya', legendArea: 'xanlıq (təxmini)', legendCap: 'paytaxt', legend1897: '1897-ci il qəzaları', legendToday: 'bugünkü rayonlar', southNote: 'Qacar İranının tərkibində qalıb; sərhədləri çəkilməyib.',
+    note: 'Qəza sərhədləri: Rusiya tarixi statistikasının elektron arxivi (RISTAT, Kessler və Markeviç), CC0. İrəvan və Naxçıvan: OpenHistoricalMap, CC0. Paytaxtlar: Wikidata. Hansı qəzanın hansı xanlıqdan yarandığı Azad Bilikin təxminidir; dəqiq sərhədlər XIX əsrin əvvəlinin xəritələrindən əl ilə köçürülməlidir.' },
+  ru: { doc: 'Ханства · Azad Bilik', title: 'Ханства', sub: 'Азербайджанские ханства около 1800 г.', u1897: 'Уезды 1897 г.', today: 'Границы нынешних районов',
+    caveat: 'Границы приблизительные. К северу от Аракса каждое ханство показано уездами 1897 г., созданными российской администрацией из его земель; Эриванское и Нахичеванское — по контурам OpenHistoricalMap; к югу от Аракса — только столицы.',
+    north: 'К северу от Аракса', south: 'К югу от Аракса и Дербент', annexed: (y) => `Отошло России: ${y}`, capital: 'Столица', drawn: 'Как нарисовано', from1897: (u) => `Уезды 1897 г.: ${u}`, fromOhm: 'Контур OpenHistoricalMap', back: '← Все ханства', wiki: 'Википедия', legendArea: 'ханство (приблизительно)', legendCap: 'столица', legend1897: 'уезды 1897 г.', legendToday: 'нынешние районы', southNote: 'Остались в составе Каджарского Ирана; границы не нарисованы.',
+    note: 'Границы уездов: Электронный архив российской исторической статистики (RISTAT, Кесслер и Маркевич), CC0. Эривань и Нахичевань: OpenHistoricalMap, CC0. Столицы: Викиданные. Какой уезд из какого ханства — оценка Azad Bilik; точные границы нужно перенести вручную с карт начала XIX в.' },
+  en: { doc: 'Khanates · Azad Bilik', title: 'Khanates', sub: 'The khanates of Azerbaijan, c. 1800', u1897: 'The 1897 uezds', today: "Today's district borders",
+    caveat: "The borders are approximate. North of the Araz each khanate is drawn as the 1897 uezds the Russian administration made from its lands; Erivan and Nakhchivan as OpenHistoricalMap's outlines; south of the Araz only their capitals.",
+    north: 'North of the Araz', south: 'South of the Araz, and Derbent', annexed: (y) => `Passed to Russia: ${y}`, capital: 'Capital', drawn: 'How it is drawn', from1897: (u) => `The 1897 uezds: ${u}`, fromOhm: 'OpenHistoricalMap outline', back: '← All khanates', wiki: 'Wikipedia', legendArea: 'khanate (approximate)', legendCap: 'capital', legend1897: '1897 uezds', legendToday: "today's districts", southNote: 'Stayed within Qajar Iran; borders not drawn.',
+    note: "Uezd borders: the Electronic Repository of Russian Historical Statistics (RISTAT, Kessler and Markevich), CC0. Erivan and Nakhchivan: OpenHistoricalMap, CC0. Capitals: Wikidata. Which uezd came from which khanate is Azad Bilik's estimate; true borders need tracing by hand from early-19th-century maps." },
+};
+const t = (k) => T[lang][k];
+const L = (p) => p[lang] ?? p.az;
+let areas = [], caps = [], geo = null, selected = null, show1897 = false, showToday = false, U1897 = {};
+const params = new URLSearchParams(location.search);
+const BOUNDS = [[43.3, 37.2], [50.4, 42.3]];
+
+const map = new maplibregl.Map({
+  container: 'map', style: `https://tiles.openfreemap.org/styles/${dark ? 'dark' : 'positron'}`,
+  bounds: BOUNDS, minZoom: 4.5, maxZoom: 10,
+  attributionControl: { compact: true, customAttribution: '<a href="https://ristat.org/">RISTAT</a> · <a href="https://www.openhistoricalmap.org/">OpenHistoricalMap</a> · Wikidata · <a href="https://www.geoboundaries.org">geoBoundaries</a>' },
+});
+map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-right');
+const tip = new maplibregl.Popup({ closeButton: false, closeOnClick: false, offset: 8 });
+const phone = () => matchMedia('(max-width: 48rem)').matches;
+const pad = () => phone() ? { top: 60, right: 16, left: 16, bottom: document.querySelector('.panel').offsetHeight + 16 } : { top: 32, right: 32, bottom: 32, left: 27 * 16 + 32 };
+const labelExpr = () => ['coalesce', ['get', `name:${lang}`], ['get', lang === 'ru' ? 'name' : 'name:latin'], ['get', 'name']];
+map.on('style.load', () => {
+  for (const l of map.getStyle().layers) {
+    if (l.type === 'background') map.setPaintProperty(l.id, 'background-color', css('--land'));
+    if (l.type === 'fill' && /water|ocean|lake/.test(l.id)) map.setPaintProperty(l.id, 'fill-color', css('--water'));
+    if (l.type === 'symbol' && l.layout?.['text-field']) map.setLayoutProperty(l.id, 'text-field', labelExpr());
+  }
+});
+map.on('load', async () => {
+  const [g, u, now, names] = await Promise.all(['data/khanates.geojson', '../1897/data/units.geojson', '../ehali/data/units.geojson', '../1897/data/names.json'].map((f) => fetch(f).then((r) => r.json())));
+  geo = g; U1897 = names.units;
+  g.features.forEach((f, k) => { f.id = k; });
+  areas = g.features.filter((f) => f.properties.kind === 'area').map((f) => ({ ...f.properties, fid: f.id }));
+  caps = g.features.filter((f) => f.properties.kind === 'capital').map((f) => ({ ...f.properties, fid: f.id }));
+  map.fitBounds(BOUNDS, { padding: pad(), duration: 0 });
+  document.querySelector('.maplibregl-ctrl-attrib')?.classList.remove('maplibregl-compact-show');
+  const firstSymbol = map.getStyle().layers.find((l) => l.type === 'symbol')?.id;
+  const ink = css('--ink');
+  map.addSource('k', { type: 'geojson', data: g });
+  map.addSource('u1897', { type: 'geojson', data: u });
+  map.addSource('today', { type: 'geojson', data: now });
+  const isArea = ['==', ['get', 'kind'], 'area'];
+  // Same colour inside a khanate, so the 1897 uezd seams don't show; a dashed edge says "approximate"
+  map.addLayer({ id: 'k-fill', type: 'fill', source: 'k', filter: isArea, paint: { 'fill-color': ['get', 'color'], 'fill-opacity': ['case', ['boolean', ['feature-state', 'sel'], false], .7, ['boolean', ['feature-state', 'hover'], false], .6, .45], 'fill-outline-color': ['get', 'color'] } }, firstSymbol);
+  map.addLayer({ id: 'k-edge', type: 'line', source: 'k', filter: isArea, paint: { 'line-color': ['get', 'color'], 'line-width': 1.2, 'line-dasharray': [3, 2], 'line-opacity': .9 } }, firstSymbol);
+  map.addLayer({ id: 'u1897', type: 'line', source: 'u1897', layout: { visibility: 'none' }, paint: { 'line-color': ink, 'line-width': .7, 'line-opacity': .45, 'line-dasharray': [1, 2] } }, firstSymbol);
+  map.addLayer({ id: 'today', type: 'line', source: 'today', layout: { visibility: 'none' }, paint: { 'line-color': ink, 'line-width': .8, 'line-opacity': .55 } }, firstSymbol);
+  map.addLayer({ id: 'k-sel', type: 'line', source: 'k', filter: isArea, paint: { 'line-color': ink, 'line-width': ['case', ['boolean', ['feature-state', 'sel'], false], 2, 0] } }, firstSymbol);
+  map.addLayer({ id: 'caps', type: 'circle', source: 'k', filter: ['==', ['get', 'kind'], 'capital'], paint: { 'circle-radius': 4, 'circle-color': ['case', ['get', 'south'], css('--paper'), ink], 'circle-stroke-color': ink, 'circle-stroke-width': 1.5 } });
+  map.addLayer({ id: 'cap-names', type: 'symbol', source: 'k', filter: ['==', ['get', 'kind'], 'capital'], layout: { 'text-field': ['get', lang], 'text-font': ['Noto Sans Regular'], 'text-size': 12, 'text-variable-anchor': ['top', 'bottom', 'left', 'right'], 'text-radial-offset': .7, 'text-justify': 'auto', 'text-max-width': 9 },
+    paint: { 'text-color': ink, 'text-halo-color': css('--paper'), 'text-halo-width': 1.6 } });
+  let hovered = null;
+  map.on('mousemove', 'k-fill', (e) => {
+    map.getCanvas().style.cursor = 'pointer';
+    const f = e.features[0];
+    if (hovered !== f.id) { if (hovered != null) map.setFeatureState({ source: 'k', id: hovered }, { hover: false }); hovered = f.id; map.setFeatureState({ source: 'k', id: hovered }, { hover: true }); }
+    tip.setLngLat(e.lngLat).setHTML(`<strong>${esc(f.properties[lang])}</strong>${f.properties.annexed ? ` · ${t('annexed')(f.properties.annexed)}` : ''}`).addTo(map);
+  });
+  map.on('mouseleave', 'k-fill', () => { map.getCanvas().style.cursor = ''; tip.remove(); if (hovered != null) map.setFeatureState({ source: 'k', id: hovered }, { hover: false }); hovered = null; });
+  map.on('click', 'k-fill', (e) => select(e.features[0].properties.id));
+  map.on('click', 'caps', (e) => select(e.features[0].properties.id));
+  map.on('mouseenter', 'caps', () => { map.getCanvas().style.cursor = 'pointer'; });
+  map.on('mouseleave', 'caps', () => { map.getCanvas().style.cursor = ''; });
+  if (params.get('k')) select(params.get('k'), true);
+  else draw();
+});
+function bboxOf(f) { let b = [180, 90, -180, -90]; const g = f.geometry; const pts = g.type === 'Point' ? [g.coordinates] : g.coordinates.flatMap((p) => p[0]); for (const [x, y] of pts) b = [Math.min(b[0], x), Math.min(b[1], y), Math.max(b[2], x), Math.max(b[3], y)]; return [[b[0], b[1]], [b[2], b[3]]]; }
+function select(id, fly = true) {
+  for (const a of areas) map.setFeatureState({ source: 'k', id: a.fid }, { sel: a.id === id });
+  selected = id;
+  if (id && fly) {
+    const a = areas.find((x) => x.id === id), c = caps.find((x) => x.id === id);
+    if (a) map.fitBounds(bboxOf(geo.features[a.fid]), { padding: pad(), maxZoom: 8.5, duration: still() ? 0 : 700 });
+    else if (c) map.flyTo({ center: geo.features[c.fid].geometry.coordinates, zoom: 7.5, duration: still() ? 0 : 700 });
+  }
+  draw();
+  document.getElementById('body').scrollTop = 0;
+}
+function drawLegend() {
+  document.getElementById('legend').innerHTML = `<div class="row"><span class="sw"></span>${t('legendArea')}</div><div class="row"><span class="pt"></span>${t('legendCap')}</div>`
+    + (show1897 ? `<div class="row"><span class="ln"></span>${t('legend1897')}</div>` : '') + (showToday ? `<div class="row"><span class="ln" style="border-top-style:solid"></span>${t('legendToday')}</div>` : '');
+}
+function drawSide() {
+  const el = document.getElementById('side');
+  if (selected) {
+    const a = areas.find((x) => x.id === selected), c = caps.find((x) => x.id === selected);
+    const k = a ?? c;
+    const wiki = k.wikidata ? `https://www.wikidata.org/wiki/Special:GoToLinkedPage/${lang}wiki/${k.wikidata}` : null;
+    const note = a ? JSON.parse(typeof a.note === 'string' ? a.note : JSON.stringify(a.note)) : null;
+    const capName = a ? JSON.parse(typeof a.capitalName === 'string' ? a.capitalName : JSON.stringify(a.capitalName)) : null;
+    const uz = a?.uezds ? (typeof a.uezds === 'string' ? JSON.parse(a.uezds) : a.uezds) : null;
+    el.innerHTML = `<button type="button" class="back" id="back">${t('back')}</button><div class="card">
+      <h2>${a ? `<i style="background:${a.color}"></i>` : ''}${esc(L(k))}</h2>
+      ${capName ? `<p><span class="k">${t('capital')}:</span> ${esc(capName[LI[lang]])}</p>` : ''}
+      ${k.annexed ? `<p><span class="k">${t('annexed')(k.annexed)}</span></p>` : ''}
+      ${note ? `<p>${esc(note[LI[lang]])}</p>` : `<p class="k">${t('southNote')}</p>`}
+      ${a ? `<p><span class="k">${t('drawn')}:</span> ${a.from === 'ohm' ? `<a href="https://www.openhistoricalmap.org/relation/${a.ohm}" target="_blank" rel="noopener">${t('fromOhm')}</a>` : esc(t('from1897')(uz.map((x) => U1897[x]?.[LI[lang]] ?? x).join(', ')))}</p>` : ''}
+      ${wiki ? `<p><a href="${wiki}" target="_blank" rel="noopener">${t('wiki')} ↗</a></p>` : ''}
+    </div><p class="note">${t('note')}</p>`;
+    el.querySelector('#back').onclick = () => select(null);
+    return;
+  }
+  const north = [...areas].sort((x, y) => (x.annexed ?? 9999) - (y.annexed ?? 9999));
+  const south = caps.filter((c) => c.south);
+  el.innerHTML = `<p class="caveat">${t('caveat')}</p>
+    <h2 class="sec">${t('north')}</h2><ul class="klist">${north.map((a) => `<li><button type="button" data-k="${a.id}"><i style="background:${a.color}"></i><span>${esc(L(a))}</span><span class="v">${a.annexed ?? ''}</span></button></li>`).join('')}</ul>
+    <h2 class="sec">${t('south')}</h2><ul class="klist">${south.map((c) => `<li><button type="button" data-k="${c.id}"><i class="pt"></i><span>${esc(L(c))}</span><span class="v">${c.annexed ?? ''}</span></button></li>`).join('')}</ul>
+    <p class="note">${t('note')}</p>`;
+  el.querySelectorAll('[data-k]').forEach((b) => b.onclick = () => select(b.dataset.k));
+}
+function keepUrl() {
+  const q = new URLSearchParams();
+  if (lang !== 'az') q.set('lang', lang);
+  if (selected) q.set('k', selected);
+  history.replaceState(null, '', `${location.pathname}${q.size ? '?' + q : ''}`);
+}
+function draw() { drawLegend(); if (!areas.length) return; drawSide(); keepUrl(); }
+document.getElementById('u1897').onchange = (e) => { show1897 = e.target.checked; map.setLayoutProperty('u1897', 'visibility', show1897 ? 'visible' : 'none'); drawLegend(); };
+document.getElementById('today').onchange = (e) => { showToday = e.target.checked; map.setLayoutProperty('today', 'visibility', showToday ? 'visible' : 'none'); drawLegend(); };
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && selected) select(null); });
+function applyLang() {
+  document.documentElement.lang = lang;
+  document.title = t('doc');
+  document.querySelectorAll('[data-i18n]').forEach((el) => el.textContent = t(el.dataset.i18n));
+  document.querySelectorAll('[data-lang]').forEach((b) => b.setAttribute('aria-pressed', b.dataset.lang === lang));
+  document.querySelectorAll('[data-keep-lang]').forEach((a) => { const u = new URL(a.getAttribute('href'), location.href); if (lang === 'az') u.searchParams.delete('lang'); else u.searchParams.set('lang', lang); a.href = u.pathname + u.search; });
+}
+applyLang();
+draw();
+document.querySelectorAll('[data-lang]').forEach((b) => b.onclick = () => {
+  lang = b.dataset.lang;
+  try { localStorage.setItem('lang', lang); } catch {}
+  applyLang(); draw();
+  if (map.getLayer('cap-names')) map.setLayoutProperty('cap-names', 'text-field', ['get', lang]);
+  if (map.getStyle()) for (const l of map.getStyle().layers) if (l.type === 'symbol' && l.layout?.['text-field'] && l.id !== 'cap-names') map.setLayoutProperty(l.id, 'text-field', labelExpr());
+});
+})();
+</script>
+</body>
+</html>
