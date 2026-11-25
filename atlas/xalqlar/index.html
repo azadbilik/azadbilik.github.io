@@ -136,17 +136,17 @@ const T = {
   az: { doc: 'Xalqlar və dillər · Azad Bilik', title: 'Xalqlar və dillər', sub: 'Azərbaycanın xalqları rayonlar üzrə', one: 'Bir xalq', top: 'Ən böyük azlıq', share: 'Payı', count: 'Sayı',
     language: 'Dil', family: 'Ailə', status: 'UNESCO', scripts: 'Əlifba', unesco: ['', 'təhlükəsiz', 'həssas', 'təhlükə altında', 'ciddi təhlükə altında', 'kritik təhlükə altında', 'ölü'],
     inRep: (n, y) => `Respublikada ${n} (${y})`, districts: 'Ən çox yaşadığı rayonlar', peoples: 'Xalqlar', nodata: 'məlumat yoxdur', lastKnown: (y) => `son məlum rəqəm: ${y}`, carriedNote: 'son məlum rəqəm (bu il yoxdur)',
-    largest: 'Ən böyük azlıq', none: 'azlıq yoxdur', ofDistrict: 'rayon əhalisinin', back: '← Xalqlar', azerbaijanis: 'Azərbaycanlılar',
+    largest: 'Ən böyük azlıq', none: 'azlıq yoxdur', under1: 'azlıqlar 1%-dən az', ofDistrict: 'rayon əhalisinin', back: '← Xalqlar', azerbaijanis: 'Azərbaycanlılar',
     note: 'Rəqəmlər rəsmi siyahıyaalmalardandır, hər biri öz mənbəyi ilə; rayon üzrə 1979, 1999, 2009 və 2019. Sovet siyahıyaalmalarında talışların çoxu azərbaycanlı kimi yazılıb; qırızlar, buduqlar, xınalıqlılar yalnız 2009-dan ayrıca sayılır; ingiloylar 2019-a qədər gürcülərlə birdir. Rəqəmi olmayan il son məlum rəqəmlə, solğun göstərilir. Dillərin vəziyyəti UNESCO-nun şkalası ilə, Wikidata-dan.' },
   ru: { doc: 'Народы и языки · Azad Bilik', title: 'Народы и языки', sub: 'Народы Азербайджана по районам', one: 'Один народ', top: 'Крупнейшее меньшинство', share: 'Доля', count: 'Число',
     language: 'Язык', family: 'Семья', status: 'ЮНЕСКО', scripts: 'Письменность', unesco: ['', 'вне опасности', 'уязвимый', 'под угрозой', 'в серьёзной опасности', 'в критическом состоянии', 'вымерший'],
     inRep: (n, y) => `В республике ${n} (${y})`, districts: 'Районы, где их больше всего', peoples: 'Народы', nodata: 'нет данных', lastKnown: (y) => `последняя известная цифра: ${y}`, carriedNote: 'последняя известная цифра (за этот год нет)',
-    largest: 'Крупнейшее меньшинство', none: 'меньшинств нет', ofDistrict: 'населения района', back: '← Народы', azerbaijanis: 'Азербайджанцы',
+    largest: 'Крупнейшее меньшинство', none: 'меньшинств нет', under1: 'меньшинства менее 1%', ofDistrict: 'населения района', back: '← Народы', azerbaijanis: 'Азербайджанцы',
     note: 'Цифры — официальные переписи, у каждой — источник; по районам — 1979, 1999, 2009 и 2019. В советских переписях большинство талышей записаны азербайджанцами; крызы, будухи, хиналугцы учитываются отдельно лишь с 2009 г.; ингилойцы до 2019 г. — вместе с грузинами. Год без цифры показан бледно, с последней известной цифрой. Положение языков — по шкале ЮНЕСКО, из Викиданных.' },
   en: { doc: 'Peoples and languages · Azad Bilik', title: 'Peoples and languages', sub: 'The peoples of Azerbaijan, district by district', one: 'One people', top: 'Largest minority', share: 'Share', count: 'Number',
     language: 'Language', family: 'Family', status: 'UNESCO', scripts: 'Script', unesco: ['', 'safe', 'vulnerable', 'definitely endangered', 'severely endangered', 'critically endangered', 'extinct'],
     inRep: (n, y) => `${n} in the Republic (${y})`, districts: 'Where most live', peoples: 'Peoples', nodata: 'no data', lastKnown: (y) => `last known figure: ${y}`, carriedNote: 'last known figure (none this census)',
-    largest: 'Largest minority', none: 'no minority', ofDistrict: 'of the district', back: '← Peoples', azerbaijanis: 'Azerbaijanis',
+    largest: 'Largest minority', none: 'no minority', under1: 'minorities under 1%', ofDistrict: 'of the district', back: '← Peoples', azerbaijanis: 'Azerbaijanis',
     note: "The figures are the official censuses, each with its source; by district for 1979, 1999, 2009 and 2019. Soviet censuses recorded most Talysh as Azerbaijanis; Kryz, Budukh and Khinalug are counted separately only from 2009; Ingiloys are counted with Georgians until 2019. A census with no figure shows the last known one, faintly. Languages' status is UNESCO's scale, from Wikidata." },
 };
 const t = (k) => T[lang][k];
@@ -185,6 +185,8 @@ function largestMinority(u) {
   if (!c) return null;
   let best = null;
   for (const p of ORDER) { const n = c.c[key(p, c.year)]; if (n && (!best || n > best.n)) best = { p, n }; }
+  // A handful of people (four Khinalug in Xocavənd, 2019) is no community: under 1% counts as none
+  if (best && c.c.total && best.n / c.c.total < 0.01) return { p: null, n: best.n, total: c.c.total, carried: c.carried, year: c.year };
   return best && { ...best, total: c.c.total, carried: c.carried, year: c.year };
 }
 const SCALES = { share: { breaks: [.5, 2, 5, 15, 30, 50], ticks: ['', '0.5%', '2%', '5%', '15%', '30%', '50%+'] }, count: { breaks: [100, 500, 2e3, 5e3, 15e3, 40e3], ticks: ['', '100', '500', '2k', '5k', '15k', '40k+'] } };
@@ -228,18 +230,18 @@ map.on('load', async () => {
     const u = units[e.features[0].id];
     if (hovered !== u.fid) { if (hovered != null) map.setFeatureState({ source: 'units', id: hovered }, { hover: false }); hovered = u.fid; map.setFeatureState({ source: 'units', id: hovered }, { hover: true }); }
     let html = `<strong>${esc(L(u))}</strong>`;
-    if (mode === 'top') { const m = largestMinority(u); html += m ? ` · ${esc(pname(m.p))}: ${nf().format(m.n)} (${(m.n / m.total * 100).toFixed(1)}%)${m.carried ? ` <small>(${t('lastKnown')(m.year)})</small>` : ''}` : ` · ${t('nodata')}`; }
+    if (mode === 'top') { const m = largestMinority(u); html += m && !m.p ? ` · ${t('under1')}` : m ? ` · ${esc(pname(m.p))}: ${nf().format(m.n)} (${(m.n / m.total * 100).toFixed(1)}%)${m.carried ? ` <small>(${t('lastKnown')(m.year)})</small>` : ''}` : ` · ${t('nodata')}`; }
     else { const c = count(u); html += c ? ` · ${esc(pname(people))}: ${nf().format(c.n)} · ${(c.total ? c.n / c.total * 100 : 0).toFixed(1)}% ${t('ofDistrict')}${c.carried ? ` <small>(${t('lastKnown')(c.year)})</small>` : ''}` : ` · ${t('nodata')}`; }
     tip.setLngLat(e.lngLat).setHTML(html).addTo(map);
   });
   map.on('mouseleave', 'units', () => { map.getCanvas().style.cursor = ''; tip.remove(); if (hovered != null) map.setFeatureState({ source: 'units', id: hovered }, { hover: false }); hovered = null; });
-  map.on('click', 'units', (e) => { const m = largestMinority(units[e.features[0].id]); if (mode === 'top' && m) { people = m.p; mode = 'one'; draw(); } });
+  map.on('click', 'units', (e) => { const m = largestMinority(units[e.features[0].id]); if (mode === 'top' && m?.p) { people = m.p; mode = 'one'; draw(); } });
   draw();
 });
 function paint() {
   for (const u of units) {
     let color = dark ? 'rgba(255,255,255,.05)' : 'rgba(26,20,16,.06)', carried = false;
-    if (mode === 'top') { const m = largestMinority(u); if (m) { color = COLORS[m.p]; carried = m.carried; } }
+    if (mode === 'top') { const m = largestMinority(u); if (m) { color = m.p ? COLORS[m.p] : (dark ? '#4A423B' : '#E2DBD0'); carried = m.carried; } }
     else { const v = value(u); if (v != null) { color = SEQ[classOf(v)]; carried = count(u).carried; } }
     map.setFeatureState({ source: 'units', id: u.fid }, { color, carried });
   }
@@ -270,7 +272,8 @@ function drawLegend() {
   const el = document.getElementById('legend');
   if (mode === 'top') {
     const shown = [...new Set(units.map((u) => largestMinority(u)?.p).filter(Boolean))];
-    el.innerHTML = `<span>${t('largest')}</span>` + shown.map((p) => `<div class="nodata"><i style="background:${COLORS[p]};border:0"></i>${esc(pname(p))}</div>`).join('') + `<div class="nodata"><i></i>${t('nodata')}</div>`;
+    el.innerHTML = `<span>${t('largest')}</span>` + shown.map((p) => `<div class="nodata"><i style="background:${COLORS[p]};border:0"></i>${esc(pname(p))}</div>`).join('')
+      + `<div class="nodata"><i style="background:${dark ? '#4A423B' : '#E2DBD0'};border:0"></i>${t('under1')}</div><div class="nodata"><i></i>${t('nodata')}</div>`;
     return;
   }
   el.innerHTML = `<span>${esc(pname(people))} · ${t(measure)}</span>
