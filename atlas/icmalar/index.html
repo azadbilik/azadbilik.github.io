@@ -124,20 +124,20 @@ const T = {
     geo: 'Gürcüstan', dag: 'Dağıstan', arm: 'Ermənistan', of: (a, t) => `${a} azərbaycanlı · əhalinin ${t}`, ofTotal: 'əhalinin',
     round: (r) => `Siyahıyaalma: ${r}`, back: '← Bütün icmalar', find: 'Rayon axtar…', play: 'Siyahıyaalmaları ardıcıl göstər', pause: 'Dayandır',
     year: 'İl', az: 'Azərbaycanlı', pct: 'Payı', src: 'mənbə', nodata: 'məlumat yoxdur', born: 'Burada doğulanlar:', bornIn: { geo: 'Gürcüstanda doğulanlar:', dag: 'Dağıstanda doğulanlar:', arm: 'Ermənistanda doğulanlar:' }, more: (n) => `və daha ${n}`,
-    show: 'Xəritədə göstər', notCounted: 'bu il bölgə üzrə sayılmayıb',
-    note: 'Rəqəmlər rəsmi siyahıyaalmalardandır (1926-da «türklər»), hər biri öz mənbəyi ilə; o vaxt olmayan və ya sərhədləri çox dəyişmiş rayon boş qalır. Sovet Ermənistanının rayonları üzrə yalnız 1939-un rəqəmləri əlçatandır; ümumi saylar bütün illər üçündür. İranda etnik siyahıyaalma aparılmır. Doğulanlar ədəbiyyat xəritəsindəndir.' },
+    show: 'Xəritədə göstər', lastKnown: (y) => `son məlum rəqəm: ${y}`, carriedNote: 'son məlum rəqəm (bu il yoxdur)', goneShort: '0: 1988–1991-də qovulublar', notCounted: 'bu il bölgə üzrə sayılmayıb',
+    note: 'Rəqəmlər rəsmi siyahıyaalmalardandır (1926-da «türklər»), hər biri öz mənbəyi ilə; rəqəmi olmayan siyahıyaalmada rayon son məlum rəqəmlə, solğun göstərilir. Ermənistanda 1991-dən sonra azərbaycanlı qalmayıb. Sovet Ermənistanının rayonları üzrə yalnız 1939-un rəqəmləri əlçatandır; ümumi saylar bütün illər üçündür. İranda etnik siyahıyaalma aparılmır. Doğulanlar ədəbiyyat xəritəsindəndir.' },
   ru: { doc: 'Общины · Azad Bilik', title: 'Общины', sub: 'Азербайджанцы за пределами республики', share: 'Доля', count: 'Число',
     geo: 'Грузия', dag: 'Дагестан', arm: 'Армения', of: (a, t) => `${a} азербайджанцев · ${t} населения`, ofTotal: 'населения',
     round: (r) => `Перепись: ${r}`, back: '← Все общины', find: 'Найти район…', play: 'Показать переписи по очереди', pause: 'Пауза',
     year: 'Год', az: 'Азербайджанцы', pct: 'Доля', src: 'источник', nodata: 'нет данных', born: 'Здесь родились:', bornIn: { geo: 'Родились в Грузии:', dag: 'Родились в Дагестане:', arm: 'Родились в Армении:' }, more: (n) => `и ещё ${n}`,
-    show: 'Показать на карте', notCounted: 'в этот год по районам не учтены',
-    note: 'Цифры — официальные переписи (в 1926 г. «тюрки»), у каждой — источник; район, которого тогда не было или чьи границы сильно изменились, оставлен пустым. По районам Советской Армении доступны только цифры 1939 г.; общие числа — за все годы. В Иране этническая перепись не ведётся. Родившиеся здесь — по литературной карте.' },
+    show: 'Показать на карте', lastKnown: (y) => `последняя известная цифра: ${y}`, carriedNote: 'последняя известная цифра (за этот год нет)', goneShort: '0: изгнаны в 1988–1991 гг.', notCounted: 'в этот год по районам не учтены',
+    note: 'Цифры — официальные переписи (в 1926 г. «тюрки»), у каждой — источник; район без цифры в этой переписи показан бледно, с последней известной цифрой. В Армении после 1991 г. азербайджанцев не осталось. По районам Советской Армении доступны только цифры 1939 г.; общие числа — за все годы. В Иране этническая перепись не ведётся. Родившиеся здесь — по литературной карте.' },
   en: { doc: 'Communities · Azad Bilik', title: 'Communities', sub: 'Azerbaijanis beyond the Republic', share: 'Share', count: 'Number',
     geo: 'Georgia', dag: 'Dagestan', arm: 'Armenia', of: (a, t) => `${a} Azerbaijanis · ${t} of the population`, ofTotal: 'of the population',
     round: (r) => `Census: ${r}`, back: '← All communities', find: 'Find a district…', play: 'Play the censuses in turn', pause: 'Pause',
     year: 'Year', az: 'Azerbaijanis', pct: 'Share', src: 'source', nodata: 'no data', born: 'Born here:', bornIn: { geo: 'Born in Georgia:', dag: 'Born in Dagestan:', arm: 'Born in Armenia:' }, more: (n) => `and ${n} more`,
-    show: 'Show on the map', notCounted: 'not counted by district that year',
-    note: "The figures are the official censuses (\"Turks\" in 1926), each with its source; a district that did not exist or whose borders changed much is left empty. Soviet Armenia's districts are available for 1939 only; the country totals for every census. Iran does not count ethnicity. Those born here are from the literary map." },
+    show: 'Show on the map', lastKnown: (y) => `last known figure: ${y}`, carriedNote: 'last known figure (none this census)', goneShort: '0: driven out in 1988–1991', notCounted: 'not counted by district that year',
+    note: "The figures are the official censuses (\"Turks\" in 1926), each with its source; a district with no figure at a census is shown faintly with its last known figure. No Azerbaijanis have remained in Armenia since 1991. Soviet Armenia's districts are available for 1939 only; the country totals for every census. Iran does not count ethnicity. Those born here are from the literary map." },
 };
 const t = (k) => T[lang][k];
 const L = (p) => p[lang] ?? p.az;
@@ -161,10 +161,20 @@ const params = new URLSearchParams(location.search);
 if (['share', 'count'].includes(params.get('m'))) measure = params.get('m');
 if (ROUNDS.some((r) => r.label === params.get('y'))) round = ROUNDS.findIndex((r) => r.label === params.get('y'));
 const yearOf = (u, r = round) => ROUNDS[r]?.[u.region];
-const at = (u, r = round) => u.series[yearOf(u, r)] ?? null;
+const exact = (u, r = round) => u.series[yearOf(u, r)] ?? null;
+// Armenia from 1991: its Azerbaijanis were driven out in 1988–1991, none have been counted since
+const gone = (u, r = round) => u.region === 'arm' && !ROUNDS[r].arm;
+// No figure for this census: the last one known (Armenia after 1991: none)
+function carried(u, r = round) {
+  if (exact(u, r) || gone(u, r)) return null;
+  for (let k = r - 1; k >= 0; k--) if (exact(u, k)) return { x: exact(u, k), year: yearOf(u, k) };
+  return null;
+}
+const at = (u, r = round) => gone(u, r) ? [0, null] : exact(u, r) ?? carried(u, r)?.x ?? null;
 function value(u, r = round, m = measure) {
   const x = at(u, r);
   if (!x) return null;
+  if (gone(u, r)) return 0;
   if (m === 'count') return x[0];
   return x[1] ? x[0] / x[1] * 100 : null;
 }
@@ -202,7 +212,7 @@ map.on('load', async () => {
   document.querySelector('.maplibregl-ctrl-attrib')?.classList.remove('maplibregl-compact-show');
   const firstSymbol = map.getStyle().layers.find((l) => l.type === 'symbol')?.id;
   map.addSource('units', { type: 'geojson', data: geo });
-  map.addLayer({ id: 'units', type: 'fill', source: 'units', paint: { 'fill-color': ['coalesce', ['feature-state', 'color'], 'rgba(0,0,0,0)'], 'fill-opacity': .85 } }, firstSymbol);
+  map.addLayer({ id: 'units', type: 'fill', source: 'units', paint: { 'fill-color': ['coalesce', ['feature-state', 'color'], 'rgba(0,0,0,0)'], 'fill-opacity': ['case', ['boolean', ['feature-state', 'carried'], false], .4, .85] } }, firstSymbol);
   map.addLayer({ id: 'units-line', type: 'line', source: 'units', paint: {
     'line-color': ['case', ['boolean', ['feature-state', 'sel'], false], css('--ink'), ['boolean', ['feature-state', 'hover'], false], css('--ink'), css('--paper')],
     'line-width': ['case', ['boolean', ['feature-state', 'sel'], false], 2.25, ['boolean', ['feature-state', 'hover'], false], 1.5, .6],
@@ -212,7 +222,8 @@ map.on('load', async () => {
     const u = units[e.features[0].id];
     if (hovered !== u.fid) { if (hovered != null) map.setFeatureState({ source: 'units', id: hovered }, { hover: false }); hovered = u.fid; map.setFeatureState({ source: 'units', id: hovered }, { hover: true }); }
     const x = at(u);
-    tip.setLngLat(e.lngLat).setHTML(`<strong>${esc(L(u))}</strong> · ${x ? t('of')(nf().format(x[0]), fmt(value(u, round, 'share'), 'share')) : t('nodata')}`).addTo(map);
+    const c = carried(u);
+    tip.setLngLat(e.lngLat).setHTML(`<strong>${esc(L(u))}</strong> · ${gone(u) ? t('goneShort') : x ? t('of')(nf().format(x[0]), fmt(value(u, round, 'share'), 'share')) : t('nodata')}${c ? ` <small>(${t('lastKnown')(c.year)})</small>` : ''}`).addTo(map);
   });
   map.on('mouseleave', 'units', () => { map.getCanvas().style.cursor = ''; tip.remove(); if (hovered != null) map.setFeatureState({ source: 'units', id: hovered }, { hover: false }); hovered = null; });
   map.on('click', 'units', (e) => select(e.features[0].id, false));
@@ -230,7 +241,7 @@ function bboxOf(g) {
 function paint() {
   for (const u of units) {
     const v = value(u);
-    map.setFeatureState({ source: 'units', id: u.fid }, { color: v == null ? (dark ? 'rgba(255,255,255,.05)' : 'rgba(26,20,16,.06)') : SEQ[classOf(v)] });
+    map.setFeatureState({ source: 'units', id: u.fid }, { color: v == null ? (dark ? 'rgba(255,255,255,.05)' : 'rgba(26,20,16,.06)') : gone(u) ? (dark ? '#3A2E2A' : '#D9D2C8') : SEQ[classOf(v)], carried: !!carried(u) });
   }
 }
 function drawControls() {
@@ -258,6 +269,8 @@ function drawLegend() {
   document.getElementById('legend').innerHTML = `<span>${t(measure)}${measure === 'share' ? ` (${t('ofTotal')})` : ''}</span>
     <div class="ramp">${SEQ.map((x) => `<span style="background:${x}"></span>`).join('')}</div>
     <div class="ticks">${SCALES[measure].ticks.slice(1).map((x) => `<span>${x}</span>`).join('')}</div>
+    <div class="nodata"><i style="background:${SEQ[3]};opacity:.4"></i>${t('carriedNote')}</div>
+    ${ROUNDS[round].arm ? '' : `<div class="nodata"><i style="background:${dark ? '#3A2E2A' : '#D9D2C8'}"></i>${t('goneShort')}</div>`}
     <div class="nodata"><i></i>${t('nodata')}</div>`;
 }
 // Each country's totals: a line per country, Azerbaijanis counted at each census
@@ -278,7 +291,7 @@ function chart() {
 function drawSide() {
   const el = document.getElementById('side');
   if (selected != null) return drawUnit(el, units[selected]);
-  const tot = (k) => { const y = ROUNDS[round][k]; const x = y && extras.totals[k]?.[y]; return `<div class="total"><span>${t(k)}${y ? ` · ${y}` : ''}</span><b>${x?.az != null ? nf().format(x.az) : '—'}</b><small>${x?.az != null && x.total ? fmt(x.az / x.total * 100, 'share') + ' ' + t('ofTotal') : ''}</small></div>`; };
+  const tot = (k) => { const y = ROUNDS[round][k]; if (k === 'arm' && !y) return `<div class="total"><span>${t(k)}</span><b>0</b><small>${t('goneShort')}</small></div>`; const x = y && extras.totals[k]?.[y]; return `<div class="total"><span>${t(k)}${y ? ` · ${y}` : ''}</span><b>${x?.az != null ? nf().format(x.az) : '—'}</b><small>${x?.az != null && x.total ? fmt(x.az / x.total * 100, 'share') + ' ' + t('ofTotal') : ''}</small></div>`; };
   const born = (k) => {
     const ps = units.filter((u) => u.region === k).flatMap((u) => extras.poets[u.id] ?? []);
     if (!ps.length) return '';

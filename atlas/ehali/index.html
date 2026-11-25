@@ -114,21 +114,21 @@ const T = {
   az: { doc: 'Əhali · Azad Bilik', title: 'Əhali', sub: 'Tarixi Azərbaycan siyahıyaalmalar üzrə', maps: 'Xəritələr',
     pop: 'Əhali', density: 'Sıxlıq', change: 'Dəyişmə', perKm: 'nəfər/km²', since: (y) => `${y}-dən bəri`,
     az: 'Azərbaycan Respublikası', ir: 'İran Azərbaycanı', irNote: 'Şərqi və Qərbi Azərbaycan, Ərdəbil, Zəncan ostanları',
-    onMap: (n, m) => `xəritədə ${m} bölgədən ${n}-i`, find: 'Rayon və ya şəhristan axtar…', play: 'Siyahıyaalmaları ardıcıl göstər', pause: 'Dayandır', base: 'müqayisə:', rankIn: (k, n) => `${n} bölgə arasında ${k}-ci`, peak: (y) => `ən çox ${y}-də`, round: (a, i) => `Azərbaycan ${a} · İran ${i}`, top: 'Ən çox', back: '← Bütün bölgələr',
+    onMap: (n, m) => `xəritədə ${m} bölgədən ${n}-i`, lastKnown: (y) => `son məlum rəqəm: ${y}`, carriedNote: 'son məlum rəqəm (bu il yoxdur)', find: 'Rayon və ya şəhristan axtar…', play: 'Siyahıyaalmaları ardıcıl göstər', pause: 'Dayandır', base: 'müqayisə:', rankIn: (k, n) => `${n} bölgə arasında ${k}-ci`, peak: (y) => `ən çox ${y}-də`, round: (a, i) => `Azərbaycan ${a} · İran ${i}`, top: 'Ən çox', back: '← Bütün bölgələr',
     year: 'İl', people: 'Əhali', chg: 'Dəyişmə', src: 'mənbə', area: (k) => `${k} km²`, nodata: 'məlumat yoxdur', city: 'şəhər',
-    note: 'Siyahıyaalmalar iki ölkədə fərqli illərdə keçirilib; xəritə onları yaxın illər üzrə cütləşdirir. Sərhədlər bugünküdür: o vaxt olmayan rayon və ya şəhristan boş qalır. Rəqəmlər rəsmi siyahıyaalma nəticələridir, hər biri öz mənbəyi ilə.' },
+    note: 'Siyahıyaalmalar iki ölkədə fərqli illərdə keçirilib; xəritə onları yaxın illər üzrə cütləşdirir. Sərhədlər bugünküdür. Siyahıyaalmada rəqəmi olmayan bölgə son məlum rəqəmlə, solğun göstərilir; hələ heç rəqəmi olmayan boş qalır. Rəqəmlər rəsmi siyahıyaalma nəticələridir, hər biri öz mənbəyi ilə.' },
   ru: { doc: 'Население · Azad Bilik', title: 'Население', sub: 'Исторический Азербайджан по переписям', maps: 'Карты',
     pop: 'Население', density: 'Плотность', change: 'Изменение', perKm: 'чел./км²', since: (y) => `с ${y} г.`,
     az: 'Азербайджанская Республика', ir: 'Иранский Азербайджан', irNote: 'останы Восточный и Западный Азербайджан, Ардебиль, Зенджан',
-    onMap: (n, m) => `на карте ${n} из ${m} единиц`, find: 'Найти район или шахрестан…', play: 'Показать переписи по очереди', pause: 'Пауза', base: 'сравнить с:', rankIn: (k, n) => `${k}-е место из ${n}`, peak: (y) => `больше всего в ${y}`, round: (a, i) => `Азербайджан ${a} · Иран ${i}`, top: 'Крупнейшие', back: '← Все единицы',
+    onMap: (n, m) => `на карте ${n} из ${m} единиц`, lastKnown: (y) => `последняя известная цифра: ${y}`, carriedNote: 'последняя известная цифра (за этот год нет)', find: 'Найти район или шахрестан…', play: 'Показать переписи по очереди', pause: 'Пауза', base: 'сравнить с:', rankIn: (k, n) => `${k}-е место из ${n}`, peak: (y) => `больше всего в ${y}`, round: (a, i) => `Азербайджан ${a} · Иран ${i}`, top: 'Крупнейшие', back: '← Все единицы',
     year: 'Год', people: 'Население', chg: 'Изменение', src: 'источник', area: (k) => `${k} км²`, nodata: 'нет данных', city: 'город',
-    note: 'Переписи в двух странах проходили в разные годы; карта соединяет их по близким годам. Границы — нынешние: район или шахрестан, которого тогда не было, остаётся пустым. Цифры — официальные итоги переписей, у каждой указан источник.' },
+    note: 'Переписи в двух странах проходили в разные годы; карта соединяет их по близким годам. Границы — нынешние. Единица без цифры в этой переписи показана бледно, с последней известной цифрой; та, у которой цифр ещё нет, остаётся пустой. Цифры — официальные итоги переписей, у каждой указан источник.' },
   en: { doc: 'Population · Azad Bilik', title: 'Population', sub: 'Historical Azerbaijan, census by census', maps: 'Maps',
     pop: 'Population', density: 'Density', change: 'Change', perKm: 'people/km²', since: (y) => `since ${y}`,
     az: 'Republic of Azerbaijan', ir: 'Iranian Azerbaijan', irNote: 'East and West Azerbaijan, Ardabil and Zanjan provinces',
-    onMap: (n, m) => `${n} of ${m} units on the map`, find: 'Find a district or county…', play: 'Play the censuses in turn', pause: 'Pause', base: 'compared with:', rankIn: (k, n) => `${k} of ${n}`, peak: (y) => `largest in ${y}`, round: (a, i) => `Azerbaijan ${a} · Iran ${i}`, top: 'Largest', back: '← All units',
+    onMap: (n, m) => `${n} of ${m} units on the map`, lastKnown: (y) => `last known figure: ${y}`, carriedNote: 'last known figure (none this census)', find: 'Find a district or county…', play: 'Play the censuses in turn', pause: 'Pause', base: 'compared with:', rankIn: (k, n) => `${k} of ${n}`, peak: (y) => `largest in ${y}`, round: (a, i) => `Azerbaijan ${a} · Iran ${i}`, top: 'Largest', back: '← All units',
     year: 'Year', people: 'Population', chg: 'Change', src: 'source', area: (k) => `${k} km²`, nodata: 'no data', city: 'city',
-    note: "The two countries counted in different years; the map pairs their censuses by the nearest year. Borders are today's: a district or county that did not exist yet is left empty. The figures are the official census results, each with its source." },
+    note: "The two countries counted in different years; the map pairs their censuses by the nearest year. Borders are today's. A unit with no figure at a census is shown faintly with its last known figure; one with no figure yet is left empty. The figures are the official census results, each with its source." },
 };
 const t = (k) => T[lang][k];
 const L = (p) => p[lang] ?? p.az;
@@ -145,8 +145,15 @@ if (atYear(params.get('b')) >= 0) base = atYear(params.get('b'));
 const baseOf = () => (base != null && base < round ? base : round - 1);
 const yearOf = (u, r = round) => ROUNDS[r]?.[u.country];
 const popAt = (u, r = round) => u.pop[yearOf(u, r)] ?? null;
+// No figure for this census: the last one known, shown as such (not for change: that would be 0%)
+function carried(u, r = round) {
+  if (popAt(u, r) != null) return null;
+  for (let k = r - 1; k >= 0; k--) if (popAt(u, k) != null) return { pop: popAt(u, k), year: yearOf(u, k) };
+  return null;
+}
 function value(u, r = round, m = measure) {
-  const p = popAt(u, r);
+  const c = m !== 'change' && carried(u, r);
+  const p = popAt(u, r) ?? (c ? c.pop : null);
   if (p == null) return null;
   if (m === 'pop') return p;
   if (m === 'density') return u.area ? p / u.area : null;
@@ -195,7 +202,7 @@ map.on('load', async () => {
   // The choropleth sits under the base map's labels and roads
   const firstSymbol = map.getStyle().layers.find((l) => l.type === 'symbol')?.id;
   map.addSource('units', { type: 'geojson', data: geo });
-  map.addLayer({ id: 'units', type: 'fill', source: 'units', paint: { 'fill-color': ['coalesce', ['feature-state', 'color'], 'rgba(0,0,0,0)'], 'fill-opacity': .85 } }, firstSymbol);
+  map.addLayer({ id: 'units', type: 'fill', source: 'units', paint: { 'fill-color': ['coalesce', ['feature-state', 'color'], 'rgba(0,0,0,0)'], 'fill-opacity': ['case', ['boolean', ['feature-state', 'carried'], false], .4, .85] } }, firstSymbol);
   map.addLayer({ id: 'units-line', type: 'line', source: 'units', paint: {
     'line-color': ['case', ['boolean', ['feature-state', 'sel'], false], css('--ink'), ['boolean', ['feature-state', 'hover'], false], css('--ink'), css('--paper')],
     'line-width': ['case', ['boolean', ['feature-state', 'sel'], false], 2.25, ['boolean', ['feature-state', 'hover'], false], 1.5, .6],
@@ -208,7 +215,8 @@ map.on('load', async () => {
       hovered = u.fid;
       map.setFeatureState({ source: 'units', id: hovered }, { hover: true });
     }
-    tip.setLngLat(e.lngLat).setHTML(`<strong>${esc(L(u))}</strong> · ${fmt(value(u))}${spark(u, 120, 28)}`).addTo(map);
+    const c = measure !== 'change' && carried(u);
+    tip.setLngLat(e.lngLat).setHTML(`<strong>${esc(L(u))}</strong> · ${fmt(value(u))}${c ? ` <small>(${t('lastKnown')(c.year)})</small>` : ''}${spark(u, 120, 28)}`).addTo(map);
   });
   map.on('mouseleave', 'units', () => {
     map.getCanvas().style.cursor = ''; tip.remove();
@@ -254,7 +262,7 @@ function fmt(v, m = measure) {
 function paint() {
   for (const u of units) {
     const v = value(u);
-    map.setFeatureState({ source: 'units', id: u.fid }, { color: v == null ? (dark ? 'rgba(255,255,255,.06)' : 'rgba(26,20,16,.07)') : colors()[classOf(v)] });
+    map.setFeatureState({ source: 'units', id: u.fid }, { color: v == null ? (dark ? 'rgba(255,255,255,.06)' : 'rgba(26,20,16,.07)') : colors()[classOf(v)], carried: v != null && measure !== 'change' && !!carried(u) });
   }
 }
 
@@ -295,6 +303,7 @@ function drawLegend() {
   document.getElementById('legend').innerHTML = `<span>${t(measure)}${measure === 'density' ? `, ${t('perKm')}` : ''}</span>
     <div class="ramp">${c.map((x) => `<span style="background:${x}"></span>`).join('')}</div>
     <div class="ticks">${s.ticks.slice(1).map((x) => `<span>${x}</span>`).join('')}</div>
+    ${measure !== 'change' ? `<div class="nodata"><i style="background:${colors()[3]};opacity:.4"></i>${t('carriedNote')}</div>` : ''}
     <div class="nodata"><i></i>${t('nodata')}</div>`;
 }
 
@@ -345,7 +354,7 @@ function drawUnit(el, u) {
   const peakYear = Object.entries(u.pop).sort((a, b) => b[1] - a[1])[0]?.[0];
   el.innerHTML = `<div class="unit"><button type="button" class="back" id="back">${t('back')}</button>
     <p class="title">${esc(L(u))}</p><p class="where">${esc(where)} · ${t('area')(nf().format(u.area))}</p>
-    <p class="share">${value(u) != null ? `${fmt(value(u))}${k >= 0 ? ` · ${t('rankIn')(k + 1, ranked.length)}` : ''}` : t('nodata')}${peakYear ? ` · ${t('peak')(peakYear)}` : ''}</p>
+    <p class="share">${value(u) != null ? `${fmt(value(u))}${carried(u) && measure !== 'change' ? ` (${t('lastKnown')(carried(u).year)})` : ''}${k >= 0 ? ` · ${t('rankIn')(k + 1, ranked.length)}` : ''}` : t('nodata')}${peakYear ? ` · ${t('peak')(peakYear)}` : ''}</p>
     <div class="trend">${spark(u, 320, 96, true)}</div>
     <table><thead><tr><th>${t('year')}</th><th>${t('people')}</th><th>${t('chg')}</th><th></th></tr></thead><tbody>${rows}</tbody></table></div>`;
   document.getElementById('back').onclick = () => select(null);
