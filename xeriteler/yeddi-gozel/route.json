@@ -1,0 +1,396 @@
+{
+ "meta": {
+  "title": {
+   "az": "Yeddi gözəl",
+   "ru": "Семь красавиц",
+   "en": "The Seven Beauties"
+  },
+  "sub": {
+   "az": "Bəhramın yolu və yeddi gözəlin yeddi ölkəsi",
+   "ru": "Путь Бахрама и семь стран семи красавиц",
+   "en": "Bahram's road, and the seven lands of the seven brides"
+  },
+  "note": {
+   "az": "Yer adları Nizaminin mətnindəndir. Gəlinlərin hər biri yalnız ölkə adı ilə gəlir (Hindistan, Xarəzm, Səqlab, Məğrib, Çin), ona görə nöqtələr təxminidir; qırıq xətlər hər gəlini öz ölkəsindən günbəzinə aparır. Bəhramın sarayının və günbəzlərin yerini Nizami adlandırmır. Miniatürlər Azad Bilik qalereyasındandır.",
+   "ru": "Названия мест взяты из текста Низами. Каждая невеста приходит лишь с именем страны (Индия, Хорезм, славяне, Магриб, Китай), поэтому точки приблизительны; пунктир ведёт каждую из её страны к её куполу. Где стояли дворец Бахрама и купола, Низами не говорит. Миниатюры — из галереи Azad Bilik.",
+   "en": "Place names are Nizami's. Each bride comes with only the name of her land (India, Khwarazm, the Slavs, the Maghrib, China), so those points are approximate; the dashed roads take each from her land to her pavilion. Nizami does not say where Bahram's court and the pavilions stood. The miniatures are from the Azad Bilik gallery."
+  },
+  "bounds": [
+   [
+    -10,
+    20
+   ],
+   [
+    112,
+    56
+   ]
+  ],
+  "list": "parts"
+ },
+ "parts": [
+  {
+   "id": "bahram",
+   "poem": "nizami-heft-peyker",
+   "color": "accent",
+   "name": {
+    "az": "Bəhramın yolu",
+    "ru": "Путь Бахрама",
+    "en": "Bahram's road"
+   },
+   "legend": {
+    "az": "Bəhram",
+    "ru": "Бахрам",
+    "en": "Bahram"
+   }
+  },
+  {
+   "id": "brides",
+   "poem": "nizami-heft-peyker",
+   "color": "second",
+   "hub": "gunbezler",
+   "name": {
+    "az": "Yeddi gözəl, yeddi günbəz",
+    "ru": "Семь красавиц, семь куполов",
+    "en": "Seven brides, seven pavilions"
+   },
+   "legend": {
+    "az": "gəlinlər, ölkələrindən günbəzlərinə",
+    "ru": "невесты — из своих стран к куполам",
+    "en": "the brides, from their lands to the pavilions"
+   }
+  }
+ ],
+ "stops": [
+  {
+   "id": "xevernaq",
+   "part": "bahram",
+   "name": {
+    "az": "Xəvərnəq",
+    "ru": "Хаварнак",
+    "en": "Khawarnaq"
+   },
+   "lat": 31.98,
+   "lng": 44.37,
+   "chapters": [
+    "nizami-yeddi-gozel-9",
+    "nizami-yeddi-gozel-10",
+    "nizami-yeddi-gozel-11",
+    "nizami-yeddi-gozel-12",
+    "nizami-yeddi-gozel-13",
+    "nizami-yeddi-gozel-14",
+    "nizami-yeddi-gozel-15"
+   ],
+   "scenes": [
+    "building-of-khawarnaq",
+    "simnar-thrown-from-roof",
+    "bahram-hunts-onagers",
+    "lion-and-onager-one-arrow",
+    "bahram-kills-dragon",
+    "seven-portraits"
+   ],
+   "note": {
+    "az": "Bəhram Münzirin yanında böyüyür; Simnar Xəvərnəqi tikir. Sarayın gizli otağında Bəhram yeddi ölkənin yeddi şahzadəsinin şəklini tapır. Nizami Münziri Yəmən şahı adlandırır; Xəvərnəqin xarabaları Hirədədir (İraq).",
+    "ru": "Бахрам растёт у Мунзира; Симнар строит Хаварнак. В тайной комнате дворца Бахрам находит портреты семи царевен семи стран. Низами зовёт Мунзира царём Йемена; руины Хаварнака — в Хире (Ирак).",
+    "en": "Bahram grows up with Munzir; Simnar builds Khawarnaq. In a locked room of the palace Bahram finds the portraits of seven princesses of seven lands. Nizami calls Munzir a king of Yemen; the ruins of Khawarnaq are at al-Hira, in Iraq."
+   }
+  },
+  {
+   "id": "taxt",
+   "part": "bahram",
+   "name": {
+    "az": "İran taxtı",
+    "ru": "Трон Ирана",
+    "en": "The throne of Iran"
+   },
+   "lat": 33.09,
+   "lng": 44.58,
+   "chapters": [
+    "nizami-yeddi-gozel-16",
+    "nizami-yeddi-gozel-17",
+    "nizami-yeddi-gozel-18",
+    "nizami-yeddi-gozel-19",
+    "nizami-yeddi-gozel-20",
+    "nizami-yeddi-gozel-21"
+   ],
+   "scenes": [
+    "crown-between-lions",
+    "bahram-enthroned",
+    "fitna-hunt",
+    "fitna-carries-cow"
+   ],
+   "note": {
+    "az": "Tacı iki şirin arasından götürüb atasının taxtına çıxır; Fitnə ilə ov. Nizami paytaxtı adlandırmır: nöqtə Sasani paytaxtı Mədaindədir.",
+    "ru": "Берёт корону из-под двух львов и восходит на трон отца; охота с Фитне. Столицу Низами не называет: точка — в Мадаине, столице Сасанидов.",
+    "en": "He takes the crown from between two lions and his father’s throne; the hunt with Fitna. Nizami does not name the capital: the dot is at Madaʿin, the Sasanian capital."
+   },
+   "approx": true
+  },
+  {
+   "id": "xorasan",
+   "part": "bahram",
+   "name": {
+    "az": "Xorasan: Xaqanla müharibə",
+    "ru": "Хорасан: война с хаканом",
+    "en": "Khurasan: the war with the Khaqan"
+   },
+   "lat": 37.6,
+   "lng": 61.85,
+   "chapters": [
+    "nizami-yeddi-gozel-22",
+    "nizami-yeddi-gozel-23"
+   ],
+   "scenes": [],
+   "note": {
+    "az": "«Keçdi Xorasana Ceyhun çayından»: Çin xaqanı İrana hücum edir, Bəhram onu məğlub edir.",
+    "ru": "Китайский хакан переходит Джейхун в Хорасан; Бахрам разбивает его.",
+    "en": "“He crossed the Oxus into Khurasan”: the Khaqan of China invades, and Bahram defeats him."
+   },
+   "approx": true
+  },
+  {
+   "id": "gunbezler",
+   "part": "bahram",
+   "name": {
+    "az": "Yeddi günbəz",
+    "ru": "Семь куполов",
+    "en": "The seven pavilions"
+   },
+   "lat": 33.09,
+   "lng": 44.58,
+   "chapters": [
+    "nizami-yeddi-gozel-24",
+    "nizami-yeddi-gozel-25"
+   ],
+   "scenes": [
+    "shida-and-the-pavilions"
+   ],
+   "note": {
+    "az": "Yeddi ölkənin şahlarından yeddi gözəl alır; memar Şidə hər birinə bir rəngdə, bir planetin rəngində günbəz tikir. Yeri Nizami adlandırmır.",
+    "ru": "Берёт семь красавиц у царей семи стран; зодчий Шиде строит каждой купол её цвета и планеты. Места Низами не называет.",
+    "en": "He wins seven brides from the kings of seven lands; the architect Shida builds each a pavilion in the colour of her day’s planet. Nizami does not name the place."
+   },
+   "approx": true
+  },
+  {
+   "id": "hind",
+   "part": "brides",
+   "name": {
+    "az": "Hindistan: Qara günbəz",
+    "ru": "Индия: Чёрный купол",
+    "en": "India: the black pavilion"
+   },
+   "lat": 25.5,
+   "lng": 81.0,
+   "chapters": [
+    "nizami-yeddi-gozel-24",
+    "nizami-yeddi-gozel-26"
+   ],
+   "scenes": [
+    "black-pavilion",
+    "turktaz-garden"
+   ],
+   "note": {
+    "az": "Hind racəsinin qızı Fürək, şənbə, Zühəl. Nağılı: qara geyimli şah və pərilər bağı.",
+    "ru": "Фурак, дочь индийского раджи; суббота, Сатурн. Её сказка — о царе в чёрном и саде пери.",
+    "en": "Furak, the Raja’s daughter; Saturday, Saturn. Her tale: the king in black and the garden of the fairies."
+   },
+   "approx": true
+  },
+  {
+   "id": "rum",
+   "part": "brides",
+   "name": {
+    "az": "Rum: Sarı günbəz",
+    "ru": "Рум: Жёлтый купол",
+    "en": "Rum: the yellow pavilion"
+   },
+   "lat": 41.01,
+   "lng": 28.98,
+   "chapters": [
+    "nizami-yeddi-gozel-24",
+    "nizami-yeddi-gozel-27"
+   ],
+   "scenes": [
+    "yellow-pavilion"
+   ],
+   "note": {
+    "az": "«Üzr ilə qız verdi, üstəlik də zər»: Qeysərin qızı Hümay, bazar, Günəş.",
+    "ru": "Кесарь отдаёт дочь Хумай, а с нею золото; воскресенье, Солнце.",
+    "en": "Caesar gives his daughter Humay, and gold besides; Sunday, the Sun."
+   }
+  },
+  {
+   "id": "xarezm",
+   "part": "brides",
+   "name": {
+    "az": "Xarəzm: Yaşıl günbəz",
+    "ru": "Хорезм: Зелёный купол",
+    "en": "Khwarazm: the green pavilion"
+   },
+   "lat": 42.33,
+   "lng": 59.15,
+   "chapters": [
+    "nizami-yeddi-gozel-24",
+    "nizami-yeddi-gozel-28"
+   ],
+   "scenes": [
+    "green-pavilion",
+    "bishr-and-malikha"
+   ],
+   "note": {
+    "az": "Xarəzm şahzadəsi Nazpəri, bazar ertəsi, Ay. Nağılı: Bişr və Məlixa.",
+    "ru": "Хорезмская царевна Назпери; понедельник, Луна. Её сказка — о Бишре и Малихе.",
+    "en": "Nazpari of Khwarazm; Monday, the Moon. Her tale: Bishr and Malikha."
+   },
+   "approx": true
+  },
+  {
+   "id": "seqlab",
+   "part": "brides",
+   "name": {
+    "az": "Səqlab: Qırmızı günbəz",
+    "ru": "Славяне: Красный купол",
+    "en": "The Slavs: the red pavilion"
+   },
+   "lat": 50.45,
+   "lng": 30.52,
+   "chapters": [
+    "nizami-yeddi-gozel-24",
+    "nizami-yeddi-gozel-29"
+   ],
+   "scenes": [
+    "red-pavilion"
+   ],
+   "note": {
+    "az": "Slavyan şahının qızı Nəsrinnuş, çərşənbə axşamı, Mərrix.",
+    "ru": "Насриннуш, дочь славянского царя; вторник, Марс.",
+    "en": "Nasrinnush, the Slav king’s daughter; Tuesday, Mars."
+   },
+   "approx": true
+  },
+  {
+   "id": "megrib",
+   "part": "brides",
+   "name": {
+    "az": "Məğrib: Firuzəyi günbəz",
+    "ru": "Магриб: Бирюзовый купол",
+    "en": "The Maghrib: the turquoise pavilion"
+   },
+   "lat": 34.03,
+   "lng": -5.0,
+   "chapters": [
+    "nizami-yeddi-gozel-24",
+    "nizami-yeddi-gozel-30"
+   ],
+   "scenes": [
+    "turquoise-pavilion",
+    "mahan-and-the-demon"
+   ],
+   "note": {
+    "az": "Məğrib şahının qızı Azəriyun, çərşənbə, Ütarid. Nağılı: Mahan və divlər.",
+    "ru": "Азарюн, дочь царя Магриба; среда, Меркурий. Её сказка — о Махане и дивах.",
+    "en": "Azariyun, daughter of the king of the Maghrib; Wednesday, Mercury. Her tale: Mahan and the demons."
+   },
+   "approx": true
+  },
+  {
+   "id": "cin",
+   "part": "brides",
+   "name": {
+    "az": "Çin: Səndəli günbəz",
+    "ru": "Китай: Сандаловый купол",
+    "en": "China: the sandalwood pavilion"
+   },
+   "lat": 34.26,
+   "lng": 108.94,
+   "chapters": [
+    "nizami-yeddi-gozel-22",
+    "nizami-yeddi-gozel-31"
+   ],
+   "scenes": [
+    "sandalwood-pavilion"
+   ],
+   "note": {
+    "az": "Xaqanın qızı Yağmanaz, cümə axşamı, Müştəri: müharibədən sonra.",
+    "ru": "Ягманаз, дочь хакана, — после войны; четверг, Юпитер.",
+    "en": "Yaghmanaz, the Khaqan’s daughter, after the war; Thursday, Jupiter."
+   },
+   "approx": true
+  },
+  {
+   "id": "iran",
+   "part": "brides",
+   "name": {
+    "az": "İran: Ağ günbəz",
+    "ru": "Иран: Белый купол",
+    "en": "Iran: the white pavilion"
+   },
+   "lat": 29.98,
+   "lng": 52.91,
+   "chapters": [
+    "nizami-yeddi-gozel-24",
+    "nizami-yeddi-gozel-32"
+   ],
+   "scenes": [
+    "white-pavilion",
+    "garden-maidens-bathing"
+   ],
+   "note": {
+    "az": "Keyan nəslindən Dürüsti, cümə, Zöhrə. Nağılı: bağ sahibi və çimən qızlar. Nizami yalnız «İran» deyir; nöqtə köhnə İran paytaxtı İstəxrdədir.",
+    "ru": "Дурусти из рода Кейанидов; пятница, Венера. Её сказка — о хозяине сада и купальщицах. Низами говорит лишь «Иран»; точка — в древнем Истахре.",
+    "en": "Durusti of the Kayanid line; Friday, Venus. Her tale: the garden’s owner and the bathing maidens. Nizami says only “Iran”; the dot is at ancient Istakhr."
+   },
+   "approx": true
+  },
+  {
+   "id": "edalet",
+   "part": "bahram",
+   "name": {
+    "az": "İran taxtı: ədalət",
+    "ru": "Трон Ирана: справедливость",
+    "en": "The throne of Iran: justice"
+   },
+   "lat": 33.09,
+   "lng": 44.58,
+   "chapters": [
+    "nizami-yeddi-gozel-33",
+    "nizami-yeddi-gozel-34",
+    "nizami-yeddi-gozel-35",
+    "nizami-yeddi-gozel-36"
+   ],
+   "scenes": [
+    "shepherd-and-dog",
+    "vizier-hanged"
+   ],
+   "note": {
+    "az": "Günbəzləri tərk edib ədalətə dönür: itini asan çoban, zalım vəzir.",
+    "ru": "Оставив купола, обращается к справедливости: пастух, повесивший пса, неправедный визирь.",
+    "en": "He leaves the pavilions for justice: the shepherd who hanged his dog, the unjust vizier."
+   },
+   "approx": true
+  },
+  {
+   "id": "magara",
+   "part": "bahram",
+   "name": {
+    "az": "Son ov: mağara",
+    "ru": "Последняя охота: пещера",
+    "en": "The last hunt: the cave"
+   },
+   "lat": 34.5,
+   "lng": 46.5,
+   "chapters": [
+    "nizami-yeddi-gozel-37"
+   ],
+   "scenes": [
+    "bahram-vanishes-in-cave"
+   ],
+   "note": {
+    "az": "Bir gurun ardınca mağaraya girir və qayıtmır. Nizami yeri adlandırmır.",
+    "ru": "Преследуя онагра, входит в пещеру и не возвращается. Места Низами не называет.",
+    "en": "He follows an onager into a cave and never comes out. Nizami does not name the place."
+   },
+   "approx": true
+  }
+ ]
+}

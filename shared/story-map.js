@@ -5,7 +5,9 @@
 //   meta:  { title, sub, note: {az, ru, en}, bounds: [[w, s], [e, n]], list: 'parts' | 'story' }
 //          'parts' lists the stops under each part (the Iskandarnama's two books); 'story' keeps
 //          one list in the order the poem tells it, each stop marked with its traveller's colour
-//   parts: [{ id, poem: gallery poem slug, color: 'accent' | 'second' | 'third', name, legend }]
+//   parts: [{ id, poem: gallery poem slug, color: 'accent' | 'second' | 'third', name, legend,
+//            hub?: stop id }]   a part with a hub joins each of its stops to that stop instead
+//            of to the one before (the Seven Beauties' brides, each from her land to the pavilions)
 //   stops: [{ id, part, name, lat, lng, chapters: [work slugs], scenes: [gallery scene ids],
 //             note?, approx? }]   a road joins each stop to the previous stop of its part
 //
@@ -79,8 +81,9 @@
     const legs = [];
     for (const p of parts) {
       const own = stops.filter((s) => s.part === p.id);
-      for (let i = 1; i < own.length; i++) {
-        const a = own[i - 1], b = own[i];
+      const hub = p.hub && stops.find((s) => s.id === p.hub);
+      for (let i = hub ? 0 : 1; i < own.length; i++) {
+        const a = hub ?? own[i - 1], b = own[i];
         if (a.lat === b.lat && a.lng === b.lng) continue;
         legs.push({ type: 'Feature', geometry: { type: 'LineString', coordinates: [[a.lng, a.lat], [b.lng, b.lat]] }, properties: { color: css(`--${p.color}`), approx: !!(a.approx || b.approx) } });
       }
@@ -169,8 +172,8 @@
     document.getElementById('prev').onclick = () => show(i - 1);
     document.getElementById('next').onclick = () => show(i + 1);
     el.scrollTop = 0;
-    // The way in: from this traveller's previous stop to this one, in view
-    const before = stops.slice(0, i).reverse().find((x) => x.part === s.part);
+    // The way in: from this traveller's previous stop (or the part's hub) to this one, in view
+    const before = (p.hub && stops.find((x) => x.id === p.hub)) || stops.slice(0, i).reverse().find((x) => x.part === s.part);
     const pts = [[s.lng, s.lat], ...(before && !(before.lat === s.lat && before.lng === s.lng) ? [[before.lng, before.lat]] : [])];
     const b = pts.reduce((bb, pt) => bb.extend(pt), new maplibregl.LngLatBounds(pts[0], pts[0]));
     map.fitBounds(b, { padding: pad(), maxZoom: 5, duration: still() ? 0 : 900 });
