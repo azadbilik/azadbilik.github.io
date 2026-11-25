@@ -1,0 +1,598 @@
+{
+  "dastgahs": [
+    {
+      "id": "rast",
+      "name": {
+        "az": "Rast",
+        "ru": "Раст",
+        "en": "Rast"
+      },
+      "character": {
+        "az": "mərdlik, igidlik, şadlıq",
+        "ru": "мужественный, смелый, энергичный",
+        "en": "courage, cheer"
+      },
+      "sections": [
+        {
+          "az": "Novruz-rəvəndə"
+        },
+        {
+          "az": "Rast"
+        },
+        {
+          "az": "Üşşaq"
+        },
+        {
+          "az": "Hüseyni"
+        },
+        {
+          "az": "Vilayəti"
+        },
+        {
+          "az": "Xocəstə"
+        },
+        {
+          "az": "Xavəran"
+        },
+        {
+          "az": "Əraq"
+        },
+        {
+          "az": "Pəncgah"
+        },
+        {
+          "az": "Rak"
+        },
+        {
+          "az": "Əmiri"
+        },
+        {
+          "az": "Məsihi"
+        }
+      ],
+      "sources": [
+        "https://az.wikipedia.org/wiki/Rast",
+        "https://ru.wikipedia.org/wiki/Мугам",
+        "https://en.wikipedia.org/wiki/Rast_(mugham)"
+      ]
+    },
+    {
+      "id": "shur",
+      "name": {
+        "az": "Şur",
+        "ru": "Шур",
+        "en": "Shur"
+      },
+      "character": {
+        "az": "şən, lirik əhval-ruhiyyə",
+        "ru": "радостное, лирическое настроение",
+        "en": "cheerful, lyrical mood"
+      },
+      "sections": [
+        {
+          "az": "Mayə"
+        },
+        {
+          "az": "Səlmək"
+        },
+        {
+          "az": "Hacı Yuni"
+        },
+        {
+          "az": "Şur-Şahnaz"
+        },
+        {
+          "az": "Busəlik"
+        },
+        {
+          "az": "Bayatı-Qacar (Bayatı-Türk)"
+        },
+        {
+          "az": "Şikəsteyi-fars"
+        },
+        {
+          "az": "Əşiran"
+        },
+        {
+          "az": "Səmayi-Şəms"
+        },
+        {
+          "az": "Zəmin-xara"
+        },
+        {
+          "az": "Hicaz"
+        },
+        {
+          "az": "Sarənc"
+        },
+        {
+          "az": "Nəşib-fəraz"
+        }
+      ],
+      "sources": [
+        "https://az.wikipedia.org/wiki/Şur",
+        "https://ru.wikipedia.org/wiki/Мугам"
+      ]
+    },
+    {
+      "id": "segah",
+      "name": {
+        "az": "Segah",
+        "ru": "Сегях",
+        "en": "Segah"
+      },
+      "character": {
+        "az": "məhəbbət",
+        "ru": "любовь",
+        "en": "love"
+      },
+      "sections": [
+        {
+          "az": "Mayeyi-Zabul"
+        },
+        {
+          "az": "Muyə"
+        },
+        {
+          "az": "Manənd-Müxalif"
+        },
+        {
+          "az": "Segah (Orta Segah)"
+        },
+        {
+          "az": "Məxluq"
+        },
+        {
+          "az": "Şikəsteyi-fars"
+        },
+        {
+          "az": "Mürəbbiqə"
+        },
+        {
+          "az": "Əraq"
+        },
+        {
+          "az": "Yədi-hasar"
+        },
+        {
+          "az": "Aşıq-guş"
+        }
+      ],
+      "sources": [
+        "https://az.wikipedia.org/wiki/Segah",
+        "https://ru.wikipedia.org/wiki/Мугам"
+      ]
+    },
+    {
+      "id": "chahargah",
+      "name": {
+        "az": "Çahargah",
+        "ru": "Чахаргях (Чаргях)",
+        "en": "Chahargah"
+      },
+      "character": {
+        "az": "coşqunluq, həyəcan, qəhrəmanlıq; parlaq, virtuoz",
+        "ru": "волнение и страсть",
+        "en": "agitation, passion; brilliant, virtuoso, heroic"
+      },
+      "sections": [
+        {
+          "az": "Bərdaşt"
+        },
+        {
+          "az": "Mayeyi-Çahargah"
+        },
+        {
+          "az": "Bəstə-nigar"
+        },
+        {
+          "az": "Hasar"
+        },
+        {
+          "az": "Manənd-Müxalif"
+        },
+        {
+          "az": "Məğlub"
+        },
+        {
+          "az": "Mənsuriyyə"
+        }
+      ],
+      "sources": [
+        "https://az.wikipedia.org/wiki/Çahargah",
+        "https://az.wikipedia.org/wiki/Muğam",
+        "https://ru.wikipedia.org/wiki/Мугам"
+      ]
+    },
+    {
+      "id": "bayati-shiraz",
+      "name": {
+        "az": "Bayatı-Şiraz",
+        "ru": "Баяты-Шираз",
+        "en": "Bayati-Shiraz"
+      },
+      "character": {
+        "az": "qəmli əhvali-ruhiyyə",
+        "ru": "меланхолия, печаль",
+        "en": "melancholy, sorrowful mood"
+      },
+      "sections": [
+        {
+          "az": "Bərdaşt"
+        },
+        {
+          "az": "Mayeyi-Bayatı-Şiraz"
+        },
+        {
+          "az": "Nişibi-fəraz"
+        },
+        {
+          "az": "Bayatı-İsfahan"
+        },
+        {
+          "az": "Zil Bayatı-Şiraz"
+        },
+        {
+          "az": "Xavəran"
+        },
+        {
+          "az": "Üzzal"
+        },
+        {
+          "az": "Dilrüba"
+        },
+        {
+          "az": "Ayaq (kadensiya)"
+        }
+      ],
+      "sources": [
+        "https://az.wikipedia.org/wiki/Bayatı-Şiraz",
+        "https://ru.wikipedia.org/wiki/Мугам"
+      ]
+    },
+    {
+      "id": "shushtar",
+      "name": {
+        "az": "Şüştər",
+        "ru": "Шуштер",
+        "en": "Shushtar"
+      },
+      "character": {
+        "az": "dərin kədər",
+        "ru": "глубокая печаль",
+        "en": "deep sorrow"
+      },
+      "sections": [
+        {
+          "az": "Əmiri"
+        },
+        {
+          "az": "Şüştər"
+        },
+        {
+          "az": "Şüştərək"
+        },
+        {
+          "az": "Tərkib"
+        },
+        {
+          "az": "Şüştər"
+        },
+        {
+          "az": "Sarənc"
+        },
+        {
+          "az": "Məsnəvi"
+        },
+        {
+          "az": "Şüştər"
+        }
+      ],
+      "sources": [
+        "https://az.wikipedia.org/wiki/Şüştər_(muğam)",
+        "https://ru.wikipedia.org/wiki/Мугам"
+      ]
+    },
+    {
+      "id": "humayun",
+      "name": {
+        "az": "Hümayun",
+        "ru": "Хумаюн",
+        "en": "Humayun"
+      },
+      "character": {
+        "az": "Şüştərdən də dərin kədər",
+        "ru": "глубокая печаль, глубже Шуштера",
+        "en": "deep sorrow, deeper than Shushtar"
+      },
+      "sections": [
+        {
+          "az": "Bərdaşt"
+        },
+        {
+          "az": "Mayeyi-Hümayun"
+        },
+        {
+          "az": "Feili"
+        },
+        {
+          "az": "Mövləvi"
+        },
+        {
+          "az": "Şüştər"
+        },
+        {
+          "az": "Tərkib"
+        },
+        {
+          "az": "Bidad"
+        },
+        {
+          "az": "Kiçik məsnəvi"
+        }
+      ],
+      "sources": [
+        "https://az.wikipedia.org/wiki/Hümayun",
+        "https://ru.wikipedia.org/wiki/Мугам"
+      ]
+    }
+  ],
+  "pieces": [
+    {
+      "name": "Rast",
+      "kind": "dastgah",
+      "dastgah": "rast",
+      "confidence": "sourced",
+      "sources": [
+        "https://az.wikipedia.org/wiki/Rast"
+      ],
+      "note": ""
+    },
+    {
+      "name": "Şur",
+      "kind": "dastgah",
+      "dastgah": "shur",
+      "confidence": "sourced",
+      "sources": [
+        "https://az.wikipedia.org/wiki/Şur"
+      ],
+      "note": ""
+    },
+    {
+      "name": "Segah",
+      "kind": "dastgah",
+      "dastgah": "segah",
+      "confidence": "sourced",
+      "sources": [
+        "https://az.wikipedia.org/wiki/Segah"
+      ],
+      "note": "Wikipedia calls the dəstgah 'Zabul Segah'; Orta Segah is its central şöbə."
+    },
+    {
+      "name": "Çahargah",
+      "kind": "dastgah",
+      "dastgah": "chahargah",
+      "confidence": "sourced",
+      "sources": [
+        "https://az.wikipedia.org/wiki/Çahargah"
+      ],
+      "note": ""
+    },
+    {
+      "name": "Şüştər",
+      "kind": "dastgah",
+      "dastgah": "shushtar",
+      "confidence": "sourced",
+      "sources": [
+        "https://az.wikipedia.org/wiki/Şüştər_(muğam)"
+      ],
+      "note": "Also a şöbə inside Hümayun and elsewhere."
+    },
+    {
+      "name": "Hümayun",
+      "kind": "dastgah",
+      "dastgah": "humayun",
+      "confidence": "sourced",
+      "sources": [
+        "https://az.wikipedia.org/wiki/Hümayun"
+      ],
+      "note": ""
+    },
+    {
+      "name": "Dəşti",
+      "kind": "shobe",
+      "dastgah": "shur",
+      "confidence": "uncertain",
+      "sources": [
+        "https://az.wikipedia.org/wiki/Şur",
+        "https://www.iranicaonline.org/articles/shur-modal-system"
+      ],
+      "note": "Az.wikipedia lists Dəşti among the smaller dəstgahs of the Şur family; Iranica treats it as an āvāz attached to Şur. Not in the Azerbaijani standard Şur section list. A dergipark snippet also groups Dəşti under Rast. Kind (small dəstgah vs şöbə) unsettled."
+    },
+    {
+      "name": "Mahur",
+      "kind": "shobe",
+      "dastgah": null,
+      "confidence": "uncertain",
+      "sources": [
+        "https://az.wikipedia.org/wiki/Mahur-Hindi"
+      ],
+      "note": "'Mayeyi-Mahur' is a section of the dəstgah Mahur-Hindi (Rast family). Whether the bare name 'Mahur' in a recording means that dəstgah is undetermined."
+    },
+    {
+      "name": "Orta Mahur",
+      "kind": "dastgah",
+      "dastgah": null,
+      "confidence": "sourced",
+      "sources": [
+        "https://az.wikipedia.org/wiki/Orta_Mahur",
+        "https://az.wikipedia.org/wiki/Rast"
+      ],
+      "note": "A dəstgah of the Rast family (eight sections: Pəs Mahur, Üç Mahur, Üşşaq, Nüqrə, Vilayəti, Mübərriqə, Hicri, Əşiran). Not one of the seven main ones."
+    },
+    {
+      "name": "Mənsuriyyə",
+      "kind": "zarbi",
+      "dastgah": "chahargah",
+      "confidence": "sourced",
+      "sources": [
+        "https://az.wikipedia.org/wiki/Mənsuriyyə",
+        "https://az.wikipedia.org/wiki/Çahargah"
+      ],
+      "note": "Zərbi muğam on the Çahargah mode, one of its final şöbələr; also played within Rast with the melody adapted."
+    },
+    {
+      "name": "Simayi-Şəms",
+      "kind": "zarbi",
+      "dastgah": "shur",
+      "confidence": "sourced",
+      "sources": [
+        "https://az.wikipedia.org/wiki/Səmayi-Şəms"
+      ],
+      "note": "Spelt Səmayi-Şəms; independent zərbi muğam and a şöbə of Şur, after Şikəsteyi-fars and Əşiran."
+    },
+    {
+      "name": "Vilayəti",
+      "kind": "shobe",
+      "dastgah": "rast",
+      "confidence": "sourced",
+      "sources": [
+        "https://az.wikipedia.org/wiki/Rast",
+        "https://az.wikipedia.org/wiki/Mahur-Hindi",
+        "https://az.wikipedia.org/wiki/Orta_Mahur"
+      ],
+      "note": "A şöbə of Rast; the same name also occurs in Mahur-Hindi and Orta Mahur."
+    },
+    {
+      "name": "Şahnaz",
+      "kind": "shobe",
+      "dastgah": "shur",
+      "confidence": "uncertain",
+      "sources": [
+        "https://az.wikipedia.org/wiki/Şur",
+        "https://en.wikipedia.org/wiki/Mugham"
+      ],
+      "note": "Şur-Şahnaz is a şöbə of Şur; Şahnaz is also named as an independent/collateral mugham (Nəvvab lists it among six dəstgahs, via a dergipark snippet). Which is meant is unclear."
+    },
+    {
+      "name": "Heyratı",
+      "kind": "zarbi",
+      "dastgah": null,
+      "confidence": "sourced",
+      "sources": [
+        "https://az.wikipedia.org/wiki/Heyratı"
+      ],
+      "note": "Zərbi muğam, Rast-based; az.wikipedia ties it to the Mahur-Hindi dəstgah (not one of the seven). Other sources group it among general zərbi muğams."
+    },
+    {
+      "name": "Arazbarı",
+      "kind": "zarbi",
+      "dastgah": "shur",
+      "confidence": "sourced",
+      "sources": [
+        "https://az.wikipedia.org/wiki/Arazbarı",
+        "https://az.wikipedia.org/wiki/Şur"
+      ],
+      "note": "Zərbi muğam of the Şur family."
+    },
+    {
+      "name": "Bayatı-Qacar",
+      "kind": "dastgah",
+      "dastgah": null,
+      "confidence": "sourced",
+      "sources": [
+        "https://az.wikipedia.org/wiki/Bayatı-Qacar",
+        "https://az.wikipedia.org/wiki/Rast"
+      ],
+      "note": "Independent dəstgah of the Rast family (8 sections); also used as a şöbə in Şur (as Bayatı-Türk) and Dügah."
+    },
+    {
+      "name": "Manəndi-Müxalif",
+      "kind": "shobe",
+      "dastgah": "segah",
+      "confidence": "sourced",
+      "sources": [
+        "https://az.wikipedia.org/wiki/Segah",
+        "https://az.wikipedia.org/wiki/Çahargah"
+      ],
+      "note": "Şöbə 'Manənd-Müxalif' of Segah; a Müxalif section also occurs in Çahargah."
+    },
+    {
+      "name": "Mirzə Hüseyn Segahı",
+      "kind": "other",
+      "dastgah": "segah",
+      "confidence": "uncertain",
+      "sources": [
+        "https://az.wikipedia.org/wiki/Segah"
+      ],
+      "note": "Segah variant a fourth above Orta Segah, attributed to the 18th-c. singer Mirzə Hüseyn. Whether it counts as a şöbə or separate mugham is not stated."
+    },
+    {
+      "name": "Yetim Segah",
+      "kind": "other",
+      "dastgah": "segah",
+      "confidence": "uncertain",
+      "sources": [
+        "https://az.wikipedia.org/wiki/Segah"
+      ],
+      "note": "Variant of Xaric Segah performed to evoke grief."
+    },
+    {
+      "name": "Qatar",
+      "kind": "other",
+      "dastgah": null,
+      "confidence": "uncertain",
+      "sources": [],
+      "note": "No source found. Possibly a recording title or a part of a longer piece."
+    },
+    {
+      "name": "Rahab",
+      "kind": "other",
+      "dastgah": null,
+      "confidence": "uncertain",
+      "sources": [
+        "https://dergipark.org.tr/tr/download/article-file/115249"
+      ],
+      "note": "Listed in a dergipark article among the Rast-group mugham modes (from a search snippet, not read in full). Not confirmed as a şöbə of a given dəstgah."
+    },
+    {
+      "name": "Tac",
+      "kind": "other",
+      "dastgah": null,
+      "confidence": "uncertain",
+      "sources": [],
+      "note": "No source found."
+    },
+    {
+      "name": "Əraq",
+      "kind": "shobe",
+      "dastgah": "rast",
+      "confidence": "sourced",
+      "sources": [
+        "https://az.wikipedia.org/wiki/Rast",
+        "https://az.wikipedia.org/wiki/Segah",
+        "https://az.wikipedia.org/wiki/Mahur-Hindi"
+      ],
+      "note": "A şöbə in many dəstgahs (Rast, Segah, Mahur-Hindi); placement depends on the recording."
+    },
+    {
+      "name": "Rəşt",
+      "kind": "other",
+      "dastgah": null,
+      "confidence": "uncertain",
+      "sources": [],
+      "note": "No source found; the spelling may be a variant of another name."
+    },
+    {
+      "name": "Xaric Segah",
+      "kind": "other",
+      "dastgah": "segah",
+      "confidence": "uncertain",
+      "sources": [
+        "https://az.wikipedia.org/wiki/Segah",
+        "https://dergipark.org.tr/tr/download/article-file/115249"
+      ],
+      "note": "Muğam of the Segah family whose tonic lies a fourth below Orta Segah; listed separately in a dergipark Rast-group snippet. Kind unsettled."
+    }
+  ]
+}

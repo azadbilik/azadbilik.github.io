@@ -57,6 +57,14 @@
   .player .now a, .player .now button { color: inherit; text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: .2em; }
   .player audio { grid-column: 1 / -1; }
   .people .listen { font-size: .75rem; color: var(--accent); padding: 0 1.5rem .35rem; margin-top: -.25rem; display: inline-block; }
+  .dg { padding: 1rem 1.5rem .25rem; border-top: 1px solid var(--rule); }
+  .dg:first-child { border-top: 0; }
+  .dg h3 { font: 400 1.25rem/1.2 var(--serif); }
+  .dg .mood { font-size: .8125rem; color: var(--muted); font-style: italic; }
+  .dg .secs { display: flex; flex-wrap: wrap; gap: .25rem; margin-top: .5rem; }
+  .dg .secs span { font-size: .6875rem; padding: .05rem .4rem; border-radius: 3px; background: var(--rule); color: var(--muted); }
+  .dg ol { list-style: none; padding: 0; margin: .5rem -1.5rem 0; }
+  .from { font-size: .6875rem; color: var(--muted); border: 1px solid var(--rule); border-radius: 3px; padding: 0 .3rem; margin-left: .3rem; white-space: nowrap; }
   .pulse { width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--accent); animation: pulse 1.4s ease-out infinite; pointer-events: none; }
   @keyframes pulse { from { transform: scale(.6); opacity: 1; } to { transform: scale(2.2); opacity: 0; } }
   @media (prefers-reduced-motion: reduce) { .pulse { animation: none; } }
@@ -74,7 +82,7 @@
     <h1 data-i18n="title">Musiqi</h1>
     <p class="sub" data-i18n="sub">İlk səs yazıları və musiqiçilərin yurdu</p>
   </div>
-  <div class="tabs" role="tablist"><button type="button" role="tab" data-tab="recs" data-i18n="recs">Səs yazıları</button><button type="button" role="tab" data-tab="people" data-i18n="people">Musiqiçilər</button></div>
+  <div class="tabs" role="tablist" style="grid-template-columns: repeat(3, 1fr)"><button type="button" role="tab" data-tab="recs" data-i18n="recs">Səs yazıları</button><button type="button" role="tab" data-tab="mugham" data-i18n="mughams">Muğamlar</button><button type="button" role="tab" data-tab="people" data-i18n="people">Musiqiçilər</button></div>
   <div class="body" id="body" aria-live="polite"></div>
   <div class="player" id="player" hidden><span id="face"></span><p class="now" id="now"></p><audio id="audio" controls preload="none"></audio></div>
 </aside>
@@ -99,17 +107,17 @@ const T = {
   az: { doc: 'Musiqi · Azad Bilik', title: 'Musiqi', sub: 'İlk səs yazıları və musiqiçilərin yurdu', gallery: 'Qalereya', recs: 'Səs yazıları', people: 'Musiqiçilər',
     mugham: 'Muğamlar', tesnif: 'Təsniflər', song: 'Mahnılar', instrumental: 'Alətlə', khanende: 'xanəndə', tar: 'tarzən', ashik: 'aşıq', unknown: 'ifaçısı bilinmir',
     play: 'Dinlə', commons: 'Commons', poems: 'şeirləri kitabxanada', back: '← Bütün musiqiçilər', nPeople: (n) => `${n} musiqiçi`, here: (n) => `${n} musiqiçi burada doğulub`,
-    one: { mugham: 'muğam', tesnif: 'təsnif', song: 'mahnı', instrumental: 'alətlə' }, all: 'Hamısı', listen: (n) => `▶ ${n} səs yazısı`, from: 'doğulub:', byHand: 'yer əl ilə', withRecs: 'səs yazısı olanlar', wiki: 'Vikipediya',
+    one: { mugham: 'muğam', tesnif: 'təsnif', song: 'mahnı', instrumental: 'alətlə' }, mughams: 'Muğamlar', probable: 'ehtimal', others: 'Başqa muğamlar', sectionsL: 'Şöbələr', noRec: 'bu muğamın səs yazısı hələ yoxdur', dgNote: 'Yeddi əsas muğam (dəstgah), Üzeyir Hacıbəylinin bölgüsü ilə; əhval-ruhiyyə və şöbələr Vikipediyadakı mənbələrə görədir. «Ehtimal» olan yerlər dəqiqləşdirilməlidir.', all: 'Hamısı', listen: (n) => `▶ ${n} səs yazısı`, from: 'doğulub:', byHand: 'yer əl ilə', withRecs: 'səs yazısı olanlar', wiki: 'Vikipediya',
     note: 'Səs yazıları Wikimedia Commons-dandır, hamısı ictimai mülkiyyətdədir: Azərbaycanda 1976-dan əvvəlki yazılar sərbəstdir. Mahnının sözləri hələ qəzəllərə bağlanmayıb. Musiqiçilər, doğulduqları yerlər və portretlər Wikidata-dandır.' },
   ru: { doc: 'Музыка · Azad Bilik', title: 'Музыка', sub: 'Первые записи и родина музыкантов', gallery: 'Галерея', recs: 'Записи', people: 'Музыканты',
     mugham: 'Мугамы', tesnif: 'Теснифы', song: 'Песни', instrumental: 'Инструментальные', khanende: 'ханенде', tar: 'тарист', ashik: 'ашуг', unknown: 'исполнитель неизвестен',
     play: 'Слушать', commons: 'Commons', poems: 'стихи в библиотеке', back: '← Все музыканты', nPeople: (n) => `${n} музыкантов`, here: (n) => `Здесь родились: ${n}`,
-    one: { mugham: 'мугам', tesnif: 'тесниф', song: 'песня', instrumental: 'инструментальная' }, all: 'Все', listen: (n) => `▶ записей: ${n}`, from: 'родом из', byHand: 'место указано вручную', withRecs: 'есть записи', wiki: 'Википедия',
+    one: { mugham: 'мугам', tesnif: 'тесниф', song: 'песня', instrumental: 'инструментальная' }, mughams: 'Мугамы', probable: 'предположительно', others: 'Другие мугамы', sectionsL: 'Шёбе', noRec: 'записей этого мугама пока нет', dgNote: 'Семь основных мугамов (дестгяхов) по Узеиру Гаджибекову; характер и шёбе — по источникам Википедии. Места с пометкой «предположительно» требуют уточнения.', all: 'Все', listen: (n) => `▶ записей: ${n}`, from: 'родом из', byHand: 'место указано вручную', withRecs: 'есть записи', wiki: 'Википедия',
     note: 'Записи — с Викисклада, все в общественном достоянии: в Азербайджане записи до 1976 года свободны. Тексты песен ещё не связаны с газелями. Музыканты, места рождения и портреты — по Викиданным.' },
   en: { doc: 'Music · Azad Bilik', title: 'Music', sub: 'The first recordings, and where the musicians came from', gallery: 'Gallery', recs: 'Recordings', people: 'Musicians',
     mugham: 'Mughams', tesnif: 'Tasnifs', song: 'Songs', instrumental: 'Instrumental', khanende: 'khanende', tar: 'tar player', ashik: 'ashik', unknown: 'performer unknown',
     play: 'Listen', commons: 'Commons', poems: 'poems in the library', back: '← All musicians', nPeople: (n) => `${n} musicians`, here: (n) => `${n} born here`,
-    one: { mugham: 'mugham', tesnif: 'tasnif', song: 'song', instrumental: 'instrumental' }, all: 'All', listen: (n) => `▶ ${n} recording${n === 1 ? '' : 's'}`, from: 'born in', byHand: 'place set by hand', withRecs: 'recorded', wiki: 'Wikipedia',
+    one: { mugham: 'mugham', tesnif: 'tasnif', song: 'song', instrumental: 'instrumental' }, mughams: 'Mughams', probable: 'probable', others: 'Other mughams', sectionsL: 'Sections', noRec: 'no recording of this mugham yet', dgNote: 'The seven main mughams (dastgahs), as Uzeyir Hajibeyli classed them; their moods and sections from the sources Wikipedia cites. Placements marked "probable" are not yet settled.', all: 'All', listen: (n) => `▶ ${n} recording${n === 1 ? '' : 's'}`, from: 'born in', byHand: 'place set by hand', withRecs: 'recorded', wiki: 'Wikipedia',
     note: "The recordings are from Wikimedia Commons, all in the public domain: in Azerbaijan, recordings made before 1976 are free. The songs' words are not yet matched to their ghazals. The musicians, their birthplaces and portraits are from Wikidata." },
 };
 const t = (k) => T[lang][k];
@@ -126,8 +134,16 @@ const years = (p) => p.born || p.died ? `${p.born ?? '?'}–${p.died ?? ''}` : '
 const nameOf = (p) => p[lang] || p.az || p.en;
 
 const params = new URLSearchParams(location.search);
-let recs = [], people = [], byQid = new Map(), places = new Map(), placeIds = [];
-let tab = params.get('tab') === 'people' ? 'people' : 'recs', place = null, who = params.get('who'), kind = null, playing = null;
+let recs = [], people = [], byQid = new Map(), places = new Map(), placeIds = [], mugham = { dastgahs: [], pieces: [] };
+// A recording's mugham: its title without a take number or an instrument, looked up in mugham.json
+const pieceOf = (r) => mugham.pieces.find((p) => p.name === r.title.az.replace(/ \((\d|qarmonda|sazda)\)$/, ''));
+function dastgahOf(r) {
+  if (r.kind === 'song' || r.kind === 'tesnif') return null;
+  const p = pieceOf(r);
+  const d = p?.dastgah && mugham.dastgahs.find((x) => x.id === p.dastgah);
+  return d ? { d, piece: p, sure: p.confidence === 'sourced' } : null;
+}
+let tab = ['people', 'mugham'].includes(params.get('tab')) ? params.get('tab') : 'recs', place = null, who = params.get('who'), kind = null, playing = null;
 const recsOf = (qid) => recs.filter((r) => r.performer?.qid === qid);
 
 const map = new maplibregl.Map({
@@ -151,7 +167,7 @@ map.on('style.load', () => {
   }
 });
 map.on('load', async () => {
-  [recs, people] = await Promise.all(['recordings.json', 'musicians.json'].map((f) => fetch(`data/${f}`).then((r) => r.json())));
+  [recs, people, mugham] = await Promise.all(['recordings.json', 'musicians.json', 'mugham.json'].map((f) => fetch(`data/${f}`).then((r) => r.json())));
   byQid = new Map(people.map((p) => [p.qid, p]));
   for (const p of people) {
     if (!places.has(p.place.id)) places.set(p.place.id, { ...p.place, people: [] });
@@ -216,8 +232,9 @@ function drawRecs(el) {
     if (!rs.length) return '';
     return `<section class="group"><h2>${t(g)} · ${rs.length}</h2><ol>${rs.map((r) => {
       const p = r.performer?.qid && byQid.get(r.performer.qid);
+      const dg = dastgahOf(r);
       return `<li class="rec${playing === r.id ? ' on' : ''}"><button type="button" class="play" data-play="${esc(r.id)}" aria-label="${t('play')}: ${esc(L(r.title))}">${playing === r.id && !audio.paused ? '❚❚' : '▶'}</button>
-        <span class="name">${esc(L(r.title))}</span>
+        <span class="name">${esc(L(r.title))}${dg && dg.piece.kind !== 'dastgah' ? `<span class="from">${esc(L(dg.d.name))}${dg.sure ? '' : ' · ' + t('probable')}</span>` : ''}</span>
         <span class="meta">${r.performer ? esc(L(r.performer).replace(/ \(.*\)$/, '')) : t('unknown')}${p ? ` · <button type="button" data-place="${p.place.id}" data-q="${p.qid}">${esc(L(p.place))}</button>` : ''}${when(r.year) ? ` · ${esc(when(r.year))}` : ''} · <a href="${esc(r.commons)}" target="_blank" rel="noopener">${t('commons')} ↗</a></span></li>`;
     }).join('')}</ol></section>`;
   }).join('') + `<p class="note">${t('note')}</p>`;
@@ -244,6 +261,22 @@ function drawPeople(el) {
   el.querySelectorAll('[data-listen]').forEach((b) => b.onclick = () => { who = b.dataset.listen; tab = 'recs'; place = null; mark(); play(recsOf(who)[0].id); keepUrl(); });
 }
 
+// The seven dastgahs: mood, sections, and the recordings that belong to each
+function drawMugham(el) {
+  const row = (r, dg) => `<li class="rec${playing === r.id ? ' on' : ''}"><button type="button" class="play" data-play="${esc(r.id)}" aria-label="${t('play')}: ${esc(L(r.title))}">${playing === r.id && !audio.paused ? '❚❚' : '▶'}</button><span class="name">${esc(L(r.title))}${dg && !dg.sure ? `<span class="from">${t('probable')}</span>` : ''}</span><span class="meta">${r.performer ? esc(L(r.performer).replace(/ \(.*\)$/, '')) : t('unknown')}${when(r.year) ? ` · ${esc(when(r.year))}` : ''}</span></li>`;
+  const placed = new Set();
+  const cards = mugham.dastgahs.map((d) => {
+    const rs = recs.filter((r) => dastgahOf(r)?.d.id === d.id);
+    rs.forEach((r) => placed.add(r.id));
+    return `<section class="dg"><h3>${esc(L(d.name))}</h3>${d.character ? `<p class="mood">${esc(L(d.character))}</p>` : ''}
+      <div class="secs" aria-label="${t('sectionsL')}">${d.sections.map((x) => `<span>${esc(x[lang] ?? x.az)}</span>`).join('')}</div>
+      ${rs.length ? `<ol>${rs.map((r) => row(r, dastgahOf(r))).join('')}</ol>` : `<p class="mood">${t('noRec')}</p>`}</section>`;
+  }).join('');
+  const rest = recs.filter((r) => !placed.has(r.id) && (r.kind === 'mugham' || r.kind === 'instrumental'));
+  el.innerHTML = cards + (rest.length ? `<section class="dg"><h3>${t('others')}</h3><ol>${rest.map((r) => row(r)).join('')}</ol></section>` : '') + `<p class="note">${t('dgNote')}</p>`;
+  el.querySelectorAll('[data-play]').forEach((b) => b.onclick = () => play(b.dataset.play));
+}
+
 function flyTo(p) {
   map.easeTo({ center: [p.place.lng, p.place.lat], zoom: Math.max(map.getZoom(), 6.5), padding: pad(), duration: still() ? 0 : 900 });
 }
@@ -257,7 +290,7 @@ function play(id) {
   audio.src = r.mp3;
   const p = r.performer?.qid && byQid.get(r.performer.qid);
   document.getElementById('face').outerHTML = p?.image ? `<img id="face" class="face" src="${esc(p.image)}" alt="" referrerpolicy="no-referrer">` : `<span id="face" class="face none">♪</span>`;
-  document.getElementById('now').innerHTML = `<strong>${esc(L(r.title))}</strong> · ${t('one')[r.kind]}<br><small>${r.performer ? (p?.wiki ? `<a href="${esc(p.wiki)}" target="_blank" rel="noopener">${esc(L(r.performer))}</a>` : esc(L(r.performer))) : t('unknown')}${p ? ` · ${years(p)} · ${t('from')} <button type="button" id="now-place">${esc(L(p.place))}</button>` : ''}${when(r.year) ? ` · ${esc(when(r.year))}` : ''}</small>`;
+  document.getElementById('now').innerHTML = `<strong>${esc(L(r.title))}</strong> · ${t('one')[r.kind]}${dastgahOf(r) ? ` · ${esc(L(dastgahOf(r).d.name))}${dastgahOf(r).d.character ? ` <small>(${esc(L(dastgahOf(r).d.character))})</small>` : ''}` : ''}<br><small>${r.performer ? (p?.wiki ? `<a href="${esc(p.wiki)}" target="_blank" rel="noopener">${esc(L(r.performer))}</a>` : esc(L(r.performer))) : t('unknown')}${p ? ` · ${years(p)} · ${t('from')} <button type="button" id="now-place">${esc(L(p.place))}</button>` : ''}${when(r.year) ? ` · ${esc(when(r.year))}` : ''}</small>`;
   document.getElementById('now-place')?.addEventListener('click', () => showPlace(p.place.id, p.qid));
   document.getElementById('player').hidden = false;
   if (p) { pulse.setLngLat([p.place.lng, p.place.lat]).addTo(map); flyTo(p); } else pulse.remove();
@@ -275,7 +308,7 @@ audio.addEventListener('ended', () => {
 function keepUrl() {
   const q = new URLSearchParams();
   if (lang !== 'az') q.set('lang', lang);
-  if (tab === 'people') q.set('tab', 'people');
+  if (tab !== 'recs') q.set('tab', tab);
   if (who) q.set('who', who);
   history.replaceState(null, '', `${location.pathname}${q.size ? '?' + q : ''}`);
 }
@@ -289,7 +322,7 @@ function draw() {
   const el = document.getElementById('body');
   if (!recs.length) return;
   const top = el.scrollTop;
-  if (tab === 'recs') drawRecs(el); else drawPeople(el);
+  if (tab === 'recs') drawRecs(el); else if (tab === 'mugham') drawMugham(el); else drawPeople(el);
   el.scrollTop = top;
   drawLegend();
 }
