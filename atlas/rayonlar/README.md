@@ -4,7 +4,8 @@
 
 | File | What |
 |---|---|
-| `data/raw/demoscope-1979-1989.json` | Demoskop Weekly's census tables for the Azerbaijan SSR ([1979](https://www.demoscope.ru/weekly/ssp/ussr79_reg1.php), [1989](https://www.demoscope.ru/weekly/ssp/sng89_reg1.php)): present population, total and urban, every row as printed |
+| `data/raw/demoscope-1979-1989.json` | Demoskop Weekly's census tables for the Azerbaijan SSR ([1979](https://www.demoscope.ru/weekly/ssp/ussr79_reg1.php), [1989](https://www.demoscope.ru/weekly/ssp/sng89_reg1.php)): present population, total and urban, every row as printed; checked against the live pages on 2026-11-26, no differences |
+| `data/raw/demoscope-1939.json` | The [1939 census](https://www.demoscope.ru/weekly/ssp/rus_pop_39_2.php) by raion and city for the Azerbaijan SSR (86 units; total, urban and the centrally added «special contingent»), read 2026-11-26; adds up to the republic, total and urban. Not on the map yet: the 1939 raions are smaller and many were merged in 1959–1963 |
 | `data/raions.json` | The table: each Soviet unit's names (az, ru, en), the census rows summed for it, the districts of today it is drawn with, whether that fit is close or approximate, and a note in three languages; `gaps` are districts of today left grey |
 | `data/raions-1979-1989.csv` | One row per Soviet unit and census as counted (merged pairs apart), with the census rows summed and today's districts: the table in [azadbilik/data](https://github.com/azadbilik/data) |
 | `data/raions.geojson`, `data/edges.geojson` | What the page reads (shapes, and their outlines less the seams between grouped districts), built by `node scripts/build.mjs` |
