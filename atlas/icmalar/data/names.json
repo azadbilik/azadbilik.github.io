@@ -1,0 +1,32 @@
+{
+ "geo": {
+  "Marneuli": ["Marneuli (Sarvan)", "Марнеули"], "Bolnisi": ["Bolnisi (Bolus)", "Болниси"], "Dmanisi": ["Dmanisi (Başkeçid)", "Дманиси"], "Gardabani": ["Qardabani (Qarayazı)", "Гардабани"],
+  "Tetri Sqaro": ["Tetrisqaro (Ağbulaq)", "Тетри-Цкаро"], "Tsalka": ["Tsalka (Barmaqsız)", "Цалка"], "Sagarejo": ["Saqareco", "Сагареджо"], "Lagodekhi": ["Laqodexi", "Лагодехи"],
+  "Qvareli": ["Kvareli", "Кварели"], "Telavi": ["Telavi", "Телави"], "Gurjaani": ["Qurcaani", "Гурджаани"], "Sighnaghi": ["Siqnaxi", "Сигнахи"], "Dedoplis Tskaro": ["Dedoplistsqaro", "Дедоплисцкаро"],
+  "Akhmeta": ["Axmeta", "Ахмета"], "Tbilisi": ["Tiflis", "Тбилиси"], "Rustavi": ["Rustavi", "Рустави"], "Mtskheta": ["Msxeta", "Мцхета"], "Kaspi": ["Kaspi", "Каспи"], "Gori": ["Qori", "Гори"],
+  "Akhalkalaki": ["Axalkələk", "Ахалкалаки"], "Akhaltsikhe": ["Axalsıx", "Ахалцихе"], "Ninotsminda": ["Ninotsminda", "Ниноцминда"], "Aspindza": ["Aspindza", "Аспиндза"], "Adigeni": ["Adigeni", "Адигени"], "Borjomi": ["Bocomi", "Боржоми"]
+ },
+ "dag": {
+  "Derbentsky District": ["Dərbənd rayonu", "Дербентский район"], "urban okrug of Derbent": ["Dərbənd", "Дербент"], "Dagestanskiye Ogni": ["Dağıstan İşıqları", "Дагестанские Огни"],
+  "Magaramkentsky District": ["Maqaramkənd rayonu", "Магарамкентский район"], "Tabasaransky District": ["Təbəsəran rayonu", "Табасаранский район"], "Rutulsky District": ["Rutul rayonu", "Рутульский район"],
+  "Suleyman-Stalsky District": ["Süleyman Stalski rayonu", "Сулейман-Стальский район"], "Kaytagsky District": ["Qaytaq rayonu", "Кайтагский район"], "Khivsky District": ["Xiv rayonu", "Хивский район"],
+  "Akhtynsky District": ["Axtı rayonu", "Ахтынский район"], "Dokuzparinsky District": ["Doquzpara rayonu", "Докузпаринский район"], "Kurakhsky District": ["Kürə rayonu", "Курахский район"],
+  "Agulsky District": ["Aqul rayonu", "Агульский район"], "Kayakentsky District": ["Qayakənd rayonu", "Каякентский район"], "Makhachkala Urban Okrug": ["Mahaçqala", "Махачкала"],
+  "городской округ Каспийск": ["Kaspiysk", "Каспийск"], "городской округ Избербаш": ["İzberbaş", "Избербаш"], "городской округ Буйнакск": ["Buynaksk", "Буйнакск"], "городской округ Хасавюрт": ["Xasavyurt", "Хасавюрт"],
+  "городской округ Кизляр": ["Kizlyar", "Кизляр"], "городской округ Кизилюрт": ["Kizilyurt", "Кизилюрт"], "городской округ Южно-Сухок": ["Yujno-Suxokumsk", "Южно-Сухокумск"],
+  "Kizlyarsky District": ["Kizlyar rayonu", "Кизлярский район"], "Tarumovsky District": ["Tarumovka rayonu", "Тарумовский район"], "Nogaysky District": ["Noqay rayonu", "Ногайский район"],
+  "Khasavyurtovsky District": ["Xasavyurt rayonu", "Хасавюртовский район"], "Karabudakhkentsky District": ["Qarabudaqkənd rayonu", "Карабудахкентский район"], "Buynaksky District": ["Buynaksk rayonu", "Буйнакский район"],
+  "Babayurtovsky District": ["Babayurt rayonu", "Бабаюртовский район"], "Kumtorkalinsky District": ["Kumtorkala rayonu", "Кумторкалинский район"], "Kizilyurtovsky District": ["Kizilyurt rayonu", "Кизилюртовский район"]
+ },
+ "arm": {
+  "Ararat": ["Vedi (Ararat)", "Арарат (Веди)"], "Masis": ["Zəngibasar (Masis)", "Масис (Зангибасар)"], "Vardenis": ["Basarkeçər (Vardenis)", "Варденис (Басаргечар)"], "Gavar": ["Yeni Bəyazid (Qavar)", "Гавар (Нор-Баязет)"],
+  "Yeghegnadzor": ["Keşişkənd (Yeğeqnadzor)", "Ехегнадзор"], "Vayk": ["Əzizbəyov (Vayk)", "Вайк (Азизбеков)"], "Sisian": ["Qarakilsə (Sisian)", "Сисиан"], "Goris": ["Gorus", "Горис"],
+  "Kapan": ["Qafan", "Кафан"], "Meghri": ["Mehri", "Мегри"], "Amasia": ["Ağbaba (Amasiya)", "Амасия"], "Ashotck": ["Qukasyan (Aşotsk)", "Ашоцк (Гукасян)"], "Akhuryan": ["Düzkənd (Axuryan)", "Ахурян"],
+  "Artashat": ["Qəmərli (Artaşat)", "Арташат (Камарлу)"], "Armavir": ["Sərdarabad (Armavir)", "Армавир (Октембер)"], "Vagharshapat": ["Üçkilsə (Eçmiədzin)", "Вагаршапат (Эчмиадзин)"], "Ashtarak": ["Aştarak", "Аштарак"],
+  "Talin": ["Talin", "Талин"], "Aragats": ["Alagöz (Araqats)", "Арагац"], "Aparan": ["Baş Aparan", "Апаран"], "Spitak": ["Hamamlı (Spitak)", "Спитак"], "Gugark": ["Qarakilsə (Quqark)", "Гугарк"],
+  "Stepanavan": ["Calaloğlu (Stepanavan)", "Степанаван"], "Tashir": ["Kalinino (Taşir)", "Ташир"], "Tumanian": ["Alaverdi (Tumanyan)", "Туманян"], "Noyemberyan": ["Noyemberyan", "Ноемберян"],
+  "Idjevan": ["Karvansaray (İcevan)", "Иджеван"], "Dilidjan": ["Dilican", "Дилижан"], "Tavush": ["Şəmşəddin (Tavuş)", "Тавуш"], "Sevan": ["Göyçə (Sevan)", "Севан"], "Martuni": ["Martuni", "Мартуни"],
+  "Karmir": ["Krasnoselsk (Çəmbərək)", "Красносельск"], "Hrazdan": ["Axta (Razdan)", "Раздан"], "Kotayk": ["Kotayk", "Котайк"], "Nairi": ["Nairi", "Наири"], "Abovian": ["Abovyan", "Абовян"],
+  "Baghramyan": ["Bağramyan", "Баграмян"], "Ani": ["Ağın (Ani)", "Ани"], "Artik": ["Artik", "Артик"], "Yerevan": ["İrəvan", "Ереван"]
+ }
+}

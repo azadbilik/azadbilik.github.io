@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>İcmalar · Azad Bilik</title>
+<meta name="description" content="Respublikadan kənarda azərbaycanlılar: Gürcüstan (Borçalı), Dağıstan (Dərbənd), Ermənistan, siyahıyaalmalar üzrə, 1926–2021. Azerbaijani communities beyond the Republic, census by census.">
+<meta name="theme-color" content="#F4EFE6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14100D" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://azadbilik.org/atlas/icmalar/">
+<meta property="og:title" content="İcmalar · Azerbaijani communities">
+<meta property="og:description" content="Respublikadan kənarda azərbaycanlılar siyahıyaalmalar üzrə: Borçalı, Dərbənd, İrəvan, 1926–2021.">
+<meta property="og:image" content="https://azadbilik.org/atlas/icmalar/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+<link rel="stylesheet" href="/shared/story-map.css">
+<style>
+  /* On top of the story maps' panel and legend: the measure switch, the census rounds, the chart */
+  .controls { padding: 1rem 1.5rem; border-bottom: 1px solid var(--rule); display: grid; gap: .9rem; }
+  .seg { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--rule); border-radius: 3px; padding: 2px; }
+  .seg button { padding: .35rem .4rem; border-radius: 2px; font-size: .8125rem; color: var(--muted); }
+  .seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+  .rounds { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; }
+  .rounds button { padding: .3rem 0; font-size: .75rem; color: var(--muted); border-bottom: 2px solid var(--rule); font-variant-numeric: tabular-nums; }
+  .rounds button[aria-pressed="true"] { color: var(--ink); border-bottom-color: var(--accent); font-weight: 600; }
+  .round-note { font-size: .75rem; color: var(--muted); display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
+  .round-note select { font: inherit; color: inherit; background: transparent; border: 1px solid var(--rule); border-radius: 3px; padding: .1rem .3rem; }
+  .timeline { display: grid; grid-template-columns: auto 1fr; gap: .5rem; align-items: end; }
+  .play { width: 2rem; height: 2rem; border: 1px solid var(--rule); border-radius: 50%; display: grid; place-items: center; font-size: .75rem; }
+  .play:hover { border-color: var(--ink); }
+  .search input { width: 100%; font: inherit; font-size: .875rem; color: var(--ink); background: transparent; border: 1px solid var(--rule); border-radius: 3px; padding: .4rem .6rem; }
+  .search input:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .spark { display: block; margin-top: .25rem; }
+  .unit .trend { padding: .5rem 1.5rem 0; }
+  .unit .trend svg { width: 100%; height: auto; display: block; overflow: visible; }
+  .unit .trend text { font: .625rem var(--sans); fill: var(--muted); }
+  .unit .share { padding: .5rem 1.5rem 0; font-size: .8125rem; color: var(--muted); }
+  .totals { padding: 1rem 1.5rem .5rem; display: grid; gap: .6rem; }
+  .total { display: grid; grid-template-columns: 1fr auto; gap: 0 .75rem; align-items: baseline; }
+  .total b { font: 400 1.5rem/1.1 var(--serif); font-variant-numeric: tabular-nums; grid-row: span 2; text-align: right; }
+  .total span { font-size: .875rem; font-weight: 500; }
+  .total small { font-size: .75rem; color: var(--muted); }
+  .chart { padding: .25rem 1.5rem 1rem; }
+  .chart svg { width: 100%; height: auto; display: block; overflow: visible; }
+  .chart text { font: .625rem var(--sans); fill: var(--muted); }
+  .rank h2, .unit h2 { padding: .75rem 1.5rem .35rem; font: 500 .75rem var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .rank ol { list-style: none; padding: 0 0 .5rem; }
+  .rank li button { display: grid; grid-template-columns: 1.5rem 1fr auto; gap: .5rem; width: 100%; text-align: left; padding: .3rem 1.5rem; font-size: .875rem; }
+  .rank li button:hover { background: var(--rule); }
+  .rank .v { font-variant-numeric: tabular-nums; color: var(--muted); }
+  .unit { padding: 1rem 0; }
+  .unit .back { display: block; padding: 0 1.5rem .75rem; font-size: .8125rem; color: var(--muted); }
+  .unit .back:hover { color: var(--ink); }
+  .unit .title { padding: 0 1.5rem; font: 400 1.5rem/1.15 var(--serif); }
+  .unit .where { padding: .15rem 1.5rem 0; font-size: .8125rem; color: var(--muted); }
+  .unit table { width: calc(100% - 3rem); margin: .75rem 1.5rem 0; border-collapse: collapse; font-size: .875rem; font-variant-numeric: tabular-nums; }
+  .unit th { text-align: left; font-weight: 500; color: var(--muted); font-size: .75rem; padding: .25rem 0; border-bottom: 1px solid var(--rule); }
+  .unit td { padding: .3rem 0; border-bottom: 1px solid var(--rule); }
+  .unit td:not(:first-child), .unit th:not(:first-child) { text-align: right; }
+  .unit td a { color: var(--muted); text-decoration: none; } .unit td a:hover { color: var(--accent); }
+  .up { color: var(--accent); } .down { color: var(--second); }
+  .legend .ramp { display: flex; }
+  .legend .ramp span { flex: 1; height: .6rem; }
+  .legend .ticks { display: flex; justify-content: space-between; font-size: .625rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .legend .nodata { display: flex; align-items: center; gap: .4rem; color: var(--muted); }
+  .legend .nodata i { width: .9rem; height: .6rem; background: repeating-linear-gradient(45deg, var(--rule) 0 2px, transparent 2px 4px); border: 1px solid var(--rule); }
+  .legend { min-width: 13rem; }
+  @media (max-width: 48rem) { .controls, .totals, .chart { padding-inline: 1rem; } .rank h2, .rank li button, .unit h2, .unit .title, .unit .where { padding-inline: 1rem; } .unit table { margin-inline: 1rem; width: calc(100% - 2rem); } .legend { min-width: 0; } }
+  .rounds { grid-template-columns: repeat(9, 1fr); }
+  .rounds button { font-size: .6875rem; }
+  .community { padding: 1rem 1.5rem 0; border-top: 1px solid var(--rule); }
+  .community h3 { font: 400 1.125rem/1.2 var(--serif); }
+  .community p { margin-top: .35rem; font-size: .875rem; }
+  .community .who { margin-top: .5rem; font-size: .8125rem; color: var(--muted); }
+  .community .who a { color: var(--ink); text-decoration: none; } .community .who a:hover { color: var(--accent); }
+  .community button.go { margin-top: .4rem; font-size: .8125rem; color: var(--muted); text-decoration: underline; text-decoration-color: var(--rule); }
+  .unit .who { padding: .5rem 1.5rem 0; font-size: .8125rem; color: var(--muted); }
+  .unit .who a { color: var(--ink); text-decoration: none; } .unit .who a:hover { color: var(--accent); }
+</style>
+</head>
+<body>
+<div id="map" role="region" aria-label="Xəritə"></div>
+
+<aside class="panel">
+  <div class="head">
+    <div class="top"><a class="brand" href="/" data-keep-lang><svg viewBox="0 0 512 512" aria-hidden="true"><g class="star"><rect x="126" y="126" width="260" height="260"/><polygon points="256,72 440,256 256,440 72,256"/></g><polygon class="gem" points="256,196 316,256 256,316 196,256"/></svg>Azad Bilik</a><nav><a href="/atlas/" data-keep-lang>Atlas</a><span class="langs" role="group" aria-label="Dil · Язык · Language"><button type="button" data-lang="az">AZ</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="en">EN</button></span></nav></div>
+    <h1 data-i18n="title">İcmalar</h1>
+    <p class="sub" data-i18n="sub">Respublikadan kənarda azərbaycanlılar</p>
+  </div>
+  <div class="body" id="body">
+    <div class="controls">
+      <div class="search"><input type="search" id="find" list="units-list" autocomplete="off"><datalist id="units-list"></datalist></div>
+      <div class="seg" role="group" id="measures"></div>
+      <div>
+        <div class="timeline"><button type="button" class="play" id="play">▶</button><div class="rounds" role="group" id="rounds"></div></div>
+        <div class="round-note" id="round-note"></div>
+      </div>
+    </div>
+    <div id="side" aria-live="polite"></div>
+  </div>
+</aside>
+
+<div class="legend" id="legend"></div>
+
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script>
+(() => {
+const dark = matchMedia('(prefers-color-scheme: dark)').matches;
+const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+const still = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+const LANGS = ['az', 'ru', 'en'];
+let lang = (() => {
+  const q = new URLSearchParams(location.search).get('lang');
+  if (LANGS.includes(q)) return q;
+  try { const s = localStorage.getItem('lang'); if (LANGS.includes(s)) return s; } catch {}
+  return 'az';
+})();
+const nf = () => new Intl.NumberFormat({ az: 'az-Latn-AZ', ru: 'ru-RU', en: 'en-GB' }[lang]);
+const T = {
+  az: { doc: 'İcmalar · Azad Bilik', title: 'İcmalar', sub: 'Respublikadan kənarda azərbaycanlılar', share: 'Payı', count: 'Sayı',
+    geo: 'Gürcüstan', dag: 'Dağıstan', arm: 'Ermənistan', of: (a, t) => `${a} azərbaycanlı · əhalinin ${t}`, ofTotal: 'əhalinin',
+    round: (r) => `Siyahıyaalma: ${r}`, back: '← Bütün icmalar', find: 'Rayon axtar…', play: 'Siyahıyaalmaları ardıcıl göstər', pause: 'Dayandır',
+    year: 'İl', az: 'Azərbaycanlı', pct: 'Payı', src: 'mənbə', nodata: 'məlumat yoxdur', born: 'Burada doğulanlar:', more: (n) => `və daha ${n}`,
+    show: 'Xəritədə göstər', notCounted: 'bu il bölgə üzrə sayılmayıb',
+    note: 'Rəqəmlər rəsmi siyahıyaalmalardandır (1926-da «türklər»), hər biri öz mənbəyi ilə; o vaxt olmayan və ya sərhədləri çox dəyişmiş rayon boş qalır. Sovet Ermənistanının rayonları üzrə yalnız 1939-un rəqəmləri əlçatandır; ümumi saylar bütün illər üçündür. İranda etnik siyahıyaalma aparılmır. Doğulanlar ədəbiyyat xəritəsindəndir.' },
+  ru: { doc: 'Общины · Azad Bilik', title: 'Общины', sub: 'Азербайджанцы за пределами республики', share: 'Доля', count: 'Число',
+    geo: 'Грузия', dag: 'Дагестан', arm: 'Армения', of: (a, t) => `${a} азербайджанцев · ${t} населения`, ofTotal: 'населения',
+    round: (r) => `Перепись: ${r}`, back: '← Все общины', find: 'Найти район…', play: 'Показать переписи по очереди', pause: 'Пауза',
+    year: 'Год', az: 'Азербайджанцы', pct: 'Доля', src: 'источник', nodata: 'нет данных', born: 'Здесь родились:', more: (n) => `и ещё ${n}`,
+    show: 'Показать на карте', notCounted: 'в этот год по районам не учтены',
+    note: 'Цифры — официальные переписи (в 1926 г. «тюрки»), у каждой — источник; район, которого тогда не было или чьи границы сильно изменились, оставлен пустым. По районам Советской Армении доступны только цифры 1939 г.; общие числа — за все годы. В Иране этническая перепись не ведётся. Родившиеся здесь — по литературной карте.' },
+  en: { doc: 'Communities · Azad Bilik', title: 'Communities', sub: 'Azerbaijanis beyond the Republic', share: 'Share', count: 'Number',
+    geo: 'Georgia', dag: 'Dagestan', arm: 'Armenia', of: (a, t) => `${a} Azerbaijanis · ${t} of the population`, ofTotal: 'of the population',
+    round: (r) => `Census: ${r}`, back: '← All communities', find: 'Find a district…', play: 'Play the censuses in turn', pause: 'Pause',
+    year: 'Year', az: 'Azerbaijanis', pct: 'Share', src: 'source', nodata: 'no data', born: 'Born here:', more: (n) => `and ${n} more`,
+    show: 'Show on the map', notCounted: 'not counted by district that year',
+    note: "The figures are the official censuses (\"Turks\" in 1926), each with its source; a district that did not exist or whose borders changed much is left empty. Soviet Armenia's districts are available for 1939 only; the country totals for every census. Iran does not count ethnicity. Those born here are from the literary map." },
+};
+const t = (k) => T[lang][k];
+const L = (p) => p[lang] ?? p.az;
+const COMMUNITIES = [
+  { region: 'geo', name: { az: 'Borçalı', ru: 'Борчалы', en: 'Borchali' }, focus: [[43.6, 41.1], [45.3, 41.8]],
+    text: { az: 'Gürcüstanın cənubunda, Marneuli, Bolnisi, Dmanisi və Qardabani rayonlarında yaşayan azərbaycanlılar: Gürcüstanın ən böyük azlığı, özünəməxsus aşıq mühiti və ləhcəsi ilə.', ru: 'Азербайджанцы юга Грузии — Марнеульский, Болнисский, Дманисский и Гардабанский районы: крупнейшее меньшинство Грузии, со своей ашугской школой и говором.', en: "The Azerbaijanis of southern Georgia, in Marneuli, Bolnisi, Dmanisi and Gardabani: Georgia's largest minority, with its own ashik school and dialect." } },
+  { region: 'dag', name: { az: 'Dərbənd', ru: 'Дербент', en: 'Derbent' }, focus: [[47.6, 41.6], [48.6, 42.3]],
+    text: { az: 'Dağıstanın cənubunda, Dərbənd şəhəri və ətraf rayonlarda yaşayan azərbaycanlılar. Azərbaycan dili Dağıstanın dövlət dillərindən biridir.', ru: 'Азербайджанцы юга Дагестана — Дербент и соседние районы. Азербайджанский язык — один из государственных языков Дагестана.', en: "The Azerbaijanis of southern Dagestan, in Derbent and the districts around it. Azerbaijani is one of Dagestan's official languages." } },
+  { region: 'arm', name: { az: 'İrəvan və Göyçə', ru: 'Иреван и Гёйча', en: 'Irevan and Göyçə' }, focus: [[43.4, 38.8], [46.7, 41.3]],
+    text: { az: 'Sovet Ermənistanının cənub və şərq rayonlarında, Göyçə, Zəngibasar, Vedi, Basarkeçər, Zəngəzur və Ağbaba bölgələrində yaşayan azərbaycanlılar. 1988–1989-da demək olar ki, hamısı yurdlarını tərk etməyə məcbur oldu.', ru: 'Азербайджанцы южных и восточных районов Советской Армении: Гёйча, Зангибасар, Веди, Басаргечар, Зангезур, Агбаба. В 1988–1989 гг. почти все они были вынуждены покинуть свои дома.', en: 'The Azerbaijanis of Soviet Armenia\'s southern and eastern districts: Göyçə, Zəngibasar, Vedi, Basarkeçər, Zangezur and Ağbaba. In 1988–1989 nearly all of them were forced to leave their homes.' } },
+];
+// Census rounds: the Soviet censuses were common to all three; later ones differ by country
+const ROUNDS = [
+  { label: '1926', geo: 1926, dag: 1926, arm: 1926 }, { label: '1939', geo: 1939, dag: 1939, arm: 1939 },
+  { label: '1959', geo: 1959, dag: 1959, arm: 1959 }, { label: '1970', geo: 1970, dag: 1970, arm: 1970 },
+  { label: '1979', geo: 1979, dag: 1979, arm: 1979 }, { label: '1989', geo: 1989, dag: 1989, arm: 1989 },
+  { label: '2002', geo: 2002, dag: 2002 }, { label: '2010–14', geo: 2014, dag: 2010 }, { label: '2021', dag: 2021 },
+].map((r, i) => ({ ...r, i }));
+let round = 5, measure = 'share', units = [], extras = { sources: {}, poets: {}, totals: {} }, selected = null, hovered = null, playing = null;
+const params = new URLSearchParams(location.search);
+if (['share', 'count'].includes(params.get('m'))) measure = params.get('m');
+if (ROUNDS.some((r) => r.label === params.get('y'))) round = ROUNDS.findIndex((r) => r.label === params.get('y'));
+const yearOf = (u, r = round) => ROUNDS[r]?.[u.region];
+const at = (u, r = round) => u.series[yearOf(u, r)] ?? null;
+function value(u, r = round, m = measure) {
+  const x = at(u, r);
+  if (!x) return null;
+  if (m === 'count') return x[0];
+  return x[1] ? x[0] / x[1] * 100 : null;
+}
+const SCALES = {
+  share: { breaks: [1, 5, 15, 30, 50, 75], ticks: ['', '1%', '5%', '15%', '30%', '50%', '75%+'] },
+  count: { breaks: [100, 1e3, 5e3, 10e3, 25e3, 50e3], ticks: ['', '100', '1k', '5k', '10k', '25k', '50k+'] },
+};
+const SEQ = dark ? ['#2B211B', '#4A2C24', '#6B3129', '#8E3430', '#B33A37', '#D45A55', '#F08A80'] : ['#F2E6DA', '#EACAB6', '#E0A88E', '#D2836A', '#BF5C48', '#A6362E', '#7A1B1E'];
+const classOf = (v) => SCALES[measure].breaks.filter((b) => v >= b).length;
+const fmt = (v, m = measure) => v == null ? t('nodata') : m === 'count' ? nf().format(v) : `${v < 10 ? v.toFixed(1) : Math.round(v)}%`;
+
+const map = new maplibregl.Map({
+  container: 'map', style: `https://tiles.openfreemap.org/styles/${dark ? 'dark' : 'positron'}`,
+  bounds: [[42.5, 38.6], [48.8, 44.6]], minZoom: 4, maxZoom: 10,
+  attributionControl: { compact: true, customAttribution: '<a href="https://www.geoboundaries.org">geoBoundaries</a> · ethno-kavkaz.narod.ru · Geostat · Rosstat' },
+});
+map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-right');
+const tip = new maplibregl.Popup({ closeButton: false, closeOnClick: false, offset: 8 });
+const phone = () => matchMedia('(max-width: 48rem)').matches;
+const pad = () => phone() ? { top: 60, right: 16, left: 16, bottom: document.querySelector('.panel').offsetHeight + 16 } : { top: 32, right: 32, bottom: 32, left: 27 * 16 + 32 };
+const labelExpr = () => ['coalesce', ['get', `name:${lang}`], ['get', lang === 'ru' ? 'name' : 'name:latin'], ['get', 'name']];
+map.on('style.load', () => {
+  for (const l of map.getStyle().layers) {
+    if (l.type === 'background') map.setPaintProperty(l.id, 'background-color', css('--land'));
+    if (l.type === 'fill' && /water|ocean|lake/.test(l.id)) map.setPaintProperty(l.id, 'fill-color', css('--water'));
+    if (l.type === 'symbol' && l.layout?.['text-field']) map.setLayoutProperty(l.id, 'text-field', labelExpr());
+  }
+});
+map.on('load', async () => {
+  const [geo, ex] = await Promise.all(['units.geojson', 'extras.json'].map((f) => fetch(`data/${f}`).then((r) => r.json())));
+  extras = ex;
+  geo.features.forEach((f, k) => { f.id = k; });
+  units = geo.features.map((f) => ({ ...f.properties, fid: f.id, bbox: bboxOf(f.geometry) }));
+  map.fitBounds([[42.5, 38.6], [48.8, 44.6]], { padding: pad(), duration: 0 });
+  document.querySelector('.maplibregl-ctrl-attrib')?.classList.remove('maplibregl-compact-show');
+  const firstSymbol = map.getStyle().layers.find((l) => l.type === 'symbol')?.id;
+  map.addSource('units', { type: 'geojson', data: geo });
+  map.addLayer({ id: 'units', type: 'fill', source: 'units', paint: { 'fill-color': ['coalesce', ['feature-state', 'color'], 'rgba(0,0,0,0)'], 'fill-opacity': .85 } }, firstSymbol);
+  map.addLayer({ id: 'units-line', type: 'line', source: 'units', paint: {
+    'line-color': ['case', ['boolean', ['feature-state', 'sel'], false], css('--ink'), ['boolean', ['feature-state', 'hover'], false], css('--ink'), css('--paper')],
+    'line-width': ['case', ['boolean', ['feature-state', 'sel'], false], 2.25, ['boolean', ['feature-state', 'hover'], false], 1.5, .6],
+  } }, firstSymbol);
+  map.on('mousemove', 'units', (e) => {
+    map.getCanvas().style.cursor = 'pointer';
+    const u = units[e.features[0].id];
+    if (hovered !== u.fid) { if (hovered != null) map.setFeatureState({ source: 'units', id: hovered }, { hover: false }); hovered = u.fid; map.setFeatureState({ source: 'units', id: hovered }, { hover: true }); }
+    const x = at(u);
+    tip.setLngLat(e.lngLat).setHTML(`<strong>${esc(L(u))}</strong> · ${x ? t('of')(nf().format(x[0]), fmt(value(u, round, 'share'), 'share')) : t('nodata')}`).addTo(map);
+  });
+  map.on('mouseleave', 'units', () => { map.getCanvas().style.cursor = ''; tip.remove(); if (hovered != null) map.setFeatureState({ source: 'units', id: hovered }, { hover: false }); hovered = null; });
+  map.on('click', 'units', (e) => select(e.features[0].id, false));
+  map.on('click', (e) => { if (!map.queryRenderedFeatures(e.point, { layers: ['units'] }).length && selected != null) select(null); });
+  document.getElementById('units-list').innerHTML = units.map((u) => `<option value="${esc(L(u))}">`).join('');
+  draw();
+  const start = params.get('u') && units.find((u) => u.key === params.get('u'));
+  if (start) select(start.fid);
+});
+function bboxOf(g) {
+  let b = [180, 90, -180, -90];
+  for (const poly of g.type === 'Polygon' ? [g.coordinates] : g.coordinates) for (const [x, y] of poly[0]) b = [Math.min(b[0], x), Math.min(b[1], y), Math.max(b[2], x), Math.max(b[3], y)];
+  return [[b[0], b[1]], [b[2], b[3]]];
+}
+function paint() {
+  for (const u of units) {
+    const v = value(u);
+    map.setFeatureState({ source: 'units', id: u.fid }, { color: v == null ? (dark ? 'rgba(255,255,255,.05)' : 'rgba(26,20,16,.06)') : SEQ[classOf(v)] });
+  }
+}
+function drawControls() {
+  const ms = document.getElementById('measures');
+  ms.style.gridTemplateColumns = 'repeat(2, 1fr)';
+  ms.innerHTML = ['share', 'count'].map((m) => `<button type="button" data-m="${m}" aria-pressed="${m === measure}">${t(m)}</button>`).join('');
+  ms.querySelectorAll('button').forEach((b) => b.onclick = () => { measure = b.dataset.m; draw(); });
+  const rs = document.getElementById('rounds');
+  rs.innerHTML = ROUNDS.map((r) => `<button type="button" data-r="${r.i}" aria-pressed="${r.i === round}">${r.label}</button>`).join('');
+  rs.querySelectorAll('button').forEach((b) => b.onclick = () => { if (playing) togglePlay(); round = +b.dataset.r; draw(); });
+  const r = ROUNDS[round];
+  document.getElementById('round-note').innerHTML = `<span>${['geo', 'dag', 'arm'].filter((k) => r[k]).map((k) => `${t(k)} ${r[k]}`).join(' · ')}</span>`;
+  const play = document.getElementById('play');
+  play.textContent = playing ? '❚❚' : '▶';
+  play.setAttribute('aria-label', playing ? t('pause') : t('play'));
+  play.title = play.getAttribute('aria-label');
+}
+function togglePlay() {
+  if (playing) { clearInterval(playing); playing = null; drawControls(); return; }
+  if (round >= ROUNDS.length - 1) round = 0;
+  playing = setInterval(() => { if (round >= ROUNDS.length - 1) { clearInterval(playing); playing = null; drawControls(); return; } round++; draw(); }, still() ? 2500 : 1500);
+  draw();
+}
+function drawLegend() {
+  document.getElementById('legend').innerHTML = `<span>${t(measure)}${measure === 'share' ? ` (${t('ofTotal')})` : ''}</span>
+    <div class="ramp">${SEQ.map((x) => `<span style="background:${x}"></span>`).join('')}</div>
+    <div class="ticks">${SCALES[measure].ticks.slice(1).map((x) => `<span>${x}</span>`).join('')}</div>
+    <div class="nodata"><i></i>${t('nodata')}</div>`;
+}
+// Each country's totals: a line per country, Azerbaijanis counted at each census
+function chart() {
+  const W = 320, H = 96, P = 18, C = { geo: css('--accent'), dag: css('--second'), arm: css('--third') || '#5B6B2E' };
+  const years = [1926, 1939, 1959, 1970, 1979, 1989, 2002, 2010, 2014, 2021];
+  const max = Math.max(1, ...Object.values(extras.totals).flatMap((o) => Object.values(o).map((x) => x.az ?? 0)));
+  const X = (y) => P + (y - 1926) / (2021 - 1926) * (W - 2 * P), Y = (v) => H - 14 - v / max * (H - 24);
+  const lines = Object.entries(extras.totals).map(([k, o]) => {
+    const pts = Object.entries(o).filter(([, x]) => x.az != null).sort(([a], [b]) => a - b);
+    return pts.length ? `<polyline points="${pts.map(([y, x]) => `${X(+y)},${Y(x.az)}`).join(' ')}" fill="none" stroke="${C[k]}" stroke-width="1.75"/>${pts.map(([y, x]) => `<circle cx="${X(+y)}" cy="${Y(x.az)}" r="2" fill="${C[k]}"><title>${t(k)} ${y}: ${nf().format(x.az)}</title></circle>`).join('')}` : '';
+  }).join('');
+  const keys = Object.keys(extras.totals).filter((k) => Object.keys(extras.totals[k]).length).map((k) => `<tspan fill="${C[k]}">● </tspan><tspan>${t(k)}  </tspan>`).join('');
+  return `<svg viewBox="0 0 ${W} ${H + 14}" role="img" aria-label="${t('count')}">${lines}
+    ${[1926, 1959, 1989, 2021].map((y) => `<text x="${X(y)}" y="${H}" text-anchor="middle">${y}</text>`).join('')}
+    <text x="${P}" y="${H + 13}">${keys}</text></svg>`;
+}
+function drawSide() {
+  const el = document.getElementById('side');
+  if (selected != null) return drawUnit(el, units[selected]);
+  const tot = (k) => { const y = ROUNDS[round][k]; const x = y && extras.totals[k]?.[y]; return `<div class="total"><span>${t(k)}${y ? ` · ${y}` : ''}</span><b>${x?.az != null ? nf().format(x.az) : '—'}</b><small>${x?.az != null && x.total ? fmt(x.az / x.total * 100, 'share') + ' ' + t('ofTotal') : ''}</small></div>`; };
+  const born = (k) => {
+    const ps = units.filter((u) => u.region === k).flatMap((u) => extras.poets[u.id] ?? []);
+    if (!ps.length) return '';
+    const link = (p) => `<a href="${lang === 'az' ? '' : ''}https://kitabxana.az${lang === 'az' ? '' : '/' + lang}/authors/${p.slug}">${esc(L(p))}</a>`;
+    return `<p class="who">${t('born')} ${ps.slice(0, 8).map(link).join(', ')}${ps.length > 8 ? ` ${t('more')(ps.length - 8)}` : ''}</p>`;
+  };
+  el.innerHTML = `<div class="totals">${tot('geo')}${tot('dag')}${tot('arm')}</div><div class="chart">${chart()}</div>
+    ${COMMUNITIES.map((c, i) => `<section class="community"><h3>${esc(L(c.name))}</h3><p>${esc(L(c.text))}</p>${born(c.region)}<button type="button" class="go" data-c="${i}">${t('show')} →</button></section>`).join('')}
+    <p class="note">${t('note')}</p>`;
+  el.querySelectorAll('[data-c]').forEach((b) => b.onclick = () => map.fitBounds(COMMUNITIES[+b.dataset.c].focus, { padding: pad(), duration: still() ? 0 : 700 }));
+}
+function drawUnit(el, u) {
+  const years = [...new Set(ROUNDS.map((r) => r[u.region]).filter(Boolean))];
+  const rows = years.map((y) => {
+    const x = u.series[y], s = extras.sources[u.id]?.[y];
+    return `<tr><td>${y}</td><td>${x ? nf().format(x[0]) : '—'}</td><td>${x && x[1] ? fmt(x[0] / x[1] * 100, 'share') : ''}</td><td>${s ? `<a href="${esc(s)}" target="_blank" rel="noopener">${t('src')} ↗</a>` : ''}</td></tr>`;
+  }).join('');
+  const ps = extras.poets[u.id] ?? [];
+  el.innerHTML = `<div class="unit"><button type="button" class="back" id="back">${t('back')}</button>
+    <p class="title">${esc(L(u))}</p><p class="where">${t(u.region)}</p>
+    ${ps.length ? `<p class="who">${t('born')} ${ps.map((p) => `<a href="https://kitabxana.az${lang === 'az' ? '' : '/' + lang}/authors/${p.slug}">${esc(L(p))}</a>`).join(', ')}</p>` : ''}
+    <table><thead><tr><th>${t('year')}</th><th>${t('az')}</th><th>${t('pct')}</th><th></th></tr></thead><tbody>${rows}</tbody></table></div>`;
+  document.getElementById('back').onclick = () => select(null);
+}
+function select(fid, fly = true) {
+  if (selected != null) map.setFeatureState({ source: 'units', id: selected }, { sel: false });
+  selected = fid;
+  if (fid != null) map.setFeatureState({ source: 'units', id: fid }, { sel: true });
+  if (fid != null && fly) map.fitBounds(units[fid].bbox, { padding: pad(), maxZoom: 9, duration: still() ? 0 : 700 });
+  drawSide(); keepUrl();
+}
+function keepUrl() {
+  const q = new URLSearchParams();
+  if (lang !== 'az') q.set('lang', lang);
+  if (measure !== 'share') q.set('m', measure);
+  if (round !== 5) q.set('y', ROUNDS[round].label);
+  if (selected != null) q.set('u', units[selected].key);
+  history.replaceState(null, '', `${location.pathname}${q.size ? '?' + q : ''}`);
+}
+function draw() { drawControls(); drawLegend(); drawSide(); if (map.getSource('units')) paint(); if (units.length) keepUrl(); }
+document.getElementById('play').onclick = togglePlay;
+document.getElementById('find').addEventListener('change', (e) => {
+  const q = e.target.value.trim().toLowerCase();
+  if (!q) return;
+  const u = units.find((x) => [x.az, x.ru, x.en, x.key].some((n) => n?.toLowerCase() === q)) ?? units.find((x) => [x.az, x.ru, x.en].some((n) => n?.toLowerCase().includes(q)));
+  if (u) { select(u.fid); e.target.value = ''; e.target.blur(); }
+});
+document.addEventListener('keydown', (e) => {
+  if (e.target.closest('input, select, textarea')) return;
+  if (e.key === 'ArrowRight' && round < ROUNDS.length - 1) { round++; draw(); }
+  if (e.key === 'ArrowLeft' && round > 0) { round--; draw(); }
+  if (e.key === 'Escape' && selected != null) select(null);
+});
+function applyLang() {
+  document.documentElement.lang = lang;
+  document.title = t('doc');
+  document.querySelectorAll('[data-i18n]').forEach((el) => el.textContent = t(el.dataset.i18n));
+  document.querySelectorAll('[data-lang]').forEach((b) => b.setAttribute('aria-pressed', b.dataset.lang === lang));
+  document.getElementById('find').placeholder = t('find');
+  if (units.length) document.getElementById('units-list').innerHTML = units.map((u) => `<option value="${esc(L(u))}">`).join('');
+  document.querySelectorAll('[data-keep-lang]').forEach((a) => { const u = new URL(a.getAttribute('href'), location.href); if (lang === 'az') u.searchParams.delete('lang'); else u.searchParams.set('lang', lang); a.href = u.pathname + u.search; });
+}
+applyLang();
+draw();
+document.querySelectorAll('[data-lang]').forEach((b) => b.onclick = () => {
+  lang = b.dataset.lang;
+  try { localStorage.setItem('lang', lang); } catch {}
+  applyLang(); draw();
+  if (map.getStyle()) for (const l of map.getStyle().layers) if (l.type === 'symbol' && l.layout?.['text-field']) map.setLayoutProperty(l.id, 'text-field', labelExpr());
+});
+})();
+</script>
+</body>
+</html>
