@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sovet rayonları · Azad Bilik</title>
-<meta name="description" content="Azərbaycan SSR-in rayonları və şəhər sovetləri 1979 və 1989-cu il siyahıyaalmalarında: əhali, sıxlıq, dəyişmə, şəhər əhalisi. The raions of the Azerbaijan SSR at the 1979 and 1989 censuses.">
+<meta name="description" content="Azərbaycan SSR-in rayonları və şəhər sovetləri 1939, 1979 və 1989-cu il siyahıyaalmalarında: əhali, sıxlıq, dəyişmə, şəhər əhalisi. The raions of the Azerbaijan SSR at the 1939, 1979 and 1989 censuses.">
 <meta name="theme-color" content="#F4EFE6" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#14100D" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="canonical" href="https://azadbilik.org/atlas/rayonlar/">
-<meta property="og:title" content="Sovet rayonları · Soviet raions, 1979–1989">
-<meta property="og:description" content="Azərbaycan SSR-in rayonları 1979 və 1989-cu il siyahıyaalmalarında.">
+<meta property="og:title" content="Sovet rayonları · Soviet raions, 1939–1989">
+<meta property="og:description" content="Azərbaycan SSR-in rayonları 1939, 1979 və 1989-cu il siyahıyaalmalarında.">
 <meta property="og:image" content="https://azadbilik.org/atlas/rayonlar/og.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="/fonts/fonts.css">
@@ -19,16 +19,16 @@
 <style>
   .controls { padding: 1rem 1.5rem; border-bottom: 1px solid var(--rule); display: grid; gap: .6rem; }
   .seg { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--rule); border-radius: 3px; padding: 2px; }
-  .seg.years { grid-template-columns: repeat(2, 1fr); }
+  .seg.years { grid-template-columns: repeat(3, 1fr); }
   .seg button { padding: .35rem .3rem; border-radius: 2px; font-size: .8125rem; color: var(--muted); }
   .seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
   .seg button[disabled] { opacity: .4; cursor: default; }
   .check { display: flex; align-items: center; gap: .5rem; font-size: .8125rem; color: var(--muted); cursor: pointer; }
   .check input { accent-color: var(--accent); }
   .caveat { margin: 1rem 1.5rem 0; padding: .6rem .75rem; border: 1px dashed color-mix(in srgb, var(--accent) 55%, transparent); border-radius: 4px; font-size: .8125rem; }
-  .totals { padding: 1rem 1.5rem 0; display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; }
+  .totals { padding: 1rem 1.5rem 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: .5rem; }
   .totals div { display: grid; }
-  .totals b { font: 400 1.5rem/1.1 var(--serif); font-variant-numeric: tabular-nums; }
+  .totals b { font: 400 1.25rem/1.1 var(--serif); font-variant-numeric: tabular-nums; }
   .totals small { font-size: .75rem; color: var(--muted); }
   .sec { padding: 1rem 1.5rem .35rem; font: 500 .75rem var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
   .rank ol { list-style: none; padding: 0 0 .5rem; }
@@ -70,7 +70,7 @@
   <div class="head">
     <div class="top"><a class="brand" href="/" data-keep-lang><svg viewBox="0 0 512 512" aria-hidden="true"><g class="star"><rect x="126" y="126" width="260" height="260"/><polygon points="256,72 440,256 256,440 72,256"/></g><polygon class="gem" points="256,196 316,256 256,316 196,256"/></svg>Azad Bilik</a><nav><a href="/atlas/" data-keep-lang>Atlas</a><span class="langs" role="group" aria-label="Dil · Язык · Language"><button type="button" data-lang="az">AZ</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="en">EN</button></span></nav></div>
     <h1 data-i18n="title">Sovet rayonları</h1>
-    <p class="sub" data-i18n="sub">Azərbaycan SSR, 1979 və 1989-cu il siyahıyaalmaları</p>
+    <p class="sub" data-i18n="sub">Azərbaycan SSR, 1939, 1979 və 1989-cu il siyahıyaalmaları</p>
   </div>
   <div class="body" id="body">
     <div class="controls">
@@ -100,21 +100,21 @@ let lang = (() => {
   return 'az';
 })();
 const T = {
-  az: { doc: 'Sovet rayonları · Azad Bilik', title: 'Sovet rayonları', sub: 'Azərbaycan SSR, 1979 və 1989-cu il siyahıyaalmaları', todayBox: 'Bugünkü rayon sərhədləri',
+  az: { doc: 'Sovet rayonları · Azad Bilik', title: 'Sovet rayonları', sub: 'Azərbaycan SSR, 1939, 1979 və 1989-cu il siyahıyaalmaları', todayBox: 'Bugünkü rayon sərhədləri',
     pop: 'Əhali', density: 'Sıxlıq', change: 'Dəyişmə', urban: 'Şəhər', perKm: 'nəfər/km²', changeLong: 'Dəyişmə 1979–1989', urbanLong: 'Şəhər əhalisi, %',
-    caveat: 'Hər sovet rayonu onun torpağını əhatə edən bugünkü rayon(lar) ilə çəkilib. Qırıq xətli sərhəd: torpaq sonradan bir az dəyişib. Boz: bugünkü rayon, torpağının sovet rayonları arasında necə bölündüyünü müəyyən etməmişik.',
+    caveat: 'Hər sovet rayonu onun torpağını əhatə edən bugünkü rayon(lar) ilə çəkilib; 1939-cu ilin rayonları başqa idi, ona görə o ilin xəritəsi də başqadır. Sonradan birləşmiş rayonlar bir yerdə çəkilib. Qırıq xətli sərhəd: torpaq sonradan bir az dəyişib. Boz: bugünkü rayon, torpağının sovet rayonları arasında necə bölündüyünü müəyyən etməmişik.',
     republic: 'Azərbaycan SSR', units: 'Rayonlar və şəhərlər', back: '← Bütün rayonlar', today: 'Bu gün', approx: 'təxmini sərhəd', year: 'İl', people: 'Əhali', urbanCol: 'Şəhər', gap: 'boz: bölgüsü bilinmir', legendApprox: 'təxmini sərhəd', legendToday: 'bugünkü rayonlar', city: 'şəhər',
-    note: 'Rəqəmlər: Ümumittifaq siyahıyaalmaları, 1979 və 1989, faktiki əhali (Demoskop Weekly cədvəlləri). Sərhədlər: bugünkü rayonlar (geoBoundaries, CC BY-SA 3.0), sovet rayonlarına Azad Bilik uyğunlaşdırıb. Hər iki ilin cəmi respublikanın cəminə bərabərdir.' },
-  ru: { doc: 'Советские районы · Azad Bilik', title: 'Советские районы', sub: 'Азербайджанская ССР, переписи 1979 и 1989 гг.', todayBox: 'Границы нынешних районов',
+    note: 'Rəqəmlər: Ümumittifaq siyahıyaalmaları, 1939, 1979 və 1989, faktiki əhali (Demoskop Weekly cədvəlləri). Sərhədlər: bugünkü rayonlar (geoBoundaries, CC BY-SA 3.0), sovet rayonlarına Azad Bilik uyğunlaşdırıb. Hər ilin cəmi respublikanın cəminə bərabərdir.' },
+  ru: { doc: 'Советские районы · Azad Bilik', title: 'Советские районы', sub: 'Азербайджанская ССР, переписи 1939, 1979 и 1989 гг.', todayBox: 'Границы нынешних районов',
     pop: 'Население', density: 'Плотность', change: 'Изменение', urban: 'Город', perKm: 'чел./км²', changeLong: 'Изменение 1979–1989', urbanLong: 'Городское население, %',
-    caveat: 'Каждый советский район показан нынешним районом (или районами), покрывающим его землю. Пунктирная граница: земля потом немного менялась. Серым: нынешний район, чья земля была поделена между советскими районами неустановленным образом.',
+    caveat: 'Каждый советский район показан нынешним районом (или районами), покрывающим его землю; районы 1939 г. были другими, поэтому и карта этого года другая. Районы, объединённые позже, показаны вместе. Пунктирная граница: земля потом немного менялась. Серым: нынешний район, чья земля была поделена между советскими районами неустановленным образом.',
     republic: 'Азербайджанская ССР', units: 'Районы и города', back: '← Все районы', today: 'Сегодня', approx: 'граница приблизительная', year: 'Год', people: 'Население', urbanCol: 'Город', gap: 'серым: раздел неизвестен', legendApprox: 'граница приблизительная', legendToday: 'нынешние районы', city: 'город',
-    note: 'Цифры: всесоюзные переписи 1979 и 1989 гг., наличное население (таблицы Демоскоп Weekly). Границы: нынешние районы (geoBoundaries, CC BY-SA 3.0), сопоставленные с советскими районами Azad Bilik. Сумма за каждый год равна итогу по республике.' },
-  en: { doc: 'Soviet raions · Azad Bilik', title: 'Soviet raions', sub: 'The Azerbaijan SSR at the 1979 and 1989 censuses', todayBox: "Today's district borders",
+    note: 'Цифры: всесоюзные переписи 1939, 1979 и 1989 гг., наличное население (таблицы Демоскоп Weekly). Границы: нынешние районы (geoBoundaries, CC BY-SA 3.0), сопоставленные с советскими районами Azad Bilik. Сумма за каждый год равна итогу по республике.' },
+  en: { doc: 'Soviet raions · Azad Bilik', title: 'Soviet raions', sub: 'The Azerbaijan SSR at the 1939, 1979 and 1989 censuses', todayBox: "Today's district borders",
     pop: 'People', density: 'Density', change: 'Change', urban: 'Urban', perKm: 'people/km²', changeLong: 'Change 1979–1989', urbanLong: 'Urban population, %',
-    caveat: "Each Soviet raion is drawn as the district or districts of today that cover its land. A dashed border: the land changed a little later. Grey: a district of today whose land was shared among Soviet raions in a way we have not established.",
+    caveat: "Each Soviet raion is drawn as the district or districts of today that cover its land; the raions of 1939 were different, so that year has its own map. Raions merged later are drawn together. A dashed border: the land changed a little later. Grey: a district of today whose land was shared among Soviet raions in a way we have not established.",
     republic: 'Azerbaijan SSR', units: 'Raions and cities', back: '← All raions', today: 'Today', approx: 'approximate border', year: 'Year', people: 'People', urbanCol: 'Urban', gap: 'grey: how it was shared is unknown', legendApprox: 'approximate border', legendToday: "today's districts", city: 'city',
-    note: "Figures: the all-Union censuses of 1979 and 1989, present population (Demoskop Weekly's tables). Borders: today's districts (geoBoundaries, CC BY-SA 3.0), matched to the Soviet raions by Azad Bilik. Each year's units add up to the republic's total." },
+    note: "Figures: the all-Union censuses of 1939, 1979 and 1989, present population (Demoskop Weekly's tables). Borders: today's districts (geoBoundaries, CC BY-SA 3.0), matched to the Soviet raions by Azad Bilik. Each year's units add up to the republic's total." },
 };
 const t = (k) => T[lang][k];
 const L = (p) => p[lang] ?? p.az;
@@ -132,8 +132,12 @@ const SCALES = {
 const MEASURES = ['pop', 'density', 'change', 'urban'];
 const params = new URLSearchParams(location.search);
 let measure = MEASURES.includes(params.get('m')) ? params.get('m') : 'pop';
-let year = params.get('y') === '1979' ? '1979' : '1989';
+const YEARS = ['1939', '1979', '1989'];
+let year = YEARS.includes(params.get('y')) ? params.get('y') : '1989';
+const ERA = {}; // '39' and '79': { units, geo, src }
 let units = [], geo = null, selected = null, showToday = false;
+const eraOf = () => measure === 'change' || year !== '1939' ? '79' : '39';
+const src = () => ERA[eraOf()].src;
 const BOUNDS = [[44.7, 38.35], [50.65, 41.95]];
 
 const value = (u, m = measure, y = year) => {
@@ -172,52 +176,69 @@ map.on('style.load', () => {
   }
 });
 map.on('load', async () => {
-  const [g, e, now] = await Promise.all(['data/raions.geojson', 'data/edges.geojson', '../ehali/data/units.geojson'].map((f) => fetch(f).then((r) => r.json())));
-  geo = g;
-  g.features.forEach((f, k) => { f.id = k; });
-  e.features.forEach((f) => { f.properties.fit = g.features.find((x) => x.properties.id === f.properties.id).properties.fit ?? 'gap'; });
-  units = g.features.map((f) => ({ ...f.properties, fid: f.id }));
+  const [g, e, g39, e39, now] = await Promise.all(['data/raions.geojson', 'data/edges.geojson', 'data/raions-1939.geojson', 'data/edges-1939.geojson', '../ehali/data/units.geojson'].map((f) => fetch(f).then((r) => r.json())));
+  for (const [k, gg, ee] of [['79', g, e], ['39', g39, e39]]) {
+    gg.features.forEach((f, i) => { f.id = i; });
+    ee.features.forEach((f) => { f.properties.fit = gg.features.find((x) => x.properties.id === f.properties.id).properties.fit ?? 'gap'; });
+    ERA[k] = { geo: gg, edges: ee, src: k === '79' ? 'r' : 'r39', units: gg.features.map((f) => ({ ...f.properties, fid: f.id })) };
+  }
+  ({ units, geo } = ERA[eraOf()]);
   now.features = now.features.filter((f) => f.properties.country === 'az');
   map.fitBounds(BOUNDS, { padding: pad(), duration: 0 });
   document.querySelector('.maplibregl-ctrl-attrib')?.classList.remove('maplibregl-compact-show');
   const firstSymbol = map.getStyle().layers.find((l) => l.type === 'symbol')?.id;
   const ink = css('--ink');
-  map.addSource('r', { type: 'geojson', data: g });
-  map.addSource('edges', { type: 'geojson', data: e });
   map.addSource('today', { type: 'geojson', data: now });
-  map.addLayer({ id: 'r-fill', type: 'fill', source: 'r', paint: { 'fill-color': ['coalesce', ['feature-state', 'color'], css('--rule')], 'fill-opacity': ['case', ['==', ['get', 'kind'], 'gap'], .5, ['boolean', ['feature-state', 'hover'], false], .95, .82] } }, firstSymbol);
-  map.addLayer({ id: 'today', type: 'line', source: 'today', layout: { visibility: 'none' }, paint: { 'line-color': ink, 'line-width': .6, 'line-opacity': .5, 'line-dasharray': [1, 2] } }, firstSymbol);
-  map.addLayer({ id: 'edges', type: 'line', source: 'edges', filter: ['==', ['get', 'fit'], 'same'], paint: { 'line-color': css('--paper'), 'line-width': .9 } }, firstSymbol);
-  map.addLayer({ id: 'edges-approx', type: 'line', source: 'edges', filter: ['!=', ['get', 'fit'], 'same'], paint: { 'line-color': ink, 'line-width': 1, 'line-opacity': .75, 'line-dasharray': [3, 2] } }, firstSymbol);
-  map.addLayer({ id: 'r-sel', type: 'line', source: 'r', paint: { 'line-color': ink, 'line-width': ['case', ['boolean', ['feature-state', 'sel'], false], 2.2, 0] } }, firstSymbol);
   let hovered = null;
-  map.on('mousemove', 'r-fill', (ev) => {
-    map.getCanvas().style.cursor = 'pointer';
-    const f = ev.features[0], u = units[f.id];
-    if (hovered !== f.id) { if (hovered != null) map.setFeatureState({ source: 'r', id: hovered }, { hover: false }); hovered = f.id; map.setFeatureState({ source: 'r', id: hovered }, { hover: true }); }
-    tip.setLngLat(ev.lngLat).setHTML(`<strong>${esc(L(u))}</strong>${u.kind === 'gap' ? ` · ${t('gap')}` : ` · ${show(u)}`}`).addTo(map);
-  });
-  map.on('mouseleave', 'r-fill', () => { map.getCanvas().style.cursor = ''; tip.remove(); if (hovered != null) map.setFeatureState({ source: 'r', id: hovered }, { hover: false }); hovered = null; });
-  map.on('click', 'r-fill', (ev) => select(units[ev.features[0].id].id));
+  for (const k of ['79', '39']) {
+    const s = ERA[k].src, vis = k === eraOf() ? 'visible' : 'none';
+    map.addSource(s, { type: 'geojson', data: ERA[k].geo });
+    map.addSource(`${s}-edges`, { type: 'geojson', data: ERA[k].edges });
+    map.addLayer({ id: `${s}-fill`, type: 'fill', source: s, layout: { visibility: vis }, paint: { 'fill-color': ['coalesce', ['feature-state', 'color'], css('--rule')], 'fill-opacity': ['case', ['==', ['get', 'kind'], 'gap'], .5, ['boolean', ['feature-state', 'hover'], false], .95, .82] } }, firstSymbol);
+    map.addLayer({ id: `${s}-edges`, type: 'line', source: `${s}-edges`, layout: { visibility: vis }, filter: ['==', ['get', 'fit'], 'same'], paint: { 'line-color': css('--paper'), 'line-width': .9 } }, firstSymbol);
+    map.addLayer({ id: `${s}-edges-approx`, type: 'line', source: `${s}-edges`, layout: { visibility: vis }, filter: ['!=', ['get', 'fit'], 'same'], paint: { 'line-color': ink, 'line-width': 1, 'line-opacity': .75, 'line-dasharray': [3, 2] } }, firstSymbol);
+    map.addLayer({ id: `${s}-sel`, type: 'line', source: s, layout: { visibility: vis }, paint: { 'line-color': ink, 'line-width': ['case', ['boolean', ['feature-state', 'sel'], false], 2.2, 0] } }, firstSymbol);
+    map.on('mousemove', `${s}-fill`, (ev) => {
+      map.getCanvas().style.cursor = 'pointer';
+      const f = ev.features[0], u = units[f.id];
+      if (hovered !== f.id) { if (hovered != null) map.setFeatureState({ source: s, id: hovered }, { hover: false }); hovered = f.id; map.setFeatureState({ source: s, id: hovered }, { hover: true }); }
+      tip.setLngLat(ev.lngLat).setHTML(`<strong>${esc(L(u))}</strong>${u.kind === 'gap' ? ` · ${t('gap')}` : ` · ${show(u)}`}`).addTo(map);
+    });
+    map.on('mouseleave', `${s}-fill`, () => { map.getCanvas().style.cursor = ''; tip.remove(); if (hovered != null) map.setFeatureState({ source: s, id: hovered }, { hover: false }); hovered = null; });
+    map.on('click', `${s}-fill`, (ev) => select(units[ev.features[0].id].id));
+  }
+  map.addLayer({ id: 'today', type: 'line', source: 'today', layout: { visibility: 'none' }, paint: { 'line-color': ink, 'line-width': .6, 'line-opacity': .5, 'line-dasharray': [1, 2] } }, firstSymbol);
+  paint();
   if (params.get('r') && units.some((u) => u.id === params.get('r'))) select(params.get('r'));
   else draw();
 });
 function bboxOf(f) { let b = [180, 90, -180, -90]; for (const p of f.geometry.coordinates) for (const [x, y] of p[0]) b = [Math.min(b[0], x), Math.min(b[1], y), Math.max(b[2], x), Math.max(b[3], y)]; return [[b[0], b[1]], [b[2], b[3]]]; }
 function select(id) {
   selected = id;
-  for (const u of units) map.setFeatureState({ source: 'r', id: u.fid }, { sel: u.id === id });
+  for (const u of units) map.setFeatureState({ source: src(), id: u.fid }, { sel: u.id === id });
   if (id) { const u = units.find((x) => x.id === id); map.fitBounds(bboxOf(geo.features[u.fid]), { padding: pad(), maxZoom: 9, duration: still() ? 0 : 700 }); }
   draw();
   document.getElementById('body').scrollTop = 0;
 }
+// the 1939 raions and those of 1979–1989 are separate layers; show the one the year needs
+function switchEra() {
+  const k = eraOf();
+  if (!ERA[k] || units === ERA[k].units) return;
+  ({ units, geo } = ERA[k]);
+  if (selected && !units.some((u) => u.id === selected)) selected = null;
+  for (const e of ['79', '39']) for (const l of ['fill', 'edges', 'edges-approx', 'sel']) map.setLayoutProperty(`${ERA[e].src}-${l}`, 'visibility', e === k ? 'visible' : 'none');
+  for (const u of units) map.setFeatureState({ source: src(), id: u.fid }, { sel: u.id === selected });
+}
 function paint() {
-  for (const u of units) map.setFeatureState({ source: 'r', id: u.fid }, { color: colorOf(value(u)) });
+  switchEra();
+  for (const u of units) map.setFeatureState({ source: src(), id: u.fid }, { color: colorOf(value(u)) });
 }
 function drawControls() {
   document.getElementById('measures').innerHTML = MEASURES.map((m) => `<button type="button" data-m="${m}" aria-pressed="${m === measure}">${t(m)}</button>`).join('');
-  document.getElementById('years').innerHTML = ['1979', '1989'].map((y) => `<button type="button" data-y="${y}" aria-pressed="${measure !== 'change' && y === year}"${measure === 'change' ? ' disabled' : ''}>${y}</button>`).join('');
+  document.getElementById('years').innerHTML = YEARS.map((y) => `<button type="button" data-y="${y}" aria-pressed="${measure !== 'change' && y === year}"${measure === 'change' ? ' disabled' : ''}>${y}</button>`).join('');
   document.querySelectorAll('[data-m]').forEach((b) => b.onclick = () => { measure = b.dataset.m; draw(); });
   document.querySelectorAll('[data-y]').forEach((b) => b.onclick = () => { year = b.dataset.y; draw(); });
+  if (measure === 'change') document.querySelector('[data-m="change"]').title = t('changeLong');
 }
 function drawLegend() {
   const s = SCALES[measure], c = colors();
@@ -234,11 +255,12 @@ function drawSide() {
   const u = selected && units.find((x) => x.id === selected);
   if (u) {
     const today = u.kind === 'gap' ? '' : `<p class="where">${t('today')}: ${u.today.map((x) => esc(x[lang] ?? x.az)).join(', ')}</p>`;
+    const ys = u.kind === 'gap' ? [] : Object.keys(u.pop);
     const rows = u.kind === 'gap' ? '' : `<table><thead><tr><th>${t('year')}</th><th>${t('people')}</th><th>${t('density')}</th><th>${t('urbanCol')}</th></tr></thead><tbody>
-      ${['1979', '1989'].map((y) => `<tr><td>${y}</td><td>${fmt(u.pop[y])}</td><td>${fmt(Math.round(u.pop[y] / u.area))}</td><td>${Math.round(u.urban[y] / u.pop[y] * 100)}%</td></tr>`).join('')}
-      <tr><td>${t('change')}</td><td class="${u.pop['1989'] >= u.pop['1979'] ? 'up' : 'down'}">${pct((u.pop['1989'] / u.pop['1979'] - 1) * 100)}</td><td></td><td></td></tr></tbody></table>`;
+      ${ys.map((y) => `<tr><td>${y}</td><td>${fmt(u.pop[y])}</td><td>${fmt(Math.round(u.pop[y] / u.area))}</td><td>${Math.round(u.urban[y] / u.pop[y] * 100)}%</td></tr>`).join('')}
+      ${ys.length > 1 ? `<tr><td>${t('change')}</td><td class="${u.pop['1989'] >= u.pop['1979'] ? 'up' : 'down'}">${pct((u.pop['1989'] / u.pop['1979'] - 1) * 100)}</td><td></td><td></td></tr>` : ''}</tbody></table>`;
     const members = u.members ?? [];
-    const split = members.length > 1 ? `<table><thead><tr><th></th><th>1979</th><th>1989</th></tr></thead><tbody>${members.map((m) => `<tr><td>${esc(L(m))}</td><td>${fmt(m.pop['1979'])}</td><td>${fmt(m.pop['1989'])}</td></tr>`).join('')}</tbody></table>` : '';
+    const split = members.length > 1 ? `<table><thead><tr><th></th>${ys.map((y) => `<th>${y}</th>`).join('')}</tr></thead><tbody>${members.map((m) => `<tr><td>${esc(L(m))}</td>${ys.map((y) => `<td>${fmt(m.pop[y])}</td>`).join('')}</tr>`).join('')}</tbody></table>` : '';
     const notes = u.kind === 'gap' ? [u.note[LI[lang]]] : members.filter((m) => m.note).map((m) => (members.length > 1 ? `<b>${esc(L(m))}.</b> ` : '') + esc(m.note[LI[lang]]));
     el.innerHTML = `<div class="unit"><button type="button" class="back" id="back">${t('back')}</button>
       <h2 class="title">${esc(L(u))}${u.kind === 'city' ? ` <small class="k" style="font:400 .8125rem var(--sans);color:var(--muted)">${t('city')}</small>` : ''}</h2>${today}
@@ -248,11 +270,10 @@ function drawSide() {
     el.querySelector('#back').onclick = () => select(null);
     return;
   }
-  const drawn = units.filter((x) => x.kind !== 'gap');
-  const sum = (y) => drawn.reduce((a, x) => a + x.pop[y], 0);
+  const sum = (y) => ERA[y === '1939' ? '39' : '79'].units.reduce((a, x) => a + (x.pop?.[y] ?? 0), 0);
   const list = [...units].sort((a, b) => (value(b) ?? -Infinity) - (value(a) ?? -Infinity));
   el.innerHTML = `<p class="caveat">${t('caveat')}</p>
-    <div class="totals"><div><small>${t('republic')}, 1979</small><b>${fmt(sum('1979'))}</b></div><div><small>1989</small><b>${fmt(sum('1989'))}</b></div></div>
+    <div class="totals">${YEARS.map((y, i) => `<div><small>${i ? '' : `${t('republic')}, `}${y}</small><b>${fmt(sum(y))}</b></div>`).join('')}</div>
     <div class="rank"><h2 class="sec">${t('units')}</h2><ol>${list.map((x) => `<li><button type="button" data-r="${x.id}"><i style="background:${colorOf(value(x)) ?? css('--rule')}"></i><span>${esc(L(x))}${x.fit === 'approx' ? '<span class="ap">*</span>' : ''}</span><span class="v">${x.kind === 'gap' ? '–' : show(x)}</span></button></li>`).join('')}</ol></div>
     <p class="note">* ${t('approx')}. ${t('note')}</p>`;
   el.querySelectorAll('[data-r]').forEach((b) => b.onclick = () => select(b.dataset.r));
