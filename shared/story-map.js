@@ -72,6 +72,8 @@
     for (const p of gallery.poems) for (const sc of p.scenes) sceneNames[`${p.slug}/${sc.id}`] = sc;
     applyLang();
     map.fitBounds(meta.bounds, { padding: pad(), duration: 0 });
+    // The credits stay folded behind their ⓘ (open, they cover a phone's map)
+    document.querySelector('.maplibregl-ctrl-attrib')?.classList.remove('maplibregl-compact-show');
 
     // Roads: each stop joined to the previous stop of its part, dashed where either end is approximate
     const legs = [];
