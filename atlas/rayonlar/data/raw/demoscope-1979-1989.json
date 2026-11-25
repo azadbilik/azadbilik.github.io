@@ -421,7 +421,8 @@
    {
     "name": "Джульфинский район (сельское население)",
     "total": 19977,
-    "urban": 19977
+    "urban": 0,
+    "comment": "Rural population only: the table prints no urban columns for this row."
    },
    {
     "name": "Ильичевский район",

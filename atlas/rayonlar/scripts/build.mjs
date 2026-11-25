@@ -22,13 +22,13 @@ const row = (y, name) => {
   return r;
 };
 // a unit's labels: "name" adds the row, "=name" starts from an aggregate, "-name" takes a row off
-function count(u, y) {
+function count(u, y, track = true) {
   let total = 0, urban = 0;
   for (const label of u[`c${y.slice(2)}`]) {
     const sign = label.startsWith('-') ? -1 : 1, name = label.replace(/^[=-]/, '');
     const r = row(y, name);
     total += sign * r.total; urban += sign * r.urban;
-    if (!label.startsWith('=') && !label.startsWith('-')) {
+    if (track && !label.startsWith('=') && !label.startsWith('-')) {
       if (used[y].has(name)) throw new Error(`${y}: «${name}» used by ${used[y].get(name)} and ${u.id}`);
       used[y].set(name, u.id);
     }
@@ -105,6 +105,8 @@ for (const y of YEARS) {
   const total = row(y, 'Азербайджанская ССР').total;
   const sum = features.reduce((a, f) => a + (f.properties.pop?.[y] ?? 0), 0);
   if (sum !== total) throw new Error(`${y}: units add up to ${sum}, the republic is ${total}`);
+  const urban = features.reduce((a, f) => a + (f.properties.urban?.[y] ?? 0), 0), urbanTotal = row(y, 'Азербайджанская ССР').urban;
+  if (urban !== urbanTotal) throw new Error(`${y}: urban people add up to ${urban}, the republic's are ${urbanTotal}`);
 }
 // today's districts whose land was shared among several Soviet raions in ways not established: grey
 for (const g of gaps) {
@@ -118,8 +120,17 @@ for (const g of gaps) {
 const unusedShapes = [...new Set(today.features.filter((f) => f.properties.country === 'az').map((f) => f.properties.key))].filter((k) => !shapesUsed.has(k));
 if (unusedShapes.length) throw new Error(`today's districts not drawn: ${unusedShapes.join(', ')}`);
 
+// The table for azadbilik/data: one row per Soviet unit and census, as counted (merged pairs apart)
+const q = (v) => { const x = String(v ?? ''); return /[",\n]/.test(x) ? `"${x.replace(/"/g, '""')}"` : x; };
+const lines = [['soviet_unit', 'name_az', 'name_ru', 'name_en', 'kind', 'region', 'year', 'population', 'urban', 'census_rows', 'today_districts', 'fit', 'drawn_with', 'source_url'].join(',')];
+for (const u of units) for (const y of YEARS) {
+  const c = count({ ...u, id: `${u.id} (csv)` }, y, false);
+  const shapes = u.shapes.length ? u.shapes : byId.get(u.with).shapes;
+  lines.push([u.id, u.az, u.ru, u.en, u.kind, u.region ?? '', y, c.total, c.urban, u[`c${y.slice(2)}`].join(';'), shapes.join(';'), u.fit, u.with ?? '', census.source[y]].map(q).join(','));
+}
+await writeFile(here('../data/raions-1979-1989.csv'), lines.join('\n') + '\n');
 await writeFile(here('../data/raions.geojson'), JSON.stringify({ type: 'FeatureCollection', features }) + '\n');
 await writeFile(here('../data/edges.geojson'), JSON.stringify({ type: 'FeatureCollection', features: edges }) + '\n');
 const approx = features.filter((f) => f.properties.fit === 'approx').length;
 const drawn = features.filter((f) => f.properties.kind !== 'gap');
-console.log(`${drawn.length} shapes for ${units.length} Soviet units (${approx} approximate), ${gaps.length} of today's districts in grey; 1979 ${drawn.reduce((a, f) => a + f.properties.pop['1979'], 0).toLocaleString('en')}, 1989 ${drawn.reduce((a, f) => a + f.properties.pop['1989'], 0).toLocaleString('en')}: both match the republic`);
+console.log(`${drawn.length} shapes for ${units.length} Soviet units (${approx} approximate), ${gaps.length} of today's districts in grey; 1979 ${drawn.reduce((a, f) => a + f.properties.pop['1979'], 0).toLocaleString('en')}, 1989 ${drawn.reduce((a, f) => a + f.properties.pop['1989'], 0).toLocaleString('en')}: both match the republic, urban too`);
