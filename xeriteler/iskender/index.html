@@ -75,7 +75,6 @@
   .scene h3 { font-size: .875rem; font-weight: 500; }
   .thumbs { display: flex; gap: .4rem; margin-top: .5rem; overflow-x: auto; scrollbar-width: none; padding-bottom: .25rem; }
   .thumbs::-webkit-scrollbar { display: none; }
-  .thumbs a { flex: none; background: var(--frame); border-radius: 2px; }
   .thumbs img { height: 7rem; width: auto; display: block; border-radius: 2px; opacity: 0; transition: opacity .4s; }
   .thumbs img:not([width]) { aspect-ratio: 3 / 4; }
   .thumbs img.ok { opacity: 1; }
@@ -91,7 +90,37 @@
   .maplibregl-popup-content { background: var(--paper); color: var(--ink); font: .8125rem var(--sans); padding: .4rem .6rem; border-radius: 3px; box-shadow: 0 2px 12px rgb(0 0 0 / .15); }
   .maplibregl-popup-tip { display: none; }
 
+  /* Legend: on the map, always in view */
+  .legend { position: fixed; top: 1rem; right: 1rem; z-index: 2; background: var(--panel); backdrop-filter: blur(8px); border: 1px solid var(--rule); border-radius: 4px; padding: .6rem .8rem; font-size: .75rem; display: grid; gap: .35rem; max-width: 15rem; box-shadow: 0 1px 2px rgb(0 0 0 / .04); }
+  .legend div { display: grid; grid-template-columns: 2.25rem 1fr; align-items: center; gap: .5rem; }
+  .legend svg { width: 2.25rem; height: .75rem; overflow: visible; }
+  .legend .k { color: var(--muted); }
+
+  /* Viewer: a miniature opens here, over the map */
+  dialog.lb { border: 0; padding: 0; width: min(64rem, 100vw); height: min(46rem, 100svh); max-width: 100vw; max-height: 100svh; background: var(--paper); color: var(--ink); border-radius: 4px; }
+  dialog.lb::backdrop { background: rgb(0 0 0 / .6); }
+  .lb-body { display: grid; grid-template-columns: 1fr 18rem; height: 100%; }
+  .lb-stage { position: relative; background: var(--frame); min-height: 0; }
+  .lb-stage img { position: absolute; inset: 1.5rem 3.75rem; width: calc(100% - 7.5rem); height: calc(100% - 3rem); object-fit: contain; transition: filter .3s; }
+  .lb-stage.busy img { filter: blur(2px); }
+  .lb-stage .nav { position: absolute; top: 50%; translate: 0 -50%; width: 2.5rem; height: 2.5rem; border-radius: 50%; background: var(--paper); box-shadow: 0 1px 6px rgb(0 0 0 / .15); display: grid; place-items: center; }
+  .lb-stage .prev { left: .75rem; } .lb-stage .next { right: .75rem; }
+  .lb-stage .nav[disabled] { opacity: .3; cursor: default; }
+  .lb-info { padding: 1.25rem 1.25rem 1.5rem; overflow-y: auto; border-left: 1px solid var(--rule); display: flex; flex-direction: column; gap: .75rem; font-size: .875rem; }
+  .lb-info .close { align-self: flex-end; font-size: .8125rem; color: var(--muted); }
+  .lb-info h2 { font: 400 1.25rem/1.25 var(--serif); }
+  .lb-info .m { color: var(--muted); }
+  .lb-info a { font-weight: 500; text-decoration: none; } .lb-info a:hover { color: var(--accent); }
+  .lb-info .pos { margin-top: auto; font-size: .75rem; color: var(--muted); }
+  .thumbs button { flex: none; background: var(--frame); border-radius: 2px; }
+
   @media (max-width: 48rem) {
+    .legend { top: .5rem; right: .5rem; padding: .45rem .6rem; font-size: .6875rem; }
+    .lb-body { grid-template-columns: 1fr; grid-template-rows: 60svh auto; height: auto; min-height: 100%; }
+    dialog.lb { height: 100svh; overflow-y: auto; border-radius: 0; }
+    .lb-stage img { inset: .5rem; width: calc(100% - 1rem); height: calc(100% - 1rem); }
+    .lb-stage .nav { top: auto; bottom: .5rem; translate: none; }
+    .lb-info { border-left: 0; }
     .panel { top: auto; left: 0; right: 0; bottom: 0; width: auto; max-height: 55svh; border-radius: 12px 12px 0 0; border-bottom: 0; }
     .head { padding: 1rem 1rem .75rem; }
     h1 { margin-top: .75rem; font-size: 1.375rem; }
@@ -114,6 +143,15 @@
   <div class="body" id="body" aria-live="polite"></div>
 </aside>
 
+<div class="legend" id="legend" aria-label="Legend"></div>
+
+<dialog class="lb" id="lb">
+  <div class="lb-body">
+    <div class="lb-stage" id="lb-stage"><img id="lb-img" alt=""><button type="button" class="nav prev" id="lb-prev">←</button><button type="button" class="nav next" id="lb-next">→</button></div>
+    <div class="lb-info" id="lb-info"></div>
+  </div>
+</dialog>
+
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <script>
 const dark = matchMedia('(prefers-color-scheme: dark)').matches;
@@ -133,14 +171,17 @@ const T = {
   az: { doc: 'İskəndərin səfərləri · Azad Bilik', title: 'İskəndərin səfərləri', sub: 'Nizaminin «İskəndərnamə»si xəritədə', map: 'Xəritə', maps: 'Xəritələr', gallery: 'Qalereya',
     serefname: 'Şərəfnamə: dünyanın fəthi', iqbalname: 'İqbalnamə: hikmət və peyğəmbərlik', back: 'Bütün yol', prev: 'Əvvəlki', next: 'Növbəti', approx: 'yeri təxminidir', read: 'Kitabxanada oxu', chapter: (n) => `${n}-ci fəsil`,
     pics: (n) => `${n} miniatür`, ch: (n) => `${n} fəsil`,
+    lgSeref: 'Şərəfnamə: birinci səfər', lgIqbal: 'İqbalnamə: ikinci səfər', lgApprox: 'yeri təxminidir', lgShared: 'eyni yerə bir neçə dəfə', close: 'Bağla', inGallery: 'Qalereyada aç', date: 'Tarix', ms: 'Əlyazma', held: 'Mənbə',
     note: 'Yer adları Nizaminin mətnindəndir; tarixi İskəndərin yolu deyil, poemadakı yoldur. Nizami yalnız ölkə və ya tərəf adı çəkəndə (Hindistan, Çin, Zülmət) nöqtə təxminidir və qırıq xətlə göstərilir. Miniatürlər Azad Bilik qalereyasındandır.' },
   ru: { doc: 'Походы Искандера · Azad Bilik', title: 'Походы Искандера', sub: '«Искандер-наме» Низами на карте', map: 'Карта', maps: 'Карты', gallery: 'Галерея',
     serefname: 'Шараф-наме: завоевание мира', iqbalname: 'Икбал-наме: мудрость и пророчество', back: 'Весь путь', prev: 'Назад', next: 'Дальше', approx: 'место приблизительно', read: 'Читать в библиотеке', chapter: (n) => `глава ${n}`,
     pics: (n) => `${n} ${plural(n, 'миниатюра', 'миниатюры', 'миниатюр')}`, ch: (n) => `${n} ${plural(n, 'глава', 'главы', 'глав')}`,
+    lgSeref: 'Шараф-наме: первый поход', lgIqbal: 'Икбал-наме: второй поход', lgApprox: 'место приблизительно', lgShared: 'одно место, несколько остановок', close: 'Закрыть', inGallery: 'Открыть в галерее', date: 'Дата', ms: 'Рукопись', held: 'Собрание',
     note: 'Названия мест взяты из текста Низами: это путь поэмы, а не исторического Александра. Там, где Низами называет лишь страну или сторону света (Индия, Китай, Страна Мрака), точка приблизительна и путь к ней показан пунктиром. Миниатюры — из галереи Azad Bilik.' },
   en: { doc: "Iskandar's journeys · Azad Bilik", title: "Iskandar's journeys", sub: "Nizami's Iskandarnama on the map", map: 'Map', maps: 'Maps', gallery: 'Gallery',
     serefname: 'Sharafnama: the conquest of the world', iqbalname: 'Iqbalnama: wisdom and prophethood', back: 'The whole route', prev: 'Previous', next: 'Next', approx: 'approximate place', read: 'Read in the library', chapter: (n) => `chapter ${n}`,
     pics: (n) => `${n} miniature${n === 1 ? '' : 's'}`, ch: (n) => `${n} chapter${n === 1 ? '' : 's'}`,
+    lgSeref: 'Sharafnama: the first journey', lgIqbal: 'Iqbalnama: the second journey', lgApprox: 'approximate place', lgShared: 'one place, several stops', close: 'Close', inGallery: 'Open in the gallery', date: 'Date', ms: 'Manuscript', held: 'Held by',
     note: "Place names are Nizami's: this is the poem's route, not the historical Alexander's. Where Nizami names only a country or a quarter of the world (India, China, the Darkness), the point is approximate and the way to it is dashed. The miniatures are from the Azad Bilik gallery." },
 };
 function plural(n, one, few, many) { const r = new Intl.PluralRules('ru').select(n); return r === 'one' ? one : r === 'few' ? few : many; }
@@ -256,7 +297,7 @@ function show(i) {
   mark(s);
   history.replaceState(null, '', `${location.pathname}${location.search}#${s.id}`);
   const q = lang === 'az' ? '' : `?lang=${lang}`;
-  const scenes = picsOf(s).map(({ id, pics }) => `<div class="scene"><h3>${esc(sceneName(s, id))}</h3>${pics.length ? `<div class="thumbs">${pics.map((x) => `<a href="/qalereya/${q ? q + '&' : '?'}p=${POEM[s.part]}#${encodeURIComponent(x.id)}" title="${esc(x.title)}"><img src="${esc(x.thumb.startsWith('thumbs/') ? '/qalereya/' + x.thumb : x.thumb)}"${x.w ? ` width="${x.w}" height="${x.h}"` : ''} alt="${esc(x.title)}" loading="lazy" referrerpolicy="no-referrer" onload="this.classList.add('ok')" onerror="this.parentElement.remove()"></a>`).join('')}</div>` : ''}</div>`).join('');
+  const scenes = picsOf(s).map(({ id, pics }) => `<div class="scene"><h3>${esc(sceneName(s, id))}</h3>${pics.length ? `<div class="thumbs">${pics.map((x) => `<button type="button" data-pic="${esc(x.id)}" title="${esc(x.title)}"><img src="${esc(src(x.thumb))}"${x.w ? ` width="${x.w}" height="${x.h}"` : ''} alt="${esc(x.title)}" loading="lazy" referrerpolicy="no-referrer" onload="this.classList.add('ok')" onerror="this.parentElement.remove()"></button>`).join('')}</div>` : ''}</div>`).join('');
   const reads = s.chapters.map((c) => `<a href="${KX()}/works/${c}">${t('chapter')(c.match(/(\d+)$/)[1])} ↗</a>`).join('');
   const el = document.getElementById('body');
   el.innerHTML = `<div class="stop" style="--c: ${s.part === 'serefname' ? 'var(--accent)' : 'var(--second)'}">
@@ -266,6 +307,8 @@ function show(i) {
     ${s.note ? `<p class="text">${esc(s.note[lang])}</p>` : ''}
     ${scenes}
     <div class="reads"><span>${t('read')}</span>${reads}</div></div>`;
+  const all = picsOf(s).flatMap((x) => x.pics);
+  el.querySelectorAll('[data-pic]').forEach((b) => b.onclick = () => openPic(all, all.findIndex((x) => x.id === b.dataset.pic), s));
   document.getElementById('back').onclick = overview;
   document.getElementById('prev').onclick = () => show(i - 1);
   document.getElementById('next').onclick = () => show(i + 1);
@@ -288,12 +331,59 @@ function mark(s) {
   map.setFeatureState({ source: 'stops', id: marked }, { sel: true });
 }
 
+const src = (u) => u.startsWith('thumbs/') ? '/qalereya/' + u : u;
+
+// The viewer: a miniature over the map, its neighbours at this stop a click or an arrow away
+const lb = document.getElementById('lb');
+let lbList = [], lbAt = 0, lbStop = null;
+function openPic(list, i, s) {
+  lbList = list; lbAt = i; lbStop = s;
+  const x = list[i];
+  const img = document.getElementById('lb-img'), stage = document.getElementById('lb-stage');
+  img.src = src(x.thumb); img.alt = x.title;
+  stage.classList.add('busy');
+  const full = new Image(); full.referrerPolicy = 'no-referrer';
+  full.onload = () => { if (lbList[lbAt] === x) { img.src = x.image; stage.classList.remove('busy'); } };
+  full.onerror = () => stage.classList.remove('busy');
+  full.src = x.image;
+  const q = lang === 'az' ? '' : `lang=${lang}&`;
+  const scene = sceneName(s, x.scene);
+  document.getElementById('lb-info').innerHTML = `<button type="button" class="close" id="lb-close">${t('close')} ✕</button>
+    <div><p class="m">${esc(scene)}</p><h2>${esc(x.title)}</h2></div>
+    <p>${[x.when ?? x.date, x.manuscript, x.museum].filter(Boolean).map(esc).join('<br>')}</p>
+    <p><a href="/qalereya/?${q}p=${POEM[s.part]}#${encodeURIComponent(x.id)}">${t('inGallery')} →</a></p>
+    <p class="pos">${i + 1} / ${list.length}</p>`;
+  document.getElementById('lb-close').onclick = () => lb.close();
+  document.getElementById('lb-prev').disabled = i <= 0;
+  document.getElementById('lb-next').disabled = i >= list.length - 1;
+  if (!lb.open) lb.showModal();
+}
+document.getElementById('lb-prev').onclick = () => lbAt > 0 && openPic(lbList, lbAt - 1, lbStop);
+document.getElementById('lb-next').onclick = () => lbAt < lbList.length - 1 && openPic(lbList, lbAt + 1, lbStop);
+lb.addEventListener('click', (e) => { if (e.target === lb) lb.close(); });
+lb.addEventListener('keydown', (e) => {
+  e.stopPropagation();
+  if (e.key === 'ArrowLeft' && lbAt > 0) openPic(lbList, lbAt - 1, lbStop);
+  if (e.key === 'ArrowRight' && lbAt < lbList.length - 1) openPic(lbList, lbAt + 1, lbStop);
+});
+
+function drawLegend() {
+  const line = (c, dash) => `<svg viewBox="0 0 36 12" aria-hidden="true"><line x1="2" y1="6" x2="34" y2="6" stroke="${c}" stroke-width="2"${dash ? ' stroke-dasharray="4 3"' : ''}/></svg>`;
+  const dot = (fill, stroke) => `<svg viewBox="0 0 36 12" aria-hidden="true"><circle cx="8" cy="6" r="4.5" fill="${fill}" stroke="${stroke}" stroke-width="1.75"/></svg>`;
+  document.getElementById('legend').innerHTML = `
+    <div>${line(css('--accent'))}<span>${t('lgSeref')}</span></div>
+    <div>${line(css('--second'))}<span>${t('lgIqbal')}</span></div>
+    <div>${dot(css('--paper'), css('--muted'))}<span class="k">${t('lgApprox')}</span></div>
+    <div><svg viewBox="0 0 36 12" aria-hidden="true"><text x="2" y="10" font-size="10" font-weight="700" fill="currentColor">2·20</text></svg><span class="k">${t('lgShared')}</span></div>`;
+}
+
 function applyLang() {
   document.documentElement.lang = lang;
   document.title = t('doc');
   document.querySelectorAll('[data-i18n]').forEach((el) => el.textContent = t(el.dataset.i18n));
   document.querySelectorAll('[data-i18n-label]').forEach((el) => el.setAttribute('aria-label', t(el.dataset.i18nLabel)));
   document.querySelectorAll('[data-lang]').forEach((b) => b.setAttribute('aria-pressed', b.dataset.lang === lang));
+  drawLegend();
   document.querySelectorAll('[data-keep-lang]').forEach((a) => { const u = new URL(a.getAttribute('href'), location.href); if (lang === 'az') u.searchParams.delete('lang'); else u.searchParams.set('lang', lang); a.href = u.pathname + u.search; });
 }
 applyLang();
@@ -309,6 +399,7 @@ document.querySelectorAll('[data-lang]').forEach((b) => b.onclick = () => {
   if (at != null) show(at); else overview();
 });
 document.addEventListener('keydown', (e) => {
+  if (lb.open) return;
   if (at == null || e.target.closest('input, select, textarea')) return;
   if (e.key === 'ArrowRight') show(at + 1);
   if (e.key === 'ArrowLeft') show(at - 1);

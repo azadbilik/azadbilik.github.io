@@ -117,12 +117,6 @@
   .next-head { margin-top: 3.5rem; font-size: .8125rem; color: var(--muted); }
   .next-head + .next { margin-top: 1rem; }
 
-  /* Principles */
-  .principles { padding: 0; list-style: none; counter-reset: p; display: grid; gap: 2rem; max-width: 40rem; }
-  .principles li { counter-increment: p; display: grid; grid-template-columns: 2.5rem 1fr; }
-  .principles li::before { content: counter(p, decimal-leading-zero); font: 400 .8125rem/2.1 var(--sans); color: var(--muted); font-variant-numeric: tabular-nums; }
-  .principles strong { display: block; font: 400 1.375rem/1.3 var(--serif); letter-spacing: -0.01em; }
-  .principles p { margin-top: .4rem; }
 
   footer { border-top: 1px solid var(--rule); padding-block: 1.75rem 2.5rem; display: flex; flex-wrap: wrap; justify-content: space-between; gap: .75rem 2rem; font-size: .8125rem; color: var(--muted); }
   footer a { color: var(--ink); }
@@ -206,14 +200,6 @@
       </div>
     </section>
 
-    <section aria-labelledby="principles">
-      <h2 class="label" id="principles"><span data-l="az">Prinsiplər</span><span data-l="ru">Принципы</span><span data-l="en">Principles</span></h2>
-      <ol class="principles body">
-        <li><div><strong><span data-l="az">Kod açıqdır.</span><span data-l="ru">Код открыт.</span><span data-l="en">The code is open.</span></strong><p><span data-l="az">Hər layihənin kodu GitHub-dadır: hər kəs baxa, istifadə edə və töhfə verə bilər.</span><span data-l="ru">Код каждого проекта на GitHub: любой может его читать, использовать и улучшать.</span><span data-l="en">Every project's code is on GitHub, for anyone to read, reuse and improve.</span></p></div></li>
-        <li><div><strong><span data-l="az">Mənbə göstərilir.</span><span data-l="ru">Источник указан.</span><span data-l="en">Sources are shown.</span></strong><p><span data-l="az">Hər mətn və təsvir götürüldüyü nəşrə bağlanır.</span><span data-l="ru">Каждый текст и каждое изображение ведут к изданию, из которого они взяты.</span><span data-l="en">Every text and image links back to the edition it comes from.</span></p></div></li>
-        <li><div><strong><span data-l="az">Hamı üçün pulsuz.</span><span data-l="ru">Бесплатно для всех.</span><span data-l="en">Free for everyone.</span></strong><p><span data-l="az">Oxumaq üçün nə ödəniş, nə qeydiyyat lazımdır.</span><span data-l="ru">Читать можно без оплаты и регистрации.</span><span data-l="en">Free to read, with no payment and no sign-up.</span></p></div></li>
-      </ol>
-    </section>
   </main>
 
   <footer>
