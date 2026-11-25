@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Əhali · Azad Bilik</title>
+<meta name="description" content="Tarixi Azərbaycanın əhalisi siyahıyaalmalar üzrə, 1956–2019: Azərbaycan Respublikasının rayonları və İranın dörd Azərbaycan ostanının şəhristanları. Population of historical Azerbaijan by census.">
+<meta name="theme-color" content="#F4EFE6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14100D" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://azadbilik.org/xeriteler/ehali/">
+<meta property="og:title" content="Əhali · Population of historical Azerbaijan">
+<meta property="og:description" content="Tarixi Azərbaycanın əhalisi siyahıyaalmalar üzrə, rayon-rayon, 1956–2019.">
+<meta property="og:image" content="https://azadbilik.org/xeriteler/ehali/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+<link rel="stylesheet" href="/shared/story-map.css">
+<style>
+  /* On top of the story maps' panel and legend: the measure switch, the census rounds, the chart */
+  .controls { padding: 1rem 1.5rem; border-bottom: 1px solid var(--rule); display: grid; gap: .9rem; }
+  .seg { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--rule); border-radius: 3px; padding: 2px; }
+  .seg button { padding: .35rem .4rem; border-radius: 2px; font-size: .8125rem; color: var(--muted); }
+  .seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+  .rounds { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; }
+  .rounds button { padding: .3rem 0; font-size: .75rem; color: var(--muted); border-bottom: 2px solid var(--rule); font-variant-numeric: tabular-nums; }
+  .rounds button[aria-pressed="true"] { color: var(--ink); border-bottom-color: var(--accent); font-weight: 600; }
+  .round-note { font-size: .75rem; color: var(--muted); }
+  .totals { padding: 1rem 1.5rem .5rem; display: grid; gap: .6rem; }
+  .total { display: grid; grid-template-columns: 1fr auto; gap: 0 .75rem; align-items: baseline; }
+  .total b { font: 400 1.5rem/1.1 var(--serif); font-variant-numeric: tabular-nums; grid-row: span 2; text-align: right; }
+  .total span { font-size: .875rem; font-weight: 500; }
+  .total small { font-size: .75rem; color: var(--muted); }
+  .chart { padding: .25rem 1.5rem 1rem; }
+  .chart svg { width: 100%; height: auto; display: block; overflow: visible; }
+  .chart text { font: .625rem var(--sans); fill: var(--muted); }
+  .rank h2, .unit h2 { padding: .75rem 1.5rem .35rem; font: 500 .75rem var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .rank ol { list-style: none; padding: 0 0 .5rem; }
+  .rank li button { display: grid; grid-template-columns: 1.5rem 1fr auto; gap: .5rem; width: 100%; text-align: left; padding: .3rem 1.5rem; font-size: .875rem; }
+  .rank li button:hover { background: var(--rule); }
+  .rank .v { font-variant-numeric: tabular-nums; color: var(--muted); }
+  .unit { padding: 1rem 0; }
+  .unit .back { display: block; padding: 0 1.5rem .75rem; font-size: .8125rem; color: var(--muted); }
+  .unit .back:hover { color: var(--ink); }
+  .unit .title { padding: 0 1.5rem; font: 400 1.5rem/1.15 var(--serif); }
+  .unit .where { padding: .15rem 1.5rem 0; font-size: .8125rem; color: var(--muted); }
+  .unit table { width: calc(100% - 3rem); margin: .75rem 1.5rem 0; border-collapse: collapse; font-size: .875rem; font-variant-numeric: tabular-nums; }
+  .unit th { text-align: left; font-weight: 500; color: var(--muted); font-size: .75rem; padding: .25rem 0; border-bottom: 1px solid var(--rule); }
+  .unit td { padding: .3rem 0; border-bottom: 1px solid var(--rule); }
+  .unit td:not(:first-child), .unit th:not(:first-child) { text-align: right; }
+  .unit td a { color: var(--muted); text-decoration: none; } .unit td a:hover { color: var(--accent); }
+  .up { color: var(--accent); } .down { color: var(--second); }
+  .legend .ramp { display: flex; }
+  .legend .ramp span { flex: 1; height: .6rem; }
+  .legend .ticks { display: flex; justify-content: space-between; font-size: .625rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .legend .nodata { display: flex; align-items: center; gap: .4rem; color: var(--muted); }
+  .legend .nodata i { width: .9rem; height: .6rem; background: repeating-linear-gradient(45deg, var(--rule) 0 2px, transparent 2px 4px); border: 1px solid var(--rule); }
+  .legend { min-width: 13rem; }
+  @media (max-width: 48rem) { .controls, .totals, .chart { padding-inline: 1rem; } .rank h2, .rank li button, .unit h2, .unit .title, .unit .where { padding-inline: 1rem; } .unit table { margin-inline: 1rem; width: calc(100% - 2rem); } .legend { min-width: 0; } }
+</style>
+</head>
+<body>
+<div id="map" role="region" aria-label="Xəritə"></div>
+
+<aside class="panel">
+  <div class="head">
+    <div class="top"><a class="brand" href="/" data-keep-lang><svg viewBox="0 0 512 512" aria-hidden="true"><g class="star"><rect x="126" y="126" width="260" height="260"/><polygon points="256,72 440,256 256,440 72,256"/></g><polygon class="gem" points="256,196 316,256 256,316 196,256"/></svg>Azad Bilik</a><nav><a href="/xeriteler/" data-i18n="maps" data-keep-lang>Xəritələr</a><span class="langs" role="group" aria-label="Dil · Язык · Language"><button type="button" data-lang="az">AZ</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="en">EN</button></span></nav></div>
+    <h1 data-i18n="title">Əhali</h1>
+    <p class="sub" data-i18n="sub">Tarixi Azərbaycan siyahıyaalmalar üzrə</p>
+  </div>
+  <div class="body" id="body">
+    <div class="controls">
+      <div class="seg" role="group" id="measures"></div>
+      <div>
+        <div class="rounds" role="group" id="rounds"></div>
+        <p class="round-note" id="round-note"></p>
+      </div>
+    </div>
+    <div id="side" aria-live="polite"></div>
+  </div>
+</aside>
+
+<div class="legend" id="legend"></div>
+
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script>
+(() => {
+const dark = matchMedia('(prefers-color-scheme: dark)').matches;
+const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+const still = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+const LANGS = ['az', 'ru', 'en'];
+let lang = (() => {
+  const q = new URLSearchParams(location.search).get('lang');
+  if (LANGS.includes(q)) return q;
+  try { const s = localStorage.getItem('lang'); if (LANGS.includes(s)) return s; } catch {}
+  return 'az';
+})();
+const nf = () => new Intl.NumberFormat({ az: 'az-Latn-AZ', ru: 'ru-RU', en: 'en-GB' }[lang]);
+const T = {
+  az: { doc: 'Əhali · Azad Bilik', title: 'Əhali', sub: 'Tarixi Azərbaycan siyahıyaalmalar üzrə', maps: 'Xəritələr',
+    pop: 'Əhali', density: 'Sıxlıq', change: 'Dəyişmə', perKm: 'nəfər/km²', since: (y) => `${y}-dən bəri`,
+    az: 'Azərbaycan Respublikası', ir: 'İran Azərbaycanı', irNote: 'Şərqi və Qərbi Azərbaycan, Ərdəbil, Zəncan ostanları',
+    onMap: (n, m) => `xəritədə ${m} bölgədən ${n}-i`, round: (a, i) => `Azərbaycan ${a} · İran ${i}`, top: 'Ən çox', back: '← Bütün bölgələr',
+    year: 'İl', people: 'Əhali', chg: 'Dəyişmə', src: 'mənbə', area: (k) => `${k} km²`, nodata: 'məlumat yoxdur', city: 'şəhər',
+    note: 'Siyahıyaalmalar iki ölkədə fərqli illərdə keçirilib; xəritə onları yaxın illər üzrə cütləşdirir. Sərhədlər bugünküdür: o vaxt olmayan rayon və ya şəhristan boş qalır. Rəqəmlər rəsmi siyahıyaalma nəticələridir, hər biri öz mənbəyi ilə.' },
+  ru: { doc: 'Население · Azad Bilik', title: 'Население', sub: 'Исторический Азербайджан по переписям', maps: 'Карты',
+    pop: 'Население', density: 'Плотность', change: 'Изменение', perKm: 'чел./км²', since: (y) => `с ${y} г.`,
+    az: 'Азербайджанская Республика', ir: 'Иранский Азербайджан', irNote: 'останы Восточный и Западный Азербайджан, Ардебиль, Зенджан',
+    onMap: (n, m) => `на карте ${n} из ${m} единиц`, round: (a, i) => `Азербайджан ${a} · Иран ${i}`, top: 'Крупнейшие', back: '← Все единицы',
+    year: 'Год', people: 'Население', chg: 'Изменение', src: 'источник', area: (k) => `${k} км²`, nodata: 'нет данных', city: 'город',
+    note: 'Переписи в двух странах проходили в разные годы; карта соединяет их по близким годам. Границы — нынешние: район или шахрестан, которого тогда не было, остаётся пустым. Цифры — официальные итоги переписей, у каждой указан источник.' },
+  en: { doc: 'Population · Azad Bilik', title: 'Population', sub: 'Historical Azerbaijan, census by census', maps: 'Maps',
+    pop: 'Population', density: 'Density', change: 'Change', perKm: 'people/km²', since: (y) => `since ${y}`,
+    az: 'Republic of Azerbaijan', ir: 'Iranian Azerbaijan', irNote: 'East and West Azerbaijan, Ardabil and Zanjan provinces',
+    onMap: (n, m) => `${n} of ${m} units on the map`, round: (a, i) => `Azerbaijan ${a} · Iran ${i}`, top: 'Largest', back: '← All units',
+    year: 'Year', people: 'Population', chg: 'Change', src: 'source', area: (k) => `${k} km²`, nodata: 'no data', city: 'city',
+    note: "The two countries counted in different years; the map pairs their censuses by the nearest year. Borders are today's: a district or county that did not exist yet is left empty. The figures are the official census results, each with its source." },
+};
+const t = (k) => T[lang][k];
+const L = (p) => p[lang] ?? p.az;
+
+// Census rounds: each country's census nearest the same decade
+const ROUNDS = [[1959, 1956], [1970, 1966], [1979, 1976], [1989, 1986], [1999, 1996], [2009, 2006], [2019, 2016]].map(([az, ir], i) => ({ i, az, ir }));
+let round = ROUNDS.length - 1, measure = 'pop', units = [], sources = {}, official = {}, selected = null;
+const yearOf = (u, r = round) => ROUNDS[r]?.[u.country];
+const popAt = (u, r = round) => u.pop[yearOf(u, r)] ?? null;
+function value(u, r = round, m = measure) {
+  const p = popAt(u, r);
+  if (p == null) return null;
+  if (m === 'pop') return p;
+  if (m === 'density') return u.area ? p / u.area : null;
+  const before = r > 0 ? popAt(u, r - 1) : null;
+  return before ? (p / before - 1) * 100 : null;
+}
+
+// Fixed classes, so a colour means the same in every census
+const SCALES = {
+  pop: { breaks: [10e3, 25e3, 50e3, 100e3, 200e3, 500e3], ticks: ['', '10k', '25k', '50k', '100k', '200k', '500k+'] },
+  density: { breaks: [10, 25, 50, 100, 200, 500], ticks: ['', '10', '25', '50', '100', '200', '500+'] },
+  change: { breaks: [-10, -2, 2, 10, 25, 50], ticks: ['', '−10%', '−2%', '+2%', '+10%', '+25%', '+50%'] },
+};
+const SEQ = dark ? ['#2B211B', '#4A2C24', '#6B3129', '#8E3430', '#B33A37', '#D45A55', '#F08A80'] : ['#F2E6DA', '#EACAB6', '#E0A88E', '#D2836A', '#BF5C48', '#A6362E', '#7A1B1E'];
+const DIV = dark ? ['#2C5A6E', '#3F7D93', '#5E9DB0', '#3A322B', '#B5574F', '#D27063', '#F08A80'] : ['#1F5C73', '#4A8AA0', '#9CC3D0', '#EFE6DA', '#E5A58F', '#C9634E', '#9A2A25'];
+const colors = () => measure === 'change' ? DIV : SEQ;
+const classOf = (v) => SCALES[measure].breaks.filter((b) => v >= b).length;
+
+const map = new maplibregl.Map({
+  container: 'map',
+  style: `https://tiles.openfreemap.org/styles/${dark ? 'dark' : 'positron'}`,
+  bounds: [[43.5, 35], [51, 42]], minZoom: 4, maxZoom: 10,
+  attributionControl: { compact: true, customAttribution: '<a href="https://www.geoboundaries.org">geoBoundaries</a> (CC BY-SA 3.0, ODbL) · stat.gov.az · Demoscope · amar.org.ir' },
+});
+map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-right');
+const tip = new maplibregl.Popup({ closeButton: false, closeOnClick: false, offset: 8 });
+const phone = () => matchMedia('(max-width: 48rem)').matches;
+const pad = () => phone() ? { top: 60, right: 16, left: 16, bottom: document.querySelector('.panel').offsetHeight + 16 } : { top: 32, right: 32, bottom: 32, left: 27 * 16 + 32 };
+const labelExpr = () => ['coalesce', ['get', `name:${lang}`], ['get', lang === 'ru' ? 'name' : 'name:latin'], ['get', 'name']];
+map.on('style.load', () => {
+  for (const l of map.getStyle().layers) {
+    if (l.type === 'background') map.setPaintProperty(l.id, 'background-color', css('--land'));
+    if (l.type === 'fill' && /water|ocean|lake/.test(l.id)) map.setPaintProperty(l.id, 'fill-color', css('--water'));
+    if (l.type === 'symbol' && l.layout?.['text-field']) map.setLayoutProperty(l.id, 'text-field', labelExpr());
+  }
+});
+
+map.on('load', async () => {
+  const [geo, src, tot] = await Promise.all(['units.geojson', 'sources.json', 'totals.json'].map((f) => fetch(`data/${f}`).then((r) => r.json())));
+  sources = src; official = tot;
+  geo.features.forEach((f, k) => { f.id = k; });
+  units = geo.features.map((f) => ({ ...f.properties, fid: f.id }));
+  map.fitBounds([[43.5, 35], [51, 42]], { padding: pad(), duration: 0 });
+  document.querySelector('.maplibregl-ctrl-attrib')?.classList.remove('maplibregl-compact-show');
+  // The choropleth sits under the base map's labels and roads
+  const firstSymbol = map.getStyle().layers.find((l) => l.type === 'symbol')?.id;
+  map.addSource('units', { type: 'geojson', data: geo });
+  map.addLayer({ id: 'units', type: 'fill', source: 'units', paint: { 'fill-color': ['coalesce', ['feature-state', 'color'], 'rgba(0,0,0,0)'], 'fill-opacity': .85 } }, firstSymbol);
+  map.addLayer({ id: 'units-line', type: 'line', source: 'units', paint: {
+    'line-color': ['case', ['boolean', ['feature-state', 'sel'], false], css('--ink'), css('--paper')],
+    'line-width': ['case', ['boolean', ['feature-state', 'sel'], false], 2, .6],
+  } }, firstSymbol);
+  map.on('mousemove', 'units', (e) => {
+    map.getCanvas().style.cursor = 'pointer';
+    const u = units[e.features[0].id];
+    tip.setLngLat(e.lngLat).setHTML(`<strong>${esc(L(u))}</strong> · ${fmt(value(u))}`).addTo(map);
+  });
+  map.on('mouseleave', 'units', () => { map.getCanvas().style.cursor = ''; tip.remove(); });
+  map.on('click', 'units', (e) => select(e.features[0].id));
+  map.on('click', (e) => { if (!map.queryRenderedFeatures(e.point, { layers: ['units'] }).length && selected != null) select(null); });
+  draw();
+});
+
+function fmt(v, m = measure) {
+  if (v == null) return t('nodata');
+  if (m === 'pop') return nf().format(Math.round(v));
+  if (m === 'density') return `${nf().format(Math.round(v))} ${t('perKm')}`;
+  return `${v > 0 ? '+' : ''}${v.toFixed(1)}%`;
+}
+
+function paint() {
+  for (const u of units) {
+    const v = value(u);
+    map.setFeatureState({ source: 'units', id: u.fid }, { color: v == null ? (dark ? 'rgba(255,255,255,.06)' : 'rgba(26,20,16,.07)') : colors()[classOf(v)] });
+  }
+}
+
+function drawControls() {
+  const ms = document.getElementById('measures');
+  ms.innerHTML = ['pop', 'density', 'change'].map((m) => `<button type="button" data-m="${m}" aria-pressed="${m === measure}">${t(m)}</button>`).join('');
+  ms.querySelectorAll('button').forEach((b) => b.onclick = () => { measure = b.dataset.m; draw(); });
+  const rs = document.getElementById('rounds');
+  rs.innerHTML = ROUNDS.map((r) => `<button type="button" data-r="${r.i}" aria-pressed="${r.i === round}" ${measure === 'change' && r.i === 0 ? 'disabled' : ''}>${r.az}</button>`).join('');
+  rs.querySelectorAll('button').forEach((b) => b.onclick = () => { round = +b.dataset.r; draw(); });
+  const r = ROUNDS[round];
+  document.getElementById('round-note').textContent = t('round')(r.az, r.ir) + (measure === 'change' && round > 0 ? ` · ${t('since')(ROUNDS[round - 1].az)}` : '');
+}
+
+function drawLegend() {
+  const s = SCALES[measure], c = colors();
+  document.getElementById('legend').innerHTML = `<span>${t(measure)}${measure === 'density' ? `, ${t('perKm')}` : ''}</span>
+    <div class="ramp">${c.map((x) => `<span style="background:${x}"></span>`).join('')}</div>
+    <div class="ticks">${s.ticks.slice(1).map((x) => `<span>${x}</span>`).join('')}</div>
+    <div class="nodata"><i></i>${t('nodata')}</div>`;
+}
+
+// Each side's official census total (data/totals.json); the units on the map are counted
+// separately, since they don't always cover the whole (missing districts, older counties)
+function totals(country, r = round) {
+  const us = units.filter((u) => u.country === country && !u.inDistrict);
+  const n = us.filter((u) => popAt(u, r) != null).length;
+  const o = official[country]?.[ROUNDS[r][country]];
+  return { sum: o?.population ?? null, source: o?.source, n, of: us.length };
+}
+function chart() {
+  const W = 320, H = 90, P = 18;
+  const series = ['az', 'ir'].map((c) => ({ c, pts: ROUNDS.map((r) => totals(c, r.i).sum) }));
+  const max = Math.max(1, ...series.flatMap((s) => s.pts.filter(Boolean)));
+  const X = (i) => P + i * (W - 2 * P) / (ROUNDS.length - 1), Y = (v) => H - 14 - (v / max) * (H - 24);
+  // A gap in a series (no official total that census) breaks its line
+  const line = (s) => s.pts.map((v, i) => v == null ? '|' : `${X(i)},${Y(v)}`).join(' ').split('|').map((x) => x.trim()).filter((x) => x.includes(' ')).map((pts) => `<polyline points="${pts}" fill="none" stroke-width="1.75"/>`);
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${t('pop')}">
+    ${series.map((s, k) => `<g stroke="${k ? css('--second') : css('--accent')}">${line(s).join('')}</g>
+      ${s.pts.map((v, i) => v == null ? '' : `<circle cx="${X(i)}" cy="${Y(v)}" r="${i === round ? 3.5 : 2}" fill="${k ? css('--second') : css('--accent')}"/>`).join('')}`).join('')}
+    ${ROUNDS.map((r, i) => `<text x="${X(i)}" y="${H}" text-anchor="middle">${r.az}</text>`).join('')}
+  </svg>`;
+}
+
+function drawSide() {
+  const el = document.getElementById('side');
+  if (selected != null) return drawUnit(el, units[selected]);
+  const tot = (c) => { const x = totals(c); return `<div class="total"><span>${t(c)}</span><b>${x.sum != null ? nf().format(x.sum) : '—'}</b><small>${c === 'ir' ? t('irNote') + ' · ' : ''}${yearOf({ country: c })} · ${t('onMap')(x.n, x.of)}</small></div>`; };
+  const ranked = units.filter((u) => value(u) != null).sort((a, b) => value(b) - value(a)).slice(0, 12);
+  el.innerHTML = `<div class="totals">${tot('az')}${tot('ir')}</div><div class="chart">${chart()}</div>
+    <section class="rank"><h2>${t('top')}: ${t(measure).toLowerCase()}</h2><ol>${ranked.map((u, i) => `<li><button type="button" data-u="${u.fid}"><span class="v">${i + 1}</span><span>${esc(L(u))}</span><span class="v">${fmt(value(u))}</span></button></li>`).join('')}</ol></section>
+    <p class="note">${t('note')}</p>`;
+  el.querySelectorAll('[data-u]').forEach((b) => b.onclick = () => select(+b.dataset.u));
+}
+
+function drawUnit(el, u) {
+  const rows = ROUNDS.map((r) => {
+    const y = r[u.country], p = u.pop[y];
+    const prev = r.i > 0 ? u.pop[ROUNDS[r.i - 1][u.country]] : null;
+    const ch = p != null && prev ? (p / prev - 1) * 100 : null;
+    const s = sources[u.id]?.[y];
+    return `<tr><td>${y}</td><td>${p != null ? nf().format(p) : '—'}</td><td class="${ch > 0 ? 'up' : ch < 0 ? 'down' : ''}">${ch != null ? fmt(ch, 'change') : ''}</td><td>${s ? `<a href="${esc(s)}" target="_blank" rel="noopener">${t('src')} ↗</a>` : ''}</td></tr>`;
+  }).join('');
+  const where = u.country === 'az' ? t('az') : `${t('ir')}${u.province ? ` · ${u.province}` : ''}`;
+  el.innerHTML = `<div class="unit"><button type="button" class="back" id="back">${t('back')}</button>
+    <p class="title">${esc(L(u))}</p><p class="where">${esc(where)} · ${t('area')(nf().format(u.area))}</p>
+    <table><thead><tr><th>${t('year')}</th><th>${t('people')}</th><th>${t('chg')}</th><th></th></tr></thead><tbody>${rows}</tbody></table></div>`;
+  document.getElementById('back').onclick = () => select(null);
+}
+
+function select(fid) {
+  if (selected != null) map.setFeatureState({ source: 'units', id: selected }, { sel: false });
+  selected = fid;
+  if (fid != null) map.setFeatureState({ source: 'units', id: fid }, { sel: true });
+  drawSide();
+  document.getElementById('body').scrollTop = phone() ? document.getElementById('side').offsetTop - 8 : 0;
+}
+
+function draw() {
+  if (measure === 'change' && round === 0) round = 1;
+  drawControls(); drawLegend(); drawSide();
+  if (map.getSource('units')) paint();
+}
+
+function applyLang() {
+  document.documentElement.lang = lang;
+  document.title = t('doc');
+  document.querySelectorAll('[data-i18n]').forEach((el) => el.textContent = t(el.dataset.i18n));
+  document.querySelectorAll('[data-lang]').forEach((b) => b.setAttribute('aria-pressed', b.dataset.lang === lang));
+  document.querySelectorAll('[data-keep-lang]').forEach((a) => { const u = new URL(a.getAttribute('href'), location.href); if (lang === 'az') u.searchParams.delete('lang'); else u.searchParams.set('lang', lang); a.href = u.pathname + u.search; });
+}
+applyLang();
+draw();
+document.querySelectorAll('[data-lang]').forEach((b) => b.onclick = () => {
+  lang = b.dataset.lang;
+  try { localStorage.setItem('lang', lang); } catch {}
+  const u = new URL(location.href);
+  if (lang === 'az') u.searchParams.delete('lang'); else u.searchParams.set('lang', lang);
+  history.replaceState(null, '', u);
+  applyLang(); draw();
+  if (map.getStyle()) for (const l of map.getStyle().layers) if (l.type === 'symbol' && l.layout?.['text-field']) map.setLayoutProperty(l.id, 'text-field', labelExpr());
+});
+})();
+</script>
+</body>
+</html>

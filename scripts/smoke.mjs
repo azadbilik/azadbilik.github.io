@@ -44,6 +44,7 @@ for (const [path, musts] of [
   ['/xeriteler/iskender/', ['maplibre-gl', '/shared/story-map.js', '/shared/viewer.js']],
   ['/xeriteler/xosrov-sirin/', ['maplibre-gl', '/shared/story-map.js', '/shared/viewer.js']],
   ['/xeriteler/yeddi-gozel/', ['maplibre-gl', '/shared/story-map.js', '/shared/viewer.js']],
+  ['/xeriteler/ehali/', ['maplibre-gl', 'data/units.geojson']],
 ]) await page(BASE + path, musts);
 
 console.log('Data');
@@ -63,6 +64,9 @@ for (const story of ['iskender', 'xosrov-sirin', 'yeddi-gozel']) {
   const lost = route.stops.flatMap((s) => s.scenes.filter((id) => !gallery.poems.find((p) => p.slug === poemOf[s.part])?.scenes.some((x) => x.id === id)).map((id) => `${s.id}/${id}`));
   check(route.stops.length >= 10 && lost.length === 0, `story map ${story}: ${route.stops.length} stops${lost.length ? `, scenes missing from the gallery: ${lost.join(', ')}` : ', every scene in the gallery'}`);
 }
+const units = (await get(`${BASE}/xeriteler/ehali/data/units.geojson`, 'json')).body ?? { features: [] };
+const withPop = units.features.filter((f) => Object.keys(f.properties.pop ?? {}).length);
+check(units.features.length >= 130 && withPop.length >= 120, `population map: ${units.features.length} units, ${withPop.length} with census figures`);
 console.log('Pictures load (a sample of thumbnails, at their hosts)');
 const byHost = new Map();
 for (const x of gallery.items) {
