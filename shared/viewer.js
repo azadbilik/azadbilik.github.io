@@ -4,9 +4,10 @@
 // colour tokens (--paper, --ink, --muted, --rule, --frame, --accent, --serif).
 //
 //   AzadViewer.open(list, index, {
-//     src: (x) => thumbnail URL,  full: (x) => full-size URL,  alt: (x) => text,
+//     src: (x) => thumbnail URL,  full: (x) => the screen-sized image,  alt: (x) => text,
+//     fallback: (x) => URL to try when `full` fails (the original),
 //     info: (x, i, n) => HTML beside the picture (title, dates, links),
-//     labels: { close, prev, next },
+//     labels: { close, prev, next, loading },
 //   })
 (() => {
   const css = `
@@ -16,6 +17,11 @@
   .azv-stage { position: relative; background: var(--frame); min-height: 0; }
   .azv-stage img { position: absolute; inset: 1.5rem 3.75rem; width: calc(100% - 7.5rem); height: calc(100% - 3rem); object-fit: contain; transition: filter .3s; }
   .azv-stage.busy img { filter: blur(2px); }
+  /* While the image loads: a spinner and a word, after a moment (a cached image needs neither) */
+  .azv-load { position: absolute; left: 50%; top: 50%; translate: -50% -50%; display: flex; align-items: center; gap: .6rem; padding: .55rem .9rem; border-radius: 999px; background: var(--paper); color: var(--ink); font-size: .8125rem; box-shadow: 0 2px 12px rgb(0 0 0 / .2); opacity: 0; transition: opacity .2s; pointer-events: none; }
+  .azv-stage.busy .azv-load { opacity: 1; transition-delay: .25s; }
+  .azv-load i { width: 1rem; height: 1rem; border-radius: 50%; border: 2px solid var(--rule); border-top-color: var(--accent); animation: azv-spin .8s linear infinite; }
+  @keyframes azv-spin { to { transform: rotate(1turn); } }
   .azv-nav { position: absolute; top: 50%; translate: 0 -50%; width: 2.5rem; height: 2.5rem; border: 0; border-radius: 50%; background: var(--paper); color: var(--ink); box-shadow: 0 1px 6px rgb(0 0 0 / .15); display: grid; place-items: center; cursor: pointer; font: inherit; }
   .azv-prev { left: .75rem; } .azv-next { right: .75rem; }
   .azv-nav[disabled] { opacity: .3; cursor: default; }
@@ -33,7 +39,7 @@
     .azv-nav { top: auto; bottom: .5rem; translate: none; }
     .azv-info { border-left: 0; }
   }
-  @media (prefers-reduced-motion: reduce) { .azv-stage img { transition: none; } }`;
+  @media (prefers-reduced-motion: reduce) { .azv-stage img { transition: none; } .azv-load i { animation-duration: 2.4s; } }`;
 
   let dlg, img, stage, info, prev, next, closeBtn, list = [], at = 0, opts = {};
 
@@ -43,7 +49,7 @@
     document.head.append(style);
     dlg = document.createElement('dialog');
     dlg.className = 'azv';
-    dlg.innerHTML = `<div class="azv-body"><div class="azv-stage"><img alt=""><button type="button" class="azv-nav azv-prev">←</button><button type="button" class="azv-nav azv-next">→</button></div>
+    dlg.innerHTML = `<div class="azv-body"><div class="azv-stage"><img alt=""><span class="azv-load" role="status"><i aria-hidden="true"></i><span></span></span><button type="button" class="azv-nav azv-prev">←</button><button type="button" class="azv-nav azv-next">→</button></div>
       <div class="azv-info"><button type="button" class="azv-close"></button><div class="azv-text"></div><p class="azv-pos"></p></div></div>`;
     document.body.append(dlg);
     stage = dlg.querySelector('.azv-stage');
@@ -74,8 +80,13 @@
     const full = new Image();
     full.referrerPolicy = 'no-referrer';
     full.onload = () => { if (list[at] === x) { img.src = full.src; stage.classList.remove('busy'); } };
-    full.onerror = () => { if (list[at] === x) stage.classList.remove('busy'); };
-    full.src = opts.full(x);
+    // The screen-sized copy failing, the original is the next best
+    const backup = opts.fallback?.(x);
+    full.onerror = () => {
+      if (list[at] !== x) return;
+      if (backup && full.src !== backup) full.src = backup; else stage.classList.remove('busy');
+    };
+    full.src = opts.full(x) ?? backup;
     info.innerHTML = opts.info(x, i, list.length);
     dlg.querySelector('.azv-pos').textContent = list.length > 1 ? `${i + 1} / ${list.length}` : '';
     prev.disabled = i <= 0;
@@ -90,6 +101,7 @@
       img.referrerPolicy = 'no-referrer';
       const l = o.labels ?? {};
       closeBtn.textContent = `${l.close ?? 'Close'} ✕`;
+      dlg.querySelector('.azv-load span').textContent = l.loading ?? 'Loading…';
       prev.setAttribute('aria-label', l.prev ?? 'Previous');
       next.setAttribute('aria-label', l.next ?? 'Next');
       dlg.setAttribute('aria-label', l.title ?? '');

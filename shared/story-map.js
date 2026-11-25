@@ -27,16 +27,16 @@
   })();
   const T = {
     az: { map: 'Xəritə', maps: 'Xəritələr', gallery: 'Qalereya', back: 'Bütün yol', prev: 'Əvvəlki', next: 'Növbəti', approx: 'yeri təxminidir', read: 'Kitabxanada oxu',
-      chapter: (n) => `${n}-ci fəsil`, pics: (n) => `${n} miniatür`, ch: (n) => `${n} fəsil`, shared: 'eyni yerə bir neçə dəfə', close: 'Bağla', inGallery: 'Qalereyada aç' },
+      chapter: (n) => `${n}-ci fəsil`, pics: (n) => `${n} miniatür`, ch: (n) => `${n} fəsil`, shared: 'eyni yerə bir neçə dəfə', close: 'Bağla', inGallery: 'Qalereyada aç', loading: 'Yüklənir…' },
     ru: { map: 'Карта', maps: 'Карты', gallery: 'Галерея', back: 'Весь путь', prev: 'Назад', next: 'Дальше', approx: 'место приблизительно', read: 'Читать в библиотеке',
-      chapter: (n) => `глава ${n}`, pics: (n) => `${n} ${plural(n, 'миниатюра', 'миниатюры', 'миниатюр')}`, ch: (n) => `${n} ${plural(n, 'глава', 'главы', 'глав')}`, shared: 'одно место, несколько остановок', close: 'Закрыть', inGallery: 'Открыть в галерее' },
+      chapter: (n) => `глава ${n}`, pics: (n) => `${n} ${plural(n, 'миниатюра', 'миниатюры', 'миниатюр')}`, ch: (n) => `${n} ${plural(n, 'глава', 'главы', 'глав')}`, shared: 'одно место, несколько остановок', close: 'Закрыть', inGallery: 'Открыть в галерее', loading: 'Загрузка…' },
     en: { map: 'Map', maps: 'Maps', gallery: 'Gallery', back: 'The whole route', prev: 'Previous', next: 'Next', approx: 'approximate place', read: 'Read in the library',
-      chapter: (n) => `chapter ${n}`, pics: (n) => `${n} miniature${n === 1 ? '' : 's'}`, ch: (n) => `${n} chapter${n === 1 ? '' : 's'}`, shared: 'one place, several stops', close: 'Close', inGallery: 'Open in the gallery' },
+      chapter: (n) => `chapter ${n}`, pics: (n) => `${n} miniature${n === 1 ? '' : 's'}`, ch: (n) => `${n} chapter${n === 1 ? '' : 's'}`, shared: 'one place, several stops', close: 'Close', inGallery: 'Open in the gallery', loading: 'Loading…' },
   };
   const t = (k) => T[lang][k];
   const L = (o) => o?.[lang] ?? o?.az ?? '';
   const KX = () => `https://kitabxana.az${lang === 'az' ? '' : '/' + lang}`;
-  const src = (u) => u.startsWith('thumbs/') ? '/qalereya/' + u : u;
+  const src = (u) => /^(thumbs|large)\//.test(u) ? '/qalereya/' + u : u;
 
   let meta = {}, parts = [], stops = [], items = [], at = null;
   const sceneNames = {};
@@ -178,8 +178,8 @@
   function openPic(list, i, s) {
     const q = lang === 'az' ? '' : `lang=${lang}&`;
     AzadViewer.open(list, i, {
-      src: (x) => src(x.thumb), full: (x) => x.image, alt: (x) => x.title,
-      labels: { close: t('close'), prev: t('prev'), next: t('next') },
+      src: (x) => src(x.thumb), full: (x) => x.large && src(x.large), fallback: (x) => x.image, alt: (x) => x.title,
+      labels: { close: t('close'), prev: t('prev'), next: t('next'), loading: t('loading') },
       info: (x) => `<p class="m">${esc(sceneName(s, x.scene))}</p><h2>${esc(x.title)}</h2>
         <p class="m">${[x.when ?? x.date, x.manuscript, x.museum].filter(Boolean).map(esc).join('<br>')}</p>
         <p><a href="/qalereya/?${q}p=${partOf(s).poem}#${encodeURIComponent(x.id)}">${t('inGallery')} →</a></p>`,
