@@ -99,17 +99,17 @@ const T = {
   az: { doc: 'Musiqi · Azad Bilik', title: 'Musiqi', sub: 'İlk səs yazıları və musiqiçilərin yurdu', gallery: 'Qalereya', recs: 'Səs yazıları', people: 'Musiqiçilər',
     mugham: 'Muğamlar', tesnif: 'Təsniflər', song: 'Mahnılar', instrumental: 'Alətlə', khanende: 'xanəndə', tar: 'tarzən', ashik: 'aşıq', unknown: 'ifaçısı bilinmir',
     play: 'Dinlə', commons: 'Commons', poems: 'şeirləri kitabxanada', back: '← Bütün musiqiçilər', nPeople: (n) => `${n} musiqiçi`, here: (n) => `${n} musiqiçi burada doğulub`,
-    all: 'Hamısı', listen: (n) => `▶ ${n} səs yazısı`, from: 'doğulub:', byHand: 'yer əl ilə', withRecs: 'səs yazısı olanlar', wiki: 'Vikipediya',
+    one: { mugham: 'muğam', tesnif: 'təsnif', song: 'mahnı', instrumental: 'alətlə' }, all: 'Hamısı', listen: (n) => `▶ ${n} səs yazısı`, from: 'doğulub:', byHand: 'yer əl ilə', withRecs: 'səs yazısı olanlar', wiki: 'Vikipediya',
     note: 'Səs yazıları Wikimedia Commons-dandır, hamısı ictimai mülkiyyətdədir: Azərbaycanda 1976-dan əvvəlki yazılar sərbəstdir. Mahnının sözləri hələ qəzəllərə bağlanmayıb. Musiqiçilər, doğulduqları yerlər və portretlər Wikidata-dandır.' },
   ru: { doc: 'Музыка · Azad Bilik', title: 'Музыка', sub: 'Первые записи и родина музыкантов', gallery: 'Галерея', recs: 'Записи', people: 'Музыканты',
     mugham: 'Мугамы', tesnif: 'Теснифы', song: 'Песни', instrumental: 'Инструментальные', khanende: 'ханенде', tar: 'тарист', ashik: 'ашуг', unknown: 'исполнитель неизвестен',
     play: 'Слушать', commons: 'Commons', poems: 'стихи в библиотеке', back: '← Все музыканты', nPeople: (n) => `${n} музыкантов`, here: (n) => `Здесь родились: ${n}`,
-    all: 'Все', listen: (n) => `▶ записей: ${n}`, from: 'родом из', byHand: 'место указано вручную', withRecs: 'есть записи', wiki: 'Википедия',
+    one: { mugham: 'мугам', tesnif: 'тесниф', song: 'песня', instrumental: 'инструментальная' }, all: 'Все', listen: (n) => `▶ записей: ${n}`, from: 'родом из', byHand: 'место указано вручную', withRecs: 'есть записи', wiki: 'Википедия',
     note: 'Записи — с Викисклада, все в общественном достоянии: в Азербайджане записи до 1976 года свободны. Тексты песен ещё не связаны с газелями. Музыканты, места рождения и портреты — по Викиданным.' },
   en: { doc: 'Music · Azad Bilik', title: 'Music', sub: 'The first recordings, and where the musicians came from', gallery: 'Gallery', recs: 'Recordings', people: 'Musicians',
     mugham: 'Mughams', tesnif: 'Tasnifs', song: 'Songs', instrumental: 'Instrumental', khanende: 'khanende', tar: 'tar player', ashik: 'ashik', unknown: 'performer unknown',
     play: 'Listen', commons: 'Commons', poems: 'poems in the library', back: '← All musicians', nPeople: (n) => `${n} musicians`, here: (n) => `${n} born here`,
-    all: 'All', listen: (n) => `▶ ${n} recording${n === 1 ? '' : 's'}`, from: 'born in', byHand: 'place set by hand', withRecs: 'recorded', wiki: 'Wikipedia',
+    one: { mugham: 'mugham', tesnif: 'tasnif', song: 'song', instrumental: 'instrumental' }, all: 'All', listen: (n) => `▶ ${n} recording${n === 1 ? '' : 's'}`, from: 'born in', byHand: 'place set by hand', withRecs: 'recorded', wiki: 'Wikipedia',
     note: "The recordings are from Wikimedia Commons, all in the public domain: in Azerbaijan, recordings made before 1976 are free. The songs' words are not yet matched to their ghazals. The musicians, their birthplaces and portraits are from Wikidata." },
 };
 const t = (k) => T[lang][k];
@@ -137,7 +137,8 @@ const map = new maplibregl.Map({
 });
 map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-right');
 const tip = new maplibregl.Popup({ closeButton: false, closeOnClick: false, offset: 10 });
-const pulseEl = document.createElement('div'); pulseEl.className = 'pulse';
+// The marker element is MapLibre's to position (its transform); the ring inside it animates
+const pulseEl = document.createElement('div'); pulseEl.innerHTML = '<div class="pulse"></div>';
 const pulse = new maplibregl.Marker({ element: pulseEl });
 const phone = () => matchMedia('(max-width: 48rem)').matches;
 const pad = () => phone() ? { top: 60, right: 24, left: 24, bottom: document.querySelector('.panel').offsetHeight + 24 } : { top: 48, right: 64, bottom: 48, left: 27 * 16 + 48 };
@@ -256,7 +257,7 @@ function play(id) {
   audio.src = r.mp3;
   const p = r.performer?.qid && byQid.get(r.performer.qid);
   document.getElementById('face').outerHTML = p?.image ? `<img id="face" class="face" src="${esc(p.image)}" alt="" referrerpolicy="no-referrer">` : `<span id="face" class="face none">♪</span>`;
-  document.getElementById('now').innerHTML = `<strong>${esc(L(r.title))}</strong> · ${t(r.kind).toLowerCase()}<br><small>${r.performer ? (p?.wiki ? `<a href="${esc(p.wiki)}" target="_blank" rel="noopener">${esc(L(r.performer))}</a>` : esc(L(r.performer))) : t('unknown')}${p ? ` · ${years(p)} · ${t('from')} <button type="button" id="now-place">${esc(L(p.place))}</button>` : ''}${when(r.year) ? ` · ${esc(when(r.year))}` : ''}</small>`;
+  document.getElementById('now').innerHTML = `<strong>${esc(L(r.title))}</strong> · ${t('one')[r.kind]}<br><small>${r.performer ? (p?.wiki ? `<a href="${esc(p.wiki)}" target="_blank" rel="noopener">${esc(L(r.performer))}</a>` : esc(L(r.performer))) : t('unknown')}${p ? ` · ${years(p)} · ${t('from')} <button type="button" id="now-place">${esc(L(p.place))}</button>` : ''}${when(r.year) ? ` · ${esc(when(r.year))}` : ''}</small>`;
   document.getElementById('now-place')?.addEventListener('click', () => showPlace(p.place.id, p.qid));
   document.getElementById('player').hidden = false;
   if (p) { pulse.setLngLat([p.place.lng, p.place.lat]).addTo(map); flyTo(p); } else pulse.remove();
