@@ -123,19 +123,19 @@ const T = {
   az: { doc: 'İcmalar · Azad Bilik', title: 'İcmalar', sub: 'Respublikadan kənarda azərbaycanlılar', share: 'Payı', count: 'Sayı',
     geo: 'Gürcüstan', dag: 'Dağıstan', arm: 'Ermənistan', of: (a, t) => `${a} azərbaycanlı · əhalinin ${t}`, ofTotal: 'əhalinin',
     round: (r) => `Siyahıyaalma: ${r}`, back: '← Bütün icmalar', find: 'Rayon axtar…', play: 'Siyahıyaalmaları ardıcıl göstər', pause: 'Dayandır',
-    year: 'İl', az: 'Azərbaycanlı', pct: 'Payı', src: 'mənbə', nodata: 'məlumat yoxdur', born: 'Burada doğulanlar:', more: (n) => `və daha ${n}`,
+    year: 'İl', az: 'Azərbaycanlı', pct: 'Payı', src: 'mənbə', nodata: 'məlumat yoxdur', born: 'Burada doğulanlar:', bornIn: { geo: 'Gürcüstanda doğulanlar:', dag: 'Dağıstanda doğulanlar:', arm: 'Ermənistanda doğulanlar:' }, more: (n) => `və daha ${n}`,
     show: 'Xəritədə göstər', notCounted: 'bu il bölgə üzrə sayılmayıb',
     note: 'Rəqəmlər rəsmi siyahıyaalmalardandır (1926-da «türklər»), hər biri öz mənbəyi ilə; o vaxt olmayan və ya sərhədləri çox dəyişmiş rayon boş qalır. Sovet Ermənistanının rayonları üzrə yalnız 1939-un rəqəmləri əlçatandır; ümumi saylar bütün illər üçündür. İranda etnik siyahıyaalma aparılmır. Doğulanlar ədəbiyyat xəritəsindəndir.' },
   ru: { doc: 'Общины · Azad Bilik', title: 'Общины', sub: 'Азербайджанцы за пределами республики', share: 'Доля', count: 'Число',
     geo: 'Грузия', dag: 'Дагестан', arm: 'Армения', of: (a, t) => `${a} азербайджанцев · ${t} населения`, ofTotal: 'населения',
     round: (r) => `Перепись: ${r}`, back: '← Все общины', find: 'Найти район…', play: 'Показать переписи по очереди', pause: 'Пауза',
-    year: 'Год', az: 'Азербайджанцы', pct: 'Доля', src: 'источник', nodata: 'нет данных', born: 'Здесь родились:', more: (n) => `и ещё ${n}`,
+    year: 'Год', az: 'Азербайджанцы', pct: 'Доля', src: 'источник', nodata: 'нет данных', born: 'Здесь родились:', bornIn: { geo: 'Родились в Грузии:', dag: 'Родились в Дагестане:', arm: 'Родились в Армении:' }, more: (n) => `и ещё ${n}`,
     show: 'Показать на карте', notCounted: 'в этот год по районам не учтены',
     note: 'Цифры — официальные переписи (в 1926 г. «тюрки»), у каждой — источник; район, которого тогда не было или чьи границы сильно изменились, оставлен пустым. По районам Советской Армении доступны только цифры 1939 г.; общие числа — за все годы. В Иране этническая перепись не ведётся. Родившиеся здесь — по литературной карте.' },
   en: { doc: 'Communities · Azad Bilik', title: 'Communities', sub: 'Azerbaijanis beyond the Republic', share: 'Share', count: 'Number',
     geo: 'Georgia', dag: 'Dagestan', arm: 'Armenia', of: (a, t) => `${a} Azerbaijanis · ${t} of the population`, ofTotal: 'of the population',
     round: (r) => `Census: ${r}`, back: '← All communities', find: 'Find a district…', play: 'Play the censuses in turn', pause: 'Pause',
-    year: 'Year', az: 'Azerbaijanis', pct: 'Share', src: 'source', nodata: 'no data', born: 'Born here:', more: (n) => `and ${n} more`,
+    year: 'Year', az: 'Azerbaijanis', pct: 'Share', src: 'source', nodata: 'no data', born: 'Born here:', bornIn: { geo: 'Born in Georgia:', dag: 'Born in Dagestan:', arm: 'Born in Armenia:' }, more: (n) => `and ${n} more`,
     show: 'Show on the map', notCounted: 'not counted by district that year',
     note: "The figures are the official censuses (\"Turks\" in 1926), each with its source; a district that did not exist or whose borders changed much is left empty. Soviet Armenia's districts are available for 1939 only; the country totals for every census. Iran does not count ethnicity. Those born here are from the literary map." },
 };
@@ -283,7 +283,7 @@ function drawSide() {
     const ps = units.filter((u) => u.region === k).flatMap((u) => extras.poets[u.id] ?? []);
     if (!ps.length) return '';
     const link = (p) => `<a href="${lang === 'az' ? '' : ''}https://kitabxana.az${lang === 'az' ? '' : '/' + lang}/authors/${p.slug}">${esc(L(p))}</a>`;
-    return `<p class="who">${t('born')} ${ps.slice(0, 8).map(link).join(', ')}${ps.length > 8 ? ` ${t('more')(ps.length - 8)}` : ''}</p>`;
+    return `<p class="who">${t('bornIn')[k]} ${ps.slice(0, 8).map(link).join(', ')}${ps.length > 8 ? ` ${t('more')(ps.length - 8)}` : ''}</p>`;
   };
   el.innerHTML = `<div class="totals">${tot('geo')}${tot('dag')}${tot('arm')}</div><div class="chart">${chart()}</div>
     ${COMMUNITIES.map((c, i) => `<section class="community"><h3>${esc(L(c.name))}</h3><p>${esc(L(c.text))}</p>${born(c.region)}<button type="button" class="go" data-c="${i}">${t('show')} →</button></section>`).join('')}
