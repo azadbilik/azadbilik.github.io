@@ -107,17 +107,17 @@ let lang = (() => {
 const T = {
   az: { doc: 'Musiqi · Azad Bilik', title: 'Musiqi', sub: 'İlk səs yazıları və musiqiçilərin yurdu', gallery: 'Qalereya', recs: 'Səs yazıları', people: 'Musiqiçilər',
     mugham: 'Muğamlar', tesnif: 'Təsniflər', song: 'Mahnılar', instrumental: 'Alətlə', khanende: 'xanəndə', tar: 'tarzən', ashik: 'aşıq', unknown: 'ifaçısı bilinmir',
-    play: 'Dinlə', commons: 'Commons', poems: 'şeirləri kitabxanada', back: '← Bütün musiqiçilər', nPeople: (n) => `${n} musiqiçi`, here: (n) => `${n} musiqiçi burada doğulub`,
+    play: 'Dinlə', commons: 'Commons', poems: 'şeirləri kitabxanada', alsoLit: 'Ədəbiyyat xəritəsində də var', back: '← Bütün musiqiçilər', nPeople: (n) => `${n} musiqiçi`, here: (n) => `${n} musiqiçi burada doğulub`,
     one: { mugham: 'muğam', tesnif: 'təsnif', song: 'mahnı', instrumental: 'alətlə' }, mughams: 'Muğamlar', probable: 'ehtimal', others: 'Başqa muğamlar', sectionsL: 'Şöbələr', noRec: 'bu muğamın səs yazısı hələ yoxdur', dgNote: 'Yeddi əsas muğam (dəstgah), Üzeyir Hacıbəylinin bölgüsü ilə; əhval-ruhiyyə və şöbələr Vikipediyadakı mənbələrə görədir. «Ehtimal» olan yerlər dəqiqləşdirilməlidir.', all: 'Hamısı', listen: (n) => `▶ ${n} səs yazısı`, from: 'doğulub:', byHand: 'yer əl ilə', withRecs: 'səs yazısı olanlar', wiki: 'Vikipediya',
     note: 'Səs yazıları Wikimedia Commons-dandır, hamısı ictimai mülkiyyətdədir: Azərbaycanda 1976-dan əvvəlki yazılar sərbəstdir. Mahnının sözləri hələ qəzəllərə bağlanmayıb. Musiqiçilər, doğulduqları yerlər və portretlər Wikidata-dandır.' },
   ru: { doc: 'Музыка · Azad Bilik', title: 'Музыка', sub: 'Первые записи и родина музыкантов', gallery: 'Галерея', recs: 'Записи', people: 'Музыканты',
     mugham: 'Мугамы', tesnif: 'Теснифы', song: 'Песни', instrumental: 'Инструментальные', khanende: 'ханенде', tar: 'тарист', ashik: 'ашуг', unknown: 'исполнитель неизвестен',
-    play: 'Слушать', commons: 'Commons', poems: 'стихи в библиотеке', back: '← Все музыканты', nPeople: (n) => `${n} музыкантов`, here: (n) => `Здесь родились: ${n}`,
+    play: 'Слушать', commons: 'Commons', poems: 'стихи в библиотеке', alsoLit: 'Есть и на литературной карте', back: '← Все музыканты', nPeople: (n) => `${n} музыкантов`, here: (n) => `Здесь родились: ${n}`,
     one: { mugham: 'мугам', tesnif: 'тесниф', song: 'песня', instrumental: 'инструментальная' }, mughams: 'Мугамы', probable: 'предположительно', others: 'Другие мугамы', sectionsL: 'Шёбе', noRec: 'записей этого мугама пока нет', dgNote: 'Семь основных мугамов (дестгяхов) по Узеиру Гаджибекову; характер и шёбе — по источникам Википедии. Места с пометкой «предположительно» требуют уточнения.', all: 'Все', listen: (n) => `▶ записей: ${n}`, from: 'родом из', byHand: 'место указано вручную', withRecs: 'есть записи', wiki: 'Википедия',
     note: 'Записи — с Викисклада, все в общественном достоянии: в Азербайджане записи до 1976 года свободны. Тексты песен ещё не связаны с газелями. Музыканты, места рождения и портреты — по Викиданным.' },
   en: { doc: 'Music · Azad Bilik', title: 'Music', sub: 'The first recordings, and where the musicians came from', gallery: 'Gallery', recs: 'Recordings', people: 'Musicians',
     mugham: 'Mughams', tesnif: 'Tasnifs', song: 'Songs', instrumental: 'Instrumental', khanende: 'khanende', tar: 'tar player', ashik: 'ashik', unknown: 'performer unknown',
-    play: 'Listen', commons: 'Commons', poems: 'poems in the library', back: '← All musicians', nPeople: (n) => `${n} musicians`, here: (n) => `${n} born here`,
+    play: 'Listen', commons: 'Commons', poems: 'poems in the library', alsoLit: 'Also on the literary map', back: '← All musicians', nPeople: (n) => `${n} musicians`, here: (n) => `${n} born here`,
     one: { mugham: 'mugham', tesnif: 'tasnif', song: 'song', instrumental: 'instrumental' }, mughams: 'Mughams', probable: 'probable', others: 'Other mughams', sectionsL: 'Sections', noRec: 'no recording of this mugham yet', dgNote: 'The seven main mughams (dastgahs), as Uzeyir Hajibeyli classed them; their moods and sections from the sources Wikipedia cites. Placements marked "probable" are not yet settled.', all: 'All', listen: (n) => `▶ ${n} recording${n === 1 ? '' : 's'}`, from: 'born in', byHand: 'place set by hand', withRecs: 'recorded', wiki: 'Wikipedia',
     note: "The recordings are from Wikimedia Commons, all in the public domain: in Azerbaijan, recordings made before 1976 are free. The songs' words are not yet matched to their ghazals. The musicians, their birthplaces and portraits are from Wikidata." },
 };
@@ -135,6 +135,7 @@ const years = (p) => p.born || p.died ? `${p.born ?? '?'}–${p.died ?? ''}` : '
 const nameOf = (p) => p[lang] || p.az || p.en;
 
 const params = new URLSearchParams(location.search);
+let litSlug = new Map(); // Wikidata id → author slug on the literary map (azadbilik.org/xerite/)
 let recs = [], people = [], byQid = new Map(), places = new Map(), placeIds = [], mugham = { dastgahs: [], pieces: [] };
 // A recording's mugham: its title without a take number or an instrument, looked up in mugham.json
 const pieceOf = (r) => mugham.pieces.find((p) => p.name === r.title.az.replace(/ \((\d|qarmonda|sazda)\)$/, ''));
@@ -203,8 +204,15 @@ map.on('load', async () => {
   });
   map.on('mouseleave', 'places', () => { map.getCanvas().style.cursor = ''; tip.remove(); });
   map.on('click', 'places', (e) => showPlace(e.features[0].properties.id));
+  const person = byQid.get(params.get('person'));
   if (who && byQid.has(who)) tab = 'recs';
+  else if (person) { tab = 'people'; place = person.place.id; mark(); }
   draw();
+  if (person && tab === 'people') showPlace(person.place.id, person.qid);
+  fetch('/xerite/data/authors.json').then((r) => r.json()).then((xs) => {
+    litSlug = new Map(xs.filter((x) => x.wikidata).map((x) => [x.wikidata, x.slug]));
+    if (tab === 'people') draw();
+  }).catch(() => {});
 });
 
 function mark() {
@@ -252,7 +260,8 @@ function drawPeople(el) {
   const extra = (p) => {
     const rs = recsOf(p.qid);
     return (rs.length ? `<button type="button" class="listen" data-listen="${p.qid}">${t('listen')(rs.length)}</button>` : '')
-      + (p.kitabxana ? `<a class="kx" href="${KX()}/authors/${p.kitabxana}">${t('poems')} ↗</a>` : '');
+      + (p.kitabxana ? `<a class="kx" href="${KX()}/authors/${p.kitabxana}">${t('poems')} ↗</a>` : '')
+      + (litSlug.has(p.qid) ? `<a class="kx" href="/xerite/?author=${litSlug.get(p.qid)}${lang === 'az' ? '' : '&lang=' + lang}">${t('alsoLit')} →</a>` : '');
   };
   el.innerHTML = (pl ? `<button type="button" class="back" id="back">${t('back')}</button><div class="place-head"><h2>${esc(L(pl))}</h2><p class="meta">${t('here')(list.length)}</p></div>` : `<section class="group"><h2>${t('nPeople')(people.length)} · ♪ ${people.filter((p) => recsOf(p.qid).length).length} ${t('withRecs')}</h2></section>`)
     + `<ol class="people">${list.map((p) => `<li><button type="button" data-p="${p.qid}"><span>${recsOf(p.qid).length ? '♪ ' : ''}${esc(nameOf(p))}</span><span class="yrs">${years(p)}</span><span class="role">${p.roles.map((r) => t(r)).join(', ')}${pl ? '' : ` · ${esc(L(p.place))}`}${p.byHand ? ` (${t('byHand')})` : ''}</span></button>${extra(p)}</li>`).join('')}</ol>`
