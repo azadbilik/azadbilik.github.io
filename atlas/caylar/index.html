@@ -67,13 +67,13 @@ let lang = (() => {
 const nf = () => new Intl.NumberFormat({ az: 'az-Latn-AZ', ru: 'ru-RU', en: 'en-GB' }[lang]);
 const T = {
   az: { doc: 'Çaylar · Azad Bilik', title: 'Çaylar', sub: 'Azərbaycanın çayları və gölləri', find: 'Çay axtar…', rivers: (n) => `${n} çay`, lakes: 'Göllər və su anbarları', length: 'Uzunluğu', whole: 'bütün uzunluğu, mənbədən mənsəbədək', inAz: 'Azərbaycandakı hissəsi', names: 'Adları', back: '← Bütün çaylar', km: 'km', area: 'sahəsi', wiki: 'Vikipediya',
-    legend: 'Çay: xəttin qalınlığı uzunluğa görə', lake: 'göl', reservoir: 'su anbarı', lakeL: 'göl, su anbarı',
+    legend: 'Çay: xəttin qalınlığı uzunluğa görə, ştrixlər axın istiqamətində', legendStill: 'Çay: xəttin qalınlığı uzunluğa görə, oxlar axın istiqamətində', lake: 'göl', reservoir: 'su anbarı', lakeL: 'göl, su anbarı',
     note: 'Çaylar və göllər OpenStreetMap-dəndir (ODbL). Uzunluq xəritədəki xəttə görə ölçülüb və rəsmi rəqəmlərdən bir qədər fərqlənə bilər: Kür üçün 1471 km (soraqlarda ~1515), Araz üçün 1068 km (~1072). Bütöv çaylar (Kür, Araz, Samur…) bütün uzunluğu ilə, kiçik çaylar Azərbaycandakı hissəsi ilə göstərilir.' },
   ru: { doc: 'Реки · Azad Bilik', title: 'Реки', sub: 'Реки и озёра Азербайджана', find: 'Найти реку…', rivers: (n) => `${n} рек`, lakes: 'Озёра и водохранилища', length: 'Длина', whole: 'вся длина, от истока до устья', inAz: 'часть в Азербайджане', names: 'Названия', back: '← Все реки', km: 'км', area: 'площадь', wiki: 'Википедия',
-    legend: 'Река: толщина линии — по длине', lake: 'озеро', reservoir: 'водохранилище', lakeL: 'озеро, водохранилище',
+    legend: 'Река: толщина линии — по длине, штрихи — по течению', legendStill: 'Река: толщина линии — по длине, стрелки — по течению', lake: 'озеро', reservoir: 'водохранилище', lakeL: 'озеро, водохранилище',
     note: 'Реки и озёра — из OpenStreetMap (ODbL). Длина измерена по линии на карте и может немного отличаться от официальной: Кура 1471 км (по справочникам ~1515), Аракс 1068 км (~1072). Целые реки (Кура, Аракс, Самур…) показаны полностью, малые — их частью в Азербайджане.' },
   en: { doc: 'Rivers · Azad Bilik', title: 'Rivers', sub: 'Rivers and lakes of Azerbaijan', find: 'Find a river…', rivers: (n) => `${n} rivers`, lakes: 'Lakes and reservoirs', length: 'Length', whole: 'whole length, source to mouth', inAz: 'the part in Azerbaijan', names: 'Names', back: '← All rivers', km: 'km', area: 'area', wiki: 'Wikipedia',
-    legend: 'River: line width by length', lake: 'lake', reservoir: 'reservoir', lakeL: 'lake, reservoir',
+    legend: 'River: line width by length, dashes run downstream', legendStill: 'River: line width by length, arrows point downstream', lake: 'lake', reservoir: 'reservoir', lakeL: 'lake, reservoir',
     note: "Rivers and lakes are from OpenStreetMap (ODbL). Lengths are measured along the mapped line and may differ a little from official figures: the Kura 1,471 km (references ~1,515), the Araz 1,068 km (~1,072). Whole rivers (the Kura, Araz, Samur…) are shown full length, smaller ones by their part in Azerbaijan." },
 };
 const t = (k) => T[lang][k];
@@ -121,6 +121,21 @@ map.on('load', async () => {
     'line-width': ['case', ['boolean', ['feature-state', 'sel'], false], ['*', width, 1.8], width],
     'line-opacity': ['case', ['boolean', ['feature-state', 'dim'], false], .3, .9],
   } });
+  // Which way the water runs (OSM draws every river downstream): dashes drifting along the line,
+  // or, for readers who ask for less motion, small chevrons
+  map.addLayer({ id: 'rivers-flow', type: 'line', source: 'rivers', layout: { 'line-cap': 'butt', 'line-join': 'round', visibility: still() ? 'none' : 'visible' }, paint: {
+    'line-color': css('--paper'),
+    // At the country's scale only the chosen river flows; from zoom 7 all of them
+    'line-opacity': ['interpolate', ['linear'], ['zoom'], 6.5, ['case', ['boolean', ['feature-state', 'sel'], false], .8, 0], 7.5, ['case', ['boolean', ['feature-state', 'dim'], false], .15, .7]],
+    'line-width': ['case', ['boolean', ['feature-state', 'sel'], false], ['*', width, .7], ['*', width, .55]], 'line-dasharray': DASH[0],
+  } });
+  map.addImage('chevron', chevron(), { pixelRatio: 2 });
+  map.addLayer({ id: 'rivers-arrows', type: 'symbol', source: 'rivers', filter: ['>=', ['get', 'length'], 15], layout: {
+    visibility: still() ? 'visible' : 'none', 'symbol-placement': 'line', 'symbol-spacing': 70, 'icon-image': 'chevron', 'icon-size': ['interpolate', ['linear'], ['zoom'], 5, .6, 9, 1],
+    'icon-rotation-alignment': 'map', 'icon-allow-overlap': true, 'icon-ignore-placement': true,
+  }, paint: { 'icon-opacity': ['case', ['boolean', ['feature-state', 'dim'], false], .25, .85] } });
+  flow();
+  matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change', () => { map.setLayoutProperty('rivers-flow', 'visibility', still() ? 'none' : 'visible'); map.setLayoutProperty('rivers-arrows', 'visibility', still() ? 'visible' : 'none'); flow(); drawLegend(); });
   map.addLayer({ id: 'river-names', type: 'symbol', source: 'rivers', filter: ['>=', ['get', 'length'], 40], layout: {
     'symbol-placement': 'line', 'text-field': ['get', lang], 'text-font': ['Noto Sans Italic'], 'text-size': 11, 'symbol-spacing': 400,
   }, paint: { 'text-color': C, 'text-halo-color': css('--paper'), 'text-halo-width': 1.5 } });
@@ -131,13 +146,38 @@ map.on('load', async () => {
     tip.setLngLat(e.lngLat).setHTML(`<strong>${esc(L(r))}</strong> · ${nf().format(r.length)} ${t('km')}`).addTo(map);
   });
   map.on('mouseleave', 'rivers-hit', () => { map.getCanvas().style.cursor = ''; tip.remove(); if (hovered != null) map.setFeatureState({ source: 'rivers', id: hovered }, { hover: false }); hovered = null; });
-  map.on('click', 'rivers-hit', (e) => select(e.features[0].id, false));
+  map.on('click', 'rivers-hit', (e) => select(e.features[0].id));
+  map.on('click', 'lakes', (e) => { if (!map.queryRenderedFeatures(e.point, { layers: ['rivers-hit'] }).length) zoomLake(e.features[0].id); });
+  map.on('mouseenter', 'lakes', () => { map.getCanvas().style.cursor = 'pointer'; });
   map.on('mousemove', 'lakes', (e) => { const l = lakes[e.features[0].id]; tip.setLngLat(e.lngLat).setHTML(`<strong>${esc(L(l))}</strong>`).addTo(map); });
-  map.on('mouseleave', 'lakes', () => tip.remove());
+  map.on('mouseleave', 'lakes', () => { tip.remove(); map.getCanvas().style.cursor = ''; });
   const start = params.get('r') && rivers.find((r) => r.id === params.get('r'));
   draw();
   if (start) select(start.fid);
 });
+function zoomLake(i) { const f = lakeGeo.features[i]; let bb = [180, 90, -180, -90]; for (const poly of f.geometry.coordinates) for (const [x, y] of poly[0]) bb = [Math.min(bb[0], x), Math.min(bb[1], y), Math.max(bb[2], x), Math.max(bb[3], y)]; map.fitBounds([[bb[0], bb[1]], [bb[2], bb[3]]], { padding: pad(), maxZoom: 11, duration: still() ? 0 : 700 }); }
+// The marching-dash steps (MapLibre's line animation): each step moves the gap a little downstream
+const DASH = [[0, 4, 3], [0.5, 4, 2.5], [1, 4, 2], [1.5, 4, 1.5], [2, 4, 1], [2.5, 4, 0.5], [3, 4, 0], [0, 0.5, 3, 3.5], [0, 1, 3, 3], [0, 1.5, 3, 2.5], [0, 2, 3, 2], [0, 2.5, 3, 1.5], [0, 3, 3, 1], [0, 3.5, 3, 0.5]].map((d) => d.map((x) => x * 3));
+let flowStep = -1, flowing = false;
+function flow() {
+  if (flowing || still()) return;
+  flowing = true;
+  const tick = (ts) => {
+    if (still() || !map.getLayer('rivers-flow')) { flowing = false; return; }
+    const k = Math.floor(ts / 90) % DASH.length;
+    if (k !== flowStep) { flowStep = k; map.setPaintProperty('rivers-flow', 'line-dasharray', DASH[k]); }
+    requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+}
+// A small chevron pointing along the line (east = downstream), drawn once
+function chevron() {
+  const c = document.createElement('canvas'); c.width = c.height = 32;
+  const g = c.getContext('2d'); g.lineCap = 'round'; g.lineJoin = 'round';
+  // ink on a paper halo, so it reads on the line and off it
+  for (const [color, w] of [[css('--paper'), 8], [css('--ink'), 4]]) { g.strokeStyle = color; g.lineWidth = w; g.beginPath(); g.moveTo(10, 7); g.lineTo(21, 16); g.lineTo(10, 25); g.stroke(); }
+  return g.getImageData(0, 0, 32, 32);
+}
 function bboxOf(g) { let b = [180, 90, -180, -90]; for (const l of g.coordinates) for (const [x, y] of l) b = [Math.min(b[0], x), Math.min(b[1], y), Math.max(b[2], x), Math.max(b[3], y)]; return [[b[0], b[1]], [b[2], b[3]]]; }
 function select(fid, fly = true) {
   if (selected != null) map.setFeatureState({ source: 'rivers', id: selected }, { sel: false });
@@ -147,7 +187,7 @@ function select(fid, fly = true) {
   draw();
 }
 function drawLegend() {
-  document.getElementById('legend').innerHTML = `<div class="row"><b style="height:3px"></b>${t('legend')}</div>${lakes.length ? `<div class="row"><b style="height:.6rem;opacity:.45"></b>${t('lakeL')}</div>` : ''}`;
+  document.getElementById('legend').innerHTML = `<div class="row"><b style="height:3px"></b>${t(still() ? 'legendStill' : 'legend')}</div>${lakes.length ? `<div class="row"><b style="height:.6rem;opacity:.45"></b>${t('lakeL')}</div>` : ''}`;
 }
 function draw() {
   const el = document.getElementById('body');
@@ -168,7 +208,7 @@ function draw() {
       + (lakes.length && !q ? `<section class="rank"><h2>${t('lakes')}</h2><ul class="riverlist">${lakes.slice(0, 20).map((l) => `<li><button type="button" data-l="${l.fid}"><span>${esc(L(l))}</span><span class="v">${l.kind === 'reservoir' ? t('reservoir') : t('lake')}</span></button></li>`).join('')}</ul></section>` : '')
       + `<p class="note">${t('note')}</p>`;
     el.querySelectorAll('[data-r]').forEach((b) => b.onclick = () => select(+b.dataset.r));
-    el.querySelectorAll('[data-l]').forEach((b) => b.onclick = () => { const f = lakeGeo.features[+b.dataset.l]; let bb = [180, 90, -180, -90]; for (const poly of f.geometry.coordinates) for (const [x, y] of poly[0]) bb = [Math.min(bb[0], x), Math.min(bb[1], y), Math.max(bb[2], x), Math.max(bb[3], y)]; map.fitBounds([[bb[0], bb[1]], [bb[2], bb[3]]], { padding: pad(), maxZoom: 11, duration: still() ? 0 : 700 }); });
+    el.querySelectorAll('[data-l]').forEach((b) => b.onclick = () => zoomLake(+b.dataset.l));
   }
   const u = new URLSearchParams();
   if (lang !== 'az') u.set('lang', lang);
