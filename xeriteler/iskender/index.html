@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>İskəndərin səfərləri · Azad Bilik</title>
+<meta name="description" content="Nizaminin «İskəndərnamə»sində İskəndərin yolu: Məqduniyyədən Bərdəyə, Çinə, Zülmət diyarına; hər dayanacaq öz fəsli və miniatürləri ilə. Iskandar's journeys in Nizami's Iskandarnama.">
+<meta name="theme-color" content="#F4EFE6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14100D" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://azadbilik.org/xeriteler/iskender/">
+<meta property="og:title" content="İskəndərin səfərləri · Iskandar's journeys">
+<meta property="og:description" content="Nizaminin «İskəndərnamə»si xəritədə: 28 dayanacaq, hər biri öz fəsli və miniatürləri ilə.">
+<meta property="og:image" content="https://azadbilik.org/xeriteler/iskender/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+<style>
+  :root {
+    --paper: #F4EFE6; --ink: #1A1410; --muted: #675E55; --rule: rgb(26 20 16 / .14); --frame: #E9E2D6;
+    --accent: #A81E28; --second: #1F5C73; --panel: rgb(244 239 230 / .96); --water: #E4DCCF; --land: #F4EFE6;
+    --serif: 'Literata', Georgia, serif; --sans: 'Inter', system-ui, sans-serif;
+    color-scheme: light dark;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --paper: #14100D; --ink: #F1EBE1; --muted: #A0968B; --rule: rgb(241 235 225 / .14); --frame: #1F1914;
+      --accent: #DA5A61; --second: #6FB3CC; --panel: rgb(20 16 13 / .95); --water: #0C0A08; --land: #1C1713; }
+  }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { height: 100%; }
+  body { background: var(--paper); color: var(--ink); font: 400 .9375rem/1.5 var(--sans); -webkit-font-smoothing: antialiased; overflow: hidden; }
+  a { color: inherit; text-underline-offset: .2em; text-decoration-thickness: 1px; text-decoration-color: var(--rule); }
+  a:hover { text-decoration-color: currentColor; }
+  button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; padding: 0; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+  [hidden] { display: none !important; }
+
+  #map { position: fixed; inset: 0; background: var(--water); }
+  .panel { position: fixed; top: 1rem; left: 1rem; bottom: 1rem; width: 25rem; display: flex; flex-direction: column;
+    background: var(--panel); backdrop-filter: blur(8px); border: 1px solid var(--rule); border-radius: 4px;
+    box-shadow: 0 1px 2px rgb(0 0 0 / .04), 0 8px 32px rgb(0 0 0 / .06); }
+  .head { padding: 1.25rem 1.5rem 1rem; border-bottom: 1px solid var(--rule); }
+  .top { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+  .top nav { display: flex; align-items: center; gap: 1rem; font-size: .8125rem; color: var(--muted); }
+  .brand { display: inline-flex; align-items: center; gap: .5rem; font-size: .8125rem; font-weight: 600; text-decoration: none; white-space: nowrap; }
+  .brand svg { width: 1rem; height: 1rem; }
+  .star { fill: currentColor; } .gem { fill: var(--accent); }
+  .langs { display: inline-flex; gap: .15rem; }
+  .langs button { font-size: .6875rem; letter-spacing: .04em; padding: .1rem .3rem; border-radius: 2px; }
+  .langs button[aria-pressed="true"] { color: var(--ink); box-shadow: inset 0 -1px currentColor; }
+  h1 { margin-top: 1.25rem; font: 400 1.75rem/1.1 var(--serif); letter-spacing: -.02em; }
+  .sub { margin-top: .35rem; font: italic 300 1rem/1.35 var(--serif); }
+
+  .body { flex: 1; overflow-y: auto; overscroll-behavior: contain; }
+  .route h2 { padding: 1rem 1.5rem .35rem; font: 500 .75rem var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: .5rem; }
+  .route h2::before { content: ''; width: 1.25rem; height: 2px; background: var(--c); }
+  .route ol { list-style: none; padding: 0 0 .5rem; }
+  .route li button { display: grid; grid-template-columns: 1.75rem 1fr; gap: .1rem .5rem; width: 100%; text-align: left; padding: .4rem 1.5rem; }
+  .route li button:hover { background: var(--rule); }
+  .route .n { grid-row: span 2; font-size: .75rem; color: var(--muted); font-variant-numeric: tabular-nums; padding-top: .15rem; }
+  .route .name { font-weight: 500; }
+  .route .meta { font-size: .8125rem; color: var(--muted); }
+  .note { padding: 1rem 1.5rem 1.5rem; font-size: .75rem; color: var(--muted); }
+
+  .stop { padding: 1rem 1.5rem 1.5rem; }
+  .stop-nav { display: flex; justify-content: space-between; align-items: center; gap: .5rem; font-size: .8125rem; color: var(--muted); }
+  .stop-nav button { padding: .25rem 0; }
+  .stop-nav button:hover { color: var(--ink); }
+  .stop-nav button[disabled] { opacity: .35; cursor: default; }
+  .stop .part { margin-top: 1rem; font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: var(--c); font-weight: 500; }
+  .stop h2 { margin-top: .25rem; font: 400 1.625rem/1.15 var(--serif); letter-spacing: -.015em; }
+  .stop .approx { font-size: .75rem; color: var(--muted); }
+  .stop .text { margin-top: .75rem; font: 400 1.0625rem/1.5 var(--serif); }
+  .scene { margin-top: 1.25rem; }
+  .scene h3 { font-size: .875rem; font-weight: 500; }
+  .thumbs { display: flex; gap: .4rem; margin-top: .5rem; overflow-x: auto; scrollbar-width: none; padding-bottom: .25rem; }
+  .thumbs::-webkit-scrollbar { display: none; }
+  .thumbs a { flex: none; background: var(--frame); border-radius: 2px; }
+  .thumbs img { height: 7rem; width: auto; display: block; border-radius: 2px; opacity: 0; transition: opacity .4s; }
+  .thumbs img:not([width]) { aspect-ratio: 3 / 4; }
+  .thumbs img.ok { opacity: 1; }
+  .reads { margin-top: 1.25rem; padding-top: .75rem; border-top: 1px solid var(--rule); display: flex; flex-wrap: wrap; gap: .35rem .9rem; font-size: .8125rem; }
+  .reads span { color: var(--muted); width: 100%; }
+  .reads a { font-weight: 500; text-decoration: none; }
+  .reads a:hover { color: var(--accent); }
+
+  .maplibregl-ctrl-attrib { font: .6875rem var(--sans); background: var(--panel) !important; color: var(--muted); }
+  .maplibregl-ctrl-attrib a { color: var(--muted); }
+  .maplibregl-ctrl-group { background: var(--panel); border: 1px solid var(--rule); box-shadow: none !important; }
+  @media (prefers-color-scheme: dark) { .maplibregl-ctrl-group .maplibregl-ctrl-icon { filter: invert(1); } }
+  .maplibregl-popup-content { background: var(--paper); color: var(--ink); font: .8125rem var(--sans); padding: .4rem .6rem; border-radius: 3px; box-shadow: 0 2px 12px rgb(0 0 0 / .15); }
+  .maplibregl-popup-tip { display: none; }
+
+  @media (max-width: 48rem) {
+    .panel { top: auto; left: 0; right: 0; bottom: 0; width: auto; max-height: 55svh; border-radius: 12px 12px 0 0; border-bottom: 0; }
+    .head { padding: 1rem 1rem .75rem; }
+    h1 { margin-top: .75rem; font-size: 1.375rem; }
+    .sub { display: none; }
+    .route h2, .route li button, .stop, .note { padding-inline: 1rem; }
+    .maplibregl-ctrl-bottom-right, .maplibregl-ctrl-bottom-left { bottom: 55svh; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<div id="map" role="region" data-i18n-label="map"></div>
+
+<aside class="panel">
+  <div class="head">
+    <div class="top"><a class="brand" href="/" data-keep-lang><svg viewBox="0 0 512 512" aria-hidden="true"><g class="star"><rect x="126" y="126" width="260" height="260"/><polygon points="256,72 440,256 256,440 72,256"/></g><polygon class="gem" points="256,196 316,256 256,316 196,256"/></svg>Azad Bilik</a><nav><a href="/xeriteler/" data-i18n="maps" data-keep-lang>Xəritələr</a><a href="/qalereya/" data-i18n="gallery" data-keep-lang>Qalereya</a><span class="langs" role="group" aria-label="Dil · Язык · Language"><button type="button" data-lang="az">AZ</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="en">EN</button></span></nav></div>
+    <h1 data-i18n="title">İskəndərin səfərləri</h1>
+    <p class="sub" data-i18n="sub">Nizaminin «İskəndərnamə»si xəritədə</p>
+  </div>
+  <div class="body" id="body" aria-live="polite"></div>
+</aside>
+
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script>
+const dark = matchMedia('(prefers-color-scheme: dark)').matches;
+const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+const still = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// One language at a time: ?lang=, else the visitor's last choice on azadbilik.org, else Azerbaijani
+const LANGS = ['az', 'ru', 'en'];
+let lang = (() => {
+  const q = new URLSearchParams(location.search).get('lang');
+  if (LANGS.includes(q)) return q;
+  try { const s = localStorage.getItem('lang'); if (LANGS.includes(s)) return s; } catch {}
+  return 'az';
+})();
+const T = {
+  az: { doc: 'İskəndərin səfərləri · Azad Bilik', title: 'İskəndərin səfərləri', sub: 'Nizaminin «İskəndərnamə»si xəritədə', map: 'Xəritə', maps: 'Xəritələr', gallery: 'Qalereya',
+    serefname: 'Şərəfnamə: dünyanın fəthi', iqbalname: 'İqbalnamə: hikmət və peyğəmbərlik', back: 'Bütün yol', prev: 'Əvvəlki', next: 'Növbəti', approx: 'yeri təxminidir', read: 'Kitabxanada oxu', chapter: (n) => `${n}-ci fəsil`,
+    pics: (n) => `${n} miniatür`, ch: (n) => `${n} fəsil`,
+    note: 'Yer adları Nizaminin mətnindəndir; tarixi İskəndərin yolu deyil, poemadakı yoldur. Nizami yalnız ölkə və ya tərəf adı çəkəndə (Hindistan, Çin, Zülmət) nöqtə təxminidir və qırıq xətlə göstərilir. Miniatürlər Azad Bilik qalereyasındandır.' },
+  ru: { doc: 'Походы Искандера · Azad Bilik', title: 'Походы Искандера', sub: '«Искандер-наме» Низами на карте', map: 'Карта', maps: 'Карты', gallery: 'Галерея',
+    serefname: 'Шараф-наме: завоевание мира', iqbalname: 'Икбал-наме: мудрость и пророчество', back: 'Весь путь', prev: 'Назад', next: 'Дальше', approx: 'место приблизительно', read: 'Читать в библиотеке', chapter: (n) => `глава ${n}`,
+    pics: (n) => `${n} ${plural(n, 'миниатюра', 'миниатюры', 'миниатюр')}`, ch: (n) => `${n} ${plural(n, 'глава', 'главы', 'глав')}`,
+    note: 'Названия мест взяты из текста Низами: это путь поэмы, а не исторического Александра. Там, где Низами называет лишь страну или сторону света (Индия, Китай, Страна Мрака), точка приблизительна и путь к ней показан пунктиром. Миниатюры — из галереи Azad Bilik.' },
+  en: { doc: "Iskandar's journeys · Azad Bilik", title: "Iskandar's journeys", sub: "Nizami's Iskandarnama on the map", map: 'Map', maps: 'Maps', gallery: 'Gallery',
+    serefname: 'Sharafnama: the conquest of the world', iqbalname: 'Iqbalnama: wisdom and prophethood', back: 'The whole route', prev: 'Previous', next: 'Next', approx: 'approximate place', read: 'Read in the library', chapter: (n) => `chapter ${n}`,
+    pics: (n) => `${n} miniature${n === 1 ? '' : 's'}`, ch: (n) => `${n} chapter${n === 1 ? '' : 's'}`,
+    note: "Place names are Nizami's: this is the poem's route, not the historical Alexander's. Where Nizami names only a country or a quarter of the world (India, China, the Darkness), the point is approximate and the way to it is dashed. The miniatures are from the Azad Bilik gallery." },
+};
+function plural(n, one, few, many) { const r = new Intl.PluralRules('ru').select(n); return r === 'one' ? one : r === 'few' ? few : many; }
+const t = (k) => T[lang][k];
+const KX = () => `https://kitabxana.az${lang === 'az' ? '' : '/' + lang}`;
+const POEM = { serefname: 'nizami-serefname', iqbalname: 'nizami-xerednama' };
+
+let stops = [], items = [], at = null;
+const map = new maplibregl.Map({
+  container: 'map',
+  style: `https://tiles.openfreemap.org/styles/${dark ? 'dark' : 'positron'}`,
+  bounds: [[-10, 8], [112, 64]], minZoom: 1.5, maxZoom: 9,
+  attributionControl: { compact: true, customAttribution: '<a href="https://kitabxana.az/collections/nizami-serefname">Nizami</a>' },
+});
+map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-right');
+const tip = new maplibregl.Popup({ closeButton: false, closeOnClick: false, offset: 10 });
+const phone = () => matchMedia('(max-width: 48rem)').matches;
+const pad = () => phone() ? { top: 24, right: 24, left: 24, bottom: document.querySelector('.panel').offsetHeight + 24 } : { top: 48, right: 64, bottom: 48, left: 27 * 16 + 48 };
+const labelExpr = () => ['coalesce', ['get', `name:${lang}`], ['get', lang === 'ru' ? 'name' : 'name:latin'], ['get', 'name']];
+map.on('style.load', () => {
+  for (const l of map.getStyle().layers) {
+    if (l.type === 'background') map.setPaintProperty(l.id, 'background-color', css('--land'));
+    if (l.type === 'fill' && /water|ocean|lake/.test(l.id)) map.setPaintProperty(l.id, 'fill-color', css('--water'));
+    if (l.type === 'symbol' && l.layout?.['text-field']) map.setLayoutProperty(l.id, 'text-field', labelExpr());
+  }
+});
+
+map.on('load', async () => {
+  const [route, gallery] = await Promise.all([fetch('route.json').then((r) => r.json()), fetch('/qalereya/data/gallery.json').then((r) => r.json())]);
+  stops = route.stops.map((s, i) => ({ ...s, n: i + 1 }));
+  items = gallery.items;
+  for (const p of gallery.poems) for (const sc of p.scenes) sceneNames[`${p.slug}/${sc.id}`] = sc;
+  map.fitBounds([[-10, 8], [112, 64]], { padding: pad(), duration: 0 });
+
+  // The road: one line per poem, dashed where either end is only approximately placed
+  const legs = [];
+  for (let i = 1; i < stops.length; i++) {
+    const a = stops[i - 1], b = stops[i];
+    if (a.lat === b.lat && a.lng === b.lng) continue;
+    legs.push({ type: 'Feature', geometry: { type: 'LineString', coordinates: [[a.lng, a.lat], [b.lng, b.lat]] },
+      properties: { part: b.part, approx: !!(a.approx || b.approx), from: a.n, to: b.n } });
+  }
+  // Stops sharing a place share a dot, labelled with every visit: "2 · 20 · 28"
+  const places = new Map();
+  for (const s of stops) {
+    const k = `${s.lat},${s.lng}`;
+    if (!places.has(k)) places.set(k, { lat: s.lat, lng: s.lng, stops: [] });
+    places.get(k).stops.push(s);
+  }
+  map.addSource('legs', { type: 'geojson', data: { type: 'FeatureCollection', features: legs } });
+  // Feature ids are the places' order, so a stop finds its dot without a tile query
+  [...places.values()].forEach((p, k) => p.stops.forEach((s) => placeOf.set(s.id, k)));
+  map.addSource('stops', { type: 'geojson', generateId: true, data: { type: 'FeatureCollection', features: [...places.values()].map((p) => ({
+    type: 'Feature', geometry: { type: 'Point', coordinates: [p.lng, p.lat] },
+    properties: { id: p.stops[0].id, ids: p.stops.map((s) => s.id).join(' '), label: p.stops.map((s) => s.n).join(' · '), part: p.stops[0].part, approx: p.stops.every((s) => s.approx) },
+  })) } });
+  const color = ['match', ['get', 'part'], 'serefname', css('--accent'), css('--second')];
+  map.addLayer({ id: 'legs', type: 'line', source: 'legs', layout: { 'line-cap': 'round' }, paint: { 'line-color': color, 'line-width': 2, 'line-opacity': .7 }, filter: ['!', ['get', 'approx']] });
+  map.addLayer({ id: 'legs-approx', type: 'line', source: 'legs', paint: { 'line-color': color, 'line-width': 2, 'line-opacity': .55, 'line-dasharray': [2, 2] }, filter: ['get', 'approx'] });
+  map.addLayer({ id: 'stops', type: 'circle', source: 'stops', paint: {
+    'circle-radius': ['case', ['boolean', ['feature-state', 'sel'], false], 8, 5.5],
+    'circle-color': ['case', ['get', 'approx'], css('--paper'), color],
+    'circle-stroke-color': color, 'circle-stroke-width': ['case', ['get', 'approx'], 2, 1.5],
+  } });
+  map.addLayer({ id: 'stop-labels', type: 'symbol', source: 'stops', layout: {
+    'text-field': ['get', 'label'], 'text-font': ['Noto Sans Bold'], 'text-size': 11, 'text-offset': [0.9, 0], 'text-anchor': 'left', 'text-allow-overlap': false,
+  }, paint: { 'text-color': css('--ink'), 'text-halo-color': css('--paper'), 'text-halo-width': 1.5 } });
+
+  map.on('mousemove', 'stops', (e) => {
+    map.getCanvas().style.cursor = 'pointer';
+    const f = e.features[0];
+    const names = f.properties.ids.split(' ').map((id) => stops.find((s) => s.id === id)).map((s) => `${s.n}. ${esc(s.name[lang])}`);
+    tip.setLngLat(f.geometry.coordinates).setHTML([...new Set(names)].join('<br>')).addTo(map);
+  });
+  map.on('mouseleave', 'stops', () => { map.getCanvas().style.cursor = ''; tip.remove(); });
+  map.on('click', 'stops', (e) => {
+    // A place visited more than once opens on the next visit after the one being read
+    const ids = e.features[0].properties.ids.split(' ');
+    const cur = ids.indexOf(stops[at]?.id);
+    show(stops.findIndex((s) => s.id === ids[(cur + 1) % ids.length]));
+  });
+
+  const start = stops.findIndex((s) => s.id === location.hash.slice(1));
+  if (start >= 0) show(start); else overview();
+});
+
+function picsOf(s) {
+  return s.scenes.map((id) => ({ id, pics: items.filter((x) => x.poem === POEM[s.part] && x.scene === id) }));
+}
+const sceneNames = {};
+const placeOf = new Map();
+const sceneName = (s, id) => sceneNames[`${POEM[s.part]}/${id}`]?.[lang] ?? id;
+
+function overview() {
+  at = null;
+  mark(null);
+  history.replaceState(null, '', location.pathname + location.search);
+  const part = (p) => `<section class="route" style="--c: ${p === 'serefname' ? 'var(--accent)' : 'var(--second)'}"><h2>${t(p)}</h2><ol>${stops.filter((s) => s.part === p).map((s) => {
+    const n = picsOf(s).reduce((a, x) => a + x.pics.length, 0);
+    return `<li><button type="button" data-i="${s.n - 1}"><span class="n">${s.n}</span><span class="name">${esc(s.name[lang])}</span><span class="meta">${[t('ch')(s.chapters.length), n && t('pics')(n), s.approx && t('approx')].filter(Boolean).join(' · ')}</span></button></li>`;
+  }).join('')}</ol></section>`;
+  const el = document.getElementById('body');
+  el.innerHTML = part('serefname') + part('iqbalname') + `<p class="note">${t('note')}</p>`;
+  el.querySelectorAll('button[data-i]').forEach((b) => b.onclick = () => show(+b.dataset.i));
+  el.scrollTop = 0;
+  map.fitBounds([[-10, 8], [112, 64]], { padding: pad(), duration: still() ? 0 : 800 });
+}
+
+function show(i) {
+  if (i < 0 || i >= stops.length) return;
+  at = i;
+  const s = stops[i];
+  mark(s);
+  history.replaceState(null, '', `${location.pathname}${location.search}#${s.id}`);
+  const q = lang === 'az' ? '' : `?lang=${lang}`;
+  const scenes = picsOf(s).map(({ id, pics }) => `<div class="scene"><h3>${esc(sceneName(s, id))}</h3>${pics.length ? `<div class="thumbs">${pics.map((x) => `<a href="/qalereya/${q ? q + '&' : '?'}p=${POEM[s.part]}#${encodeURIComponent(x.id)}" title="${esc(x.title)}"><img src="${esc(x.thumb.startsWith('thumbs/') ? '/qalereya/' + x.thumb : x.thumb)}"${x.w ? ` width="${x.w}" height="${x.h}"` : ''} alt="${esc(x.title)}" loading="lazy" referrerpolicy="no-referrer" onload="this.classList.add('ok')" onerror="this.parentElement.remove()"></a>`).join('')}</div>` : ''}</div>`).join('');
+  const reads = s.chapters.map((c) => `<a href="${KX()}/works/${c}">${t('chapter')(c.match(/(\d+)$/)[1])} ↗</a>`).join('');
+  const el = document.getElementById('body');
+  el.innerHTML = `<div class="stop" style="--c: ${s.part === 'serefname' ? 'var(--accent)' : 'var(--second)'}">
+    <div class="stop-nav"><button type="button" id="back">← ${t('back')}</button><span><button type="button" id="prev" ${i === 0 ? 'disabled' : ''} aria-label="${t('prev')}">‹ ${t('prev')}</button> · <button type="button" id="next" ${i === stops.length - 1 ? 'disabled' : ''} aria-label="${t('next')}">${t('next')} ›</button></span></div>
+    <p class="part">${s.n} / ${stops.length} · ${t(s.part).split(':')[0]}</p>
+    <h2>${esc(s.name[lang])}</h2>${s.approx ? `<p class="approx">${t('approx')}</p>` : ''}
+    ${s.note ? `<p class="text">${esc(s.note[lang])}</p>` : ''}
+    ${scenes}
+    <div class="reads"><span>${t('read')}</span>${reads}</div></div>`;
+  document.getElementById('back').onclick = overview;
+  document.getElementById('prev').onclick = () => show(i - 1);
+  document.getElementById('next').onclick = () => show(i + 1);
+  el.scrollTop = 0;
+  // The way in: from the previous stop to this one in view
+  const prev = stops[i - 1];
+  const pts = [[s.lng, s.lat], ...(prev && !(prev.lat === s.lat && prev.lng === s.lng) ? [[prev.lng, prev.lat]] : [])];
+  const b = pts.reduce((bb, p) => bb.extend(p), new maplibregl.LngLatBounds(pts[0], pts[0]));
+  map.fitBounds(b, { padding: pad(), maxZoom: 5, duration: still() ? 0 : 900 });
+}
+
+let marked = null;
+function mark(s) {
+  const src = map.getSource('stops');
+  if (!src) return;
+  if (marked != null) map.setFeatureState({ source: 'stops', id: marked }, { sel: false });
+  marked = null;
+  if (!s) return;
+  marked = placeOf.get(s.id);
+  map.setFeatureState({ source: 'stops', id: marked }, { sel: true });
+}
+
+function applyLang() {
+  document.documentElement.lang = lang;
+  document.title = t('doc');
+  document.querySelectorAll('[data-i18n]').forEach((el) => el.textContent = t(el.dataset.i18n));
+  document.querySelectorAll('[data-i18n-label]').forEach((el) => el.setAttribute('aria-label', t(el.dataset.i18nLabel)));
+  document.querySelectorAll('[data-lang]').forEach((b) => b.setAttribute('aria-pressed', b.dataset.lang === lang));
+  document.querySelectorAll('[data-keep-lang]').forEach((a) => { const u = new URL(a.getAttribute('href'), location.href); if (lang === 'az') u.searchParams.delete('lang'); else u.searchParams.set('lang', lang); a.href = u.pathname + u.search; });
+}
+applyLang();
+document.querySelectorAll('[data-lang]').forEach((b) => b.onclick = () => {
+  lang = b.dataset.lang;
+  try { localStorage.setItem('lang', lang); } catch {}
+  const u = new URL(location.href);
+  if (lang === 'az') u.searchParams.delete('lang'); else u.searchParams.set('lang', lang);
+  history.replaceState(null, '', u);
+  applyLang();
+  if (!stops.length) return;
+  for (const l of map.getStyle().layers) if (l.type === 'symbol' && l.layout?.['text-field'] && l.id !== 'stop-labels') map.setLayoutProperty(l.id, 'text-field', labelExpr());
+  if (at != null) show(at); else overview();
+});
+document.addEventListener('keydown', (e) => {
+  if (at == null || e.target.closest('input, select, textarea')) return;
+  if (e.key === 'ArrowRight') show(at + 1);
+  if (e.key === 'ArrowLeft') show(at - 1);
+  if (e.key === 'Escape') overview();
+});
+</script>
+</body>
+</html>

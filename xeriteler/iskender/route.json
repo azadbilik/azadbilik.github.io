@@ -1,0 +1,682 @@
+{
+ "stops": [
+  {
+   "id": "makedoniya",
+   "part": "serefname",
+   "name": {
+    "az": "Məqduniyyə (Rum)",
+    "ru": "Македония (Рум)",
+    "en": "Macedonia (Rum)"
+   },
+   "lat": 40.75,
+   "lng": 22.52,
+   "chapters": [
+    "nizami-serefname-12",
+    "nizami-serefname-13",
+    "nizami-serefname-14"
+   ],
+   "scenes": [
+    "birth-of-iskandar",
+    "iskandar-at-school",
+    "iskandar-enthroned"
+   ],
+   "note": {
+    "az": "Doğulur, Nikomaxdan dərs alır, atası Filqusun taxtına çıxır.",
+    "ru": "Рождение, учёба у Никомаха, восшествие на трон отца, Филикуса.",
+    "en": "Born, taught by Nicomachus, takes his father Filqus's throne."
+   }
+  },
+  {
+   "id": "iskenderiyye",
+   "part": "serefname",
+   "name": {
+    "az": "Misir, İskəndəriyyə",
+    "ru": "Египет, Александрия",
+    "en": "Egypt, Alexandria"
+   },
+   "lat": 31.2,
+   "lng": 29.92,
+   "chapters": [
+    "nizami-serefname-15",
+    "nizami-serefname-16",
+    "nizami-serefname-17",
+    "nizami-serefname-18",
+    "nizami-serefname-19"
+   ],
+   "scenes": [
+    "egyptians-plead",
+    "war-with-zangis",
+    "invention-of-mirror"
+   ],
+   "note": {
+    "az": "Misirlilərin köməyinə gəlir, zəngiləri məğlub edir, İskəndəriyyəni salır, güzgünü icad edir.",
+    "ru": "Приходит на помощь египтянам, побеждает зинджей, основывает Александрию, изобретает зеркало.",
+    "en": "Comes to the aid of the Egyptians, defeats the Zangis, founds Alexandria, invents the mirror."
+   }
+  },
+  {
+   "id": "mosul",
+   "part": "serefname",
+   "name": {
+    "az": "Mosul",
+    "ru": "Мосул",
+    "en": "Mosul"
+   },
+   "lat": 36.34,
+   "lng": 43.13,
+   "chapters": [
+    "nizami-serefname-20",
+    "nizami-serefname-23",
+    "nizami-serefname-24",
+    "nizami-serefname-25",
+    "nizami-serefname-26"
+   ],
+   "scenes": [
+    "dara-demands-tribute",
+    "battle-with-dara",
+    "death-of-dara"
+   ],
+   "note": {
+    "az": "«Cəzirə torpağı — o Mosul» — Dara ilə döyüş meydanı; Dara İskəndərin qucağında ölür.",
+    "ru": "«Земля острова — Мосул»: поле битвы с Дарой; Дара умирает на руках Искандера.",
+    "en": "“The land of the island, which is Mosul”: the battlefield with Dara, who dies in Iskandar's arms."
+   }
+  },
+  {
+   "id": "babil",
+   "part": "serefname",
+   "name": {
+    "az": "Babil",
+    "ru": "Вавилон",
+    "en": "Babylon"
+   },
+   "lat": 32.54,
+   "lng": 44.42,
+   "chapters": [
+    "nizami-serefname-28"
+   ],
+   "scenes": [
+    "fire-temples-destroyed"
+   ],
+   "note": {
+    "az": "Mosuldan Babilə gəlir, atəşgədələri söndürür.",
+    "ru": "Из Мосула приходит в Вавилон, гасит храмы огня.",
+    "en": "From Mosul to Babylon, where he puts out the fire temples."
+   }
+  },
+  {
+   "id": "istexr",
+   "part": "serefname",
+   "name": {
+    "az": "İsfahan, İstəxr",
+    "ru": "Исфахан, Истахр",
+    "en": "Isfahan, Istakhr"
+   },
+   "lat": 29.98,
+   "lng": 52.91,
+   "chapters": [
+    "nizami-serefname-29",
+    "nizami-serefname-30"
+   ],
+   "scenes": [
+    "marriage-to-rawshanak"
+   ],
+   "note": {
+    "az": "Daranın qızı Rövşənəklə evlənir; İstəxrdə İran taxtına çıxır.",
+    "ru": "Женится на Роушанак, дочери Дары; в Истахре восходит на иранский трон.",
+    "en": "Marries Rawshanak, Dara's daughter; is crowned king of Iran at Istakhr."
+   }
+  },
+  {
+   "id": "kebe",
+   "part": "serefname",
+   "name": {
+    "az": "Məkkə, Kəbə",
+    "ru": "Мекка, Кааба",
+    "en": "Mecca, the Kaʿba"
+   },
+   "lat": 21.42,
+   "lng": 39.83,
+   "chapters": [
+    "nizami-serefname-32"
+   ],
+   "scenes": [
+    "iskandar-at-kaaba"
+   ],
+   "note": {
+    "az": "Həcc ziyarəti.",
+    "ru": "Паломничество.",
+    "en": "The pilgrimage."
+   }
+  },
+  {
+   "id": "berde",
+   "part": "serefname",
+   "name": {
+    "az": "Bərdə",
+    "ru": "Барда",
+    "en": "Bardaʿa"
+   },
+   "lat": 40.38,
+   "lng": 47.12,
+   "chapters": [
+    "nizami-serefname-33",
+    "nizami-serefname-34"
+   ],
+   "scenes": [
+    "iskandar-meets-nushaba",
+    "nushaba-shows-portrait",
+    "nushaba-jewel-banquet",
+    "nushaba-feast"
+   ],
+   "note": {
+    "az": "Öz elçisi kimi Nüşabənin sarayına gəlir; Nüşabə ona öz şəklini göstərir.",
+    "ru": "Под видом собственного посла приходит ко двору Нушабе; она показывает ему его портрет.",
+    "en": "Comes to Nushaba’s court disguised as his own envoy; she shows him his portrait."
+   }
+  },
+  {
+   "id": "derbend",
+   "part": "serefname",
+   "name": {
+    "az": "Dərbənd",
+    "ru": "Дербент",
+    "en": "Darband"
+   },
+   "lat": 42.06,
+   "lng": 48.29,
+   "chapters": [
+    "nizami-serefname-35",
+    "nizami-serefname-36"
+   ],
+   "scenes": [
+    "siege-of-darband",
+    "darband-hermit"
+   ],
+   "note": {
+    "az": "Dərbənd qalasını alır, mağarada zahidi ziyarət edir.",
+    "ru": "Берёт крепость Дербент, посещает отшельника в пещере.",
+    "en": "Takes the fortress of Darband, visits the hermit in his cave."
+   }
+  },
+  {
+   "id": "serir",
+   "part": "serefname",
+   "name": {
+    "az": "Sərir qalası",
+    "ru": "Крепость Серир",
+    "en": "The fortress of Sarir"
+   },
+   "lat": 42.54,
+   "lng": 46.7,
+   "chapters": [
+    "nizami-serefname-37",
+    "nizami-serefname-38"
+   ],
+   "scenes": [
+    "kay-khusraw-cave"
+   ],
+   "approx": true,
+   "note": {
+    "az": "Keyxosrovun mağarası və taxtı (Dağıstanda, təxmini yeri).",
+    "ru": "Пещера и трон Кейхосрова (в Дагестане, место приблизительно).",
+    "en": "Kay Khusraw's cave and throne (in Daghestan; the place is approximate)."
+   }
+  },
+  {
+   "id": "rey",
+   "part": "serefname",
+   "name": {
+    "az": "Rey, Xorasan",
+    "ru": "Рей, Хорасан",
+    "en": "Rayy, Khurasan"
+   },
+   "lat": 35.59,
+   "lng": 51.43,
+   "chapters": [
+    "nizami-serefname-39"
+   ],
+   "scenes": [],
+   "note": {
+    "az": "Xorasandan Hindistana yol.",
+    "ru": "Через Хорасан — в Индию.",
+    "en": "Through Khurasan, on to India."
+   }
+  },
+  {
+   "id": "hind",
+   "part": "serefname",
+   "name": {
+    "az": "Hindistan",
+    "ru": "Индия",
+    "en": "India"
+   },
+   "lat": 27.0,
+   "lng": 78.5,
+   "chapters": [
+    "nizami-serefname-40",
+    "nizami-serefname-41"
+   ],
+   "scenes": [
+    "kayds-daughter"
+   ],
+   "approx": true,
+   "note": {
+    "az": "Hind şahı Keyd ona qızını, filosofunu, həkimini və qədəhini verir.",
+    "ru": "Индийский царь Кайд отдаёт ему дочь, философа, лекаря и чашу.",
+    "en": "Kayd, king of India, gives him his daughter, his philosopher, his physician and his cup."
+   }
+  },
+  {
+   "id": "tibet",
+   "part": "serefname",
+   "name": {
+    "az": "Tibet",
+    "ru": "Тибет",
+    "en": "Tibet"
+   },
+   "lat": 31.5,
+   "lng": 88.0,
+   "chapters": [
+    "nizami-serefname-42"
+   ],
+   "scenes": [
+    "hunt-on-way-to-china"
+   ],
+   "approx": true,
+   "note": {
+    "az": "«Tibetə tərpəndi tez Hindistandan, oradan tez Çinə keçdi.»",
+    "ru": "Из Индии — в Тибет, оттуда — в Китай.",
+    "en": "From India to Tibet, and on into China."
+   }
+  },
+  {
+   "id": "cin",
+   "part": "serefname",
+   "name": {
+    "az": "Çin",
+    "ru": "Китай",
+    "en": "China"
+   },
+   "lat": 34.26,
+   "lng": 108.94,
+   "chapters": [
+    "nizami-serefname-43",
+    "nizami-serefname-44",
+    "nizami-serefname-45"
+   ],
+   "scenes": [
+    "khaqan-comes-as-envoy",
+    "painting-contest",
+    "khaqan-feast"
+   ],
+   "approx": true,
+   "note": {
+    "az": "Xaqan özü elçi kimi gəlir; Rum və Çin rəssamlarının yarışı.",
+    "ru": "Хакан сам приходит под видом посла; состязание румских и китайских художников.",
+    "en": "The Khaqan comes as his own envoy; the contest of the Greek and Chinese painters."
+   }
+  },
+  {
+   "id": "amul",
+   "part": "serefname",
+   "name": {
+    "az": "Ceyhun, Amul",
+    "ru": "Джейхун, Амуль",
+    "en": "Amul on the Oxus"
+   },
+   "lat": 39.08,
+   "lng": 63.57,
+   "chapters": [
+    "nizami-serefname-46",
+    "nizami-serefname-47"
+   ],
+   "scenes": [],
+   "note": {
+    "az": "Rusların Bərdəni talayıb Nüşabəni əsir apardığı xəbəri gəlir; «Ceyhuna gələrək, Amuldan keçdi.»",
+    "ru": "Приходит весть, что русы разорили Барду и пленили Нушабе; войско переходит Джейхун у Амуля.",
+    "en": "News comes that the Rus have sacked Bardaʿa and taken Nushaba; the army crosses the Oxus at Amul."
+   }
+  },
+  {
+   "id": "qipcaq",
+   "part": "serefname",
+   "name": {
+    "az": "Qıpçaq çölü",
+    "ru": "Кыпчакская степь",
+    "en": "The Kipchak steppe"
+   },
+   "lat": 47.5,
+   "lng": 46.5,
+   "chapters": [
+    "nizami-serefname-47",
+    "nizami-serefname-48",
+    "nizami-serefname-49",
+    "nizami-serefname-50",
+    "nizami-serefname-51",
+    "nizami-serefname-52",
+    "nizami-serefname-53",
+    "nizami-serefname-54",
+    "nizami-serefname-55",
+    "nizami-serefname-56",
+    "nizami-serefname-57",
+    "nizami-serefname-58"
+   ],
+   "scenes": [
+    "war-with-rus",
+    "iskandar-lassoes-the-div",
+    "nushaba-freed",
+    "iskandar-and-chinese-girl"
+   ],
+   "approx": true,
+   "note": {
+    "az": "Səqlab və qıpçaq çöllərində ruslarla yeddi döyüş; Nüşabə azad olunur (yeri təxminidir).",
+    "ru": "Семь битв с русами в славянских и кыпчакских степях; Нушабе освобождена (место приблизительно).",
+    "en": "Seven battles with the Rus on the Slav and Kipchak steppes; Nushaba is freed (the place is approximate)."
+   }
+  },
+  {
+   "id": "bulgar",
+   "part": "serefname",
+   "name": {
+    "az": "Bulğar",
+    "ru": "Булгар",
+    "en": "Bulghar"
+   },
+   "lat": 54.98,
+   "lng": 49.06,
+   "chapters": [
+    "nizami-serefname-59",
+    "nizami-serefname-62"
+   ],
+   "scenes": [],
+   "note": {
+    "az": "Zülmətə yola çıxdığı yerdə şəhər salır: «Saldığı o şəhər adlandı: Bulğar.»",
+    "ru": "Там, откуда он уходит во Мрак, он основывает город — Булгар.",
+    "en": "Where he sets out into the Darkness he founds a city, Bulghar."
+   }
+  },
+  {
+   "id": "zulmet",
+   "part": "serefname",
+   "name": {
+    "az": "Zülmət diyarı",
+    "ru": "Страна Мрака",
+    "en": "The Land of Darkness"
+   },
+   "lat": 62.0,
+   "lng": 52.0,
+   "chapters": [
+    "nizami-serefname-59",
+    "nizami-serefname-60",
+    "nizami-serefname-61"
+   ],
+   "scenes": [
+    "khizr-at-fountain",
+    "weighing-the-stone",
+    "city-without-death"
+   ],
+   "approx": true,
+   "note": {
+    "az": "Xızır və İlyas dirilik suyunu tapır; İskəndər tapa bilmir.",
+    "ru": "Хызр и Ильяс находят живую воду; Искандер — нет.",
+    "en": "Khizr and Ilyas find the Water of Life; Iskandar does not."
+   }
+  },
+  {
+   "id": "rum-donus",
+   "part": "serefname",
+   "name": {
+    "az": "Rum",
+    "ru": "Рум",
+    "en": "Rum"
+   },
+   "lat": 40.75,
+   "lng": 22.52,
+   "chapters": [
+    "nizami-serefname-62",
+    "nizami-serefname-63"
+   ],
+   "scenes": [],
+   "note": {
+    "az": "Rus elindən keçib Rum dənizi ilə vətənə qayıdır.",
+    "ru": "Через землю русов и Румское море возвращается домой.",
+    "en": "Through the land of the Rus and by the Sea of Rum, home."
+   }
+  },
+  {
+   "id": "rum-hikmet",
+   "part": "iqbalname",
+   "name": {
+    "az": "Rum: hikmət məclisi",
+    "ru": "Рум: собрание мудрецов",
+    "en": "Rum: the council of sages"
+   },
+   "lat": 40.75,
+   "lng": 22.52,
+   "chapters": [
+    "nizami-iqbalname-10",
+    "nizami-iqbalname-11",
+    "nizami-iqbalname-13",
+    "nizami-iqbalname-14",
+    "nizami-iqbalname-15",
+    "nizami-iqbalname-17",
+    "nizami-iqbalname-19",
+    "nizami-iqbalname-29"
+   ],
+   "scenes": [
+    "iskandar-and-wise-shepherd",
+    "archimedes-and-chinese-girl",
+    "baker-before-the-king",
+    "zangi-kills-companion",
+    "hermes-and-seventy-sages",
+    "plato-music",
+    "iskandar-visits-socrates",
+    "seven-sages",
+    "iskandar-made-prophet"
+   ],
+   "note": {
+    "az": "Filosoflarla söhbətlər; İskəndərə peyğəmbərlik verilir və dünyanı dörd tərəfdən dolaşmağa çıxır.",
+    "ru": "Беседы с мудрецами; Искандер призван к пророчеству и отправляется обойти мир с четырёх сторон.",
+    "en": "Talks with the philosophers; Iskandar is called to prophethood and sets out round the four quarters of the world."
+   }
+  },
+  {
+   "id": "iskenderiyye-2",
+   "part": "iqbalname",
+   "name": {
+    "az": "İskəndəriyyə",
+    "ru": "Александрия",
+    "en": "Alexandria"
+   },
+   "lat": 31.2,
+   "lng": 29.92,
+   "chapters": [
+    "nizami-iqbalname-33"
+   ],
+   "scenes": [],
+   "note": {
+    "az": "«O, Məqduniyyədən yola düşərək İskəndəriyyəyə gəlib çatantək…»",
+    "ru": "Из Македонии — в Александрию.",
+    "en": "From Macedonia to Alexandria."
+   }
+  },
+  {
+   "id": "qudus",
+   "part": "iqbalname",
+   "name": {
+    "az": "Beytülmüqəddəs",
+    "ru": "Иерусалим",
+    "en": "Jerusalem"
+   },
+   "lat": 31.78,
+   "lng": 35.23,
+   "chapters": [
+    "nizami-iqbalname-33"
+   ],
+   "scenes": [],
+   "note": {
+    "az": "«Beytülmüqəddəsi nizama saldı.»",
+    "ru": "Наводит порядок в Иерусалиме.",
+    "en": "Sets Jerusalem in order."
+   }
+  },
+  {
+   "id": "endelus",
+   "part": "iqbalname",
+   "name": {
+    "az": "Məğrib, Əndəlüs",
+    "ru": "Магриб, Андалус",
+    "en": "The Maghrib, al-Andalus"
+   },
+   "lat": 37.88,
+   "lng": -4.78,
+   "chapters": [
+    "nizami-iqbalname-33"
+   ],
+   "scenes": [],
+   "note": {
+    "az": "«Çəkdi Əfrəncəyə qoşunu ordan, sonra Əndülüsə oldu o rəvan.»",
+    "ru": "Через Магриб и земли франков — в Андалус.",
+    "en": "Through the Maghrib and the land of the Franks to al-Andalus."
+   }
+  },
+  {
+   "id": "cenub",
+   "part": "iqbalname",
+   "name": {
+    "az": "Cənub dənizləri",
+    "ru": "Южные моря",
+    "en": "The southern seas"
+   },
+   "lat": 13.0,
+   "lng": 56.0,
+   "chapters": [
+    "nizami-iqbalname-34",
+    "nizami-iqbalname-35"
+   ],
+   "scenes": [
+    "iskandar-watches-sirens",
+    "drum-talisman"
+   ],
+   "approx": true,
+   "note": {
+    "az": "Şərqdən qayıdıb cənuba yönəlir: dəniz pəriləri, tilsimli təbil (yeri təxminidir).",
+    "ru": "С востока поворачивает на юг: морские девы, заколдованный барабан (место приблизительно).",
+    "en": "Back from the east he turns south: the sirens, the drum of the talisman (the place is approximate)."
+   }
+  },
+  {
+   "id": "qendehar",
+   "part": "iqbalname",
+   "name": {
+    "az": "Qəndəhar",
+    "ru": "Кандагар",
+    "en": "Qandahar"
+   },
+   "lat": 31.61,
+   "lng": 65.71,
+   "chapters": [
+    "nizami-iqbalname-35"
+   ],
+   "scenes": [
+    "qandahar-idol-girl"
+   ],
+   "note": {
+    "az": "«Gördü orda gözəl bir bütxana var, qoymuşlar adını onun Qəndəhar.»",
+    "ru": "Капище с живым идолом, которое зовут Кандагар.",
+    "en": "A temple of idols they call Qandahar, with its living idol."
+   }
+  },
+  {
+   "id": "simal",
+   "part": "iqbalname",
+   "name": {
+    "az": "Şimal: Yəcuc səddi",
+    "ru": "Север: стена от Яджуджа",
+    "en": "The North: the wall against Gog"
+   },
+   "lat": 49.0,
+   "lng": 95.0,
+   "chapters": [
+    "nizami-iqbalname-36"
+   ],
+   "scenes": [
+    "wall-against-gog",
+    "city-of-the-righteous"
+   ],
+   "approx": true,
+   "note": {
+    "az": "Çindən şimala gedir, Yəcuc-Məcuca qarşı sədd tikir, salehlər şəhərini görür.",
+    "ru": "Из Китая идёт на север, строит стену от Гога и Магога, видит город праведных.",
+    "en": "North from China he builds the wall against Gog and Magog and finds the city of the righteous."
+   }
+  },
+  {
+   "id": "kirman",
+   "part": "iqbalname",
+   "name": {
+    "az": "Kirman, Kirmanşah",
+    "ru": "Керман, Керманшах",
+    "en": "Kerman, Kermanshah"
+   },
+   "lat": 30.28,
+   "lng": 57.08,
+   "chapters": [
+    "nizami-iqbalname-37"
+   ],
+   "scenes": [],
+   "note": {
+    "az": "«Yerin o başından Kirmana yetdi, ordan Kirmanşaha yol aldı getdi.»",
+    "ru": "С края земли — в Керман, оттуда в Керманшах.",
+    "en": "From the world's end to Kerman, and on to Kermanshah."
+   }
+  },
+  {
+   "id": "zur",
+   "part": "iqbalname",
+   "name": {
+    "az": "Şəhri-Zur",
+    "ru": "Шахризур",
+    "en": "Shahrazur"
+   },
+   "lat": 35.33,
+   "lng": 45.98,
+   "chapters": [
+    "nizami-iqbalname-37",
+    "nizami-iqbalname-38",
+    "nizami-iqbalname-39"
+   ],
+   "scenes": [
+    "death-of-iskandar"
+   ],
+   "note": {
+    "az": "Babildən Ruma gedərkən «Zur şəhrinə gəlib çatanda pozuldu səhhəti şahın bir anda.»",
+    "ru": "На пути из Вавилона в Рум, в городе Зур, царь заболевает и умирает.",
+    "en": "On the road from Babylon to Rum he falls ill at the city of Zur, and dies."
+   }
+  },
+  {
+   "id": "iskenderiyye-3",
+   "part": "iqbalname",
+   "name": {
+    "az": "İskəndəriyyə",
+    "ru": "Александрия",
+    "en": "Alexandria"
+   },
+   "lat": 31.2,
+   "lng": 29.92,
+   "chapters": [
+    "nizami-iqbalname-39"
+   ],
+   "scenes": [
+    "iskandars-coffin"
+   ],
+   "note": {
+    "az": "«Şəhri Zurdan Misrə yola saldılar… İskəndəriyyəni etdilər vətən.»",
+    "ru": "Из Шахризура тело везут в Египет; Александрия становится его могилой.",
+    "en": "From Shahrazur he is carried to Egypt; Alexandria becomes his grave."
+   }
+  }
+ ]
+}

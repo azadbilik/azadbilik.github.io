@@ -41,6 +41,7 @@ for (const [path, musts] of [
   ['/xerite/', ['maplibre-gl', 'data/authors.json']],
   ['/qalereya/', ['data/gallery.json', 'id="viewer"']],
   ['/qalereya/emalatxana/', ['maplibre-gl', '../data/manuscripts.json']],
+  ['/xeriteler/iskender/', ['maplibre-gl', 'route.json', '/qalereya/data/gallery.json']],
 ]) await page(BASE + path, musts);
 
 console.log('Data');
@@ -54,6 +55,10 @@ check(gallery.items.filter((x) => x.w).length >= gallery.items.length * 0.95, 'g
 const catalogue = (await get(`${BASE}/qalereya/data/manuscripts.json`, 'json')).body ?? { manuscripts: [] };
 check(catalogue.manuscripts.filter((m) => m.lat != null).length >= 10, `workshops: ${catalogue.manuscripts.filter((m) => m.lat != null).length} manuscripts with a city`);
 
+const route = (await get(`${BASE}/xeriteler/iskender/route.json`, 'json')).body ?? { stops: [] };
+const POEM = { serefname: 'nizami-serefname', iqbalname: 'nizami-xerednama' };
+const lost = route.stops.flatMap((s) => s.scenes.filter((id) => !gallery.poems.find((p) => p.slug === POEM[s.part])?.scenes.some((x) => x.id === id)).map((id) => `${s.id}/${id}`));
+check(route.stops.length >= 20 && lost.length === 0, `Iskandar's journeys: ${route.stops.length} stops${lost.length ? `, scenes missing from the gallery: ${lost.join(', ')}` : ', every scene in the gallery'}`);
 console.log('Pictures load (a sample of thumbnails, at their hosts)');
 const byHost = new Map();
 for (const x of gallery.items) {
