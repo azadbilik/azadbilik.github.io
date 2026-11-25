@@ -68,13 +68,13 @@ const nf = () => new Intl.NumberFormat({ az: 'az-Latn-AZ', ru: 'ru-RU', en: 'en-
 const T = {
   az: { doc: 'Çaylar · Azad Bilik', title: 'Çaylar', sub: 'Azərbaycanın çayları və gölləri', find: 'Çay axtar…', rivers: (n) => `${n} çay`, lakes: 'Göllər və su anbarları', length: 'Uzunluğu', whole: 'bütün uzunluğu, mənbədən mənsəbədək', inAz: 'Azərbaycandakı hissəsi', names: 'Adları', back: '← Bütün çaylar', km: 'km', area: 'sahəsi', wiki: 'Vikipediya',
     legend: 'Çay: xəttin qalınlığı uzunluğa görə, ştrixlər axın istiqamətində', legendStill: 'Çay: xəttin qalınlığı uzunluğa görə, oxlar axın istiqamətində', lake: 'göl', reservoir: 'su anbarı', lakeL: 'göl, su anbarı',
-    note: 'Çaylar və göllər OpenStreetMap-dəndir (ODbL). Uzunluq xəritədəki xəttə görə ölçülüb və rəsmi rəqəmlərdən bir qədər fərqlənə bilər: Kür üçün 1471 km (soraqlarda ~1515), Araz üçün 1068 km (~1072). Bütöv çaylar (Kür, Araz, Samur…) bütün uzunluğu ilə, kiçik çaylar Azərbaycandakı hissəsi ilə göstərilir.' },
+    note: 'Çaylar və göllər OpenStreetMap-dəndir (ODbL). Uzunluq xəritədəki xəttə görə ölçülüb və rəsmi rəqəmlərdən bir qədər fərqlənə bilər: Kür üçün 1471 km (soraqlarda ~1515), Araz üçün 1068 km (~1072). Kür və Arazın 10 km-dən uzun bütün qolları (qolların qolları da) Gürcüstanda, Ermənistanda, Türkiyədə və İranda da, bütün uzunluğu ilə göstərilir, onların keçdiyi göllər və su anbarları ilə (Göyçə, Arpi…); Azərbaycanın başqa çayları ölkədəki hissəsi ilə.' },
   ru: { doc: 'Реки · Azad Bilik', title: 'Реки', sub: 'Реки и озёра Азербайджана', find: 'Найти реку…', rivers: (n) => `${n} рек`, lakes: 'Озёра и водохранилища', length: 'Длина', whole: 'вся длина, от истока до устья', inAz: 'часть в Азербайджане', names: 'Названия', back: '← Все реки', km: 'км', area: 'площадь', wiki: 'Википедия',
     legend: 'Река: толщина линии — по длине, штрихи — по течению', legendStill: 'Река: толщина линии — по длине, стрелки — по течению', lake: 'озеро', reservoir: 'водохранилище', lakeL: 'озеро, водохранилище',
-    note: 'Реки и озёра — из OpenStreetMap (ODbL). Длина измерена по линии на карте и может немного отличаться от официальной: Кура 1471 км (по справочникам ~1515), Аракс 1068 км (~1072). Целые реки (Кура, Аракс, Самур…) показаны полностью, малые — их частью в Азербайджане.' },
+    note: 'Реки и озёра — из OpenStreetMap (ODbL). Длина измерена по линии на карте и может немного отличаться от официальной: Кура 1471 км (по справочникам ~1515), Аракс 1068 км (~1072). Все притоки Куры и Аракса длиннее 10 км (и притоки притоков) показаны на всём протяжении, в Грузии, Армении, Турции и Иране тоже, с озёрами и водохранилищами на них (Севан, Арпи…); остальные реки Азербайджана — их частью в стране.' },
   en: { doc: 'Rivers · Azad Bilik', title: 'Rivers', sub: 'Rivers and lakes of Azerbaijan', find: 'Find a river…', rivers: (n) => `${n} rivers`, lakes: 'Lakes and reservoirs', length: 'Length', whole: 'whole length, source to mouth', inAz: 'the part in Azerbaijan', names: 'Names', back: '← All rivers', km: 'km', area: 'area', wiki: 'Wikipedia',
     legend: 'River: line width by length, dashes run downstream', legendStill: 'River: line width by length, arrows point downstream', lake: 'lake', reservoir: 'reservoir', lakeL: 'lake, reservoir',
-    note: "Rivers and lakes are from OpenStreetMap (ODbL). Lengths are measured along the mapped line and may differ a little from official figures: the Kura 1,471 km (references ~1,515), the Araz 1,068 km (~1,072). Whole rivers (the Kura, Araz, Samur…) are shown full length, smaller ones by their part in Azerbaijan." },
+    note: "Rivers and lakes are from OpenStreetMap (ODbL). Lengths are measured along the mapped line and may differ a little from official figures: the Kura 1,471 km (references ~1,515), the Araz 1,068 km (~1,072). Every tributary of the Kura and the Araz longer than 10 km (and theirs in turn) is shown over its whole length, in Georgia, Armenia, Turkey and Iran too, with the lakes and reservoirs on them (Sevan, Arpi…); Azerbaijan's other rivers by their part in the country." },
 };
 const t = (k) => T[lang][k];
 const L = (p) => p[lang] || p.az;
@@ -83,7 +83,7 @@ const params = new URLSearchParams(location.search);
 
 const map = new maplibregl.Map({
   container: 'map', style: `https://tiles.openfreemap.org/styles/${dark ? 'dark' : 'positron'}`,
-  bounds: [[44.7, 38.3], [50.4, 41.95]], minZoom: 4, maxZoom: 12,
+  bounds: [[41.0, 37.6], [50.4, 42.8]], minZoom: 4, maxZoom: 12,
   attributionControl: { compact: true, customAttribution: 'Çaylar · rivers: <a href="https://www.openstreetmap.org/copyright">© OpenStreetMap</a> (ODbL)' },
 });
 map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-right');
@@ -107,7 +107,7 @@ map.on('load', async () => {
   lg.features.forEach((f, k) => { f.id = k; });
   rivers = rg.features.map((f) => ({ ...f.properties, fid: f.id, bbox: bboxOf(f.geometry) }));
   lakes = lg.features.map((f) => ({ ...f.properties, fid: f.id }));
-  map.fitBounds([[44.7, 38.3], [50.4, 41.95]], { padding: pad(), duration: 0 });
+  map.fitBounds([[41.0, 37.6], [50.4, 42.8]], { padding: pad(), duration: 0 });
   document.querySelector('.maplibregl-ctrl-attrib')?.classList.remove('maplibregl-compact-show');
   const C = css('--second');
   map.addSource('lakes', { type: 'geojson', data: lg });
