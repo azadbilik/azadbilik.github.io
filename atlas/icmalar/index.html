@@ -291,7 +291,11 @@ function chart() {
 function drawSide() {
   const el = document.getElementById('side');
   if (selected != null) return drawUnit(el, units[selected]);
-  const tot = (k) => { const y = ROUNDS[round][k]; if (k === 'arm' && !y) return `<div class="total"><span>${t(k)}</span><b>0</b><small>${t('goneShort')}</small></div>`; const x = y && extras.totals[k]?.[y]; return `<div class="total"><span>${t(k)}${y ? ` · ${y}` : ''}</span><b>${x?.az != null ? nf().format(x.az) : '—'}</b><small>${x?.az != null && x.total ? fmt(x.az / x.total * 100, 'share') + ' ' + t('ofTotal') : ''}</small></div>`; };
+  const tot = (k) => { const y = ROUNDS[round][k]; if (k === 'arm' && !y) return `<div class="total"><span>${t(k)}</span><b>0</b><small>${t('goneShort')}</small></div>`;
+    // No census this round: the last total known, said so
+    let yy = y, x = y && extras.totals[k]?.[y], last = false;
+    if (!x) for (let r = round - 1; r >= 0; r--) { const z = ROUNDS[r][k]; if (z && extras.totals[k]?.[z]) { yy = z; x = extras.totals[k][z]; last = true; break; } }
+    if (last) return `<div class="total"><span>${t(k)} · ${yy}</span><b>${nf().format(x.az)}</b><small>${t('lastKnown')(yy)}</small></div>`; return `<div class="total"><span>${t(k)}${y ? ` · ${y}` : ''}</span><b>${x?.az != null ? nf().format(x.az) : '—'}</b><small>${x?.az != null && x.total ? fmt(x.az / x.total * 100, 'share') + ' ' + t('ofTotal') : ''}</small></div>`; };
   const born = (k) => {
     const ps = units.filter((u) => u.region === k).flatMap((u) => extras.poets[u.id] ?? []);
     if (!ps.length) return '';
