@@ -44,7 +44,7 @@ for (const [path, musts] of [
   ['/xeriteler/iskender/', ['maplibre-gl', '/shared/story-map.js', '/shared/viewer.js']],
   ['/xeriteler/xosrov-sirin/', ['maplibre-gl', '/shared/story-map.js', '/shared/viewer.js']],
   ['/xeriteler/yeddi-gozel/', ['maplibre-gl', '/shared/story-map.js', '/shared/viewer.js']],
-  ['/xeriteler/ehali/', ['maplibre-gl', 'data/units.geojson']],
+  ['/xeriteler/ehali/', ['maplibre-gl', "'units.geojson'"]],
 ]) await page(BASE + path, musts);
 
 console.log('Data');
