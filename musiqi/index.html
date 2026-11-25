@@ -36,6 +36,7 @@
   .player[hidden] { display: none; }
   .player .now { font-size: .8125rem; } .player .now small { color: var(--muted); }
   .player audio { width: 100%; height: 2rem; }
+  .people { list-style: none; padding: 0; }
   .people li button { display: grid; grid-template-columns: 1fr auto; gap: .05rem .75rem; width: 100%; text-align: left; padding: .35rem 1.5rem; font-size: .875rem; }
   .people li button:hover { background: var(--rule); }
   .people .role { font-size: .75rem; color: var(--muted); }
@@ -149,6 +150,13 @@ map.on('load', async () => {
   draw();
 });
 
+// Commons' dates in words, in the reader's language
+const when = (y) => !y ? '' : lang === 'en' ? y : y
+  .replace(/^early 20th century$/i, lang === 'ru' ? 'начало XX века' : 'XX əsrin əvvəli')
+  .replace(/^first half of 20th century$/i, lang === 'ru' ? 'первая половина XX века' : 'XX əsrin birinci yarısı')
+  .replace(/^Early XX c\.$/i, lang === 'ru' ? 'начало XX века' : 'XX əsrin əvvəli')
+  .replace(/^(\d{4})s$/, lang === 'ru' ? '$1-е' : '$1-cı illər').replace(/^c\. (\d{4})$/, lang === 'ru' ? 'ок. $1' : 'təq. $1')
+  .replace(/^Unknown date$/i, '');
 const roleText = (p) => p.roles.map((r) => t(r)).join(', ');
 const years = (p) => p.born || p.died ? `${p.born ?? '?'}–${p.died ?? ''}` : '';
 function drawRecs(el) {
@@ -158,7 +166,7 @@ function drawRecs(el) {
     if (!rs.length) return '';
     return `<section class="group"><h2>${t(g)} · ${rs.length}</h2><ol>${rs.map((r) => `<li class="rec${playing === r.id ? ' on' : ''}"><button type="button" class="play" data-play="${esc(r.id)}" aria-label="${t('play')}: ${esc(L(r.title))}">${playing === r.id ? '❚❚' : '▶'}</button>
       <span class="name">${esc(L(r.title))}</span>
-      <span class="meta">${r.performer ? (r.performer.qid && people.some((p) => p.qid === r.performer.qid) ? `<button type="button" data-who="${r.performer.qid}">${esc(L(r.performer))}</button>` : esc(L(r.performer))) : t('unknown')}${r.year ? ` · ${esc(r.year)}` : ''} · <a href="${esc(r.commons)}" target="_blank" rel="noopener">${t('commons')} ↗</a></span></li>`).join('')}</ol></section>`;
+      <span class="meta">${r.performer ? (r.performer.qid && people.some((p) => p.qid === r.performer.qid) ? `<button type="button" data-who="${r.performer.qid}">${esc(L(r.performer))}</button>` : esc(L(r.performer))) : t('unknown')}${when(r.year) ? ` · ${esc(when(r.year))}` : ''} · <a href="${esc(r.commons)}" target="_blank" rel="noopener">${t('commons')} ↗</a></span></li>`).join('')}</ol></section>`;
   }).join('') + `<p class="note">${t('note')}</p>`;
   el.querySelectorAll('[data-play]').forEach((b) => b.onclick = () => play(b.dataset.play));
   el.querySelectorAll('[data-who]').forEach((b) => b.onclick = () => { const p = people.find((x) => x.qid === b.dataset.who); if (p) showPlace(p.place.id, p.qid); });
@@ -192,7 +200,7 @@ function play(id) {
   if (playing === id) { if (audio.paused) audio.play(); else audio.pause(); return; }
   playing = id;
   audio.src = r.mp3;
-  document.getElementById('now').innerHTML = `${esc(L(r.title))} <small>· ${r.performer ? esc(L(r.performer)) : t('unknown')}${r.year ? ` · ${esc(r.year)}` : ''}</small>`;
+  document.getElementById('now').innerHTML = `${esc(L(r.title))} <small>· ${r.performer ? esc(L(r.performer)) : t('unknown')}${when(r.year) ? ` · ${esc(when(r.year))}` : ''}</small>`;
   document.getElementById('player').hidden = false;
   audio.play().catch(() => {});
   draw();
