@@ -119,11 +119,16 @@ for (const e of water) {
   const closed = rings.filter((r) => r.length > 3);
   if (!closed.length) continue;
   const area = closed.reduce((s, r) => s + ringArea([...r, r[0]]), 0);
-  if (area < 0.5) continue;
+  // Mountain lakes are small (Göygöl 0.8 km², Maralgöl 0.2, Batabat 0.1): keep anything from 0.05 km²
+  if (area < 0.05) continue;
   const n = names(e.tags);
-  // The Caspian is a sea, not one of the country's lakes
+  // The Caspian is a sea, not one of the country's lakes; tanks, ponds and pools named only as such are not lakes
   if (/dənizi|море|sea/i.test(`${n.az} ${n.ru} ${n.en} ${n.local}`)) continue;
+  if (/^(su (deposu|depo|hovuzu|çəni|anbarı)|so hovuzu|göl|adsız|damba|kür|\d+\s*т|kiçik su anbarı)$/i.test((n.az ?? n.local ?? '').trim())) continue;
   if (n.az === 'Sari Su' || n.local === 'Sari Su') n.az = 'Sarısu';
+  // OSM names written in Latin transliteration or with the district tacked on
+  const LAKE_NAMES = { 'Mahmudchala': 'Mahmudçala gölü', 'Incacay Su Anbari': 'İncəçay su anbarı', 'Abbasbəyli Su Ambarı': 'Abbasbəyli su anbarı', 'Ceyranbatan Su Anbarı': 'Ceyranbatan su anbarı', 'Ağstafa Qazax Su Anbarı': 'Ağstafa su anbarı', 'Xoşbulaq Zağalı Gölu': 'Xoşbulaq Zağalı gölü', 'Acınohur Gölü': 'Acınohur gölü', 'Mehman Gölü': 'Mehman gölü' };
+  for (const k of ['az', 'local']) if (n[k]) n[k] = LAKE_NAMES[n[k]] ?? n[k].replace(/\s*\\\s*.*$/, '');
   lakeFeatures.push({ type: 'Feature', geometry: { type: 'MultiPolygon', coordinates: closed.map((r) => [simplifyRing(r, 0.0005)]) },
     properties: { id: e.type[0] + e.id, az: n.az ?? n.local, ru: n.ru ?? n.local, en: n.en ?? n.az ?? n.local, wikidata: e.tags.wikidata ?? null, kind: e.tags.water ?? 'lake', area: Math.round(area * 10) / 10 } });
 }
