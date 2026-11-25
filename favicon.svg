@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <style>.bg{fill:#1A1410}.star{fill:#F4EFE6}.gem{fill:#A81E28}</style>
+  <rect class="bg" width="512" height="512" rx="96"/>
+  <g class="star"><rect x="126" y="126" width="260" height="260"/><polygon points="256,72 440,256 256,440 72,256"/></g>
+  <polygon class="gem" points="256,186 326,256 256,326 186,256"/>
+</svg>

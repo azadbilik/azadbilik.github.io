@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Azad Bilik</title>
+<meta name="description" content="Azərbaycan mədəniyyəti və tarixi haqqında açıq bilik. Open knowledge about Azerbaijani culture and history.">
+<meta name="theme-color" content="#F4EFE6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14100D" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="canonical" href="https://azadbilik.org/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://azadbilik.org/">
+<meta property="og:title" content="Azad Bilik">
+<meta property="og:description" content="Azərbaycan mədəniyyəti və tarixi haqqında açıq bilik · Open knowledge about Azerbaijani culture and history">
+<meta property="og:image" content="https://azadbilik.org/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="fonts/literata-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="fonts/fonts.css">
+<style>
+  :root {
+    --paper: #F4EFE6;
+    --ink: #1A1410;
+    --muted: #675E55;
+    --rule: rgb(26 20 16 / 0.16);
+    --accent: #A81E28;
+    --serif: 'Literata', Georgia, serif;
+    --sans: 'Inter', system-ui, sans-serif;
+    --gutter: clamp(1rem, 4vw, 3rem);
+    color-scheme: light dark;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #14100D;
+      --ink: #F1EBE1;
+      --muted: #A0968B;
+      --rule: rgb(241 235 225 / 0.16);
+      --accent: #DA5A61;
+    }
+  }
+
+  * { box-sizing: border-box; margin: 0; }
+  html { -webkit-text-size-adjust: 100%; text-rendering: optimizeLegibility; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font: 400 1rem/1.6 var(--sans);
+    font-feature-settings: 'ss01', 'cv11';
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.22em; text-decoration-color: var(--rule); transition: text-decoration-color .15s; }
+  a:hover { text-decoration-color: currentColor; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+  [lang="en"] { color: var(--muted); }
+
+  .wrap { max-width: 76rem; margin: 0 auto; padding: 0 var(--gutter); }
+
+  /* Header */
+  header { display: flex; align-items: center; justify-content: space-between; padding-block: 1.75rem; }
+  .brand { display: inline-flex; align-items: center; gap: .6rem; font-weight: 600; font-size: .9375rem; letter-spacing: -0.005em; text-decoration: none; }
+  .brand svg { width: 1.375rem; height: 1.375rem; }
+  .star { fill: currentColor; }
+  .gem { fill: var(--accent); }
+  nav a { font-size: .875rem; color: var(--muted); text-decoration: none; }
+  nav a:hover { color: var(--ink); }
+
+  /* Hero */
+  .hero { padding-block: clamp(4.5rem, 14vw, 10rem) clamp(4rem, 10vw, 7.5rem); }
+  h1 {
+    font: 300 clamp(2.25rem, 1.2rem + 4.6vw, 5rem)/1.04 var(--serif);
+    letter-spacing: -0.025em;
+    max-width: 15ch;
+    text-wrap: balance;
+  }
+  .hero p {
+    margin-top: 1.5rem;
+    font: italic 300 clamp(1.125rem, 1rem + .6vw, 1.5rem)/1.35 var(--serif);
+    max-width: 30ch;
+  }
+
+  /* Sections: a label in the margin, the content beside it */
+  section { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: 1.5rem; border-top: 1px solid var(--rule); padding-block: 2.25rem 4rem; }
+  .label { grid-column: 1 / 4; font-size: .75rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; padding-top: .35rem; }
+  .label span { display: block; }
+  .body { grid-column: 4 / 12; }
+  @media (max-width: 52rem) {
+    section { display: block; padding-block: 1.5rem 3rem; }
+    .label { margin-bottom: 1.75rem; }
+    .label span { display: inline; }
+    .label span + span::before { content: ' · '; }
+  }
+
+  /* Project */
+  .project { display: grid; grid-template-columns: 1fr auto; gap: .25rem 2rem; }
+  .project h2 { font: 400 clamp(1.75rem, 1.4rem + 1.6vw, 2.75rem)/1.1 var(--serif); letter-spacing: -0.02em; }
+  .project h2 a { text-decoration: none; }
+  .project h2 a::after { content: ' ↗'; font-family: var(--sans); font-weight: 300; font-size: .55em; vertical-align: .45em; color: var(--muted); transition: color .15s; }
+  .project h2 a:hover::after { color: var(--accent); }
+  .status { align-self: start; margin-top: .6rem; display: inline-flex; align-items: center; font-size: .8125rem; color: var(--muted); white-space: nowrap; }
+  .status::before { content: ''; width: .4375rem; height: .4375rem; margin-right: .5rem; background: var(--accent); transform: rotate(45deg); }
+  .project .desc { grid-column: 1 / -1; margin-top: 1rem; max-width: 40rem; font-size: 1.0625rem; }
+  .project .desc [lang="en"] { display: block; margin-top: .35rem; font-size: 1rem; }
+  .facts { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: .5rem 2.5rem; margin-top: 2rem; padding: 0; list-style: none; }
+  .facts li { font: 300 1.5rem/1.2 var(--serif); font-variant-numeric: lining-nums tabular-nums; }
+  .facts small { display: block; margin-top: .3rem; font: 400 .8125rem/1.4 var(--sans); color: var(--muted); }
+
+  .next { margin-top: 3.5rem; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem 1.5rem; }
+  .next li { border-top: 1px solid var(--rule); padding-top: .75rem; font: 400 1.125rem/1.3 var(--serif); }
+  .next [lang="en"] { display: block; font: 400 .8125rem/1.5 var(--sans); }
+  .next-head { margin-top: 3.5rem; font-size: .8125rem; color: var(--muted); }
+  .next-head + .next { margin-top: 1rem; }
+
+  /* Principles */
+  .principles { padding: 0; list-style: none; counter-reset: p; display: grid; gap: 2rem; max-width: 40rem; }
+  .principles li { counter-increment: p; display: grid; grid-template-columns: 2.5rem 1fr; }
+  .principles li::before { content: counter(p, decimal-leading-zero); font: 400 .8125rem/2.1 var(--sans); color: var(--muted); font-variant-numeric: tabular-nums; }
+  .principles strong { display: block; font: 400 1.375rem/1.3 var(--serif); letter-spacing: -0.01em; }
+  .principles p { margin-top: .4rem; }
+  .principles p [lang="en"] { display: block; margin-top: .2rem; }
+
+  footer { border-top: 1px solid var(--rule); padding-block: 1.75rem 2.5rem; display: flex; flex-wrap: wrap; justify-content: space-between; gap: .75rem 2rem; font-size: .8125rem; color: var(--muted); }
+  footer a { color: var(--ink); }
+
+  @media (max-width: 40rem) {
+    .next { grid-template-columns: repeat(2, 1fr); }
+    .facts { display: grid; grid-template-columns: repeat(2, auto); justify-content: start; gap: 1.25rem 2.5rem; }
+    .facts li:last-child { grid-column: 1 / -1; }
+    .hero { padding-block: 3.5rem 3rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="brand" href="/" aria-label="Azad Bilik">
+      <svg viewBox="0 0 512 512" aria-hidden="true"><g class="star"><rect x="126" y="126" width="260" height="260"/><polygon points="256,72 440,256 256,440 72,256"/></g><polygon class="gem" points="256,196 316,256 256,316 196,256"/></svg>
+      Azad Bilik
+    </a>
+    <nav><a href="https://github.com/azadbilik">GitHub</a></nav>
+  </header>
+
+  <main>
+    <div class="hero">
+      <h1>Azərbaycan mədəniyyəti və tarixi haqqında açıq bilik.</h1>
+      <p lang="en">Open knowledge about Azerbaijani culture and history.</p>
+    </div>
+
+    <section aria-labelledby="projects">
+      <h2 class="label" id="projects"><span>Layihələr</span><span lang="en">Projects</span></h2>
+      <div class="body">
+        <article class="project">
+          <h2><a href="https://kitabxana.az">Kitabxana</a></h2>
+          <span class="status">Açıqdır&nbsp;·&nbsp;<span lang="en">Live</span></span>
+          <p class="desc">Azərbaycan ədəbiyyatının onlayn kitabxanası: klassik və müasir əsərlər, tərcümələr, mənbə nəşrlərin skanları. <span lang="en">An online library of Azerbaijani literature: classical and modern works, translations, and scans of the editions they come from.</span></p>
+          <ul class="facts">
+            <li>48 000+<small>əsər <span lang="en">· works</span></small></li>
+            <li>470+<small>müəllif <span lang="en">· authors</span></small></li>
+            <li>az · ru · en · fa<small>dillər <span lang="en">· languages</span></small></li>
+          </ul>
+        </article>
+
+        <p class="next-head">Sırada <span lang="en">· Next</span></p>
+        <ul class="next">
+          <li>Xəritələr <span lang="en">Maps</span></li>
+          <li>Musiqi <span lang="en">Music</span></li>
+          <li>Qalereya <span lang="en">Gallery</span></li>
+          <li>Məlumatlar <span lang="en">Data</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section aria-labelledby="principles">
+      <h2 class="label" id="principles"><span>Prinsiplər</span><span lang="en">Principles</span></h2>
+      <ol class="principles body">
+        <li><div><strong>Kod açıqdır.</strong><p>Hər layihənin kodu GitHub-dadır: hər kəs baxa, istifadə edə və töhfə verə bilər. <span lang="en">Every project's code is on GitHub, for anyone to read, reuse and improve.</span></p></div></li>
+        <li><div><strong>Mənbə göstərilir.</strong><p>Hər mətn və təsvir götürüldüyü nəşrə bağlanır. <span lang="en">Every text and image links back to the edition it comes from.</span></p></div></li>
+        <li><div><strong>Hamı üçün pulsuz.</strong><p>Oxumaq üçün nə ödəniş, nə qeydiyyat lazımdır. <span lang="en">Free to read, with no payment and no sign-up.</span></p></div></li>
+      </ol>
+    </section>
+  </main>
+
+  <footer>
+    <span>Səhv tapdınız və ya mənbəniz var? <a href="https://github.com/azadbilik/kitabxana/issues">Bizə yazın</a> <span lang="en">· Found a mistake or have a source? Open an issue</span></span>
+    <span>Azad Bilik · <a href="https://github.com/azadbilik">github.com/azadbilik</a></span>
+  </footer>
+</div>
+</body>
+</html>
