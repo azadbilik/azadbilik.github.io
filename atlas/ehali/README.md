@@ -1,6 +1,6 @@
 # Əhali · Population of historical Azerbaijan
 
-[azadbilik.org/xeriteler/ehali](https://azadbilik.org/xeriteler/ehali/): census populations of the Republic of Azerbaijan's districts and cities (1959–2019) and of the counties of Iran's four Azerbaijani provinces, East and West Azerbaijan, Ardabil and Zanjan (1956–2016), on today's borders.
+[azadbilik.org/atlas/ehali](https://azadbilik.org/atlas/ehali/): census populations of the Republic of Azerbaijan's districts and cities (1959–2019) and of the counties of Iran's four Azerbaijani provinces, East and West Azerbaijan, Ardabil and Zanjan (1956–2016), on today's borders.
 
 | File | What |
 |---|---|

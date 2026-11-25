@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Xəritələr · Azad Bilik</title>
+<title>Ədəbi xəritələr · Azad Bilik</title>
 <meta name="description" content="Azərbaycan ədəbiyyatı və sənətinin xəritələri. Maps of Azerbaijani literature and art.">
 <meta name="theme-color" content="#F4EFE6" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#14100D" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="canonical" href="https://azadbilik.org/xeriteler/">
-<meta property="og:title" content="Xəritələr · Azad Bilik">
+<meta property="og:title" content="Ədəbi xəritələr · Literary maps · Azad Bilik">
 <meta property="og:description" content="Azərbaycan ədəbiyyatı və sənətinin xəritələri · Maps of Azerbaijani literature and art">
 <meta property="og:image" content="https://azadbilik.org/xerite/og.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -76,7 +76,7 @@
 
   <main>
     <div class="hero">
-      <h1><span data-l="az">Xəritələr</span><span data-l="ru">Карты</span><span data-l="en">Maps</span></h1>
+      <h1><span data-l="az">Ədəbi xəritələr</span><span data-l="ru">Литературные карты</span><span data-l="en">Literary maps</span></h1>
       <p><span data-l="az">Azərbaycan ədəbiyyatı və sənəti yer üzündə: şairlərin doğulduğu kəndlərdən əlyazmaların çəkildiyi saraylaradək.</span><span data-l="ru">Азербайджанская литература и искусство на карте: от сёл, где родились поэты, до дворцов, где расписывали рукописи.</span><span data-l="en">Azerbaijani literature and art on the map: from the villages poets were born in to the courts where manuscripts were painted.</span></p>
     </div>
 
@@ -121,17 +121,9 @@
           <p class="facts"><span data-l="az">13 dayanacaq · 177 miniatür · 7 ölkə</span><span data-l="ru">13 остановок · 177 миниатюр · 7 стран</span><span data-l="en">13 stops · 177 miniatures · 7 lands</span></p>
         </a>
       </li>
-      <li class="map">
-        <a href="/xeriteler/ehali/" data-keep-lang>
-          <div class="pic"><img src="/xeriteler/ehali/og.png" width="1200" height="630" alt="" loading="lazy"></div>
-          <h2><span data-l="az">Əhali</span><span data-l="ru">Население</span><span data-l="en">Population</span></h2>
-          <p><span data-l="az">Tarixi Azərbaycanın əhalisi siyahıyaalmalar üzrə: Azərbaycan Respublikasının rayonları və İranın dörd Azərbaycan ostanının şəhristanları, sayı, sıxlığı və dəyişməsi ilə.</span><span data-l="ru">Население исторического Азербайджана по переписям: районы Азербайджанской Республики и шахрестаны четырёх азербайджанских останов Ирана — численность, плотность, изменение.</span><span data-l="en">The population of historical Azerbaijan, census by census: the Republic's districts and the counties of Iran's four Azerbaijani provinces, by number, density and change.</span></p>
-          <p class="facts"><span data-l="az">133 bölgə · 7 siyahıyaalma · 1956–2019</span><span data-l="ru">133 единицы · 7 переписей · 1956–2019</span><span data-l="en">133 units · 7 censuses · 1956–2019</span></p>
-        </a>
-      </li>
     </ul>
 
-    <p class="note"><span data-l="az">Yeni xəritələr hazırlanır. Fikriniz və ya məlumatınız varsa, <a href="https://github.com/azadbilik/xerite/issues">bizə yazın</a>.</span><span data-l="ru">Новые карты готовятся. Если у вас есть идея или данные, <a href="https://github.com/azadbilik/xerite/issues">напишите нам</a>.</span><span data-l="en">More maps are on the way. If you have an idea or data for one, <a href="https://github.com/azadbilik/xerite/issues">tell us</a>.</span></p>
+    <p class="note"><span data-l="az">Əhali, icmalar və coğrafiya xəritələri <a href="/atlas/" data-keep-lang>Atlas</a> bölməsindədir.</span><span data-l="ru">Карты населения, общин и географии — в разделе <a href="/atlas/" data-keep-lang>Атлас</a>.</span><span data-l="en">Maps of population, communities and geography are in the <a href="/atlas/" data-keep-lang>Atlas</a>.</span></p>
   </main>
 
   <footer><a href="/" data-keep-lang>Azad Bilik</a> · <a href="https://github.com/azadbilik">GitHub</a></footer>
@@ -139,7 +131,7 @@
 <script>
   function apply(l) {
     document.documentElement.lang = l;
-    document.title = { az: 'Xəritələr', ru: 'Карты', en: 'Maps' }[l] + ' · Azad Bilik';
+    document.title = { az: 'Ədəbi xəritələr', ru: 'Литературные карты', en: 'Literary maps' }[l] + ' · Azad Bilik';
     document.querySelectorAll('[data-lang]').forEach((b) => b.setAttribute('aria-pressed', b.dataset.lang === l));
     document.querySelectorAll('[data-kx]').forEach((a) => a.href = `https://kitabxana.az${l === 'az' ? '' : '/' + l}`);
     document.querySelectorAll('[data-keep-lang]').forEach((a) => { const u = new URL(a.getAttribute('href'), location.href); if (l === 'az') u.searchParams.delete('lang'); else u.searchParams.set('lang', l); a.href = u.pathname + u.search; });

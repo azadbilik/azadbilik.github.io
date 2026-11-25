@@ -36,7 +36,9 @@ async function page(url, musts) {
 
 console.log('Hub pages');
 for (const [path, musts] of [
-  ['/', ['href="/xeriteler/"', 'href="/qalereya/"', 'data-lang="ru"']],
+  ['/', ['href="/xeriteler/"', 'href="/qalereya/"', 'href="/atlas/"', 'id="culture"', 'id="atlas"', 'data-lang="ru"']],
+  ['/atlas/', ['href="/atlas/ehali/"', 'href="/xeriteler/"']],
+  ['/xeriteler/ehali/', ['/atlas/ehali/']],
   ['/xeriteler/', ['href="/xerite/"', 'href="/qalereya/emalatxana/"']],
   ['/xerite/', ['maplibre-gl', 'data/authors.json']],
   ['/qalereya/', ['data/gallery.json', 'id="viewer"']],
@@ -44,7 +46,7 @@ for (const [path, musts] of [
   ['/xeriteler/iskender/', ['maplibre-gl', '/shared/story-map.js', '/shared/viewer.js']],
   ['/xeriteler/xosrov-sirin/', ['maplibre-gl', '/shared/story-map.js', '/shared/viewer.js']],
   ['/xeriteler/yeddi-gozel/', ['maplibre-gl', '/shared/story-map.js', '/shared/viewer.js']],
-  ['/xeriteler/ehali/', ['maplibre-gl', "'units.geojson'"]],
+  ['/atlas/ehali/', ['maplibre-gl', "'units.geojson'"]],
 ]) await page(BASE + path, musts);
 
 console.log('Data');
@@ -64,7 +66,7 @@ for (const story of ['iskender', 'xosrov-sirin', 'yeddi-gozel']) {
   const lost = route.stops.flatMap((s) => s.scenes.filter((id) => !gallery.poems.find((p) => p.slug === poemOf[s.part])?.scenes.some((x) => x.id === id)).map((id) => `${s.id}/${id}`));
   check(route.stops.length >= 10 && lost.length === 0, `story map ${story}: ${route.stops.length} stops${lost.length ? `, scenes missing from the gallery: ${lost.join(', ')}` : ', every scene in the gallery'}`);
 }
-const units = (await get(`${BASE}/xeriteler/ehali/data/units.geojson`, 'json')).body ?? { features: [] };
+const units = (await get(`${BASE}/atlas/ehali/data/units.geojson`, 'json')).body ?? { features: [] };
 const withPop = units.features.filter((f) => Object.keys(f.properties.pop ?? {}).length);
 check(units.features.length >= 130 && withPop.length >= 120, `population map: ${units.features.length} units, ${withPop.length} with census figures`);
 console.log('Pictures load (a sample of thumbnails, at their hosts)');

@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atlas · Azad Bilik</title>
+<meta name="description" content="Tarixi Azərbaycanın atlası: əhali, icmalar, xalqlar və dillər, coğrafiya. An atlas of historical Azerbaijan: population, communities, peoples and languages, geography.">
+<meta name="theme-color" content="#F4EFE6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14100D" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://azadbilik.org/atlas/">
+<meta property="og:title" content="Atlas · Azad Bilik">
+<meta property="og:description" content="Tarixi Azərbaycanın atlası: əhali, icmalar, xalqlar və dillər, coğrafiya.">
+<meta property="og:image" content="https://azadbilik.org/atlas/ehali/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<script>
+  // ?lang=, else the visitor's last choice on azadbilik.org, else Azerbaijani; set before paint
+  (() => { const L = ['az', 'ru', 'en']; let l = new URLSearchParams(location.search).get('lang'); if (!L.includes(l)) { try { l = localStorage.getItem('lang'); } catch {} } if (L.includes(l)) document.documentElement.lang = l; })();
+</script>
+<style>
+  :root {
+    --paper: #F4EFE6; --ink: #1A1410; --muted: #675E55; --rule: rgb(26 20 16 / .16); --frame: #E9E2D6;
+    --accent: #A81E28; --serif: 'Literata', Georgia, serif; --sans: 'Inter', system-ui, sans-serif;
+    --gutter: clamp(1rem, 4vw, 3rem);
+    color-scheme: light dark;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --paper: #14100D; --ink: #F1EBE1; --muted: #A0968B; --rule: rgb(241 235 225 / .16); --frame: #1F1914; --accent: #DA5A61; }
+  }
+  html:not([lang="az"]) [data-l="az"], html:not([lang="ru"]) [data-l="ru"], html:not([lang="en"]) [data-l="en"] { display: none !important; }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: var(--paper); color: var(--ink); font: 400 1rem/1.6 var(--sans); -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: .22em; text-decoration-color: var(--rule); }
+  a:hover { text-decoration-color: currentColor; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+  .wrap { max-width: 76rem; margin: 0 auto; padding: 0 var(--gutter); }
+
+  header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .75rem 1.5rem; padding-block: 1.75rem; }
+  .brand { display: inline-flex; align-items: center; gap: .6rem; font-weight: 600; font-size: .9375rem; text-decoration: none; white-space: nowrap; }
+  .brand svg { width: 1.375rem; height: 1.375rem; }
+  .star { fill: currentColor; } .gem { fill: var(--accent); }
+  nav { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: .25rem 1.25rem; }
+  nav a { font-size: .875rem; color: var(--muted); text-decoration: none; }
+  nav a:hover { color: var(--ink); }
+  .langs { display: inline-flex; gap: .15rem; }
+  .langs button { font: inherit; font-size: .75rem; letter-spacing: .04em; padding: .1rem .3rem; border: 0; border-radius: 2px; background: none; color: var(--muted); cursor: pointer; }
+  .langs button[aria-pressed="true"] { color: var(--ink); box-shadow: inset 0 -1px currentColor; }
+
+  .hero { padding-block: clamp(3rem, 9vw, 6rem) clamp(2.5rem, 6vw, 4rem); }
+  h1 { font: 300 clamp(2.25rem, 1.2rem + 4.6vw, 4.5rem)/1.04 var(--serif); letter-spacing: -.025em; }
+  .hero p { margin-top: 1.25rem; font: italic 300 clamp(1.125rem, 1rem + .6vw, 1.375rem)/1.4 var(--serif); max-width: 36ch; }
+
+  .maps { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr)); gap: 2.5rem 2rem; border-top: 1px solid var(--rule); padding-top: 2.5rem; }
+  .map a { display: block; text-decoration: none; }
+  .map .pic { aspect-ratio: 1200 / 630; background: var(--frame); border-radius: 3px; overflow: hidden; }
+  .map img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s; }
+  .map a:hover img { transform: scale(1.015); }
+  .map h2 { margin-top: 1rem; font: 400 1.75rem/1.15 var(--serif); letter-spacing: -.015em; }
+  .map h2::after { content: ' →'; font: 300 .6em var(--sans); color: var(--muted); vertical-align: .2em; }
+  .map a:hover h2::after { color: var(--accent); }
+  .map p { margin-top: .5rem; max-width: 34rem; }
+  .map .facts { margin-top: .5rem; font-size: .8125rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .note { margin-top: 3.5rem; padding-top: 1.25rem; border-top: 1px solid var(--rule); font-size: .875rem; color: var(--muted); max-width: 40rem; }
+
+  footer { margin-top: 4rem; border-top: 1px solid var(--rule); padding-block: 1.75rem 2.5rem; font-size: .8125rem; color: var(--muted); }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="brand" href="/" data-keep-lang><svg viewBox="0 0 512 512" aria-hidden="true"><g class="star"><rect x="126" y="126" width="260" height="260"/><polygon points="256,72 440,256 256,440 72,256"/></g><polygon class="gem" points="256,196 316,256 256,316 196,256"/></svg>Azad Bilik</a>
+    <nav><a href="https://kitabxana.az" data-kx><span data-l="az">Kitabxana</span><span data-l="ru">Библиотека</span><span data-l="en">Library</span></a><a href="/qalereya/" data-keep-lang><span data-l="az">Qalereya</span><span data-l="ru">Галерея</span><span data-l="en">Gallery</span></a><span class="langs" role="group" aria-label="Dil · Язык · Language"><button type="button" data-lang="az">AZ</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="en">EN</button></span></nav>
+  </header>
+
+  <main>
+    <div class="hero">
+      <h1>Atlas</h1>
+      <p><span data-l="az">Tarixi Azərbaycan rəqəmlərdə və xəritələrdə: əhali, icmalar, xalqlar və dillər, coğrafiya. Hər rəqəm öz mənbəyi ilə.</span><span data-l="ru">Исторический Азербайджан в цифрах и картах: население, общины, народы и языки, география. Каждая цифра — с источником.</span><span data-l="en">Historical Azerbaijan in figures and maps: population, communities, peoples and languages, geography. Every figure with its source.</span></p>
+    </div>
+
+    <ul class="maps">
+      <li class="map">
+        <a href="/atlas/ehali/" data-keep-lang>
+          <div class="pic"><img src="/atlas/ehali/og.png" width="1200" height="630" alt="" loading="lazy"></div>
+          <h2><span data-l="az">Əhali</span><span data-l="ru">Население</span><span data-l="en">Population</span></h2>
+          <p><span data-l="az">Tarixi Azərbaycanın əhalisi siyahıyaalmalar üzrə: Azərbaycan Respublikasının rayonları və İranın dörd Azərbaycan ostanının şəhristanları, sayı, sıxlığı və dəyişməsi ilə.</span><span data-l="ru">Население исторического Азербайджана по переписям: районы Азербайджанской Республики и шахрестаны четырёх азербайджанских останов Ирана — численность, плотность, изменение.</span><span data-l="en">The population of historical Azerbaijan, census by census: the Republic's districts and the counties of Iran's four Azerbaijani provinces, by number, density and change.</span></p>
+          <p class="facts"><span data-l="az">133 bölgə · 7 siyahıyaalma · 1956–2019</span><span data-l="ru">133 единицы · 7 переписей · 1956–2019</span><span data-l="en">133 units · 7 censuses · 1956–2019</span></p>
+        </a>
+      </li>
+    </ul>
+
+    <p class="note"><span data-l="az">Hazırlanır: Respublikadan kənarda azərbaycanlı icmaları (Gürcüstan, Dağıstan, Ermənistan), Azərbaycanın xalqları və dilləri, çaylar. Ədəbiyyat və sənət xəritələri <a href="/xeriteler/" data-keep-lang>Ədəbi xəritələr</a> bölməsindədir.</span><span data-l="ru">Готовятся: азербайджанские общины за пределами республики (Грузия, Дагестан, Армения), народы и языки Азербайджана, реки. Карты литературы и искусства — в разделе <a href="/xeriteler/" data-keep-lang>Литературные карты</a>.</span><span data-l="en">In progress: Azerbaijani communities beyond the Republic (Georgia, Dagestan, Armenia), the peoples and languages of Azerbaijan, rivers. Maps of literature and art are under <a href="/xeriteler/" data-keep-lang>Literary maps</a>.</span></p>
+  </main>
+
+  <footer><a href="/" data-keep-lang>Azad Bilik</a> · <a href="https://github.com/azadbilik">GitHub</a></footer>
+</div>
+<script>
+  function apply(l) {
+    document.documentElement.lang = l;
+    document.title = 'Atlas · Azad Bilik';
+    document.querySelectorAll('[data-lang]').forEach((b) => b.setAttribute('aria-pressed', b.dataset.lang === l));
+    document.querySelectorAll('[data-kx]').forEach((a) => a.href = `https://kitabxana.az${l === 'az' ? '' : '/' + l}`);
+    document.querySelectorAll('[data-keep-lang]').forEach((a) => { const u = new URL(a.getAttribute('href'), location.href); if (l === 'az') u.searchParams.delete('lang'); else u.searchParams.set('lang', l); a.href = u.pathname + u.search; });
+  }
+  apply(document.documentElement.lang);
+  document.querySelectorAll('[data-lang]').forEach((b) => b.onclick = () => {
+    const l = b.dataset.lang;
+    try { localStorage.setItem('lang', l); } catch {}
+    const u = new URL(location.href);
+    if (l === 'az') u.searchParams.delete('lang'); else u.searchParams.set('lang', l);
+    history.replaceState(null, '', u);
+    apply(l);
+  });
+</script>
+</body>
+</html>
