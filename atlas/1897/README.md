@@ -1,6 +1,6 @@
 # 1897 · Native languages in the Caucasus, 1897
 
-[azadbilik.org/atlas/1897](https://azadbilik.org/atlas/1897/): the 1897 census of the Russian Empire by native language in the 44 uezds and okrugs of the Baku, Elisabethpol, Erivan and Tiflis governorates and the Dagestan and Kars oblasts, on their 1897 borders, with today's districts drawn over them to compare.
+[azadbilik.org/atlas/1897](https://azadbilik.org/atlas/1897/): the 1897 census of the Russian Empire by native language in the 36 uezds and okrugs of the Baku, Elisabethpol and Erivan governorates, the Dagestan and Kars oblasts, and the Borchali uezd and Zaqatala okrug of the Tiflis governorate (its other, Georgian, uezds are left out), on their 1897 borders, with today's districts drawn over them to compare.
 
 | File | What |
 |---|---|
@@ -21,5 +21,5 @@
 
 - Uezds are drawn as RISTAT reconstructs them; the reconstruction has not been checked here against the 1897 maps.
 - Georgian on the map includes Imeretian, Mingrelian and Svan; Russian includes Ukrainian («малорусский») and Belarusian. The CSV keeps every census name separately.
-- Not included yet: Kutais governorate, Batum and Sukhum okrugs, the Black Sea governorate, Terek, Kuban and Stavropol.
+- Left out: the Tiflis governorate apart from Borchali and Zaqatala, and western Georgia (Kutais, Batum, Sukhum). `data/raw/` keeps every page and boundary as read; the build drops them. Terek, Kuban, Stavropol and the Black Sea governorate are not read.
 - The census tables and the CSV are CC0. The boundaries are CC0 (cite RISTAT).

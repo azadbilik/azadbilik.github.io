@@ -16,6 +16,9 @@ const names = await json('names.json');
 const langs = await json('languages.json');
 delete langs._note;
 
+// Of the Tiflis governorate only the two Azerbaijani-inhabited units are mapped
+const TIFLIS_KEEP = new Set(['Борчалинский', 'Закатальский']);
+const dropped = (ru, gov) => /^Тифлисск/.test(gov) && !TIFLIS_KEEP.has(ru);
 const SRC = (reg) => `https://www.demoscope.ru/weekly/ssp/emp_lan_97_uezd.php?reg=${reg}`;
 const num = (s) => /^[\d\s]+$/.test(s) && /\d/.test(s) ? Number(s.replace(/\s/g, '')) : null;
 const byLabel = {};
@@ -45,7 +48,7 @@ function parse(rows) {
 const ALIAS = { 'Карский': 'Карсский' };
 const units = {}, towns = {}, govs = {};
 const csv = [['unit_ru', 'kind', 'uyezd_ru', 'language', 'language_ru', 'men', 'women', 'both', 'source'].join(',')];
-let uyezd = null;
+let uyezd = null, gov = null;
 for (const [reg, p] of Object.entries(pages).sort((a, b) => a[0] - b[0])) {
   const t = p.t.replace(/\s+/g, ' ').trim();
   const { total, rows } = parse(p.rows);
@@ -53,10 +56,11 @@ for (const [reg, p] of Object.entries(pages).sort((a, b) => a[0] - b[0])) {
   const sum = rows.reduce((s, r) => s + r.both, 0);
   if (sum !== total.both) console.warn(`rows ≠ total: ${t} ${sum} vs ${total.both}`);
   let kind, key;
-  if (/ - вся$/.test(t)) { kind = 'governorate'; key = t.replace(/ - вся$/, ''); uyezd = null; }
+  if (/ - вся$/.test(t)) { kind = 'governorate'; key = t.replace(/ - вся$/, ''); uyezd = null; gov = key; }
   else if (/ - (весь)$/.test(t)) { kind = 'uyezd'; key = t.replace(/ (уезд|округ) - весь$/, ''); key = ALIAS[key] ?? key; uyezd = key; }
   else if (/ - (г\.|м\.|мест\.|сел\.|уроч\.|укрепл\.|пос\.)/.test(t)) { kind = 'town'; key = t.replace(/^.* - (г\.|м\.|мест\.|сел\.|уроч\.|укрепл\.|пос\.)\s*/, '').trim(); }
   else continue; // «города», «уезды без городов», «… без города»: the same people counted again
+  if (gov === 'Тифлисская губерния' && (kind === 'governorate' || !TIFLIS_KEEP.has(kind === 'uyezd' ? key : uyezd))) continue;
   const byLang = {};
   for (const r of rows) {
     const k = langKey(r.label);
@@ -72,7 +76,7 @@ for (const [reg, p] of Object.entries(pages).sort((a, b) => a[0] - b[0])) {
 const r4 = (x) => Math.round(x * 1e4) / 1e4;
 const round = (c) => typeof c[0] === 'number' ? [r4(c[0]), r4(c[1])] : c.map(round);
 const GOV = { 'Карская губерния': 'Карская область', 'Тифлисская губерния вкл. Закатальский округ': 'Тифлисская губерния' };
-const features = geo.features.map((f, id) => {
+const features = geo.features.filter((f) => !dropped(f.properties.Name_RU, f.properties.prov_RU)).map((f, id) => {
   const ru = f.properties.Name_RU;
   const n = names.units[ru], g = names.govs[f.properties.prov_RU];
   const c = units[ru];

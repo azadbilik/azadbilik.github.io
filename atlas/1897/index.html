@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>1897: ana dilləri · Azad Bilik</title>
-<meta name="description" content="1897-ci il siyahıyaalması: Cənubi Qafqazın və Dağıstanın 44 qəzasında ana dilləri, bugünkü sərhədlərlə müqayisədə. Native languages in the 44 uezds of the South Caucasus and Dagestan, 1897 census.">
+<meta name="description" content="1897-ci il siyahıyaalması: Cənubi Qafqazın və Dağıstanın 36 qəzasında ana dilləri, bugünkü sərhədlərlə müqayisədə. Native languages in the 36 uezds of the South Caucasus and Dagestan, 1897 census.">
 <meta name="theme-color" content="#F4EFE6" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#14100D" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -100,15 +100,15 @@ const LI = { az: 0, ru: 1, en: 2 };
 const nf = () => new Intl.NumberFormat({ az: 'az-Latn-AZ', ru: 'ru-RU', en: 'en-GB' }[lang]);
 const T = {
   az: { doc: '1897: ana dilləri · Azad Bilik', title: '1897: ana dilləri', sub: 'Qafqazda ilk siyahıyaalma, qəza-qəza', top: 'Ən böyük dil', one: 'Bir dil', share: 'Payı', count: 'Sayı',
-    today: 'Bugünkü rayon sərhədləri', todayLegend: 'bugünkü rayonlar', total: (n) => `${n} nəfər`, area: '44 qəza və dairə: Bakı, Yelizavetpol, İrəvan, Tiflis quberniyaları, Dağıstan və Qars vilayətləri',
+    today: 'Bugünkü rayon sərhədləri', todayLegend: 'bugünkü rayonlar', total: (n) => `${n} nəfər`, area: '36 qəza və dairə: Bakı, Yelizavetpol, İrəvan quberniyaları, Dağıstan və Qars vilayətləri, Tiflis quberniyasından Borçalı qəzası və Zaqatala dairəsi',
     languages: 'Dillər', where: 'Ən çox danışıldığı qəzalar', ofUnit: 'qəza əhalisinin', back: '← Dillər', language: 'Ana dili', people: 'Nəfər', towns: 'Şəhərlər', src: 'Mənbə', town: 'şəhər', nodata: 'məlumat yoxdur',
     note: 'Rəqəmlər 1897-ci il Ümumrusiya siyahıyaalmasının XIII cədvəlindəndir («Əhalinin ana dilinə görə bölgüsü», Sankt-Peterburq, 1903–1905), Demoskop Weekly-nin köçürməsi ilə; hər qəzanın səhifəsi öz linki ilə. Siyahıyaalma millət yox, ana dili soruşurdu; azərbaycanlıların dili «tatar dili» kimi yazılıb. Gürcü dilinə imeret, menqrel və svan dilləri, rus dilinə ukrain və belarus dilləri qatılıb. Qəza sərhədləri: Rusiya tarixi statistikasının elektron arxivi (RISTAT, Kessler və Markeviç), CC0. Qəzalar 1897-ci ilin sərhədlərindədir; bugünkü rayonlar müqayisə üçündür.' },
   ru: { doc: '1897: родные языки · Azad Bilik', title: '1897: родные языки', sub: 'Первая перепись на Кавказе, по уездам', top: 'Крупнейший язык', one: 'Один язык', share: 'Доля', count: 'Число',
-    today: 'Границы нынешних районов', todayLegend: 'нынешние районы', total: (n) => `${n} чел.`, area: '44 уезда и округа: Бакинская, Елисаветпольская, Эриванская, Тифлисская губернии, Дагестанская и Карсская области',
+    today: 'Границы нынешних районов', todayLegend: 'нынешние районы', total: (n) => `${n} чел.`, area: '36 уездов и округов: Бакинская, Елисаветпольская, Эриванская губернии, Дагестанская и Карсская области, из Тифлисской губернии — Борчалинский уезд и Закатальский округ',
     languages: 'Языки', where: 'Уезды, где на нём говорят больше всего', ofUnit: 'населения уезда', back: '← Языки', language: 'Родной язык', people: 'Человек', towns: 'Города', src: 'Источник', town: 'город', nodata: 'нет данных',
     note: 'Цифры — таблица XIII Первой всеобщей переписи населения Российской империи 1897 г. («Распределение населения по родному языку», СПб., 1903–1905) в переложении Демоскопа Weekly; у каждого уезда — ссылка на его страницу. Перепись спрашивала родной язык, а не национальность; язык азербайджанцев записан как «татарский». К грузинскому отнесены имеретинский, мингрельский и сванский, к русскому — малорусский и белорусский. Границы уездов: Электронный архив российской исторической статистики (RISTAT, Кесслер и Маркевич), CC0. Уезды — в границах 1897 г.; нынешние районы — для сравнения.' },
   en: { doc: 'Native languages, 1897 · Azad Bilik', title: 'Native languages, 1897', sub: 'The first census of the Caucasus, uezd by uezd', top: 'Largest language', one: 'One language', share: 'Share', count: 'Number',
-    today: "Today's district borders", todayLegend: "today's districts", total: (n) => `${n} people`, area: '44 uezds and okrugs: the Baku, Elisabethpol, Erivan and Tiflis governorates, Dagestan and Kars oblasts',
+    today: "Today's district borders", todayLegend: "today's districts", total: (n) => `${n} people`, area: '36 uezds and okrugs: the Baku, Elisabethpol and Erivan governorates, Dagestan and Kars oblasts, and from the Tiflis governorate the Borchali uezd and Zaqatala okrug',
     languages: 'Languages', where: 'Where it was spoken most', ofUnit: 'of the uezd', back: '← Languages', language: 'Native language', people: 'People', towns: 'Towns', src: 'Source', town: 'town', nodata: 'no data',
     note: "The figures are Table XIII of the 1897 census of the Russian Empire («Distribution of the population by native language», St Petersburg, 1903–1905) as transcribed by Demoscope Weekly; each uezd links to its page. The census asked for native language, not nationality; Azerbaijani was recorded as «Tatar». Georgian includes Imeretian, Mingrelian and Svan; Russian includes Ukrainian and Belarusian. Uezd borders: the Electronic Repository of Russian Historical Statistics (RISTAT, Kessler and Markevich), CC0. Uezds are drawn on their 1897 borders; today's districts are there to compare." },
 };
