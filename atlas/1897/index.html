@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>1897: ana dilləri · Azad Bilik</title>
+<meta name="description" content="1897-ci il siyahıyaalması: Cənubi Qafqazın və Dağıstanın 44 qəzasında ana dilləri, bugünkü sərhədlərlə müqayisədə. Native languages in the 44 uezds of the South Caucasus and Dagestan, 1897 census.">
+<meta name="theme-color" content="#F4EFE6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14100D" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://azadbilik.org/atlas/1897/">
+<meta property="og:title" content="1897: ana dilləri · Native languages, 1897">
+<meta property="og:description" content="Cənubi Qafqazın və Dağıstanın qəzalarında ana dilləri, 1897-ci il siyahıyaalmasına görə.">
+<meta property="og:image" content="https://azadbilik.org/atlas/1897/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+<link rel="stylesheet" href="/shared/story-map.css">
+<style>
+  .controls { padding: 1rem 1.5rem; border-bottom: 1px solid var(--rule); display: grid; gap: .9rem; }
+  .seg { display: grid; grid-template-columns: repeat(2, 1fr); border: 1px solid var(--rule); border-radius: 3px; padding: 2px; }
+  .seg button { padding: .35rem .4rem; border-radius: 2px; font-size: .8125rem; color: var(--muted); }
+  .seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+  .check { display: flex; align-items: center; gap: .5rem; font-size: .8125rem; color: var(--muted); cursor: pointer; }
+  .check input { accent-color: var(--accent); }
+  .totals { padding: 1rem 1.5rem 0; display: grid; gap: .25rem; }
+  .totals b { font: 400 1.5rem/1.1 var(--serif); font-variant-numeric: tabular-nums; }
+  .totals small { font-size: .8125rem; color: var(--muted); }
+  .rank h2, .unit h3 { padding: .75rem 1.5rem .35rem; font: 500 .75rem var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .rank ol { list-style: none; padding: 0 0 .5rem; }
+  .rank li button { display: grid; grid-template-columns: 1.5rem 1fr auto; gap: .5rem; width: 100%; text-align: left; padding: .3rem 1.5rem; font-size: .875rem; }
+  .rank li button:hover { background: var(--rule); }
+  .rank .v { font-variant-numeric: tabular-nums; color: var(--muted); }
+  .langlist { list-style: none; padding: .25rem 0 .5rem; }
+  .langlist button { display: grid; grid-template-columns: .65rem 1fr auto; gap: .5rem; align-items: center; width: 100%; text-align: left; padding: .35rem 1.5rem; font-size: .875rem; }
+  .langlist button:hover { background: var(--rule); }
+  .langlist button[aria-pressed="true"] { background: var(--rule); box-shadow: inset 2px 0 var(--accent); font-weight: 500; }
+  .langlist i { width: .65rem; height: .65rem; border-radius: 2px; }
+  .langlist .v { font-size: .75rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .unit { padding: 1rem 0; }
+  .unit .back { display: block; padding: 0 1.5rem .75rem; font-size: .8125rem; color: var(--muted); }
+  .unit .back:hover { color: var(--ink); }
+  .unit .title { padding: 0 1.5rem; font: 400 1.5rem/1.15 var(--serif); }
+  .unit .where { padding: .15rem 1.5rem 0; font-size: .8125rem; color: var(--muted); }
+  .unit table { width: calc(100% - 3rem); margin: .75rem 1.5rem 0; border-collapse: collapse; font-size: .875rem; font-variant-numeric: tabular-nums; }
+  .unit th { text-align: left; font-weight: 500; color: var(--muted); font-size: .75rem; padding: .25rem 0; border-bottom: 1px solid var(--rule); }
+  .unit td { padding: .3rem 0; border-bottom: 1px solid var(--rule); }
+  .unit td:not(:first-child), .unit th:not(:first-child) { text-align: right; padding-left: .75rem; white-space: nowrap; }
+  .unit h3 { margin-top: .75rem; }
+  .unit td i { display: inline-block; width: .6rem; height: .6rem; border-radius: 2px; margin-right: .4rem; }
+  .unit .src { padding: .5rem 1.5rem 0; font-size: .75rem; color: var(--muted); }
+  .unit .src a { color: inherit; }
+  .bar { display: flex; height: .5rem; margin: .6rem 1.5rem 0; border-radius: 2px; overflow: hidden; }
+  .legend .ramp { display: flex; }
+  .legend .ramp span { flex: 1; height: .6rem; }
+  .legend .ticks { display: flex; justify-content: space-between; font-size: .625rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .legend .nodata { display: flex; align-items: center; gap: .4rem; color: var(--muted); }
+  .legend .nodata i { width: .9rem; height: .6rem; border: 1px solid var(--rule); }
+  .legend .today i { height: 0; border: 0; border-top: 1.5px dashed var(--ink); }
+  .legend { min-width: 13rem; }
+  @media (max-width: 48rem) { .controls, .totals { padding-inline: 1rem; } .rank h2, .rank li button, .langlist button, .unit h3, .unit .title, .unit .where, .unit .back, .unit .src { padding-inline: 1rem; } .unit table { margin-inline: 1rem; width: calc(100% - 2rem); } .bar { margin-inline: 1rem; } .legend { min-width: 0; } }
+</style>
+</head>
+<body>
+<div id="map" role="region" aria-label="Xəritə"></div>
+
+<aside class="panel">
+  <div class="head">
+    <div class="top"><a class="brand" href="/" data-keep-lang><svg viewBox="0 0 512 512" aria-hidden="true"><g class="star"><rect x="126" y="126" width="260" height="260"/><polygon points="256,72 440,256 256,440 72,256"/></g><polygon class="gem" points="256,196 316,256 256,316 196,256"/></svg>Azad Bilik</a><nav><a href="/atlas/" data-keep-lang>Atlas</a><span class="langs" role="group" aria-label="Dil · Язык · Language"><button type="button" data-lang="az">AZ</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="en">EN</button></span></nav></div>
+    <h1 data-i18n="title">1897: ana dilləri</h1>
+    <p class="sub" data-i18n="sub">Qafqazda ilk siyahıyaalma, qəza-qəza</p>
+  </div>
+  <div class="body" id="body">
+    <div class="controls">
+      <div class="seg" role="group" id="modes"></div>
+      <div class="seg" role="group" id="measures"></div>
+      <label class="check"><input type="checkbox" id="today"> <span data-i18n="today">Bugünkü rayon sərhədləri</span></label>
+    </div>
+    <div id="side" aria-live="polite"></div>
+  </div>
+</aside>
+
+<div class="legend" id="legend"></div>
+
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script>
+(() => {
+const dark = matchMedia('(prefers-color-scheme: dark)').matches;
+const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+const still = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+const LANGS = ['az', 'ru', 'en'];
+let lang = (() => {
+  const q = new URLSearchParams(location.search).get('lang');
+  if (LANGS.includes(q)) return q;
+  try { const s = localStorage.getItem('lang'); if (LANGS.includes(s)) return s; } catch {}
+  return 'az';
+})();
+const LI = { az: 0, ru: 1, en: 2 };
+const nf = () => new Intl.NumberFormat({ az: 'az-Latn-AZ', ru: 'ru-RU', en: 'en-GB' }[lang]);
+const T = {
+  az: { doc: '1897: ana dilləri · Azad Bilik', title: '1897: ana dilləri', sub: 'Qafqazda ilk siyahıyaalma, qəza-qəza', top: 'Ən böyük dil', one: 'Bir dil', share: 'Payı', count: 'Sayı',
+    today: 'Bugünkü rayon sərhədləri', todayLegend: 'bugünkü rayonlar', total: (n) => `${n} nəfər`, area: '44 qəza və dairə: Bakı, Yelizavetpol, İrəvan, Tiflis quberniyaları, Dağıstan və Qars vilayətləri',
+    languages: 'Dillər', where: 'Ən çox danışıldığı qəzalar', ofUnit: 'qəza əhalisinin', back: '← Dillər', language: 'Ana dili', people: 'Nəfər', towns: 'Şəhərlər', src: 'Mənbə', town: 'şəhər', nodata: 'məlumat yoxdur',
+    note: 'Rəqəmlər 1897-ci il Ümumrusiya siyahıyaalmasının XIII cədvəlindəndir («Əhalinin ana dilinə görə bölgüsü», Sankt-Peterburq, 1903–1905), Demoskop Weekly-nin köçürməsi ilə; hər qəzanın səhifəsi öz linki ilə. Siyahıyaalma millət yox, ana dili soruşurdu; azərbaycanlıların dili «tatar dili» kimi yazılıb. Gürcü dilinə imeret, menqrel və svan dilləri, rus dilinə ukrain və belarus dilləri qatılıb. Qəza sərhədləri: Rusiya tarixi statistikasının elektron arxivi (RISTAT, Kessler və Markeviç), CC0. Qəzalar 1897-ci ilin sərhədlərindədir; bugünkü rayonlar müqayisə üçündür.' },
+  ru: { doc: '1897: родные языки · Azad Bilik', title: '1897: родные языки', sub: 'Первая перепись на Кавказе, по уездам', top: 'Крупнейший язык', one: 'Один язык', share: 'Доля', count: 'Число',
+    today: 'Границы нынешних районов', todayLegend: 'нынешние районы', total: (n) => `${n} чел.`, area: '44 уезда и округа: Бакинская, Елисаветпольская, Эриванская, Тифлисская губернии, Дагестанская и Карсская области',
+    languages: 'Языки', where: 'Уезды, где на нём говорят больше всего', ofUnit: 'населения уезда', back: '← Языки', language: 'Родной язык', people: 'Человек', towns: 'Города', src: 'Источник', town: 'город', nodata: 'нет данных',
+    note: 'Цифры — таблица XIII Первой всеобщей переписи населения Российской империи 1897 г. («Распределение населения по родному языку», СПб., 1903–1905) в переложении Демоскопа Weekly; у каждого уезда — ссылка на его страницу. Перепись спрашивала родной язык, а не национальность; язык азербайджанцев записан как «татарский». К грузинскому отнесены имеретинский, мингрельский и сванский, к русскому — малорусский и белорусский. Границы уездов: Электронный архив российской исторической статистики (RISTAT, Кесслер и Маркевич), CC0. Уезды — в границах 1897 г.; нынешние районы — для сравнения.' },
+  en: { doc: 'Native languages, 1897 · Azad Bilik', title: 'Native languages, 1897', sub: 'The first census of the Caucasus, uezd by uezd', top: 'Largest language', one: 'One language', share: 'Share', count: 'Number',
+    today: "Today's district borders", todayLegend: "today's districts", total: (n) => `${n} people`, area: '44 uezds and okrugs: the Baku, Elisabethpol, Erivan and Tiflis governorates, Dagestan and Kars oblasts',
+    languages: 'Languages', where: 'Where it was spoken most', ofUnit: 'of the uezd', back: '← Languages', language: 'Native language', people: 'People', towns: 'Towns', src: 'Source', town: 'town', nodata: 'no data',
+    note: "The figures are Table XIII of the 1897 census of the Russian Empire («Distribution of the population by native language», St Petersburg, 1903–1905) as transcribed by Demoscope Weekly; each uezd links to its page. The census asked for native language, not nationality; Azerbaijani was recorded as «Tatar». Georgian includes Imeretian, Mingrelian and Svan; Russian includes Ukrainian and Belarusian. Uezd borders: the Electronic Repository of Russian Historical Statistics (RISTAT, Kessler and Markevich), CC0. Uezds are drawn on their 1897 borders; today's districts are there to compare." },
+};
+const t = (k) => T[lang][k];
+const L = (p) => p[lang] ?? p.az;
+let units = [], geoData = null, LG = {}, mode = 'top', measure = 'share', language = 'azerbaijani', selected = null, hovered = null, today = false;
+const params = new URLSearchParams(location.search);
+if (params.get('l')) { language = params.get('l'); mode = 'one'; }
+if (params.get('today') === '1') today = true;
+const lname = (k) => LG[k]?.names[LI[lang]] ?? k;
+const SCALES = { share: { breaks: [1, 5, 15, 30, 50, 75], ticks: ['1%', '5%', '15%', '30%', '50%', '75%+'] }, count: { breaks: [500, 2e3, 5e3, 15e3, 40e3, 100e3], ticks: ['500', '2k', '5k', '15k', '40k', '100k+'] } };
+const SEQ = dark ? ['#2B211B', '#4A2C24', '#6B3129', '#8E3430', '#B33A37', '#D45A55', '#F08A80'] : ['#F2E6DA', '#EACAB6', '#E0A88E', '#D2836A', '#BF5C48', '#A6362E', '#7A1B1E'];
+const classOf = (v) => SCALES[measure].breaks.filter((b) => v >= b).length;
+const largest = (u) => Object.entries(u.langs ?? {}).sort((a, b) => b[1] - a[1])[0];
+const value = (u, k = language) => { const n = u.langs?.[k]; if (n == null) return null; return measure === 'count' ? n : n / u.total * 100; };
+const pct = (n, d) => { const v = n / d * 100; return `${v < 10 ? v.toFixed(1) : Math.round(v)}%`; };
+const BOUNDS = [[40.8, 38.6], [50.4, 43.4]];
+
+const map = new maplibregl.Map({
+  container: 'map', style: `https://tiles.openfreemap.org/styles/${dark ? 'dark' : 'positron'}`,
+  bounds: BOUNDS, minZoom: 4.5, maxZoom: 10,
+  attributionControl: { compact: true, customAttribution: '<a href="https://ristat.org/">RISTAT</a> (Kessler &amp; Markevich) · <a href="https://www.demoscope.ru/weekly/ssp/emp_lan_97_uezd.php">Demoscope Weekly</a> · <a href="https://www.geoboundaries.org">geoBoundaries</a>' },
+});
+map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-right');
+const tip = new maplibregl.Popup({ closeButton: false, closeOnClick: false, offset: 8 });
+const phone = () => matchMedia('(max-width: 48rem)').matches;
+const pad = () => phone() ? { top: 60, right: 16, left: 16, bottom: document.querySelector('.panel').offsetHeight + 16 } : { top: 32, right: 32, bottom: 32, left: 27 * 16 + 32 };
+const labelExpr = () => ['coalesce', ['get', `name:${lang}`], ['get', lang === 'ru' ? 'name' : 'name:latin'], ['get', 'name']];
+map.on('style.load', () => {
+  for (const l of map.getStyle().layers) {
+    if (l.type === 'background') map.setPaintProperty(l.id, 'background-color', css('--land'));
+    if (l.type === 'fill' && /water|ocean|lake/.test(l.id)) map.setPaintProperty(l.id, 'fill-color', css('--water'));
+    if (l.type === 'symbol' && l.layout?.['text-field']) map.setLayoutProperty(l.id, 'text-field', labelExpr());
+  }
+});
+map.on('load', async () => {
+  const [geo, out, now] = await Promise.all(['data/units.geojson', 'data/census.out.json', '../ehali/data/units.geojson'].map((f) => fetch(f).then((r) => r.json())));
+  LG = out.languages; geoData = geo;
+  units = geo.features.map((f) => ({ ...f.properties, fid: f.id }));
+  if (!LG[language]) { language = 'azerbaijani'; mode = 'top'; }
+  map.fitBounds(BOUNDS, { padding: pad(), duration: 0 });
+  document.querySelector('.maplibregl-ctrl-attrib')?.classList.remove('maplibregl-compact-show');
+  const firstSymbol = map.getStyle().layers.find((l) => l.type === 'symbol')?.id;
+  map.addSource('units', { type: 'geojson', data: geo });
+  map.addSource('today', { type: 'geojson', data: now });
+  map.addLayer({ id: 'units', type: 'fill', source: 'units', paint: { 'fill-color': ['coalesce', ['feature-state', 'color'], 'rgba(0,0,0,0)'], 'fill-opacity': .85 } }, firstSymbol);
+  map.addLayer({ id: 'units-line', type: 'line', source: 'units', paint: {
+    'line-color': ['case', ['boolean', ['feature-state', 'hover'], false], css('--ink'), ['boolean', ['feature-state', 'sel'], false], css('--ink'), css('--paper')],
+    'line-width': ['case', ['boolean', ['feature-state', 'hover'], false], 1.5, ['boolean', ['feature-state', 'sel'], false], 2, .7],
+  } }, firstSymbol);
+  map.addLayer({ id: 'today', type: 'line', source: 'today', layout: { visibility: today ? 'visible' : 'none' }, paint: { 'line-color': css('--ink'), 'line-width': .9, 'line-dasharray': [2, 2], 'line-opacity': .7 } }, firstSymbol);
+  map.on('mousemove', 'units', (e) => {
+    map.getCanvas().style.cursor = 'pointer';
+    const u = units[e.features[0].id];
+    if (hovered !== u.fid) { if (hovered != null) map.setFeatureState({ source: 'units', id: hovered }, { hover: false }); hovered = u.fid; map.setFeatureState({ source: 'units', id: hovered }, { hover: true }); }
+    let html = `<strong>${esc(L(u))}</strong>`;
+    if (!u.total) html += ` · ${t('nodata')}`;
+    else if (mode === 'top') { const [k, n] = largest(u); html += ` · ${esc(lname(k))}: ${pct(n, u.total)}`; }
+    else { const n = u.langs[language] ?? 0; html += ` · ${esc(lname(language))}: ${nf().format(n)} · ${pct(n, u.total)} ${t('ofUnit')}`; }
+    tip.setLngLat(e.lngLat).setHTML(html).addTo(map);
+  });
+  map.on('mouseleave', 'units', () => { map.getCanvas().style.cursor = ''; tip.remove(); if (hovered != null) map.setFeatureState({ source: 'units', id: hovered }, { hover: false }); hovered = null; });
+  map.on('click', 'units', (e) => select(e.features[0].id));
+  draw();
+});
+function select(fid) {
+  if (selected != null) map.setFeatureState({ source: 'units', id: selected }, { sel: false });
+  selected = fid;
+  if (fid != null) map.setFeatureState({ source: 'units', id: fid }, { sel: true });
+  draw();
+  document.getElementById('body').scrollTop = 0;
+}
+function paint() {
+  for (const u of units) {
+    let color = dark ? 'rgba(255,255,255,.05)' : 'rgba(26,20,16,.06)';
+    if (u.total) {
+      if (mode === 'top') color = LG[largest(u)[0]]?.color ?? color;
+      else { const v = value(u); color = v == null ? (dark ? '#2B211B' : '#F7F1EA') : SEQ[classOf(v)]; }
+    }
+    map.setFeatureState({ source: 'units', id: u.fid }, { color });
+  }
+}
+function drawControls() {
+  const md = document.getElementById('modes');
+  md.innerHTML = [['top', t('top')], ['one', t('one')]].map(([m, l]) => `<button type="button" data-mode="${m}" aria-pressed="${m === mode}">${l}</button>`).join('');
+  md.querySelectorAll('button').forEach((b) => b.onclick = () => { mode = b.dataset.mode; draw(); });
+  const ms = document.getElementById('measures');
+  ms.hidden = mode === 'top';
+  ms.innerHTML = ['share', 'count'].map((m) => `<button type="button" data-m="${m}" aria-pressed="${m === measure}">${t(m)}</button>`).join('');
+  ms.querySelectorAll('button').forEach((b) => b.onclick = () => { measure = b.dataset.m; draw(); });
+  document.getElementById('today').checked = today;
+}
+function drawLegend() {
+  const el = document.getElementById('legend');
+  const line = today ? `<div class="nodata today"><i></i>${t('todayLegend')}</div>` : '';
+  if (mode === 'top') {
+    const shown = [...new Set(units.filter((u) => u.total).map((u) => largest(u)[0]))];
+    el.innerHTML = `<span>${t('top')}</span>` + shown.map((k) => `<div class="nodata"><i style="background:${LG[k].color};border:0"></i>${esc(lname(k))}</div>`).join('') + line;
+    return;
+  }
+  el.innerHTML = `<span>${esc(lname(language))} · ${t(measure)}</span>
+    <div class="ramp">${SEQ.map((x) => `<span style="background:${x}"></span>`).join('')}</div>
+    <div class="ticks"><span></span>${SCALES[measure].ticks.map((x) => `<span>${x}</span>`).join('')}</div>` + line;
+}
+function langTotals() {
+  const tot = {};
+  for (const u of units) for (const [k, n] of Object.entries(u.langs ?? {})) tot[k] = (tot[k] ?? 0) + n;
+  return Object.entries(tot).sort((a, b) => b[1] - a[1]);
+}
+function bar(u) {
+  return `<div class="bar" aria-hidden="true">${Object.entries(u.langs).sort((a, b) => b[1] - a[1]).map(([k, n]) => `<span style="flex:${n};background:${LG[k].color}" title="${esc(lname(k))}"></span>`).join('')}</div>`;
+}
+function langTable(x) {
+  return `<table><thead><tr><th>${t('language')}</th><th>${t('people')}</th><th>%</th></tr></thead><tbody>${Object.entries(x.langs).sort((a, b) => b[1] - a[1]).filter(([, n]) => n / x.total >= .001 || n >= 100).map(([k, n]) => `<tr><td><i style="background:${LG[k].color}"></i>${esc(lname(k))}</td><td>${nf().format(n)}</td><td>${pct(n, x.total)}</td></tr>`).join('')}</tbody></table>`;
+}
+function drawSide() {
+  const el = document.getElementById('side');
+  if (selected != null) {
+    const u = units[selected];
+    el.innerHTML = `<section class="unit"><button type="button" class="back">${t('back')}</button>
+      <h2 class="title">${esc(L(u))}</h2><p class="where">${esc(u.gov[LI[lang]])}${u.total ? ` · ${t('total')(nf().format(u.total))}` : ''}</p>
+      ${u.total ? bar(u) + langTable(u) + `<p class="src">${t('src')}: <a href="${esc(u.src)}" target="_blank" rel="noopener">Demoscope Weekly</a></p>` : `<p class="where">${t('nodata')}</p>`}
+      ${(u.towns ?? []).map((w) => `<h3>${esc(L(w))} · ${t('town')} · ${t('total')(nf().format(w.total))}</h3>${langTable(w)}`).join('')}
+      <p class="note">${t('note')}</p></section>`;
+    el.querySelector('.back').onclick = () => select(null);
+    return;
+  }
+  const tot = langTotals();
+  const all = units.reduce((s, u) => s + (u.total ?? 0), 0);
+  const ranked = mode === 'one' ? `<section class="rank"><h2>${esc(lname(language))} · ${t('where')}</h2><ol>${units.filter((u) => u.langs?.[language]).sort((a, b) => b.langs[language] - a.langs[language]).slice(0, 8).map((u, i) => `<li><button type="button" data-u="${u.fid}"><span class="v">${i + 1}</span><span>${esc(L(u))}</span><span class="v">${nf().format(u.langs[language])} · ${pct(u.langs[language], u.total)}</span></button></li>`).join('')}</ol></section>` : '';
+  el.innerHTML = `<div class="totals"><b>${nf().format(all)}</b><small>${t('area')}</small></div>${ranked}
+    <section class="rank"><h2>${t('languages')}</h2><ul class="langlist">${tot.map(([k, n]) => `<li><button type="button" data-l="${k}" aria-pressed="${mode === 'one' && k === language}"><i style="background:${LG[k].color}"></i><span>${esc(lname(k))}</span><span class="v">${nf().format(n)} · ${pct(n, all)}</span></button></li>`).join('')}</ul></section>
+    <p class="note">${t('note')}</p>`;
+  el.querySelectorAll('[data-l]').forEach((b) => b.onclick = () => { language = b.dataset.l; mode = 'one'; draw(); document.getElementById('body').scrollTop = 0; });
+  el.querySelectorAll('[data-u]').forEach((b) => b.onclick = () => { const f = geoData.features[+b.dataset.u]; map.fitBounds(bbox(f.geometry), { padding: pad(), maxZoom: 8, duration: still() ? 0 : 700 }); select(+b.dataset.u); });
+}
+function bbox(g) { let b = [180, 90, -180, -90]; for (const poly of g.type === 'Polygon' ? [g.coordinates] : g.coordinates) for (const [x, y] of poly[0]) b = [Math.min(b[0], x), Math.min(b[1], y), Math.max(b[2], x), Math.max(b[3], y)]; return [[b[0], b[1]], [b[2], b[3]]]; }
+function keepUrl() {
+  const q = new URLSearchParams();
+  if (lang !== 'az') q.set('lang', lang);
+  if (mode === 'one') q.set('l', language);
+  if (today) q.set('today', '1');
+  history.replaceState(null, '', `${location.pathname}${q.size ? '?' + q : ''}`);
+}
+function draw() { drawControls(); if (!units.length) return; drawLegend(); drawSide(); paint(); keepUrl(); }
+document.getElementById('today').onchange = (e) => { today = e.target.checked; if (map.getLayer('today')) map.setLayoutProperty('today', 'visibility', today ? 'visible' : 'none'); draw(); };
+function applyLang() {
+  document.documentElement.lang = lang;
+  document.title = t('doc');
+  document.querySelectorAll('[data-i18n]').forEach((el) => el.textContent = t(el.dataset.i18n));
+  document.querySelectorAll('[data-lang]').forEach((b) => b.setAttribute('aria-pressed', b.dataset.lang === lang));
+  document.querySelectorAll('[data-keep-lang]').forEach((a) => { const u = new URL(a.getAttribute('href'), location.href); if (lang === 'az') u.searchParams.delete('lang'); else u.searchParams.set('lang', lang); a.href = u.pathname + u.search; });
+}
+applyLang();
+draw();
+document.querySelectorAll('[data-lang]').forEach((b) => b.onclick = () => {
+  lang = b.dataset.lang;
+  try { localStorage.setItem('lang', lang); } catch {}
+  applyLang(); draw();
+  if (map.getStyle()) for (const l of map.getStyle().layers) if (l.type === 'symbol' && l.layout?.['text-field']) map.setLayoutProperty(l.id, 'text-field', labelExpr());
+});
+})();
+</script>
+</body>
+</html>

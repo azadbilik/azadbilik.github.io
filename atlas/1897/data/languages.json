@@ -1,0 +1,323 @@
+{
+ "_note": "Each language the 1897 census tables name for the Caucasus, grouped as the page shows them. `labels` are the census's own words (Demoscope's transcription of Table XIII); `names` are az, ru, en.",
+ "azerbaijani": {
+  "labels": [
+   "Татарский"
+  ],
+  "color": "#D9A62E",
+  "names": [
+   "Azərbaycan türkcəsi («tatar»)",
+   "Азербайджанский («татарский»)",
+   "Azerbaijani (“Tatar”)"
+  ]
+ },
+ "armenian": {
+  "labels": [
+   "Армянский"
+  ],
+  "color": "#8A6A5A",
+  "names": [
+   "Erməni",
+   "Армянский",
+   "Armenian"
+  ]
+ },
+ "georgian": {
+  "labels": [
+   "Грузинский",
+   "Имеретинский",
+   "Мингрельский",
+   "Сванетский"
+  ],
+  "color": "#A23B3B",
+  "names": [
+   "Kartvel dilləri (gürcü, imeret, menqrel, svan)",
+   "Картвельские (грузинский, имеретинский, мингрельский, сванский)",
+   "Kartvelian (Georgian, Imeretian, Mingrelian, Svan)"
+  ]
+ },
+ "russian": {
+  "labels": [
+   "Великорусский",
+   "Малорусский",
+   "Белорусский"
+  ],
+  "color": "#5A6B7A",
+  "names": [
+   "Rus, ukrain, belarus",
+   "Русский (велико-, мало-, белорусский)",
+   "Russian, Ukrainian, Belarusian"
+  ]
+ },
+ "avar": {
+  "labels": [
+   "Аварско-Андийский"
+  ],
+  "color": "#8C5A2B",
+  "names": [
+   "Avar və and dilləri",
+   "Аварско-андийские",
+   "Avar and Andic"
+  ]
+ },
+ "dargin": {
+  "labels": [
+   "Даргинский"
+  ],
+  "color": "#5E8C6A",
+  "names": [
+   "Dargin",
+   "Даргинский",
+   "Dargin"
+  ]
+ },
+ "lezgian": {
+  "labels": [
+   "Кюринский"
+  ],
+  "color": "#1F6F8B",
+  "names": [
+   "Ləzgi («kürə»)",
+   "Лезгинский («кюринский»)",
+   "Lezgian (“Kürə”)"
+  ]
+ },
+ "lak": {
+  "labels": [
+   "Кази-Кумукский и остал. лезгин. нар."
+  ],
+  "color": "#9E3B5B",
+  "names": [
+   "Lak və digər Dağıstan dilləri («qazıqumuq»)",
+   "Лакский и прочие («казикумукский»)",
+   "Lak and other Daghestanian (“Kazikumukh”)"
+  ]
+ },
+ "lezgic-other": {
+  "labels": [
+   "Лезгинские без распределения"
+  ],
+  "color": "#4F8FA6",
+  "names": [
+   "Dağıstan dilləri, bölünməmiş",
+   "Лезгинские без распределения",
+   "Daghestanian, not broken down"
+  ]
+ },
+ "udi": {
+  "labels": [
+   "Удинский"
+  ],
+  "color": "#7A3E8E",
+  "names": [
+   "Udin",
+   "Удинский",
+   "Udi"
+  ]
+ },
+ "talysh": {
+  "labels": [
+   "Талышинский"
+  ],
+  "color": "#3E8E41",
+  "names": [
+   "Talış",
+   "Талышский",
+   "Talysh"
+  ]
+ },
+ "tat": {
+  "labels": [
+   "Татский"
+  ],
+  "color": "#2E7D6B",
+  "names": [
+   "Tat",
+   "Татский",
+   "Tat"
+  ]
+ },
+ "persian": {
+  "labels": [
+   "Персидский",
+   "Таджикский"
+  ],
+  "color": "#5B4BA0",
+  "names": [
+   "Fars",
+   "Персидский",
+   "Persian"
+  ]
+ },
+ "kurdish": {
+  "labels": [
+   "Курдские"
+  ],
+  "color": "#6B8E23",
+  "names": [
+   "Kürd",
+   "Курдский",
+   "Kurdish"
+  ]
+ },
+ "jewish": {
+  "labels": [
+   "Еврейский"
+  ],
+  "color": "#3B5BA2",
+  "names": [
+   "Yəhudi dilləri",
+   "Еврейский",
+   "Jewish languages"
+  ]
+ },
+ "turkish": {
+  "labels": [
+   "Турецкий"
+  ],
+  "color": "#D9708E",
+  "names": [
+   "Türk (Osmanlı)",
+   "Турецкий",
+   "Turkish"
+  ]
+ },
+ "karapapakh": {
+  "labels": [
+   "Карапапахский"
+  ],
+  "color": "#C26A6A",
+  "names": [
+   "Qarapapaq",
+   "Карапапахский",
+   "Karapapakh"
+  ]
+ },
+ "kumyk": {
+  "labels": [
+   "Кумыкский"
+  ],
+  "color": "#9A8A3A",
+  "names": [
+   "Qumuq",
+   "Кумыкский",
+   "Kumyk"
+  ]
+ },
+ "nogai": {
+  "labels": [
+   "Ногайский"
+  ],
+  "color": "#A89A5A",
+  "names": [
+   "Noqay",
+   "Ногайский",
+   "Nogai"
+  ]
+ },
+ "turkmen": {
+  "labels": [
+   "Туркменский"
+  ],
+  "color": "#C79A5A",
+  "names": [
+   "Türkmən",
+   "Туркменский",
+   "Turkmen"
+  ]
+ },
+ "turkic-other": {
+  "labels": [
+   "Тюркские наречия без распределения",
+   "Киргиз-кайсацкий",
+   "Башкирский",
+   "Карачаевский",
+   "Чувашский"
+  ],
+  "color": "#D9A66B",
+  "names": [
+   "Digər türk dilləri",
+   "Прочие тюркские",
+   "Other Turkic"
+  ]
+ },
+ "greek": {
+  "labels": [
+   "Греческий"
+  ],
+  "color": "#7F9FB5",
+  "names": [
+   "Yunan",
+   "Греческий",
+   "Greek"
+  ]
+ },
+ "assyrian": {
+  "labels": [
+   "Айсорский (Сиро-халдейский)"
+  ],
+  "color": "#8E6F9E",
+  "names": [
+   "Aysor (assuri)",
+   "Айсорский (ассирийский)",
+   "Assyrian"
+  ]
+ },
+ "ossetian": {
+  "labels": [
+   "Осетинские"
+  ],
+  "color": "#4F7F6F",
+  "names": [
+   "Osetin",
+   "Осетинский",
+   "Ossetian"
+  ]
+ },
+ "chechen": {
+  "labels": [
+   "Чеченский",
+   "Кистинский",
+   "Ингушский"
+  ],
+  "color": "#6F6F4F",
+  "names": [
+   "Çeçen, kist, inquş",
+   "Чеченский, кистинский, ингушский",
+   "Chechen, Kist, Ingush"
+  ]
+ },
+ "polish": {
+  "labels": [
+   "Польский"
+  ],
+  "color": "#9AA3AD",
+  "names": [
+   "Polyak",
+   "Польский",
+   "Polish"
+  ]
+ },
+ "german": {
+  "labels": [
+   "Немецкий"
+  ],
+  "color": "#7D8894",
+  "names": [
+   "Alman",
+   "Немецкий",
+   "German"
+  ]
+ },
+ "other": {
+  "labels": [
+   "*"
+  ],
+  "color": "#B8B0A4",
+  "names": [
+   "Digər dillər",
+   "Прочие языки",
+   "Other languages"
+  ]
+ }
+}

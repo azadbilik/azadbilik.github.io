@@ -1,0 +1,493 @@
+{
+ "govs": {
+  "Бакинская губерния": [
+   "Bakı quberniyası",
+   "Бакинская губерния",
+   "Baku Governorate"
+  ],
+  "Елисаветпольская губерния": [
+   "Yelizavetpol (Gəncə) quberniyası",
+   "Елисаветпольская губерния",
+   "Elisabethpol Governorate"
+  ],
+  "Эриванская губерния": [
+   "İrəvan quberniyası",
+   "Эриванская губерния",
+   "Erivan Governorate"
+  ],
+  "Тифлисская губерния вкл. Закатальский округ": [
+   "Tiflis quberniyası",
+   "Тифлисская губерния",
+   "Tiflis Governorate"
+  ],
+  "Дагестанская область": [
+   "Dağıstan vilayəti",
+   "Дагестанская область",
+   "Dagestan Oblast"
+  ],
+  "Карская губерния": [
+   "Qars vilayəti",
+   "Карская область",
+   "Kars Oblast"
+  ]
+ },
+ "units": {
+  "Бакинский": [
+   "Bakı qəzası",
+   "Бакинский уезд",
+   "Baku uezd"
+  ],
+  "Геокчайский": [
+   "Göyçay qəzası",
+   "Геокчайский уезд",
+   "Geokchay uezd"
+  ],
+  "Джеватский": [
+   "Cavad qəzası",
+   "Джеватский уезд",
+   "Javad uezd"
+  ],
+  "Кубинский": [
+   "Quba qəzası",
+   "Кубинский уезд",
+   "Quba uezd"
+  ],
+  "Ленкоранский": [
+   "Lənkəran qəzası",
+   "Ленкоранский уезд",
+   "Lankaran uezd"
+  ],
+  "Шемахинский": [
+   "Şamaxı qəzası",
+   "Шемахинский уезд",
+   "Shamakhi uezd"
+  ],
+  "Елисаветпольский": [
+   "Yelizavetpol (Gəncə) qəzası",
+   "Елисаветпольский уезд",
+   "Elisabethpol (Ganja) uezd"
+  ],
+  "Арешский": [
+   "Ərəş qəzası",
+   "Арешский уезд",
+   "Aresh uezd"
+  ],
+  "Джебраильский": [
+   "Cəbrayıl qəzası",
+   "Джебраильский уезд",
+   "Jabrayil uezd"
+  ],
+  "Джеванширский": [
+   "Cavanşir qəzası",
+   "Джеванширский уезд",
+   "Javanshir uezd"
+  ],
+  "Зангезурский": [
+   "Zəngəzur qəzası",
+   "Зангезурский уезд",
+   "Zangezur uezd"
+  ],
+  "Казахский": [
+   "Qazax qəzası",
+   "Казахский уезд",
+   "Qazakh uezd"
+  ],
+  "Нухинский": [
+   "Nuxa qəzası",
+   "Нухинский уезд",
+   "Nukha uezd"
+  ],
+  "Шушинский": [
+   "Şuşa qəzası",
+   "Шушинский уезд",
+   "Shusha uezd"
+  ],
+  "Эриванский": [
+   "İrəvan qəzası",
+   "Эриванский уезд",
+   "Erivan uezd"
+  ],
+  "Александропольский": [
+   "Aleksandropol (Gümrü) qəzası",
+   "Александропольский уезд",
+   "Alexandropol (Gyumri) uezd"
+  ],
+  "Нахичеванский": [
+   "Naxçıvan qəzası",
+   "Нахичеванский уезд",
+   "Nakhchivan uezd"
+  ],
+  "Новобаязетский": [
+   "Yeni Bəyazid qəzası",
+   "Новобаязетский уезд",
+   "Novobayazet uezd"
+  ],
+  "Сурмалинский": [
+   "Sürməli qəzası",
+   "Сурмалинский уезд",
+   "Surmali uezd"
+  ],
+  "Шаруро-Даралагезский": [
+   "Şərur-Dərələyəz qəzası",
+   "Шаруро-Даралагезский уезд",
+   "Sharur-Daralayaz uezd"
+  ],
+  "Эчмиадзинский": [
+   "Üçkilsə (Eçmiədzin) qəzası",
+   "Эчмиадзинский уезд",
+   "Etchmiadzin uezd"
+  ],
+  "Тифлисский": [
+   "Tiflis qəzası",
+   "Тифлисский уезд",
+   "Tiflis uezd"
+  ],
+  "Ахалкалакский": [
+   "Axalkələk qəzası",
+   "Ахалкалакский уезд",
+   "Akhalkalaki uezd"
+  ],
+  "Ахалцихский": [
+   "Axalsıx qəzası",
+   "Ахалцихский уезд",
+   "Akhaltsikhe uezd"
+  ],
+  "Борчалинский": [
+   "Borçalı qəzası",
+   "Борчалинский уезд",
+   "Borchali uezd"
+  ],
+  "Горийский": [
+   "Qori qəzası",
+   "Горийский уезд",
+   "Gori uezd"
+  ],
+  "Душетский": [
+   "Duşet qəzası",
+   "Душетский уезд",
+   "Dusheti uezd"
+  ],
+  "Сигнахский": [
+   "Sığnaq qəzası",
+   "Сигнахский уезд",
+   "Signagi uezd"
+  ],
+  "Телавский": [
+   "Telav qəzası",
+   "Телавский уезд",
+   "Telavi uezd"
+  ],
+  "Тионетский": [
+   "Tionet qəzası",
+   "Тионетский уезд",
+   "Tianeti uezd"
+  ],
+  "Закатальский": [
+   "Zaqatala dairəsi",
+   "Закатальский округ",
+   "Zaqatala okrug"
+  ],
+  "Темир-Хан-Шуринский": [
+   "Teymurxan-Şura dairəsi",
+   "Темир-Хан-Шуринский округ",
+   "Temir-Khan-Shura okrug"
+  ],
+  "Аварский": [
+   "Avar dairəsi",
+   "Аварский округ",
+   "Avar okrug"
+  ],
+  "Андийский": [
+   "And dairəsi",
+   "Андийский округ",
+   "Andi okrug"
+  ],
+  "Гунибский": [
+   "Qunib dairəsi",
+   "Гунибский округ",
+   "Gunib okrug"
+  ],
+  "Даргинский": [
+   "Dargin dairəsi",
+   "Даргинский округ",
+   "Dargin okrug"
+  ],
+  "Казикумухский": [
+   "Qazıqumuq dairəsi",
+   "Казикумухский округ",
+   "Kazikumukh okrug"
+  ],
+  "Кайтаго-Табасаранский": [
+   "Qaytaq-Təbəsəran dairəsi",
+   "Кайтаго-Табасаранский округ",
+   "Kaitag-Tabasaran okrug"
+  ],
+  "Кюринский": [
+   "Kürə dairəsi",
+   "Кюринский округ",
+   "Kyurin okrug"
+  ],
+  "Самурский": [
+   "Samur dairəsi",
+   "Самурский округ",
+   "Samur okrug"
+  ],
+  "Карсский": [
+   "Qars dairəsi",
+   "Карсский округ",
+   "Kars okrug"
+  ],
+  "Ардаганский": [
+   "Ərdahan dairəsi",
+   "Ардаганский округ",
+   "Ardahan okrug"
+  ],
+  "Кагызманский": [
+   "Kağızman dairəsi",
+   "Кагызманский округ",
+   "Kagizman okrug"
+  ],
+  "Ольтинский": [
+   "Oltu dairəsi",
+   "Ольтинский округ",
+   "Olti okrug"
+  ]
+ },
+ "towns": {
+  "Ольты": [
+   "Oltu",
+   "Ольты",
+   "Olti"
+  ],
+  "Карс": [
+   "Qars",
+   "Карс",
+   "Kars"
+  ],
+  "Ардаган": [
+   "Ərdahan",
+   "Ардаган",
+   "Ardahan"
+  ],
+  "Кагызман": [
+   "Kağızman",
+   "Кагызман",
+   "Kağızman"
+  ],
+  "Вагоршапат": [
+   "Üçkilsə (Vağarşapat)",
+   "Вагоршапат",
+   "Vagharshapat"
+  ],
+  "Александрополь": [
+   "Gümrü (Aleksandropol)",
+   "Александрополь",
+   "Alexandropol (Gyumri)"
+  ],
+  "Эривань": [
+   "İrəvan",
+   "Эривань",
+   "Erivan"
+  ],
+  "Игдыр": [
+   "İğdır",
+   "Игдыр",
+   "Iğdır"
+  ],
+  "Башиорашен": [
+   "Başnorəşən",
+   "Башиорашен",
+   "Bashnorashen"
+  ],
+  "Новобаязет": [
+   "Yeni Bəyazid",
+   "Новобаязет",
+   "Novobayazet"
+  ],
+  "Казах": [
+   "Qazax",
+   "Казах",
+   "Qazakh"
+  ],
+  "Елисаветполь": [
+   "Gəncə (Yelizavetpol)",
+   "Елисаветполь",
+   "Ganja (Elisabethpol)"
+  ],
+  "Агдаш": [
+   "Ağdaş",
+   "Агдаш",
+   "Aghdash"
+  ],
+  "Герусы": [
+   "Gorus",
+   "Герусы",
+   "Goris"
+  ],
+  "Сальяны": [
+   "Salyan",
+   "Сальяны",
+   "Salyan"
+  ],
+  "Баку": [
+   "Bakı",
+   "Баку",
+   "Baku"
+  ],
+  "Тертер": [
+   "Tərtər",
+   "Тертер",
+   "Tartar"
+  ],
+  "Геокчай": [
+   "Göyçay",
+   "Геокчай",
+   "Goychay"
+  ],
+  "Нуха": [
+   "Nuxa (Şəki)",
+   "Нуха",
+   "Nukha (Shaki)"
+  ],
+  "Куба": [
+   "Quba",
+   "Куба",
+   "Quba"
+  ],
+  "Закаталы": [
+   "Zaqatala",
+   "Закаталы",
+   "Zaqatala"
+  ],
+  "Ахты": [
+   "Axtı",
+   "Ахты",
+   "Akhty"
+  ],
+  "Маджалис": [
+   "Məcalis",
+   "Маджалис",
+   "Majalis"
+  ],
+  "Дербент": [
+   "Dərbənd",
+   "Дербент",
+   "Derbent"
+  ],
+  "Темир-Хан-Шура": [
+   "Teymurxan-Şura (Buynaksk)",
+   "Темир-Хан-Шура",
+   "Temir-Khan-Shura (Buynaksk)"
+  ],
+  "Петровск": [
+   "Petrovsk (Mahaçqala)",
+   "Петровск",
+   "Petrovsk (Makhachkala)"
+  ],
+  "Кумух": [
+   "Qumuq",
+   "Кумух",
+   "Kumukh"
+  ],
+  "Гуниб": [
+   "Qunib",
+   "Гуниб",
+   "Gunib"
+  ],
+  "Хунзах": [
+   "Xunzax",
+   "Хунзах",
+   "Khunzakh"
+  ],
+  "Ботлих": [
+   "Botlix",
+   "Ботлих",
+   "Botlikh"
+  ],
+  "Телав": [
+   "Telavi",
+   "Телав",
+   "Telavi"
+  ],
+  "Сигнах": [
+   "Sığnaq",
+   "Сигнах",
+   "Sighnaghi"
+  ],
+  "Тифлис": [
+   "Tiflis",
+   "Тифлис",
+   "Tiflis"
+  ],
+  "Тионеты": [
+   "Tionet",
+   "Тионеты",
+   "Tianeti"
+  ],
+  "Ахалцих": [
+   "Axalsıx",
+   "Ахалцих",
+   "Akhaltsikhe"
+  ],
+  "Ахалкалаки": [
+   "Axalkələk",
+   "Ахалкалаки",
+   "Akhalkalaki"
+  ],
+  "Гори": [
+   "Qori",
+   "Гори",
+   "Gori"
+  ],
+  "Душет": [
+   "Duşet",
+   "Душет",
+   "Dusheti"
+  ],
+  "Ленкорань": [
+   "Lənkəran",
+   "Ленкорань",
+   "Lankaran"
+  ],
+  "Касум-Кент": [
+   "Qasımkənd",
+   "Касум-Кент",
+   "Kasumkent"
+  ],
+  "Нахичевань": [
+   "Naxçıvan",
+   "Нахичевань",
+   "Nakhchivan"
+  ],
+  "Ордубад": [
+   "Ordubad",
+   "Ордубад",
+   "Ordubad"
+  ],
+  "Джебраил": [
+   "Cəbrayıl",
+   "Джебраил",
+   "Jabrayil"
+  ],
+  "Шуша": [
+   "Şuşa",
+   "Шуша",
+   "Shusha"
+  ],
+  "Шемаха": [
+   "Şamaxı",
+   "Шемаха",
+   "Shamakhi"
+  ],
+  "Леваши": [
+   "Levaşi",
+   "Леваши",
+   "Levashi"
+  ],
+  "Шулаверы": [
+   "Şulaver (Şaumyani)",
+   "Шулаверы",
+   "Shulaveri"
+  ]
+ }
+}
