@@ -1,0 +1,10 @@
+{
+ "lezgic": ["Nax-Dağıstan dilləri, ləzgi qrupu", "Нахско-дагестанские, лезгинская группа", "Nakh-Daghestanian, Lezgic branch"],
+ "avar-andic": ["Nax-Dağıstan dilləri, avar-and qrupu", "Нахско-дагестанские, аваро-андийская группа", "Nakh-Daghestanian, Avar-Andic branch"],
+ "khinalug": ["Nax-Dağıstan dilləri, ayrıca dil", "Нахско-дагестанские, изолированный язык", "Nakh-Daghestanian, an isolate within the family"],
+ "iranian": ["Hind-Avropa dilləri, İran qrupu", "Индоевропейские, иранская группа", "Indo-European, Iranian branch"],
+ "kartvelian": ["Kartvel dilləri", "Картвельские языки", "Kartvelian"],
+ "slavic": ["Hind-Avropa dilləri, slavyan qrupu", "Индоевропейские, славянская группа", "Indo-European, Slavic branch"],
+ "turkic": ["Türk dilləri", "Тюркские языки", "Turkic"],
+ "armenian": ["Hind-Avropa dilləri, erməni dili", "Индоевропейские, армянский язык", "Indo-European, Armenian"]
+}

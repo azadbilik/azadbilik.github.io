@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Xalqlar və dillər · Azad Bilik</title>
+<meta name="description" content="Azərbaycanın xalqları və dilləri rayonlar üzrə, siyahıyaalmalara görə: ləzgilər, talışlar, avarlar, saxurlar, udinlər, tatlar, qırızlar, buduqlar, xınalıqlılar. Peoples and languages of Azerbaijan by district.">
+<meta name="theme-color" content="#F4EFE6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14100D" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://azadbilik.org/atlas/xalqlar/">
+<meta property="og:title" content="Xalqlar və dillər · Peoples and languages of Azerbaijan">
+<meta property="og:description" content="Azərbaycanın xalqları və dilləri rayonlar üzrə, 1979–2019.">
+<meta property="og:image" content="https://azadbilik.org/atlas/xalqlar/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+<link rel="stylesheet" href="/shared/story-map.css">
+<style>
+  /* On top of the story maps' panel and legend: the measure switch, the census rounds, the chart */
+  .controls { padding: 1rem 1.5rem; border-bottom: 1px solid var(--rule); display: grid; gap: .9rem; }
+  .seg { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--rule); border-radius: 3px; padding: 2px; }
+  .seg button { padding: .35rem .4rem; border-radius: 2px; font-size: .8125rem; color: var(--muted); }
+  .seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+  .rounds { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; }
+  .rounds button { padding: .3rem 0; font-size: .75rem; color: var(--muted); border-bottom: 2px solid var(--rule); font-variant-numeric: tabular-nums; }
+  .rounds button[aria-pressed="true"] { color: var(--ink); border-bottom-color: var(--accent); font-weight: 600; }
+  .round-note { font-size: .75rem; color: var(--muted); display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
+  .round-note select { font: inherit; color: inherit; background: transparent; border: 1px solid var(--rule); border-radius: 3px; padding: .1rem .3rem; }
+  .timeline { display: grid; grid-template-columns: auto 1fr; gap: .5rem; align-items: end; }
+  .play { width: 2rem; height: 2rem; border: 1px solid var(--rule); border-radius: 50%; display: grid; place-items: center; font-size: .75rem; }
+  .play:hover { border-color: var(--ink); }
+  .search input { width: 100%; font: inherit; font-size: .875rem; color: var(--ink); background: transparent; border: 1px solid var(--rule); border-radius: 3px; padding: .4rem .6rem; }
+  .search input:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .spark { display: block; margin-top: .25rem; }
+  .unit .trend { padding: .5rem 1.5rem 0; }
+  .unit .trend svg { width: 100%; height: auto; display: block; overflow: visible; }
+  .unit .trend text { font: .625rem var(--sans); fill: var(--muted); }
+  .unit .share { padding: .5rem 1.5rem 0; font-size: .8125rem; color: var(--muted); }
+  .totals { padding: 1rem 1.5rem .5rem; display: grid; gap: .6rem; }
+  .total { display: grid; grid-template-columns: 1fr auto; gap: 0 .75rem; align-items: baseline; }
+  .total b { font: 400 1.5rem/1.1 var(--serif); font-variant-numeric: tabular-nums; grid-row: span 2; text-align: right; }
+  .total span { font-size: .875rem; font-weight: 500; }
+  .total small { font-size: .75rem; color: var(--muted); }
+  .chart { padding: .25rem 1.5rem 1rem; }
+  .chart svg { width: 100%; height: auto; display: block; overflow: visible; }
+  .chart text { font: .625rem var(--sans); fill: var(--muted); }
+  .rank h2, .unit h2 { padding: .75rem 1.5rem .35rem; font: 500 .75rem var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .rank ol { list-style: none; padding: 0 0 .5rem; }
+  .rank li button { display: grid; grid-template-columns: 1.5rem 1fr auto; gap: .5rem; width: 100%; text-align: left; padding: .3rem 1.5rem; font-size: .875rem; }
+  .rank li button:hover { background: var(--rule); }
+  .rank .v { font-variant-numeric: tabular-nums; color: var(--muted); }
+  .unit { padding: 1rem 0; }
+  .unit .back { display: block; padding: 0 1.5rem .75rem; font-size: .8125rem; color: var(--muted); }
+  .unit .back:hover { color: var(--ink); }
+  .unit .title { padding: 0 1.5rem; font: 400 1.5rem/1.15 var(--serif); }
+  .unit .where { padding: .15rem 1.5rem 0; font-size: .8125rem; color: var(--muted); }
+  .unit table { width: calc(100% - 3rem); margin: .75rem 1.5rem 0; border-collapse: collapse; font-size: .875rem; font-variant-numeric: tabular-nums; }
+  .unit th { text-align: left; font-weight: 500; color: var(--muted); font-size: .75rem; padding: .25rem 0; border-bottom: 1px solid var(--rule); }
+  .unit td { padding: .3rem 0; border-bottom: 1px solid var(--rule); }
+  .unit td:not(:first-child), .unit th:not(:first-child) { text-align: right; }
+  .unit td a { color: var(--muted); text-decoration: none; } .unit td a:hover { color: var(--accent); }
+  .up { color: var(--accent); } .down { color: var(--second); }
+  .legend .ramp { display: flex; }
+  .legend .ramp span { flex: 1; height: .6rem; }
+  .legend .ticks { display: flex; justify-content: space-between; font-size: .625rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .legend .nodata { display: flex; align-items: center; gap: .4rem; color: var(--muted); }
+  .legend .nodata i { width: .9rem; height: .6rem; background: repeating-linear-gradient(45deg, var(--rule) 0 2px, transparent 2px 4px); border: 1px solid var(--rule); }
+  .legend { min-width: 13rem; }
+  @media (max-width: 48rem) { .controls, .totals, .chart { padding-inline: 1rem; } .rank h2, .rank li button, .unit h2, .unit .title, .unit .where { padding-inline: 1rem; } .unit table { margin-inline: 1rem; width: calc(100% - 2rem); } .legend { min-width: 0; } }
+  .rounds { grid-template-columns: repeat(9, 1fr); }
+  .rounds button { font-size: .6875rem; }
+  .community { padding: 1rem 1.5rem 0; border-top: 1px solid var(--rule); }
+  .community h3 { font: 400 1.125rem/1.2 var(--serif); }
+  .community p { margin-top: .35rem; font-size: .875rem; }
+  .community .who { margin-top: .5rem; font-size: .8125rem; color: var(--muted); }
+  .community .who a { color: var(--ink); text-decoration: none; } .community .who a:hover { color: var(--accent); }
+  .community button.go { margin-top: .4rem; font-size: .8125rem; color: var(--muted); text-decoration: underline; text-decoration-color: var(--rule); }
+  .unit .who { padding: .5rem 1.5rem 0; font-size: .8125rem; color: var(--muted); }
+  .unit .who a { color: var(--ink); text-decoration: none; } .unit .who a:hover { color: var(--accent); }
+  .rounds { grid-template-columns: repeat(4, 1fr); }
+  .peoplelist { list-style: none; padding: .25rem 0 .5rem; }
+  .peoplelist button { display: grid; grid-template-columns: .65rem 1fr auto; gap: .5rem; align-items: center; width: 100%; text-align: left; padding: .35rem 1.5rem; font-size: .875rem; }
+  .peoplelist button:hover { background: var(--rule); }
+  .peoplelist button[aria-pressed="true"] { background: var(--rule); box-shadow: inset 2px 0 var(--accent); font-weight: 500; }
+  .peoplelist i { width: .65rem; height: .65rem; border-radius: 2px; }
+  .peoplelist .v { font-size: .75rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .lang { padding: .75rem 1.5rem 0; font-size: .875rem; display: grid; gap: .3rem; }
+  .lang h3 { font: 400 1.25rem/1.2 var(--serif); }
+  .lang .k { color: var(--muted); font-size: .8125rem; }
+  .badge { display: inline-block; font-size: .75rem; padding: .05rem .45rem; border-radius: 3px; border: 1px solid var(--rule); }
+  .badge.u3, .badge.u4, .badge.u5 { border-color: color-mix(in srgb, var(--accent) 55%, transparent); color: var(--accent); }
+  .lang a { color: inherit; } .lang .spark { margin-top: .25rem; }
+</style>
+</head>
+<body>
+<div id="map" role="region" aria-label="Xəritə"></div>
+
+<aside class="panel">
+  <div class="head">
+    <div class="top"><a class="brand" href="/" data-keep-lang><svg viewBox="0 0 512 512" aria-hidden="true"><g class="star"><rect x="126" y="126" width="260" height="260"/><polygon points="256,72 440,256 256,440 72,256"/></g><polygon class="gem" points="256,196 316,256 256,316 196,256"/></svg>Azad Bilik</a><nav><a href="/atlas/" data-keep-lang>Atlas</a><span class="langs" role="group" aria-label="Dil · Язык · Language"><button type="button" data-lang="az">AZ</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="en">EN</button></span></nav></div>
+    <h1 data-i18n="title">Xalqlar və dillər</h1>
+    <p class="sub" data-i18n="sub">Azərbaycanın xalqları rayonlar üzrə</p>
+  </div>
+  <div class="body" id="body">
+    <div class="controls">
+      <div class="seg" role="group" id="modes"></div>
+      <div class="seg" role="group" id="measures"></div>
+      <div>
+        <div class="timeline"><button type="button" class="play" id="play">▶</button><div class="rounds" role="group" id="rounds"></div></div>
+      </div>
+    </div>
+    <div id="side" aria-live="polite"></div>
+  </div>
+</aside>
+
+<div class="legend" id="legend"></div>
+
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script>
+(() => {
+const dark = matchMedia('(prefers-color-scheme: dark)').matches;
+const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+const still = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+const LANGS = ['az', 'ru', 'en'];
+let lang = (() => {
+  const q = new URLSearchParams(location.search).get('lang');
+  if (LANGS.includes(q)) return q;
+  try { const s = localStorage.getItem('lang'); if (LANGS.includes(s)) return s; } catch {}
+  return 'az';
+})();
+const LI = { az: 0, ru: 1, en: 2 };
+const nf = () => new Intl.NumberFormat({ az: 'az-Latn-AZ', ru: 'ru-RU', en: 'en-GB' }[lang]);
+const T = {
+  az: { doc: 'Xalqlar və dillər · Azad Bilik', title: 'Xalqlar və dillər', sub: 'Azərbaycanın xalqları rayonlar üzrə', one: 'Bir xalq', top: 'Ən böyük azlıq', share: 'Payı', count: 'Sayı',
+    language: 'Dil', family: 'Ailə', status: 'UNESCO', scripts: 'Əlifba', unesco: ['', 'təhlükəsiz', 'həssas', 'təhlükə altında', 'ciddi təhlükə altında', 'kritik təhlükə altında', 'ölü'],
+    inRep: (n, y) => `Respublikada ${n} (${y})`, districts: 'Ən çox yaşadığı rayonlar', peoples: 'Xalqlar', nodata: 'məlumat yoxdur', lastKnown: (y) => `son məlum rəqəm: ${y}`, carriedNote: 'son məlum rəqəm (bu il yoxdur)',
+    largest: 'Ən böyük azlıq', none: 'azlıq yoxdur', ofDistrict: 'rayon əhalisinin', back: '← Xalqlar', azerbaijanis: 'Azərbaycanlılar',
+    note: 'Rəqəmlər rəsmi siyahıyaalmalardandır, hər biri öz mənbəyi ilə; rayon üzrə 1979, 1999, 2009 və 2019. Sovet siyahıyaalmalarında talışların çoxu azərbaycanlı kimi yazılıb; qırızlar, buduqlar, xınalıqlılar yalnız 2009-dan ayrıca sayılır; ingiloylar 2019-a qədər gürcülərlə birdir. Rəqəmi olmayan il son məlum rəqəmlə, solğun göstərilir. Dillərin vəziyyəti UNESCO-nun şkalası ilə, Wikidata-dan.' },
+  ru: { doc: 'Народы и языки · Azad Bilik', title: 'Народы и языки', sub: 'Народы Азербайджана по районам', one: 'Один народ', top: 'Крупнейшее меньшинство', share: 'Доля', count: 'Число',
+    language: 'Язык', family: 'Семья', status: 'ЮНЕСКО', scripts: 'Письменность', unesco: ['', 'вне опасности', 'уязвимый', 'под угрозой', 'в серьёзной опасности', 'в критическом состоянии', 'вымерший'],
+    inRep: (n, y) => `В республике ${n} (${y})`, districts: 'Районы, где их больше всего', peoples: 'Народы', nodata: 'нет данных', lastKnown: (y) => `последняя известная цифра: ${y}`, carriedNote: 'последняя известная цифра (за этот год нет)',
+    largest: 'Крупнейшее меньшинство', none: 'меньшинств нет', ofDistrict: 'населения района', back: '← Народы', azerbaijanis: 'Азербайджанцы',
+    note: 'Цифры — официальные переписи, у каждой — источник; по районам — 1979, 1999, 2009 и 2019. В советских переписях большинство талышей записаны азербайджанцами; крызы, будухи, хиналугцы учитываются отдельно лишь с 2009 г.; ингилойцы до 2019 г. — вместе с грузинами. Год без цифры показан бледно, с последней известной цифрой. Положение языков — по шкале ЮНЕСКО, из Викиданных.' },
+  en: { doc: 'Peoples and languages · Azad Bilik', title: 'Peoples and languages', sub: 'The peoples of Azerbaijan, district by district', one: 'One people', top: 'Largest minority', share: 'Share', count: 'Number',
+    language: 'Language', family: 'Family', status: 'UNESCO', scripts: 'Script', unesco: ['', 'safe', 'vulnerable', 'definitely endangered', 'severely endangered', 'critically endangered', 'extinct'],
+    inRep: (n, y) => `${n} in the Republic (${y})`, districts: 'Where most live', peoples: 'Peoples', nodata: 'no data', lastKnown: (y) => `last known figure: ${y}`, carriedNote: 'last known figure (none this census)',
+    largest: 'Largest minority', none: 'no minority', ofDistrict: 'of the district', back: '← Peoples', azerbaijanis: 'Azerbaijanis',
+    note: "The figures are the official censuses, each with its source; by district for 1979, 1999, 2009 and 2019. Soviet censuses recorded most Talysh as Azerbaijanis; Kryz, Budukh and Khinalug are counted separately only from 2009; Ingiloys are counted with Georgians until 2019. A census with no figure shows the last known one, faintly. Languages' status is UNESCO's scale, from Wikidata." },
+};
+const t = (k) => T[lang][k];
+const L = (p) => p[lang] ?? p.az;
+const ROUNDS = ['1979', '1999', '2009', '2019'];
+// Peoples shown (a 1979 "Mountain Jews" joins the later "Jews (incl. Mountain Jews)")
+const ORDER = ['Lezgins', 'Talysh', 'Avars', 'Tsakhurs', 'Udi', 'Tats', 'Kryz', 'Budukh', 'Khinalug', 'Kurds', 'Georgians', 'Ingiloys', 'Jews (incl. Mountain Jews)', 'Russians', 'Ukrainians', 'Tatars', 'Turks (Meskhetian)', 'Armenians'];
+const COLORS = { Lezgins: '#1F6F8B', Talysh: '#3E8E41', Avars: '#8C5A2B', Tsakhurs: '#B07A1E', Udi: '#7A3E8E', Tats: '#2E7D6B', Kryz: '#C0533A', Budukh: '#9E3B5B', Khinalug: '#5B4BA0', Kurds: '#6B8E23', Georgians: '#A23B3B', Ingiloys: '#C26A6A', 'Jews (incl. Mountain Jews)': '#3B5BA2', Russians: '#5A6B7A', Ukrainians: '#7F9FB5', Tatars: '#9A8A3A', 'Turks (Meskhetian)': '#B0563A', Armenians: '#8A6A5A' };
+let geoData = null, round = 3, mode = 'one', measure = 'share', people = 'Lezgins', units = [], info = {}, selected = null, hovered = null, playing = null;
+const params = new URLSearchParams(location.search);
+if (ORDER.includes(params.get('p'))) people = params.get('p');
+if (params.get('mode') === 'top') mode = 'top';
+if (ROUNDS.includes(params.get('y'))) round = ROUNDS.indexOf(params.get('y'));
+const key = (p, y) => p === 'Jews (incl. Mountain Jews)' && y === '1979' ? 'Mountain Jews' : p;
+const exact = (u, r = round) => u.census[ROUNDS[r]] ?? null;
+function census(u, r = round) {
+  if (exact(u, r)) return { c: exact(u, r), year: ROUNDS[r], carried: false };
+  for (let k = r - 1; k >= 0; k--) if (exact(u, k)) return { c: exact(u, k), year: ROUNDS[k], carried: true };
+  return null;
+}
+function count(u, p = people, r = round) {
+  // A people with no figure this census: its last known one (if the census then counted it)
+  const x = exact(u, r);
+  const k = key(p, ROUNDS[r]);
+  if (x && x[k] != null) return { n: x[k], total: x.total, year: ROUNDS[r], carried: false };
+  for (let j = r - 1; j >= 0; j--) { const y = exact(u, j), kk = key(p, ROUNDS[j]); if (y && y[kk] != null) return { n: y[kk], total: y.total, year: ROUNDS[j], carried: true }; }
+  return null;
+}
+function value(u) {
+  const c = count(u);
+  if (!c) return null;
+  return measure === 'count' ? c.n : c.total ? c.n / c.total * 100 : null;
+}
+function largestMinority(u) {
+  const c = census(u);
+  if (!c) return null;
+  let best = null;
+  for (const p of ORDER) { const n = c.c[key(p, c.year)]; if (n && (!best || n > best.n)) best = { p, n }; }
+  return best && { ...best, total: c.c.total, carried: c.carried, year: c.year };
+}
+const SCALES = { share: { breaks: [.5, 2, 5, 15, 30, 50], ticks: ['', '0.5%', '2%', '5%', '15%', '30%', '50%+'] }, count: { breaks: [100, 500, 2e3, 5e3, 15e3, 40e3], ticks: ['', '100', '500', '2k', '5k', '15k', '40k+'] } };
+const SEQ = dark ? ['#2B211B', '#4A2C24', '#6B3129', '#8E3430', '#B33A37', '#D45A55', '#F08A80'] : ['#F2E6DA', '#EACAB6', '#E0A88E', '#D2836A', '#BF5C48', '#A6362E', '#7A1B1E'];
+const classOf = (v) => SCALES[measure].breaks.filter((b) => v >= b).length;
+const fmt = (v) => v == null ? t('nodata') : measure === 'count' ? nf().format(v) : `${v < 10 ? v.toFixed(1) : Math.round(v)}%`;
+const pname = (p) => { const x = info[p]; return x ? x[lang] : p; };
+
+const map = new maplibregl.Map({
+  container: 'map', style: `https://tiles.openfreemap.org/styles/${dark ? 'dark' : 'positron'}`,
+  bounds: [[44.7, 38.3], [50.4, 41.95]], minZoom: 5, maxZoom: 11,
+  attributionControl: { compact: true, customAttribution: '<a href="https://www.geoboundaries.org">geoBoundaries</a> · azstat (pop-stat.mashke.org) · ethno-kavkaz.narod.ru · Wikidata' },
+});
+map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-right');
+const tip = new maplibregl.Popup({ closeButton: false, closeOnClick: false, offset: 8 });
+const phone = () => matchMedia('(max-width: 48rem)').matches;
+const pad = () => phone() ? { top: 60, right: 16, left: 16, bottom: document.querySelector('.panel').offsetHeight + 16 } : { top: 32, right: 32, bottom: 32, left: 27 * 16 + 32 };
+const labelExpr = () => ['coalesce', ['get', `name:${lang}`], ['get', lang === 'ru' ? 'name' : 'name:latin'], ['get', 'name']];
+map.on('style.load', () => {
+  for (const l of map.getStyle().layers) {
+    if (l.type === 'background') map.setPaintProperty(l.id, 'background-color', css('--land'));
+    if (l.type === 'fill' && /water|ocean|lake/.test(l.id)) map.setPaintProperty(l.id, 'fill-color', css('--water'));
+    if (l.type === 'symbol' && l.layout?.['text-field']) map.setLayoutProperty(l.id, 'text-field', labelExpr());
+  }
+});
+map.on('load', async () => {
+  const [geo, pi] = await Promise.all(['units.geojson', 'peoples.out.json'].map((f) => fetch(`data/${f}`).then((r) => r.json())));
+  info = pi; geoData = geo;
+  geo.features.forEach((f, k) => { f.id = k; });
+  units = geo.features.map((f) => ({ ...f.properties, fid: f.id }));
+  map.fitBounds([[44.7, 38.3], [50.4, 41.95]], { padding: pad(), duration: 0 });
+  document.querySelector('.maplibregl-ctrl-attrib')?.classList.remove('maplibregl-compact-show');
+  const firstSymbol = map.getStyle().layers.find((l) => l.type === 'symbol')?.id;
+  map.addSource('units', { type: 'geojson', data: geo });
+  map.addLayer({ id: 'units', type: 'fill', source: 'units', paint: { 'fill-color': ['coalesce', ['feature-state', 'color'], 'rgba(0,0,0,0)'], 'fill-opacity': ['case', ['boolean', ['feature-state', 'carried'], false], .4, .85] } }, firstSymbol);
+  map.addLayer({ id: 'units-line', type: 'line', source: 'units', paint: {
+    'line-color': ['case', ['boolean', ['feature-state', 'hover'], false], css('--ink'), css('--paper')], 'line-width': ['case', ['boolean', ['feature-state', 'hover'], false], 1.5, .6],
+  } }, firstSymbol);
+  map.on('mousemove', 'units', (e) => {
+    map.getCanvas().style.cursor = 'pointer';
+    const u = units[e.features[0].id];
+    if (hovered !== u.fid) { if (hovered != null) map.setFeatureState({ source: 'units', id: hovered }, { hover: false }); hovered = u.fid; map.setFeatureState({ source: 'units', id: hovered }, { hover: true }); }
+    let html = `<strong>${esc(L(u))}</strong>`;
+    if (mode === 'top') { const m = largestMinority(u); html += m ? ` · ${esc(pname(m.p))}: ${nf().format(m.n)} (${(m.n / m.total * 100).toFixed(1)}%)${m.carried ? ` <small>(${t('lastKnown')(m.year)})</small>` : ''}` : ` · ${t('nodata')}`; }
+    else { const c = count(u); html += c ? ` · ${esc(pname(people))}: ${nf().format(c.n)} · ${(c.total ? c.n / c.total * 100 : 0).toFixed(1)}% ${t('ofDistrict')}${c.carried ? ` <small>(${t('lastKnown')(c.year)})</small>` : ''}` : ` · ${t('nodata')}`; }
+    tip.setLngLat(e.lngLat).setHTML(html).addTo(map);
+  });
+  map.on('mouseleave', 'units', () => { map.getCanvas().style.cursor = ''; tip.remove(); if (hovered != null) map.setFeatureState({ source: 'units', id: hovered }, { hover: false }); hovered = null; });
+  map.on('click', 'units', (e) => { const m = largestMinority(units[e.features[0].id]); if (mode === 'top' && m) { people = m.p; mode = 'one'; draw(); } });
+  draw();
+});
+function paint() {
+  for (const u of units) {
+    let color = dark ? 'rgba(255,255,255,.05)' : 'rgba(26,20,16,.06)', carried = false;
+    if (mode === 'top') { const m = largestMinority(u); if (m) { color = COLORS[m.p]; carried = m.carried; } }
+    else { const v = value(u); if (v != null) { color = SEQ[classOf(v)]; carried = count(u).carried; } }
+    map.setFeatureState({ source: 'units', id: u.fid }, { color, carried });
+  }
+}
+function drawControls() {
+  const md = document.getElementById('modes');
+  md.style.gridTemplateColumns = 'repeat(2, 1fr)';
+  md.innerHTML = [['one', t('one')], ['top', t('top')]].map(([m, l]) => `<button type="button" data-mode="${m}" aria-pressed="${m === mode}">${l}</button>`).join('');
+  md.querySelectorAll('button').forEach((b) => b.onclick = () => { mode = b.dataset.mode; draw(); });
+  const ms = document.getElementById('measures');
+  ms.style.gridTemplateColumns = 'repeat(2, 1fr)';
+  ms.hidden = mode === 'top';
+  ms.innerHTML = ['share', 'count'].map((m) => `<button type="button" data-m="${m}" aria-pressed="${m === measure}">${t(m)}</button>`).join('');
+  ms.querySelectorAll('button').forEach((b) => b.onclick = () => { measure = b.dataset.m; draw(); });
+  const rs = document.getElementById('rounds');
+  rs.innerHTML = ROUNDS.map((y, i) => `<button type="button" data-r="${i}" aria-pressed="${i === round}">${y}</button>`).join('');
+  rs.querySelectorAll('button').forEach((b) => b.onclick = () => { if (playing) togglePlay(); round = +b.dataset.r; draw(); });
+  const play = document.getElementById('play');
+  play.textContent = playing ? '❚❚' : '▶';
+}
+function togglePlay() {
+  if (playing) { clearInterval(playing); playing = null; drawControls(); return; }
+  if (round >= ROUNDS.length - 1) round = 0;
+  playing = setInterval(() => { if (round >= ROUNDS.length - 1) { clearInterval(playing); playing = null; drawControls(); return; } round++; draw(); }, still() ? 2500 : 1500);
+  draw();
+}
+function drawLegend() {
+  const el = document.getElementById('legend');
+  if (mode === 'top') {
+    const shown = [...new Set(units.map((u) => largestMinority(u)?.p).filter(Boolean))];
+    el.innerHTML = `<span>${t('largest')}</span>` + shown.map((p) => `<div class="nodata"><i style="background:${COLORS[p]};border:0"></i>${esc(pname(p))}</div>`).join('') + `<div class="nodata"><i></i>${t('nodata')}</div>`;
+    return;
+  }
+  el.innerHTML = `<span>${esc(pname(people))} · ${t(measure)}</span>
+    <div class="ramp">${SEQ.map((x) => `<span style="background:${x}"></span>`).join('')}</div>
+    <div class="ticks">${SCALES[measure].ticks.slice(1).map((x) => `<span>${x}</span>`).join('')}</div>
+    <div class="nodata"><i style="background:${SEQ[3]};opacity:.4"></i>${t('carriedNote')}</div>
+    <div class="nodata"><i></i>${t('nodata')}</div>`;
+}
+// A people's line over the censuses, in the Republic
+function spark(p) {
+  const tot = info[p]?.totals ?? {};
+  const pts = Object.entries(tot).map(([y, n]) => [+y, n]).sort((a, b) => a[0] - b[0]);
+  if (pts.length < 2) return '';
+  const W = 320, H = 70, max = Math.max(...pts.map((x) => x[1]));
+  const X = (y) => 8 + (y - 1959) / (2019 - 1959) * (W - 16), Y = (v) => H - 14 - v / max * (H - 22);
+  return `<svg class="spark" viewBox="0 0 ${W} ${H}" width="100%" aria-hidden="true"><polyline points="${pts.map(([y, n]) => `${X(y)},${Y(n)}`).join(' ')}" fill="none" stroke="${COLORS[p] ?? css('--accent')}" stroke-width="1.75"/>${pts.map(([y, n]) => `<circle cx="${X(y)}" cy="${Y(n)}" r="2.2" fill="${COLORS[p] ?? css('--accent')}"><title>${y}: ${nf().format(n)}</title></circle><text x="${X(y)}" y="${H}" text-anchor="middle" font-size="9" fill="currentColor" opacity=".6">${y}</text>`).join('')}</svg>`;
+}
+function drawSide() {
+  const el = document.getElementById('side');
+  const yr = ROUNDS[round];
+  const repCount = (p) => info[p]?.totals?.[yr] ?? info[p]?.totals?.[{ 1979: '1979', 1999: '1999', 2009: '2009', 2019: '2019' }[yr]];
+  const x = info[people] ?? {};
+  const lg = x.language ?? {};
+  const card = mode === 'one' ? `<div class="lang">
+    <h3>${esc(pname(people))}</h3>
+    ${repCount(people) != null ? `<p>${t('inRep')(nf().format(repCount(people)), yr)}</p>` : ''}
+    <p><span class="k">${t('language')}:</span> ${lg.wiki ? `<a href="${esc(lg.wiki)}" target="_blank" rel="noopener">${esc(x.langName?.[LI[lang]] ?? '')}</a>` : esc(x.langName?.[LI[lang]] ?? '')}</p>
+    ${x.family?.name ? `<p><span class="k">${t('family')}:</span> ${esc(x.family.name[LI[lang]])}</p>` : ''}
+    ${lg.unesco ? `<p><span class="k">${t('status')}:</span> <span class="badge u${lg.unesco}">${t('unesco')[lg.unesco]}</span></p>` : ''}
+    ${lg.scripts?.length ? `<p><span class="k">${t('scripts')}:</span> ${esc(lg.scripts.join(', '))}</p>` : ''}
+    ${spark(people)}
+  </div>
+  <section class="rank"><h2>${t('districts')}</h2><ol>${units.map((u) => ({ u, c: count(u) })).filter((z) => z.c && z.c.n).sort((a, b) => b.c.n - a.c.n).slice(0, 8).map((z, i) => `<li><button type="button" data-u="${z.u.fid}"><span class="v">${i + 1}</span><span>${esc(L(z.u))}</span><span class="v">${nf().format(z.c.n)} · ${(z.c.total ? z.c.n / z.c.total * 100 : 0).toFixed(1)}%</span></button></li>`).join('')}</ol></section>` : '';
+  el.innerHTML = card + `<section class="rank"><h2>${t('peoples')} · ${yr}</h2><ul class="peoplelist">${ORDER.filter((p) => info[p]).map((p) => `<li><button type="button" data-p="${esc(p)}" aria-pressed="${mode === 'one' && p === people}"><i style="background:${COLORS[p]}"></i><span>${esc(pname(p))}</span><span class="v">${repCount(p) != null ? nf().format(repCount(p)) : '—'}</span></button></li>`).join('')}</ul></section>
+    <p class="note">${t('note')}</p>`;
+  el.querySelectorAll('[data-p]').forEach((b) => b.onclick = () => { people = b.dataset.p; mode = 'one'; draw(); document.getElementById('body').scrollTop = 0; });
+  el.querySelectorAll('[data-u]').forEach((b) => b.onclick = () => { const u = units[+b.dataset.u]; map.fitBounds(bbox(geoData.features[u.fid].geometry), { padding: pad(), maxZoom: 9, duration: still() ? 0 : 700 }); });
+}
+function bbox(g) { let b = [180, 90, -180, -90]; for (const poly of g.type === 'Polygon' ? [g.coordinates] : g.coordinates) for (const [x, y] of poly[0]) b = [Math.min(b[0], x), Math.min(b[1], y), Math.max(b[2], x), Math.max(b[3], y)]; return [[b[0], b[1]], [b[2], b[3]]]; }
+function keepUrl() {
+  const q = new URLSearchParams();
+  if (lang !== 'az') q.set('lang', lang);
+  if (mode === 'top') q.set('mode', 'top'); else if (people !== 'Lezgins') q.set('p', people);
+  if (round !== 3) q.set('y', ROUNDS[round]);
+  history.replaceState(null, '', `${location.pathname}${q.size ? '?' + q : ''}`);
+}
+function draw() { drawControls(); if (!units.length) return; drawLegend(); drawSide(); paint(); keepUrl(); }
+document.getElementById('play').onclick = togglePlay;
+document.addEventListener('keydown', (e) => {
+  if (e.target.closest('input, select, textarea')) return;
+  if (e.key === 'ArrowRight' && round < ROUNDS.length - 1) { round++; draw(); }
+  if (e.key === 'ArrowLeft' && round > 0) { round--; draw(); }
+});
+function applyLang() {
+  document.documentElement.lang = lang;
+  document.title = t('doc');
+  document.querySelectorAll('[data-i18n]').forEach((el) => el.textContent = t(el.dataset.i18n));
+  document.querySelectorAll('[data-lang]').forEach((b) => b.setAttribute('aria-pressed', b.dataset.lang === lang));
+  document.querySelectorAll('[data-keep-lang]').forEach((a) => { const u = new URL(a.getAttribute('href'), location.href); if (lang === 'az') u.searchParams.delete('lang'); else u.searchParams.set('lang', lang); a.href = u.pathname + u.search; });
+}
+applyLang();
+draw();
+document.querySelectorAll('[data-lang]').forEach((b) => b.onclick = () => {
+  lang = b.dataset.lang;
+  try { localStorage.setItem('lang', lang); } catch {}
+  applyLang(); draw();
+  if (map.getStyle()) for (const l of map.getStyle().layers) if (l.type === 'symbol' && l.layout?.['text-field']) map.setLayoutProperty(l.id, 'text-field', labelExpr());
+});
+})();
+</script>
+</body>
+</html>

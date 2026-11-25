@@ -40,6 +40,7 @@ for (const [path, musts] of [
   ['/atlas/', ['href="/atlas/ehali/"', 'href="/xeriteler/"']],
   ['/musiqi/', ['maplibre-gl', 'recordings.json']],
   ['/atlas/icmalar/', ['maplibre-gl', 'extras.json']],
+  ['/atlas/xalqlar/', ['maplibre-gl', 'peoples.out.json']],
   ['/xeriteler/ehali/', ['/atlas/ehali/']],
   ['/xeriteler/', ['href="/xerite/"', 'href="/qalereya/emalatxana/"']],
   ['/xerite/', ['maplibre-gl', 'data/authors.json']],

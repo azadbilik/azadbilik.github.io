@@ -1,0 +1,22 @@
+{
+ "Lezgins": { "lang": "Q31746", "family": "lezgic", "az": "Ləzgilər", "ru": "Лезгины", "en": "Lezgins", "langName": ["Ləzgi dili", "Лезгинский язык", "Lezgian"] },
+ "Talysh": { "lang": "Q34318", "family": "iranian", "az": "Talışlar", "ru": "Талыши", "en": "Talysh", "langName": ["Talış dili", "Талышский язык", "Talysh"] },
+ "Avars": { "lang": "Q29561", "family": "avar-andic", "az": "Avarlar", "ru": "Аварцы", "en": "Avars", "langName": ["Avar dili", "Аварский язык", "Avar"] },
+ "Tsakhurs": { "lang": "Q36853", "family": "lezgic", "az": "Saxurlar", "ru": "Цахуры", "en": "Tsakhurs", "langName": ["Saxur dili", "Цахурский язык", "Tsakhur"] },
+ "Udi": { "lang": "Q36867", "family": "lezgic", "az": "Udinlər", "ru": "Удины", "en": "Udi", "langName": ["Udi dili", "Удинский язык", "Udi"] },
+ "Tats": { "lang": "Q56489", "family": "iranian", "az": "Tatlar", "ru": "Таты", "en": "Tats", "langName": ["Tat dili", "Татский язык", "Tat"] },
+ "Kryz": { "lang": "Q35861", "family": "lezgic", "az": "Qırızlar", "ru": "Крызы", "en": "Kryz", "langName": ["Qrız dili", "Крызский язык", "Kryts"] },
+ "Budukh": { "lang": "Q35397", "family": "lezgic", "az": "Buduqlar", "ru": "Будухи", "en": "Budukh", "langName": ["Buduq dili", "Будухский язык", "Budukh"] },
+ "Khinalug": { "lang": "Q35278", "family": "khinalug", "az": "Xınalıqlar", "ru": "Хиналугцы", "en": "Khinalug", "langName": ["Xınalıq dili", "Хиналугский язык", "Khinalug"] },
+ "Khaput": { "lang": null, "family": "lezgic", "az": "Xaputlular", "ru": "Хапутлинцы", "en": "Khaput", "langName": ["Xaput (qrız dilinin ləhcəsi)", "Хапутский (говор крызского)", "Khaput (a dialect of Kryts)"] },
+ "Kurds": { "lang": "Q36163", "family": "iranian", "az": "Kürdlər", "ru": "Курды", "en": "Kurds", "langName": ["Kurmanc dili", "Курманджи", "Kurmanji"] },
+ "Georgians": { "lang": "Q8108", "family": "kartvelian", "az": "Gürcülər", "ru": "Грузины", "en": "Georgians", "langName": ["Gürcü dili", "Грузинский язык", "Georgian"] },
+ "Ingiloys": { "lang": "Q8108", "family": "kartvelian", "az": "İngiloylar", "ru": "Ингилойцы", "en": "Ingiloys", "langName": ["Gürcü dilinin ingiloy ləhcəsi", "Ингилойский говор грузинского", "Ingiloy Georgian"] },
+ "Jews (incl. Mountain Jews)": { "lang": "Q56495", "family": "iranian", "az": "Yəhudilər (dağ yəhudiləri ilə)", "ru": "Евреи (с горскими)", "en": "Jews (incl. Mountain Jews)", "langName": ["Dağ yəhudilərinin dili (cuhuri)", "Джуури (горско-еврейский)", "Judeo-Tat (Juhuri)"] },
+ "Mountain Jews": { "lang": "Q56495", "family": "iranian", "az": "Dağ yəhudiləri", "ru": "Горские евреи", "en": "Mountain Jews", "langName": ["Dağ yəhudilərinin dili (cuhuri)", "Джуури (горско-еврейский)", "Judeo-Tat (Juhuri)"] },
+ "Russians": { "lang": "Q7737", "family": "slavic", "az": "Ruslar", "ru": "Русские", "en": "Russians", "langName": ["Rus dili", "Русский язык", "Russian"] },
+ "Ukrainians": { "lang": "Q8798", "family": "slavic", "az": "Ukraynalılar", "ru": "Украинцы", "en": "Ukrainians", "langName": ["Ukrayna dili", "Украинский язык", "Ukrainian"] },
+ "Tatars": { "lang": "Q25285", "family": "turkic", "az": "Tatarlar", "ru": "Татары", "en": "Tatars", "langName": ["Tatar dili", "Татарский язык", "Tatar"] },
+ "Turks (Meskhetian)": { "lang": "Q256", "family": "turkic", "az": "Ahıska türkləri", "ru": "Турки-месхетинцы", "en": "Meskhetian Turks", "langName": ["Türk dili", "Турецкий язык", "Turkish"] },
+ "Armenians": { "lang": "Q8785", "family": "armenian", "az": "Ermənilər", "ru": "Армяне", "en": "Armenians", "langName": ["Erməni dili", "Армянский язык", "Armenian"] }
+}
