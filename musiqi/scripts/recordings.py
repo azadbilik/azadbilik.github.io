@@ -10,7 +10,7 @@ P = {
     'Bülbül': ('Q1131312', 'Bülbül', 'Бюльбюль', 'Bulbul'),
     'Seyid': ('Q4528165', 'Seyid Şuşinski', 'Сеид Шушинский', 'Seyid Shushinski'),
     'Xan': ('Q2427251', 'Xan Şuşinski', 'Хан Шушинский', 'Khan Shushinski'),
-    'Qədirbala': (None, 'Qədirbala (Əbdülqədir Cabbarov)', 'Гадирбала (Абдулгадир Джаббаров)', 'Gadirbala (Abdulgadir Jabbarov)'),
+    'Qədirbala': ('qedirbala', 'Qədirbala (Əbdülqədir Cabbarov)', 'Гадирбала (Абдулгадир Джаббаров)', 'Gadirbala (Abdulgadir Jabbarov)'),
     'Ələsgər': ('Q12850169', 'Ələsgər Abdullayev', 'Алескер Абдуллаев', 'Alasgar Abdullayev'),
     'Əhəd': (None, 'Əhəd Əliyev', 'Ахад Алиев', 'Ahad Aliyev'),
 }

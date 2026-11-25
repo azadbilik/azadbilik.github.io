@@ -45,6 +45,21 @@
   .people .yrs { grid-row: span 2; font-size: .75rem; color: var(--muted); font-variant-numeric: tabular-nums; align-self: center; }
   .place-head { padding: 1rem 1.5rem .25rem; }
   .place-head h2 { font: 400 1.375rem/1.2 var(--serif); padding: 0; text-transform: none; letter-spacing: 0; color: var(--ink); }
+  /* Filters */
+  .chips { display: flex; flex-wrap: wrap; gap: .3rem; padding: .75rem 1.5rem 0; }
+  .chips button { font-size: .75rem; padding: .2rem .55rem; border: 1px solid var(--rule); border-radius: 999px; color: var(--muted); }
+  .chips button[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .chips small { opacity: .7; margin-left: .2rem; font-variant-numeric: tabular-nums; }
+  /* Now playing: who sings, from where */
+  .player { grid-template-columns: auto 1fr; column-gap: .75rem; }
+  .player .face { grid-row: span 2; width: 3.25rem; height: 3.25rem; border-radius: 3px; object-fit: cover; background: var(--frame); }
+  .player .face.none { display: grid; place-items: center; font: 400 1.25rem var(--serif); color: var(--muted); }
+  .player .now a, .player .now button { color: inherit; text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: .2em; }
+  .player audio { grid-column: 1 / -1; }
+  .people .listen { font-size: .75rem; color: var(--accent); padding: 0 1.5rem .35rem; margin-top: -.25rem; display: inline-block; }
+  .pulse { width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--accent); animation: pulse 1.4s ease-out infinite; pointer-events: none; }
+  @keyframes pulse { from { transform: scale(.6); opacity: 1; } to { transform: scale(2.2); opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .pulse { animation: none; } }
   .card .maplibregl-popup-content { padding: .75rem 1rem; }
   .legend .row { display: flex; align-items: center; gap: .5rem; }
   .legend .row i { width: .65rem; height: .65rem; border-radius: 50%; display: inline-block; }
@@ -61,7 +76,7 @@
   </div>
   <div class="tabs" role="tablist"><button type="button" role="tab" data-tab="recs" data-i18n="recs">Səs yazıları</button><button type="button" role="tab" data-tab="people" data-i18n="people">Musiqiçilər</button></div>
   <div class="body" id="body" aria-live="polite"></div>
-  <div class="player" id="player" hidden><p class="now" id="now"></p><audio id="audio" controls preload="none"></audio></div>
+  <div class="player" id="player" hidden><span id="face"></span><p class="now" id="now"></p><audio id="audio" controls preload="none"></audio></div>
 </aside>
 
 <div class="legend" id="legend"></div>
@@ -83,23 +98,38 @@ let lang = (() => {
 const T = {
   az: { doc: 'Musiqi · Azad Bilik', title: 'Musiqi', sub: 'İlk səs yazıları və musiqiçilərin yurdu', gallery: 'Qalereya', recs: 'Səs yazıları', people: 'Musiqiçilər',
     mugham: 'Muğamlar', tesnif: 'Təsniflər', song: 'Mahnılar', instrumental: 'Alətlə', khanende: 'xanəndə', tar: 'tarzən', ashik: 'aşıq', unknown: 'ifaçısı bilinmir',
-    play: 'Dinlə', where: 'doğulduğu yer', commons: 'Commons', poems: 'şeirləri kitabxanada', back: '← Bütün musiqiçilər', nPeople: (n) => `${n} musiqiçi`, here: (n) => `${n} musiqiçi burada doğulub`,
-    note: 'Səs yazıları Wikimedia Commons-dandır, hamısı ictimai mülkiyyətdədir: Azərbaycanda 1976-dan əvvəlki yazılar sərbəstdir. Mahnının sözləri hələ qəzəllərə bağlanmayıb. Musiqiçilər və doğulduqları yerlər Wikidata-dandır.' },
+    play: 'Dinlə', commons: 'Commons', poems: 'şeirləri kitabxanada', back: '← Bütün musiqiçilər', nPeople: (n) => `${n} musiqiçi`, here: (n) => `${n} musiqiçi burada doğulub`,
+    all: 'Hamısı', listen: (n) => `▶ ${n} səs yazısı`, from: 'doğulub:', byHand: 'yer əl ilə', withRecs: 'səs yazısı olanlar', wiki: 'Vikipediya',
+    note: 'Səs yazıları Wikimedia Commons-dandır, hamısı ictimai mülkiyyətdədir: Azərbaycanda 1976-dan əvvəlki yazılar sərbəstdir. Mahnının sözləri hələ qəzəllərə bağlanmayıb. Musiqiçilər, doğulduqları yerlər və portretlər Wikidata-dandır.' },
   ru: { doc: 'Музыка · Azad Bilik', title: 'Музыка', sub: 'Первые записи и родина музыкантов', gallery: 'Галерея', recs: 'Записи', people: 'Музыканты',
     mugham: 'Мугамы', tesnif: 'Теснифы', song: 'Песни', instrumental: 'Инструментальные', khanende: 'ханенде', tar: 'тарист', ashik: 'ашуг', unknown: 'исполнитель неизвестен',
-    play: 'Слушать', where: 'место рождения', commons: 'Commons', poems: 'стихи в библиотеке', back: '← Все музыканты', nPeople: (n) => `${n} музыкантов`, here: (n) => `Здесь родились: ${n}`,
-    note: 'Записи — с Викисклада, все в общественном достоянии: в Азербайджане записи до 1976 года свободны. Тексты песен ещё не связаны с газелями. Музыканты и места их рождения — по Викиданным.' },
+    play: 'Слушать', commons: 'Commons', poems: 'стихи в библиотеке', back: '← Все музыканты', nPeople: (n) => `${n} музыкантов`, here: (n) => `Здесь родились: ${n}`,
+    all: 'Все', listen: (n) => `▶ записей: ${n}`, from: 'родом из', byHand: 'место указано вручную', withRecs: 'есть записи', wiki: 'Википедия',
+    note: 'Записи — с Викисклада, все в общественном достоянии: в Азербайджане записи до 1976 года свободны. Тексты песен ещё не связаны с газелями. Музыканты, места рождения и портреты — по Викиданным.' },
   en: { doc: 'Music · Azad Bilik', title: 'Music', sub: 'The first recordings, and where the musicians came from', gallery: 'Gallery', recs: 'Recordings', people: 'Musicians',
     mugham: 'Mughams', tesnif: 'Tasnifs', song: 'Songs', instrumental: 'Instrumental', khanende: 'khanende', tar: 'tar player', ashik: 'ashik', unknown: 'performer unknown',
-    play: 'Listen', where: 'birthplace', commons: 'Commons', poems: 'poems in the library', back: '← All musicians', nPeople: (n) => `${n} musicians`, here: (n) => `${n} born here`,
-    note: 'The recordings are from Wikimedia Commons, all in the public domain: in Azerbaijan, recordings made before 1976 are free. The songs\' words are not yet matched to their ghazals. The musicians and their birthplaces are from Wikidata.' },
+    play: 'Listen', commons: 'Commons', poems: 'poems in the library', back: '← All musicians', nPeople: (n) => `${n} musicians`, here: (n) => `${n} born here`,
+    all: 'All', listen: (n) => `▶ ${n} recording${n === 1 ? '' : 's'}`, from: 'born in', byHand: 'place set by hand', withRecs: 'recorded', wiki: 'Wikipedia',
+    note: "The recordings are from Wikimedia Commons, all in the public domain: in Azerbaijan, recordings made before 1976 are free. The songs' words are not yet matched to their ghazals. The musicians, their birthplaces and portraits are from Wikidata." },
 };
 const t = (k) => T[lang][k];
 const L = (o) => o?.[lang] || o?.az || o?.en || '';
 const KX = () => `https://kitabxana.az${lang === 'az' ? '' : '/' + lang}`;
-const ROLE_COLOR = () => ({ khanende: css('--accent'), tar: css('--second'), ashik: css('--third') || '#5B6B2E' });
+const ROLE = () => ({ khanende: css('--accent'), tar: css('--second'), ashik: css('--third') || '#5B6B2E' });
+const when = (y) => !y ? '' : lang === 'en' ? y.replace(/^Unknown date$/i, '') : y
+  .replace(/^early 20th century$/i, lang === 'ru' ? 'начало XX века' : 'XX əsrin əvvəli')
+  .replace(/^first half of 20th century$/i, lang === 'ru' ? 'первая половина XX века' : 'XX əsrin birinci yarısı')
+  .replace(/^Early XX c\.$/i, lang === 'ru' ? 'начало XX века' : 'XX əsrin əvvəli')
+  .replace(/^(\d{4})s$/, lang === 'ru' ? '$1-е' : '$1-cı illər').replace(/^c\. (\d{4})$/, lang === 'ru' ? 'ок. $1' : 'təq. $1')
+  .replace(/^Unknown date$/i, '');
+const years = (p) => p.born || p.died ? `${p.born ?? '?'}–${p.died ?? ''}` : '';
+const nameOf = (p) => p[lang] || p.az || p.en;
 
-let recs = [], people = [], tab = new URLSearchParams(location.search).get('tab') === 'people' ? 'people' : 'recs', place = null, playing = null;
+const params = new URLSearchParams(location.search);
+let recs = [], people = [], byQid = new Map(), places = new Map(), placeIds = [];
+let tab = params.get('tab') === 'people' ? 'people' : 'recs', place = null, who = params.get('who'), kind = null, playing = null;
+const recsOf = (qid) => recs.filter((r) => r.performer?.qid === qid);
+
 const map = new maplibregl.Map({
   container: 'map', style: `https://tiles.openfreemap.org/styles/${dark ? 'dark' : 'positron'}`,
   bounds: [[43, 37.5], [50.6, 42.5]], minZoom: 3, maxZoom: 11,
@@ -107,6 +137,8 @@ const map = new maplibregl.Map({
 });
 map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-right');
 const tip = new maplibregl.Popup({ closeButton: false, closeOnClick: false, offset: 10 });
+const pulseEl = document.createElement('div'); pulseEl.className = 'pulse';
+const pulse = new maplibregl.Marker({ element: pulseEl });
 const phone = () => matchMedia('(max-width: 48rem)').matches;
 const pad = () => phone() ? { top: 60, right: 24, left: 24, bottom: document.querySelector('.panel').offsetHeight + 24 } : { top: 48, right: 64, bottom: 48, left: 27 * 16 + 48 };
 const labelExpr = () => ['coalesce', ['get', `name:${lang}`], ['get', lang === 'ru' ? 'name' : 'name:latin'], ['get', 'name']];
@@ -119,108 +151,148 @@ map.on('style.load', () => {
 });
 map.on('load', async () => {
   [recs, people] = await Promise.all(['recordings.json', 'musicians.json'].map((f) => fetch(`data/${f}`).then((r) => r.json())));
+  byQid = new Map(people.map((p) => [p.qid, p]));
+  for (const p of people) {
+    if (!places.has(p.place.id)) places.set(p.place.id, { ...p.place, people: [] });
+    places.get(p.place.id).people.push(p);
+  }
+  placeIds = [...places.keys()];
   map.fitBounds([[43, 37.5], [50.6, 42.5]], { padding: pad(), duration: 0 });
   document.querySelector('.maplibregl-ctrl-attrib')?.classList.remove('maplibregl-compact-show');
-  // One dot per birthplace, sized by how many were born there, coloured by the commonest role
-  const places = new Map();
-  for (const p of people) {
-    const k = p.place.id;
-    if (!places.has(k)) places.set(k, { ...p.place, people: [] });
-    places.get(k).people.push(p);
-  }
-  const C = ROLE_COLOR();
-  map.addSource('places', { type: 'geojson', generateId: true, data: { type: 'FeatureCollection', features: [...places.values()].map((pl) => {
+  const C = ROLE();
+  // A dot per birthplace, sized by how many were born there, coloured by the commonest role;
+  // a ring where someone born there is on the recordings
+  map.addSource('places', { type: 'geojson', generateId: true, data: { type: 'FeatureCollection', features: placeIds.map((id) => {
+    const pl = places.get(id);
     const roles = pl.people.flatMap((p) => p.roles);
     const top = ['khanende', 'tar', 'ashik'].sort((a, b) => roles.filter((r) => r === b).length - roles.filter((r) => r === a).length)[0];
-    return { type: 'Feature', geometry: { type: 'Point', coordinates: [pl.lng, pl.lat] }, properties: { id: pl.id, n: pl.people.length, color: C[top] } };
+    return { type: 'Feature', geometry: { type: 'Point', coordinates: [pl.lng, pl.lat] }, properties: { id, n: pl.people.length, color: C[top], rec: pl.people.some((p) => recsOf(p.qid).length) } };
   }) } });
+  map.addLayer({ id: 'rings', type: 'circle', source: 'places', filter: ['get', 'rec'], paint: {
+    'circle-radius': ['+', ['interpolate', ['linear'], ['sqrt', ['get', 'n']], 1, 4, 3, 9, 6, 16], 4],
+    'circle-color': 'rgba(0,0,0,0)', 'circle-stroke-color': css('--ink'), 'circle-stroke-width': 1.25, 'circle-stroke-opacity': ['case', ['boolean', ['feature-state', 'dim'], false], .2, .7],
+  } });
   map.addLayer({ id: 'places', type: 'circle', source: 'places', paint: {
     'circle-radius': ['interpolate', ['linear'], ['sqrt', ['get', 'n']], 1, 4, 3, 9, 6, 16],
-    'circle-color': ['get', 'color'], 'circle-opacity': ['case', ['boolean', ['feature-state', 'dim'], false], .2, .8],
+    'circle-color': ['get', 'color'], 'circle-opacity': ['case', ['boolean', ['feature-state', 'dim'], false], .2, .85],
     'circle-stroke-color': css('--paper'), 'circle-stroke-width': ['case', ['boolean', ['feature-state', 'sel'], false], 2.5, 1],
   } });
   map.on('mousemove', 'places', (e) => {
     map.getCanvas().style.cursor = 'pointer';
     const pl = places.get(e.features[0].properties.id);
-    tip.setLngLat(e.features[0].geometry.coordinates).setHTML(`<strong>${esc(L(pl))}</strong> · ${t('here')(pl.people.length)}`).addTo(map);
+    const recd = pl.people.filter((p) => recsOf(p.qid).length);
+    tip.setLngLat(e.features[0].geometry.coordinates).setHTML(`<strong>${esc(L(pl))}</strong> · ${t('here')(pl.people.length)}${recd.length ? `<br>♪ ${recd.map((p) => esc(nameOf(p))).join(', ')}` : ''}`).addTo(map);
   });
   map.on('mouseleave', 'places', () => { map.getCanvas().style.cursor = ''; tip.remove(); });
   map.on('click', 'places', (e) => showPlace(e.features[0].properties.id));
-  window.__places = places;
+  if (who && byQid.has(who)) tab = 'recs';
   draw();
 });
 
-// Commons' dates in words, in the reader's language
-const when = (y) => !y ? '' : lang === 'en' ? y : y
-  .replace(/^early 20th century$/i, lang === 'ru' ? 'начало XX века' : 'XX əsrin əvvəli')
-  .replace(/^first half of 20th century$/i, lang === 'ru' ? 'первая половина XX века' : 'XX əsrin birinci yarısı')
-  .replace(/^Early XX c\.$/i, lang === 'ru' ? 'начало XX века' : 'XX əsrin əvvəli')
-  .replace(/^(\d{4})s$/, lang === 'ru' ? '$1-е' : '$1-cı illər').replace(/^c\. (\d{4})$/, lang === 'ru' ? 'ок. $1' : 'təq. $1')
-  .replace(/^Unknown date$/i, '');
-const roleText = (p) => p.roles.map((r) => t(r)).join(', ');
-const years = (p) => p.born || p.died ? `${p.born ?? '?'}–${p.died ?? ''}` : '';
-function drawRecs(el) {
-  const groups = ['mugham', 'tesnif', 'song', 'instrumental'];
-  el.innerHTML = groups.map((g) => {
-    const rs = recs.filter((r) => r.kind === g);
-    if (!rs.length) return '';
-    return `<section class="group"><h2>${t(g)} · ${rs.length}</h2><ol>${rs.map((r) => `<li class="rec${playing === r.id ? ' on' : ''}"><button type="button" class="play" data-play="${esc(r.id)}" aria-label="${t('play')}: ${esc(L(r.title))}">${playing === r.id ? '❚❚' : '▶'}</button>
-      <span class="name">${esc(L(r.title))}</span>
-      <span class="meta">${r.performer ? (r.performer.qid && people.some((p) => p.qid === r.performer.qid) ? `<button type="button" data-who="${r.performer.qid}">${esc(L(r.performer))}</button>` : esc(L(r.performer))) : t('unknown')}${when(r.year) ? ` · ${esc(when(r.year))}` : ''} · <a href="${esc(r.commons)}" target="_blank" rel="noopener">${t('commons')} ↗</a></span></li>`).join('')}</ol></section>`;
-  }).join('') + `<p class="note">${t('note')}</p>`;
-  el.querySelectorAll('[data-play]').forEach((b) => b.onclick = () => play(b.dataset.play));
-  el.querySelectorAll('[data-who]').forEach((b) => b.onclick = () => { const p = people.find((x) => x.qid === b.dataset.who); if (p) showPlace(p.place.id, p.qid); });
-}
-function drawPeople(el) {
-  const list = place ? people.filter((p) => p.place.id === place) : people;
-  const pl = place && window.__places.get(place);
-  const kx = (p) => p.kitabxana ? `<a class="kx" href="${KX()}/authors/${p.kitabxana}">${t('poems')} ↗</a>` : '';
-  el.innerHTML = (pl ? `<button type="button" class="back" id="back">${t('back')}</button><div class="place-head"><h2>${esc(L(pl))}</h2><p class="meta">${t('here')(list.length)}</p></div>` : `<section class="group"><h2>${t('nPeople')(people.length)}</h2></section>`)
-    + `<ol class="people">${list.map((p) => `<li><button type="button" data-p="${p.qid}"><span>${esc(p[lang] || p.az || p.en)}</span><span class="yrs">${years(p)}</span><span class="role">${roleText(p)}${pl ? '' : ` · ${esc(L(p.place))}`}</span></button>${kx(p)}</li>`).join('')}</ol>`
-    + (pl ? '' : `<p class="note">${t('note')}</p>`);
-  document.getElementById('back')?.addEventListener('click', () => { place = null; mark(); draw(); map.fitBounds([[43, 37.5], [50.6, 42.5]], { padding: pad(), duration: still() ? 0 : 700 }); });
-  el.querySelectorAll('[data-p]').forEach((b) => b.onclick = () => { const p = people.find((x) => x.qid === b.dataset.p); showPlace(p.place.id, p.qid); });
+function mark() {
+  if (!map.getSource('places')) return;
+  placeIds.forEach((id, fid) => map.setFeatureState({ source: 'places', id: fid }, { dim: place != null && id !== place, sel: id === place }));
 }
 function showPlace(id, qid) {
   place = id; tab = 'people';
   mark();
-  const pl = window.__places.get(id);
+  const pl = places.get(id);
   map.easeTo({ center: [pl.lng, pl.lat], zoom: Math.max(map.getZoom(), 7), padding: pad(), duration: still() ? 0 : 700 });
   draw();
   if (qid) document.querySelector(`[data-p="${qid}"]`)?.scrollIntoView({ block: 'center' });
 }
-// Feature ids are the places' order (generateId), so each dot is found by its index
-function mark() {
-  if (!map.getSource('places')) return;
-  [...window.__places.keys()].forEach((id, fid) => map.setFeatureState({ source: 'places', id: fid }, { dim: place != null && id !== place, sel: id === place }));
+
+// The recordings: filtered by performer and kind; the one playing marked
+function drawRecs(el) {
+  const performers = [...new Map(recs.filter((r) => r.performer).map((r) => [r.performer.qid ?? r.performer.az, r.performer])).values()];
+  const n = (f) => recs.filter(f).length;
+  const chips = `<div class="chips" role="group">${[[null, t('all'), recs.length], ...performers.map((p) => [p.qid ?? p.az, L(p).replace(/ \(.*\)$/, ''), n((r) => (r.performer?.qid ?? r.performer?.az) === (p.qid ?? p.az))])].map(([id, label, c]) => `<button type="button" data-who="${esc(id ?? '')}" aria-pressed="${(who ?? '') === (id ?? '')}">${esc(label)}<small>${c}</small></button>`).join('')}</div>
+    <div class="chips" role="group">${[null, 'mugham', 'tesnif', 'song', 'instrumental'].map((k) => `<button type="button" data-kind="${k ?? ''}" aria-pressed="${(kind ?? '') === (k ?? '')}">${k ? t(k) : t('all')}<small>${n((r) => !k || r.kind === k)}</small></button>`).join('')}</div>`;
+  const shown = recs.filter((r) => (!who || (r.performer?.qid ?? r.performer?.az) === who) && (!kind || r.kind === kind));
+  const groups = ['mugham', 'tesnif', 'song', 'instrumental'];
+  el.innerHTML = chips + groups.map((g) => {
+    const rs = shown.filter((r) => r.kind === g);
+    if (!rs.length) return '';
+    return `<section class="group"><h2>${t(g)} · ${rs.length}</h2><ol>${rs.map((r) => {
+      const p = r.performer?.qid && byQid.get(r.performer.qid);
+      return `<li class="rec${playing === r.id ? ' on' : ''}"><button type="button" class="play" data-play="${esc(r.id)}" aria-label="${t('play')}: ${esc(L(r.title))}">${playing === r.id && !audio.paused ? '❚❚' : '▶'}</button>
+        <span class="name">${esc(L(r.title))}</span>
+        <span class="meta">${r.performer ? esc(L(r.performer).replace(/ \(.*\)$/, '')) : t('unknown')}${p ? ` · <button type="button" data-place="${p.place.id}" data-q="${p.qid}">${esc(L(p.place))}</button>` : ''}${when(r.year) ? ` · ${esc(when(r.year))}` : ''} · <a href="${esc(r.commons)}" target="_blank" rel="noopener">${t('commons')} ↗</a></span></li>`;
+    }).join('')}</ol></section>`;
+  }).join('') + `<p class="note">${t('note')}</p>`;
+  el.querySelectorAll('[data-play]').forEach((b) => b.onclick = () => play(b.dataset.play));
+  el.querySelectorAll('[data-who]').forEach((b) => b.onclick = () => { who = b.dataset.who || null; draw(); keepUrl(); if (who && byQid.has(who)) flyTo(byQid.get(who)); });
+  el.querySelectorAll('[data-kind]').forEach((b) => b.onclick = () => { kind = b.dataset.kind || null; draw(); });
+  el.querySelectorAll('[data-place]').forEach((b) => b.onclick = () => showPlace(b.dataset.place, b.dataset.q));
 }
+
+// The musicians: all, or those of one place; a recorded one can be played from here
+function drawPeople(el) {
+  const list = (place ? people.filter((p) => p.place.id === place) : [...people]).sort((a, b) => recsOf(b.qid).length - recsOf(a.qid).length || (a.born ?? 9999) - (b.born ?? 9999));
+  const pl = place && places.get(place);
+  const extra = (p) => {
+    const rs = recsOf(p.qid);
+    return (rs.length ? `<button type="button" class="listen" data-listen="${p.qid}">${t('listen')(rs.length)}</button>` : '')
+      + (p.kitabxana ? `<a class="kx" href="${KX()}/authors/${p.kitabxana}">${t('poems')} ↗</a>` : '');
+  };
+  el.innerHTML = (pl ? `<button type="button" class="back" id="back">${t('back')}</button><div class="place-head"><h2>${esc(L(pl))}</h2><p class="meta">${t('here')(list.length)}</p></div>` : `<section class="group"><h2>${t('nPeople')(people.length)} · ♪ ${people.filter((p) => recsOf(p.qid).length).length} ${t('withRecs')}</h2></section>`)
+    + `<ol class="people">${list.map((p) => `<li><button type="button" data-p="${p.qid}"><span>${recsOf(p.qid).length ? '♪ ' : ''}${esc(nameOf(p))}</span><span class="yrs">${years(p)}</span><span class="role">${p.roles.map((r) => t(r)).join(', ')}${pl ? '' : ` · ${esc(L(p.place))}`}${p.byHand ? ` (${t('byHand')})` : ''}</span></button>${extra(p)}</li>`).join('')}</ol>`
+    + (pl ? '' : `<p class="note">${t('note')}</p>`);
+  document.getElementById('back')?.addEventListener('click', () => { place = null; mark(); draw(); map.fitBounds([[43, 37.5], [50.6, 42.5]], { padding: pad(), duration: still() ? 0 : 700 }); });
+  el.querySelectorAll('[data-p]').forEach((b) => b.onclick = () => { const p = byQid.get(b.dataset.p); showPlace(p.place.id, p.qid); });
+  el.querySelectorAll('[data-listen]').forEach((b) => b.onclick = () => { who = b.dataset.listen; tab = 'recs'; place = null; mark(); play(recsOf(who)[0].id); keepUrl(); });
+}
+
+function flyTo(p) {
+  map.easeTo({ center: [p.place.lng, p.place.lat], zoom: Math.max(map.getZoom(), 6.5), padding: pad(), duration: still() ? 0 : 900 });
+}
+
+// Playing: the performer's portrait and birthplace in the player, their place pulsing on the map
+const audio = document.getElementById('audio');
 function play(id) {
-  const audio = document.getElementById('audio');
   const r = recs.find((x) => x.id === id);
   if (playing === id) { if (audio.paused) audio.play(); else audio.pause(); return; }
   playing = id;
   audio.src = r.mp3;
-  document.getElementById('now').innerHTML = `${esc(L(r.title))} <small>· ${r.performer ? esc(L(r.performer)) : t('unknown')}${when(r.year) ? ` · ${esc(when(r.year))}` : ''}</small>`;
+  const p = r.performer?.qid && byQid.get(r.performer.qid);
+  document.getElementById('face').outerHTML = p?.image ? `<img id="face" class="face" src="${esc(p.image)}" alt="" referrerpolicy="no-referrer">` : `<span id="face" class="face none">♪</span>`;
+  document.getElementById('now').innerHTML = `<strong>${esc(L(r.title))}</strong> · ${t(r.kind).toLowerCase()}<br><small>${r.performer ? (p?.wiki ? `<a href="${esc(p.wiki)}" target="_blank" rel="noopener">${esc(L(r.performer))}</a>` : esc(L(r.performer))) : t('unknown')}${p ? ` · ${years(p)} · ${t('from')} <button type="button" id="now-place">${esc(L(p.place))}</button>` : ''}${when(r.year) ? ` · ${esc(when(r.year))}` : ''}</small>`;
+  document.getElementById('now-place')?.addEventListener('click', () => showPlace(p.place.id, p.qid));
   document.getElementById('player').hidden = false;
+  if (p) { pulse.setLngLat([p.place.lng, p.place.lat]).addTo(map); flyTo(p); } else pulse.remove();
   audio.play().catch(() => {});
   draw();
 }
-document.getElementById('audio').addEventListener('pause', () => { document.querySelectorAll('[data-play]').forEach((b) => { b.textContent = '▶'; }); });
-document.getElementById('audio').addEventListener('play', () => { const b = document.querySelector(`[data-play="${CSS.escape(playing ?? '')}"]`); if (b) b.textContent = '❚❚'; });
-document.getElementById('audio').addEventListener('ended', () => { const i = recs.findIndex((r) => r.id === playing); if (i >= 0 && i < recs.length - 1) play(recs[i + 1].id); });
+audio.addEventListener('play', () => draw());
+audio.addEventListener('pause', () => draw());
+audio.addEventListener('ended', () => {
+  const shown = recs.filter((r) => (!who || (r.performer?.qid ?? r.performer?.az) === who) && (!kind || r.kind === kind));
+  const i = shown.findIndex((r) => r.id === playing);
+  if (i >= 0 && i < shown.length - 1) play(shown[i + 1].id); else pulse.remove();
+});
 
+function keepUrl() {
+  const q = new URLSearchParams();
+  if (lang !== 'az') q.set('lang', lang);
+  if (tab === 'people') q.set('tab', 'people');
+  if (who) q.set('who', who);
+  history.replaceState(null, '', `${location.pathname}${q.size ? '?' + q : ''}`);
+}
 function drawLegend() {
-  const C = ROLE_COLOR();
-  document.getElementById('legend').innerHTML = ['khanende', 'tar', 'ashik'].map((r) => `<div class="row"><i style="background:${C[r]}"></i>${t(r)}</div>`).join('');
+  const C = ROLE();
+  document.getElementById('legend').innerHTML = ['khanende', 'tar', 'ashik'].map((r) => `<div class="row"><i style="background:${C[r]}"></i>${t(r)}</div>`).join('')
+    + `<div class="row"><i style="background:transparent;border:1.25px solid ${css('--ink')}"></i>♪ ${t('withRecs')}</div>`;
 }
 function draw() {
   document.querySelectorAll('[data-tab]').forEach((b) => b.setAttribute('aria-selected', b.dataset.tab === tab));
   const el = document.getElementById('body');
   if (!recs.length) return;
+  const top = el.scrollTop;
   if (tab === 'recs') drawRecs(el); else drawPeople(el);
+  el.scrollTop = top;
   drawLegend();
 }
-document.querySelectorAll('[data-tab]').forEach((b) => b.onclick = () => { tab = b.dataset.tab; if (tab === 'recs') { place = null; mark(); } draw(); document.getElementById('body').scrollTop = 0; });
+document.querySelectorAll('[data-tab]').forEach((b) => b.onclick = () => { tab = b.dataset.tab; if (tab === 'recs') { place = null; mark(); } draw(); keepUrl(); document.getElementById('body').scrollTop = 0; });
 function applyLang() {
   document.documentElement.lang = lang;
   document.title = t('doc');
@@ -232,8 +304,8 @@ applyLang();
 document.querySelectorAll('[data-lang]').forEach((b) => b.onclick = () => {
   lang = b.dataset.lang;
   try { localStorage.setItem('lang', lang); } catch {}
-  const u = new URL(location.href); if (lang === 'az') u.searchParams.delete('lang'); else u.searchParams.set('lang', lang); history.replaceState(null, '', u);
-  applyLang(); draw();
+  applyLang(); keepUrl(); draw();
+  if (playing) { const id = playing; playing = null; const was = audio.paused; const tm = audio.currentTime; play(id); audio.currentTime = tm; if (was) audio.pause(); }
   if (map.getStyle()) for (const l of map.getStyle().layers) if (l.type === 'symbol' && l.layout?.['text-field']) map.setLayoutProperty(l.id, 'text-field', labelExpr());
 });
 })();

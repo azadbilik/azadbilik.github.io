@@ -14,7 +14,8 @@
    "en": "Derbent",
    "lat": 42.0578,
    "lng": 48.2889
-  }
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Bayat_Abbas"
  },
  {
   "qid": "Q366289",
@@ -34,100 +35,30 @@
    "lat": 41.7225,
    "lng": 44.7925
   },
-  "kitabxana": "sayat-nova"
+  "kitabxana": "sayat-nova",
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Rus%20Stamp%20Sayat%20Nova.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/Sayat_Nova"
  },
  {
-  "qid": "Q6498967",
-  "az": "Ağ Aşıq Allahverdi",
-  "ru": "Аг Ашуг Аллахверди",
-  "en": "Âşık Allahverdi",
+  "qid": "Q4073560",
+  "az": "Aşıq Valeh",
+  "ru": "Ашуг Валех",
+  "en": "Ashig Valeh",
   "roles": [
    "ashik"
   ],
-  "born": 1754,
-  "died": 1860,
+  "born": 1722,
+  "died": 1822,
   "place": {
-   "id": "Q1820789",
-   "az": "Nəqədə",
-   "ru": "Негеде",
-   "en": "Naqadeh",
-   "lat": 36.9553,
-   "lng": 45.3881
+   "id": "Q100329099",
+   "az": "Gülablı",
+   "ru": "Гюлаблы",
+   "en": "Gulably",
+   "lat": 39.877,
+   "lng": 46.9458
   },
-  "kitabxana": "ag-asiq-allahverdi"
- },
- {
-  "qid": "Q12842684",
-  "az": "Məlikballı Qurban",
-  "roles": [
-   "ashik"
-  ],
-  "born": 1790,
-  "died": 1865,
-  "place": {
-   "id": "Q4991473",
-   "az": "Məlikballı",
-   "en": "Məlikballı",
-   "lat": 40.5447,
-   "lng": 47.5446
-  },
-  "kitabxana": "malibeyli-qurban"
- },
- {
-  "qid": "Q20512815",
-  "ru": "Мискин-Бурджи",
-  "en": "Miskin-Burji",
-  "roles": [
-   "ashik"
-  ],
-  "born": 1810,
-  "died": 1847,
-  "place": {
-   "id": "Q230104",
-   "az": "Naxçıvan",
-   "ru": "Нахичевань",
-   "en": "Nakhchivan",
-   "lat": 39.2089,
-   "lng": 45.4122
-  }
- },
- {
-  "qid": "Q16374758",
-  "az": "Səttar",
-  "ru": "Саттар",
-  "en": "Sattar",
-  "roles": [
-   "khanende"
-  ],
-  "born": 1820,
-  "died": null,
-  "place": {
-   "id": "Q180103",
-   "az": "Ərdəbil",
-   "ru": "Ардебиль",
-   "en": "Ardabil",
-   "lat": 38.25,
-   "lng": 48.3
-  }
- },
- {
-  "qid": "Q12842145",
-  "az": "Mirzə Əli Əsgər Qarabaği",
-  "ru": "Мирза Али Аскер Карабаги",
-  "en": "Mirza Ali Asgar Karabaghi",
-  "roles": [
-   "khanende"
-  ],
-  "born": 1824,
-  "died": null,
-  "place": {
-   "id": "Q158903",
-   "az": "Şuşa",
-   "ru": "Шуша",
-   "en": "Shusha",
-   "lat": 39.7602,
-   "lng": 46.7504
-  }
+  "kitabxana": "asiq-valeh",
+  "wiki": "https://az.wikipedia.org/wiki/A%C5%9F%C4%B1q_Valeh"
  },
  {
   "qid": "Q16380365",
@@ -148,15 +79,15 @@
   }
  },
  {
-  "qid": "Q4131492",
-  "az": "Hacı Hüsü",
-  "ru": "Гаджи Гуси",
-  "en": "Haji Husu",
+  "qid": "Q12842145",
+  "az": "Mirzə Əli Əsgər Qarabaği",
+  "ru": "Мирза Али Аскер Карабаги",
+  "en": "Mirza Ali Asgar Karabaghi",
   "roles": [
    "khanende"
   ],
-  "born": 1830,
-  "died": 1898,
+  "born": 1824,
+  "died": null,
   "place": {
    "id": "Q158903",
    "az": "Şuşa",
@@ -164,63 +95,26 @@
    "en": "Shusha",
    "lat": 39.7602,
    "lng": 46.7504
-  }
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Mirz%C9%99_%C6%8Fli_%C6%8Fsg%C9%99r_Qaraba%C4%9Fi"
  },
  {
-  "qid": "Q4101481",
-  "az": "Əbdülbağı Zülalov",
-  "ru": "Бюльбюльджан",
-  "en": "Bulbuljan",
-  "roles": [
-   "khanende"
-  ],
-  "born": 1841,
-  "died": 1927,
-  "place": {
-   "id": "Q158903",
-   "az": "Şuşa",
-   "ru": "Шуша",
-   "en": "Shusha",
-   "lat": 39.7602,
-   "lng": 46.7504
-  }
- },
- {
-  "qid": "Q128589631",
-  "az": "Aşıq Camal",
+  "qid": "Q1979936",
+  "ru": "Дживани",
+  "en": "Jivani",
   "roles": [
    "ashik"
   ],
-  "born": 1850,
-  "died": 1907,
+  "born": 1846,
+  "died": 1909,
   "place": {
-   "id": "Q4875325",
-   "az": "Baş Göynük",
-   "ru": "Баш-Гёйнюк",
-   "en": "Baş Göynük",
-   "lat": 41.3266,
-   "lng": 47.1138
+   "id": "Q12865635",
+   "ru": "Карцахи",
+   "en": "Kartsakhi",
+   "lat": 41.2458,
+   "lng": 43.2789
   },
-  "kitabxana": "asiq-camal"
- },
- {
-  "qid": "Q16371325",
-  "az": "Məşədi Zeynal Haqverdiyev",
-  "ru": "Мешади Зейнал Ахвердиев",
-  "en": "Mashadi Zeynal",
-  "roles": [
-   "tar"
-  ],
-  "born": 1850,
-  "died": 1918,
-  "place": {
-   "id": "Q4793204",
-   "az": "Kərkicahan",
-   "ru": "Кяркиджахан",
-   "en": "Karkijahan",
-   "lat": 39.8036,
-   "lng": 46.7503
-  }
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/%D4%B1%D5%B7%D5%B8%D6%82%D5%B2%20%D5%8B%D5%AB%D5%BE%D5%A1%D5%B6%D5%AB%20-%20Ashugh%20Jivani.jpeg?width=240"
  },
  {
   "qid": "Q12842088",
@@ -239,83 +133,8 @@
    "en": "Shamakhi",
    "lat": 40.6339,
    "lng": 48.6392
-  }
- },
- {
-  "qid": "Q7224484",
-  "az": "Molla Cümə",
-  "ru": "Молла Джума",
-  "en": "Molla Cümə",
-  "roles": [
-   "ashik"
-  ],
-  "born": 1859,
-  "died": 1920,
-  "place": {
-   "id": "Q4833436",
-   "az": "Aşağı Layısqı",
-   "ru": "Ашагы-Лайски",
-   "en": "Aşağı Layısqı",
-   "lat": 41.2828,
-   "lng": 46.9724
   },
-  "kitabxana": "molla-cume"
- },
- {
-  "qid": "Q16365154",
-  "az": "Ağabala Ağasadıq oğlu",
-  "en": "Aghabala Aghasaid oghlu",
-  "roles": [
-   "khanende"
-  ],
-  "born": 1860,
-  "died": 1928,
-  "place": {
-   "id": "Q9248",
-   "az": "Bakı",
-   "ru": "Баку",
-   "en": "Baku",
-   "lat": 40.3667,
-   "lng": 49.8352
-  }
- },
- {
-  "qid": "Q4216454",
-  "az": "Cabbar Qaryağdıoğlu",
-  "ru": "Карьягдыоглы, Джаббар Исмаил оглы",
-  "en": "Jabbar Garyaghdioglu",
-  "roles": [
-   "khanende"
-  ],
-  "born": 1861,
-  "died": 1944,
-  "place": {
-   "id": "Q158903",
-   "az": "Şuşa",
-   "ru": "Шуша",
-   "en": "Shusha",
-   "lat": 39.7602,
-   "lng": 46.7504
-  }
- },
- {
-  "qid": "Q12840896",
-  "az": "Keçəçioğlu Məhəmməd",
-  "ru": "Кечачи оглы Мухаммед",
-  "en": "Kechachioghlu Muhammed",
-  "roles": [
-   "khanende"
-  ],
-  "born": 1864,
-  "died": 1940,
-  "place": {
-   "id": "Q158903",
-   "az": "Şuşa",
-   "ru": "Шуша",
-   "en": "Shusha",
-   "lat": 39.7602,
-   "lng": 46.7504
-  }
+  "wiki": "https://az.wikipedia.org/wiki/Mirz%C9%99_M%C9%99h%C9%99mm%C9%99dh%C9%99s%C9%99n_F%C9%99l%C9%99kzad%C9%99_%C5%9Eirvani"
  },
  {
   "qid": "Q12850169",
@@ -333,7 +152,9 @@
    "en": "Shaki",
    "lat": 41.1919,
    "lng": 47.1706
-  }
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Alasgar.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/%C6%8Fl%C9%99sg%C9%99r_Abdullayev"
  },
  {
   "qid": "Q86584531",
@@ -350,7 +171,9 @@
    "en": "Shusha",
    "lat": 39.7602,
    "lng": 46.7504
-  }
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/%C3%87ar%C4%B1q%C3%A7%C4%B1%20Bahad%C4%B1r.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/%C3%87ar%C4%B1q%C3%A7%C4%B1_Bahad%C4%B1r"
  },
  {
   "qid": "Q55203819",
@@ -368,7 +191,9 @@
    "en": "Shusha",
    "lat": 39.7602,
    "lng": 46.7504
-  }
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Khanlig%20Shukur.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/Xanl%C4%B1q_%C5%9E%C3%BCk%C3%BCr"
  },
  {
   "qid": "Q12842906",
@@ -387,204 +212,66 @@
    "en": "Shusha",
    "lat": 39.7602,
    "lng": 46.7504
-  }
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/M%C9%99%C5%9F%C9%99di%20M%C9%99mm%C9%99d%20F%C9%99rz%C9%99liyev.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/M%C9%99%C5%9F%C9%99di_M%C9%99mm%C9%99d_F%C9%99rz%C9%99liyev"
  },
  {
-  "qid": "Q16371319",
-  "az": "Məşədi Süleyman bəy Mansurov",
-  "ru": "Мешади Сулейман бек Мансуров",
-  "en": "Məşədi Mansurov",
-  "roles": [
-   "tar"
-  ],
-  "born": 1872,
-  "died": 1955,
-  "place": {
-   "id": "Q9248",
-   "az": "Bakı",
-   "ru": "Баку",
-   "en": "Baku",
-   "lat": 40.3667,
-   "lng": 49.8352
-  }
- },
- {
-  "qid": "Q16372546",
-  "az": "Qasım Abdullayev",
-  "ru": "Абдуллаев, Гасым Ибрагим оглы",
-  "en": "Gasim Abdullayev",
+  "qid": "Q114437517",
+  "az": "Keştazlı Həsən",
+  "ru": "Кештазлы, Гасан Гусейн оглы",
   "roles": [
    "khanende"
   ],
   "born": 1873,
-  "died": 1927,
-  "place": {
-   "id": "Q158903",
-   "az": "Şuşa",
-   "ru": "Шуша",
-   "en": "Shusha",
-   "lat": 39.7602,
-   "lng": 46.7504
-  }
- },
- {
-  "qid": "Q16370924",
-  "az": "Məmmədqulu Şuşinski",
-  "en": "Məmmədqulu Şuşinski",
-  "roles": [
-   "khanende"
-  ],
-  "born": 1874,
   "died": 1929,
   "place": {
-   "id": "Q158903",
-   "az": "Şuşa",
-   "ru": "Шуша",
-   "en": "Shusha",
-   "lat": 39.7602,
-   "lng": 46.7504
-  }
+   "id": "Q97302245",
+   "az": "Keştazlı",
+   "en": "Keştazlı",
+   "lat": 40.0183,
+   "lng": 46.9467
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Ke%C5%9Ftazl%C4%B1_H%C9%99s%C9%99n"
  },
  {
-  "qid": "Q4054565",
-  "az": "İslam Abdullayev",
-  "ru": "Абдуллаев, Ислам Абдул оглы",
-  "en": "İslam Abdullayev",
-  "roles": [
-   "khanende"
-  ],
-  "born": 1876,
-  "died": 1964,
-  "place": {
-   "id": "Q158903",
-   "az": "Şuşa",
-   "ru": "Шуша",
-   "en": "Shusha",
-   "lat": 39.7602,
-   "lng": 46.7504
-  }
- },
- {
-  "qid": "Q124043162",
-  "az": "Aşıq Ağayar",
+  "qid": "Q91083301",
+  "az": "Aşıq Seyid İbrahim",
   "roles": [
    "ashik"
-  ],
-  "born": 1880,
-  "died": 1978,
-  "place": {
-   "id": "Q745934",
-   "az": "Zod",
-   "ru": "Сотк",
-   "en": "Sotk",
-   "lat": 40.2031,
-   "lng": 45.8647
-  }
- },
- {
-  "qid": "Q16365419",
-  "az": "Bahadur Mehralı oğlu",
-  "roles": [
-   "khanende"
-  ],
-  "born": 1883,
-  "died": 1962,
-  "place": {
-   "id": "Q158903",
-   "az": "Şuşa",
-   "ru": "Шуша",
-   "en": "Shusha",
-   "lat": 39.7602,
-   "lng": 46.7504
-  }
- },
- {
-  "qid": "Q12837135",
-  "az": "Aşıq Savad",
-  "en": "Asiq Savad",
-  "roles": [
-   "ashik"
-  ],
-  "born": 1885,
-  "died": 1970,
-  "place": {
-   "id": "Q4846413",
-   "az": "Dəmirçilər",
-   "en": "Dəmirçilər (41° 17' N 45° 11' E)",
-   "lat": 41.285,
-   "lng": 45.1883
-  }
- },
- {
-  "qid": "Q16370169",
-  "az": "Mirzə Mansur Mansurov",
-  "en": "Mirza Mansur bey Mansurov",
-  "roles": [
-   "tar"
-  ],
-  "born": 1887,
-  "died": 1967,
-  "place": {
-   "id": "Q9248",
-   "az": "Bakı",
-   "ru": "Баку",
-   "en": "Baku",
-   "lat": 40.3667,
-   "lng": 49.8352
-  }
- },
- {
-  "qid": "Q25543138",
-  "az": "Aşıq Yunis",
-  "roles": [
-   "ashik"
-  ],
-  "born": 1888,
-  "died": 1974,
-  "place": {
-   "id": "Q1024597",
-   "az": "Cil",
-   "ru": "Джиль",
-   "en": "Jil",
-   "lat": 40.4544,
-   "lng": 45.4536
-  }
- },
- {
-  "qid": "Q16378870",
-  "az": "Əli Zülalov",
-  "ru": "Зулалов, Али Абдул оглы",
-  "en": "Ali Zulalov",
-  "roles": [
-   "khanende"
-  ],
-  "born": 1893,
-  "died": 1963,
-  "place": {
-   "id": "Q158903",
-   "az": "Şuşa",
-   "ru": "Шуша",
-   "en": "Shusha",
-   "lat": 39.7602,
-   "lng": 46.7504
-  }
- },
- {
-  "qid": "Q16372446",
-  "az": "Pəsxan Cəlil",
-  "roles": [
-   "khanende"
   ],
   "born": 1895,
-  "died": 1949,
+  "died": 1944,
   "place": {
-   "id": "Q158903",
-   "az": "Şuşa",
-   "ru": "Шуша",
-   "en": "Shusha",
-   "lat": 39.7602,
-   "lng": 46.7504
-  }
+   "id": "Q7266587",
+   "az": "Qaradaş",
+   "en": "Qaradaş",
+   "lat": 40.6988,
+   "lng": 45.4922
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/A%C5%9F%C4%B1q%20Seyid%20%C4%B0brahim.png?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/A%C5%9F%C4%B1q_Seyid_%C4%B0brahim"
+ },
+ {
+  "qid": "Q1131312",
+  "az": "Bülbül",
+  "ru": "Бюльбюль",
+  "en": "Bulbul",
+  "roles": [
+   "khanende"
+  ],
+  "born": 1897,
+  "died": 1961,
+  "place": {
+   "id": "Q16418402",
+   "az": "Xanbağı",
+   "ru": "Ханбагы",
+   "en": "Khanbagi",
+   "lat": 39.8478,
+   "lng": 46.7731
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/B%C3%BClb%C3%BCl%20M%C9%99mm%C9%99dov.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/B%C3%BClb%C3%BCl_(m%C3%BC%C4%9F%C9%99nni)"
  },
  {
   "qid": "Q135457772",
@@ -593,7 +280,7 @@
   "roles": [
    "ashik"
   ],
-  "born": 1900,
+  "born": 1899,
   "died": 1995,
   "place": {
    "id": "Q80053",
@@ -602,25 +289,6 @@
    "en": "Tabriz",
    "lat": 38.0739,
    "lng": 46.2961
-  }
- },
- {
-  "qid": "Q2427251",
-  "az": "Xan Şuşinski",
-  "ru": "Хан Шушинский",
-  "en": "Khan Shushinski",
-  "roles": [
-   "khanende"
-  ],
-  "born": 1901,
-  "died": 1979,
-  "place": {
-   "id": "Q158903",
-   "az": "Şuşa",
-   "ru": "Шуша",
-   "en": "Shusha",
-   "lat": 39.7602,
-   "lng": 46.7504
   }
  },
  {
@@ -640,7 +308,9 @@
    "en": "Shamakhi",
    "lat": 40.6339,
    "lng": 48.6392
-  }
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Yaver%20Kelenterli%20%28crop%29.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/Yav%C9%99r_K%C9%99l%C9%99nt%C9%99rli"
  },
  {
   "qid": "Q6123065",
@@ -659,61 +329,8 @@
    "en": "Lankaran",
    "lat": 38.7536,
    "lng": 48.8511
-  }
- },
- {
-  "qid": "Q16365285",
-  "az": "Aşıq Müseyib",
-  "roles": [
-   "ashik"
-  ],
-  "born": 1909,
-  "died": 1995,
-  "place": {
-   "id": "Q1024597",
-   "az": "Cil",
-   "ru": "Джиль",
-   "en": "Jil",
-   "lat": 40.45,
-   "lng": 45.45
-  }
- },
- {
-  "qid": "Q5391050",
-  "az": "Ağabala Abdullayev",
-  "ru": "Абдуллаев, Агабала Мамедбагир оглы",
-  "en": "Agabala Abdullayev",
-  "roles": [
-   "khanende"
-  ],
-  "born": 1910,
-  "died": 1976,
-  "place": {
-   "id": "Q4846062",
-   "az": "Çərəli",
-   "ru": "Черели",
-   "en": "Çərəli",
-   "lat": 39.252,
-   "lng": 46.6141
-  }
- },
- {
-  "qid": "Q16365226",
-  "az": "Ağası Məşədibəyov",
-  "en": "Agasi Masadibayov",
-  "roles": [
-   "tar"
-  ],
-  "born": 1912,
-  "died": 1984,
-  "place": {
-   "id": "Q9248",
-   "az": "Bakı",
-   "ru": "Баку",
-   "en": "Baku",
-   "lat": 40.3667,
-   "lng": 49.8352
-  }
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Cahan_Tal%C4%B1%C5%9Finskaya"
  },
  {
   "qid": "Q20557211",
@@ -730,7 +347,8 @@
    "en": "Lankaran",
    "lat": 38.7536,
    "lng": 48.8511
-  }
+  },
+  "wiki": "https://az.wikipedia.org/wiki/B%C9%99%C5%9Fir_M%C9%99mm%C9%99dov"
  },
  {
   "qid": "Q16368427",
@@ -749,191 +367,46 @@
    "en": "Shamakhi",
    "lat": 40.6339,
    "lng": 48.6392
-  }
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Haji%20Mammadov.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/Hac%C4%B1_M%C9%99mm%C9%99dov_(tarz%C9%99n)"
  },
  {
-  "qid": "Q16375253",
-  "az": "Tükəzban İsmayılova",
-  "ru": "Исмаилова, Тукезбан Магеррам кызы",
-  "en": "Tukezban Ismayilova",
-  "roles": [
-   "khanende"
-  ],
-  "born": 1923,
-  "died": 2008,
-  "place": {
-   "id": "Q9248",
-   "az": "Bakı",
-   "ru": "Баку",
-   "en": "Baku",
-   "lat": 40.3667,
-   "lng": 49.8352
-  }
- },
- {
-  "qid": "Q131783517",
-  "az": "Simuzər Hətəmova",
-  "ru": "Атамова, Симузар Рза кызы",
-  "en": "Simuzar Hatamova",
-  "roles": [
-   "khanende"
-  ],
-  "born": 1925,
-  "died": 2005,
-  "place": {
-   "id": "Q540844",
-   "az": "Ağdam",
-   "ru": "Агдам",
-   "en": "Aghdam",
-   "lat": 39.9833,
-   "lng": 46.9167
-  }
- },
- {
-  "qid": "Q16369499",
-  "az": "Kərim Paşayev",
+  "qid": "Q16365278",
+  "az": "Aşıq Murad Ulduz",
+  "en": "Asiq Murad Ulduz",
   "roles": [
    "ashik"
   ],
-  "born": 1925,
+  "born": 1922,
   "died": 1999,
   "place": {
-   "id": "Q1024715",
-   "az": "Ardanış",
-   "ru": "Артаниш",
-   "en": "Artanish",
-   "lat": 40.4958,
-   "lng": 45.3628
-  }
+   "id": "Q10738062",
+   "az": "Bardaqlı",
+   "en": "Bardaklı",
+   "lat": 40.8353,
+   "lng": 43.48
+  },
+  "wiki": "https://az.wikipedia.org/wiki/A%C5%9F%C4%B1q_Murad_Ulduz"
  },
  {
-  "qid": "Q16378461",
-  "az": "Əbülfət Əliyev",
-  "ru": "Абульфат Алиев",
-  "en": "Abulfat Aliyev",
-  "roles": [
-   "khanende"
-  ],
-  "born": 1926,
-  "died": 1990,
-  "place": {
-   "id": "Q158903",
-   "az": "Şuşa",
-   "ru": "Шуша",
-   "en": "Shusha",
-   "lat": 39.7602,
-   "lng": 46.7504
-  }
- },
- {
-  "qid": "Q16368908",
-  "az": "Həbib Bayramov",
-  "ru": "Габиб Байрамов",
-  "en": "Habib Bayramov",
-  "roles": [
-   "tar"
-  ],
-  "born": 1926,
-  "died": 1994,
-  "place": {
-   "id": "Q9248",
-   "az": "Bakı",
-   "ru": "Баку",
-   "en": "Baku",
-   "lat": 40.3667,
-   "lng": 49.8352
-  }
- },
- {
-  "qid": "Q134286966",
-  "az": "Bakir Haşımov",
-  "roles": [
-   "khanende"
-  ],
-  "born": 1926,
-  "died": 1989,
-  "place": {
-   "id": "Q201647",
-   "az": "Ağdam rayonu",
-   "ru": "Агдамский район",
-   "en": "Aghdam",
-   "lat": 39.9836,
-   "lng": 46.9286
-  }
- },
- {
-  "qid": "Q4292213",
-  "az": "Fatma Mehrəliyeva",
-  "ru": "Фатима Мехралиева",
-  "en": "Fatma Mehraliyeva",
-  "roles": [
-   "khanende"
-  ],
-  "born": 1926,
-  "died": 2000,
-  "place": {
-   "id": "Q647982",
-   "az": "Quba",
-   "ru": "Губа",
-   "en": "Guba",
-   "lat": 41.3653,
-   "lng": 48.5264
-  }
- },
- {
-  "qid": "Q16372672",
-  "az": "Qulu Əsgərov",
-  "ru": "Аскеров, Гулу Рустам оглы",
-  "en": "Gulu Asgerov",
-  "roles": [
-   "khanende"
-  ],
-  "born": 1928,
-  "died": 1987,
-  "place": {
-   "id": "Q1017678",
-   "az": "Salyan",
-   "ru": "Сальян",
-   "en": "Salyan",
-   "lat": 39.5961,
-   "lng": 48.9847
-  }
- },
- {
-  "qid": "Q134953771",
-  "az": "Aşıq Kamil Zülfüqarov",
-  "en": "Aşıq Kamil",
+  "qid": "Q16365351",
+  "az": "Aşıq İsgəndər Ağbabalı",
+  "en": "İsgändär Ağbabali",
   "roles": [
    "ashik"
   ],
-  "born": 1929,
-  "died": 2004,
-  "place": {
-   "id": "Q4907684",
-   "az": "Boranıkənd",
-   "en": "Boranıkənd",
-   "lat": 39.4271,
-   "lng": 48.8281
-  }
- },
- {
-  "qid": "Q16377959",
-  "az": "Şahmalı Kürdoğlu",
-  "ru": "Гаджиев, Шахмали Мирзагулу оглы",
-  "en": "Sahmali Kurdoglu",
-  "roles": [
-   "khanende"
-  ],
-  "born": 1930,
+  "born": 1925,
   "died": 1992,
   "place": {
-   "id": "Q201647",
-   "az": "Ağdam rayonu",
-   "ru": "Агдамский район",
-   "en": "Aghdam",
-   "lat": 39.9836,
-   "lng": 46.9286
-  }
+   "id": "Q15242875",
+   "az": "Ellərkənd",
+   "ru": "Лорасар",
+   "en": "Lorasar",
+   "lat": 41.1128,
+   "lng": 43.5964
+  },
+  "wiki": "https://az.wikipedia.org/wiki/A%C5%9F%C4%B1q_%C4%B0sg%C9%99nd%C9%99r_A%C4%9Fbabal%C4%B1"
  },
  {
   "qid": "Q94379810",
@@ -953,6 +426,24 @@
   }
  },
  {
+  "qid": "Q16365291",
+  "az": "Aşıq Məhəmməd Sadaxlı",
+  "roles": [
+   "ashik"
+  ],
+  "born": 1930,
+  "died": 2016,
+  "place": {
+   "id": "Q16677411",
+   "az": "Mollaoğlu",
+   "ru": "Молаоглы",
+   "en": "Molaoghlu",
+   "lat": 41.2317,
+   "lng": 44.7208
+  },
+  "wiki": "https://az.wikipedia.org/wiki/A%C5%9F%C4%B1q_M%C9%99h%C9%99mm%C9%99d_Sadaxl%C4%B1"
+ },
+ {
   "qid": "Q16376261",
   "az": "Yaqub Məmmədov",
   "ru": "Мамедов, Ягуб Мамед оглы",
@@ -969,62 +460,25 @@
    "en": "Aghjabadi District",
    "lat": 40.0528,
    "lng": 47.4614
-  }
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Yaqub_M%C9%99mm%C9%99dov_(xan%C9%99nd%C9%99)"
  },
  {
-  "qid": "Q12842293",
-  "az": "Murad Niyazlı",
-  "en": "Murad Niyazli",
+  "qid": "Q109559922",
+  "az": "Aşıq Dehqan",
   "roles": [
    "ashik"
   ],
-  "born": 1933,
-  "died": 2005,
+  "born": 1934,
+  "died": 2025,
   "place": {
-   "id": "Q2422901",
-   "az": "Aşağı Şorca",
-   "ru": "Неркин Шоржа",
-   "en": "Nerkin Shorzha",
-   "lat": 40.11,
-   "lng": 45.8361
-  }
- },
- {
-  "qid": "Q6404572",
-  "az": "Qədir Rüstəmov",
-  "ru": "Рустамов, Гадир Черкез оглы",
-  "en": "Gadir Rustamov",
-  "roles": [
-   "khanende"
-  ],
-  "born": 1935,
-  "died": 2011,
-  "place": {
-   "id": "Q201647",
-   "az": "Ağdam rayonu",
-   "ru": "Агдамский район",
-   "en": "Aghdam",
-   "lat": 39.9836,
-   "lng": 46.9286
-  }
- },
- {
-  "qid": "Q12837122",
-  "az": "Aşıq Mahmud Məmmədov",
-  "en": "Asiq Mahmud Mammadov",
-  "roles": [
-   "ashik"
-  ],
-  "born": 1935,
-  "died": 2020,
-  "place": {
-   "id": "Q1024539",
-   "az": "Ağbulaq",
-   "ru": "Агберк",
-   "en": "Aghberk",
-   "lat": 40.5326,
-   "lng": 45.2692
-  }
+   "id": "Q5711207",
+   "az": "İqdır",
+   "en": "Igdir",
+   "lat": 37.5219,
+   "lng": 45.2367
+  },
+  "wiki": "https://az.wikipedia.org/wiki/A%C5%9F%C4%B1q_Dehqan"
  },
  {
   "qid": "Q19715058",
@@ -1043,7 +497,8 @@
    "en": "Ganja",
    "lat": 40.6828,
    "lng": 46.3606
-  }
+  },
+  "wiki": "https://az.wikipedia.org/wiki/N%C9%99riman_%C6%8Fzimov"
  },
  {
   "qid": "Q130342177",
@@ -1060,79 +515,29 @@
    "en": "Ganja",
    "lat": 40.6828,
    "lng": 46.3606
-  }
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Kifay%C9%99t_G%C9%99nc%C9%99li"
  },
  {
-  "qid": "Q61122097",
-  "az": "Oqtay Quliyev",
-  "en": "Oqtay Quliyev",
-  "roles": [
-   "tar"
-  ],
-  "born": 1938,
-  "died": null,
-  "place": {
-   "id": "Q540844",
-   "az": "Ağdam",
-   "ru": "Агдам",
-   "en": "Aghdam",
-   "lat": 39.9833,
-   "lng": 46.9167
-  }
- },
- {
-  "qid": "Q96957660",
-  "az": "Sərraf Qasım",
-  "ru": "Сарраф Касум",
-  "en": "Sərraf Qasım",
-  "roles": [
-   "ashik"
-  ],
-  "born": 1939,
-  "died": 2018,
-  "place": {
-   "id": "Q4833445",
-   "az": "Aşağı Qışlaq",
-   "en": "Aşağı Qışlaq",
-   "lat": 39.4661,
-   "lng": 45.702
-  }
- },
- {
-  "qid": "Q16378524",
-  "az": "Ədalət Nəsibov",
-  "ru": "Ашуг Адалят",
-  "roles": [
-   "ashik"
-  ],
-  "born": 1939,
-  "died": 2017,
-  "place": {
-   "id": "Q586758",
-   "az": "Qazax",
-   "ru": "Газах",
-   "en": "Gazakh",
-   "lat": 41.0933,
-   "lng": 45.3661
-  }
- },
- {
-  "qid": "Q20563594",
-  "az": "Süleyman Abdullayev",
-  "en": "Süleyman Abdullayev",
+  "qid": "Q16365956",
+  "az": "Canəli Əkbərov",
+  "ru": "Джанали Ханали оглы Акперов",
+  "en": "Canali Akbarov",
   "roles": [
    "khanende"
   ],
-  "born": 1939,
-  "died": 2022,
+  "born": 1940,
+  "died": 2021,
   "place": {
-   "id": "Q1996181",
-   "az": "Füzuli",
-   "ru": "Физули",
-   "en": "Fuzuli",
-   "lat": 39.6003,
-   "lng": 47.1431
-  }
+   "id": "Q12711972",
+   "az": "Tükəvilə",
+   "ru": "Тукавиля",
+   "en": "Tükəvilə",
+   "lat": 38.8568,
+   "lng": 48.6928
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/JanaliAkbarov.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/Can%C9%99li_%C6%8Fkb%C9%99rov"
  },
  {
   "qid": "Q16365329",
@@ -1150,7 +555,8 @@
    "en": "Lachin District",
    "lat": 39.6333,
    "lng": 46.55
-  }
+  },
+  "wiki": "https://az.wikipedia.org/wiki/A%C5%9F%C4%B1q_Umbay"
  },
  {
   "qid": "Q16373777",
@@ -1168,77 +574,8 @@
    "en": "Jalilabad District",
    "lat": 39.2,
    "lng": 48.3
-  }
- },
- {
-  "qid": "Q12845363",
-  "az": "Sabir Novruzov",
-  "en": "Sabir Novruzov",
-  "roles": [
-   "khanende"
-  ],
-  "born": 1944,
-  "died": 2009,
-  "place": {
-   "id": "Q1983875",
-   "az": "Ağcabədi",
-   "ru": "Агджабеди",
-   "en": "Aghjabadi",
-   "lat": 40.0489,
-   "lng": 47.4502
-  }
- },
- {
-  "qid": "Q23683318",
-  "az": "Aşıq Kərəm İncəli",
-  "en": "Aşıq Kərəm İncəli",
-  "roles": [
-   "ashik"
-  ],
-  "born": 1945,
-  "died": 1995,
-  "place": {
-   "id": "Q389381",
-   "az": "Qazax rayonu",
-   "ru": "Газахский район",
-   "en": "Gazakh District",
-   "lat": 41.0933,
-   "lng": 45.3661
-  }
- },
- {
-  "qid": "Q55702598",
-  "az": "Sabir Əliyev (xanəndə)",
-  "ru": "Алиев, Сабир Магеррам оглы",
-  "roles": [
-   "khanende"
-  ],
-  "born": 1948,
-  "died": 2020,
-  "place": {
-   "id": "Q4719409",
-   "az": "Pərdi",
-   "en": "Pərdili",
-   "lat": 39.1826,
-   "lng": 48.2846
-  }
- },
- {
-  "qid": "Q16371283",
-  "az": "Məzahir Məmmədov",
-  "roles": [
-   "tar"
-  ],
-  "born": 1948,
-  "died": null,
-  "place": {
-   "id": "Q1017678",
-   "az": "Salyan",
-   "ru": "Сальян",
-   "en": "Salyan",
-   "lat": 39.5961,
-   "lng": 48.9847
-  }
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Sabir_Mirz%C9%99yev_(xan%C9%99nd%C9%99)"
  },
  {
   "qid": "Q16374539",
@@ -1256,81 +593,47 @@
    "en": "Minaxorlu",
    "lat": 39.9835,
    "lng": 47.1968
-  }
+  },
+  "wiki": "https://az.wikipedia.org/wiki/S%C9%99fa_Q%C9%99hr%C9%99manov"
  },
  {
-  "qid": "Q16376664",
-  "az": "Zamiq Əliyev",
-  "ru": "Замик Баларза оглы Алиев",
-  "en": "Zamiq Əliyev",
-  "roles": [
-   "tar"
-  ],
-  "born": 1950,
-  "died": null,
-  "place": {
-   "id": "Q9248",
-   "az": "Bakı",
-   "ru": "Баку",
-   "en": "Baku",
-   "lat": 40.3667,
-   "lng": 49.8352
-  }
- },
- {
-  "qid": "Q16365229",
-  "az": "Ağasəlim Abdullayev",
-  "ru": "Абдуллаев, Агасалим Сахиб оглы",
-  "en": "Ağasəlim Abdullayev",
+  "qid": "Q136657345",
+  "az": "Aqil Məlikov",
+  "ru": "Агиль Меликов",
+  "en": "Agil Melikov",
   "roles": [
    "khanende"
   ],
-  "born": 1950,
+  "born": 1952,
   "died": null,
   "place": {
-   "id": "Q9248",
-   "az": "Bakı",
-   "ru": "Баку",
-   "en": "Baku",
-   "lat": 40.3667,
-   "lng": 49.8352
-  }
+   "id": "Q8082442",
+   "az": "Şağan",
+   "ru": "Шаган",
+   "en": "Şağan",
+   "lat": 40.4974,
+   "lng": 50.1216
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Aqil_M%C9%99likov"
  },
  {
-  "qid": "Q137759693",
-  "az": "Ziyəddin Keşəli",
-  "roles": [
-   "ashik"
-  ],
-  "born": 1950,
-  "died": 2025,
-  "place": {
-   "id": "Q2410306",
-   "az": "Marneuli bələdiyyəsi",
-   "ru": "Марнеульский муниципалитет",
-   "en": "Marneuli Municipality",
-   "lat": 41.4872,
-   "lng": 44.7981
-  }
- },
- {
-  "qid": "Q19716199",
-  "az": "Zümrüd Məmmədova",
-  "ru": "Мамедова, Зумруд Мовлуд кызы",
-  "en": "Zumrud Mammadova",
+  "qid": "Q76603817",
+  "az": "Zaur Rzayev",
+  "ru": "Рзаев, Заур Алигусейн оглы",
   "roles": [
    "khanende"
   ],
-  "born": 1956,
-  "died": null,
+  "born": 1952,
+  "died": 2026,
   "place": {
-   "id": "Q4846214",
-   "az": "İkinci Nügədi",
-   "ru": "Икинджи Нюгеди",
-   "en": "İkinci Nügədi",
-   "lat": 41.3195,
-   "lng": 48.5924
-  }
+   "id": "Q29583554",
+   "az": "Karrar",
+   "ru": "Каррар",
+   "en": "Karrar",
+   "lat": 40.3069,
+   "lng": 48.2602
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Zaur_Rzayev"
  },
  {
   "qid": "Q16377988",
@@ -1348,97 +651,30 @@
    "en": "Ganja",
    "lat": 40.6828,
    "lng": 46.3606
-  }
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/%C5%9EAHNAZ%20HA%C5%9EIMOVA.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/%C5%9Eahnaz_Ha%C5%9F%C4%B1mova"
  },
  {
-  "qid": "Q936538",
-  "az": "Alim Qasımov",
-  "ru": "Гасымов, Алим Хамза оглы",
-  "en": "Alim Qasimov",
+  "qid": "Q6400869",
+  "az": "Mənsum İbrahimov",
+  "ru": "Мансум Ибрагимов",
+  "en": "Mansum Ibrahimov",
   "roles": [
    "khanende"
-  ],
-  "born": 1957,
-  "died": null,
-  "place": {
-   "id": "Q6957039",
-   "az": "Nabur",
-   "ru": "Набур",
-   "en": "Nabur",
-   "lat": 40.6319,
-   "lng": 48.9195
-  }
- },
- {
-  "qid": "Q15063051",
-  "az": "Ərəstun Əliyev",
-  "en": "Arastun Aliyev",
-  "roles": [
-   "khanende"
-  ],
-  "born": 1957,
-  "died": null,
-  "place": {
-   "id": "Q330857",
-   "az": "Bərdə rayonu",
-   "ru": "Бардинский район",
-   "en": "Barda District",
-   "lat": 40.3667,
-   "lng": 47.1167
-  }
- },
- {
-  "qid": "Q16368115",
-  "az": "Gülarə Azaflı",
-  "roles": [
-   "ashik"
-  ],
-  "born": 1959,
-  "died": null,
-  "place": {
-   "id": "Q4832243",
-   "az": "Azaflı",
-   "ru": "Азафлы",
-   "en": "Azaplı",
-   "lat": 40.9265,
-   "lng": 45.6612
-  }
- },
- {
-  "qid": "Q12837124",
-  "az": "Aşıq Məhərrəm Hüseynli",
-  "en": "Asiq Maharram Huseynli",
-  "roles": [
-   "ashik"
-  ],
-  "born": 1959,
-  "died": null,
-  "place": {
-   "id": "Q1026084",
-   "az": "Tovuz",
-   "ru": "Товуз",
-   "en": "Tovuz",
-   "lat": 40.9924,
-   "lng": 45.6167
-  }
- },
- {
-  "qid": "Q110747528",
-  "az": "Aşıq Bəhmən Kazımov",
-  "en": "Aşıq Bəhmən Kazımov",
-  "roles": [
-   "ashik"
   ],
   "born": 1960,
   "died": null,
   "place": {
-   "id": "Q1024715",
-   "az": "Ardanış",
-   "ru": "Артаниш",
-   "en": "Artanish",
-   "lat": 40.4958,
-   "lng": 45.3628
-  }
+   "id": "Q29350447",
+   "az": "İmamqulubəyli",
+   "ru": "Имамкулубейли",
+   "en": "İmamqulubəyli (village), Agdam",
+   "lat": 40.1864,
+   "lng": 47.1974
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Mansum%20Ibrahimov.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/M%C9%99nsum_%C4%B0brahimov"
  },
  {
   "qid": "Q12848564",
@@ -1456,7 +692,8 @@
    "en": "Iran",
    "lat": 32,
    "lng": 53
-  }
+  },
+  "wiki": "https://az.wikipedia.org/wiki/%C3%87ingiz_Biriya"
  },
  {
   "qid": "Q12841651",
@@ -1475,7 +712,27 @@
    "en": "Sumgait",
    "lat": 40.5961,
    "lng": 49.67
-  }
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Malik%20Mansurov%20Mugam%20Quartet%20%28Azerbaijan%29%20%282%29.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/Malik_Mansurov"
+ },
+ {
+  "qid": "Q23497980",
+  "az": "Səlcuq Şahbazi",
+  "en": "Seljug Shahbazi",
+  "roles": [
+   "ashik"
+  ],
+  "born": 1962,
+  "died": null,
+  "place": {
+   "id": "Q5861532",
+   "az": "Ağcaqışlaq",
+   "en": "Agh Qeshlaq",
+   "lat": 37.32,
+   "lng": 47.785
+  },
+  "wiki": "https://az.wikipedia.org/wiki/S%C9%99lcuq_%C5%9Eahbazi"
  },
  {
   "qid": "Q6741182",
@@ -1494,7 +751,8 @@
    "en": "Shamakhi",
    "lat": 40.6339,
    "lng": 48.6392
-  }
+  },
+  "wiki": "https://az.wikipedia.org/wiki/M%C9%99l%C9%99kxan%C4%B1m_Eyubova"
  },
  {
   "qid": "Q16365288",
@@ -1512,7 +770,46 @@
    "en": "Iran",
    "lat": 32,
    "lng": 53
-  }
+  },
+  "wiki": "https://az.wikipedia.org/wiki/A%C5%9F%C4%B1q_M%C9%99hbub_X%C9%99lili"
+ },
+ {
+  "qid": "Q12836241",
+  "az": "Aybəniz Laçınlı",
+  "ru": "Айбениз Лачинлы",
+  "en": "Aybəniz Laçınlı",
+  "roles": [
+   "ashik"
+  ],
+  "born": 1963,
+  "died": null,
+  "place": {
+   "id": "Q12698774",
+   "az": "Nağdalı",
+   "en": "Nağdalı, Lachin",
+   "lat": 39.9128,
+   "lng": 46.4206
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Ayb%C9%99niz_La%C3%A7%C4%B1nl%C4%B1"
+ },
+ {
+  "qid": "Q12848212",
+  "az": "Zabit Nəbizadə",
+  "ru": "Набизаде, Забит Гюльхан оглы",
+  "roles": [
+   "khanende"
+  ],
+  "born": 1965,
+  "died": null,
+  "place": {
+   "id": "Q8082646",
+   "az": "Şıxzahırlı",
+   "ru": "Шихзахырлы",
+   "en": "Şıxzahırlı",
+   "lat": 40.4748,
+   "lng": 49.0256
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Zabit_N%C9%99bizad%C9%99"
  },
  {
   "qid": "Q110108740",
@@ -1529,25 +826,26 @@
    "en": "Zangilan District",
    "lat": 39.0656,
    "lng": 46.6969
-  }
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Almaz_Orucova"
  },
  {
-  "qid": "Q25543577",
-  "az": "Səbuhi Cəfərov",
-  "en": "Səbuhi Cəfərov",
+  "qid": "Q16365354",
+  "az": "Aşıq Ədalət Dəlidağlı",
   "roles": [
-   "tar"
+   "ashik"
   ],
-  "born": 1968,
+  "born": 1967,
   "died": null,
   "place": {
-   "id": "Q647982",
-   "az": "Quba",
-   "ru": "Губа",
-   "en": "Guba",
-   "lat": 41.3653,
-   "lng": 48.5264
-  }
+   "id": "Q8051573",
+   "az": "Yellicə",
+   "ru": "Еллиджа",
+   "en": "Yellicə",
+   "lat": 40.0956,
+   "lng": 45.9498
+  },
+  "wiki": "https://az.wikipedia.org/wiki/A%C5%9F%C4%B1q_%C6%8Fdal%C9%99t_D%C9%99lida%C4%9Fl%C4%B1"
  },
  {
   "qid": "Q22583114",
@@ -1565,7 +863,25 @@
    "en": "Çuxanlı, Gobustan",
    "lat": 40.6029,
    "lng": 48.7935
-  }
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Elnar%C9%99_Abdullayeva"
+ },
+ {
+  "qid": "Q12838311",
+  "az": "Cəfər Xakipur",
+  "roles": [
+   "ashik"
+  ],
+  "born": 1976,
+  "died": null,
+  "place": {
+   "id": "Q5684012",
+   "az": "Qaraxanlı",
+   "en": "Qareh Kanlu",
+   "lat": 38.0592,
+   "lng": 47.7856
+  },
+  "wiki": "https://az.wikipedia.org/wiki/C%C9%99f%C9%99r_Xakipur"
  },
  {
   "qid": "Q110952356",
@@ -1583,7 +899,9 @@
    "en": "Shaki",
    "lat": 41.1919,
    "lng": 47.1706
-  }
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Vagifshikhaliyev.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/Vaqif_%C5%9E%C4%B1x%C9%99liyev"
  },
  {
   "qid": "Q1483971",
@@ -1602,42 +920,28 @@
    "en": "Shamakhi",
    "lat": 40.6339,
    "lng": 48.6392
-  }
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/MEX%20TV%20CONCIERTO%20ALIM%20QASIMOV%202%20%28crop%202%29.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/F%C9%99rqan%C9%99_Qas%C4%B1mova"
  },
  {
-  "qid": "Q97216783",
-  "az": "Aşıq Tural Bağırov",
-  "roles": [
-   "ashik"
-  ],
-  "born": 1981,
-  "died": null,
-  "place": {
-   "id": "Q230104",
-   "az": "Naxçıvan",
-   "ru": "Нахичевань",
-   "en": "Nakhchivan",
-   "lat": 39.2089,
-   "lng": 45.4122
-  }
- },
- {
-  "qid": "Q12837187",
-  "az": "Babək Niftəliyev",
-  "en": "Babak Niftaliyev",
+  "qid": "Q4295602",
+  "az": "Abgül Mirzəliyev",
+  "ru": "Мирзалиев, Абгюль Арзулла оглы",
   "roles": [
    "khanende"
   ],
-  "born": 1985,
+  "born": 1986,
   "died": null,
   "place": {
-   "id": "Q1643630",
-   "az": "Kəlbəcər",
-   "ru": "Кельбаджар",
-   "en": "Kalbajar",
-   "lat": 40.1067,
-   "lng": 46.0383
-  }
+   "id": "Q8082646",
+   "az": "Şıxzahırlı",
+   "ru": "Шихзахырлы",
+   "en": "Şıxzahırlı",
+   "lat": 40.4748,
+   "lng": 49.0256
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Abg%C3%BCl_Mirz%C9%99liyev"
  },
  {
   "qid": "Q118142274",
@@ -1654,24 +958,9 @@
    "en": "Shamakhi",
    "lat": 40.6339,
    "lng": 48.6392
-  }
- },
- {
-  "qid": "Q138682898",
-  "az": "Mustafa Aşurov",
-  "roles": [
-   "tar"
-  ],
-  "born": 1991,
-  "died": null,
-  "place": {
-   "id": "Q586758",
-   "az": "Qazax",
-   "ru": "Газах",
-   "en": "Gazakh",
-   "lat": 41.0933,
-   "lng": 45.3661
-  }
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Mirelem.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/Mir%C9%99l%C9%99m_Mir%C9%99l%C9%99mov"
  },
  {
   "qid": "Q135210316",
@@ -1707,131 +996,306 @@
    "en": "Shusha",
    "lat": 39.7602,
    "lng": 46.7504
-  }
- },
- {
-  "qid": "Q4073560",
-  "az": "Aşıq Valeh",
-  "ru": "Ашуг Валех",
-  "en": "Ashig Valeh",
-  "roles": [
-   "ashik"
-  ],
-  "born": 1722,
-  "died": 1822,
-  "place": {
-   "id": "Q100329099",
-   "az": "Gülablı",
-   "ru": "Гюлаблы",
-   "en": "Gulably",
-   "lat": 39.877,
-   "lng": 46.9458
   },
-  "kitabxana": "asiq-valeh"
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Mirza%20Mukhtar.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/Mirz%C9%99_Muxtar"
  },
  {
-  "qid": "Q1979936",
-  "ru": "Дживани",
-  "en": "Jivani",
+  "qid": "Q6498967",
+  "az": "Ağ Aşıq Allahverdi",
+  "ru": "Аг Ашуг Аллахверди",
+  "en": "Âşık Allahverdi",
   "roles": [
    "ashik"
   ],
-  "born": 1846,
-  "died": 1909,
+  "born": 1754,
+  "died": 1860,
   "place": {
-   "id": "Q12865635",
-   "ru": "Карцахи",
-   "en": "Kartsakhi",
-   "lat": 41.2458,
-   "lng": 43.2789
-  }
+   "id": "Q1820789",
+   "az": "Nəqədə",
+   "ru": "Негеде",
+   "en": "Naqadeh",
+   "lat": 36.9553,
+   "lng": 45.3881
+  },
+  "kitabxana": "ag-asiq-allahverdi",
+  "wiki": "https://az.wikipedia.org/wiki/A%C4%9F_A%C5%9F%C4%B1q_Allahverdi"
  },
  {
-  "qid": "Q114437517",
-  "az": "Keştazlı Həsən",
-  "ru": "Кештазлы, Гасан Гусейн оглы",
+  "qid": "Q12842684",
+  "az": "Məlikballı Qurban",
+  "roles": [
+   "ashik"
+  ],
+  "born": 1790,
+  "died": 1865,
+  "place": {
+   "id": "Q4991473",
+   "az": "Məlikballı",
+   "en": "Məlikballı",
+   "lat": 40.5447,
+   "lng": 47.5446
+  },
+  "kitabxana": "malibeyli-qurban",
+  "wiki": "https://az.wikipedia.org/wiki/M%C9%99likball%C4%B1_Qurban"
+ },
+ {
+  "qid": "Q4073559",
+  "az": "Aşıq Alı",
+  "ru": "Ашуг Алы Гызылвенкли",
+  "en": "Aşıq Alı",
+  "roles": [
+   "ashik"
+  ],
+  "born": 1801,
+  "died": 1911,
+  "place": {
+   "id": "Q2650168",
+   "az": "Qızılvəng",
+   "ru": "Макенис",
+   "en": "Makenis",
+   "lat": 40.1239,
+   "lng": 45.6108
+  },
+  "kitabxana": "asiq-ali",
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Ashiq%20Ali.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/A%C5%9F%C4%B1q_Al%C4%B1"
+ },
+ {
+  "qid": "Q16374758",
+  "az": "Səttar",
+  "ru": "Саттар",
+  "en": "Sattar",
   "roles": [
    "khanende"
   ],
-  "born": 1873,
-  "died": 1929,
+  "born": 1820,
+  "died": null,
   "place": {
-   "id": "Q97302245",
-   "az": "Keştazlı",
-   "en": "Keştazlı",
-   "lat": 40.0183,
-   "lng": 46.9467
-  }
+   "id": "Q180103",
+   "az": "Ərdəbil",
+   "ru": "Ардебиль",
+   "en": "Ardabil",
+   "lat": 38.25,
+   "lng": 48.3
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Sattar%20%28Azeri%20mugham%20singer%29.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/S%C9%99ttar_(xan%C9%99nd%C9%99)"
  },
  {
-  "qid": "Q4695282",
-  "az": "Əhməd Bakıxanov",
-  "ru": "Бакиханов, Ахмед Мамедрза оглы",
-  "en": "Ahmad Bakikhanov",
+  "qid": "Q128589631",
+  "az": "Aşıq Camal",
+  "roles": [
+   "ashik"
+  ],
+  "born": 1850,
+  "died": 1907,
+  "place": {
+   "id": "Q4875325",
+   "az": "Baş Göynük",
+   "ru": "Баш-Гёйнюк",
+   "en": "Baş Göynük",
+   "lat": 41.3266,
+   "lng": 47.1138
+  },
+  "kitabxana": "asiq-camal",
+  "wiki": "https://az.wikipedia.org/wiki/A%C5%9F%C4%B1q_Camal"
+ },
+ {
+  "qid": "Q16371325",
+  "az": "Məşədi Zeynal Haqverdiyev",
+  "ru": "Мешади Зейнал Ахвердиев",
+  "en": "Mashadi Zeynal",
   "roles": [
    "tar"
   ],
-  "born": 1892,
-  "died": 1973,
+  "born": 1850,
+  "died": 1918,
   "place": {
-   "id": "Q9248",
-   "az": "Bakı",
-   "ru": "Баку",
-   "en": "Baku",
-   "lat": 40.3667,
-   "lng": 49.8352
-  }
+   "id": "Q4793204",
+   "az": "Kərkicahan",
+   "ru": "Кяркиджахан",
+   "en": "Karkijahan",
+   "lat": 39.8036,
+   "lng": 46.7503
+  },
+  "wiki": "https://az.wikipedia.org/wiki/M%C9%99%C5%9F%C9%99di_Zeynal"
  },
  {
-  "qid": "Q91083301",
-  "az": "Aşıq Seyid İbrahim",
+  "qid": "Q7224484",
+  "az": "Molla Cümə",
+  "ru": "Молла Джума",
+  "en": "Molla Cümə",
   "roles": [
    "ashik"
   ],
-  "born": 1895,
-  "died": 1944,
+  "born": 1859,
+  "died": 1920,
   "place": {
-   "id": "Q7266587",
-   "az": "Qaradaş",
-   "en": "Qaradaş",
-   "lat": 40.6988,
-   "lng": 45.4922
-  }
+   "id": "Q4833436",
+   "az": "Aşağı Layısqı",
+   "ru": "Ашагы-Лайски",
+   "en": "Aşağı Layısqı",
+   "lat": 41.2828,
+   "lng": 46.9724
+  },
+  "kitabxana": "molla-cume",
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Molla%20C%C3%BCm%C9%99.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/Molla_C%C3%BCm%C9%99"
  },
  {
-  "qid": "Q1131312",
-  "az": "Bülbül",
-  "ru": "Бюльбюль",
-  "en": "Bulbul",
+  "qid": "Q4073558",
+  "az": "Aşıq Əsəd",
+  "ru": "Ашуг Асад",
+  "en": "Ashik Asad",
+  "roles": [
+   "ashik"
+  ],
+  "born": 1874,
+  "died": 1951,
+  "place": {
+   "id": "Q2649943",
+   "az": "Böyük Qaraqoyunlu",
+   "ru": "Норабак",
+   "en": "Norabak",
+   "lat": 40.15,
+   "lng": 45.8667
+  },
+  "kitabxana": "asiq-esed",
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Kalinin%20gives%20the%20order%20%22Badge%20of%20Honor%22%20to%20ashug%20Asad.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/A%C5%9F%C4%B1q_%C6%8Fs%C9%99d"
+ },
+ {
+  "qid": "Q124043162",
+  "az": "Aşıq Ağayar",
+  "roles": [
+   "ashik"
+  ],
+  "born": 1880,
+  "died": 1978,
+  "place": {
+   "id": "Q745934",
+   "az": "Zod",
+   "ru": "Сотк",
+   "en": "Sotk",
+   "lat": 40.2031,
+   "lng": 45.8647
+  },
+  "wiki": "https://az.wikipedia.org/wiki/A%C5%9F%C4%B1q_A%C4%9Fayar"
+ },
+ {
+  "qid": "Q12837135",
+  "az": "Aşıq Savad",
+  "en": "Asiq Savad",
+  "roles": [
+   "ashik"
+  ],
+  "born": 1885,
+  "died": 1970,
+  "place": {
+   "id": "Q4846413",
+   "az": "Dəmirçilər",
+   "en": "Dəmirçilər (41° 17' N 45° 11' E)",
+   "lat": 41.285,
+   "lng": 45.1883
+  },
+  "wiki": "https://az.wikipedia.org/wiki/A%C5%9F%C4%B1q_Savad"
+ },
+ {
+  "qid": "Q25543138",
+  "az": "Aşıq Yunis",
+  "roles": [
+   "ashik"
+  ],
+  "born": 1888,
+  "died": 1974,
+  "place": {
+   "id": "Q1024597",
+   "az": "Cil",
+   "ru": "Джиль",
+   "en": "Jil",
+   "lat": 40.4544,
+   "lng": 45.4536
+  },
+  "wiki": "https://az.wikipedia.org/wiki/A%C5%9F%C4%B1q_Yunis"
+ },
+ {
+  "qid": "Q4528165",
+  "az": "Seyid Şuşinski",
+  "ru": "Сеид Шушинский",
   "roles": [
    "khanende"
   ],
-  "born": 1897,
-  "died": 1961,
+  "born": 1889,
+  "died": 1965,
   "place": {
-   "id": "Q16418402",
-   "az": "Xanbağı",
-   "ru": "Ханбагы",
-   "en": "Khanbagi",
-   "lat": 39.8478,
-   "lng": 46.7731
-  }
+   "id": "Q2658391",
+   "az": "Horadiz",
+   "ru": "Горадиз",
+   "en": "Horadiz",
+   "lat": 39.4478,
+   "lng": 47.3364
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Seyid%20Shushinski%201919.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/Seyid_%C5%9Eu%C5%9Finski"
  },
  {
-  "qid": "Q95946398",
-  "az": "Vayxırlı Məmmədcəfər",
+  "qid": "Q4073563",
+  "az": "Aşıq İslam Yusifov",
+  "ru": "Ашуг Ислам",
   "roles": [
    "ashik"
   ],
-  "born": 1900,
-  "died": 2000,
+  "born": 1893,
+  "died": 1968,
   "place": {
-   "id": "Q5012603",
-   "az": "Türkeş",
-   "en": "Türkeş",
-   "lat": 39.4224,
-   "lng": 45.471
-  }
+   "id": "Q2643326",
+   "az": "Nərimanlı",
+   "ru": "Шатван",
+   "en": "Shatvan",
+   "lat": 40.1831,
+   "lng": 45.8256
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Ashiq%20Islam.png?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/A%C5%9F%C4%B1q_%C4%B0slam_Yusifov"
+ },
+ {
+  "qid": "Q16365348",
+  "az": "Aşıq İdris",
+  "roles": [
+   "ashik"
+  ],
+  "born": 1894,
+  "died": 1945,
+  "place": {
+   "id": "Q2649959",
+   "az": "Zərkənd",
+   "ru": "Кут",
+   "en": "Kut",
+   "lat": 40.18,
+   "lng": 45.9
+  },
+  "wiki": "https://az.wikipedia.org/wiki/A%C5%9F%C4%B1q_%C4%B0dris"
+ },
+ {
+  "qid": "Q5391050",
+  "az": "Ağabala Abdullayev",
+  "ru": "Абдуллаев, Агабала Мамедбагир оглы",
+  "en": "Agabala Abdullayev",
+  "roles": [
+   "khanende"
+  ],
+  "born": 1910,
+  "died": 1976,
+  "place": {
+   "id": "Q4846062",
+   "az": "Çərəli",
+   "ru": "Черели",
+   "en": "Çərəli",
+   "lat": 39.252,
+   "lng": 46.6141
+  },
+  "wiki": "https://az.wikipedia.org/wiki/A%C4%9Fabala_Abdullayev"
  },
  {
   "qid": "Q12837126",
@@ -1849,7 +1313,8 @@
    "lat": 39.4993,
    "lng": 45.0264
   },
-  "kitabxana": "asiq-nabat"
+  "kitabxana": "asiq-nabat",
+  "wiki": "https://az.wikipedia.org/wiki/A%C5%9F%C4%B1q_Nabat"
  },
  {
   "qid": "Q8013694",
@@ -1868,205 +1333,241 @@
    "lat": 39.0411,
    "lng": 47.2092
   },
-  "kitabxana": "asiq-huseyn-cavan"
+  "kitabxana": "asiq-huseyn-cavan",
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/A%C5%9F%C4%B1q%20H%C3%BCseyn%20Cavan%20-%20%281%29.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/A%C5%9F%C4%B1q_H%C3%BCseyn_Cavan"
  },
  {
-  "qid": "Q373520",
-  "az": "Hacıbaba Hüseynov",
-  "ru": "Гусейнов, Гаджибаба Гусейнали оглы",
-  "en": "Hajibaba Huseynov",
+  "qid": "Q131783517",
+  "az": "Simuzər Hətəmova",
+  "ru": "Атамова, Симузар Рза кызы",
+  "en": "Simuzar Hatamova",
   "roles": [
    "khanende"
   ],
-  "born": 1919,
-  "died": 1993,
-  "place": {
-   "id": "Q9248",
-   "az": "Bakı",
-   "ru": "Баку",
-   "en": "Baku",
-   "lat": 40.3667,
-   "lng": 49.8352
-  }
- },
- {
-  "qid": "Q6028583",
-  "az": "Sara Qədimova",
-  "ru": "Гядимова, Сара Бябиш кызы",
-  "en": "Sara Qadimova",
-  "roles": [
-   "khanende"
-  ],
-  "born": 1922,
+  "born": 1921,
   "died": 2005,
   "place": {
-   "id": "Q9248",
-   "az": "Bakı",
-   "ru": "Баку",
-   "en": "Baku",
-   "lat": 40.3667,
-   "lng": 49.8352
-  }
+   "id": "Q540844",
+   "az": "Ağdam",
+   "ru": "Агдам",
+   "en": "Aghdam",
+   "lat": 39.9833,
+   "lng": 46.9167
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Simuz%C9%99r_H%C9%99t%C9%99mova"
  },
  {
-  "qid": "Q16365278",
-  "az": "Aşıq Murad Ulduz",
-  "en": "Asiq Murad Ulduz",
+  "qid": "Q4292213",
+  "az": "Fatma Mehrəliyeva",
+  "ru": "Фатима Мехралиева",
+  "en": "Fatma Mehraliyeva",
   "roles": [
-   "ashik"
-  ],
-  "born": 1922,
-  "died": 1999,
-  "place": {
-   "id": "Q10738062",
-   "az": "Bardaqlı",
-   "en": "Bardaklı",
-   "lat": 40.8353,
-   "lng": 43.48
-  }
- },
- {
-  "qid": "Q12849952",
-  "az": "Əhsən Dadaşov",
-  "en": "Ahsan Dadasov",
-  "roles": [
-   "tar"
-  ],
-  "born": 1924,
-  "died": 1976,
-  "place": {
-   "id": "Q9248",
-   "az": "Bakı",
-   "ru": "Баку",
-   "en": "Baku",
-   "lat": 40.3667,
-   "lng": 49.8352
-  }
- },
- {
-  "qid": "Q131581615",
-  "az": "Şövkət Babayeva",
-  "en": "Shovkat Babayeva",
-  "roles": [
-   "tar"
-  ],
-  "born": 1924,
-  "died": 1993,
-  "place": {
-   "id": "Q9248",
-   "az": "Bakı",
-   "ru": "Баку",
-   "en": "Baku",
-   "lat": 40.3667,
-   "lng": 49.8352
-  }
- },
- {
-  "qid": "Q16365351",
-  "az": "Aşıq İsgəndər Ağbabalı",
-  "en": "İsgändär Ağbabali",
-  "roles": [
-   "ashik"
-  ],
-  "born": 1925,
-  "died": 1992,
-  "place": {
-   "id": "Q15242875",
-   "az": "Ellərkənd",
-   "ru": "Лорасар",
-   "en": "Lorasar",
-   "lat": 41.1128,
-   "lng": 43.5964
-  }
- },
- {
-  "qid": "Q111048998",
-  "az": "Əlikram Hüseynov",
-  "ru": "Гусейнов, Аликрам Гасан оглы",
-  "roles": [
-   "tar"
+   "khanende"
   ],
   "born": 1926,
-  "died": 2006,
+  "died": 2000,
   "place": {
-   "id": "Q9248",
-   "az": "Bakı",
-   "ru": "Баку",
-   "en": "Baku",
-   "lat": 40.3667,
-   "lng": 49.8352
-  }
+   "id": "Q647982",
+   "az": "Quba",
+   "ru": "Губа",
+   "en": "Guba",
+   "lat": 41.3653,
+   "lng": 48.5264
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Fatma_Mehr%C9%99liyeva"
  },
  {
-  "qid": "Q91236774",
-  "az": "Nəriman Əliyev",
-  "ru": "Алиев, Нариман Мовсум оглы",
-  "en": "Nariman Aliyev",
+  "qid": "Q134286966",
+  "az": "Bakir Haşımov",
+  "roles": [
+   "khanende"
+  ],
+  "born": 1926,
+  "died": 1989,
+  "place": {
+   "id": "Q201647",
+   "az": "Ağdam rayonu",
+   "ru": "Агдамский район",
+   "en": "Aghdam",
+   "lat": 39.9836,
+   "lng": 46.9286
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Bakir_Ha%C5%9F%C4%B1mov"
+ },
+ {
+  "qid": "Q16365360",
+  "az": "Aşıq Əli",
+  "en": "Asiq Ali Imamquliyev",
+  "roles": [
+   "ashik"
+  ],
+  "born": 1927,
+  "died": 1990,
+  "place": {
+   "id": "Q2649959",
+   "az": "Zərkənd",
+   "ru": "Кут",
+   "en": "Kut",
+   "lat": 40.18,
+   "lng": 45.9
+  },
+  "wiki": "https://az.wikipedia.org/wiki/A%C5%9F%C4%B1q_%C6%8Fli_%C4%B0mamquliyev"
+ },
+ {
+  "qid": "Q16372672",
+  "az": "Qulu Əsgərov",
+  "ru": "Аскеров, Гулу Рустам оглы",
+  "en": "Gulu Asgerov",
+  "roles": [
+   "khanende"
+  ],
+  "born": 1928,
+  "died": 1987,
+  "place": {
+   "id": "Q1017678",
+   "az": "Salyan",
+   "ru": "Сальян",
+   "en": "Salyan",
+   "lat": 39.5968,
+   "lng": 48.9837
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Qulu_%C6%8Fsg%C9%99rov"
+ },
+ {
+  "qid": "Q134953771",
+  "az": "Aşıq Kamil Zülfüqarov",
+  "en": "Aşıq Kamil",
+  "roles": [
+   "ashik"
+  ],
+  "born": 1929,
+  "died": 2004,
+  "place": {
+   "id": "Q4907684",
+   "az": "Boranıkənd",
+   "en": "Boranıkənd",
+   "lat": 39.4271,
+   "lng": 48.8281
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/A%C5%9F%C4%B1q%20Kamil%20Z%C3%BClf%C3%BCqarov.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/A%C5%9F%C4%B1q_Kamil"
+ },
+ {
+  "qid": "Q16377959",
+  "az": "Şahmalı Kürdoğlu",
+  "ru": "Гаджиев, Шахмали Мирзагулу оглы",
+  "en": "Sahmali Kurdoglu",
   "roles": [
    "khanende"
   ],
   "born": 1930,
-  "died": 1998,
+  "died": 1992,
   "place": {
-   "id": "Q9248",
-   "az": "Bakı",
-   "ru": "Баку",
-   "en": "Baku",
-   "lat": 40.3667,
-   "lng": 49.8352
-  }
+   "id": "Q201647",
+   "az": "Ağdam rayonu",
+   "ru": "Агдамский район",
+   "en": "Aghdam",
+   "lat": 39.9836,
+   "lng": 46.9286
+  },
+  "wiki": "https://az.wikipedia.org/wiki/%C5%9Eahmal%C4%B1_K%C3%BCrdo%C4%9Flu"
  },
  {
-  "qid": "Q16365291",
-  "az": "Aşıq Məhəmməd Sadaxlı",
+  "qid": "Q6404572",
+  "az": "Qədir Rüstəmov",
+  "ru": "Рустамов, Гадир Черкез оглы",
+  "en": "Gadir Rustamov",
+  "roles": [
+   "khanende"
+  ],
+  "born": 1935,
+  "died": 2011,
+  "place": {
+   "id": "Q201647",
+   "az": "Ağdam rayonu",
+   "ru": "Агдамский район",
+   "en": "Aghdam",
+   "lat": 39.9836,
+   "lng": 46.9286
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Q%C9%99dir_R%C3%BCst%C9%99mov"
+ },
+ {
+  "qid": "Q12837122",
+  "az": "Aşıq Mahmud Məmmədov",
+  "en": "Asiq Mahmud Mammadov",
   "roles": [
    "ashik"
   ],
-  "born": 1930,
-  "died": 2016,
+  "born": 1935,
+  "died": 2020,
   "place": {
-   "id": "Q16677411",
-   "az": "Mollaoğlu",
-   "ru": "Молаоглы",
-   "en": "Molaoghlu",
-   "lat": 41.2317,
-   "lng": 44.7208
-  }
+   "id": "Q1024539",
+   "az": "Ağbulaq",
+   "ru": "Агберк",
+   "en": "Aghberk",
+   "lat": 40.5326,
+   "lng": 45.2692
+  },
+  "wiki": "https://az.wikipedia.org/wiki/A%C5%9F%C4%B1q_Mahmud_M%C9%99mm%C9%99dov"
  },
  {
-  "qid": "Q109559922",
-  "az": "Aşıq Dehqan",
-  "roles": [
-   "ashik"
-  ],
-  "born": 1934,
-  "died": 2025,
-  "place": {
-   "id": "Q5711207",
-   "az": "İqdır",
-   "en": "Igdir",
-   "lat": 37.5219,
-   "lng": 45.2367
-  }
- },
- {
-  "qid": "Q39394656",
-  "az": "Adil Bağırov",
-  "ru": "Адиль Кямиль оглы Багиров",
-  "en": "Adil Baghirov",
+  "qid": "Q61122097",
+  "az": "Oqtay Quliyev",
+  "en": "Oqtay Quliyev",
   "roles": [
    "tar"
   ],
-  "born": 1937,
+  "born": 1938,
   "died": null,
   "place": {
-   "id": "Q9248",
-   "az": "Bakı",
-   "ru": "Баку",
-   "en": "Baku",
-   "lat": 40.3667,
-   "lng": 49.8352
-  }
+   "id": "Q540844",
+   "az": "Ağdam",
+   "ru": "Агдам",
+   "en": "Aghdam",
+   "lat": 39.9833,
+   "lng": 46.9167
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Oqtay_Quliyev"
+ },
+ {
+  "qid": "Q16378524",
+  "az": "Ədalət Nəsibov",
+  "ru": "Ашуг Адалят",
+  "roles": [
+   "ashik"
+  ],
+  "born": 1939,
+  "died": 2017,
+  "place": {
+   "id": "Q586758",
+   "az": "Qazax",
+   "ru": "Газах",
+   "en": "Gazakh",
+   "lat": 41.0933,
+   "lng": 45.3661
+  },
+  "wiki": "https://az.wikipedia.org/wiki/A%C5%9F%C4%B1q_%C6%8Fdal%C9%99t"
+ },
+ {
+  "qid": "Q96957660",
+  "az": "Sərraf Qasım",
+  "ru": "Сарраф Касум",
+  "en": "Sərraf Qasım",
+  "roles": [
+   "ashik"
+  ],
+  "born": 1939,
+  "died": 2018,
+  "place": {
+   "id": "Q4833445",
+   "az": "Aşağı Qışlaq",
+   "en": "Aşağı Qışlaq",
+   "lat": 39.4661,
+   "lng": 45.702
+  },
+  "wiki": "https://az.wikipedia.org/wiki/S%C9%99rraf_Qas%C4%B1m"
  },
  {
   "qid": "Q16375043",
@@ -2085,64 +1586,48 @@
    "en": "Alar",
    "lat": 39.3159,
    "lng": 48.5319
-  }
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Teymur%20Mustafayev.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/Teymur_Mustafayev"
  },
  {
-  "qid": "Q16365956",
-  "az": "Canəli Əkbərov",
-  "ru": "Джанали Ханали оглы Акперов",
-  "en": "Canali Akbarov",
+  "qid": "Q20563594",
+  "az": "Süleyman Abdullayev",
+  "en": "Süleyman Abdullayev",
   "roles": [
    "khanende"
   ],
-  "born": 1940,
-  "died": 2021,
+  "born": 1939,
+  "died": 2022,
   "place": {
-   "id": "Q12711972",
-   "az": "Tükəvilə",
-   "ru": "Тукавиля",
-   "en": "Tükəvilə",
-   "lat": 38.8568,
-   "lng": 48.6928
-  }
+   "id": "Q1996181",
+   "az": "Füzuli",
+   "ru": "Физули",
+   "en": "Fuzuli",
+   "lat": 39.6003,
+   "lng": 47.1431
+  },
+  "wiki": "https://az.wikipedia.org/wiki/S%C3%BCleyman_Abdullayev_(xan%C9%99nd%C9%99)"
  },
  {
-  "qid": "Q12839110",
-  "az": "Elmira Rəhimova",
-  "ru": "Эльмира Рагимова",
-  "en": "Elmira Rahimova",
+  "qid": "Q12837118",
+  "az": "Aşıq Fətulla",
+  "en": "Aşıq Fətulla Əliyev",
   "roles": [
-   "khanende"
-  ],
-  "born": 1941,
-  "died": null,
-  "place": {
-   "id": "Q9248",
-   "az": "Bakı",
-   "ru": "Баку",
-   "en": "Baku",
-   "lat": 40.3667,
-   "lng": 49.8352
-  }
- },
- {
-  "qid": "Q434919",
-  "az": "Flora Kərimova",
-  "ru": "Флора Керимова",
-  "en": "Flora Karimova",
-  "roles": [
-   "khanende"
+   "ashik"
   ],
   "born": 1941,
   "died": null,
   "place": {
-   "id": "Q9248",
-   "az": "Bakı",
-   "ru": "Баку",
-   "en": "Baku",
-   "lat": 40.3667,
-   "lng": 49.8352
-  }
+   "id": "Q2643326",
+   "az": "Nərimanlı",
+   "ru": "Шатван",
+   "en": "Shatvan",
+   "lat": 40.1831,
+   "lng": 45.8256
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/A%C5%9F%C4%B1q%20F%C9%99tulla%20%E2%80%93%2080.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/A%C5%9F%C4%B1q_F%C9%99tulla"
  },
  {
   "qid": "Q16365342",
@@ -2160,98 +1645,81 @@
    "en": "Tircan",
    "lat": 40.7374,
    "lng": 48.334
-  }
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Yanvar_B%C9%99d%C9%99lov"
  },
  {
-  "qid": "Q12850037",
-  "az": "Əli Quliyev",
+  "qid": "Q12845363",
+  "az": "Sabir Novruzov",
+  "en": "Sabir Novruzov",
+  "roles": [
+   "khanende"
+  ],
+  "born": 1944,
+  "died": 2009,
+  "place": {
+   "id": "Q1983875",
+   "az": "Ağcabədi",
+   "ru": "Агджабеди",
+   "en": "Aghjabadi",
+   "lat": 40.0489,
+   "lng": 47.4502
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Sabir_Novruzov_(xan%C9%99nd%C9%99)"
+ },
+ {
+  "qid": "Q55702598",
+  "az": "Sabir Əliyev (xanəndə)",
+  "ru": "Алиев, Сабир Магеррам оглы",
+  "roles": [
+   "khanende"
+  ],
+  "born": 1948,
+  "died": 2020,
+  "place": {
+   "id": "Q4719409",
+   "az": "Pərdi",
+   "en": "Pərdili",
+   "lat": 39.1826,
+   "lng": 48.2846
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Sabir_%C6%8Fliyev_(xan%C9%99nd%C9%99)"
+ },
+ {
+  "qid": "Q16371283",
+  "az": "Məzahir Məmmədov",
+  "roles": [
+   "tar"
+  ],
+  "born": 1948,
+  "died": null,
+  "place": {
+   "id": "Q1017678",
+   "az": "Salyan",
+   "ru": "Сальян",
+   "en": "Salyan",
+   "lat": 39.5968,
+   "lng": 48.9837
+  },
+  "wiki": "https://az.wikipedia.org/wiki/M%C9%99zahir_M%C9%99mm%C9%99dov_(tarz%C9%99n)"
+ },
+ {
+  "qid": "Q137759693",
+  "az": "Ziyəddin Keşəli",
   "roles": [
    "ashik"
   ],
   "born": 1950,
-  "died": null,
+  "died": 2025,
   "place": {
-   "id": "Q4991555",
-   "az": "Əlimərdanlı",
-   "ru": "Алимарданлы",
-   "en": "Əlimərdanlı",
-   "lat": 41.0395,
-   "lng": 45.6751
-  }
- },
- {
-  "qid": "Q4833537",
-  "az": "Aşıq Xanlar Məhərrəmov",
-  "en": "Aşık Khanlar",
-  "roles": [
-   "ashik"
-  ],
-  "born": 1950,
-  "died": 1998,
-  "place": {
-   "id": "Q4991555",
-   "az": "Əlimərdanlı",
-   "ru": "Алимарданлы",
-   "en": "Əlimərdanlı",
-   "lat": 41.0395,
-   "lng": 45.6751
-  }
- },
- {
-  "qid": "Q136657345",
-  "az": "Aqil Məlikov",
-  "ru": "Агиль Меликов",
-  "en": "Agil Melikov",
-  "roles": [
-   "khanende"
-  ],
-  "born": 1952,
-  "died": null,
-  "place": {
-   "id": "Q8082442",
-   "az": "Şağan",
-   "ru": "Шаган",
-   "en": "Şağan",
-   "lat": 40.4974,
-   "lng": 50.1216
-  }
- },
- {
-  "qid": "Q76603817",
-  "az": "Zaur Rzayev",
-  "ru": "Рзаев, Заур Алигусейн оглы",
-  "roles": [
-   "khanende"
-  ],
-  "born": 1952,
-  "died": 2026,
-  "place": {
-   "id": "Q29583554",
-   "az": "Karrar",
-   "ru": "Каррар",
-   "en": "Karrar",
-   "lat": 40.3069,
-   "lng": 48.2602
-  }
- },
- {
-  "qid": "Q6400869",
-  "az": "Mənsum İbrahimov",
-  "ru": "Мансум Ибрагимов",
-  "en": "Mansum Ibrahimov",
-  "roles": [
-   "khanende"
-  ],
-  "born": 1960,
-  "died": null,
-  "place": {
-   "id": "Q29350447",
-   "az": "İmamqulubəyli",
-   "ru": "Имамкулубейли",
-   "en": "İmamqulubəyli (village), Agdam",
-   "lat": 40.1864,
-   "lng": 47.1974
-  }
+   "id": "Q2410306",
+   "az": "Marneuli bələdiyyəsi",
+   "ru": "Марнеульский муниципалитет",
+   "en": "Marneuli Municipality",
+   "lat": 41.4872,
+   "lng": 44.7981
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Ziy%C9%99ddin_Ke%C5%9F%C9%99li"
  },
  {
   "qid": "Q6394333",
@@ -2260,7 +1728,7 @@
   "roles": [
    "ashik"
   ],
-  "born": 1961,
+  "born": 1951,
   "died": null,
   "place": {
    "id": "Q5630460",
@@ -2268,24 +1736,68 @@
    "en": "Sheykh Hoseynlu",
    "lat": 38.9489,
    "lng": 46.8292
-  }
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/%C3%87ingiz%20Mehdipur.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/A%C5%9F%C4%B1q_%C3%87ingiz_Mehdipur"
  },
  {
-  "qid": "Q23497980",
-  "az": "Səlcuq Şahbazi",
-  "en": "Seljug Shahbazi",
+  "qid": "Q19716199",
+  "az": "Zümrüd Məmmədova",
+  "ru": "Мамедова, Зумруд Мовлуд кызы",
+  "en": "Zumrud Mammadova",
+  "roles": [
+   "khanende"
+  ],
+  "born": 1956,
+  "died": null,
+  "place": {
+   "id": "Q4846214",
+   "az": "İkinci Nügədi",
+   "ru": "Икинджи Нюгеди",
+   "en": "İkinci Nügədi",
+   "lat": 41.3195,
+   "lng": 48.5924
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Z%C3%BCmr%C3%BCd_M%C9%99mm%C9%99dova"
+ },
+ {
+  "qid": "Q936538",
+  "az": "Alim Qasımov",
+  "ru": "Гасымов, Алим Хамза оглы",
+  "en": "Alim Qasimov",
+  "roles": [
+   "khanende"
+  ],
+  "born": 1957,
+  "died": null,
+  "place": {
+   "id": "Q6957039",
+   "az": "Nabur",
+   "ru": "Набур",
+   "en": "Nabur",
+   "lat": 40.6319,
+   "lng": 48.9195
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Alim%20Gasimov.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/Alim_Qas%C4%B1mov"
+ },
+ {
+  "qid": "Q16368115",
+  "az": "Gülarə Azaflı",
   "roles": [
    "ashik"
   ],
-  "born": 1962,
+  "born": 1959,
   "died": null,
   "place": {
-   "id": "Q5861532",
-   "az": "Ağcaqışlaq",
-   "en": "Agh Qeshlaq",
-   "lat": 37.32,
-   "lng": 47.785
-  }
+   "id": "Q4832243",
+   "az": "Azaflı",
+   "ru": "Азафлы",
+   "en": "Azaplı",
+   "lat": 40.9265,
+   "lng": 45.6612
+  },
+  "wiki": "https://az.wikipedia.org/wiki/G%C3%BClar%C9%99_Azafl%C4%B1"
  },
  {
   "qid": "Q55203270",
@@ -2301,78 +1813,25 @@
    "en": "Yuxarı Qışlaq",
    "lat": 39.5007,
    "lng": 45.6942
-  }
+  },
+  "wiki": "https://az.wikipedia.org/wiki/A%C5%9F%C4%B1q_Abdulla_F%C9%99t%C9%99liyev"
  },
  {
-  "qid": "Q12836241",
-  "az": "Aybəniz Laçınlı",
-  "ru": "Айбениз Лачинлы",
-  "en": "Aybəniz Laçınlı",
+  "qid": "Q25543577",
+  "az": "Səbuhi Cəfərov",
+  "en": "Səbuhi Cəfərov",
   "roles": [
-   "ashik"
+   "tar"
   ],
-  "born": 1963,
+  "born": 1968,
   "died": null,
   "place": {
-   "id": "Q12698774",
-   "az": "Nağdalı",
-   "en": "Nağdalı, Lachin",
-   "lat": 39.9128,
-   "lng": 46.4206
-  }
- },
- {
-  "qid": "Q12848212",
-  "az": "Zabit Nəbizadə",
-  "ru": "Набизаде, Забит Гюльхан оглы",
-  "roles": [
-   "khanende"
-  ],
-  "born": 1965,
-  "died": null,
-  "place": {
-   "id": "Q8082646",
-   "az": "Şıxzahırlı",
-   "ru": "Шихзахырлы",
-   "en": "Şıxzahırlı",
-   "lat": 40.4748,
-   "lng": 49.0256
-  }
- },
- {
-  "qid": "Q23685213",
-  "az": "Teyyub Aslanov",
-  "ru": "Асланов, Тейюб Шуэйюб оглы",
-  "en": "Teyyub Aslanov",
-  "roles": [
-   "khanende"
-  ],
-  "born": 1967,
-  "died": null,
-  "place": {
-   "id": "Q9248",
-   "az": "Bakı",
-   "ru": "Баку",
-   "en": "Baku",
-   "lat": 40.3667,
-   "lng": 49.8352
-  }
- },
- {
-  "qid": "Q16365354",
-  "az": "Aşıq Ədalət Dəlidağlı",
-  "roles": [
-   "ashik"
-  ],
-  "born": 1967,
-  "died": null,
-  "place": {
-   "id": "Q8051573",
-   "az": "Yellicə",
-   "ru": "Еллиджа",
-   "en": "Yellicə",
-   "lat": 40.0956,
-   "lng": 45.9498
+   "id": "Q647982",
+   "az": "Quba",
+   "ru": "Губа",
+   "en": "Guba",
+   "lat": 41.3653,
+   "lng": 48.5264
   }
  },
  {
@@ -2391,45 +1850,29 @@
    "en": "Alakol",
    "lat": 40.9067,
    "lng": 45.7716
-  }
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/A%C5%9F%C4%B1q%20Z%C3%BClfiyy%C9%99%202018.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/A%C5%9F%C4%B1q_Z%C3%BClfiyy%C9%99"
  },
  {
-  "qid": "Q16368221",
-  "az": "Gülyaz Məmmədova",
-  "ru": "Мамедова, Гюльяз Закир кызы",
-  "en": "Gulyaz Memmedova",
+  "qid": "Q115260068",
+  "az": "Sevinc Sarıyeva",
+  "en": "Sevinj Sariyeva",
   "roles": [
    "khanende"
   ],
-  "born": 1970,
+  "born": 1972,
   "died": null,
   "place": {
-   "id": "Q5005190",
-   "az": "Böyük Dəhnə",
-   "ru": "Бёюк-Дахна",
-   "en": "Böyük Dəhnə",
-   "lat": 40.9729,
-   "lng": 47.1168
-  }
- },
- {
-  "qid": "Q12836279",
-  "az": "Aygün Bəylər",
-  "ru": "Гумматова, Айгюн Айдын кызы",
-  "en": "Aygün Beyler",
-  "roles": [
-   "khanende"
-  ],
-  "born": 1975,
-  "died": 2024,
-  "place": {
-   "id": "Q9248",
-   "az": "Bakı",
-   "ru": "Баку",
-   "en": "Baku",
-   "lat": 40.3667,
-   "lng": 49.8352
-  }
+   "id": "Q2660750",
+   "az": "Qarakənd",
+   "ru": "Каракенд",
+   "en": "Qarakənd",
+   "lat": 39.8461,
+   "lng": 47.0241
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Sevinj%20Sariyeva%20in%202022.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/Sevinc_Sar%C4%B1yeva"
  },
  {
   "qid": "Q16374215",
@@ -2448,23 +1891,8 @@
    "en": "Əliqulular",
    "lat": 39.9085,
    "lng": 47.9296
-  }
- },
- {
-  "qid": "Q12838311",
-  "az": "Cəfər Xakipur",
-  "roles": [
-   "ashik"
-  ],
-  "born": 1976,
-  "died": null,
-  "place": {
-   "id": "Q5684012",
-   "az": "Qaraxanlı",
-   "en": "Qareh Kanlu",
-   "lat": 38.0589,
-   "lng": 47.7839
-  }
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Simar%C9%99_%C4%B0manova"
  },
  {
   "qid": "Q12838981",
@@ -2481,186 +1909,46 @@
    "en": "Hacsamlı",
    "lat": 39.8,
    "lng": 46.4072
-  }
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Ehtiram_H%C3%BCseynov"
  },
  {
-  "qid": "Q106179729",
-  "az": "Sahib Paşazadə",
-  "en": "Sahib Pashazade",
-  "roles": [
-   "tar"
-  ],
-  "born": 1980,
-  "died": null,
-  "place": {
-   "id": "Q9248",
-   "az": "Bakı",
-   "ru": "Баку",
-   "en": "Baku",
-   "lat": 40.3667,
-   "lng": 49.8352
-  }
- },
- {
-  "qid": "Q12845504",
-  "az": "Samirə Əliyeva",
-  "en": "Samirə Əliyeva",
-  "roles": [
-   "ashik"
-  ],
-  "born": 1981,
-  "died": null,
-  "place": {
-   "id": "Q9248",
-   "az": "Bakı",
-   "ru": "Баку",
-   "en": "Baku",
-   "lat": 40.3667,
-   "lng": 49.8352
-  }
- },
- {
-  "qid": "Q117750849",
-  "az": "Arslan Növrəsli",
-  "roles": [
-   "tar"
-  ],
-  "born": 1981,
-  "died": null,
-  "place": {
-   "id": "Q9248",
-   "az": "Bakı",
-   "ru": "Баку",
-   "en": "Baku",
-   "lat": 40.3667,
-   "lng": 49.8352
-  }
- },
- {
-  "qid": "Q4295602",
-  "az": "Abgül Mirzəliyev",
-  "ru": "Мирзалиев, Абгюль Арзулла оглы",
+  "qid": "Q12837187",
+  "az": "Babək Niftəliyev",
+  "en": "Babak Niftaliyev",
   "roles": [
    "khanende"
   ],
-  "born": 1986,
+  "born": 1985,
   "died": null,
   "place": {
-   "id": "Q8082646",
-   "az": "Şıxzahırlı",
-   "ru": "Шихзахырлы",
-   "en": "Şıxzahırlı",
-   "lat": 40.4748,
-   "lng": 49.0256
-  }
+   "id": "Q1643630",
+   "az": "Kəlbəcər",
+   "ru": "Кельбаджар",
+   "en": "Kalbajar",
+   "lat": 40.1067,
+   "lng": 46.0383
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Bab%C9%99k_Nift%C9%99liyev"
  },
  {
-  "qid": "Q110105823",
-  "az": "Şəhriyar İmanov",
-  "en": "Shahriyar Imanov",
+  "qid": "Q138682898",
+  "az": "Mustafa Aşurov",
   "roles": [
    "tar"
-  ],
-  "born": 1989,
-  "died": null,
-  "place": {
-   "id": "Q9248",
-   "az": "Bakı",
-   "ru": "Баку",
-   "en": "Baku",
-   "lat": 40.3667,
-   "lng": 49.8352
-  }
- },
- {
-  "qid": "Q105953918",
-  "az": "Pərviz Qasımov",
-  "en": "Parviz Gasimov",
-  "roles": [
-   "khanende"
   ],
   "born": 1991,
   "died": null,
   "place": {
-   "id": "Q9248",
-   "az": "Bakı",
-   "ru": "Баку",
-   "en": "Baku",
-   "lat": 40.3667,
-   "lng": 49.8352
-  }
- },
- {
-  "qid": "Q140127954",
-  "az": "Səxavət Məmmədov",
-  "en": "Sakhavat Mammadov",
-  "roles": [
-   "tar"
-  ],
-  "born": 1993,
-  "died": null,
-  "place": {
-   "id": "Q9248",
-   "az": "Bakı",
-   "ru": "Баку",
-   "en": "Baku",
-   "lat": 40.3667,
-   "lng": 49.8352
-  }
- },
- {
-  "qid": "Q130321247",
-  "az": "Sədəf Budaqova",
-  "roles": [
-   "khanende"
-  ],
-  "born": 1995,
-  "died": null,
-  "place": {
-   "id": "Q9248",
-   "az": "Bakı",
-   "ru": "Баку",
-   "en": "Baku",
-   "lat": 40.3667,
-   "lng": 49.8352
-  }
- },
- {
-  "qid": "Q113360480",
-  "az": "Aşıq Xavər Zəngilanlı",
-  "en": "Aşıq Xavər Zəngilanlı",
-  "roles": [
-   "ashik"
-  ],
-  "born": 2000,
-  "died": null,
-  "place": {
-   "id": "Q9248",
-   "az": "Bakı",
-   "ru": "Баку",
-   "en": "Baku",
-   "lat": 40.3667,
-   "lng": 49.8352
-  }
- },
- {
-  "qid": "Q31307884",
-  "az": "Almaxanım",
-  "ru": "Алмаханым",
-  "en": "Almaxanim",
-  "roles": [
-   "khanende"
-  ],
-  "born": 2001,
-  "died": null,
-  "place": {
-   "id": "Q9248",
-   "az": "Bakı",
-   "ru": "Баку",
-   "en": "Baku",
-   "lat": 40.3667,
-   "lng": 49.8352
-  }
+   "id": "Q586758",
+   "az": "Qazax",
+   "ru": "Газах",
+   "en": "Gazakh",
+   "lat": 41.0933,
+   "lng": 45.3661
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/A%C5%9Furov%20Mustafa%20%C6%8Fhm%C9%99d%20o%C4%9Flu.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/Mustafa_A%C5%9Furov"
  },
  {
   "qid": "Q13053058",
@@ -2677,24 +1965,6 @@
    "en": "Akhaltsikhe",
    "lat": 41.6389,
    "lng": 42.9861
-  }
- },
- {
-  "qid": "Q55199868",
-  "az": "Moşu Göyəzənli",
-  "en": "Moşu Göyəzənli",
-  "roles": [
-   "ashik"
-  ],
-  "born": null,
-  "died": null,
-  "place": {
-   "id": "Q389381",
-   "az": "Qazax rayonu",
-   "ru": "Газахский район",
-   "en": "Gazakh District",
-   "lat": 41.0933,
-   "lng": 45.3661
   }
  },
  {
@@ -2731,7 +2001,8 @@
    "lat": 37.7258,
    "lng": 46.9378
   },
-  "kitabxana": "xeste-qasim"
+  "kitabxana": "xeste-qasim",
+  "wiki": "https://az.wikipedia.org/wiki/X%C9%99st%C9%99_Qas%C4%B1m"
  },
  {
   "qid": "Q112994350",
@@ -2749,7 +2020,8 @@
    "en": "Velikent",
    "lat": 42.1864,
    "lng": 48.0628
-  }
+  },
+  "wiki": "https://az.wikipedia.org/wiki/F%C9%99t%C9%99li_V%C9%99lik%C9%99ndli"
  },
  {
   "qid": "Q137596048",
@@ -2767,7 +2039,8 @@
    "lat": 41.3833,
    "lng": 44.7169
   },
-  "kitabxana": "qul-qarani"
+  "kitabxana": "qul-qarani",
+  "wiki": "https://az.wikipedia.org/wiki/Qul_Qaran%C4%B1"
  },
  {
   "qid": "Q125230938",
@@ -2784,27 +2057,26 @@
    "en": "Talaveri",
    "lat": 41.3828,
    "lng": 44.645
-  }
+  },
+  "wiki": "https://az.wikipedia.org/wiki/G%C3%BCll%C9%99r_P%C9%99risi"
  },
  {
-  "qid": "Q4073559",
-  "az": "Aşıq Alı",
-  "ru": "Ашуг Алы Гызылвенкли",
-  "en": "Aşıq Alı",
+  "qid": "Q20512815",
+  "ru": "Мискин-Бурджи",
+  "en": "Miskin-Burji",
   "roles": [
    "ashik"
   ],
-  "born": 1801,
-  "died": 1911,
+  "born": 1810,
+  "died": 1847,
   "place": {
-   "id": "Q2650168",
-   "az": "Qızılvəng",
-   "ru": "Макенис",
-   "en": "Makenis",
-   "lat": 40.1239,
-   "lng": 45.6108
-  },
-  "kitabxana": "asiq-ali"
+   "id": "Q230104",
+   "az": "Naxçıvan",
+   "ru": "Нахичевань",
+   "en": "Nakhchivan",
+   "lat": 39.2089,
+   "lng": 45.4122
+  }
  },
  {
   "qid": "Q2636522",
@@ -2824,7 +2096,51 @@
    "lat": 40.1833,
    "lng": 45.8667
   },
-  "kitabxana": "elesger"
+  "kitabxana": "elesger",
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Ashig%20Alesger.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/A%C5%9F%C4%B1q_%C6%8Fl%C9%99sg%C9%99r"
+ },
+ {
+  "qid": "Q4131492",
+  "az": "Hacı Hüsü",
+  "ru": "Гаджи Гуси",
+  "en": "Haji Husu",
+  "roles": [
+   "khanende"
+  ],
+  "born": 1830,
+  "died": 1898,
+  "place": {
+   "id": "Q158903",
+   "az": "Şuşa",
+   "ru": "Шуша",
+   "en": "Shusha",
+   "lat": 39.7602,
+   "lng": 46.7504
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Husi%20Haji.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/Hac%C4%B1_H%C3%BCs%C3%BC"
+ },
+ {
+  "qid": "Q4101481",
+  "az": "Əbdülbağı Zülalov",
+  "ru": "Бюльбюльджан",
+  "en": "Bulbuljan",
+  "roles": [
+   "khanende"
+  ],
+  "born": 1841,
+  "died": 1927,
+  "place": {
+   "id": "Q158903",
+   "az": "Şuşa",
+   "ru": "Шуша",
+   "en": "Shusha",
+   "lat": 39.7602,
+   "lng": 46.7504
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/B%C3%BClb%C3%BClcan.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/B%C3%BClb%C3%BClcan"
  },
  {
   "qid": "Q16369814",
@@ -2842,7 +2158,71 @@
    "en": "Malıbəyli",
    "lat": 39.8303,
    "lng": 46.7919
-  }
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/C%C3%BCm%C5%9F%C3%BCd%20Mal%C4%B1b%C9%99yli.png?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/Mal%C4%B1b%C9%99yli_C%C3%BCm%C5%9F%C3%BCd"
+ },
+ {
+  "qid": "Q16365154",
+  "az": "Ağabala Ağasadıq oğlu",
+  "en": "Aghabala Aghasaid oghlu",
+  "roles": [
+   "khanende"
+  ],
+  "born": 1860,
+  "died": 1928,
+  "place": {
+   "id": "Q9248",
+   "az": "Bakı",
+   "ru": "Баку",
+   "en": "Baku",
+   "lat": 40.3667,
+   "lng": 49.8352
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Aghababa%20Aghasaid%20oghlu.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/A%C4%9Fabala_A%C4%9Fas%C9%99id_o%C4%9Flu"
+ },
+ {
+  "qid": "Q4216454",
+  "az": "Cabbar Qaryağdıoğlu",
+  "ru": "Карьягдыоглы, Джаббар Исмаил оглы",
+  "en": "Jabbar Garyaghdioglu",
+  "roles": [
+   "khanende"
+  ],
+  "born": 1861,
+  "died": 1944,
+  "place": {
+   "id": "Q158903",
+   "az": "Şuşa",
+   "ru": "Шуша",
+   "en": "Shusha",
+   "lat": 39.7602,
+   "lng": 46.7504
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Jabbar%20Garyagdioglu.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/Cabbar_Qarya%C4%9Fd%C4%B1o%C4%9Flu"
+ },
+ {
+  "qid": "Q12840896",
+  "az": "Keçəçioğlu Məhəmməd",
+  "ru": "Кечачи оглы Мухаммед",
+  "en": "Kechachioghlu Muhammed",
+  "roles": [
+   "khanende"
+  ],
+  "born": 1864,
+  "died": 1940,
+  "place": {
+   "id": "Q158903",
+   "az": "Şuşa",
+   "ru": "Шуша",
+   "en": "Shusha",
+   "lat": 39.7602,
+   "lng": 46.7504
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Kechahci%20oglu%20Muhammad.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/Ke%C3%A7%C9%99%C3%A7io%C4%9Flu_M%C9%99h%C9%99mm%C9%99d"
  },
  {
   "qid": "Q16365302",
@@ -2861,7 +2241,8 @@
    "en": "Ayrk",
    "lat": 40.1264,
    "lng": 45.7911
-  }
+  },
+  "wiki": "https://az.wikipedia.org/wiki/A%C5%9F%C4%B1q_N%C9%99c%C9%99f_Da%C5%9Fk%C9%99ndli"
  },
  {
   "qid": "Q16365311",
@@ -2879,7 +2260,8 @@
    "lat": 40.8443,
    "lng": 46.2127
   },
-  "kitabxana": "asiq-qasim"
+  "kitabxana": "asiq-qasim",
+  "wiki": "https://az.wikipedia.org/wiki/A%C5%9F%C4%B1q_Qas%C4%B1m"
  },
  {
   "qid": "Q140367047",
@@ -2896,15 +2278,16 @@
    "en": "Salli",
    "lat": 39.8736,
    "lng": 45.2767
-  }
+  },
+  "wiki": "https://az.wikipedia.org/wiki/D%C9%99r%C9%99l%C9%99y%C9%99zli_A%C5%9F%C4%B1q_C%C9%99lil"
  },
  {
   "qid": "Q12841664",
   "az": "Malıbəyli Həmid",
   "en": "Malibeyli Hamid",
   "roles": [
-   "khanende",
-   "tar"
+   "tar",
+   "khanende"
   ],
   "born": 1869,
   "died": 1922,
@@ -2915,7 +2298,49 @@
    "en": "Malıbəyli",
    "lat": 39.8303,
    "lng": 46.7919
-  }
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Mal%C4%B1b%C9%99yli_H%C9%99mid"
+ },
+ {
+  "qid": "Q16371319",
+  "az": "Məşədi Süleyman bəy Mansurov",
+  "ru": "Мешади Сулейман бек Мансуров",
+  "en": "Məşədi Mansurov",
+  "roles": [
+   "tar"
+  ],
+  "born": 1872,
+  "died": 1955,
+  "place": {
+   "id": "Q9248",
+   "az": "Bakı",
+   "ru": "Баку",
+   "en": "Baku",
+   "lat": 40.3667,
+   "lng": 49.8352
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Mashadi%20Suleyman%20bey%20Mansurov.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/M%C9%99%C5%9F%C9%99di_S%C3%BCleyman_b%C9%99y_Mansurov"
+ },
+ {
+  "qid": "Q16372546",
+  "az": "Qasım Abdullayev",
+  "ru": "Абдуллаев, Гасым Ибрагим оглы",
+  "en": "Gasim Abdullayev",
+  "roles": [
+   "khanende"
+  ],
+  "born": 1873,
+  "died": 1927,
+  "place": {
+   "id": "Q158903",
+   "az": "Şuşa",
+   "ru": "Шуша",
+   "en": "Shusha",
+   "lat": 39.7602,
+   "lng": 46.7504
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Qas%C4%B1m_Abdullayev_(xan%C9%99nd%C9%99)"
  },
  {
   "qid": "Q114456747",
@@ -2931,80 +2356,128 @@
    "en": "Bağbanlar",
    "lat": 39.9385,
    "lng": 46.982
-  }
- },
- {
-  "qid": "Q4073558",
-  "az": "Aşıq Əsəd",
-  "ru": "Ашуг Асад",
-  "en": "Ashik Asad",
-  "roles": [
-   "ashik"
-  ],
-  "born": 1874,
-  "died": 1951,
-  "place": {
-   "id": "Q2649943",
-   "az": "Böyük Qaraqoyunlu",
-   "ru": "Норабак",
-   "en": "Norabak",
-   "lat": 40.15,
-   "lng": 45.8667
   },
-  "kitabxana": "asiq-esed"
+  "wiki": "https://az.wikipedia.org/wiki/%C6%8Fkb%C9%99r_Xamu%C5%9F_o%C4%9Flu"
  },
  {
-  "qid": "Q4528165",
-  "az": "Seyid Şuşinski",
-  "ru": "Сеид Шушинский",
+  "qid": "Q16370924",
+  "az": "Məmmədqulu Şuşinski",
+  "en": "Məmmədqulu Şuşinski",
   "roles": [
    "khanende"
   ],
-  "born": 1889,
-  "died": 1965,
+  "born": 1874,
+  "died": 1929,
   "place": {
-   "id": "Q2658391",
-   "az": "Horadiz",
-   "ru": "Горадиз",
-   "en": "Horadiz",
-   "lat": 39.4478,
-   "lng": 47.3364
-  }
+   "id": "Q158903",
+   "az": "Şuşa",
+   "ru": "Шуша",
+   "en": "Shusha",
+   "lat": 39.7602,
+   "lng": 46.7504
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/M%C9%99mm%C9%99dqulu%20%C5%9Eu%C5%9Finski.png?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/M%C9%99mm%C9%99dqulu_%C5%9Eu%C5%9Finski"
  },
  {
-  "qid": "Q4073563",
-  "az": "Aşıq İslam Yusifov",
-  "ru": "Ашуг Ислам",
+  "qid": "Q4054565",
+  "az": "İslam Abdullayev",
+  "ru": "Абдуллаев, Ислам Абдул оглы",
+  "en": "İslam Abdullayev",
   "roles": [
-   "ashik"
+   "khanende"
+  ],
+  "born": 1876,
+  "died": 1964,
+  "place": {
+   "id": "Q158903",
+   "az": "Şuşa",
+   "ru": "Шуша",
+   "en": "Shusha",
+   "lat": 39.7602,
+   "lng": 46.7504
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Islam%20abdullayev%20with%20def.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/%C4%B0slam_Abdullayev"
+ },
+ {
+  "qid": "Q16365419",
+  "az": "Bahadur Mehralı oğlu",
+  "roles": [
+   "khanende"
+  ],
+  "born": 1883,
+  "died": 1962,
+  "place": {
+   "id": "Q158903",
+   "az": "Şuşa",
+   "ru": "Шуша",
+   "en": "Shusha",
+   "lat": 39.7602,
+   "lng": 46.7504
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Bahadur_Mehral%C4%B1o%C4%9Flu"
+ },
+ {
+  "qid": "Q16370169",
+  "az": "Mirzə Mansur Mansurov",
+  "en": "Mirza Mansur bey Mansurov",
+  "roles": [
+   "tar"
+  ],
+  "born": 1887,
+  "died": 1967,
+  "place": {
+   "id": "Q9248",
+   "az": "Bakı",
+   "ru": "Баку",
+   "en": "Baku",
+   "lat": 40.3667,
+   "lng": 49.8352
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Mirza%20Mansur%20Mansurov.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/Mirz%C9%99_Mansur_Mansurov"
+ },
+ {
+  "qid": "Q4695282",
+  "az": "Əhməd Bakıxanov",
+  "ru": "Бакиханов, Ахмед Мамедрза оглы",
+  "en": "Ahmad Bakikhanov",
+  "roles": [
+   "tar"
+  ],
+  "born": 1892,
+  "died": 1973,
+  "place": {
+   "id": "Q9248",
+   "az": "Bakı",
+   "ru": "Баку",
+   "en": "Baku",
+   "lat": 40.3667,
+   "lng": 49.8352
+  },
+  "wiki": "https://az.wikipedia.org/wiki/%C6%8Fhm%C9%99d_Bak%C4%B1xanov"
+ },
+ {
+  "qid": "Q16378870",
+  "az": "Əli Zülalov",
+  "ru": "Зулалов, Али Абдул оглы",
+  "en": "Ali Zulalov",
+  "roles": [
+   "khanende"
   ],
   "born": 1893,
-  "died": 1968,
+  "died": 1963,
   "place": {
-   "id": "Q2643326",
-   "az": "Nərimanlı",
-   "ru": "Шатван",
-   "en": "Shatvan",
-   "lat": 40.1831,
-   "lng": 45.8256
-  }
- },
- {
-  "qid": "Q16365348",
-  "az": "Aşıq İdris",
-  "roles": [
-   "ashik"
-  ],
-  "born": 1894,
-  "died": 1945,
-  "place": {
-   "id": "Q2649959",
-   "az": "Zərkənd",
-   "ru": "Кут",
-   "en": "Kut",
-   "lat": 40.18,
-   "lng": 45.9
-  }
+   "id": "Q158903",
+   "az": "Şuşa",
+   "ru": "Шуша",
+   "en": "Shusha",
+   "lat": 39.7602,
+   "lng": 46.7504
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/%D0%90%D0%BB%D0%B8%20%D0%97%D1%83%D0%BB%D0%B0%D0%BB%D0%BE%D0%B2.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/%C6%8Fli_Z%C3%BClalov"
  },
  {
   "qid": "Q16370391",
@@ -3022,7 +2495,26 @@
    "lat": 40.5035,
    "lng": 45.7656
   },
-  "kitabxana": "miskin-veli"
+  "kitabxana": "miskin-veli",
+  "wiki": "https://az.wikipedia.org/wiki/Miskin_V%C9%99li"
+ },
+ {
+  "qid": "Q16372446",
+  "az": "Pəsxan Cəlil",
+  "roles": [
+   "khanende"
+  ],
+  "born": 1895,
+  "died": 1949,
+  "place": {
+   "id": "Q158903",
+   "az": "Şuşa",
+   "ru": "Шуша",
+   "en": "Shusha",
+   "lat": 39.7602,
+   "lng": 46.7504
+  },
+  "wiki": "https://az.wikipedia.org/wiki/P%C9%99sxan_C%C9%99lil"
  },
  {
   "qid": "Q4057575",
@@ -3041,7 +2533,47 @@
    "en": "Qaradolaq",
    "lat": 39.9289,
    "lng": 47.4653
-  }
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Zulfu%20Adigozelov.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/Z%C3%BClf%C3%BC_Ad%C4%B1g%C3%B6z%C9%99lov"
+ },
+ {
+  "qid": "Q95946398",
+  "az": "Vayxırlı Məmmədcəfər",
+  "roles": [
+   "ashik"
+  ],
+  "born": 1900,
+  "died": 2000,
+  "place": {
+   "id": "Q5012603",
+   "az": "Türkeş",
+   "en": "Türkeş",
+   "lat": 39.4224,
+   "lng": 45.471
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Vayx%C4%B1rl%C4%B1_M%C9%99mm%C9%99dc%C9%99f%C9%99r"
+ },
+ {
+  "qid": "Q2427251",
+  "az": "Xan Şuşinski",
+  "ru": "Хан Шушинский",
+  "en": "Khan Shushinski",
+  "roles": [
+   "khanende"
+  ],
+  "born": 1901,
+  "died": 1979,
+  "place": {
+   "id": "Q158903",
+   "az": "Şuşa",
+   "ru": "Шуша",
+   "en": "Shusha",
+   "lat": 39.7602,
+   "lng": 46.7504
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Khan%20Shushinski.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/Xan_%C5%9Eu%C5%9Finski"
  },
  {
   "qid": "Q16371931",
@@ -3060,7 +2592,26 @@
    "lat": 40.1833,
    "lng": 45.8667
   },
-  "kitabxana": "novres-iman"
+  "kitabxana": "novres-iman",
+  "wiki": "https://az.wikipedia.org/wiki/N%C3%B6vr%C9%99s_%C4%B0man"
+ },
+ {
+  "qid": "Q16365285",
+  "az": "Aşıq Müseyib",
+  "roles": [
+   "ashik"
+  ],
+  "born": 1909,
+  "died": 1995,
+  "place": {
+   "id": "Q1024597",
+   "az": "Cil",
+   "ru": "Джиль",
+   "en": "Jil",
+   "lat": 40.4544,
+   "lng": 45.4536
+  },
+  "wiki": "https://az.wikipedia.org/wiki/A%C5%9F%C4%B1q_M%C3%BCseyib"
  },
  {
   "qid": "Q16365345",
@@ -3078,24 +2629,27 @@
    "en": "Ayrk",
    "lat": 40.1264,
    "lng": 45.7911
-  }
+  },
+  "wiki": "https://az.wikipedia.org/wiki/A%C5%9F%C4%B1q_Ziyad"
  },
  {
-  "qid": "Q16365363",
-  "az": "Aşıq Əli Şairov",
+  "qid": "Q16365226",
+  "az": "Ağası Məşədibəyov",
+  "en": "Agasi Masadibayov",
   "roles": [
-   "ashik"
+   "tar"
   ],
-  "born": 1913,
-  "died": 1943,
+  "born": 1912,
+  "died": 1984,
   "place": {
-   "id": "Q2536508",
-   "az": "Daşkənd",
-   "ru": "Айрк",
-   "en": "Ayrk",
-   "lat": 40.1264,
-   "lng": 45.7911
-  }
+   "id": "Q9248",
+   "az": "Bakı",
+   "ru": "Баку",
+   "en": "Baku",
+   "lat": 40.3667,
+   "lng": 49.8352
+  },
+  "wiki": "https://az.wikipedia.org/wiki/A%C4%9Fas%C4%B1_M%C9%99%C5%9F%C9%99dib%C9%99yov"
  },
  {
   "qid": "Q12837106",
@@ -3113,7 +2667,26 @@
    "en": "Ayrk",
    "lat": 40.1264,
    "lng": 45.7911
-  }
+  },
+  "wiki": "https://az.wikipedia.org/wiki/A%C5%9F%C4%B1q_Abbas%C9%99li"
+ },
+ {
+  "qid": "Q16365363",
+  "az": "Aşıq Əli Şairov",
+  "roles": [
+   "ashik"
+  ],
+  "born": 1913,
+  "died": 1943,
+  "place": {
+   "id": "Q2536508",
+   "az": "Daşkənd",
+   "ru": "Айрк",
+   "en": "Ayrk",
+   "lat": 40.1264,
+   "lng": 45.7911
+  },
+  "wiki": "https://az.wikipedia.org/wiki/A%C5%9F%C4%B1q_%C6%8Fli_%C5%9Eairov"
  },
  {
   "qid": "Q4073562",
@@ -3131,7 +2704,29 @@
    "en": "Mamkhuti",
    "lat": 41.3833,
    "lng": 44.7169
-  }
+  },
+  "wiki": "https://az.wikipedia.org/wiki/A%C5%9F%C4%B1q_H%C3%BCseyn_Sara%C3%A7l%C4%B1"
+ },
+ {
+  "qid": "Q373520",
+  "az": "Hacıbaba Hüseynov",
+  "ru": "Гусейнов, Гаджибаба Гусейнали оглы",
+  "en": "Hajibaba Huseynov",
+  "roles": [
+   "khanende"
+  ],
+  "born": 1919,
+  "died": 1993,
+  "place": {
+   "id": "Q9248",
+   "az": "Bakı",
+   "ru": "Баку",
+   "en": "Baku",
+   "lat": 40.3667,
+   "lng": 49.8352
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Hajibaba%20Huseynov%2C%20Bahram%20Mansurov%20and%20Talat%20Bakikhanov.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/Hac%C4%B1baba_H%C3%BCseynov"
  },
  {
   "qid": "Q12837134",
@@ -3149,7 +2744,29 @@
    "en": "Ayrk",
    "lat": 40.1264,
    "lng": 45.7911
-  }
+  },
+  "wiki": "https://az.wikipedia.org/wiki/A%C5%9F%C4%B1q_S%C9%99fiyar"
+ },
+ {
+  "qid": "Q6028583",
+  "az": "Sara Qədimova",
+  "ru": "Гядимова, Сара Бябиш кызы",
+  "en": "Sara Qadimova",
+  "roles": [
+   "khanende"
+  ],
+  "born": 1922,
+  "died": 2005,
+  "place": {
+   "id": "Q9248",
+   "az": "Bakı",
+   "ru": "Баку",
+   "en": "Baku",
+   "lat": 40.3667,
+   "lng": 49.8352
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Sara%20Gadimova.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/Sara_Q%C9%99dimova"
  },
  {
   "qid": "Q20679646",
@@ -3168,7 +2785,8 @@
    "en": "Alkhazurovo",
    "lat": 43.0628,
    "lng": 45.6511
-  }
+  },
+  "wiki": "https://az.wikipedia.org/wiki/%C6%8Fhm%C9%99d_S%C3%BCleymanov"
  },
  {
   "qid": "Q12837143",
@@ -3185,25 +2803,146 @@
    "en": "Xəlilli",
    "lat": 40.4927,
    "lng": 48.1683
-  }
+  },
+  "wiki": "https://az.wikipedia.org/wiki/A%C5%9F%C4%B1q_%C5%9Eakir"
  },
  {
-  "qid": "Q16365360",
-  "az": "Aşıq Əli",
-  "en": "Asiq Ali Imamquliyev",
+  "qid": "Q16375253",
+  "az": "Tükəzban İsmayılova",
+  "ru": "Исмаилова, Тукезбан Магеррам кызы",
+  "en": "Tukezban Ismayilova",
+  "roles": [
+   "khanende"
+  ],
+  "born": 1923,
+  "died": 2008,
+  "place": {
+   "id": "Q9248",
+   "az": "Bakı",
+   "ru": "Баку",
+   "en": "Baku",
+   "lat": 40.3667,
+   "lng": 49.8352
+  },
+  "wiki": "https://az.wikipedia.org/wiki/T%C3%BCk%C9%99zban_%C4%B0smay%C4%B1lova"
+ },
+ {
+  "qid": "Q131581615",
+  "az": "Şövkət Babayeva",
+  "en": "Shovkat Babayeva",
+  "roles": [
+   "tar"
+  ],
+  "born": 1924,
+  "died": 1993,
+  "place": {
+   "id": "Q9248",
+   "az": "Bakı",
+   "ru": "Баку",
+   "en": "Baku",
+   "lat": 40.3667,
+   "lng": 49.8352
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Shovket%20Babayeva.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/%C5%9E%C3%B6vk%C9%99t_Babayeva"
+ },
+ {
+  "qid": "Q12849952",
+  "az": "Əhsən Dadaşov",
+  "en": "Ahsan Dadasov",
+  "roles": [
+   "tar"
+  ],
+  "born": 1924,
+  "died": 1976,
+  "place": {
+   "id": "Q9248",
+   "az": "Bakı",
+   "ru": "Баку",
+   "en": "Baku",
+   "lat": 40.3667,
+   "lng": 49.8352
+  },
+  "wiki": "https://az.wikipedia.org/wiki/%C6%8Fhs%C9%99n_Dada%C5%9Fov"
+ },
+ {
+  "qid": "Q16369499",
+  "az": "Kərim Paşayev",
   "roles": [
    "ashik"
   ],
-  "born": 1927,
+  "born": 1925,
+  "died": 1999,
+  "place": {
+   "id": "Q1024715",
+   "az": "Ardanış",
+   "ru": "Артаниш",
+   "en": "Artanish",
+   "lat": 40.4958,
+   "lng": 45.3628
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Pa%C5%9Fayev%20K%C9%99rim.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/K%C9%99rim_Pa%C5%9Fayev"
+ },
+ {
+  "qid": "Q16378461",
+  "az": "Əbülfət Əliyev",
+  "ru": "Абульфат Алиев",
+  "en": "Abulfat Aliyev",
+  "roles": [
+   "khanende"
+  ],
+  "born": 1926,
   "died": 1990,
   "place": {
-   "id": "Q2649959",
-   "az": "Zərkənd",
-   "ru": "Кут",
-   "en": "Kut",
-   "lat": 40.18,
-   "lng": 45.9
-  }
+   "id": "Q158903",
+   "az": "Şuşa",
+   "ru": "Шуша",
+   "en": "Shusha",
+   "lat": 39.7602,
+   "lng": 46.7504
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Abulfat%20Aliyev.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/%C6%8Fb%C3%BClf%C9%99t_%C6%8Fliyev"
+ },
+ {
+  "qid": "Q111048998",
+  "az": "Əlikram Hüseynov",
+  "ru": "Гусейнов, Аликрам Гасан оглы",
+  "roles": [
+   "tar"
+  ],
+  "born": 1926,
+  "died": 2006,
+  "place": {
+   "id": "Q9248",
+   "az": "Bakı",
+   "ru": "Баку",
+   "en": "Baku",
+   "lat": 40.3667,
+   "lng": 49.8352
+  },
+  "wiki": "https://az.wikipedia.org/wiki/%C6%8Flikram_H%C3%BCseynov"
+ },
+ {
+  "qid": "Q16368908",
+  "az": "Həbib Bayramov",
+  "ru": "Габиб Байрамов",
+  "en": "Habib Bayramov",
+  "roles": [
+   "tar"
+  ],
+  "born": 1926,
+  "died": 1994,
+  "place": {
+   "id": "Q9248",
+   "az": "Bakı",
+   "ru": "Баку",
+   "en": "Baku",
+   "lat": 40.3667,
+   "lng": 49.8352
+  },
+  "wiki": "https://az.wikipedia.org/wiki/H%C9%99bib_Bayramov"
  },
  {
   "qid": "Q12837127",
@@ -3221,7 +2960,28 @@
    "en": "Ayrk",
    "lat": 40.1264,
    "lng": 45.7911
-  }
+  },
+  "wiki": "https://az.wikipedia.org/wiki/A%C5%9F%C4%B1q_Novruz"
+ },
+ {
+  "qid": "Q91236774",
+  "az": "Nəriman Əliyev",
+  "ru": "Алиев, Нариман Мовсум оглы",
+  "en": "Nariman Aliyev",
+  "roles": [
+   "khanende"
+  ],
+  "born": 1930,
+  "died": 1998,
+  "place": {
+   "id": "Q9248",
+   "az": "Bakı",
+   "ru": "Баку",
+   "en": "Baku",
+   "lat": 40.3667,
+   "lng": 49.8352
+  },
+  "wiki": "https://az.wikipedia.org/wiki/N%C9%99riman_%C6%8Fliyev_(xan%C9%99nd%C9%99)"
  },
  {
   "qid": "Q12837116",
@@ -3239,7 +2999,47 @@
    "en": "Ayrk",
    "lat": 40.1264,
    "lng": 45.7911
-  }
+  },
+  "wiki": "https://az.wikipedia.org/wiki/A%C5%9F%C4%B1q_Hac%C4%B1_G%C3%B6y%C3%A7%C9%99li"
+ },
+ {
+  "qid": "Q12842293",
+  "az": "Murad Niyazlı",
+  "en": "Murad Niyazli",
+  "roles": [
+   "ashik"
+  ],
+  "born": 1933,
+  "died": 2005,
+  "place": {
+   "id": "Q2422901",
+   "az": "Aşağı Şorca",
+   "ru": "Неркин Шоржа",
+   "en": "Nerkin Shorzha",
+   "lat": 40.11,
+   "lng": 45.8361
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Murad_Niyazl%C4%B1"
+ },
+ {
+  "qid": "Q39394656",
+  "az": "Adil Bağırov",
+  "ru": "Адиль Кямиль оглы Багиров",
+  "en": "Adil Baghirov",
+  "roles": [
+   "tar"
+  ],
+  "born": 1937,
+  "died": null,
+  "place": {
+   "id": "Q9248",
+   "az": "Bakı",
+   "ru": "Баку",
+   "en": "Baku",
+   "lat": 40.3667,
+   "lng": 49.8352
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Adil_Ba%C4%9F%C4%B1rov_(tarz%C9%99n)"
  },
  {
   "qid": "Q12835981",
@@ -3258,25 +3058,50 @@
    "en": "Sarıhacılı",
    "lat": 39.9985,
    "lng": 46.8826
-  }
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Arif%20Babayev%2001.03.2019.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/Arif_Babayev"
  },
  {
-  "qid": "Q12837118",
-  "az": "Aşıq Fətulla",
-  "en": "Aşıq Fətulla Əliyev",
+  "qid": "Q12839110",
+  "az": "Elmira Rəhimova",
+  "ru": "Эльмира Рагимова",
+  "en": "Elmira Rahimova",
   "roles": [
-   "ashik"
+   "khanende"
   ],
   "born": 1941,
   "died": null,
   "place": {
-   "id": "Q2643326",
-   "az": "Nərimanlı",
-   "ru": "Шатван",
-   "en": "Shatvan",
-   "lat": 40.1831,
-   "lng": 45.8256
-  }
+   "id": "Q9248",
+   "az": "Bakı",
+   "ru": "Баку",
+   "en": "Baku",
+   "lat": 40.3667,
+   "lng": 49.8352
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Elmira_R%C9%99himova"
+ },
+ {
+  "qid": "Q434919",
+  "az": "Flora Kərimova",
+  "ru": "Флора Керимова",
+  "en": "Flora Karimova",
+  "roles": [
+   "khanende"
+  ],
+  "born": 1941,
+  "died": null,
+  "place": {
+   "id": "Q9248",
+   "az": "Bakı",
+   "ru": "Баку",
+   "en": "Baku",
+   "lat": 40.3667,
+   "lng": 49.8352
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/%D0%A4%D0%BB%D0%BE%D1%80%D0%B0%20%D0%BA%D0%B5%D1%80%D0%B8%D0%BC%D0%BE%D0%B2%D0%B0.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/Flora_K%C9%99rimova"
  },
  {
   "qid": "Q16365697",
@@ -3294,7 +3119,27 @@
    "en": "Aşağı Rəfədinli",
    "lat": 39.4799,
    "lng": 47.1341
-  }
+  },
+  "wiki": "https://az.wikipedia.org/wiki/B%C9%99hram_N%C9%99sibov"
+ },
+ {
+  "qid": "Q23683318",
+  "az": "Aşıq Kərəm İncəli",
+  "en": "Aşıq Kərəm İncəli",
+  "roles": [
+   "ashik"
+  ],
+  "born": 1945,
+  "died": 1995,
+  "place": {
+   "id": "Q389381",
+   "az": "Qazax rayonu",
+   "ru": "Газахский район",
+   "en": "Gazakh District",
+   "lat": 41.0933,
+   "lng": 45.3661
+  },
+  "wiki": "https://az.wikipedia.org/wiki/A%C5%9F%C4%B1q_K%C9%99r%C9%99m_%C4%B0nc%C9%99li"
  },
  {
   "qid": "Q12846972",
@@ -3310,7 +3155,86 @@
    "en": "Kərimli",
    "lat": 40.553,
    "lng": 45.6349
-  }
+  },
+  "wiki": "https://az.wikipedia.org/wiki/A%C5%9F%C4%B1q_Ulduz_S%C3%B6nm%C9%99z"
+ },
+ {
+  "qid": "Q16376664",
+  "az": "Zamiq Əliyev",
+  "ru": "Замик Баларза оглы Алиев",
+  "en": "Zamiq Əliyev",
+  "roles": [
+   "tar"
+  ],
+  "born": 1950,
+  "died": null,
+  "place": {
+   "id": "Q9248",
+   "az": "Bakı",
+   "ru": "Баку",
+   "en": "Baku",
+   "lat": 40.3667,
+   "lng": 49.8352
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Zamiq_%C6%8Fliyev"
+ },
+ {
+  "qid": "Q16365229",
+  "az": "Ağasəlim Abdullayev",
+  "ru": "Абдуллаев, Агасалим Сахиб оглы",
+  "en": "Ağasəlim Abdullayev",
+  "roles": [
+   "khanende"
+  ],
+  "born": 1950,
+  "died": null,
+  "place": {
+   "id": "Q9248",
+   "az": "Bakı",
+   "ru": "Баку",
+   "en": "Baku",
+   "lat": 40.3667,
+   "lng": 49.8352
+  },
+  "wiki": "https://az.wikipedia.org/wiki/A%C4%9Fas%C9%99lim_Abdullayev"
+ },
+ {
+  "qid": "Q4833537",
+  "az": "Aşıq Xanlar Məhərrəmov",
+  "en": "Aşık Khanlar",
+  "roles": [
+   "ashik"
+  ],
+  "born": 1950,
+  "died": 1998,
+  "place": {
+   "id": "Q4991555",
+   "az": "Əlimərdanlı",
+   "ru": "Алимарданлы",
+   "en": "Əlimərdanlı",
+   "lat": 41.0395,
+   "lng": 45.6751
+  },
+  "wiki": "https://az.wikipedia.org/wiki/A%C5%9F%C4%B1q_Xanlar_M%C9%99h%C9%99rr%C9%99mov"
+ },
+ {
+  "qid": "Q12850037",
+  "az": "Əli Quliyev",
+  "roles": [
+   "ashik"
+  ],
+  "born": 1950,
+  "died": null,
+  "place": {
+   "id": "Q4991555",
+   "az": "Əlimərdanlı",
+   "ru": "Алимарданлы",
+   "en": "Əlimərdanlı",
+   "lat": 41.0395,
+   "lng": 45.6751
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/A%C5%9F%C4%B1q%20%C6%8Fli%20v%C9%99%20R%C9%99%C5%9Fid%20S%C3%BCleymanov.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/%C6%8Fli_Quliyev_(a%C5%9F%C4%B1q)"
  },
  {
   "qid": "Q39382400",
@@ -3329,7 +3253,8 @@
    "en": "Buzovna",
    "lat": 40.5199,
    "lng": 50.1027
-  }
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Firuz_%C6%8Fliyev"
  },
  {
   "qid": "Q1189603",
@@ -3348,7 +3273,9 @@
    "en": "Əmircan, Baku",
    "lat": 40.4214,
    "lng": 49.9892
-  }
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/A%C4%9Faxan%20Abdullayev%202015.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/A%C4%9Faxan_Abdullayev"
  },
  {
   "qid": "Q12841647",
@@ -3366,7 +3293,8 @@
    "en": "Kərimbəyli",
    "lat": 39.5082,
    "lng": 47.4178
-  }
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Malik_Quliyev"
  },
  {
   "qid": "Q12846316",
@@ -3385,7 +3313,8 @@
    "en": "Abdal",
    "lat": 39.8661,
    "lng": 46.9253
-  }
+  },
+  "wiki": "https://az.wikipedia.org/wiki/S%C9%99xav%C9%99t_M%C9%99mm%C9%99dov"
  },
  {
   "qid": "Q12837128",
@@ -3403,7 +3332,66 @@
    "en": "Ayrk",
    "lat": 40.1264,
    "lng": 45.7911
-  }
+  },
+  "wiki": "https://az.wikipedia.org/wiki/A%C5%9F%C4%B1q_Nuriddin"
+ },
+ {
+  "qid": "Q15063051",
+  "az": "Ərəstun Əliyev",
+  "en": "Arastun Aliyev",
+  "roles": [
+   "khanende"
+  ],
+  "born": 1957,
+  "died": null,
+  "place": {
+   "id": "Q330857",
+   "az": "Bərdə rayonu",
+   "ru": "Бардинский район",
+   "en": "Barda District",
+   "lat": 40.3667,
+   "lng": 47.1167
+  },
+  "wiki": "https://az.wikipedia.org/wiki/%C6%8Fr%C9%99stun_%C6%8Fliyev"
+ },
+ {
+  "qid": "Q12837124",
+  "az": "Aşıq Məhərrəm Hüseynli",
+  "en": "Asiq Maharram Huseynli",
+  "roles": [
+   "ashik"
+  ],
+  "born": 1959,
+  "died": null,
+  "place": {
+   "id": "Q1026084",
+   "az": "Tovuz",
+   "ru": "Товуз",
+   "en": "Tovuz",
+   "lat": 40.9924,
+   "lng": 45.6167
+  },
+  "wiki": "https://az.wikipedia.org/wiki/A%C5%9F%C4%B1q_M%C9%99h%C9%99rr%C9%99m_H%C3%BCseynli"
+ },
+ {
+  "qid": "Q110747528",
+  "az": "Aşıq Bəhmən Kazımov",
+  "en": "Aşıq Bəhmən Kazımov",
+  "roles": [
+   "ashik"
+  ],
+  "born": 1960,
+  "died": null,
+  "place": {
+   "id": "Q1024715",
+   "az": "Ardanış",
+   "ru": "Артаниш",
+   "en": "Artanish",
+   "lat": 40.4958,
+   "lng": 45.3628
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/B%C9%99hm%C9%99n%20Kaz%C4%B1mov.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/A%C5%9F%C4%B1q_B%C9%99hm%C9%99n_Ardan%C4%B1%C5%9Fl%C4%B1"
  },
  {
   "qid": "Q126872345",
@@ -3420,7 +3408,8 @@
    "en": "Hacılar",
    "lat": 40.0492,
    "lng": 47.1129
-  }
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Q%C9%99z%C9%99nf%C9%99r_Abbasov"
  },
  {
   "qid": "Q12837103",
@@ -3438,7 +3427,8 @@
    "en": "Ayrk",
    "lat": 40.1264,
    "lng": 45.7911
-  }
+  },
+  "wiki": "https://az.wikipedia.org/wiki/A%C5%9F%C4%B1q_Arzuman"
  },
  {
   "qid": "Q12838063",
@@ -3456,7 +3446,29 @@
    "en": "Zəngişalı",
    "lat": 40.0496,
    "lng": 47.0589
-  }
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Cabir_Abdullayev"
+ },
+ {
+  "qid": "Q23685213",
+  "az": "Teyyub Aslanov",
+  "ru": "Асланов, Тейюб Шуэйюб оглы",
+  "en": "Teyyub Aslanov",
+  "roles": [
+   "khanende"
+  ],
+  "born": 1967,
+  "died": null,
+  "place": {
+   "id": "Q9248",
+   "az": "Bakı",
+   "ru": "Баку",
+   "en": "Baku",
+   "lat": 40.3667,
+   "lng": 49.8352
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Teyyub%20Aslan.JPG?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/Teyyub_Aslanov"
  },
  {
   "qid": "Q12837117",
@@ -3474,7 +3486,9 @@
    "en": "Ayrk",
    "lat": 40.1264,
    "lng": 45.7911
-  }
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/A%C5%9F%C4%B1q%20Firudin.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/A%C5%9F%C4%B1q_Firudin"
  },
  {
   "qid": "Q12836277",
@@ -3493,7 +3507,9 @@
    "en": "Sarıhacılı",
    "lat": 39.9985,
    "lng": 46.8826
-  }
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Ayg%C3%BCn%20Bayramova%2001.03.2019.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/Ayg%C3%BCn_Bayramova"
  },
  {
   "qid": "Q16374960",
@@ -3511,7 +3527,8 @@
    "en": "Kasumlo",
    "lat": 41.3042,
    "lng": 44.8717
-  }
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Telli_Bor%C3%A7al%C4%B1"
  },
  {
   "qid": "Q12847899",
@@ -3529,25 +3546,29 @@
    "en": "Arıqıran",
    "lat": 40.5364,
    "lng": 45.6118
-  }
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Ya%C5%9Far_F%C9%99rmay%C4%B1lo%C4%9Flu"
  },
  {
-  "qid": "Q115260068",
-  "az": "Sevinc Sarıyeva",
-  "en": "Sevinj Sariyeva",
+  "qid": "Q16368221",
+  "az": "Gülyaz Məmmədova",
+  "ru": "Мамедова, Гюльяз Закир кызы",
+  "en": "Gulyaz Memmedova",
   "roles": [
    "khanende"
   ],
-  "born": 1972,
+  "born": 1970,
   "died": null,
   "place": {
-   "id": "Q2660750",
-   "az": "Qarakənd",
-   "ru": "Каракенд",
-   "en": "Qarakənd",
-   "lat": 39.8461,
-   "lng": 47.0241
-  }
+   "id": "Q5005190",
+   "az": "Böyük Dəhnə",
+   "ru": "Бёюк-Дахна",
+   "en": "Böyük Dəhnə",
+   "lat": 40.9729,
+   "lng": 47.1168
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Elkhan%20Mansurov%2C%20Gulyaz%20Mammadova.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/G%C3%BClyaz_M%C9%99mm%C9%99dova"
  },
  {
   "qid": "Q16367686",
@@ -3564,7 +3585,8 @@
    "en": "Abdal",
    "lat": 39.8661,
    "lng": 46.9253
-  }
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Firuz_S%C9%99xav%C9%99t"
  },
  {
   "qid": "Q61122556",
@@ -3582,7 +3604,8 @@
    "en": "Düz Rəsullu",
    "lat": 40.6589,
    "lng": 45.4767
-  }
+  },
+  "wiki": "https://az.wikipedia.org/wiki/A%C5%9F%C4%B1q_Altay_M%C9%99mm%C9%99dov"
  },
  {
   "qid": "Q87891503",
@@ -3599,7 +3622,28 @@
    "en": "Arabaçı",
    "lat": 40.6463,
    "lng": 45.4471
-  }
+  },
+  "wiki": "https://az.wikipedia.org/wiki/A%C5%9F%C4%B1q_D%C9%99mir_G%C9%99d%C9%99b%C9%99yli"
+ },
+ {
+  "qid": "Q12836279",
+  "az": "Aygün Bəylər",
+  "ru": "Гумматова, Айгюн Айдын кызы",
+  "en": "Aygün Beyler",
+  "roles": [
+   "khanende"
+  ],
+  "born": 1975,
+  "died": 2024,
+  "place": {
+   "id": "Q9248",
+   "az": "Bakı",
+   "ru": "Баку",
+   "en": "Baku",
+   "lat": 40.3667,
+   "lng": 49.8352
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Ayg%C3%BCn_B%C9%99yl%C9%99r"
  },
  {
   "qid": "Q16368043",
@@ -3615,6 +3659,238 @@
    "en": "Çaldaş",
    "lat": 40.5112,
    "lng": 45.7076
-  }
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/F%C9%99zail%20Miskinli.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/F%C9%99zail_Miskinli"
+ },
+ {
+  "qid": "Q106179729",
+  "az": "Sahib Paşazadə",
+  "en": "Sahib Pashazade",
+  "roles": [
+   "tar"
+  ],
+  "born": 1980,
+  "died": null,
+  "place": {
+   "id": "Q9248",
+   "az": "Bakı",
+   "ru": "Баку",
+   "en": "Baku",
+   "lat": 40.3667,
+   "lng": 49.8352
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/%D0%A1%D0%B0%D1%85%D0%B8%D0%B1%20%D0%9F%D0%B0%D1%88%D0%B0%D0%B7%D0%B0%D0%B4%D0%B5.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/Sahib_Pa%C5%9Fazad%C9%99"
+ },
+ {
+  "qid": "Q117750849",
+  "az": "Arslan Növrəsli",
+  "roles": [
+   "tar"
+  ],
+  "born": 1981,
+  "died": null,
+  "place": {
+   "id": "Q9248",
+   "az": "Bakı",
+   "ru": "Баку",
+   "en": "Baku",
+   "lat": 40.3667,
+   "lng": 49.8352
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Arslan%20Novrasli.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/Arslan_N%C3%B6vr%C9%99sli"
+ },
+ {
+  "qid": "Q12845504",
+  "az": "Samirə Əliyeva",
+  "en": "Samirə Əliyeva",
+  "roles": [
+   "ashik"
+  ],
+  "born": 1981,
+  "died": null,
+  "place": {
+   "id": "Q9248",
+   "az": "Bakı",
+   "ru": "Баку",
+   "en": "Baku",
+   "lat": 40.3667,
+   "lng": 49.8352
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Samir%C9%99_%C6%8Fliyeva"
+ },
+ {
+  "qid": "Q97216783",
+  "az": "Aşıq Tural Bağırov",
+  "roles": [
+   "ashik"
+  ],
+  "born": 1981,
+  "died": null,
+  "place": {
+   "id": "Q230104",
+   "az": "Naxçıvan",
+   "ru": "Нахичевань",
+   "en": "Nakhchivan",
+   "lat": 39.2089,
+   "lng": 45.4122
+  },
+  "wiki": "https://az.wikipedia.org/wiki/A%C5%9F%C4%B1q_Tural_Ba%C4%9F%C4%B1rov"
+ },
+ {
+  "qid": "Q110105823",
+  "az": "Şəhriyar İmanov",
+  "en": "Shahriyar Imanov",
+  "roles": [
+   "tar"
+  ],
+  "born": 1989,
+  "died": null,
+  "place": {
+   "id": "Q9248",
+   "az": "Bakı",
+   "ru": "Баку",
+   "en": "Baku",
+   "lat": 40.3667,
+   "lng": 49.8352
+  },
+  "wiki": "https://az.wikipedia.org/wiki/%C5%9E%C9%99hriyar_%C4%B0manov"
+ },
+ {
+  "qid": "Q105953918",
+  "az": "Pərviz Qasımov",
+  "en": "Parviz Gasimov",
+  "roles": [
+   "khanende"
+  ],
+  "born": 1991,
+  "died": null,
+  "place": {
+   "id": "Q9248",
+   "az": "Bakı",
+   "ru": "Баку",
+   "en": "Baku",
+   "lat": 40.3667,
+   "lng": 49.8352
+  },
+  "wiki": "https://az.wikipedia.org/wiki/P%C9%99rviz_Qas%C4%B1mov"
+ },
+ {
+  "qid": "Q140127954",
+  "az": "Səxavət Məmmədov",
+  "en": "Sakhavat Mammadov",
+  "roles": [
+   "tar"
+  ],
+  "born": 1993,
+  "died": null,
+  "place": {
+   "id": "Q9248",
+   "az": "Bakı",
+   "ru": "Баку",
+   "en": "Baku",
+   "lat": 40.3667,
+   "lng": 49.8352
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Sakhavat%20mammadov.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/S%C9%99xav%C9%99t_M%C9%99mm%C9%99dov_(tarz%C9%99n)"
+ },
+ {
+  "qid": "Q130321247",
+  "az": "Sədəf Budaqova",
+  "roles": [
+   "khanende"
+  ],
+  "born": 1995,
+  "died": null,
+  "place": {
+   "id": "Q9248",
+   "az": "Bakı",
+   "ru": "Баку",
+   "en": "Baku",
+   "lat": 40.3667,
+   "lng": 49.8352
+  },
+  "wiki": "https://az.wikipedia.org/wiki/S%C9%99d%C9%99f_Budaqova"
+ },
+ {
+  "qid": "Q113360480",
+  "az": "Aşıq Xavər Zəngilanlı",
+  "en": "Aşıq Xavər Zəngilanlı",
+  "roles": [
+   "ashik"
+  ],
+  "born": 2000,
+  "died": null,
+  "place": {
+   "id": "Q9248",
+   "az": "Bakı",
+   "ru": "Баку",
+   "en": "Baku",
+   "lat": 40.3667,
+   "lng": 49.8352
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/A%C5%9F%C4%B1q%20Xav%C9%99r%20Z%C9%99ngilanl%C4%B1.jpg?width=240"
+ },
+ {
+  "qid": "Q31307884",
+  "az": "Almaxanım",
+  "ru": "Алмаханым",
+  "en": "Almaxanim",
+  "roles": [
+   "khanende"
+  ],
+  "born": 2001,
+  "died": null,
+  "place": {
+   "id": "Q9248",
+   "az": "Bakı",
+   "ru": "Баку",
+   "en": "Baku",
+   "lat": 40.3667,
+   "lng": 49.8352
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Almaxan%C4%B1m"
+ },
+ {
+  "qid": "Q55199868",
+  "az": "Moşu Göyəzənli",
+  "en": "Moşu Göyəzənli",
+  "roles": [
+   "ashik"
+  ],
+  "born": null,
+  "died": null,
+  "place": {
+   "id": "Q389381",
+   "az": "Qazax rayonu",
+   "ru": "Газахский район",
+   "en": "Gazakh District",
+   "lat": 41.0933,
+   "lng": 45.3661
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Mo%C5%9Fu_G%C3%B6y%C9%99z%C9%99nli"
+ },
+ {
+  "qid": "qedirbala",
+  "az": "Qədirbala",
+  "ru": "Гадирбала",
+  "en": "Gadirbala",
+  "roles": [
+   "khanende"
+  ],
+  "born": null,
+  "died": null,
+  "place": {
+   "id": "Q158903",
+   "az": "Şuşa",
+   "ru": "Шуша",
+   "en": "Shusha",
+   "lat": 39.7602,
+   "lng": 46.7504
+  },
+  "byHand": true
  }
 ]

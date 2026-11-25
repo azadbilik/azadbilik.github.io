@@ -5,11 +5,13 @@
 import { readFile, writeFile } from 'node:fs/promises';
 
 const OCC = { Q2493398: 'khanende', Q12846426: 'tar', Q7097633: 'ashik' };
-const q = `SELECT ?p ?occ ?az ?ru ?en ?born ?died ?bp ?bpAz ?bpRu ?bpEn ?coord ?tied ?other WHERE {
+const q = `SELECT ?p ?occ ?az ?ru ?en ?born ?died ?bp ?bpAz ?bpRu ?bpEn ?coord ?tied ?other ?img ?wiki WHERE {
   VALUES ?occ { ${Object.keys(OCC).map((k) => 'wd:' + k).join(' ')} }
   ?p wdt:P106 ?occ ; wdt:P19 ?bp . ?bp wdt:P625 ?coord .
   OPTIONAL { ?p rdfs:label ?az FILTER(lang(?az) = "az") } OPTIONAL { ?p rdfs:label ?ru FILTER(lang(?ru) = "ru") } OPTIONAL { ?p rdfs:label ?en FILTER(lang(?en) = "en") }
   OPTIONAL { ?p wdt:P569 ?born } OPTIONAL { ?p wdt:P570 ?died }
+  OPTIONAL { ?p wdt:P18 ?img }
+  OPTIONAL { ?wiki schema:about ?p ; schema:isPartOf <https://az.wikipedia.org/> }
   # Ties to Azerbaijan: citizenship (Azerbaijan, the Azerbaijan SSR), Azerbaijani as a language, ethnicity
   OPTIONAL { ?p wdt:P27 ?cit FILTER(?cit IN (wd:Q227, wd:Q130229, wd:Q1092537)) }
   OPTIONAL { ?p wdt:P1412|wdt:P103|wdt:P6886 ?lng FILTER(?lng = wd:Q9292) }
@@ -39,6 +41,9 @@ for (const b of rows) {
     p.place = { id: id(b.bp.value), az: b.bpAz?.value, ru: b.bpRu?.value, en: b.bpEn?.value, lat: +lat.toFixed(4), lng: +lng.toFixed(4) };
   }
   if (kxByQid.has(qid)) p.kitabxana = kxByQid.get(qid);
+  // A portrait (Commons, 240px) and the az.wikipedia article, where they exist
+  if (b.img && !p.image) p.image = b.img.value.replace(/^http:/, 'https:') + '?width=240';
+  if (b.wiki && !p.wiki) p.wiki = b.wiki.value;
   if (b.tied?.value === 'true' || p.kitabxana) p.tied = true;
   if (b.other?.value === 'true') p.other = true;
   people.set(qid, p);
@@ -53,6 +58,12 @@ const ARMENIAN_ASHUGHS = new Set(['Q2038818', 'Q20510636', 'Q85983588', 'Q198574
 for (const p of people.values()) if (!p.tied && inRegion(p.place) && !p.other && !ARMENIAN_ASHUGHS.has(p.qid)) p.tied = true;
 const left = [...people.values()].filter((p) => !p.tied);
 console.log(`left out (no tie to Azerbaijan on Wikidata): ${left.length}, e.g. ${left.slice(0, 8).map((p) => p.az ?? p.en).join(', ')}`);
+// Qədirbala (Əbdülqədir Cabbarov), on the first Azerbaijani records (1902): Wikidata has no
+// birthplace for him; he was a Şuşa khanende
+if (![...people.values()].some((p) => /Qədirbala/.test(p.az ?? ''))) {
+  const shusha = [...people.values()].find((p) => p.place?.az === 'Şuşa')?.place;
+  if (shusha) people.set('qedirbala', { qid: 'qedirbala', az: 'Qədirbala', ru: 'Гадирбала', en: 'Gadirbala', roles: ['khanende'], born: null, died: null, place: shusha, tied: true, byHand: true });
+}
 const list = [...people.values()].filter((p) => p.tied && (p.az || p.en)).map(({ tied, other, ...p }) => p).sort((a, b) => (a.born ?? 9999) - (b.born ?? 9999));
 await writeFile(new URL('../data/musicians.json', import.meta.url), JSON.stringify(list, null, 1) + '\n');
 const count = (r) => list.filter((p) => p.roles.includes(r)).length;
