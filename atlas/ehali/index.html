@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Əhali · Azad Bilik</title>
-<meta name="description" content="Tarixi Azərbaycanın əhalisi siyahıyaalmalar üzrə, 1956–2019: Azərbaycan Respublikasının rayonları və İranın dörd Azərbaycan ostanının şəhristanları. Population of historical Azerbaijan by census.">
+<meta name="description" content="Tarixi Azərbaycanın əhalisi siyahıyaalmalar üzrə, 1939–2019: Azərbaycan Respublikasının rayonları və İranın dörd Azərbaycan ostanının şəhristanları. Population of historical Azerbaijan by census.">
 <meta name="theme-color" content="#F4EFE6" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#14100D" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="canonical" href="https://azadbilik.org/atlas/ehali/">
 <meta property="og:title" content="Əhali · Population of historical Azerbaijan">
-<meta property="og:description" content="Tarixi Azərbaycanın əhalisi siyahıyaalmalar üzrə, rayon-rayon, 1956–2019.">
+<meta property="og:description" content="Tarixi Azərbaycanın əhalisi siyahıyaalmalar üzrə, rayon-rayon, 1939–2019.">
 <meta property="og:image" content="https://azadbilik.org/atlas/ehali/og.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="/fonts/fonts.css">
@@ -22,7 +22,7 @@
   .seg { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--rule); border-radius: 3px; padding: 2px; }
   .seg button { padding: .35rem .4rem; border-radius: 2px; font-size: .8125rem; color: var(--muted); }
   .seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
-  .rounds { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; }
+  .rounds { display: grid; grid-template-columns: repeat(8, 1fr); gap: 2px; }
   .rounds button { padding: .3rem 0; font-size: .75rem; color: var(--muted); border-bottom: 2px solid var(--rule); font-variant-numeric: tabular-nums; }
   .rounds button[aria-pressed="true"] { color: var(--ink); border-bottom-color: var(--accent); font-weight: 600; }
   .round-note { font-size: .75rem; color: var(--muted); display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
@@ -134,7 +134,7 @@ const t = (k) => T[lang][k];
 const L = (p) => p[lang] ?? p.az;
 
 // Census rounds: each country's census nearest the same decade
-const ROUNDS = [[1959, 1956], [1970, 1966], [1979, 1976], [1989, 1986], [1999, 1996], [2009, 2006], [2019, 2016]].map(([az, ir], i) => ({ i, az, ir }));
+const ROUNDS = [[1939, null], [1959, 1956], [1970, 1966], [1979, 1976], [1989, 1986], [1999, 1996], [2009, 2006], [2019, 2016]].map(([az, ir], i) => ({ i, az, ir }));
 let round = ROUNDS.length - 1, base = null, measure = 'pop', units = [], sources = {}, official = {}, selected = null, hovered = null, playing = null;
 // The view in the link (?m=density&y=1989&b=1959&u=Barda District), so a view can be shared
 const params = new URLSearchParams(location.search);
@@ -249,7 +249,7 @@ function spark(u, W, H, axis = false) {
   const c = u.country === 'az' ? css('--accent') : css('--second');
   return `<svg class="spark" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" aria-hidden="true">${segs.map((p) => `<polyline points="${p}" fill="none" stroke="${c}" stroke-width="1.5"/>`).join('')}
     ${pts.map((v, i) => v == null ? '' : `<circle cx="${X(i)}" cy="${Y(v)}" r="${i === round ? 3 : 1.6}" fill="${c}"/>`).join('')}
-    ${axis ? ROUNDS.map((r, i) => `<text x="${X(i)}" y="${H}" text-anchor="middle">${r[u.country]}</text>`).join('') : ''}</svg>`;
+    ${axis ? ROUNDS.map((r, i) => `<text x="${X(i)}" y="${H}" text-anchor="middle">${r[u.country] ?? ''}</text>`).join('') : ''}</svg>`;
 }
 
 function fmt(v, m = measure) {
@@ -275,8 +275,8 @@ function drawControls() {
   rs.querySelectorAll('button').forEach((b) => b.onclick = () => { if (playing) togglePlay(); round = +b.dataset.r; draw(); });
   const r = ROUNDS[round];
   const note = document.getElementById('round-note');
-  note.innerHTML = `<span>${t('round')(r.az, r.ir)}</span>` + (measure === 'change' && round > 0
-    ? `<label>${t('base')} <select id="base">${ROUNDS.filter((x) => x.i < round).map((x) => `<option value="${x.i}"${x.i === baseOf() ? ' selected' : ''}>${x.az} · ${x.ir}</option>`).join('')}</select></label>` : '');
+  note.innerHTML = `<span>${t('round')(r.az, r.ir ?? '—')}</span>` + (measure === 'change' && round > 0
+    ? `<label>${t('base')} <select id="base">${ROUNDS.filter((x) => x.i < round).map((x) => `<option value="${x.i}"${x.i === baseOf() ? ' selected' : ''}>${x.az}${x.ir ? ` · ${x.ir}` : ''}</option>`).join('')}</select></label>` : '');
   const sel = document.getElementById('base');
   if (sel) sel.onchange = () => { base = +sel.value; draw(); };
   const play = document.getElementById('play');
@@ -332,7 +332,7 @@ function chart() {
 function drawSide() {
   const el = document.getElementById('side');
   if (selected != null) return drawUnit(el, units[selected]);
-  const tot = (c) => { const x = totals(c); return `<div class="total"><span>${t(c)}</span><b>${x.sum != null ? nf().format(x.sum) : '—'}</b><small>${c === 'ir' ? t('irNote') + ' · ' : ''}${yearOf({ country: c })} · ${t('onMap')(x.n, x.of)}</small></div>`; };
+  const tot = (c) => { const x = totals(c); return `<div class="total"><span>${t(c)}</span><b>${x.sum != null ? nf().format(x.sum) : '—'}</b><small>${c === 'ir' ? t('irNote') + ' · ' : ''}${yearOf({ country: c }) ?? '—'} · ${t('onMap')(x.n, x.of)}</small></div>`; };
   const ranked = units.filter((u) => value(u) != null).sort((a, b) => value(b) - value(a)).slice(0, 12);
   el.innerHTML = `<div class="totals">${tot('az')}${tot('ir')}</div><div class="chart">${chart()}</div>
     <section class="rank"><h2>${t('top')}: ${t(measure).toLowerCase()}</h2><ol>${ranked.map((u, i) => `<li><button type="button" data-u="${u.fid}"><span class="v">${i + 1}</span><span>${esc(L(u))}</span><span class="v">${fmt(value(u))}</span></button></li>`).join('')}</ol></section>
@@ -341,7 +341,7 @@ function drawSide() {
 }
 
 function drawUnit(el, u) {
-  const rows = ROUNDS.map((r) => {
+  const rows = ROUNDS.filter((r) => r[u.country] != null).map((r) => {
     const y = r[u.country], p = u.pop[y];
     const prev = r.i > 0 ? u.pop[ROUNDS[r.i - 1][u.country]] : null;
     const ch = p != null && prev ? (p / prev - 1) * 100 : null;
