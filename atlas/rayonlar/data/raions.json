@@ -1,0 +1,1398 @@
+{
+  "about": "The raions and city councils of the Azerbaijan SSR at the 1979 and 1989 censuses, each drawn as the whole districts of today that cover its land. c79/c89 name the Demoskop rows summed for it (data/raw/demoscope-1979-1989.json); shapes are geoBoundaries ADM2 names. fit: same = today's district(s) cover the Soviet unit's land closely; approx = the land moved a little since, as the note says.",
+  "units": [
+    {
+      "id": "baku",
+      "kind": "city",
+      "az": "Bakı",
+      "ru": "Баку",
+      "en": "Baku",
+      "c79": [
+        "Бакинский горсовет"
+      ],
+      "c89": [
+        "Бакинский горсовет"
+      ],
+      "shapes": [
+        "Baku City"
+      ],
+      "fit": "same",
+      "note": [
+        "Şəhər soveti: şəhər və tabeliyindəki qəsəbələr.",
+        "Горсовет: город и подчинённые ему посёлки.",
+        "The city council: the city and the settlements under it."
+      ]
+    },
+    {
+      "id": "sumqayit",
+      "kind": "city",
+      "az": "Sumqayıt",
+      "ru": "Сумгаит",
+      "en": "Sumgait",
+      "c79": [
+        "Сумгаитский горсовет"
+      ],
+      "c89": [
+        "Сумгаитский горсовет"
+      ],
+      "shapes": [
+        "Sumqayit City"
+      ],
+      "fit": "same"
+    },
+    {
+      "id": "kirovabad",
+      "kind": "city",
+      "az": "Kirovabad",
+      "ru": "Кировабад",
+      "en": "Kirovabad",
+      "c79": [
+        "Кировабадский горсовет (ныне Гянджинский)"
+      ],
+      "c89": [
+        "Кировабадский горсовет (ныне Гянджинский)"
+      ],
+      "shapes": [
+        "Ganja City"
+      ],
+      "fit": "same"
+    },
+    {
+      "id": "ali-bayramli",
+      "kind": "city",
+      "az": "Əli Bayramlı",
+      "ru": "Али-Байрамлы",
+      "en": "Ali-Bayramli",
+      "c79": [
+        "Али-Байрамский горсовет"
+      ],
+      "c89": [
+        "Али-Байрамлинский горсовет"
+      ],
+      "shapes": [
+        "Shirvan City"
+      ],
+      "fit": "same",
+      "note": [
+        "Şəhər soveti; 1979 və 1989-da onun bütün əhalisi şəhər əhalisi idi.",
+        "Горсовет; в 1979 и 1989 гг. всё его население городское.",
+        "The city council; in 1979 and 1989 all its people counted as urban."
+      ]
+    },
+    {
+      "id": "mingachevir",
+      "kind": "city",
+      "az": "Mingəçevir",
+      "ru": "Мингечаур",
+      "en": "Mingachevir",
+      "c79": [
+        "г. Мингечаур"
+      ],
+      "c89": [
+        "г. Мингечаур"
+      ],
+      "shapes": [
+        "Mingachevir City"
+      ],
+      "fit": "same"
+    },
+    {
+      "id": "naftalan",
+      "kind": "city",
+      "az": "Naftalan",
+      "ru": "Нафталан",
+      "en": "Naftalan",
+      "c79": [
+        "г. Нафталан"
+      ],
+      "c89": [
+        "г. Нафталан"
+      ],
+      "shapes": [
+        "Naftalan City"
+      ],
+      "fit": "same"
+    },
+    {
+      "id": "yevlakh-city",
+      "kind": "city",
+      "az": "Yevlax şəhəri",
+      "ru": "г. Евлах",
+      "en": "Yevlakh (city)",
+      "c79": [
+        "г. Евлах"
+      ],
+      "c89": [
+        "г. Евлах"
+      ],
+      "shapes": [
+        "Yevlakh City"
+      ],
+      "fit": "same"
+    },
+    {
+      "id": "lankaran-city",
+      "kind": "city",
+      "az": "Lənkəran şəhəri",
+      "ru": "г. Ленкорань",
+      "en": "Lankaran (city)",
+      "c79": [
+        "г. Ленкорань"
+      ],
+      "c89": [
+        "г. Ленкорань"
+      ],
+      "shapes": [
+        "Lankaran City"
+      ],
+      "fit": "same"
+    },
+    {
+      "id": "shaki-city",
+      "kind": "city",
+      "az": "Şəki şəhəri",
+      "ru": "г. Шеки",
+      "en": "Shaki (city)",
+      "c79": [
+        "г. Шеки"
+      ],
+      "c89": [
+        "Шекинский горсовет"
+      ],
+      "shapes": [
+        "Shaki City"
+      ],
+      "fit": "same",
+      "note": [
+        "1989: şəhər soveti (şəhər və tabeliyindəki qəsəbələr); 1979: yalnız şəhər.",
+        "1989: горсовет (город и подчинённые посёлки); 1979: только город.",
+        "1989: the city council (the city and its settlements); 1979: the city alone."
+      ]
+    },
+    {
+      "id": "agdam",
+      "kind": "raion",
+      "az": "Ağdam",
+      "ru": "Агдамский",
+      "en": "Agdam",
+      "c79": [
+        "Агдамский район"
+      ],
+      "c89": [
+        "Агдамский район"
+      ],
+      "shapes": [
+        "Agdam District"
+      ],
+      "fit": "same"
+    },
+    {
+      "id": "agdash",
+      "kind": "raion",
+      "az": "Ağdaş",
+      "ru": "Агдашский",
+      "en": "Agdash",
+      "c79": [
+        "Агдашский район"
+      ],
+      "c89": [
+        "Агдашский район"
+      ],
+      "shapes": [
+        "Agdash District"
+      ],
+      "fit": "same"
+    },
+    {
+      "id": "aghjabadi",
+      "kind": "raion",
+      "az": "Ağcabədi",
+      "ru": "Агджабединский",
+      "en": "Agjabedi",
+      "c79": [
+        "Агджабединский район"
+      ],
+      "c89": [
+        "Агджабединский район"
+      ],
+      "shapes": [
+        "Aghjabadi District"
+      ],
+      "fit": "same"
+    },
+    {
+      "id": "apsheron",
+      "kind": "raion",
+      "az": "Abşeron",
+      "ru": "Апшеронский",
+      "en": "Apsheron",
+      "c79": [
+        "Апшеронский район"
+      ],
+      "c89": [
+        "Апшеронский район"
+      ],
+      "shapes": [
+        "Absheron District",
+        "Khizi District"
+      ],
+      "fit": "same",
+      "note": [
+        "Xızı rayonu 1990-cı ildə Abşeron rayonundan ayrılıb.",
+        "Хызинский район выделен из Апшеронского в 1990 г.",
+        "The Khizi district was split off from Apsheron in 1990."
+      ]
+    },
+    {
+      "id": "astara",
+      "kind": "raion",
+      "az": "Astara",
+      "ru": "Астаринский",
+      "en": "Astara",
+      "c79": [
+        "Астаринский район"
+      ],
+      "c89": [
+        "Астаринский район"
+      ],
+      "shapes": [
+        "Astara District"
+      ],
+      "fit": "same"
+    },
+    {
+      "id": "akhsu",
+      "kind": "raion",
+      "az": "Ağsu",
+      "ru": "Ахсуинский",
+      "en": "Akhsu",
+      "c79": [
+        "Ахсуинский район"
+      ],
+      "c89": [
+        "Ахсуинский район"
+      ],
+      "shapes": [
+        "Agsu District"
+      ],
+      "fit": "same"
+    },
+    {
+      "id": "barda",
+      "kind": "raion",
+      "az": "Bərdə",
+      "ru": "Бардинский",
+      "en": "Barda",
+      "c79": [
+        "Бардинский район"
+      ],
+      "c89": [
+        "Бардинский район"
+      ],
+      "shapes": [
+        "Barda District"
+      ],
+      "fit": "same"
+    },
+    {
+      "id": "belokany",
+      "kind": "raion",
+      "az": "Balakən",
+      "ru": "Белоканский",
+      "en": "Belokany",
+      "c79": [
+        "Белоканский район"
+      ],
+      "c89": [
+        "Белоканский район"
+      ],
+      "shapes": [
+        "Balakan District"
+      ],
+      "fit": "same"
+    },
+    {
+      "id": "vartashen",
+      "kind": "raion",
+      "az": "Vartaşen",
+      "ru": "Варташенский",
+      "en": "Vartashen",
+      "c79": [
+        "Варташенский район"
+      ],
+      "c89": [
+        "Варташенский район"
+      ],
+      "shapes": [
+        "Oghuz District"
+      ],
+      "fit": "same"
+    },
+    {
+      "id": "geokchay",
+      "kind": "raion",
+      "az": "Göyçay",
+      "ru": "Геокчайский",
+      "en": "Geokchay",
+      "c79": [
+        "Геокчайский район"
+      ],
+      "c89": [
+        "Геокчайский район"
+      ],
+      "shapes": [
+        "Goychay District"
+      ],
+      "fit": "same"
+    },
+    {
+      "id": "dashkesan",
+      "kind": "raion",
+      "az": "Daşkəsən",
+      "ru": "Дашкесанский",
+      "en": "Dashkesan",
+      "c79": [
+        "Дашкесанский район"
+      ],
+      "c89": [
+        "Дашкесанский район"
+      ],
+      "shapes": [
+        "Dashkasan District"
+      ],
+      "fit": "same"
+    },
+    {
+      "id": "jalilabad",
+      "kind": "raion",
+      "az": "Cəlilabad",
+      "ru": "Джалилабадский",
+      "en": "Jalilabad",
+      "c79": [
+        "Джалилабадский район"
+      ],
+      "c89": [
+        "Джалилабадский район"
+      ],
+      "shapes": [
+        "Jalilabad District"
+      ],
+      "fit": "same"
+    },
+    {
+      "id": "jabrayil",
+      "kind": "raion",
+      "az": "Cəbrayıl",
+      "ru": "Джебраильский",
+      "en": "Jebrail",
+      "c79": [
+        "Джебраильский район"
+      ],
+      "c89": [
+        "Джебраильский район"
+      ],
+      "shapes": [
+        "Jabrayil District"
+      ],
+      "fit": "same"
+    },
+    {
+      "id": "divichi",
+      "kind": "raion",
+      "az": "Dəvəçi",
+      "ru": "Дивичинский",
+      "en": "Divichi",
+      "c79": [
+        "Дивичинский район"
+      ],
+      "c89": [
+        "Дивичинский район"
+      ],
+      "shapes": [
+        "Shabran District",
+        "Siazan District"
+      ],
+      "fit": "same",
+      "note": [
+        "Siyəzən rayonu 1992-ci ildə Dəvəçidən ayrılıb; Dəvəçi 2010-cu ildə Şabran adlandırılıb.",
+        "Сиазаньский район выделен из Дивичинского в 1992 г.; Дивичи переименован в Шабран в 2010 г.",
+        "The Siazan district was split off from Divichi in 1992; Divichi was renamed Shabran in 2010."
+      ]
+    },
+    {
+      "id": "yevlakh",
+      "kind": "raion",
+      "az": "Yevlax",
+      "ru": "Евлахский",
+      "en": "Yevlakh",
+      "c79": [
+        "Евлахский район"
+      ],
+      "c89": [
+        "Евлахский район"
+      ],
+      "shapes": [
+        "Yevlakh District"
+      ],
+      "fit": "same"
+    },
+    {
+      "id": "zhdanov",
+      "kind": "raion",
+      "az": "Jdanov",
+      "ru": "Ждановский",
+      "en": "Zhdanov",
+      "c79": [
+        "Ждановский район"
+      ],
+      "c89": [
+        "Бейлаганский район"
+      ],
+      "shapes": [
+        "Beylagan District"
+      ],
+      "fit": "same",
+      "note": [
+        "1989-cu ildə Beyləqan adlandırılıb.",
+        "В 1989 г. переименован в Бейлаганский.",
+        "Renamed Beylagan in 1989."
+      ]
+    },
+    {
+      "id": "zaqatala",
+      "kind": "raion",
+      "az": "Zaqatala",
+      "ru": "Закатальский",
+      "en": "Zakataly",
+      "c79": [
+        "Закатальский район"
+      ],
+      "c89": [
+        "Закатальский район"
+      ],
+      "shapes": [
+        "Zaqatala District"
+      ],
+      "fit": "same"
+    },
+    {
+      "id": "zangilan",
+      "kind": "raion",
+      "az": "Zəngilan",
+      "ru": "Зангеланский",
+      "en": "Zangelan",
+      "c79": [
+        "Зангеланский район"
+      ],
+      "c89": [
+        "Зангеланский район"
+      ],
+      "shapes": [
+        "Zangilan District"
+      ],
+      "fit": "same"
+    },
+    {
+      "id": "zardab",
+      "kind": "raion",
+      "az": "Zərdab",
+      "ru": "Зардобский",
+      "en": "Zardob",
+      "c79": [
+        "Зардобский район"
+      ],
+      "c89": [
+        "Зардобский район"
+      ],
+      "shapes": [
+        "Zardab District"
+      ],
+      "fit": "same"
+    },
+    {
+      "id": "imishli",
+      "kind": "raion",
+      "az": "İmişli",
+      "ru": "Имишлинский",
+      "en": "Imishli",
+      "c79": [
+        "Имишлинский район"
+      ],
+      "c89": [
+        "Имишлинский район"
+      ],
+      "shapes": [
+        "Imishli District"
+      ],
+      "fit": "same"
+    },
+    {
+      "id": "ismailli",
+      "kind": "raion",
+      "az": "İsmayıllı",
+      "ru": "Исмаиллинский",
+      "en": "Ismailly",
+      "c79": [
+        "Исмаиллинский район"
+      ],
+      "c89": [
+        "Исмаиллинский район"
+      ],
+      "shapes": [
+        "Ismailli District"
+      ],
+      "fit": "same"
+    },
+    {
+      "id": "kazakh",
+      "kind": "raion",
+      "az": "Qazax",
+      "ru": "Казахский",
+      "en": "Kazakh",
+      "c79": [
+        "Казахский район"
+      ],
+      "c89": [
+        "Казахский район"
+      ],
+      "shapes": [
+        "Qazakh District",
+        "Agstafa District"
+      ],
+      "fit": "same",
+      "note": [
+        "Ağstafa rayonu 1990-cı ildə Qazaxdan ayrılıb.",
+        "Агстафинский район выделен из Казахского в 1990 г.",
+        "The Agstafa district was split off from Kazakh in 1990."
+      ]
+    },
+    {
+      "id": "kakh",
+      "kind": "raion",
+      "az": "Qax",
+      "ru": "Кахский",
+      "en": "Kakh",
+      "c79": [
+        "Кахский район"
+      ],
+      "c89": [
+        "Кахский район"
+      ],
+      "shapes": [
+        "Qakh District"
+      ],
+      "fit": "same"
+    },
+    {
+      "id": "kedabek",
+      "kind": "raion",
+      "az": "Gədəbəy",
+      "ru": "Кедабекский",
+      "en": "Kedabek",
+      "c79": [
+        "Кедабекский район"
+      ],
+      "c89": [
+        "Кедабекский район"
+      ],
+      "shapes": [
+        "Gadabay District"
+      ],
+      "fit": "same"
+    },
+    {
+      "id": "kelbajar",
+      "kind": "raion",
+      "az": "Kəlbəcər",
+      "ru": "Кельбаджарский",
+      "en": "Kelbajar",
+      "c79": [
+        "Кельбаджарский район"
+      ],
+      "c89": [
+        "Кельбаджарский район"
+      ],
+      "shapes": [
+        "Kalbajar District"
+      ],
+      "fit": "approx",
+      "note": [
+        "1992-ci ildə ləğv edilmiş Ağdərə (Mardakert) rayonunun 23 kəndi Kəlbəcərə verilib; bugünkü sərhəd onları da əhatə edir.",
+        "В 1992 г. Кельбаджару переданы 23 села упразднённого Мардакертского района; нынешняя граница включает и их.",
+        "In 1992 Kelbajar was given 23 villages of the abolished Mardakert raion; today's border takes them in."
+      ]
+    },
+    {
+      "id": "kubatly",
+      "kind": "raion",
+      "az": "Qubadlı",
+      "ru": "Кубатлинский",
+      "en": "Kubatly",
+      "c79": [
+        "Кубатлинский район"
+      ],
+      "c89": [
+        "Кубатлинский район"
+      ],
+      "shapes": [
+        "Qubadli District"
+      ],
+      "fit": "same"
+    },
+    {
+      "id": "kuba",
+      "kind": "raion",
+      "az": "Quba",
+      "ru": "Кубинский",
+      "en": "Kuba",
+      "c79": [
+        "Кубинский район"
+      ],
+      "c89": [
+        "Кубинский район"
+      ],
+      "shapes": [
+        "Quba District"
+      ],
+      "fit": "same"
+    },
+    {
+      "id": "kusary",
+      "kind": "raion",
+      "az": "Qusar",
+      "ru": "Кусарский",
+      "en": "Kusary",
+      "c79": [
+        "Кусарский район"
+      ],
+      "c89": [
+        "Кусарский район"
+      ],
+      "shapes": [
+        "Qusar District"
+      ],
+      "fit": "same"
+    },
+    {
+      "id": "kutkashen",
+      "kind": "raion",
+      "az": "Qutqaşen",
+      "ru": "Куткашенский",
+      "en": "Kutkashen",
+      "c79": [
+        "Куткашенский район"
+      ],
+      "c89": [
+        "Куткашенский район"
+      ],
+      "shapes": [
+        "Qabala District"
+      ],
+      "fit": "same",
+      "note": [
+        "1991-ci ildə Qəbələ adlandırılıb.",
+        "В 1991 г. переименован в Габалинский.",
+        "Renamed Qabala in 1991."
+      ]
+    },
+    {
+      "id": "kurdamir",
+      "kind": "raion",
+      "az": "Kürdəmir",
+      "ru": "Кюрдамирский",
+      "en": "Kurdamir",
+      "c79": [
+        "Кюрдамирский район"
+      ],
+      "c89": [
+        "Кюрдамирский район"
+      ],
+      "shapes": [
+        "Kurdamir District"
+      ],
+      "fit": "same"
+    },
+    {
+      "id": "lachin",
+      "kind": "raion",
+      "az": "Laçın",
+      "ru": "Лачинский",
+      "en": "Lachin",
+      "c79": [
+        "Лачинский район"
+      ],
+      "c89": [
+        "Лачинский район"
+      ],
+      "shapes": [
+        "Lachin District"
+      ],
+      "fit": "same"
+    },
+    {
+      "id": "lankaran",
+      "kind": "raion",
+      "az": "Lənkəran",
+      "ru": "Ленкоранский",
+      "en": "Lenkoran",
+      "c79": [
+        "Ленкоранский район"
+      ],
+      "c89": [
+        "Ленкоранский район"
+      ],
+      "shapes": [
+        "Lankaran District"
+      ],
+      "fit": "same"
+    },
+    {
+      "id": "lerik",
+      "kind": "raion",
+      "az": "Lerik",
+      "ru": "Лерикский",
+      "en": "Lerik",
+      "c79": [
+        "Лерикский район"
+      ],
+      "c89": [
+        "Лерикский район"
+      ],
+      "shapes": [
+        "Lerik District"
+      ],
+      "fit": "same"
+    },
+    {
+      "id": "masally",
+      "kind": "raion",
+      "az": "Masallı",
+      "ru": "Масаллинский",
+      "en": "Masally",
+      "c79": [
+        "Масаллинский район"
+      ],
+      "c89": [
+        "Масаллинский район"
+      ],
+      "shapes": [
+        "Masally District"
+      ],
+      "fit": "same"
+    },
+    {
+      "id": "mir-bashir",
+      "kind": "raion",
+      "az": "Mir Bəşir",
+      "ru": "Мир-Баширский",
+      "en": "Mir-Bashir",
+      "c79": [
+        "Мир-Баширский район"
+      ],
+      "c89": [
+        "Мир-Баширский район"
+      ],
+      "shapes": [],
+      "fit": "approx",
+      "with": "mardakert",
+      "note": [
+        "1991-ci ildə Tərtər adlandırılıb. 1992-ci ildə Ağdərə (Mardakert) rayonunun çox hissəsi Tərtərə verildiyi üçün bugünkü Tərtər hər ikisini əhatə edir; xəritədə ikisi bir yerdə çəkilib.",
+        "В 1991 г. переименован в Тертерский. В 1992 г. к Тертеру отошла большая часть Мардакертского района, поэтому нынешний Тертер включает оба; на карте они показаны вместе.",
+        "Renamed Tartar in 1991. Most of the Mardakert raion went to Tartar in 1992, so today's Tartar covers both; the map draws them together."
+      ]
+    },
+    {
+      "id": "neftchala",
+      "kind": "raion",
+      "az": "Neftçala",
+      "ru": "Нефтечалинский",
+      "en": "Neftechala",
+      "c79": [
+        "Нефтечалинский район"
+      ],
+      "c89": [
+        "Нефтечалинский район"
+      ],
+      "shapes": [
+        "Neftchala District"
+      ],
+      "fit": "same"
+    },
+    {
+      "id": "pushkin",
+      "kind": "raion",
+      "az": "Puşkin",
+      "ru": "Пушкинский",
+      "en": "Pushkin",
+      "c79": [
+        "Пушкинский район"
+      ],
+      "c89": [
+        "Пушкинский район"
+      ],
+      "shapes": [
+        "Bilasuvar District"
+      ],
+      "fit": "same",
+      "note": [
+        "1991-ci ildə Biləsuvar adlandırılıb.",
+        "В 1991 г. переименован в Билясуварский.",
+        "Renamed Bilasuvar in 1991."
+      ]
+    },
+    {
+      "id": "saatly",
+      "kind": "raion",
+      "az": "Saatlı",
+      "ru": "Саатлинский",
+      "en": "Saatly",
+      "c79": [
+        "Саатлинский район"
+      ],
+      "c89": [
+        "Саатлинский район"
+      ],
+      "shapes": [
+        "Saatly District"
+      ],
+      "fit": "same"
+    },
+    {
+      "id": "sabirabad",
+      "kind": "raion",
+      "az": "Sabirabad",
+      "ru": "Сабирабадский",
+      "en": "Sabirabad",
+      "c79": [
+        "Сабирабадский район"
+      ],
+      "c89": [
+        "Сабирабадский район"
+      ],
+      "shapes": [
+        "Sabirabad District"
+      ],
+      "fit": "approx",
+      "note": [
+        "Statistika komitəsinin bugünkü sərhədlərə uyğunlaşdırdığı 1979 və 1989 rəqəmləri sovet rayonununkundan 10–17% azdır: sərhəd sonradan dəyişib.",
+        "Пересчитанные Госкомстатом на нынешние границы цифры 1979 и 1989 гг. на 10–17% ниже советских: граница позже менялась.",
+        "The statistics committee's figures for 1979 and 1989 recast to today's borders are 10–17% below the Soviet raion's: the border changed later."
+      ]
+    },
+    {
+      "id": "salyan",
+      "kind": "raion",
+      "az": "Salyan",
+      "ru": "Сальянский",
+      "en": "Salyany",
+      "c79": [
+        "Сальянский район"
+      ],
+      "c89": [
+        "Сальянский район"
+      ],
+      "shapes": [
+        "Salyan District"
+      ],
+      "fit": "approx",
+      "note": [
+        "Statistika komitəsinin bugünkü sərhədlərə uyğunlaşdırdığı 1979 və 1989 rəqəmləri sovet rayonununkundan 10–17% azdır: sərhəd sonradan dəyişib.",
+        "Пересчитанные Госкомстатом на нынешние границы цифры 1979 и 1989 гг. на 10–17% ниже советских: граница позже менялась.",
+        "The statistics committee's figures for 1979 and 1989 recast to today's borders are 10–17% below the Soviet raion's: the border changed later."
+      ]
+    },
+    {
+      "id": "tauz",
+      "kind": "raion",
+      "az": "Tovuz",
+      "ru": "Таузский",
+      "en": "Tauz",
+      "c79": [
+        "Таузский район"
+      ],
+      "c89": [
+        "Таузский район"
+      ],
+      "shapes": [
+        "Tovuz District"
+      ],
+      "fit": "same"
+    },
+    {
+      "id": "ujar",
+      "kind": "raion",
+      "az": "Ucar",
+      "ru": "Уджарский",
+      "en": "Ujar",
+      "c79": [
+        "Уджарский район"
+      ],
+      "c89": [
+        "Уджарский район"
+      ],
+      "shapes": [
+        "Ujar District"
+      ],
+      "fit": "same"
+    },
+    {
+      "id": "fizuli",
+      "kind": "raion",
+      "az": "Füzuli",
+      "ru": "Физулинский",
+      "en": "Fizuli",
+      "c79": [
+        "Физулинский район"
+      ],
+      "c89": [
+        "Физулинский район"
+      ],
+      "shapes": [
+        "Fuzuli District"
+      ],
+      "fit": "same"
+    },
+    {
+      "id": "khanlar",
+      "kind": "raion",
+      "az": "Xanlar",
+      "ru": "Ханларский",
+      "en": "Khanlar",
+      "c79": [
+        "Ханларский район"
+      ],
+      "c89": [
+        "Ханларский район"
+      ],
+      "shapes": [
+        "Goygol District",
+        "Samukh District"
+      ],
+      "fit": "approx",
+      "note": [
+        "Samux rayonu 1992-ci ildə 1959-da ləğv edilmiş Səfərəliyev rayonunun torpaqlarında yenidən yaradılıb; Xanlar 2008-də Göygöl adlandırılıb. Bu torpaqların hamısının 1979–1989-da Xanlar rayonunda olduğunu yoxlamamışıq.",
+        "Самухский район воссоздан в 1992 г. на землях упразднённого в 1959 г. Сафаралиевского района; Ханлар в 2008 г. переименован в Гёйгёль. Что все эти земли в 1979–1989 гг. входили в Ханларский район, мы не проверили.",
+        "The Samukh district was re-formed in 1992 on the lands of the Safaraliev raion abolished in 1959; Khanlar was renamed Goygol in 2008. That all of that land lay in the Khanlar raion in 1979–1989 is not checked."
+      ]
+    },
+    {
+      "id": "khachmas",
+      "kind": "raion",
+      "az": "Xaçmaz",
+      "ru": "Хачмасский",
+      "en": "Khachmas",
+      "c79": [
+        "Хачмасский район"
+      ],
+      "c89": [
+        "Хачмасский район"
+      ],
+      "shapes": [
+        "Khachmaz District"
+      ],
+      "fit": "same"
+    },
+    {
+      "id": "shamkhor",
+      "kind": "raion",
+      "az": "Şamxor",
+      "ru": "Шамхорский",
+      "en": "Shamkhor",
+      "c79": [
+        "Шамхорский район"
+      ],
+      "c89": [
+        "Шамхорский район"
+      ],
+      "shapes": [
+        "Shamkir District"
+      ],
+      "fit": "same"
+    },
+    {
+      "id": "kasum-ismailov",
+      "kind": "raion",
+      "az": "Qasım İsmayılov",
+      "ru": "Касум-Исмаиловский",
+      "en": "Kasum-Ismailov",
+      "c79": [
+        "Касум-Исмаиловский район"
+      ],
+      "c89": [
+        "Касум-Исмаиловский район"
+      ],
+      "shapes": [],
+      "fit": "approx",
+      "with": "shaumyan",
+      "note": [
+        "1991-ci ildə Şaumyan rayonu ilə birləşdirilib, Goranboy adlandırılıb; xəritədə ikisi bir yerdə çəkilib.",
+        "В 1991 г. объединён с Шаумяновским районом и назван Геранбойским; на карте они показаны вместе.",
+        "Merged with the Shaumyan raion in 1991 as Goranboy; the map draws them together."
+      ]
+    },
+    {
+      "id": "shaumyan",
+      "kind": "raion",
+      "az": "Şaumyan",
+      "ru": "Шаумяновский",
+      "en": "Shaumyan",
+      "c79": [
+        "Шаумяновский район"
+      ],
+      "c89": [
+        "Шаумяновский район"
+      ],
+      "shapes": [
+        "Goranboy District"
+      ],
+      "fit": "approx",
+      "with": "kasum-ismailov"
+    },
+    {
+      "id": "shaki",
+      "kind": "raion",
+      "az": "Şəki",
+      "ru": "Шекинский",
+      "en": "Sheki",
+      "c79": [
+        "Шекинский район"
+      ],
+      "c89": [
+        "Шекинский район"
+      ],
+      "shapes": [
+        "Shaki District"
+      ],
+      "fit": "same"
+    },
+    {
+      "id": "shemakha",
+      "kind": "raion",
+      "az": "Şamaxı",
+      "ru": "Шемахинский",
+      "en": "Shemakha",
+      "c79": [
+        "Шемахинский район"
+      ],
+      "c89": [
+        "Шемахинский район"
+      ],
+      "shapes": [
+        "Shamakhi District",
+        "Gobustan District"
+      ],
+      "fit": "same",
+      "note": [
+        "Qobustan (Mərəzə) rayonu 1990-cı ildə Şamaxıdan ayrılıb.",
+        "Гобустанский (Маразинский) район выделен из Шемахинского в 1990 г.",
+        "The Gobustan (Maraza) district was split off from Shemakha in 1990."
+      ]
+    },
+    {
+      "id": "yardymli",
+      "kind": "raion",
+      "az": "Yardımlı",
+      "ru": "Ярдымлинский",
+      "en": "Yardymli",
+      "c79": [
+        "Ярдымлинский район"
+      ],
+      "c89": [
+        "Ярдымлинский район"
+      ],
+      "shapes": [
+        "Yardymli District"
+      ],
+      "fit": "same"
+    },
+    {
+      "id": "nakhchivan-city",
+      "kind": "city",
+      "region": "nax",
+      "az": "Naxçıvan şəhəri",
+      "ru": "г. Нахичевань",
+      "en": "Nakhichevan (city)",
+      "c79": [
+        "Нахичеванский горсовет"
+      ],
+      "c89": [
+        "г. Нахичевань"
+      ],
+      "shapes": [
+        "Nakhchivan City"
+      ],
+      "fit": "same"
+    },
+    {
+      "id": "babek",
+      "kind": "raion",
+      "region": "nax",
+      "az": "Babək",
+      "ru": "Бабекский",
+      "en": "Babek",
+      "c79": [
+        "Бабекский район"
+      ],
+      "c89": [
+        "Бабекский район"
+      ],
+      "shapes": [
+        "Babek District"
+      ],
+      "fit": "approx",
+      "note": [
+        "Bugünkü Kəngərli rayonunun (2004) bir hissəsi də 1979–1989-da Babək rayonunda idi; Kəngərli ayrıca, boz çəkilib.",
+        "Часть нынешнего Кенгерлинского района (2004) в 1979–1989 гг. тоже входила в Бабекский район; Кенгерли показан отдельно, серым.",
+        "Part of today's Kangarli district (2004) also lay in the Babek raion in 1979–1989; Kangarli is drawn apart, in grey."
+      ]
+    },
+    {
+      "id": "julfa",
+      "kind": "raion",
+      "region": "nax",
+      "az": "Culfa",
+      "ru": "Джульфинский",
+      "en": "Julfa",
+      "c79": [
+        "Джульфинский район"
+      ],
+      "c89": [
+        "Джульфинский горсовет",
+        "Джульфинский район (сельское население)"
+      ],
+      "shapes": [
+        "Julfa District"
+      ],
+      "fit": "same",
+      "note": [
+        "1989: şəhər soveti ilə kənd rayonu toplanıb.",
+        "1989: сумма горсовета и сельского района.",
+        "1989: the town council and the rural raion added together."
+      ]
+    },
+    {
+      "id": "ilyich",
+      "kind": "raion",
+      "region": "nax",
+      "az": "İliç",
+      "ru": "Ильичёвский",
+      "en": "Ilyichevsk",
+      "c79": [
+        "Ильичевский район"
+      ],
+      "c89": [
+        "Ильичевский район"
+      ],
+      "shapes": [
+        "Sharur District",
+        "Sadarak District"
+      ],
+      "fit": "approx",
+      "note": [
+        "1990-cı ildə Şərur adlandırılıb; Sədərək rayonu 1990-da ondan ayrılıb. Bugünkü Kəngərli rayonunun (2004) bir hissəsi də burada idi.",
+        "В 1990 г. переименован в Шарурский; Садаракский район выделен из него в 1990 г. Часть нынешнего Кенгерлинского района (2004) тоже входила сюда.",
+        "Renamed Sharur in 1990; the Sadarak district was split off from it in 1990. Part of today's Kangarli district (2004) lay here too."
+      ]
+    },
+    {
+      "id": "ordubad",
+      "kind": "raion",
+      "region": "nax",
+      "az": "Ordubad",
+      "ru": "Ордубадский",
+      "en": "Ordubad",
+      "c79": [
+        "Ордубадский район"
+      ],
+      "c89": [
+        "Ордубадский горсовет",
+        "Ордубадский район"
+      ],
+      "shapes": [
+        "Ordubad District"
+      ],
+      "fit": "same",
+      "note": [
+        "1989: şəhər soveti ilə rayon toplanıb.",
+        "1989: сумма горсовета и района.",
+        "1989: the town council and the raion added together."
+      ]
+    },
+    {
+      "id": "shahbuz",
+      "kind": "raion",
+      "region": "nax",
+      "az": "Şahbuz",
+      "ru": "Шахбузский",
+      "en": "Shahbuz",
+      "c79": [
+        "Шахбузский район"
+      ],
+      "c89": [
+        "Шахбузский район"
+      ],
+      "shapes": [
+        "Shahbuz District"
+      ],
+      "fit": "same"
+    },
+    {
+      "id": "stepanakert",
+      "kind": "city",
+      "region": "nkao",
+      "az": "Stepanakert",
+      "ru": "Степанакерт",
+      "en": "Stepanakert",
+      "c79": [
+        "=Нагорно-Карабахская автономная область",
+        "-Аскеранский район",
+        "-Гадрутский район",
+        "-Мардакертский район",
+        "-Мартунинский район",
+        "-Шушинский район"
+      ],
+      "c89": [
+        "г. Степанакерт"
+      ],
+      "shapes": [
+        "Khankendi City"
+      ],
+      "fit": "same",
+      "note": [
+        "1991-ci ildə Xankəndi adı qaytarılıb. 1979: Demoskopun cədvəlində şəhər ayrıca yoxdur; vilayətin cəmindən rayonlar çıxılıb.",
+        "В 1991 г. возвращено название Ханкенди. 1979: в таблице Демоскопа города отдельно нет; это итог области минус районы.",
+        "The name Khankendi was restored in 1991. 1979: Demoskop's table has no row for the town; this is the oblast's total less its raions."
+      ]
+    },
+    {
+      "id": "askeran",
+      "kind": "raion",
+      "region": "nkao",
+      "az": "Əsgəran",
+      "ru": "Аскеранский",
+      "en": "Askeran",
+      "c79": [
+        "Аскеранский район"
+      ],
+      "c89": [
+        "Аскеранский район"
+      ],
+      "shapes": [
+        "Khojaly District"
+      ],
+      "fit": "approx",
+      "note": [
+        "1991-ci ildə Xocalı rayonu adı ilə yenidən qurulub; sərhədi bir az dəyişib.",
+        "В 1991 г. преобразован в Ходжалинский район; граница немного изменилась.",
+        "Re-formed as the Khojaly district in 1991; its border changed a little."
+      ]
+    },
+    {
+      "id": "hadrut",
+      "kind": "raion",
+      "region": "nkao",
+      "az": "Hadrut",
+      "ru": "Гадрутский",
+      "en": "Hadrut",
+      "c79": [
+        "Гадрутский район"
+      ],
+      "c89": [
+        "Гадрутский район"
+      ],
+      "shapes": [],
+      "fit": "approx",
+      "with": "martuni",
+      "note": [
+        "1991-ci ildə Martuni rayonu ilə birləşdirilib, Xocavənd adlandırılıb; xəritədə ikisi bir yerdə çəkilib.",
+        "В 1991 г. объединён с Мартунинским районом и назван Ходжавендским; на карте они показаны вместе.",
+        "Merged with the Martuni raion in 1991 as Khojavend; the map draws them together."
+      ]
+    },
+    {
+      "id": "martuni",
+      "kind": "raion",
+      "region": "nkao",
+      "az": "Martuni",
+      "ru": "Мартунинский",
+      "en": "Martuni",
+      "c79": [
+        "Мартунинский район"
+      ],
+      "c89": [
+        "Мартунинский район"
+      ],
+      "shapes": [
+        "Khojavend District"
+      ],
+      "fit": "approx",
+      "with": "hadrut"
+    },
+    {
+      "id": "mardakert",
+      "kind": "raion",
+      "region": "nkao",
+      "az": "Mardakert",
+      "ru": "Мардакертский",
+      "en": "Mardakert",
+      "c79": [
+        "Мардакертский район"
+      ],
+      "c89": [
+        "Мардакертский район"
+      ],
+      "shapes": [
+        "Tartar District"
+      ],
+      "fit": "approx",
+      "with": "mir-bashir",
+      "note": [
+        "1991-ci ildə Ağdərə adlandırılıb, 1992-də ləğv edilib: çox hissəsi Tərtərə, 23 kəndi Kəlbəcərə verilib. Xəritədə Mir Bəşirlə bir yerdə, bugünkü Tərtərin sərhədində çəkilib.",
+        "В 1991 г. переименован в Агдеринский, в 1992 г. упразднён: большая часть отошла Тертеру, 23 села — Кельбаджару. На карте показан вместе с Мир-Баширским в границах нынешнего Тертера.",
+        "Renamed Aghdara in 1991 and abolished in 1992: most of it went to Tartar, 23 villages to Kelbajar. The map draws it with Mir-Bashir within today's Tartar."
+      ]
+    },
+    {
+      "id": "shusha",
+      "kind": "raion",
+      "region": "nkao",
+      "az": "Şuşa",
+      "ru": "Шушинский",
+      "en": "Shusha",
+      "c79": [
+        "Шушинский район"
+      ],
+      "c89": [
+        "Шушинский район"
+      ],
+      "shapes": [
+        "Shusha District",
+        "Shusha City"
+      ],
+      "fit": "same",
+      "note": [
+        "Şuşa şəhəri ilə birlikdə.",
+        "Вместе с городом Шуша.",
+        "With the town of Shusha."
+      ]
+    }
+  ],
+  "gaps": [
+    {
+      "shape": "Hajigabul District",
+      "note": [
+        "Hacıqabul rayonu 1990-cı ildə 1959-da ləğv edilmiş Qazıməmməd rayonunun torpaqlarında yaradılıb. 1979–1989-da bu torpaqlar qonşu rayonlar arasında bölünmüşdü (Əli Bayramlı şəhər sovetində kənd əhalisi yox idi); hansında nə qədər, müəyyən etməmişik.",
+        "Аджикабульский район создан в 1990 г. на землях упразднённого в 1959 г. Кази-Магомедского района. В 1979–1989 гг. эти земли были поделены между соседними районами (в Али-Байрамлинском горсовете сельского населения не было); как именно, мы не установили.",
+        "The Hajigabul district was made in 1990 on the lands of the Kazi-Magomed raion, abolished in 1959. In 1979–1989 that land was shared among neighbouring raions (the Ali-Bayramli city council had no rural people); how, we have not established."
+      ]
+    },
+    {
+      "shape": "Kangarli District",
+      "note": [
+        "Kəngərli rayonu 2004-cü ildə Babək və Şərur (sovet dövründə İliç) rayonlarının torpaqlarından yaradılıb: 1999–2009 arasında hər ikisinin əhalisi azalıb. Hansı hissənin haradan gəldiyini müəyyən etməmişik.",
+        "Кенгерлинский район создан в 2004 г. из земель Бабекского и Шарурского (в советское время Ильичёвского) районов: население обоих между 1999 и 2009 гг. уменьшилось. Какая часть откуда, мы не установили.",
+        "The Kangarli district was made in 2004 from the Babek and Sharur (Soviet Ilyichevsk) districts: both lost people between 1999 and 2009. Which part came from which, we have not established."
+      ]
+    }
+  ]
+}

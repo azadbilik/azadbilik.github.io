@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sovet rayonları · Azad Bilik</title>
+<meta name="description" content="Azərbaycan SSR-in rayonları və şəhər sovetləri 1979 və 1989-cu il siyahıyaalmalarında: əhali, sıxlıq, dəyişmə, şəhər əhalisi. The raions of the Azerbaijan SSR at the 1979 and 1989 censuses.">
+<meta name="theme-color" content="#F4EFE6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14100D" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://azadbilik.org/atlas/rayonlar/">
+<meta property="og:title" content="Sovet rayonları · Soviet raions, 1979–1989">
+<meta property="og:description" content="Azərbaycan SSR-in rayonları 1979 və 1989-cu il siyahıyaalmalarında.">
+<meta property="og:image" content="https://azadbilik.org/atlas/rayonlar/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+<link rel="stylesheet" href="/shared/story-map.css">
+<style>
+  .controls { padding: 1rem 1.5rem; border-bottom: 1px solid var(--rule); display: grid; gap: .6rem; }
+  .seg { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--rule); border-radius: 3px; padding: 2px; }
+  .seg.years { grid-template-columns: repeat(2, 1fr); }
+  .seg button { padding: .35rem .3rem; border-radius: 2px; font-size: .8125rem; color: var(--muted); }
+  .seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+  .seg button[disabled] { opacity: .4; cursor: default; }
+  .check { display: flex; align-items: center; gap: .5rem; font-size: .8125rem; color: var(--muted); cursor: pointer; }
+  .check input { accent-color: var(--accent); }
+  .caveat { margin: 1rem 1.5rem 0; padding: .6rem .75rem; border: 1px dashed color-mix(in srgb, var(--accent) 55%, transparent); border-radius: 4px; font-size: .8125rem; }
+  .totals { padding: 1rem 1.5rem 0; display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; }
+  .totals div { display: grid; }
+  .totals b { font: 400 1.5rem/1.1 var(--serif); font-variant-numeric: tabular-nums; }
+  .totals small { font-size: .75rem; color: var(--muted); }
+  .sec { padding: 1rem 1.5rem .35rem; font: 500 .75rem var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .rank ol { list-style: none; padding: 0 0 .5rem; }
+  .rank li button { display: grid; grid-template-columns: .7rem 1fr auto; gap: .6rem; align-items: center; width: 100%; text-align: left; padding: .3rem 1.5rem; font-size: .875rem; }
+  .rank li button:hover { background: var(--rule); }
+  .rank i { width: .7rem; height: .7rem; border-radius: 2px; }
+  .rank .v { font-variant-numeric: tabular-nums; color: var(--muted); font-size: .8125rem; }
+  .rank .ap { color: var(--muted); font-size: .75rem; margin-left: .25rem; }
+  .unit { padding: 1rem 0; }
+  .back { display: block; padding: 0 1.5rem .75rem; font-size: .8125rem; color: var(--muted); }
+  .back:hover { color: var(--ink); }
+  .unit .title { padding: 0 1.5rem; font: 400 1.5rem/1.15 var(--serif); }
+  .unit .where { padding: .25rem 1.5rem 0; font-size: .8125rem; color: var(--muted); }
+  .unit table { width: calc(100% - 3rem); margin: .75rem 1.5rem 0; border-collapse: collapse; font-size: .875rem; font-variant-numeric: tabular-nums; }
+  .unit th { text-align: left; font-weight: 500; color: var(--muted); font-size: .75rem; padding: .25rem 0; border-bottom: 1px solid var(--rule); }
+  .unit td { padding: .3rem 0; border-bottom: 1px solid var(--rule); }
+  .unit td:not(:first-child), .unit th:not(:first-child) { text-align: right; }
+  .unit .notes { padding: .75rem 1.5rem 0; display: grid; gap: .5rem; font-size: .8125rem; }
+  .unit .notes b { font-weight: 500; }
+  .badge { display: inline-block; margin: .5rem 1.5rem 0; padding: .05rem .4rem; border: 1px dashed var(--muted); border-radius: 3px; font-size: .75rem; color: var(--muted); }
+  .up { color: var(--accent); } .down { color: var(--second); }
+  .legend { min-width: 13rem; }
+  .legend > span { font-weight: 500; }
+  .legend .ramp { display: flex; }
+  .legend .ramp span { flex: 1; height: .6rem; }
+  .legend .ticks { display: flex; justify-content: space-between; font-size: .625rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .legend .row { display: flex; align-items: center; gap: .4rem; color: var(--muted); }
+  .legend .row i { width: .9rem; height: .6rem; flex: none; }
+  .legend .row i.gap { background: var(--rule); border: 1px dashed var(--muted); }
+  .legend .row i.approx { border: 1.5px dashed var(--ink); }
+  .legend .row i.now { border-top: 1px solid var(--ink); height: 0; }
+  @media (max-width: 48rem) { .controls, .totals { padding-inline: 1rem; } .caveat { margin-inline: 1rem; } .sec, .rank li button, .back, .unit .title, .unit .where, .unit .notes { padding-inline: 1rem; } .badge { margin-inline: 1rem; } .unit table { margin-inline: 1rem; width: calc(100% - 2rem); } .legend { min-width: 0; } }
+</style>
+</head>
+<body>
+<div id="map" role="region" aria-label="Xəritə"></div>
+
+<aside class="panel">
+  <div class="head">
+    <div class="top"><a class="brand" href="/" data-keep-lang><svg viewBox="0 0 512 512" aria-hidden="true"><g class="star"><rect x="126" y="126" width="260" height="260"/><polygon points="256,72 440,256 256,440 72,256"/></g><polygon class="gem" points="256,196 316,256 256,316 196,256"/></svg>Azad Bilik</a><nav><a href="/atlas/" data-keep-lang>Atlas</a><span class="langs" role="group" aria-label="Dil · Язык · Language"><button type="button" data-lang="az">AZ</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="en">EN</button></span></nav></div>
+    <h1 data-i18n="title">Sovet rayonları</h1>
+    <p class="sub" data-i18n="sub">Azərbaycan SSR, 1979 və 1989-cu il siyahıyaalmaları</p>
+  </div>
+  <div class="body" id="body">
+    <div class="controls">
+      <div class="seg" role="group" id="measures"></div>
+      <div class="seg years" role="group" id="years"></div>
+      <label class="check"><input type="checkbox" id="today"> <span data-i18n="todayBox">Bugünkü rayon sərhədləri</span></label>
+    </div>
+    <div id="side" aria-live="polite"></div>
+  </div>
+</aside>
+
+<div class="legend" id="legend"></div>
+
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script>
+(() => {
+const dark = matchMedia('(prefers-color-scheme: dark)').matches;
+const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+const still = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+const LANGS = ['az', 'ru', 'en'];
+const LI = { az: 0, ru: 1, en: 2 };
+let lang = (() => {
+  const q = new URLSearchParams(location.search).get('lang');
+  if (LANGS.includes(q)) return q;
+  try { const s = localStorage.getItem('lang'); if (LANGS.includes(s)) return s; } catch {}
+  return 'az';
+})();
+const T = {
+  az: { doc: 'Sovet rayonları · Azad Bilik', title: 'Sovet rayonları', sub: 'Azərbaycan SSR, 1979 və 1989-cu il siyahıyaalmaları', todayBox: 'Bugünkü rayon sərhədləri',
+    pop: 'Əhali', density: 'Sıxlıq', change: 'Dəyişmə', urban: 'Şəhər', perKm: 'nəfər/km²', changeLong: 'Dəyişmə 1979–1989', urbanLong: 'Şəhər əhalisi, %',
+    caveat: 'Hər sovet rayonu onun torpağını əhatə edən bugünkü rayon(lar) ilə çəkilib. Qırıq xətli sərhəd: torpaq sonradan bir az dəyişib. Boz: bugünkü rayon, torpağının sovet rayonları arasında necə bölündüyünü müəyyən etməmişik.',
+    republic: 'Azərbaycan SSR', units: 'Rayonlar və şəhərlər', back: '← Bütün rayonlar', today: 'Bu gün', approx: 'təxmini sərhəd', year: 'İl', people: 'Əhali', urbanCol: 'Şəhər', gap: 'boz: bölgüsü bilinmir', legendApprox: 'təxmini sərhəd', legendToday: 'bugünkü rayonlar', city: 'şəhər',
+    note: 'Rəqəmlər: Ümumittifaq siyahıyaalmaları, 1979 və 1989, faktiki əhali (Demoskop Weekly cədvəlləri). Sərhədlər: bugünkü rayonlar (geoBoundaries, CC BY-SA 3.0), sovet rayonlarına Azad Bilik uyğunlaşdırıb. Hər iki ilin cəmi respublikanın cəminə bərabərdir.' },
+  ru: { doc: 'Советские районы · Azad Bilik', title: 'Советские районы', sub: 'Азербайджанская ССР, переписи 1979 и 1989 гг.', todayBox: 'Границы нынешних районов',
+    pop: 'Население', density: 'Плотность', change: 'Изменение', urban: 'Город', perKm: 'чел./км²', changeLong: 'Изменение 1979–1989', urbanLong: 'Городское население, %',
+    caveat: 'Каждый советский район показан нынешним районом (или районами), покрывающим его землю. Пунктирная граница: земля потом немного менялась. Серым: нынешний район, чья земля была поделена между советскими районами неустановленным образом.',
+    republic: 'Азербайджанская ССР', units: 'Районы и города', back: '← Все районы', today: 'Сегодня', approx: 'граница приблизительная', year: 'Год', people: 'Население', urbanCol: 'Город', gap: 'серым: раздел неизвестен', legendApprox: 'граница приблизительная', legendToday: 'нынешние районы', city: 'город',
+    note: 'Цифры: всесоюзные переписи 1979 и 1989 гг., наличное население (таблицы Демоскоп Weekly). Границы: нынешние районы (geoBoundaries, CC BY-SA 3.0), сопоставленные с советскими районами Azad Bilik. Сумма за каждый год равна итогу по республике.' },
+  en: { doc: 'Soviet raions · Azad Bilik', title: 'Soviet raions', sub: 'The Azerbaijan SSR at the 1979 and 1989 censuses', todayBox: "Today's district borders",
+    pop: 'People', density: 'Density', change: 'Change', urban: 'Urban', perKm: 'people/km²', changeLong: 'Change 1979–1989', urbanLong: 'Urban population, %',
+    caveat: "Each Soviet raion is drawn as the district or districts of today that cover its land. A dashed border: the land changed a little later. Grey: a district of today whose land was shared among Soviet raions in a way we have not established.",
+    republic: 'Azerbaijan SSR', units: 'Raions and cities', back: '← All raions', today: 'Today', approx: 'approximate border', year: 'Year', people: 'People', urbanCol: 'Urban', gap: 'grey: how it was shared is unknown', legendApprox: 'approximate border', legendToday: "today's districts", city: 'city',
+    note: "Figures: the all-Union censuses of 1979 and 1989, present population (Demoskop Weekly's tables). Borders: today's districts (geoBoundaries, CC BY-SA 3.0), matched to the Soviet raions by Azad Bilik. Each year's units add up to the republic's total." },
+};
+const t = (k) => T[lang][k];
+const L = (p) => p[lang] ?? p.az;
+const fmt = (n) => n == null ? '–' : n.toLocaleString(lang === 'en' ? 'en' : lang === 'ru' ? 'ru' : 'az');
+const pct = (n) => `${n > 0 ? '+' : n < 0 ? '−' : ''}${Math.abs(n).toFixed(1).replace('.', lang === 'en' ? '.' : ',')}%`;
+
+const SEQ = dark ? ['#2B211B', '#4A2C24', '#6B3129', '#8E3430', '#B33A37', '#D45A55', '#F08A80'] : ['#F2E6DA', '#EACAB6', '#E0A88E', '#D2836A', '#BF5C48', '#A6362E', '#7A1B1E'];
+const DIV = dark ? ['#2C5A6E', '#3F7D93', '#5E9DB0', '#3A322B', '#B5574F', '#D27063', '#F08A80'] : ['#1F5C73', '#4A8AA0', '#9CC3D0', '#EFE6DA', '#E5A58F', '#C9634E', '#9A2A25'];
+const SCALES = {
+  pop: { breaks: [20e3, 40e3, 60e3, 80e3, 100e3, 150e3], ticks: ['', '20k', '40k', '60k', '80k', '100k', '150k+'] },
+  density: { breaks: [25, 50, 75, 100, 150, 300], ticks: ['', '25', '50', '75', '100', '150', '300+'] },
+  change: { breaks: [-10, -2, 2, 10, 20, 30], ticks: ['', '−10%', '−2%', '+2%', '+10%', '+20%', '+30%'] },
+  urban: { breaks: [10, 20, 30, 40, 60, 80], ticks: ['', '10', '20', '30', '40', '60', '80+'] },
+};
+const MEASURES = ['pop', 'density', 'change', 'urban'];
+const params = new URLSearchParams(location.search);
+let measure = MEASURES.includes(params.get('m')) ? params.get('m') : 'pop';
+let year = params.get('y') === '1979' ? '1979' : '1989';
+let units = [], geo = null, selected = null, showToday = false;
+const BOUNDS = [[44.7, 38.35], [50.65, 41.95]];
+
+const value = (u, m = measure, y = year) => {
+  if (u.kind === 'gap') return null;
+  if (m === 'pop') return u.pop[y];
+  if (m === 'density') return u.pop[y] / u.area;
+  if (m === 'change') return (u.pop['1989'] / u.pop['1979'] - 1) * 100;
+  return u.urban[y] / u.pop[y] * 100;
+};
+const colors = () => measure === 'change' ? DIV : SEQ;
+const colorOf = (v) => v == null ? null : colors()[SCALES[measure].breaks.filter((b) => v >= b).length];
+const show = (u, m = measure) => {
+  const v = value(u, m);
+  if (v == null) return '';
+  if (m === 'pop') return fmt(v);
+  if (m === 'density') return fmt(Math.round(v));
+  if (m === 'change') return pct(v);
+  return `${Math.round(v)}%`;
+};
+
+const map = new maplibregl.Map({
+  container: 'map', style: `https://tiles.openfreemap.org/styles/${dark ? 'dark' : 'positron'}`,
+  bounds: BOUNDS, minZoom: 5, maxZoom: 11,
+  attributionControl: { compact: true, customAttribution: '<a href="https://www.demoscope.ru/weekly/ssp/sng89_reg1.php">Demoskop Weekly</a> · <a href="https://www.geoboundaries.org">geoBoundaries</a>' },
+});
+map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-right');
+const tip = new maplibregl.Popup({ closeButton: false, closeOnClick: false, offset: 8 });
+const phone = () => matchMedia('(max-width: 48rem)').matches;
+const pad = () => phone() ? { top: 60, right: 16, left: 16, bottom: document.querySelector('.panel').offsetHeight + 16 } : { top: 32, right: 32, bottom: 32, left: 27 * 16 + 32 };
+const labelExpr = () => ['coalesce', ['get', `name:${lang}`], ['get', lang === 'ru' ? 'name' : 'name:latin'], ['get', 'name']];
+map.on('style.load', () => {
+  for (const l of map.getStyle().layers) {
+    if (l.type === 'background') map.setPaintProperty(l.id, 'background-color', css('--land'));
+    if (l.type === 'fill' && /water|ocean|lake/.test(l.id)) map.setPaintProperty(l.id, 'fill-color', css('--water'));
+    if (l.type === 'symbol' && l.layout?.['text-field']) map.setLayoutProperty(l.id, 'text-field', labelExpr());
+  }
+});
+map.on('load', async () => {
+  const [g, e, now] = await Promise.all(['data/raions.geojson', 'data/edges.geojson', '../ehali/data/units.geojson'].map((f) => fetch(f).then((r) => r.json())));
+  geo = g;
+  g.features.forEach((f, k) => { f.id = k; });
+  e.features.forEach((f) => { f.properties.fit = g.features.find((x) => x.properties.id === f.properties.id).properties.fit ?? 'gap'; });
+  units = g.features.map((f) => ({ ...f.properties, fid: f.id }));
+  now.features = now.features.filter((f) => f.properties.country === 'az');
+  map.fitBounds(BOUNDS, { padding: pad(), duration: 0 });
+  document.querySelector('.maplibregl-ctrl-attrib')?.classList.remove('maplibregl-compact-show');
+  const firstSymbol = map.getStyle().layers.find((l) => l.type === 'symbol')?.id;
+  const ink = css('--ink');
+  map.addSource('r', { type: 'geojson', data: g });
+  map.addSource('edges', { type: 'geojson', data: e });
+  map.addSource('today', { type: 'geojson', data: now });
+  map.addLayer({ id: 'r-fill', type: 'fill', source: 'r', paint: { 'fill-color': ['coalesce', ['feature-state', 'color'], css('--rule')], 'fill-opacity': ['case', ['==', ['get', 'kind'], 'gap'], .5, ['boolean', ['feature-state', 'hover'], false], .95, .82] } }, firstSymbol);
+  map.addLayer({ id: 'today', type: 'line', source: 'today', layout: { visibility: 'none' }, paint: { 'line-color': ink, 'line-width': .6, 'line-opacity': .5, 'line-dasharray': [1, 2] } }, firstSymbol);
+  map.addLayer({ id: 'edges', type: 'line', source: 'edges', filter: ['==', ['get', 'fit'], 'same'], paint: { 'line-color': css('--paper'), 'line-width': .9 } }, firstSymbol);
+  map.addLayer({ id: 'edges-approx', type: 'line', source: 'edges', filter: ['!=', ['get', 'fit'], 'same'], paint: { 'line-color': ink, 'line-width': 1, 'line-opacity': .75, 'line-dasharray': [3, 2] } }, firstSymbol);
+  map.addLayer({ id: 'r-sel', type: 'line', source: 'r', paint: { 'line-color': ink, 'line-width': ['case', ['boolean', ['feature-state', 'sel'], false], 2.2, 0] } }, firstSymbol);
+  let hovered = null;
+  map.on('mousemove', 'r-fill', (ev) => {
+    map.getCanvas().style.cursor = 'pointer';
+    const f = ev.features[0], u = units[f.id];
+    if (hovered !== f.id) { if (hovered != null) map.setFeatureState({ source: 'r', id: hovered }, { hover: false }); hovered = f.id; map.setFeatureState({ source: 'r', id: hovered }, { hover: true }); }
+    tip.setLngLat(ev.lngLat).setHTML(`<strong>${esc(L(u))}</strong>${u.kind === 'gap' ? ` · ${t('gap')}` : ` · ${show(u)}`}`).addTo(map);
+  });
+  map.on('mouseleave', 'r-fill', () => { map.getCanvas().style.cursor = ''; tip.remove(); if (hovered != null) map.setFeatureState({ source: 'r', id: hovered }, { hover: false }); hovered = null; });
+  map.on('click', 'r-fill', (ev) => select(units[ev.features[0].id].id));
+  if (params.get('r') && units.some((u) => u.id === params.get('r'))) select(params.get('r'));
+  else draw();
+});
+function bboxOf(f) { let b = [180, 90, -180, -90]; for (const p of f.geometry.coordinates) for (const [x, y] of p[0]) b = [Math.min(b[0], x), Math.min(b[1], y), Math.max(b[2], x), Math.max(b[3], y)]; return [[b[0], b[1]], [b[2], b[3]]]; }
+function select(id) {
+  selected = id;
+  for (const u of units) map.setFeatureState({ source: 'r', id: u.fid }, { sel: u.id === id });
+  if (id) { const u = units.find((x) => x.id === id); map.fitBounds(bboxOf(geo.features[u.fid]), { padding: pad(), maxZoom: 9, duration: still() ? 0 : 700 }); }
+  draw();
+  document.getElementById('body').scrollTop = 0;
+}
+function paint() {
+  for (const u of units) map.setFeatureState({ source: 'r', id: u.fid }, { color: colorOf(value(u)) });
+}
+function drawControls() {
+  document.getElementById('measures').innerHTML = MEASURES.map((m) => `<button type="button" data-m="${m}" aria-pressed="${m === measure}">${t(m)}</button>`).join('');
+  document.getElementById('years').innerHTML = ['1979', '1989'].map((y) => `<button type="button" data-y="${y}" aria-pressed="${measure !== 'change' && y === year}"${measure === 'change' ? ' disabled' : ''}>${y}</button>`).join('');
+  document.querySelectorAll('[data-m]').forEach((b) => b.onclick = () => { measure = b.dataset.m; draw(); });
+  document.querySelectorAll('[data-y]').forEach((b) => b.onclick = () => { year = b.dataset.y; draw(); });
+}
+function drawLegend() {
+  const s = SCALES[measure], c = colors();
+  const head = measure === 'pop' ? `${t('pop')}, ${year}` : measure === 'density' ? `${t('density')}, ${t('perKm')}, ${year}` : measure === 'change' ? t('changeLong') : `${t('urbanLong')}, ${year}`;
+  document.getElementById('legend').innerHTML = `<span>${head}</span>
+    <div class="ramp">${c.map((x) => `<span style="background:${x}"></span>`).join('')}</div>
+    <div class="ticks">${s.ticks.slice(1).map((x) => `<span>${x}</span>`).join('')}</div>
+    <div class="row"><i class="approx"></i>${t('legendApprox')}</div>
+    <div class="row"><i class="gap"></i>${t('gap')}</div>
+    ${showToday ? `<div class="row"><i class="now" style="border-top-style:dotted"></i>${t('legendToday')}</div>` : ''}`;
+}
+function drawSide() {
+  const el = document.getElementById('side');
+  const u = selected && units.find((x) => x.id === selected);
+  if (u) {
+    const today = u.kind === 'gap' ? '' : `<p class="where">${t('today')}: ${u.today.map((x) => esc(x[lang] ?? x.az)).join(', ')}</p>`;
+    const rows = u.kind === 'gap' ? '' : `<table><thead><tr><th>${t('year')}</th><th>${t('people')}</th><th>${t('density')}</th><th>${t('urbanCol')}</th></tr></thead><tbody>
+      ${['1979', '1989'].map((y) => `<tr><td>${y}</td><td>${fmt(u.pop[y])}</td><td>${fmt(Math.round(u.pop[y] / u.area))}</td><td>${Math.round(u.urban[y] / u.pop[y] * 100)}%</td></tr>`).join('')}
+      <tr><td>${t('change')}</td><td class="${u.pop['1989'] >= u.pop['1979'] ? 'up' : 'down'}">${pct((u.pop['1989'] / u.pop['1979'] - 1) * 100)}</td><td></td><td></td></tr></tbody></table>`;
+    const members = u.members ?? [];
+    const split = members.length > 1 ? `<table><thead><tr><th></th><th>1979</th><th>1989</th></tr></thead><tbody>${members.map((m) => `<tr><td>${esc(L(m))}</td><td>${fmt(m.pop['1979'])}</td><td>${fmt(m.pop['1989'])}</td></tr>`).join('')}</tbody></table>` : '';
+    const notes = u.kind === 'gap' ? [u.note[LI[lang]]] : members.filter((m) => m.note).map((m) => (members.length > 1 ? `<b>${esc(L(m))}.</b> ` : '') + esc(m.note[LI[lang]]));
+    el.innerHTML = `<div class="unit"><button type="button" class="back" id="back">${t('back')}</button>
+      <h2 class="title">${esc(L(u))}${u.kind === 'city' ? ` <small class="k" style="font:400 .8125rem var(--sans);color:var(--muted)">${t('city')}</small>` : ''}</h2>${today}
+      ${u.fit === 'approx' ? `<span class="badge">${t('approx')}</span>` : ''}${rows}${split}
+      ${notes.length ? `<div class="notes">${notes.map((n) => `<p>${u.kind === 'gap' ? esc(n) : n}</p>`).join('')}</div>` : ''}</div>
+      <p class="note">${t('note')}</p>`;
+    el.querySelector('#back').onclick = () => select(null);
+    return;
+  }
+  const drawn = units.filter((x) => x.kind !== 'gap');
+  const sum = (y) => drawn.reduce((a, x) => a + x.pop[y], 0);
+  const list = [...units].sort((a, b) => (value(b) ?? -Infinity) - (value(a) ?? -Infinity));
+  el.innerHTML = `<p class="caveat">${t('caveat')}</p>
+    <div class="totals"><div><small>${t('republic')}, 1979</small><b>${fmt(sum('1979'))}</b></div><div><small>1989</small><b>${fmt(sum('1989'))}</b></div></div>
+    <div class="rank"><h2 class="sec">${t('units')}</h2><ol>${list.map((x) => `<li><button type="button" data-r="${x.id}"><i style="background:${colorOf(value(x)) ?? css('--rule')}"></i><span>${esc(L(x))}${x.fit === 'approx' ? '<span class="ap">*</span>' : ''}</span><span class="v">${x.kind === 'gap' ? '–' : show(x)}</span></button></li>`).join('')}</ol></div>
+    <p class="note">* ${t('approx')}. ${t('note')}</p>`;
+  el.querySelectorAll('[data-r]').forEach((b) => b.onclick = () => select(b.dataset.r));
+}
+function keepUrl() {
+  const q = new URLSearchParams();
+  if (lang !== 'az') q.set('lang', lang);
+  if (measure !== 'pop') q.set('m', measure);
+  if (year !== '1989' && measure !== 'change') q.set('y', year);
+  if (selected) q.set('r', selected);
+  history.replaceState(null, '', `${location.pathname}${q.size ? '?' + q : ''}`);
+}
+function draw() { drawControls(); drawLegend(); if (!units.length) return; paint(); drawSide(); keepUrl(); }
+document.getElementById('today').onchange = (ev) => { showToday = ev.target.checked; map.setLayoutProperty('today', 'visibility', showToday ? 'visible' : 'none'); drawLegend(); };
+document.addEventListener('keydown', (ev) => { if (ev.key === 'Escape' && selected) select(null); });
+function applyLang() {
+  document.documentElement.lang = lang;
+  document.title = t('doc');
+  document.querySelectorAll('[data-i18n]').forEach((el) => el.textContent = t(el.dataset.i18n));
+  document.querySelectorAll('[data-lang]').forEach((b) => b.setAttribute('aria-pressed', b.dataset.lang === lang));
+  document.querySelectorAll('[data-keep-lang]').forEach((a) => { const u = new URL(a.getAttribute('href'), location.href); if (lang === 'az') u.searchParams.delete('lang'); else u.searchParams.set('lang', lang); a.href = u.pathname + u.search; });
+}
+applyLang();
+draw();
+document.querySelectorAll('[data-lang]').forEach((b) => b.onclick = () => {
+  lang = b.dataset.lang;
+  try { localStorage.setItem('lang', lang); } catch {}
+  applyLang(); draw();
+  if (map.getStyle()) for (const l of map.getStyle().layers) if (l.type === 'symbol' && l.layout?.['text-field']) map.setLayoutProperty(l.id, 'text-field', labelExpr());
+});
+})();
+</script>
+</body>
+</html>
