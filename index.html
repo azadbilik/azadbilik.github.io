@@ -18,6 +18,10 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preload" href="fonts/literata-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="fonts/fonts.css">
+<script>
+  // ?lang=, else the visitor's last choice on azadbilik.org (shared with the map and the gallery), else Azerbaijani; set before paint
+  (() => { const L = ['az', 'ru', 'en']; let l = new URLSearchParams(location.search).get('lang'); if (!L.includes(l)) { try { l = localStorage.getItem('lang'); } catch {} } if (L.includes(l)) document.documentElement.lang = l; })();
+</script>
 <style>
   :root {
     --paper: #F4EFE6;
@@ -52,7 +56,12 @@
   a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.22em; text-decoration-color: var(--rule); transition: text-decoration-color .15s; }
   a:hover { text-decoration-color: currentColor; }
   a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
-  [lang="en"] { color: var(--muted); }
+  /* One language at a time: every text is written three times, the page's language shows */
+  html:not([lang="az"]) [data-l="az"], html:not([lang="ru"]) [data-l="ru"], html:not([lang="en"]) [data-l="en"] { display: none !important; }
+  .langs { display: inline-flex; gap: .15rem; }
+  .langs button { font: inherit; font-size: .75rem; letter-spacing: .04em; padding: .1rem .3rem; border: 0; border-radius: 2px; background: none; color: var(--muted); cursor: pointer; }
+  .langs button[aria-pressed="true"] { color: var(--ink); box-shadow: inset 0 -1px currentColor; }
+  .langs button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
   .wrap { max-width: 76rem; margin: 0 auto; padding: 0 var(--gutter); }
 
@@ -83,13 +92,10 @@
   /* Sections: a label in the margin, the content beside it */
   section { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: 1.5rem; border-top: 1px solid var(--rule); padding-block: 2.25rem 4rem; }
   .label { grid-column: 1 / 4; font-size: .75rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; padding-top: .35rem; }
-  .label span { display: block; }
   .body { grid-column: 4 / 12; }
   @media (max-width: 52rem) {
     section { display: block; padding-block: 1.5rem 3rem; }
     .label { margin-bottom: 1.75rem; }
-    .label span { display: inline; }
-    .label span + span::before { content: ' · '; }
   }
 
   /* Project */
@@ -102,14 +108,12 @@
   .status { align-self: start; margin-top: .6rem; display: inline-flex; align-items: center; font-size: .8125rem; color: var(--muted); white-space: nowrap; }
   .status::before { content: ''; width: .4375rem; height: .4375rem; margin-right: .5rem; background: var(--accent); transform: rotate(45deg); }
   .project .desc { grid-column: 1 / -1; margin-top: 1rem; max-width: 40rem; font-size: 1.0625rem; }
-  .project .desc [lang="en"] { display: block; margin-top: .35rem; font-size: 1rem; }
   .facts { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: .5rem 2.5rem; margin-top: 2rem; padding: 0; list-style: none; }
   .facts li { font: 300 1.5rem/1.2 var(--serif); font-variant-numeric: lining-nums tabular-nums; }
   .facts small { display: block; margin-top: .3rem; font: 400 .8125rem/1.4 var(--sans); color: var(--muted); }
 
   .next { margin-top: 3.5rem; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem 1.5rem; }
   .next li { border-top: 1px solid var(--rule); padding-top: .75rem; font: 400 1.125rem/1.3 var(--serif); }
-  .next [lang="en"] { display: block; font: 400 .8125rem/1.5 var(--sans); }
   .next-head { margin-top: 3.5rem; font-size: .8125rem; color: var(--muted); }
   .next-head + .next { margin-top: 1rem; }
 
@@ -119,7 +123,6 @@
   .principles li::before { content: counter(p, decimal-leading-zero); font: 400 .8125rem/2.1 var(--sans); color: var(--muted); font-variant-numeric: tabular-nums; }
   .principles strong { display: block; font: 400 1.375rem/1.3 var(--serif); letter-spacing: -0.01em; }
   .principles p { margin-top: .4rem; }
-  .principles p [lang="en"] { display: block; margin-top: .2rem; }
 
   footer { border-top: 1px solid var(--rule); padding-block: 1.75rem 2.5rem; display: flex; flex-wrap: wrap; justify-content: space-between; gap: .75rem 2rem; font-size: .8125rem; color: var(--muted); }
   footer a { color: var(--ink); }
@@ -140,82 +143,101 @@
       <svg viewBox="0 0 512 512" aria-hidden="true"><g class="star"><rect x="126" y="126" width="260" height="260"/><polygon points="256,72 440,256 256,440 72,256"/></g><polygon class="gem" points="256,196 316,256 256,316 196,256"/></svg>
       Azad Bilik
     </a>
-    <nav><a href="https://kitabxana.az">Kitabxana</a><a href="/xerite/">Xəritə</a><a href="/qalereya/">Qalereya</a><a href="https://github.com/azadbilik">GitHub</a></nav>
+    <nav><a href="https://kitabxana.az" data-kx><span data-l="az">Kitabxana</span><span data-l="ru">Библиотека</span><span data-l="en">Library</span></a><a href="/xerite/" data-keep-lang><span data-l="az">Xəritə</span><span data-l="ru">Карта</span><span data-l="en">Map</span></a><a href="/qalereya/" data-keep-lang><span data-l="az">Qalereya</span><span data-l="ru">Галерея</span><span data-l="en">Gallery</span></a><a href="https://github.com/azadbilik">GitHub</a><span class="langs" role="group" aria-label="Dil · Язык · Language"><button type="button" data-lang="az">AZ</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="en">EN</button></span></nav>
   </header>
 
   <main>
     <div class="hero">
-      <h1>Azərbaycan mədəniyyəti və tarixi haqqında açıq bilik.</h1>
-      <p lang="en">Open knowledge about Azerbaijani culture and history.</p>
+      <h1><span data-l="az">Azərbaycan mədəniyyəti və tarixi haqqında açıq bilik.</span><span data-l="ru">Открытые знания об азербайджанской культуре и истории.</span><span data-l="en">Open knowledge about Azerbaijani culture and history.</span></h1>
+      <p><span data-l="az">Hamı üçün pulsuz, mənbəsi göstərilmiş, kodu açıq.</span><span data-l="ru">Бесплатно для всех, с указанием источников, с открытым кодом.</span><span data-l="en">Free for everyone, sourced, and open source.</span></p>
     </div>
 
     <section aria-labelledby="projects">
-      <h2 class="label" id="projects"><span>Layihələr</span><span lang="en">Projects</span></h2>
+      <h2 class="label" id="projects"><span data-l="az">Layihələr</span><span data-l="ru">Проекты</span><span data-l="en">Projects</span></h2>
       <div class="body">
         <article class="project">
-          <h2><a href="https://kitabxana.az">Kitabxana</a></h2>
-          <span class="status">Açıqdır&nbsp;·&nbsp;<span lang="en">Live</span></span>
-          <p class="desc">Azərbaycan ədəbiyyatının onlayn kitabxanası: klassik və müasir əsərlər, tərcümələr, mənbə nəşrlərin skanları. <span lang="en">An online library of Azerbaijani literature: classical and modern works, translations, and scans of the editions they come from.</span></p>
+          <h2><a href="https://kitabxana.az" data-kx><span data-l="az">Kitabxana</span><span data-l="ru">Библиотека</span><span data-l="en">Library</span></a></h2>
+          <span class="status"><span data-l="az">Açıqdır</span><span data-l="ru">Открыт</span><span data-l="en">Live</span></span>
+          <p class="desc"><span data-l="az">Azərbaycan ədəbiyyatının onlayn kitabxanası: klassik və müasir əsərlər, tərcümələr, mənbə nəşrlərin skanları.</span><span data-l="ru">Онлайн-библиотека азербайджанской литературы: классика и современность, переводы, сканы изданий, из которых взяты тексты.</span><span data-l="en">An online library of Azerbaijani literature: classical and modern works, translations, and scans of the editions they come from.</span></p>
           <ul class="facts">
-            <li>48 000+<small>əsər <span lang="en">· works</span></small></li>
-            <li>470+<small>müəllif <span lang="en">· authors</span></small></li>
-            <li>az · ru · en · fa<small>dillər <span lang="en">· languages</span></small></li>
+            <li>48 000+<small><span data-l="az">əsər</span><span data-l="ru">произведений</span><span data-l="en">works</span></small></li>
+            <li>470+<small><span data-l="az">müəllif</span><span data-l="ru">авторов</span><span data-l="en">authors</span></small></li>
+            <li>az · ru · en · fa<small><span data-l="az">dillər</span><span data-l="ru">языки</span><span data-l="en">languages</span></small></li>
           </ul>
         </article>
 
         <article class="project">
-          <h2><a href="/xerite/">Ədəbiyyat xəritəsi</a></h2>
-          <span class="status">Açıqdır&nbsp;·&nbsp;<span lang="en">Live</span></span>
-          <p class="desc">Kitabxana müəlliflərinin doğulduğu və vəfat etdiyi yerlər, əsrlər üzrə. <span lang="en">Where kitabxana's authors were born and died, century by century.</span></p>
+          <h2><a href="/xerite/" data-keep-lang><span data-l="az">Ədəbiyyat xəritəsi</span><span data-l="ru">Литературная карта</span><span data-l="en">Literary map</span></a></h2>
+          <span class="status"><span data-l="az">Açıqdır</span><span data-l="ru">Открыт</span><span data-l="en">Live</span></span>
+          <p class="desc"><span data-l="az">Kitabxana müəlliflərinin doğulduğu və vəfat etdiyi yerlər, əsrlər üzrə.</span><span data-l="ru">Где родились и умерли авторы библиотеки, век за веком.</span><span data-l="en">Where kitabxana's authors were born and died, century by century.</span></p>
           <ul class="facts">
-            <li>314<small>müəllif <span lang="en">· authors</span></small></li>
-            <li>149<small>yer <span lang="en">· places</span></small></li>
+            <li>314<small><span data-l="az">müəllif</span><span data-l="ru">авторов</span><span data-l="en">authors</span></small></li>
+            <li>149<small><span data-l="az">yer</span><span data-l="ru">мест</span><span data-l="en">places</span></small></li>
           </ul>
         </article>
 
         <article class="project">
-          <h2><a href="https://github.com/azadbilik/data">Məlumatlar</a></h2>
-          <span class="status">Açıqdır&nbsp;·&nbsp;<span lang="en">Live</span></span>
-          <p class="desc">Kitabxananın kataloqu açıq məlumat kimi: müəlliflər, kitablar, əsərlər, tərcümələr və yerlər, istənilən məqsəd üçün. <span lang="en">Kitabxana's catalogue as open data: authors, books, works, translations and places, free to use for anything.</span></p>
+          <h2><a href="https://github.com/azadbilik/data"><span data-l="az">Məlumatlar</span><span data-l="ru">Данные</span><span data-l="en">Open data</span></a></h2>
+          <span class="status"><span data-l="az">Açıqdır</span><span data-l="ru">Открыт</span><span data-l="en">Live</span></span>
+          <p class="desc"><span data-l="az">Kitabxananın və qalereyanın kataloqu açıq məlumat kimi: müəlliflər, kitablar, əsərlər, tərcümələr, yerlər, səhnələr və miniatürlər, istənilən məqsəd üçün.</span><span data-l="ru">Каталог библиотеки и галереи как открытые данные: авторы, книги, произведения, переводы, места, сцены и миниатюры — для любых целей.</span><span data-l="en">The library's and the gallery's catalogue as open data: authors, books, works, translations, places, scenes and miniatures, free to use for anything.</span></p>
           <ul class="facts">
-            <li>CSV<small>format <span lang="en">· format</span></small></li>
-            <li>6<small>cədvəl <span lang="en">· tables</span></small></li>
-            <li>CC0<small>lisenziya <span lang="en">· licence</span></small></li>
+            <li>CSV<small><span data-l="az">format</span><span data-l="ru">формат</span><span data-l="en">format</span></small></li>
+            <li>8<small><span data-l="az">cədvəl</span><span data-l="ru">таблиц</span><span data-l="en">tables</span></small></li>
+            <li>CC0<small><span data-l="az">lisenziya</span><span data-l="ru">лицензия</span><span data-l="en">licence</span></small></li>
           </ul>
         </article>
 
         <article class="project">
-          <h2><a href="/qalereya/">Qalereya</a></h2>
-          <span class="status">Açıqdır&nbsp;·&nbsp;<span lang="en">Live</span></span>
-          <p class="desc">Nizami və Füzulinin poemalarına beş əsr ərzində çəkilmiş miniatürlər, səhnə-səhnə, hər biri kitabxanadakı fəslinə bağlı; <a href="/qalereya/emalatxana/">emalatxanaların xəritəsi</a> ilə. <span lang="en">Five centuries of miniatures painted for Nizami's and Fuzuli's poems, scene by scene, each linked to its chapter in the library, and <a href="/qalereya/emalatxana/">a map of the workshops</a> where they were painted.</span></p>
+          <h2><a href="/qalereya/" data-keep-lang><span data-l="az">Qalereya</span><span data-l="ru">Галерея</span><span data-l="en">Gallery</span></a></h2>
+          <span class="status"><span data-l="az">Açıqdır</span><span data-l="ru">Открыт</span><span data-l="en">Live</span></span>
+          <p class="desc"><span data-l="az">Nizami və Füzulinin poemalarına beş əsr ərzində çəkilmiş miniatürlər, səhnə-səhnə, hər biri kitabxanadakı fəslinə bağlı; <a href="/qalereya/emalatxana/" data-keep-lang>emalatxanaların xəritəsi</a> ilə.</span><span data-l="ru">Пять веков миниатюр к поэмам Низами и Физули, сцена за сценой, каждая со ссылкой на свою главу в библиотеке, и <a href="/qalereya/emalatxana/" data-keep-lang>карта мастерских</a>, где они были написаны.</span><span data-l="en">Five centuries of miniatures painted for Nizami's and Fuzuli's poems, scene by scene, each linked to its chapter in the library, and <a href="/qalereya/emalatxana/" data-keep-lang>a map of the workshops</a> where they were painted.</span></p>
           <ul class="facts">
-            <li>782<small>miniatür <span lang="en">· miniatures</span></small></li>
-            <li>187<small>səhnə <span lang="en">· scenes</span></small></li>
-            <li>CC0 · PD<small>lisenziya <span lang="en">· licence</span></small></li>
+            <li>781<small><span data-l="az">miniatür</span><span data-l="ru">миниатюр</span><span data-l="en">miniatures</span></small></li>
+            <li>187<small><span data-l="az">səhnə</span><span data-l="ru">сцен</span><span data-l="en">scenes</span></small></li>
+            <li>CC0 · PD<small><span data-l="az">lisenziya</span><span data-l="ru">лицензия</span><span data-l="en">licence</span></small></li>
           </ul>
         </article>
 
-        <p class="next-head">Sırada <span lang="en">· Next</span></p>
+        <p class="next-head"><span data-l="az">Sırada</span><span data-l="ru">Далее</span><span data-l="en">Next</span></p>
         <ul class="next">
-          <li>Musiqi <span lang="en">Music</span></li>
+          <li><span data-l="az">Musiqi</span><span data-l="ru">Музыка</span><span data-l="en">Music</span></li>
         </ul>
       </div>
     </section>
 
     <section aria-labelledby="principles">
-      <h2 class="label" id="principles"><span>Prinsiplər</span><span lang="en">Principles</span></h2>
+      <h2 class="label" id="principles"><span data-l="az">Prinsiplər</span><span data-l="ru">Принципы</span><span data-l="en">Principles</span></h2>
       <ol class="principles body">
-        <li><div><strong>Kod açıqdır.</strong><p>Hər layihənin kodu GitHub-dadır: hər kəs baxa, istifadə edə və töhfə verə bilər. <span lang="en">Every project's code is on GitHub, for anyone to read, reuse and improve.</span></p></div></li>
-        <li><div><strong>Mənbə göstərilir.</strong><p>Hər mətn və təsvir götürüldüyü nəşrə bağlanır. <span lang="en">Every text and image links back to the edition it comes from.</span></p></div></li>
-        <li><div><strong>Hamı üçün pulsuz.</strong><p>Oxumaq üçün nə ödəniş, nə qeydiyyat lazımdır. <span lang="en">Free to read, with no payment and no sign-up.</span></p></div></li>
+        <li><div><strong><span data-l="az">Kod açıqdır.</span><span data-l="ru">Код открыт.</span><span data-l="en">The code is open.</span></strong><p><span data-l="az">Hər layihənin kodu GitHub-dadır: hər kəs baxa, istifadə edə və töhfə verə bilər.</span><span data-l="ru">Код каждого проекта на GitHub: любой может его читать, использовать и улучшать.</span><span data-l="en">Every project's code is on GitHub, for anyone to read, reuse and improve.</span></p></div></li>
+        <li><div><strong><span data-l="az">Mənbə göstərilir.</span><span data-l="ru">Источник указан.</span><span data-l="en">Sources are shown.</span></strong><p><span data-l="az">Hər mətn və təsvir götürüldüyü nəşrə bağlanır.</span><span data-l="ru">Каждый текст и каждое изображение ведут к изданию, из которого они взяты.</span><span data-l="en">Every text and image links back to the edition it comes from.</span></p></div></li>
+        <li><div><strong><span data-l="az">Hamı üçün pulsuz.</span><span data-l="ru">Бесплатно для всех.</span><span data-l="en">Free for everyone.</span></strong><p><span data-l="az">Oxumaq üçün nə ödəniş, nə qeydiyyat lazımdır.</span><span data-l="ru">Читать можно без оплаты и регистрации.</span><span data-l="en">Free to read, with no payment and no sign-up.</span></p></div></li>
       </ol>
     </section>
   </main>
 
   <footer>
-    <span>Səhv tapdınız və ya mənbəniz var? <a href="https://github.com/azadbilik/kitabxana/issues">Bizə yazın</a> <span lang="en">· Found a mistake or have a source? Open an issue</span></span>
+    <span><span data-l="az">Səhv tapdınız və ya mənbəniz var? <a href="https://github.com/azadbilik/kitabxana/issues">Bizə yazın</a></span><span data-l="ru">Нашли ошибку или у вас есть источник? <a href="https://github.com/azadbilik/kitabxana/issues">Напишите нам</a></span><span data-l="en">Found a mistake or have a source? <a href="https://github.com/azadbilik/kitabxana/issues">Tell us</a></span></span>
     <span><a href="mailto:hello@azadbilik.org">hello@azadbilik.org</a> · <a href="https://github.com/azadbilik">GitHub</a></span>
   </footer>
 </div>
+<script>
+  const T = { az: ['Azad Bilik', 'Azərbaycan mədəniyyəti və tarixi haqqında açıq bilik.'], ru: ['Azad Bilik', 'Открытые знания об азербайджанской культуре и истории.'], en: ['Azad Bilik', 'Open knowledge about Azerbaijani culture and history.'] };
+  function apply(l) {
+    document.documentElement.lang = l;
+    document.querySelector('meta[name="description"]').content = T[l][1];
+    document.querySelectorAll('[data-lang]').forEach((b) => b.setAttribute('aria-pressed', b.dataset.lang === l));
+    document.querySelectorAll('[data-kx]').forEach((a) => a.href = `https://kitabxana.az${l === 'az' ? '' : '/' + l}`);
+    document.querySelectorAll('[data-keep-lang]').forEach((a) => { const u = new URL(a.getAttribute('href'), location.href); if (l === 'az') u.searchParams.delete('lang'); else u.searchParams.set('lang', l); a.href = u.pathname + u.search; });
+  }
+  apply(document.documentElement.lang);
+  document.querySelectorAll('[data-lang]').forEach((b) => b.onclick = () => {
+    const l = b.dataset.lang;
+    try { localStorage.setItem('lang', l); } catch {}
+    const u = new URL(location.href);
+    if (l === 'az') u.searchParams.delete('lang'); else u.searchParams.set('lang', l);
+    history.replaceState(null, '', u);
+    apply(l);
+  });
+</script>
 </body>
 </html>
