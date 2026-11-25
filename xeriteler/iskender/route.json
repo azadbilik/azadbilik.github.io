@@ -1,4 +1,64 @@
 {
+ "meta": {
+  "title": {
+   "az": "İskəndərin səfərləri",
+   "ru": "Походы Искандера",
+   "en": "Iskandar's journeys"
+  },
+  "sub": {
+   "az": "Nizaminin «İskəndərnamə»si xəritədə",
+   "ru": "«Искандер-наме» Низами на карте",
+   "en": "Nizami's Iskandarnama on the map"
+  },
+  "note": {
+   "az": "Yer adları Nizaminin mətnindəndir; tarixi İskəndərin yolu deyil, poemadakı yoldur. Nizami yalnız ölkə və ya tərəf adı çəkəndə (Hindistan, Çin, Zülmət) nöqtə təxminidir və qırıq xətlə göstərilir. Miniatürlər Azad Bilik qalereyasındandır.",
+   "ru": "Названия мест взяты из текста Низами: это путь поэмы, а не исторического Александра. Там, где Низами называет лишь страну или сторону света (Индия, Китай, Страна Мрака), точка приблизительна и путь к ней показан пунктиром. Миниатюры — из галереи Azad Bilik.",
+   "en": "Place names are Nizami's: this is the poem's route, not the historical Alexander's. Where Nizami names only a country or a quarter of the world (India, China, the Darkness), the point is approximate and the way to it is dashed. The miniatures are from the Azad Bilik gallery."
+  },
+  "bounds": [
+   [
+    -10,
+    8
+   ],
+   [
+    112,
+    64
+   ]
+  ],
+  "list": "parts"
+ },
+ "parts": [
+  {
+   "id": "serefname",
+   "poem": "nizami-serefname",
+   "color": "accent",
+   "name": {
+    "az": "Şərəfnamə: dünyanın fəthi",
+    "ru": "Шараф-наме: завоевание мира",
+    "en": "Sharafnama: the conquest of the world"
+   },
+   "legend": {
+    "az": "Şərəfnamə: birinci səfər",
+    "ru": "Шараф-наме: первый поход",
+    "en": "Sharafnama: the first journey"
+   }
+  },
+  {
+   "id": "iqbalname",
+   "poem": "nizami-xerednama",
+   "color": "second",
+   "name": {
+    "az": "İqbalnamə: hikmət və peyğəmbərlik",
+    "ru": "Икбал-наме: мудрость и пророчество",
+    "en": "Iqbalnama: wisdom and prophethood"
+   },
+   "legend": {
+    "az": "İqbalnamə: ikinci səfər",
+    "ru": "Икбал-наме: второй поход",
+    "en": "Iqbalnama: the second journey"
+   }
+  }
+ ],
  "stops": [
   {
    "id": "makedoniya",

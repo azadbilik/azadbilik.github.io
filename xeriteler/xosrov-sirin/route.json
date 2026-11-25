@@ -1,0 +1,594 @@
+{
+ "meta": {
+  "title": {
+   "az": "Xosrov və Şirin",
+   "ru": "Хосров и Ширин",
+   "en": "Khusraw and Shirin"
+  },
+  "sub": {
+   "az": "Nizaminin poeması xəritədə: iki aşiqin və Fərhadın yolları",
+   "ru": "Поэма Низами на карте: пути двух влюблённых и Фархада",
+   "en": "Nizami's poem on the map: the two lovers' roads, and Farhad's"
+  },
+  "note": {
+   "az": "Yer adları Nizaminin mətnindəndir. Nizami yalnız ölkə adı çəkəndə və ya yeri adlandırmayanda (Ərmən yaylaqları, çeşmə, ordugah) nöqtə təxminidir və qırıq xətlə göstərilir. Şirinin qəsri ənənəvi olaraq Qəsri-Şirin şəhərindədir. Miniatürlər Azad Bilik qalereyasındandır.",
+   "ru": "Названия мест взяты из текста Низами. Там, где он называет лишь страну или не называет места (армянские нагорья, родник, ставка), точка приблизительна и путь показан пунктиром. Замок Ширин по преданию — в городе Касре-Ширин. Миниатюры — из галереи Azad Bilik.",
+   "en": "Place names are Nizami's. Where he names only a country, or no place at all (the Armenian uplands, the spring, the camp), the point is approximate and the road to it dashed. Shirin's castle is by tradition at the town of Qasr-e Shirin. The miniatures are from the Azad Bilik gallery."
+  },
+  "bounds": [
+   [
+    27,
+    30
+   ],
+   [
+    54,
+    43
+   ]
+  ],
+  "list": "story"
+ },
+ "parts": [
+  {
+   "id": "khusraw",
+   "poem": "nizami-xosrov-va-sirin",
+   "color": "accent",
+   "name": {
+    "az": "Xosrov",
+    "ru": "Хосров",
+    "en": "Khusraw"
+   }
+  },
+  {
+   "id": "shirin",
+   "poem": "nizami-xosrov-va-sirin",
+   "color": "second",
+   "name": {
+    "az": "Şirin",
+    "ru": "Ширин",
+    "en": "Shirin"
+   }
+  },
+  {
+   "id": "farhad",
+   "poem": "nizami-xosrov-va-sirin",
+   "color": "third",
+   "name": {
+    "az": "Fərhad",
+    "ru": "Фархад",
+    "en": "Farhad"
+   }
+  }
+ ],
+ "stops": [
+  {
+   "id": "madain-gencliyi",
+   "part": "khusraw",
+   "name": {
+    "az": "Mədain",
+    "ru": "Мадаин",
+    "en": "Madaʿin"
+   },
+   "lat": 33.09,
+   "lng": 44.58,
+   "chapters": [
+    "nizami-xosrov-ve-sirin-16",
+    "nizami-xosrov-ve-sirin-17",
+    "nizami-xosrov-ve-sirin-18",
+    "nizami-xosrov-ve-sirin-19"
+   ],
+   "scenes": [
+    "khusraw-begs-hormuz-pardon"
+   ],
+   "note": {
+    "az": "Hörmüzün sarayında şahzadə Xosrov; Şapur ona Məhin Banunun ölkəsini və qardaşı qızı Şirini vəsf edir.",
+    "ru": "Царевич Хосров при дворе Хормоза; Шапур описывает ему страну Мехин Бану и её племянницу Ширин.",
+    "en": "Prince Khusraw at Hurmuz’s court; Shapur tells him of Mahin Banu’s land and her niece Shirin."
+   }
+  },
+  {
+   "id": "ermen",
+   "part": "shirin",
+   "name": {
+    "az": "Ərmən yaylaqları",
+    "ru": "Армянские нагорья",
+    "en": "The Armenian uplands"
+   },
+   "lat": 40.15,
+   "lng": 45.0,
+   "chapters": [
+    "nizami-xosrov-ve-sirin-20",
+    "nizami-xosrov-ve-sirin-21",
+    "nizami-xosrov-ve-sirin-22",
+    "nizami-xosrov-ve-sirin-23"
+   ],
+   "scenes": [
+    "shapur-shows-portrait",
+    "shapur-reveals-himself"
+   ],
+   "note": {
+    "az": "«Yay zamanı yeri Ərmən torpağı»: Şapur Xosrovun şəklini üç dəfə Şirinin yoluna asır.",
+    "ru": "Летом двор Мехин Бану в армянских горах: Шапур трижды вешает портрет Хосрова на пути Ширин.",
+    "en": "“In summer, her seat is the land of Armenia”: Shapur hangs Khusraw’s portrait three times in Shirin’s way."
+   },
+   "approx": true
+  },
+  {
+   "id": "cesme",
+   "part": "shirin",
+   "name": {
+    "az": "Yolda: çeşmə",
+    "ru": "В пути: родник",
+    "en": "On the road: the spring"
+   },
+   "lat": 36.6,
+   "lng": 46.3,
+   "chapters": [
+    "nizami-xosrov-ve-sirin-24",
+    "nizami-xosrov-ve-sirin-25"
+   ],
+   "scenes": [
+    "shirin-flees-on-shabdiz",
+    "khusraw-sees-shirin-bathing"
+   ],
+   "note": {
+    "az": "Şirin Şəbdizə minib Mədainə qaçır; yolda çeşmədə çimərkən Ərmənə gedən Xosrov onu görür, tanımır. Nizami yeri adlandırmır.",
+    "ru": "Ширин бежит в Мадаин на Шабдизе; у родника её, купающуюся, видит Хосров, едущий в Армению, и не узнаёт. Место Низами не называет.",
+    "en": "Shirin flees to Madaʿin on Shabdiz; bathing at a spring she is seen by Khusraw, riding to Armenia, who does not know her. Nizami does not name the place."
+   },
+   "approx": true
+  },
+  {
+   "id": "madain-sirin",
+   "part": "shirin",
+   "name": {
+    "az": "Mədain",
+    "ru": "Мадаин",
+    "en": "Madaʿin"
+   },
+   "lat": 33.09,
+   "lng": 44.58,
+   "chapters": [
+    "nizami-xosrov-ve-sirin-26"
+   ],
+   "scenes": [
+    "shirin-arrives-at-madain"
+   ],
+   "note": {
+    "az": "Şirin Xosrovun sarayına gəlir, amma Xosrov artıq Ərməndədir.",
+    "ru": "Ширин приходит во дворец Хосрова, но Хосров уже в Армении.",
+    "en": "Shirin reaches Khusraw’s palace, but Khusraw is already in Armenia."
+   }
+  },
+  {
+   "id": "qesr",
+   "part": "shirin",
+   "name": {
+    "az": "Şirinin qəsri",
+    "ru": "Замок Ширин",
+    "en": "Shirin’s castle"
+   },
+   "lat": 34.52,
+   "lng": 45.58,
+   "chapters": [
+    "nizami-xosrov-ve-sirin-27",
+    "nizami-xosrov-ve-sirin-30"
+   ],
+   "scenes": [
+    "shapur-fetches-shirin"
+   ],
+   "note": {
+    "az": "Kənizlər ona «Kirmanşahdan kənar on ağac qədər» isti, ucqar yerdə qəsr tikdirirlər; Şapur onu buradan aparır. Ənənəyə görə Qəsri-Şirin.",
+    "ru": "Завистливые служанки строят ей замок «в десяти агачах от Керманшаха», в жарком глухом месте; отсюда её увозит Шапур. По преданию — Касре-Ширин.",
+    "en": "Jealous maids have her castle built “ten aghaj beyond Kermanshah”, in a hot, far place; Shapur fetches her from here. By tradition, Qasr-e Shirin."
+   }
+  },
+  {
+   "id": "mugan",
+   "part": "khusraw",
+   "name": {
+    "az": "Muğan",
+    "ru": "Муган",
+    "en": "Mughan"
+   },
+   "lat": 39.65,
+   "lng": 48.25,
+   "chapters": [
+    "nizami-xosrov-ve-sirin-28"
+   ],
+   "scenes": [
+    "khusraw-at-mahin-banu"
+   ],
+   "note": {
+    "az": "«Ordan birbaş gedib çıxdı Muğana, Muğandan da keçdi düz Baxərzana»: Məhin Banu onu qarşılayır.",
+    "ru": "Из Мугани — в Бахерзан, где его встречает Мехин Бану.",
+    "en": "“On to Mughan, and from Mughan to Bakharzan”: Mahin Banu receives him."
+   },
+   "approx": true
+  },
+  {
+   "id": "berde",
+   "part": "khusraw",
+   "name": {
+    "az": "Bərdə",
+    "ru": "Барда",
+    "en": "Bardaʿa"
+   },
+   "lat": 40.38,
+   "lng": 47.12,
+   "chapters": [
+    "nizami-xosrov-ve-sirin-28",
+    "nizami-xosrov-ve-sirin-29"
+   ],
+   "scenes": [
+    "shapur-returns-to-khusraw"
+   ],
+   "note": {
+    "az": "«Gəl, bizimlə Bərdəyə gedək, qışı qalaq orda»: Məhin Banunun qış iqamətgahı.",
+    "ru": "«Поедем с нами в Барду, перезимуем там»: зимняя ставка Мехин Бану.",
+    "en": "“Come with us to Bardaʿa, and winter there”: Mahin Banu’s winter seat."
+   }
+  },
+  {
+   "id": "madain-taxt",
+   "part": "khusraw",
+   "name": {
+    "az": "Mədain",
+    "ru": "Мадаин",
+    "en": "Madaʿin"
+   },
+   "lat": 33.09,
+   "lng": 44.58,
+   "chapters": [
+    "nizami-xosrov-ve-sirin-31",
+    "nizami-xosrov-ve-sirin-32",
+    "nizami-xosrov-ve-sirin-33"
+   ],
+   "scenes": [
+    "khusraw-enthroned"
+   ],
+   "note": {
+    "az": "Hörmüz ölür, Xosrov taxta çıxır; Bəhram Çubin üsyan qaldırır.",
+    "ru": "Хормоз умирает, Хосров восходит на трон; восстаёт Бахрам Чубин.",
+    "en": "Hurmuz dies and Khusraw takes the throne; Bahram Chubin rises against him."
+   }
+  },
+  {
+   "id": "mugan-ov",
+   "part": "khusraw",
+   "name": {
+    "az": "Muğan: ov və çövkan",
+    "ru": "Муган: охота и чоуган",
+    "en": "Mughan: the hunt and polo"
+   },
+   "lat": 39.65,
+   "lng": 48.25,
+   "chapters": [
+    "nizami-xosrov-ve-sirin-34",
+    "nizami-xosrov-ve-sirin-35",
+    "nizami-xosrov-ve-sirin-36",
+    "nizami-xosrov-ve-sirin-37",
+    "nizami-xosrov-ve-sirin-38",
+    "nizami-xosrov-ve-sirin-39",
+    "nizami-xosrov-ve-sirin-40",
+    "nizami-xosrov-ve-sirin-41"
+   ],
+   "scenes": [
+    "meeting-at-the-hunt",
+    "polo-game",
+    "khusraw-kills-lion",
+    "maidens-tell-stories"
+   ],
+   "note": {
+    "az": "«Yetirdi özünü Azərbaycana… Birbaş Muğan deyib atı döndərdi»: Şirinlə ovda görüşür, çövkan oynayır, şiri yumruqla öldürür.",
+    "ru": "Бежит в Азербайджан, в Мугань: встреча с Ширин на охоте, чоуган, лев, убитый кулаком.",
+    "en": "He escapes to Azerbaijan and turns straight for Mughan: he meets Shirin at the hunt, they play polo, he kills a lion with his fist."
+   },
+   "approx": true
+  },
+  {
+   "id": "rum",
+   "part": "khusraw",
+   "name": {
+    "az": "Rum, Qeysərin sarayı",
+    "ru": "Рум, двор кесаря",
+    "en": "Rum, Caesar’s court"
+   },
+   "lat": 41.01,
+   "lng": 28.98,
+   "chapters": [
+    "nizami-xosrov-ve-sirin-42"
+   ],
+   "scenes": [
+    "khusraw-at-caesars-court"
+   ],
+   "note": {
+    "az": "Qeysər ona qoşun və qızı Məryəmi verir.",
+    "ru": "Кесарь даёт ему войско и свою дочь Марьям.",
+    "en": "Caesar gives him an army and his daughter Maryam."
+   }
+  },
+  {
+   "id": "madain-qayidis",
+   "part": "khusraw",
+   "name": {
+    "az": "Mədain",
+    "ru": "Мадаин",
+    "en": "Madaʿin"
+   },
+   "lat": 33.09,
+   "lng": 44.58,
+   "chapters": [
+    "nizami-xosrov-ve-sirin-43",
+    "nizami-xosrov-ve-sirin-44",
+    "nizami-xosrov-ve-sirin-48",
+    "nizami-xosrov-ve-sirin-49",
+    "nizami-xosrov-ve-sirin-50"
+   ],
+   "scenes": [
+    "battle-with-bahram-chubin",
+    "death-of-bahram-announced",
+    "barbad-plays"
+   ],
+   "note": {
+    "az": "Bəhram Çubini məğlub edib taxtı qaytarır; Barbəd ona otuz avaz çalır.",
+    "ru": "Разбив Бахрама Чубина, возвращает трон; Барбад играет ему тридцать ладов.",
+    "en": "He defeats Bahram Chubin and takes back the throne; Barbad plays him his thirty melodies."
+   }
+  },
+  {
+   "id": "berde-sirin",
+   "part": "shirin",
+   "name": {
+    "az": "Bərdə",
+    "ru": "Барда",
+    "en": "Bardaʿa"
+   },
+   "lat": 40.38,
+   "lng": 47.12,
+   "chapters": [
+    "nizami-xosrov-ve-sirin-45",
+    "nizami-xosrov-ve-sirin-46"
+   ],
+   "scenes": [
+    "shirin-laments"
+   ],
+   "note": {
+    "az": "Şirin Xosrovun həsrətini çəkir; Məhin Banu ölür, ölkəni Şirinə tapşırır.",
+    "ru": "Ширин тоскует по Хосрову; Мехин Бану умирает, оставив ей страну.",
+    "en": "Shirin pines for Khusraw; Mahin Banu dies and leaves her the land."
+   }
+  },
+  {
+   "id": "qesr-qayidis",
+   "part": "shirin",
+   "name": {
+    "az": "Şirinin qəsri",
+    "ru": "Замок Ширин",
+    "en": "Shirin’s castle"
+   },
+   "lat": 34.52,
+   "lng": 45.58,
+   "chapters": [
+    "nizami-xosrov-ve-sirin-47"
+   ],
+   "scenes": [],
+   "note": {
+    "az": "Şirin Xosrova yaxın, qəsrinə qayıdır; Məryəmdən qorxan Xosrov ona gedə bilmir.",
+    "ru": "Ширин возвращается в свой замок, ближе к Хосрову; тот, страшась Марьям, не может к ней поехать.",
+    "en": "Shirin comes back to her castle, near Khusraw; fearing Maryam, he cannot go to her."
+   }
+  },
+  {
+   "id": "qesr-ferhad",
+   "part": "farhad",
+   "name": {
+    "az": "Şirinin qəsri: süd arxı",
+    "ru": "Замок Ширин: молочный канал",
+    "en": "Shirin’s castle: the milk channel"
+   },
+   "lat": 34.52,
+   "lng": 45.58,
+   "chapters": [
+    "nizami-xosrov-ve-sirin-53"
+   ],
+   "scenes": [
+    "farhad-before-shirin",
+    "milk-channel"
+   ],
+   "note": {
+    "az": "Şapur Fərhadı gətirir; Fərhad otlaqdan qəsrə daşdan süd arxı çəkir.",
+    "ru": "Шапур приводит Фархада; тот высекает в камне канал для молока от пастбищ к замку.",
+    "en": "Shapur brings Farhad, who cuts a channel in the rock to carry milk from the pastures to the castle."
+   }
+  },
+  {
+   "id": "madain-ferhad",
+   "part": "farhad",
+   "name": {
+    "az": "Mədain",
+    "ru": "Мадаин",
+    "en": "Madaʿin"
+   },
+   "lat": 33.09,
+   "lng": 44.58,
+   "chapters": [
+    "nizami-xosrov-ve-sirin-55",
+    "nizami-xosrov-ve-sirin-56",
+    "nizami-xosrov-ve-sirin-57"
+   ],
+   "scenes": [
+    "khusraw-learns-of-farhad",
+    "farhad-before-khusraw"
+   ],
+   "note": {
+    "az": "Xosrov Fərhadı çağırtdırır: məşhur sual-cavab.",
+    "ru": "Хосров призывает Фархада: знаменитый спор.",
+    "en": "Khusraw summons Farhad: their famous exchange."
+   }
+  },
+  {
+   "id": "bisutun",
+   "part": "farhad",
+   "name": {
+    "az": "Bisütun",
+    "ru": "Бисутун",
+    "en": "Bisutun"
+   },
+   "lat": 34.39,
+   "lng": 47.44,
+   "chapters": [
+    "nizami-xosrov-ve-sirin-58",
+    "nizami-xosrov-ve-sirin-59",
+    "nizami-xosrov-ve-sirin-60"
+   ],
+   "scenes": [
+    "farhad-carves-bisutun",
+    "shirin-visits-farhad",
+    "farhad-carries-shirin",
+    "death-of-farhad"
+   ],
+   "note": {
+    "az": "Fərhad Bisütun dağını yonur; Şirin ona baş çəkir, Fərhad onu atı ilə birgə çiynində aparır; yalançı xəbərdən ölür.",
+    "ru": "Фархад рубит гору Бисутун; Ширин навещает его, он несёт её вместе с конём; ложная весть убивает его.",
+    "en": "Farhad carves Mount Bisutun; Shirin visits him and he carries her and her horse; a false message kills him."
+   }
+  },
+  {
+   "id": "isfahan",
+   "part": "khusraw",
+   "name": {
+    "az": "İsfahan",
+    "ru": "Исфахан",
+    "en": "Isfahan"
+   },
+   "lat": 32.65,
+   "lng": 51.67,
+   "chapters": [
+    "nizami-xosrov-ve-sirin-65"
+   ],
+   "scenes": [
+    "khusraw-and-shakar"
+   ],
+   "note": {
+    "az": "Xosrov İsfahanlı Şəkərə evlənir.",
+    "ru": "Хосров берёт в жёны Шекер из Исфахана.",
+    "en": "Khusraw marries Shakar of Isfahan."
+   }
+  },
+  {
+   "id": "qesr-xosrov",
+   "part": "khusraw",
+   "name": {
+    "az": "Şirinin qəsri",
+    "ru": "Замок Ширин",
+    "en": "Shirin’s castle"
+   },
+   "lat": 34.52,
+   "lng": 45.58,
+   "chapters": [
+    "nizami-xosrov-ve-sirin-67",
+    "nizami-xosrov-ve-sirin-68",
+    "nizami-xosrov-ve-sirin-78"
+   ],
+   "scenes": [
+    "khusraw-at-shirins-castle",
+    "khusraw-leaves-castle"
+   ],
+   "note": {
+    "az": "«Ov zamanı Xosrov kimsə duymadan Qəsri-Şirin tərəf olmuşdu rəvan»: qış gecəsi qapıda; Şirin onu içəri buraxmır.",
+    "ru": "Во время охоты Хосров тайно едет к замку Ширин: зимней ночью у ворот, она не впускает его.",
+    "en": "Out hunting, Khusraw rides secretly to Shirin’s castle: a winter night at her gate, and she will not let him in."
+   }
+  },
+  {
+   "id": "ordugah",
+   "part": "shirin",
+   "name": {
+    "az": "Xosrovun ordugahı",
+    "ru": "Ставка Хосрова",
+    "en": "Khusraw’s camp"
+   },
+   "lat": 34.33,
+   "lng": 46.6,
+   "chapters": [
+    "nizami-xosrov-ve-sirin-79",
+    "nizami-xosrov-ve-sirin-80",
+    "nizami-xosrov-ve-sirin-81",
+    "nizami-xosrov-ve-sirin-82",
+    "nizami-xosrov-ve-sirin-83",
+    "nizami-xosrov-ve-sirin-84",
+    "nizami-xosrov-ve-sirin-85",
+    "nizami-xosrov-ve-sirin-86",
+    "nizami-xosrov-ve-sirin-87",
+    "nizami-xosrov-ve-sirin-88"
+   ],
+   "scenes": [
+    "shirin-rides-to-khusraw",
+    "barbad-nakisa-contest",
+    "shirin-comes-out-of-tent"
+   ],
+   "note": {
+    "az": "Şirin gecə ordugaha gəlir; Barbəd və Nəkisa onların dilindən oxuyur; barışırlar.",
+    "ru": "Ширин ночью приходит в ставку; Барбад и Накиса поют за них; они примиряются.",
+    "en": "Shirin comes to the camp by night; Barbad and Nakisa sing for each of them; they are reconciled."
+   },
+   "approx": true
+  },
+  {
+   "id": "madain-toy",
+   "part": "shirin",
+   "name": {
+    "az": "Mədain",
+    "ru": "Мадаин",
+    "en": "Madaʿin"
+   },
+   "lat": 33.09,
+   "lng": 44.58,
+   "chapters": [
+    "nizami-xosrov-ve-sirin-89",
+    "nizami-xosrov-ve-sirin-90",
+    "nizami-xosrov-ve-sirin-91"
+   ],
+   "scenes": [
+    "shirin-brought-to-madain",
+    "wedding",
+    "khusraw-and-shirin-enthroned"
+   ],
+   "note": {
+    "az": "«Taqi-Kəsradan ta Bisütunacan» yol bəzənir: toy və taxt.",
+    "ru": "Дорога «от Таки-Кисра до Бисутуна» в убранстве: свадьба и трон.",
+    "en": "The road “from Taq-i Kisra to Bisutun” is decked out: the wedding, and the throne."
+   }
+  },
+  {
+   "id": "madain-son",
+   "part": "khusraw",
+   "name": {
+    "az": "Mədain",
+    "ru": "Мадаин",
+    "en": "Madaʿin"
+   },
+   "lat": 33.09,
+   "lng": 44.58,
+   "chapters": [
+    "nizami-xosrov-ve-sirin-92",
+    "nizami-xosrov-ve-sirin-112",
+    "nizami-xosrov-ve-sirin-113",
+    "nizami-xosrov-ve-sirin-116",
+    "nizami-xosrov-ve-sirin-117"
+   ],
+   "scenes": [
+    "buzurg-umid-advises",
+    "shiruya-murders-khusraw",
+    "khusraws-funeral",
+    "shirin-suicide",
+    "khusraw-tears-prophets-letter"
+   ],
+   "note": {
+    "az": "Böyük Ümidin öyüdləri; Şiruyə Xosrovu öldürür, Şirin onun məqbərəsində özünü öldürür.",
+    "ru": "Наставления Бузург Умида; Шируйе убивает Хосрова, Ширин закалывается у его гробницы.",
+    "en": "Buzurg Umid’s counsel; Shiruya murders Khusraw, and Shirin kills herself at his tomb."
+   }
+  }
+ ]
+}
