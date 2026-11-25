@@ -1,0 +1,21 @@
+# Daily check that the hub's pages, data and links to kitabxana.az still work (scripts/smoke.mjs).
+# A failed run emails the repository's watchers.
+name: Smoke test
+on:
+  schedule:
+    - cron: '17 5 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/smoke.mjs
