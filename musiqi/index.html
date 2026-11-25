@@ -50,6 +50,7 @@
   .chips button { font-size: .75rem; padding: .2rem .55rem; border: 1px solid var(--rule); border-radius: 999px; color: var(--muted); }
   .chips button[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
   .chips small { opacity: .7; margin-left: .2rem; font-variant-numeric: tabular-nums; }
+  @media (max-width: 48rem) { .chips { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; padding-inline: 1rem; } .chips::-webkit-scrollbar { display: none; } .chips button { flex: none; } }
   /* Now playing: who sings, from where */
   .player { grid-template-columns: auto 1fr; column-gap: .75rem; }
   .player .face { grid-row: span 2; width: 3.25rem; height: 3.25rem; border-radius: 3px; object-fit: cover; background: var(--frame); }
@@ -290,7 +291,7 @@ function play(id) {
   audio.src = r.mp3;
   const p = r.performer?.qid && byQid.get(r.performer.qid);
   document.getElementById('face').outerHTML = p?.image ? `<img id="face" class="face" src="${esc(p.image)}" alt="" referrerpolicy="no-referrer">` : `<span id="face" class="face none">♪</span>`;
-  document.getElementById('now').innerHTML = `<strong>${esc(L(r.title))}</strong> · ${t('one')[r.kind]}${dastgahOf(r) ? ` · ${esc(L(dastgahOf(r).d.name))}${dastgahOf(r).d.character ? ` <small>(${esc(L(dastgahOf(r).d.character))})</small>` : ''}` : ''}<br><small>${r.performer ? (p?.wiki ? `<a href="${esc(p.wiki)}" target="_blank" rel="noopener">${esc(L(r.performer))}</a>` : esc(L(r.performer))) : t('unknown')}${p ? ` · ${years(p)} · ${t('from')} <button type="button" id="now-place">${esc(L(p.place))}</button>` : ''}${when(r.year) ? ` · ${esc(when(r.year))}` : ''}</small>`;
+  document.getElementById('now').innerHTML = `<strong>${esc(L(r.title))}</strong> · ${t('one')[r.kind]}${dastgahOf(r) ? ` · ${esc(L(dastgahOf(r).d.name))}${dastgahOf(r).sure ? '' : ` (${t('probable')})`}${dastgahOf(r).d.character ? ` <small>(${esc(L(dastgahOf(r).d.character))})</small>` : ''}` : ''}<br><small>${r.performer ? (p?.wiki ? `<a href="${esc(p.wiki)}" target="_blank" rel="noopener">${esc(L(r.performer))}</a>` : esc(L(r.performer))) : t('unknown')}${p ? ` · ${years(p)} · ${t('from')} <button type="button" id="now-place">${esc(L(p.place))}</button>` : ''}${when(r.year) ? ` · ${esc(when(r.year))}` : ''}</small>`;
   document.getElementById('now-place')?.addEventListener('click', () => showPlace(p.place.id, p.qid));
   document.getElementById('player').hidden = false;
   if (p) { pulse.setLngLat([p.place.lng, p.place.lat]).addTo(map); flyTo(p); } else pulse.remove();
