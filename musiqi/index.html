@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Musiqi · Azad Bilik</title>
+<meta name="description" content="Azərbaycan musiqisinin ilk səs yazıları (1902–1963), sərbəst istifadədə, və xanəndələrin, tarzənlərin, aşıqların doğulduğu yerlər. The first recordings of Azerbaijani music and where its singers and players were born.">
+<meta name="theme-color" content="#F4EFE6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14100D" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://azadbilik.org/musiqi/">
+<meta property="og:title" content="Musiqi · Azerbaijani music">
+<meta property="og:description" content="İlk səs yazıları və musiqiçilərin xəritəsi: Qaryağdıoğlu, Keçəçioğlu, Qədirbala, Bülbül, Şuşa, Göyçə, Borçalı.">
+<meta property="og:image" content="https://azadbilik.org/musiqi/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+<link rel="stylesheet" href="/shared/story-map.css">
+<style>
+  .tabs { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--rule); }
+  .tabs button { padding: .7rem .5rem; font-size: .875rem; color: var(--muted); border-bottom: 2px solid transparent; }
+  .tabs button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--accent); font-weight: 500; }
+  .group h2 { padding: 1rem 1.5rem .35rem; font: 500 .75rem var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .group ol { list-style: none; padding: 0; }
+  .rec { display: grid; grid-template-columns: 2rem 1fr; gap: .1rem .6rem; align-items: center; padding: .4rem 1.5rem; }
+  .rec:hover { background: var(--rule); }
+  .rec.on { background: var(--rule); box-shadow: inset 2px 0 var(--accent); }
+  .rec .play { grid-row: span 2; width: 2rem; height: 2rem; border: 1px solid var(--rule); border-radius: 50%; display: grid; place-items: center; font-size: .7rem; }
+  .rec .play:hover { border-color: var(--ink); }
+  .rec .name { font-weight: 500; }
+  .rec .meta { font-size: .8125rem; color: var(--muted); }
+  .rec .meta button { color: inherit; text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: .2em; }
+  .rec .meta button:hover { color: var(--ink); }
+  .rec .meta a { color: inherit; text-decoration: none; } .rec .meta a:hover { color: var(--accent); }
+  .player { border-top: 1px solid var(--rule); padding: .6rem 1rem .7rem; display: grid; gap: .3rem; background: var(--panel); }
+  .player[hidden] { display: none; }
+  .player .now { font-size: .8125rem; } .player .now small { color: var(--muted); }
+  .player audio { width: 100%; height: 2rem; }
+  .people li button { display: grid; grid-template-columns: 1fr auto; gap: .05rem .75rem; width: 100%; text-align: left; padding: .35rem 1.5rem; font-size: .875rem; }
+  .people li button:hover { background: var(--rule); }
+  .people .role { font-size: .75rem; color: var(--muted); }
+  .people .kx { display: block; padding: 0 1.5rem .35rem; margin-top: -.25rem; font-size: .75rem; color: var(--muted); text-decoration: none; }
+  .people .kx:hover { color: var(--accent); }
+  .people .yrs { grid-row: span 2; font-size: .75rem; color: var(--muted); font-variant-numeric: tabular-nums; align-self: center; }
+  .place-head { padding: 1rem 1.5rem .25rem; }
+  .place-head h2 { font: 400 1.375rem/1.2 var(--serif); padding: 0; text-transform: none; letter-spacing: 0; color: var(--ink); }
+  .card .maplibregl-popup-content { padding: .75rem 1rem; }
+  .legend .row { display: flex; align-items: center; gap: .5rem; }
+  .legend .row i { width: .65rem; height: .65rem; border-radius: 50%; display: inline-block; }
+</style>
+</head>
+<body>
+<div id="map" role="region" aria-label="Xəritə"></div>
+
+<aside class="panel">
+  <div class="head">
+    <div class="top"><a class="brand" href="/" data-keep-lang><svg viewBox="0 0 512 512" aria-hidden="true"><g class="star"><rect x="126" y="126" width="260" height="260"/><polygon points="256,72 440,256 256,440 72,256"/></g><polygon class="gem" points="256,196 316,256 256,316 196,256"/></svg>Azad Bilik</a><nav><a href="/qalereya/" data-i18n="gallery" data-keep-lang>Qalereya</a><span class="langs" role="group" aria-label="Dil · Язык · Language"><button type="button" data-lang="az">AZ</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="en">EN</button></span></nav></div>
+    <h1 data-i18n="title">Musiqi</h1>
+    <p class="sub" data-i18n="sub">İlk səs yazıları və musiqiçilərin yurdu</p>
+  </div>
+  <div class="tabs" role="tablist"><button type="button" role="tab" data-tab="recs" data-i18n="recs">Səs yazıları</button><button type="button" role="tab" data-tab="people" data-i18n="people">Musiqiçilər</button></div>
+  <div class="body" id="body" aria-live="polite"></div>
+  <div class="player" id="player" hidden><p class="now" id="now"></p><audio id="audio" controls preload="none"></audio></div>
+</aside>
+
+<div class="legend" id="legend"></div>
+
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script>
+(() => {
+const dark = matchMedia('(prefers-color-scheme: dark)').matches;
+const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+const still = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+const LANGS = ['az', 'ru', 'en'];
+let lang = (() => {
+  const q = new URLSearchParams(location.search).get('lang');
+  if (LANGS.includes(q)) return q;
+  try { const s = localStorage.getItem('lang'); if (LANGS.includes(s)) return s; } catch {}
+  return 'az';
+})();
+const T = {
+  az: { doc: 'Musiqi · Azad Bilik', title: 'Musiqi', sub: 'İlk səs yazıları və musiqiçilərin yurdu', gallery: 'Qalereya', recs: 'Səs yazıları', people: 'Musiqiçilər',
+    mugham: 'Muğamlar', tesnif: 'Təsniflər', song: 'Mahnılar', instrumental: 'Alətlə', khanende: 'xanəndə', tar: 'tarzən', ashik: 'aşıq', unknown: 'ifaçısı bilinmir',
+    play: 'Dinlə', where: 'doğulduğu yer', commons: 'Commons', poems: 'şeirləri kitabxanada', back: '← Bütün musiqiçilər', nPeople: (n) => `${n} musiqiçi`, here: (n) => `${n} musiqiçi burada doğulub`,
+    note: 'Səs yazıları Wikimedia Commons-dandır, hamısı ictimai mülkiyyətdədir: Azərbaycanda 1976-dan əvvəlki yazılar sərbəstdir. Mahnının sözləri hələ qəzəllərə bağlanmayıb. Musiqiçilər və doğulduqları yerlər Wikidata-dandır.' },
+  ru: { doc: 'Музыка · Azad Bilik', title: 'Музыка', sub: 'Первые записи и родина музыкантов', gallery: 'Галерея', recs: 'Записи', people: 'Музыканты',
+    mugham: 'Мугамы', tesnif: 'Теснифы', song: 'Песни', instrumental: 'Инструментальные', khanende: 'ханенде', tar: 'тарист', ashik: 'ашуг', unknown: 'исполнитель неизвестен',
+    play: 'Слушать', where: 'место рождения', commons: 'Commons', poems: 'стихи в библиотеке', back: '← Все музыканты', nPeople: (n) => `${n} музыкантов`, here: (n) => `Здесь родились: ${n}`,
+    note: 'Записи — с Викисклада, все в общественном достоянии: в Азербайджане записи до 1976 года свободны. Тексты песен ещё не связаны с газелями. Музыканты и места их рождения — по Викиданным.' },
+  en: { doc: 'Music · Azad Bilik', title: 'Music', sub: 'The first recordings, and where the musicians came from', gallery: 'Gallery', recs: 'Recordings', people: 'Musicians',
+    mugham: 'Mughams', tesnif: 'Tasnifs', song: 'Songs', instrumental: 'Instrumental', khanende: 'khanende', tar: 'tar player', ashik: 'ashik', unknown: 'performer unknown',
+    play: 'Listen', where: 'birthplace', commons: 'Commons', poems: 'poems in the library', back: '← All musicians', nPeople: (n) => `${n} musicians`, here: (n) => `${n} born here`,
+    note: 'The recordings are from Wikimedia Commons, all in the public domain: in Azerbaijan, recordings made before 1976 are free. The songs\' words are not yet matched to their ghazals. The musicians and their birthplaces are from Wikidata.' },
+};
+const t = (k) => T[lang][k];
+const L = (o) => o?.[lang] || o?.az || o?.en || '';
+const KX = () => `https://kitabxana.az${lang === 'az' ? '' : '/' + lang}`;
+const ROLE_COLOR = () => ({ khanende: css('--accent'), tar: css('--second'), ashik: css('--third') || '#5B6B2E' });
+
+let recs = [], people = [], tab = new URLSearchParams(location.search).get('tab') === 'people' ? 'people' : 'recs', place = null, playing = null;
+const map = new maplibregl.Map({
+  container: 'map', style: `https://tiles.openfreemap.org/styles/${dark ? 'dark' : 'positron'}`,
+  bounds: [[43, 37.5], [50.6, 42.5]], minZoom: 3, maxZoom: 11,
+  attributionControl: { compact: true, customAttribution: '<a href="https://commons.wikimedia.org">Wikimedia Commons</a> · <a href="https://www.wikidata.org">Wikidata</a>' },
+});
+map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-right');
+const tip = new maplibregl.Popup({ closeButton: false, closeOnClick: false, offset: 10 });
+const phone = () => matchMedia('(max-width: 48rem)').matches;
+const pad = () => phone() ? { top: 60, right: 24, left: 24, bottom: document.querySelector('.panel').offsetHeight + 24 } : { top: 48, right: 64, bottom: 48, left: 27 * 16 + 48 };
+const labelExpr = () => ['coalesce', ['get', `name:${lang}`], ['get', lang === 'ru' ? 'name' : 'name:latin'], ['get', 'name']];
+map.on('style.load', () => {
+  for (const l of map.getStyle().layers) {
+    if (l.type === 'background') map.setPaintProperty(l.id, 'background-color', css('--land'));
+    if (l.type === 'fill' && /water|ocean|lake/.test(l.id)) map.setPaintProperty(l.id, 'fill-color', css('--water'));
+    if (l.type === 'symbol' && l.layout?.['text-field']) map.setLayoutProperty(l.id, 'text-field', labelExpr());
+  }
+});
+map.on('load', async () => {
+  [recs, people] = await Promise.all(['recordings.json', 'musicians.json'].map((f) => fetch(`data/${f}`).then((r) => r.json())));
+  map.fitBounds([[43, 37.5], [50.6, 42.5]], { padding: pad(), duration: 0 });
+  document.querySelector('.maplibregl-ctrl-attrib')?.classList.remove('maplibregl-compact-show');
+  // One dot per birthplace, sized by how many were born there, coloured by the commonest role
+  const places = new Map();
+  for (const p of people) {
+    const k = p.place.id;
+    if (!places.has(k)) places.set(k, { ...p.place, people: [] });
+    places.get(k).people.push(p);
+  }
+  const C = ROLE_COLOR();
+  map.addSource('places', { type: 'geojson', generateId: true, data: { type: 'FeatureCollection', features: [...places.values()].map((pl) => {
+    const roles = pl.people.flatMap((p) => p.roles);
+    const top = ['khanende', 'tar', 'ashik'].sort((a, b) => roles.filter((r) => r === b).length - roles.filter((r) => r === a).length)[0];
+    return { type: 'Feature', geometry: { type: 'Point', coordinates: [pl.lng, pl.lat] }, properties: { id: pl.id, n: pl.people.length, color: C[top] } };
+  }) } });
+  map.addLayer({ id: 'places', type: 'circle', source: 'places', paint: {
+    'circle-radius': ['interpolate', ['linear'], ['sqrt', ['get', 'n']], 1, 4, 3, 9, 6, 16],
+    'circle-color': ['get', 'color'], 'circle-opacity': ['case', ['boolean', ['feature-state', 'dim'], false], .2, .8],
+    'circle-stroke-color': css('--paper'), 'circle-stroke-width': ['case', ['boolean', ['feature-state', 'sel'], false], 2.5, 1],
+  } });
+  map.on('mousemove', 'places', (e) => {
+    map.getCanvas().style.cursor = 'pointer';
+    const pl = places.get(e.features[0].properties.id);
+    tip.setLngLat(e.features[0].geometry.coordinates).setHTML(`<strong>${esc(L(pl))}</strong> · ${t('here')(pl.people.length)}`).addTo(map);
+  });
+  map.on('mouseleave', 'places', () => { map.getCanvas().style.cursor = ''; tip.remove(); });
+  map.on('click', 'places', (e) => showPlace(e.features[0].properties.id));
+  window.__places = places;
+  draw();
+});
+
+const roleText = (p) => p.roles.map((r) => t(r)).join(', ');
+const years = (p) => p.born || p.died ? `${p.born ?? '?'}–${p.died ?? ''}` : '';
+function drawRecs(el) {
+  const groups = ['mugham', 'tesnif', 'song', 'instrumental'];
+  el.innerHTML = groups.map((g) => {
+    const rs = recs.filter((r) => r.kind === g);
+    if (!rs.length) return '';
+    return `<section class="group"><h2>${t(g)} · ${rs.length}</h2><ol>${rs.map((r) => `<li class="rec${playing === r.id ? ' on' : ''}"><button type="button" class="play" data-play="${esc(r.id)}" aria-label="${t('play')}: ${esc(L(r.title))}">${playing === r.id ? '❚❚' : '▶'}</button>
+      <span class="name">${esc(L(r.title))}</span>
+      <span class="meta">${r.performer ? (r.performer.qid && people.some((p) => p.qid === r.performer.qid) ? `<button type="button" data-who="${r.performer.qid}">${esc(L(r.performer))}</button>` : esc(L(r.performer))) : t('unknown')}${r.year ? ` · ${esc(r.year)}` : ''} · <a href="${esc(r.commons)}" target="_blank" rel="noopener">${t('commons')} ↗</a></span></li>`).join('')}</ol></section>`;
+  }).join('') + `<p class="note">${t('note')}</p>`;
+  el.querySelectorAll('[data-play]').forEach((b) => b.onclick = () => play(b.dataset.play));
+  el.querySelectorAll('[data-who]').forEach((b) => b.onclick = () => { const p = people.find((x) => x.qid === b.dataset.who); if (p) showPlace(p.place.id, p.qid); });
+}
+function drawPeople(el) {
+  const list = place ? people.filter((p) => p.place.id === place) : people;
+  const pl = place && window.__places.get(place);
+  const kx = (p) => p.kitabxana ? `<a class="kx" href="${KX()}/authors/${p.kitabxana}">${t('poems')} ↗</a>` : '';
+  el.innerHTML = (pl ? `<button type="button" class="back" id="back">${t('back')}</button><div class="place-head"><h2>${esc(L(pl))}</h2><p class="meta">${t('here')(list.length)}</p></div>` : `<section class="group"><h2>${t('nPeople')(people.length)}</h2></section>`)
+    + `<ol class="people">${list.map((p) => `<li><button type="button" data-p="${p.qid}"><span>${esc(p[lang] || p.az || p.en)}</span><span class="yrs">${years(p)}</span><span class="role">${roleText(p)}${pl ? '' : ` · ${esc(L(p.place))}`}</span></button>${kx(p)}</li>`).join('')}</ol>`
+    + (pl ? '' : `<p class="note">${t('note')}</p>`);
+  document.getElementById('back')?.addEventListener('click', () => { place = null; mark(); draw(); map.fitBounds([[43, 37.5], [50.6, 42.5]], { padding: pad(), duration: still() ? 0 : 700 }); });
+  el.querySelectorAll('[data-p]').forEach((b) => b.onclick = () => { const p = people.find((x) => x.qid === b.dataset.p); showPlace(p.place.id, p.qid); });
+}
+function showPlace(id, qid) {
+  place = id; tab = 'people';
+  mark();
+  const pl = window.__places.get(id);
+  map.easeTo({ center: [pl.lng, pl.lat], zoom: Math.max(map.getZoom(), 7), padding: pad(), duration: still() ? 0 : 700 });
+  draw();
+  if (qid) document.querySelector(`[data-p="${qid}"]`)?.scrollIntoView({ block: 'center' });
+}
+// Feature ids are the places' order (generateId), so each dot is found by its index
+function mark() {
+  if (!map.getSource('places')) return;
+  [...window.__places.keys()].forEach((id, fid) => map.setFeatureState({ source: 'places', id: fid }, { dim: place != null && id !== place, sel: id === place }));
+}
+function play(id) {
+  const audio = document.getElementById('audio');
+  const r = recs.find((x) => x.id === id);
+  if (playing === id) { if (audio.paused) audio.play(); else audio.pause(); return; }
+  playing = id;
+  audio.src = r.mp3;
+  document.getElementById('now').innerHTML = `${esc(L(r.title))} <small>· ${r.performer ? esc(L(r.performer)) : t('unknown')}${r.year ? ` · ${esc(r.year)}` : ''}</small>`;
+  document.getElementById('player').hidden = false;
+  audio.play().catch(() => {});
+  draw();
+}
+document.getElementById('audio').addEventListener('pause', () => { document.querySelectorAll('[data-play]').forEach((b) => { b.textContent = '▶'; }); });
+document.getElementById('audio').addEventListener('play', () => { const b = document.querySelector(`[data-play="${CSS.escape(playing ?? '')}"]`); if (b) b.textContent = '❚❚'; });
+document.getElementById('audio').addEventListener('ended', () => { const i = recs.findIndex((r) => r.id === playing); if (i >= 0 && i < recs.length - 1) play(recs[i + 1].id); });
+
+function drawLegend() {
+  const C = ROLE_COLOR();
+  document.getElementById('legend').innerHTML = ['khanende', 'tar', 'ashik'].map((r) => `<div class="row"><i style="background:${C[r]}"></i>${t(r)}</div>`).join('');
+}
+function draw() {
+  document.querySelectorAll('[data-tab]').forEach((b) => b.setAttribute('aria-selected', b.dataset.tab === tab));
+  const el = document.getElementById('body');
+  if (!recs.length) return;
+  if (tab === 'recs') drawRecs(el); else drawPeople(el);
+  drawLegend();
+}
+document.querySelectorAll('[data-tab]').forEach((b) => b.onclick = () => { tab = b.dataset.tab; if (tab === 'recs') { place = null; mark(); } draw(); document.getElementById('body').scrollTop = 0; });
+function applyLang() {
+  document.documentElement.lang = lang;
+  document.title = t('doc');
+  document.querySelectorAll('[data-i18n]').forEach((el) => el.textContent = t(el.dataset.i18n));
+  document.querySelectorAll('[data-lang]').forEach((b) => b.setAttribute('aria-pressed', b.dataset.lang === lang));
+  document.querySelectorAll('[data-keep-lang]').forEach((a) => { const u = new URL(a.getAttribute('href'), location.href); if (lang === 'az') u.searchParams.delete('lang'); else u.searchParams.set('lang', lang); a.href = u.pathname + u.search; });
+}
+applyLang();
+document.querySelectorAll('[data-lang]').forEach((b) => b.onclick = () => {
+  lang = b.dataset.lang;
+  try { localStorage.setItem('lang', lang); } catch {}
+  const u = new URL(location.href); if (lang === 'az') u.searchParams.delete('lang'); else u.searchParams.set('lang', lang); history.replaceState(null, '', u);
+  applyLang(); draw();
+  if (map.getStyle()) for (const l of map.getStyle().layers) if (l.type === 'symbol' && l.layout?.['text-field']) map.setLayoutProperty(l.id, 'text-field', labelExpr());
+});
+})();
+</script>
+</body>
+</html>

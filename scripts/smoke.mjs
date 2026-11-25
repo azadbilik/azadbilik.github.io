@@ -38,6 +38,7 @@ console.log('Hub pages');
 for (const [path, musts] of [
   ['/', ['href="/xeriteler/"', 'href="/qalereya/"', 'href="/atlas/"', 'id="culture"', 'id="atlas"', 'data-lang="ru"']],
   ['/atlas/', ['href="/atlas/ehali/"', 'href="/xeriteler/"']],
+  ['/musiqi/', ['maplibre-gl', 'recordings.json']],
   ['/xeriteler/ehali/', ['/atlas/ehali/']],
   ['/xeriteler/', ['href="/xerite/"', 'href="/qalereya/emalatxana/"']],
   ['/xerite/', ['maplibre-gl', 'data/authors.json']],
