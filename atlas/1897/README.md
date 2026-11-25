@@ -4,6 +4,7 @@
 
 | File | What |
 |---|---|
+| `data/NOTES.md` | Sources, coverage, how the census's language names are grouped (copied to the open data repo with the CSV) |
 | `data/census-1897.csv` | Every unit (governorate, uezd, town) × language as the census names it: men, women, both sexes, and the Demoscope page it comes from |
 | `data/languages.json` | How the census's language names are grouped on the map, with names in Azerbaijani, Russian and English |
 | `data/names.json` | Uezds' and governorates' names in three languages |

@@ -47,7 +47,10 @@ function parse(rows) {
 // Demoscope's page labels: «Бакинский уезд - весь», «Бакинский уезд - г. Баку», «Бакинская губерния - вся»
 const ALIAS = { 'Карский': 'Карсский' };
 const units = {}, towns = {}, govs = {};
-const csv = [['unit_ru', 'kind', 'uyezd_ru', 'language', 'language_ru', 'men', 'women', 'both', 'source'].join(',')];
+const csv = [['unit_ru', 'unit_az', 'unit_en', 'kind', 'uyezd_ru', 'language', 'language_ru', 'men', 'women', 'both', 'source_url'].join(',')];
+// Names in Azerbaijani and English: governorates by their census name, uezds by stem, towns by name
+const GOVNAME = Object.fromEntries(Object.values(names.govs).map((n) => [n[1], n]));
+const unitName = (kind, key) => (kind === 'governorate' ? GOVNAME[key] : kind === 'uyezd' ? names.units[key] : names.towns[key]) ?? [key, key, key];
 let uyezd = null, gov = null;
 for (const [reg, p] of Object.entries(pages).sort((a, b) => a[0] - b[0])) {
   const t = p.t.replace(/\s+/g, ' ').trim();
@@ -65,7 +68,8 @@ for (const [reg, p] of Object.entries(pages).sort((a, b) => a[0] - b[0])) {
   for (const r of rows) {
     const k = langKey(r.label);
     byLang[k] = (byLang[k] ?? 0) + r.both;
-    csv.push([key, kind, kind === 'town' ? uyezd : kind === 'uyezd' ? key : '', k, r.label, r.m, r.f, r.both, SRC(reg)].map((x) => /[,"]/.test(String(x)) ? `"${String(x).replace(/"/g, '""')}"` : x).join(','));
+    const un = unitName(kind, key);
+    csv.push([un[1], un[0], un[2], kind, kind === 'town' ? names.units[uyezd]?.[1] ?? uyezd : kind === 'uyezd' ? un[1] : '', k, r.label, r.m, r.f, r.both, SRC(reg)].map((x) => /[,"]/.test(String(x)) ? `"${String(x).replace(/"/g, '""')}"` : x).join(','));
   }
   const entry = { total: total.both, men: total.m, women: total.f, langs: byLang, src: SRC(reg) };
   if (kind === 'governorate') govs[key] = entry;
