@@ -50,7 +50,7 @@ JAVAD = 48.47   # the Kura is a border down to Javad
 SHARUR = 44.75  # the Araz is one from Sharur down: above it Erivan holds Surmali on both banks
 rivers = unary_union([
     shape(f['geometry']).intersection(box(40, 30, JAVAD, 45) if f['properties']['az'] == 'Kür' else box(SHARUR, 30, 52, 45))
-    for f in json.load(open(ATLAS / 'caylar' / 'data' / 'rivers.geojson'))['features'] if f['properties']['az'] in ('Kür', 'Araz')])
+    for f in json.load(open(ATLAS / 'hovze' / 'data' / 'rivers.geojson'))['features'] if f['properties']['az'] in ('Kür', 'Araz')])
 
 # 2. the traced lines, closed onto their neighbours
 lines = {k: LineString(lonlat(v)).simplify(0.001) for k, v in json.load(open(RAW / 'lines-px.json')).items()}

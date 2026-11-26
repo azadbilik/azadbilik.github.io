@@ -1,6 +1,6 @@
-# Çaylar · Rivers and lakes of Azerbaijan
+# Kür–Araz hövzəsi · The Kura–Araz basin
 
-[azadbilik.org/atlas/caylar](https://azadbilik.org/atlas/caylar/): 155 named rivers and 35 lakes and reservoirs of Azerbaijan from OpenStreetMap (© OpenStreetMap contributors, ODbL), each river with its names in Azerbaijani, Russian and English and its length.
+[azadbilik.org/atlas/hovze](https://azadbilik.org/atlas/hovze/) (formerly /atlas/caylar, which forwards here): 312 named rivers and 108 lakes and reservoirs of the Kura–Araz basin from OpenStreetMap (© OpenStreetMap contributors, ODbL), each river with its names in Azerbaijani, Russian and English and its length.
 
 `data/rivers.geojson` and `data/lakes.geojson` are built by `node scripts/build.mjs` from two Overpass downloads kept out of the repository (22 MB) in `data/raw/`:
 
