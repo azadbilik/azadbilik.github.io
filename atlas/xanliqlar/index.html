@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Xanlıqlar · Azad Bilik</title>
-<meta name="description" content="Azərbaycan xanlıqları təxminən 1800-cü ildə: Quba, Bakı, Şirvan, Şəki, Gəncə, Qarabağ, Talış, Cavad, Naxçıvan, İrəvan və Arazın cənubundakılar. Təxmini sərhədlər. The khanates of Azerbaijan around 1800, approximate borders.">
+<meta name="description" content="Azərbaycan xanlıqları təxminən 1800-cü ildə: Quba, Bakı, Şirvan, Şəki, Gəncə, Qarabağ, Talış, Cavad, Naxçıvan, İrəvan və Arazın cənubundakılar. Sərhədlər 1901-ci il xəritəsindən. The khanates of Azerbaijan around 1800, borders from a 1901 map.">
 <meta name="theme-color" content="#F4EFE6" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#14100D" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -79,17 +79,17 @@ let lang = (() => {
 const LI = { az: 0, ru: 1, en: 2 };
 const T = {
   az: { doc: 'Xanlıqlar · Azad Bilik', title: 'Xanlıqlar', sub: 'Azərbaycan xanlıqları, təxminən 1800', u1897: '1897-ci ilin qəzaları', today: 'Bugünkü rayon sərhədləri',
-    caveat: 'Sərhədlər təxminidir. Arazın şimalında hər xanlıq Rusiya idarəsinin onun torpaqlarından düzəltdiyi 1897-ci il qəzaları ilə çəkilib; İrəvan və Naxçıvan OpenHistoricalMap-in konturları ilə; Arazın cənubundakılar yalnız paytaxtları ilə.',
-    north: 'Arazın şimalında', south: 'Arazın cənubunda və Dərbənd', annexed: (y) => `Rusiyaya keçib: ${y}`, capital: 'Paytaxtı', drawn: 'Necə çəkilib', from1897: (u) => `1897-ci ilin qəzaları: ${u}`, fromOhm: 'OpenHistoricalMap konturu', back: '← Bütün xanlıqlar', wiki: 'Vikipediya', legendArea: 'xanlıq (təxmini)', legendCap: 'paytaxt', legend1897: '1897-ci il qəzaları', legendToday: 'bugünkü rayonlar', southNote: 'Qacar İranının tərkibində qalıb; sərhədləri çəkilməyib.',
-    note: 'Qəza sərhədləri: Rusiya tarixi statistikasının elektron arxivi (RISTAT, Kessler və Markeviç), CC0. İrəvan və Naxçıvan: OpenHistoricalMap, CC0. Paytaxtlar: Wikidata. Hansı qəzanın hansı xanlıqdan yarandığı Azad Bilikin təxminidir; dəqiq sərhədlər XIX əsrin əvvəlinin xəritələrindən əl ilə köçürülməlidir.' },
+    caveat: 'Arazın şimalındakı doqquz xanlığın sərhədləri V. İ. Tomkeyevin 1801–1813-cü illərin sərhədlərini göstərən xəritəsindən (Tiflis, 1901) köçürülüb: bir neçə kilometrə qədər dəqiqliklə. İlisu, Qazax və Borçalı 1897-ci il qəzaları ilə, Cavad və Arazın cənubundakılar yalnız paytaxtları ilə göstərilir.',
+    north: 'Arazın şimalında', south: 'Arazın cənubunda və Dərbənd', annexed: (y) => `Rusiyaya keçib: ${y}`, capital: 'Paytaxtı', drawn: 'Necə çəkilib', from1897: (u) => `1897-ci ilin qəzaları: ${u}`, fromTomkeev: 'Tomkeyevin xəritəsindən (1901), 1801–1813-cü illərin sərhədləri', back: '← Bütün xanlıqlar', wiki: 'Vikipediya', legendArea: 'xanlıq', legendCap: 'paytaxt', legend1897: '1897-ci il qəzaları', legendToday: 'bugünkü rayonlar', southNote: 'Qacar İranının tərkibində qalıb; sərhədləri çəkilməyib.',
+    note: 'Sərhədlər: <a href="https://commons.wikimedia.org/wiki/File:%D0%9A%D0%B0%D1%80%D1%82%D0%B0_%D0%9A%D0%B0%D0%B2%D0%BA%D0%B0%D0%B7%D1%81%D0%BA%D0%BE%D0%B3%D0%BE_%D0%BA%D1%80%D0%B0%D1%8F_(1801-1813)..jpg" target="_blank" rel="noopener">«Карта Кавказского края с обозначением границ 1801–1813 г.»</a> (Qafqaz hərbi dairəsi qərargahının hərbi-tarixi şöbəsi, polkovnik-leytenant V. İ. Tomkeyev, Tiflis 1901; ictimai mülkiyyət). Xəritəni 14 şəhərə görə yerə oturdub sərhəd xətlərini Azad Bilik izləyib (şəhərlərdə orta xəta ~2,6 km); Kür və Araz OpenStreetMap-dən. Qəzalar və sahil: RISTAT (Kessler və Markeviç), CC0. Paytaxtlar: Wikidata.' },
   ru: { doc: 'Ханства · Azad Bilik', title: 'Ханства', sub: 'Азербайджанские ханства около 1800 г.', u1897: 'Уезды 1897 г.', today: 'Границы нынешних районов',
-    caveat: 'Границы приблизительные. К северу от Аракса каждое ханство показано уездами 1897 г., созданными российской администрацией из его земель; Эриванское и Нахичеванское — по контурам OpenHistoricalMap; к югу от Аракса — только столицы.',
-    north: 'К северу от Аракса', south: 'К югу от Аракса и Дербент', annexed: (y) => `Отошло России: ${y}`, capital: 'Столица', drawn: 'Как нарисовано', from1897: (u) => `Уезды 1897 г.: ${u}`, fromOhm: 'Контур OpenHistoricalMap', back: '← Все ханства', wiki: 'Википедия', legendArea: 'ханство (приблизительно)', legendCap: 'столица', legend1897: 'уезды 1897 г.', legendToday: 'нынешние районы', southNote: 'Остались в составе Каджарского Ирана; границы не нарисованы.',
-    note: 'Границы уездов: Электронный архив российской исторической статистики (RISTAT, Кесслер и Маркевич), CC0. Эривань и Нахичевань: OpenHistoricalMap, CC0. Столицы: Викиданные. Какой уезд из какого ханства — оценка Azad Bilik; точные границы нужно перенести вручную с карт начала XIX в.' },
+    caveat: 'Границы девяти ханств к северу от Аракса перенесены с карты В. И. Томкеева, показывающей границы 1801–1813 гг. (Тифлис, 1901), с точностью до нескольких километров. Илису, Казах и Борчалы показаны уездами 1897 г., Джават и ханства к югу от Аракса — только столицами.',
+    north: 'К северу от Аракса', south: 'К югу от Аракса и Дербент', annexed: (y) => `Отошло России: ${y}`, capital: 'Столица', drawn: 'Как нарисовано', from1897: (u) => `Уезды 1897 г.: ${u}`, fromTomkeev: 'По карте Томкеева (1901), границы 1801–1813 гг.', back: '← Все ханства', wiki: 'Википедия', legendArea: 'ханство', legendCap: 'столица', legend1897: 'уезды 1897 г.', legendToday: 'нынешние районы', southNote: 'Остались в составе Каджарского Ирана; границы не нарисованы.',
+    note: 'Границы: <a href="https://commons.wikimedia.org/wiki/File:%D0%9A%D0%B0%D1%80%D1%82%D0%B0_%D0%9A%D0%B0%D0%B2%D0%BA%D0%B0%D0%B7%D1%81%D0%BA%D0%BE%D0%B3%D0%BE_%D0%BA%D1%80%D0%B0%D1%8F_(1801-1813)..jpg" target="_blank" rel="noopener">«Карта Кавказского края с обозначением границ 1801–1813 г.»</a> (Военно-исторический отдел штаба Кавказского военного округа, подполковник В. И. Томкеев, Тифлис 1901; общественное достояние). Карту привязал по 14 городам и линии границ провёл Azad Bilik (средняя ошибка по городам ~2,6 км); Кура и Аракс — OpenStreetMap. Уезды и берег: RISTAT (Кесслер и Маркевич), CC0. Столицы: Викиданные.' },
   en: { doc: 'Khanates · Azad Bilik', title: 'Khanates', sub: 'The khanates of Azerbaijan, c. 1800', u1897: 'The 1897 uezds', today: "Today's district borders",
-    caveat: "The borders are approximate. North of the Araz each khanate is drawn as the 1897 uezds the Russian administration made from its lands; Erivan and Nakhchivan as OpenHistoricalMap's outlines; south of the Araz only their capitals.",
-    north: 'North of the Araz', south: 'South of the Araz, and Derbent', annexed: (y) => `Passed to Russia: ${y}`, capital: 'Capital', drawn: 'How it is drawn', from1897: (u) => `The 1897 uezds: ${u}`, fromOhm: 'OpenHistoricalMap outline', back: '← All khanates', wiki: 'Wikipedia', legendArea: 'khanate (approximate)', legendCap: 'capital', legend1897: '1897 uezds', legendToday: "today's districts", southNote: 'Stayed within Qajar Iran; borders not drawn.',
-    note: "Uezd borders: the Electronic Repository of Russian Historical Statistics (RISTAT, Kessler and Markevich), CC0. Erivan and Nakhchivan: OpenHistoricalMap, CC0. Capitals: Wikidata. Which uezd came from which khanate is Azad Bilik's estimate; true borders need tracing by hand from early-19th-century maps." },
+    caveat: "The borders of the nine khanates north of the Araz are traced from V. I. Tomkeev's map of the borders of 1801–1813 (Tiflis, 1901), true to within a few kilometres. Ilisu, Qazax and Borchali are drawn as their 1897 uezds; Javad and the khanates south of the Araz by their capitals only.",
+    north: 'North of the Araz', south: 'South of the Araz, and Derbent', annexed: (y) => `Passed to Russia: ${y}`, capital: 'Capital', drawn: 'How it is drawn', from1897: (u) => `The 1897 uezds: ${u}`, fromTomkeev: "Tomkeev's map (1901), the borders of 1801–1813", back: '← All khanates', wiki: 'Wikipedia', legendArea: 'khanate', legendCap: 'capital', legend1897: '1897 uezds', legendToday: "today's districts", southNote: 'Stayed within Qajar Iran; borders not drawn.',
+    note: 'Borders: <a href="https://commons.wikimedia.org/wiki/File:%D0%9A%D0%B0%D1%80%D1%82%D0%B0_%D0%9A%D0%B0%D0%B2%D0%BA%D0%B0%D0%B7%D1%81%D0%BA%D0%BE%D0%B3%D0%BE_%D0%BA%D1%80%D0%B0%D1%8F_(1801-1813)..jpg" target="_blank" rel="noopener">«Map of the Caucasus Region with its borders of 1801–1813»</a> (Military-Historical Section of the Caucasus Military District staff, Lt-Col. V. I. Tomkeev, Tiflis 1901; public domain). Placed on the earth by 14 towns and its border lines followed by Azad Bilik (towns ~2.6 km off on average); the Kura and the Araz from OpenStreetMap. Uezds and the coast: RISTAT (Kessler and Markevich), CC0. Capitals: Wikidata.' },
 };
 const t = (k) => T[lang][k];
 const L = (p) => p[lang] ?? p.az;
@@ -100,7 +100,7 @@ const BOUNDS = [[43.3, 37.2], [50.4, 42.3]];
 const map = new maplibregl.Map({
   container: 'map', style: `https://tiles.openfreemap.org/styles/${dark ? 'dark' : 'positron'}`,
   bounds: BOUNDS, minZoom: 4.5, maxZoom: 10,
-  attributionControl: { compact: true, customAttribution: '<a href="https://ristat.org/">RISTAT</a> · <a href="https://www.openhistoricalmap.org/">OpenHistoricalMap</a> · Wikidata · <a href="https://www.geoboundaries.org">geoBoundaries</a>' },
+  attributionControl: { compact: true, customAttribution: 'Tomkeev 1901 · <a href="https://ristat.org/">RISTAT</a> · OpenStreetMap · Wikidata · <a href="https://www.geoboundaries.org">geoBoundaries</a>' },
 });
 map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-right');
 const tip = new maplibregl.Popup({ closeButton: false, closeOnClick: false, offset: 8 });
@@ -128,7 +128,7 @@ map.on('load', async () => {
   map.addSource('u1897', { type: 'geojson', data: u });
   map.addSource('today', { type: 'geojson', data: now });
   const isArea = ['==', ['get', 'kind'], 'area'];
-  // Same colour inside a khanate, so the 1897 uezd seams don't show; a dashed edge says "approximate"
+  // Same colour inside a khanate; a dashed edge: a border copied from a small-scale map
   map.addLayer({ id: 'k-fill', type: 'fill', source: 'k', filter: isArea, paint: { 'fill-color': ['get', 'color'], 'fill-opacity': ['case', ['boolean', ['feature-state', 'sel'], false], .7, ['boolean', ['feature-state', 'hover'], false], .6, .45], 'fill-outline-color': ['get', 'color'] } }, firstSymbol);
   map.addLayer({ id: 'k-edge', type: 'line', source: 'k', filter: isArea, paint: { 'line-color': ['get', 'color'], 'line-width': 1.2, 'line-dasharray': [3, 2], 'line-opacity': .9 } }, firstSymbol);
   map.addLayer({ id: 'u1897', type: 'line', source: 'u1897', layout: { visibility: 'none' }, paint: { 'line-color': ink, 'line-width': .7, 'line-opacity': .45, 'line-dasharray': [1, 2] } }, firstSymbol);
@@ -174,21 +174,21 @@ function drawSide() {
     const a = areas.find((x) => x.id === selected), c = caps.find((x) => x.id === selected);
     const k = a ?? c;
     const wiki = k.wikidata ? `https://www.wikidata.org/wiki/Special:GoToLinkedPage/${lang}wiki/${k.wikidata}` : null;
-    const note = a ? JSON.parse(typeof a.note === 'string' ? a.note : JSON.stringify(a.note)) : null;
-    const capName = a ? JSON.parse(typeof a.capitalName === 'string' ? a.capitalName : JSON.stringify(a.capitalName)) : null;
+    const parse = (v) => v == null ? null : typeof v === 'string' ? JSON.parse(v) : v;
+    const note = parse(k.note), capName = parse(k.capitalName);
     const uz = a?.uezds ? (typeof a.uezds === 'string' ? JSON.parse(a.uezds) : a.uezds) : null;
     el.innerHTML = `<button type="button" class="back" id="back">${t('back')}</button><div class="card">
       <h2>${a ? `<i style="background:${a.color}"></i>` : ''}${esc(L(k))}</h2>
       ${capName ? `<p><span class="k">${t('capital')}:</span> ${esc(capName[LI[lang]])}</p>` : ''}
       ${k.annexed ? `<p><span class="k">${t('annexed')(k.annexed)}</span></p>` : ''}
       ${note ? `<p>${esc(note[LI[lang]])}</p>` : `<p class="k">${t('southNote')}</p>`}
-      ${a ? `<p><span class="k">${t('drawn')}:</span> ${a.from === 'ohm' ? `<a href="https://www.openhistoricalmap.org/relation/${a.ohm}" target="_blank" rel="noopener">${t('fromOhm')}</a>` : esc(t('from1897')(uz.map((x) => U1897[x]?.[LI[lang]] ?? x).join(', ')))}</p>` : ''}
+      ${a ? `<p><span class="k">${t('drawn')}:</span> ${a.from === 'tomkeev-1901' ? esc(t('fromTomkeev')) : esc(t('from1897')(uz.map((x) => U1897[x]?.[LI[lang]] ?? x).join(', ')))}</p>` : ''}
       ${wiki ? `<p><a href="${wiki}" target="_blank" rel="noopener">${t('wiki')} ↗</a></p>` : ''}
     </div><p class="note">${t('note')}</p>`;
     el.querySelector('#back').onclick = () => select(null);
     return;
   }
-  const north = [...areas].sort((x, y) => (x.annexed ?? 9999) - (y.annexed ?? 9999));
+  const north = [...areas, ...caps.filter((c) => !c.south && !areas.some((a) => a.id === c.id))].sort((x, y) => (x.annexed ?? 9999) - (y.annexed ?? 9999));
   const south = caps.filter((c) => c.south);
   el.innerHTML = `<p class="caveat">${t('caveat')}</p>
     <h2 class="sec">${t('north')}</h2><ul class="klist">${north.map((a) => `<li><button type="button" data-k="${a.id}"><i style="background:${a.color}"></i><span>${esc(L(a))}</span><span class="v">${a.annexed ?? ''}</span></button></li>`).join('')}</ul>
