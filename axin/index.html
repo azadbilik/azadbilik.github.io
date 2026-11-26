@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script src="/shared/theme.js"></script>
+<script>(() => { const L = ['az', 'ru', 'en']; let l = new URLSearchParams(location.search).get('lang'); if (!L.includes(l)) { try { l = localStorage.getItem('lang'); } catch {} } if (L.includes(l)) document.documentElement.lang = l; })();</script>
+<title>Axın · Azad Bilik</title>
+<meta name="description" content="Prototip: günün 24 kartı — şeir, səs, miniatür, musiqiçi. Prototype: today's 24 cards from the site.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#F4EFE6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14100D" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="stylesheet" href="/shared/hub.css">
+<link rel="stylesheet" href="/shared/story-map.css">
+<style>
+  /* Axın (a stream): one card per screen, snapping. A prototype: a day's deck of 24, threads that
+     pull related cards forward, an end. No autoplay, no tracking beyond the reader's own browser. */
+  html, body { height: 100%; }
+  body { overflow: hidden; background: var(--paper); color: var(--ink); }
+  [data-l] { display: none; } html[lang="az"] [data-l="az"], html[lang="ru"] [data-l="ru"], html[lang="en"] [data-l="en"] { display: revert; }
+  header.hub-header { position: fixed; inset: 0 0 auto 0; z-index: 5; padding-block: .75rem; background: linear-gradient(var(--paper) 60%, transparent); }
+  header.hub-header nav > a { display: none; }
+  #feed { height: 100dvh; overflow-y: auto; scroll-snap-type: y mandatory; overscroll-behavior: contain; scrollbar-width: none; }
+  #feed::-webkit-scrollbar { display: none; }
+  .card { position: relative; height: 100dvh; scroll-snap-align: start; scroll-snap-stop: always; display: grid; grid-template-rows: 1fr auto; padding: 4.5rem clamp(1rem, 5vw, 3rem) calc(1.25rem + env(safe-area-inset-bottom)); max-width: 40rem; margin: 0 auto; }
+  .body { display: flex; flex-direction: column; justify-content: center; gap: 1rem; min-height: 0; }
+  .kicker { font: 500 .6875rem var(--sans); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  h2 { font: 400 clamp(1.5rem, 5vw, 2.1rem)/1.15 var(--serif); letter-spacing: -.01em; }
+  .meta { font: 400 .9375rem/1.45 var(--sans); color: var(--muted); }
+  .foot { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; padding-top: 1rem; }
+  .foot a, .foot button { display: inline-flex; align-items: center; min-height: 2.5rem; padding: 0 .9rem; border: 1px solid var(--rule); border-radius: 999px; font: 500 .8125rem var(--sans); color: var(--ink); text-decoration: none; background: none; cursor: pointer; }
+  .foot .follow { border-color: var(--accent); color: var(--accent); }
+  .foot .follow[disabled] { opacity: .5; cursor: default; }
+  .count { margin-left: auto; font: 400 .75rem var(--sans); color: var(--muted); font-variant-numeric: tabular-nums; }
+
+  /* Nəzirə: the model, then the answer */
+  .verse { font: 400 clamp(1.05rem, 3.6vw, 1.3rem)/1.55 var(--serif); }
+  .verse p { margin: 0; }
+  .who { font: 500 .8125rem var(--sans); margin-top: .35rem; } .who span.y { color: var(--muted); font-weight: 400; }
+  .pair { display: grid; gap: 1.5rem; }
+  .pair .ans { padding-left: 1rem; border-left: 2px solid var(--accent); }
+  .arrow { font: 500 .8125rem var(--sans); color: var(--accent); margin-bottom: .35rem; } .arrow .y { color: var(--muted); font-weight: 400; }
+  mark { background: none; color: var(--accent); box-shadow: inset 0 -.12em color-mix(in srgb, var(--accent) 35%, transparent); }
+
+  /* Miniature: the picture as large as the screen allows */
+  .card.miniature .body { justify-content: flex-start; }
+  .body { overflow: hidden; }
+  .pic { flex: 1 1 auto; min-height: 0; position: relative; }
+  .pic img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: center; }
+
+  /* Record: a disc that turns while it plays */
+  .disc { width: min(52vw, 15rem); aspect-ratio: 1; border-radius: 50%; margin: 0 auto 1rem; background: repeating-radial-gradient(circle, #1A1410 0 2px, #2A221C 2px 4px); position: relative; box-shadow: 0 0 0 1px var(--rule); }
+  .disc::after { content: ''; position: absolute; inset: 34%; border-radius: 50%; background: var(--accent); }
+  .disc::before { content: ''; position: absolute; inset: 48%; border-radius: 50%; background: var(--paper); z-index: 1; }
+  .playing .disc { animation: spin 1.8s linear infinite; }
+  @keyframes spin { to { transform: rotate(1turn); } }
+  @media (prefers-reduced-motion: reduce) { .playing .disc { animation: none; } }
+  .play { border-color: var(--ink) !important; background: var(--ink) !important; color: var(--paper) !important; }
+
+  /* The end */
+  .card.end .body { text-align: center; align-items: center; }
+  .card.end .foot { justify-content: center; }
+  .proto { margin-left: .5rem; padding: .15rem .4rem; border: 1px solid var(--rule); border-radius: 2px; font: 500 .6875rem var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+</style>
+</head>
+<body>
+<header class="hub-header">
+  <a class="brand" href="/" data-keep-lang><svg viewBox="0 0 32 32" aria-hidden="true"><path class="star" d="M16 2l3.2 9.8H29l-7.9 5.8 3 9.4L16 21.2 7.9 27l3-9.4L3 11.8h9.8z"/><circle class="gem" cx="16" cy="16" r="3"/></svg>Axın<span class="proto">prototip</span></a>
+  <nav aria-label="Azad Bilik"><span class="langs" role="group" aria-label="Dil · Язык · Language"><button type="button" data-lang="az">AZ</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="en">EN</button></span></nav>
+</header>
+<main id="feed"></main>
+<script src="/shared/hub.js" defer></script>
+<script>
+const LANGS = ['az', 'ru', 'en'];
+let lang = LANGS.includes(document.documentElement.lang) ? document.documentElement.lang : 'az';
+const L = () => LANGS.indexOf(lang);
+const T = {
+  az: { nezire: 'Nəzirə', answers: 'cavab verir', record: 'Səs yazısı', person: 'Musiqiçi', miniature: 'Miniatür', open: 'Saytda aç', follow: (n) => `${n} — davam et`, followed: 'Yol açıldı', play: 'Dinlə', pause: 'Dayan', born: 'Doğulub', end: 'Bugünlük bu qədər', endSub: (n) => `${n} kart. Sabah yeniləri olacaq.`, again: 'Yenidən qarışdır', home: 'Ana səhifə', of: '/', mugham: 'muğam', tesnif: 'təsnif', song: 'mahnı', instrumental: 'çalğı', ashik: 'aşıq', khanende: 'xanəndə', tar: 'tarzən' },
+  ru: { nezire: 'Назира', answers: 'отвечает', record: 'Запись', person: 'Музыкант', miniature: 'Миниатюра', open: 'Открыть на сайте', follow: (n) => `${n} — дальше`, followed: 'Нить открыта', play: 'Слушать', pause: 'Стоп', born: 'Родился', end: 'На сегодня всё', endSub: (n) => `${n} карточек. Завтра будут новые.`, again: 'Перемешать', home: 'Главная', of: '/', mugham: 'мугам', tesnif: 'тесниф', song: 'песня', instrumental: 'инструментал', ashik: 'ашуг', khanende: 'ханенде', tar: 'тарист' },
+  en: { nezire: 'Nazira', answers: 'answers', record: 'Recording', person: 'Musician', miniature: 'Miniature', open: 'Open on the site', follow: (n) => `More: ${n}`, followed: 'Thread opened', play: 'Listen', pause: 'Stop', born: 'Born', end: 'That’s today’s', endSub: (n) => `${n} cards. New ones tomorrow.`, again: 'Shuffle again', home: 'Home', of: '/', mugham: 'mugham', tesnif: 'tasnif', song: 'song', instrumental: 'instrumental', ashik: 'ashik', khanende: 'khanende', tar: 'tar player' },
+};
+const t = (k) => T[lang][k];
+const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const yrs = ([a, b]) => (a || b ? `${a ?? '?'}–${b ?? ''}` : '');
+const when = (y) => !y ? '' : lang === 'en' ? y.replace(/^Early XX c\.$/i, 'early 20th century') : y
+  .replace(/^(early 20th century|Early XX c\.)$/i, lang === 'ru' ? 'начало XX века' : 'XX əsrin əvvəli')
+  .replace(/^first half of 20th century$/i, lang === 'ru' ? 'первая половина XX века' : 'XX əsrin birinci yarısı')
+  .replace(/^(\d{4})s$/, lang === 'ru' ? '$1-е' : '$1-cı illər').replace(/^c\. (\d{4})$/, lang === 'ru' ? 'ок. $1' : 'təq. $1');
+const href = (u) => { if (lang === 'az') return u; const x = new URL(u, location.origin); x.searchParams.set('lang', lang); return x.pathname + x.search + x.hash; };
+
+// A day's deck: the same for everyone on a given day, a different one tomorrow
+const DECK = 24, THREAD = 4, MAX = 40;
+const seedOf = (s) => { let h = 2166136261; for (const c of s) h = Math.imul(h ^ c.charCodeAt(0), 16777619); return h >>> 0; };
+const rng = (seed) => () => ((seed = Math.imul(seed ^ (seed >>> 15), 2246822507) + 0x9E3779B9 >>> 0) / 4294967296);
+let pool = [], deck = [], shown = new Set(), shuffles = 0;
+
+function build() {
+  const r = rng(seedOf(new Date().toISOString().slice(0, 10) + ':' + shuffles));
+  const by = {}; for (const c of pool) (by[c.k] ??= []).push(c);
+  for (const k in by) by[k].sort(() => r() - .5);
+  // the rhythm: picture, verse, sound, picture, verse, person …
+  const RHYTHM = ['miniature', 'nezire', 'record', 'miniature', 'nezire', 'person'];
+  deck = [];
+  for (let i = 0; deck.length < DECK; i++) { const c = by[RHYTHM[i % RHYTHM.length]]?.pop(); if (c) deck.push(c); if (i > 200) break; }
+  shown = new Set(deck.map((c) => c.id));
+}
+
+// The thread a card offers: its key with the most unseen cards in the pool behind it
+function threadOf(c) {
+  let best = null;
+  for (const key of c.t) {
+    const more = pool.filter((x) => !shown.has(x.id) && x.t.includes(key));
+    if (more.length && (!best || more.length > best.more.length)) best = { key, more };
+  }
+  return best;
+}
+function threadName(c, key) {
+  const i = L();
+  if (c.k === 'nezire') return (c.model.slug === key.split(':')[1] ? c.model : c.answer).poet[i];
+  if (c.k === 'record') return key.startsWith('dastgah:') ? c.title[i] : c.performer[i];
+  if (c.k === 'person') return c.name[i];
+  if (c.k === 'miniature') return key.startsWith('scene:') ? c.scene[i] : c.poet[i];
+  return '';
+}
+
+// The radif: the words both opening lines end on, marked in each, so the link shows at a glance
+function radif(a, b) {
+  const w = (s) => s.split(/\s+/), key = (x) => x.toLocaleLowerCase('az').replace(/[^\p{L}-]/gu, '');
+  const A = w(a), B = w(b); let n = 0;
+  while (n < A.length && n < B.length && key(A[A.length - 1 - n]) && key(A[A.length - 1 - n]) === key(B[B.length - 1 - n])) n++;
+  const mark = (ws) => n ? `${esc(ws.slice(0, -n).join(' '))} <mark>${esc(ws.slice(-n).join(' '))}</mark>` : esc(ws.join(' '));
+  return [mark(A), mark(B)];
+}
+function card(c, n) {
+  const i = L(), th = threadOf(c);
+  const foot = `<div class="foot">
+    ${c.k === 'record' ? `<button type="button" class="play" data-play>${t('play')}</button>` : ''}
+    <a href="${esc(href(c.u))}">${t('open')}</a>
+    ${th && deck.length < MAX ? `<button type="button" class="follow" data-follow="${esc(th.key)}">${esc(t('follow')(threadName(c, th.key)))}</button>` : ''}
+    <span class="count">${n + 1}${t('of')}${deck.length}</span></div>`;
+  let body = '';
+  if (c.k === 'nezire') {
+    const [ma, aa] = radif(c.model.m[0], c.answer.m[0]);
+    body = `<div class="kicker">${t('nezire')}</div><div class="pair">
+      <div><div class="verse"><p>${ma}</p>${c.model.m.slice(1).map((l) => `<p>${esc(l)}</p>`).join('')}</div><div class="who">${esc(c.model.poet[i])} <span class="y">${yrs(c.model.years)}</span></div></div>
+      <div class="ans"><div class="arrow">↳ ${esc(c.answer.poet[i])} <span class="y">${yrs(c.answer.years)}</span> ${t('answers')}</div><div class="verse"><p>${aa}</p>${c.answer.m.slice(1).map((l) => `<p>${esc(l)}</p>`).join('')}</div></div></div>`;
+  }
+  else if (c.k === 'record') body = `<div class="disc" aria-hidden="true"></div><div class="kicker">${t('record')} · ${t(c.kind) ?? c.kind}</div>
+      <h2>${esc(c.title[i])}</h2><div class="meta">${esc(c.performer[i])} · ${esc(when(c.year))}${c.character ? `<br>${esc(c.character[i])}` : ''}</div><audio preload="none" src="${esc(c.mp3)}"></audio>`;
+  else if (c.k === 'person') body = `<div class="kicker">${t('person')} · ${c.roles.map((r) => t(r) ?? r).join(', ')}</div>
+      <h2>${esc(c.name[i])}</h2><div class="meta">${esc(c.place[i])} · ${c.born}–${c.died ?? ''}</div>`;
+  else if (c.k === 'miniature') body = `<div class="pic"><img src="${esc(c.img)}" alt="${esc(c.scene[i])}" width="${c.w}" height="${c.h}" loading="lazy" decoding="async"></div>
+      <div><div class="kicker">${t('miniature')} · ${esc(c.poem[i])}</div><h2>${esc(c.scene[i])}</h2>
+      <div class="meta">${[c.when, c.city?.[i], c.dynasty?.[i]].filter(Boolean).map(esc).join(' · ')}</div></div>`;
+  return `<section class="card ${c.k}" data-id="${esc(c.id)}"><div class="body">${body}</div>${foot}</section>`;
+}
+const endCard = () => `<section class="card end"><div class="body"><h2>${t('end')}</h2><div class="meta">${t('endSub')(deck.length)}</div></div>
+  <div class="foot"><button type="button" data-again>${t('again')}</button><a href="${href('/')}">${t('home')}</a></div></section>`;
+
+const feed = document.getElementById('feed');
+function render(keepAt) {
+  const top = feed.scrollTop;
+  feed.innerHTML = deck.map(card).join('') + endCard();
+  if (keepAt != null) feed.scrollTop = top;
+  observe();
+}
+
+// Sound only on a tap, and it stops when its card leaves the screen
+let io;
+function observe() {
+  io?.disconnect();
+  io = new IntersectionObserver((es) => { for (const e of es) if (!e.isIntersecting) stop(e.target); }, { root: feed, threshold: .4 });
+  feed.querySelectorAll('.card.record').forEach((el) => io.observe(el));
+}
+function stop(el) { const a = el.querySelector('audio'); if (a && !a.paused) { a.pause(); el.classList.remove('playing'); el.querySelector('[data-play]').textContent = t('play'); } }
+feed.addEventListener('click', (e) => {
+  const b = e.target.closest('button'); if (!b) return;
+  const el = b.closest('.card');
+  if (b.dataset.play != null) {
+    const a = el.querySelector('audio');
+    if (a.paused) { feed.querySelectorAll('.card.playing').forEach(stop); a.play(); el.classList.add('playing'); b.textContent = t('pause'); a.onended = () => stop(el); }
+    else stop(el);
+  } else if (b.dataset.follow) {
+    // pull the thread's next cards in right after this one; the deck grows, but never past MAX
+    const at = deck.findIndex((c) => c.id === el.dataset.id);
+    const more = pool.filter((x) => !shown.has(x.id) && x.t.includes(b.dataset.follow)).slice(0, Math.min(THREAD, MAX - deck.length));
+    more.forEach((x) => shown.add(x.id));
+    deck.splice(at + 1, 0, ...more);
+    render(true);
+    feed.children[at + 1]?.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+  } else if (b.dataset.again != null) { shuffles++; build(); render(); feed.scrollTop = 0; }
+});
+// Arrow keys and j/k step a card
+addEventListener('keydown', (e) => {
+  if (e.target.closest('input, textarea') || e.metaKey || e.ctrlKey) return;
+  const d = { ArrowDown: 1, j: 1, PageDown: 1, ArrowUp: -1, k: -1, PageUp: -1 }[e.key]; if (!d) return;
+  e.preventDefault(); feed.scrollBy({ top: d * feed.clientHeight, behavior: 'smooth' });
+});
+
+function setLang(l) {
+  lang = l; document.documentElement.lang = l;
+  try { localStorage.setItem('lang', l); } catch {}
+  document.querySelectorAll('[data-lang]').forEach((b) => b.setAttribute('aria-pressed', b.dataset.lang === lang));
+  document.querySelectorAll('[data-keep-lang]').forEach((a) => { const u = new URL(a.getAttribute('href'), location.href); if (lang === 'az') u.searchParams.delete('lang'); else u.searchParams.set('lang', lang); a.href = u.pathname + u.search; });
+  if (deck.length) render(true);
+}
+document.querySelectorAll('[data-lang]').forEach((b) => b.onclick = () => setLang(b.dataset.lang));
+setLang(lang);
+
+fetch('cards.json').then((r) => r.json()).then((d) => { pool = d.cards; build(); render(); });
+</script>
+</body>
+</html>
