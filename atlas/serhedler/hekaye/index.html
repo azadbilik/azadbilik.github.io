@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sərhədlər necə dəyişdi · Azad Bilik</title>
+<meta name="description" content="Xanlıqlardan bugünkü rayonlara: Azərbaycanın daxili sərhədləri 1800–1991-ci illərdə necə dəyişdi, xəritə üzərində addım-addım. How Azerbaijan's internal borders changed, 1800–1991, step by step on the map.">
+<meta name="theme-color" content="#F4EFE6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14100D" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://azadbilik.org/atlas/serhedler/hekaye/">
+<meta property="og:title" content="Sərhədlər necə dəyişdi · How the borders moved, 1800–1991">
+<meta property="og:description" content="Xanlıqlardan bugünkü rayonlara, xəritə üzərində addım-addım.">
+<meta property="og:image" content="https://azadbilik.org/atlas/serhedler/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+<link rel="stylesheet" href="/shared/story-map.css">
+<style>
+  /* The map stays behind; the story scrolls over it, one step a screen */
+  html, body { height: auto; } body { overflow: visible; }
+  #map { position: fixed; inset: 0; }
+  .top-bar { position: fixed; top: 1rem; left: 1rem; z-index: 3; display: flex; gap: .75rem; align-items: center; background: var(--panel); backdrop-filter: blur(8px); border: 1px solid var(--rule); border-radius: 4px; padding: .45rem .75rem; font-size: .8125rem; }
+  .top-bar a { color: inherit; }
+  .top-bar .langs button { padding: 0 .2rem; color: var(--muted); } .top-bar .langs button[aria-pressed="true"] { color: var(--ink); text-decoration: underline; }
+  .year { position: fixed; right: 1.25rem; bottom: 2.5rem; z-index: 2; font: 400 clamp(2.5rem, 7vw, 5rem)/1 var(--serif); color: var(--ink); opacity: .85; font-variant-numeric: tabular-nums; text-shadow: 0 0 12px var(--land); pointer-events: none; transition: opacity .3s; }
+  .progress { position: fixed; left: 0; top: 0; height: 3px; background: var(--accent); z-index: 4; width: 0; }
+  .story { position: relative; z-index: 2; width: min(26rem, calc(100% - 2rem)); margin-left: 1rem; padding: 40vh 0 50vh; display: grid; gap: 75vh; pointer-events: none; }
+  .step { pointer-events: auto; background: var(--panel); backdrop-filter: blur(8px); border: 1px solid var(--rule); border-radius: 6px; padding: 1.1rem 1.25rem; box-shadow: 0 2px 10px rgb(0 0 0 / .06); opacity: .45; transform: translateY(12px); transition: opacity .5s, transform .5s; }
+  .step.on { opacity: 1; transform: none; }
+  .step .when { font: 500 .75rem var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+  .step h2 { font: 400 1.5rem/1.2 var(--serif); margin: .25rem 0 .5rem; }
+  .step p { font-size: .9375rem; line-height: 1.55; }
+  .step p + p { margin-top: .5rem; }
+  .step a { color: inherit; }
+  .step.end { text-align: left; }
+  .step.end .links { display: grid; gap: .35rem; margin-top: .6rem; font-size: .875rem; }
+  @media (max-width: 48rem) { .story { margin: 0 auto; padding-top: 55vh; } .year { bottom: auto; top: 3.6rem; right: 1rem; font-size: 2.25rem; } }
+  @media (prefers-reduced-motion: reduce) { .step { transition: none; transform: none; } }
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<div id="map" role="img" aria-label="Xəritə"></div>
+<div class="top-bar"><a href="/" data-keep-lang>Azad Bilik</a> · <a href="/atlas/serhedler/" data-keep-lang data-i18n="back">Sərhədlər xəritəsi</a><span class="langs" role="group" aria-label="Dil · Язык · Language"><button type="button" data-lang="az">AZ</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="en">EN</button></span></div>
+<div class="year" id="year" aria-hidden="true"></div>
+<main class="story" id="story"></main>
+
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script>
+(() => {
+const dark = matchMedia('(prefers-color-scheme: dark)').matches;
+const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+const still = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+const LANGS = ['az', 'ru', 'en'];
+let lang = (() => {
+  const q = new URLSearchParams(location.search).get('lang');
+  if (LANGS.includes(q)) return q;
+  try { const s = localStorage.getItem('lang'); if (LANGS.includes(s)) return s; } catch {}
+  return 'az';
+})();
+const L = (o) => o?.[lang] ?? o?.az;
+const T = { az: { doc: 'Sərhədlər necə dəyişdi · Azad Bilik', back: 'Sərhədlər xəritəsi' }, ru: { doc: 'Как менялись границы · Azad Bilik', back: 'Карта границ' }, en: { doc: 'How the borders moved · Azad Bilik', back: 'The borders map' } };
+
+// The layers, from the atlas's own maps
+const LAYERS = {
+  '1800': '../../xanliqlar/data/khanates.geojson', '1897': '../../1897/data/units.geojson',
+  '1926': '../../rayonlar/data/raions-1926.geojson', '1939': '../../rayonlar/data/raions-1939.geojson',
+  '1989': '../../rayonlar/data/raions.geojson', 'today': '../../ehali/data/units.geojson',
+};
+const ALL = [[44.0, 38.3], [50.6, 42.2]], AZ = [[44.7, 38.35], [50.5, 41.95]];
+// The story. Each step: the layer, where the camera goes, the units it lights, the 1901 scan's opacity
+const STEPS = [
+  { layer: '1800', year: '~1800', bounds: ALL, scan: 0,
+    when: { az: 'Təxminən 1800', ru: 'Около 1800', en: 'Around 1800' },
+    title: { az: 'Xanlıqlar', ru: 'Ханства', en: 'The khanates' },
+    text: { az: 'Qafqaz dağları ilə Araz arasında bir neçə xanlıq və sultanlıq var idi: Quba, Bakı, Şirvan, Şəki, Gəncə, Qarabağ, Talış, İrəvan, Naxçıvan… Hər birinin öz xanı, paytaxtı və sərhədi var idi; Qacar şahları onlardan tabeçilik gözləyirdi.',
+            ru: 'Между Кавказским хребтом и Араксом лежал десяток ханств и султанств: Куба, Баку, Ширван, Шеки, Гянджа, Карабах, Талыш, Эривань, Нахичевань… У каждого — свой хан, столица и границы; каджарские шахи ждали от них покорности.',
+            en: 'Between the Caucasus and the Araz lay a dozen khanates and sultanates: Quba, Baku, Shirvan, Shaki, Ganja, Karabakh, Talysh, Erivan, Nakhchivan… Each had its khan, its capital and its borders; the Qajar shahs expected their obedience.' } },
+  { layer: '1800', year: '1804–1806', bounds: [[45.5, 39.0], [50.2, 41.9]], ids: ['ganja', 'karabakh', 'sheki', 'shirvan', 'baku', 'quba'], scan: 0,
+    when: { az: '1804–1806', ru: '1804–1806', en: '1804–1806' },
+    title: { az: 'Rusiya gəlir', ru: 'Приходит Россия', en: 'Russia arrives' },
+    text: { az: '1804-cü ildə Gəncə hücumla alındı, Cavad xan döyüşdə öldü. 1805-də Qarabağ (Kürəkçay müqaviləsi), Şəki və Şirvan Rusiyanın himayəsini qəbul etdi; 1806-da Bakı, Quba və Dərbənd tutuldu.',
+            ru: 'В 1804 г. Гянджа взята штурмом, Джавад-хан погиб. В 1805 г. Карабах (Кюрекчайский договор), Шеки и Ширван признали власть России; в 1806 г. заняты Баку, Куба и Дербент.',
+            en: 'In 1804 Ganja was stormed and Javad Khan killed. In 1805 Karabakh (the Kurekchay treaty), Shaki and Shirvan accepted Russian rule; in 1806 Baku, Quba and Derbent were taken.' } },
+  { layer: '1800', year: '1813', bounds: ALL, ids: ['talysh'], scan: .75,
+    when: { az: '1813', ru: '1813', en: '1813' },
+    title: { az: 'Gülüstan', ru: 'Гюлистан', en: 'Gulistan' },
+    text: { az: 'Gülüstan müqaviləsi ilə İran Arazın şimalındakı xanlıqların çoxunu, Talışın şimal hissəsini də Rusiyaya verdi. Arxada gördüyünüz xəritə — Tomkeyevin 1901-ci ildə çəkdiyi 1801–1813 sərhədləri — məhz bu anı göstərir; xanlıqların sərhədlərini ondan köçürmüşük.',
+            ru: 'По Гюлистанскому договору Иран уступил России большинство ханств к северу от Аракса и северную часть Талыша. Карта на фоне — границы 1801–1813 гг., составленные Томкеевым в 1901 г., — показывает именно этот момент; с неё и перенесены границы ханств.',
+            en: "By the Treaty of Gulistan Iran ceded to Russia most of the khanates north of the Araz, and the northern part of Talysh. The map behind — Tomkeev's 1901 map of the borders of 1801–1813 — shows exactly this moment; the khanate borders were traced from it." } },
+  { layer: '1800', year: '1828', bounds: [[43.6, 37.4], [50.2, 41.4]], ids: ['erivan', 'nakhchivan'], scan: 0,
+    when: { az: '1828', ru: '1828', en: '1828' },
+    title: { az: 'Türkmənçay və Araz', ru: 'Туркманчай и Аракс', en: 'Turkmenchay and the Araz' },
+    text: { az: 'Yeni müharibədən sonra Türkmənçay müqaviləsi İrəvan və Naxçıvan xanlıqlarını da Rusiyaya verdi. Araz sərhəd oldu: Təbriz, Ərdəbil, Xoy, Urmiya və Qaradağ cənubda, İranda qaldı. Azərbaycan iki dövlət arasında bölündü.',
+            ru: 'После новой войны Туркманчайский договор передал России Эриванское и Нахичеванское ханства. Аракс стал границей: Тебриз, Ардебиль, Хой, Урмия и Карадаг остались к югу, в Иране. Азербайджан оказался разделён между двумя государствами.',
+            en: 'After another war the Treaty of Turkmenchay gave Russia the Erivan and Nakhchivan khanates too. The Araz became the border: Tabriz, Ardabil, Khoy, Urmia and Karadagh stayed to the south, in Iran. Azerbaijan was divided between two states.' } },
+  { layer: '1897', year: '1840–1897', bounds: ALL, scan: 0,
+    when: { az: '1840–1897', ru: '1840–1897', en: '1840–1897' },
+    title: { az: 'Xanlıqlardan qəzalara', ru: 'От ханств к уездам', en: 'From khanates to uezds' },
+    text: { az: 'Xanlar bir-bir ləğv edildi (Şəki 1819, Şirvan 1820, Qarabağ 1822). 1840-cı ildən torpaq Rusiya qaydası ilə quberniya və qəzalara bölündü: İrəvan (1849), Bakı (1859), Yelizavetpol (1868). Qəza sərhədləri çox vaxt xanlıqların sərhədlərini izləmirdi.',
+            ru: 'Ханов упраздняли одного за другим (Шеки 1819, Ширван 1820, Карабах 1822). С 1840 г. землю делили по-российски на губернии и уезды: Эриванская (1849), Бакинская (1859), Елисаветпольская (1868). Границы уездов часто не совпадали с ханскими.',
+            en: 'The khans were abolished one by one (Shaki 1819, Shirvan 1820, Karabakh 1822). From 1840 the land was divided the Russian way into governorates and uezds: Erivan (1849), Baku (1859), Elisabethpol (1868). The uezd borders often ignored the khanates\' lines.' } },
+  { layer: '1926', year: '1926', bounds: AZ, ids: ['nkao', 'nakhchivan', 'kurdistan'],
+    when: { az: '1918–1926', ru: '1918–1926', en: '1918–1926' },
+    title: { az: 'Respublika, sonra Sovet', ru: 'Республика, потом Советы', en: 'A republic, then the Soviets' },
+    text: { az: '1918-də Azərbaycan Xalq Cümhuriyyəti quruldu, 1920-də Sovet hakimiyyəti gəldi. Köhnə qəzalar qaldı, amma yeniləri də yarandı: Dağlıq Qarabağ Muxtar Vilayəti (1923), Naxçıvan Muxtar Respublikası (1924) və 1929-a qədər yaşayan «Kürdüstan qəzası».',
+            ru: 'В 1918 г. возникла Азербайджанская Демократическая Республика, в 1920 г. пришла советская власть. Старые уезды остались, но появились и новые единицы: Нагорно-Карабахская автономная область (1923), Нахичеванская АССР (1924) и просуществовавший до 1929 г. «Курдистанский уезд».',
+            en: 'In 1918 the Azerbaijan Democratic Republic was founded; in 1920 Soviet rule came. The old uezds stayed, but new units appeared: the Nagorno-Karabakh Autonomous Oblast (1923), the Nakhchivan ASSR (1924) and a "Kurdistan uezd" that lasted until 1929.' } },
+  { layer: '1939', year: '1930–1939', bounds: AZ,
+    when: { az: '1930–1939', ru: '1930–1939', en: '1930–1939' },
+    title: { az: 'Rayonlar', ru: 'Районы', en: 'The raions' },
+    text: { az: '1930-cu ildə qəzalar ləğv edildi, əvəzində altmışdan çox kiçik rayon yarandı. 1939-cu il siyahıyaalması onları belə tapdı. Bəziləri bugünkü rayonlara bənzəyir, bəziləri isə bir neçə bugünkü rayonun torpağını bölüşürdü (boz).',
+            ru: 'В 1930 г. уезды упразднили, вместо них появилось более шестидесяти небольших районов. Такими их застала перепись 1939 г. Одни похожи на нынешние, другие делили землю нескольких нынешних районов (серым).',
+            en: 'In 1930 the uezds were abolished and more than sixty small raions took their place, as the 1939 census found them. Some look like today\'s districts; others shared the land of several of them (grey).' } },
+  { layer: '1989', year: '1979–1989', bounds: AZ, ids: ['kirovabad', 'ilyich', 'stepanakert', 'ali-bayramli'],
+    when: { az: '1979–1989', ru: '1979–1989', en: '1979–1989' },
+    title: { az: 'Sovet adları', ru: 'Советские имена', en: 'Soviet names' },
+    text: { az: 'Son Sovet illərində bir çox yer siyasi adlar daşıyırdı: Gəncə — Kirovabad, Şərur — İliçevsk, Xankəndi — Stepanakert, Şirvan — Əli-Bayramlı. Rayonların çoxu birləşdirilib-ayrılsa da, sərhədlərin özü artıq bugünkünə yaxın idi.',
+            ru: 'В поздние советские годы многие места носили политические имена: Гянджа — Кировабад, Шарур — Ильичёвск, Ханкенди — Степанакерт, Ширван — Али-Байрамлы. Районы объединяли и делили, но сами границы были уже близки к нынешним.',
+            en: 'In the late Soviet years many places bore political names: Ganja was Kirovabad, Sharur Ilyichevsk, Khankendi Stepanakert, Shirvan Ali-Bayramli. Raions were merged and split, but the borders themselves were already close to today\'s.' } },
+  { layer: 'today', year: '1991–', bounds: AZ, end: true,
+    when: { az: '1991-dən', ru: 'С 1991', en: 'From 1991' },
+    title: { az: 'Bu gün', ru: 'Сегодня', en: 'Today' },
+    text: { az: '1991-də Azərbaycan müstəqilliyini bərpa etdi. Bugünkü rayonların əksəriyyəti Sovet rayonlarından gəlir — onlar da öz növbəsində qəzalardan, qəzalar isə xanlıqlardan. İki əsrin sərhədləri hələ də xəritədə oxunur.',
+            ru: 'В 1991 г. Азербайджан восстановил независимость. Большинство нынешних районов восходит к советским — те к уездам, уезды к ханствам. Границы двух веков всё ещё читаются на карте.',
+            en: 'In 1991 Azerbaijan regained its independence. Most of today\'s districts go back to Soviet raions, those to uezds, and the uezds to the khanates. Two centuries of borders can still be read on the map.' } },
+];
+const LINKS = { az: [['../', 'Bütün dövrlər bir xəritədə'], ['../../xanliqlar/', 'Xanlıqlar'], ['../../1897/', '1897: ana dilləri'], ['../../rayonlar/', 'Sovet rayonları'], ['../../ehali/', 'Əhali']],
+  ru: [['../', 'Все эпохи на одной карте'], ['../../xanliqlar/', 'Ханства'], ['../../1897/', '1897: родные языки'], ['../../rayonlar/', 'Советские районы'], ['../../ehali/', 'Население']],
+  en: [['../', 'All the eras on one map'], ['../../xanliqlar/', 'The khanates'], ['../../1897/', 'Native languages, 1897'], ['../../rayonlar/', 'Soviet raions'], ['../../ehali/', 'Population']] };
+
+const TONES = dark ? ['#8E6F3A', '#3B6EA8', '#B0563A', '#2E7D6B', '#7A3E8E', '#A23B6A', '#5B8A9E', '#C9862B'] : ['#C9A46A', '#7FA3CF', '#D58C72', '#6FB09B', '#A98BC0', '#CF7FA0', '#8FB5C6', '#E2B26B'];
+function colour(gj) {
+  const vtx = new Map(), fs = gj.features;
+  fs.forEach((f, i) => { const g = f.geometry; const polys = g.type === 'Polygon' ? [g.coordinates] : g.coordinates;
+    for (const p of polys) for (const ring of p) for (let j = 0; j < ring.length; j += 3) { const k = ring[j][0].toFixed(3) + ',' + ring[j][1].toFixed(3); if (!vtx.has(k)) vtx.set(k, new Set()); vtx.get(k).add(i); } });
+  const nb = fs.map(() => new Set());
+  for (const s of vtx.values()) if (s.size > 1) for (const a of s) for (const b of s) if (a !== b) nb[a].add(b);
+  const got = [];
+  fs.forEach((f, i) => { const used = new Set([...nb[i]].map((j) => got[j]).filter((x) => x != null)); let c = 0; while (used.has(c) && c < TONES.length - 1) c++; got[i] = c; f.properties.tone = f.properties.color ?? TONES[c]; });
+}
+
+// the story's text
+function render() {
+  document.documentElement.lang = lang;
+  document.title = T[lang].doc;
+  document.querySelectorAll('[data-i18n]').forEach((el) => el.textContent = T[lang][el.dataset.i18n]);
+  document.querySelectorAll('[data-lang]').forEach((b) => b.setAttribute('aria-pressed', b.dataset.lang === lang));
+  document.querySelectorAll('[data-keep-lang]').forEach((a) => { const u = new URL(a.getAttribute('href'), location.href); if (lang === 'az') u.searchParams.delete('lang'); else u.searchParams.set('lang', lang); a.href = u.pathname + u.search; });
+  const q = lang === 'az' ? '' : `?lang=${lang}`;
+  document.getElementById('story').innerHTML = STEPS.map((s, i) => `<section class="step${s.end ? ' end' : ''}" data-i="${i}"><p class="when">${esc(L(s.when))}</p><h2>${esc(L(s.title))}</h2><p>${esc(L(s.text))}</p>${s.end ? `<div class="links">${LINKS[lang].map(([h, n]) => `<a href="${h}${q}">${esc(n)} →</a>`).join('')}</div>` : ''}</section>`).join('');
+  observe();
+}
+
+const map = new maplibregl.Map({
+  container: 'map', style: `https://tiles.openfreemap.org/styles/${dark ? 'dark' : 'positron'}`,
+  bounds: ALL, minZoom: 4, maxZoom: 9, interactive: false,
+  attributionControl: { compact: true, customAttribution: 'Tomkeev 1901 · <a href="https://ristat.org/">RISTAT</a> · Demoscope · <a href="https://www.geoboundaries.org">geoBoundaries</a>' },
+});
+const pad = () => matchMedia('(max-width: 48rem)').matches ? { top: 80, right: 20, left: 20, bottom: innerHeight * .45 } : { top: 40, right: 40, bottom: 40, left: Math.min(26 * 16, innerWidth * .4) + 40 };
+map.on('style.load', () => {
+  for (const l of map.getStyle().layers) {
+    if (l.type === 'background') map.setPaintProperty(l.id, 'background-color', css('--land'));
+    if (l.type === 'fill' && /water|ocean|lake/.test(l.id)) map.setPaintProperty(l.id, 'fill-color', css('--water'));
+    if (l.type === 'symbol' && l.layout?.['text-field']) map.setLayoutProperty(l.id, 'text-field', ['coalesce', ['get', `name:${lang}`], ['get', lang === 'ru' ? 'name' : 'name:latin'], ['get', 'name']]);
+  }
+});
+let ready = false, current = -1;
+map.on('load', async () => {
+  const firstSymbol = map.getStyle().layers.find((l) => l.type === 'symbol')?.id;
+  const sc = await fetch('../../xanliqlar/data/tomkeev-1901.json').then((r) => r.json());
+  map.addSource('scan', { type: 'image', url: '../../xanliqlar/data/tomkeev-1901.webp', coordinates: sc.coordinates });
+  map.addLayer({ id: 'scan', type: 'raster', source: 'scan', paint: { 'raster-opacity': 0, 'raster-opacity-transition': { duration: still() ? 0 : 900 } } }, firstSymbol);
+  await Promise.all(Object.entries(LAYERS).map(async ([id, file]) => {
+    const gj = await fetch(file).then((r) => r.json());
+    gj.features = gj.features.filter((f) => f.geometry && f.geometry.type !== 'Point' && (id !== 'today' || f.properties.country === 'az') && (id !== '1897' || !['Дагестанская область', 'Карская область'].includes(f.properties.govKey)));
+    colour(gj);
+    map.addSource(id, { type: 'geojson', data: gj });
+    const fade = { duration: still() ? 0 : 800 };
+    map.addLayer({ id: `${id}-fill`, type: 'fill', source: id, paint: { 'fill-color': ['case', ['==', ['get', 'kind'], 'gap'], css('--muted'), ['get', 'tone']], 'fill-opacity': 0, 'fill-opacity-transition': fade } }, firstSymbol);
+    map.addLayer({ id: `${id}-line`, type: 'line', source: id, paint: { 'line-color': css('--ink'), 'line-width': .8, 'line-opacity': 0, 'line-opacity-transition': fade } }, firstSymbol);
+    map.addLayer({ id: `${id}-hl`, type: 'line', source: id, filter: ['in', ['get', 'id'], ['literal', []]], paint: { 'line-color': css('--accent'), 'line-width': 2.5, 'line-opacity': 0, 'line-opacity-transition': fade } }, firstSymbol);
+  }));
+  ready = true;
+  go(Math.max(current, 0), true);
+});
+
+// a step: its layer fades in (the units it names lit, the rest dimmed), the camera moves, the year counts
+function go(i, force = false) {
+  if (i === current && !force) return;
+  current = i;
+  document.querySelectorAll('.step').forEach((s) => s.classList.toggle('on', +s.dataset.i === i));
+  const s = STEPS[i];
+  document.getElementById('year').textContent = s.year;
+  if (!ready) return;
+  const ids = s.ids ?? [];
+  for (const id of Object.keys(LAYERS)) {
+    const on = id === s.layer;
+    map.setPaintProperty(`${id}-fill`, 'fill-opacity', !on ? 0 : ids.length ? ['case', ['in', ['get', 'id'], ['literal', ids]], .65, ['==', ['get', 'kind'], 'gap'], .12, .14] : ['case', ['==', ['get', 'kind'], 'gap'], .22, .5]);
+    map.setPaintProperty(`${id}-line`, 'line-opacity', on ? .7 : 0);
+    map.setFilter(`${id}-hl`, ['in', ['get', 'id'], ['literal', on ? ids : []]]);
+    map.setPaintProperty(`${id}-hl`, 'line-opacity', on && ids.length ? 1 : 0);
+  }
+  map.setPaintProperty('scan', 'raster-opacity', s.scan ?? 0);
+  if (s.scan) map.setPaintProperty(`${s.layer}-fill`, 'fill-opacity', ids.length ? ['case', ['in', ['get', 'id'], ['literal', ids]], .35, 0] : 0);
+  map.fitBounds(s.bounds, { padding: pad(), duration: still() ? 0 : 1600, essential: true });
+}
+let io;
+function observe() {
+  io?.disconnect();
+  io = new IntersectionObserver((es) => { for (const e of es) if (e.isIntersecting) go(+e.target.dataset.i); }, { rootMargin: '-45% 0px -45% 0px' });
+  document.querySelectorAll('.step').forEach((s) => io.observe(s));
+}
+addEventListener('scroll', () => { const h = document.documentElement; document.getElementById('progress').style.width = `${h.scrollTop / (h.scrollHeight - h.clientHeight) * 100}%`; }, { passive: true });
+document.querySelectorAll('[data-lang]').forEach((b) => b.onclick = () => {
+  lang = b.dataset.lang;
+  try { localStorage.setItem('lang', lang); } catch {}
+  const u = new URL(location.href); if (lang === 'az') u.searchParams.delete('lang'); else u.searchParams.set('lang', lang); history.replaceState(null, '', u.pathname + u.search);
+  render(); go(current, true);
+});
+render();
+})();
+</script>
+</body>
+</html>

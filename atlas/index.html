@@ -51,13 +51,19 @@
   h1 { font: 300 clamp(2.25rem, 1.2rem + 4.6vw, 4.5rem)/1.04 var(--serif); letter-spacing: -.025em; }
   .hero p { margin-top: 1.25rem; font: italic 300 clamp(1.125rem, 1rem + .6vw, 1.375rem)/1.4 var(--serif); max-width: 36ch; }
 
-  .maps { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr)); gap: 2.5rem 2rem; border-top: 1px solid var(--rule); padding-top: 2.5rem; }
+  /* Sections: the group's name in the margin, its maps beside it */
+  .group { display: grid; grid-template-columns: minmax(11rem, 1fr) 3fr; gap: 1.5rem 3rem; border-top: 1px solid var(--rule); padding-block: 2.25rem 3.5rem; }
+  .group-head { align-self: start; position: sticky; top: 1.5rem; }
+  .group-head h2 { font: 400 1.375rem/1.2 var(--serif); letter-spacing: -.01em; text-wrap: balance; }
+  .group-head p { margin-top: .5rem; font-size: .875rem; color: var(--muted); max-width: 24ch; }
+  .maps { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr)); gap: 2.5rem 2rem; }
+  @media (max-width: 52rem) { .group { grid-template-columns: 1fr; gap: 1.25rem; padding-block: 1.75rem 2.75rem; } .group-head { position: static; } .group-head p { max-width: 40rem; } }
   .map a { display: block; text-decoration: none; }
   .map .pic { aspect-ratio: 1200 / 630; background: var(--frame); border-radius: 3px; overflow: hidden; }
   .map img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s; }
   .map a:hover img { transform: scale(1.015); }
-  .map h2 { margin-top: 1rem; font: 400 1.75rem/1.15 var(--serif); letter-spacing: -.015em; }
-  .map h2::after { content: ' →'; font: 300 .6em var(--sans); color: var(--muted); vertical-align: .2em; }
+  .map h3 { margin-top: 1rem; font: 400 1.75rem/1.15 var(--serif); letter-spacing: -.015em; }
+  .map h3::after { content: ' →'; font: 300 .6em var(--sans); color: var(--muted); vertical-align: .2em; }
   .map a:hover h2::after { color: var(--accent); }
   .map p { margin-top: .5rem; max-width: 34rem; }
   .map .facts { margin-top: .5rem; font-size: .8125rem; color: var(--muted); font-variant-numeric: tabular-nums; }
@@ -80,72 +86,85 @@
       <p><span data-l="az">Tarixi Azərbaycan rəqəmlərdə və xəritələrdə: əhali, icmalar, xalqlar və dillər, coğrafiya. Hər rəqəm öz mənbəyi ilə.</span><span data-l="ru">Исторический Азербайджан в цифрах и картах: население, общины, народы и языки, география. Каждая цифра — с источником.</span><span data-l="en">Historical Azerbaijan in figures and maps: population, communities, peoples and languages, geography. Every figure with its source.</span></p>
     </div>
 
-    <ul class="maps">
-      <li class="map">
-        <a href="/atlas/serhedler/" data-keep-lang>
-          <div class="pic"><img src="/atlas/serhedler/og.png" width="1200" height="630" alt="" loading="lazy"></div>
-          <h2><span data-l="az">Sərhədlər</span><span data-l="ru">Границы</span><span data-l="en">Borders</span></h2>
-          <p><span data-l="az">İki əsrin daxili sərhədləri bir xəritədə: xanlıqlar, 1897-ci ilin qəzaları, Sovet qəzaları və rayonları, bugünkü rayonlar. Dövrləri sürüşdürün, hər birindən öz xəritəsinə keçin.</span><span data-l="ru">Внутренние границы за два века на одной карте: ханства, уезды 1897 г., советские уезды и районы, нынешние районы. Листайте эпохи и переходите к карте каждой.</span><span data-l="en">Two centuries of internal borders on one map: the khanates, the 1897 uezds, the Soviet uezds and raions, today's districts. Slide through the eras and open each one's own map.</span></p>
-          <p class="facts"><span data-l="az">6 dövr · 1800–bu gün</span><span data-l="ru">6 эпох · 1800–сегодня</span><span data-l="en">6 eras · 1800 to today</span></p>
-        </a>
-      </li>
-      <li class="map">
-        <a href="/atlas/ehali/" data-keep-lang>
-          <div class="pic"><img src="/atlas/ehali/og.png" width="1200" height="630" alt="" loading="lazy"></div>
-          <h2><span data-l="az">Əhali</span><span data-l="ru">Население</span><span data-l="en">Population</span></h2>
-          <p><span data-l="az">Tarixi Azərbaycanın əhalisi siyahıyaalmalar üzrə: Azərbaycan Respublikasının rayonları və İranın dörd Azərbaycan ostanının şəhristanları, sayı, sıxlığı və dəyişməsi ilə.</span><span data-l="ru">Население исторического Азербайджана по переписям: районы Азербайджанской Республики и шахрестаны четырёх азербайджанских останов Ирана — численность, плотность, изменение.</span><span data-l="en">The population of historical Azerbaijan, census by census: the Republic's districts and the counties of Iran's four Azerbaijani provinces, by number, density and change.</span></p>
-          <p class="facts"><span data-l="az">133 bölgə · 8 siyahıyaalma · 1939–2019</span><span data-l="ru">133 единицы · 8 переписей · 1939–2019</span><span data-l="en">133 units · 8 censuses · 1939–2019</span></p>
-        </a>
-      </li>
-      <li class="map">
-        <a href="/atlas/icmalar/" data-keep-lang>
-          <div class="pic"><img src="/atlas/icmalar/og.png" width="1200" height="630" alt="" loading="lazy"></div>
-          <h2><span data-l="az">İcmalar</span><span data-l="ru">Общины</span><span data-l="en">Communities</span></h2>
-          <p><span data-l="az">Respublikadan kənarda azərbaycanlılar siyahıyaalmalar üzrə: Borçalı (Gürcüstan), Dərbənd (Dağıstan), İrəvan və Göyçə (Sovet Ermənistanı), burada doğulan şairlərlə.</span><span data-l="ru">Азербайджанцы за пределами республики по переписям: Борчалы (Грузия), Дербент (Дагестан), Иреван и Гёйча (Советская Армения) — с поэтами, родившимися там.</span><span data-l="en">Azerbaijanis beyond the Republic, census by census: Borchali (Georgia), Derbent (Dagestan), Irevan and Göyçə (Soviet Armenia), with the poets born there.</span></p>
-          <p class="facts"><span data-l="az">158 rayon · 10 siyahıyaalma · 1926–2021</span><span data-l="ru">158 районов · 10 переписей · 1926–2021</span><span data-l="en">158 districts · 10 censuses · 1926–2021</span></p>
-        </a>
-      </li>
-      <li class="map">
-        <a href="/atlas/xalqlar/" data-keep-lang>
-          <div class="pic"><img src="/atlas/xalqlar/og.png" width="1200" height="630" alt="" loading="lazy"></div>
-          <h2><span data-l="az">Xalqlar və dillər</span><span data-l="ru">Народы и языки</span><span data-l="en">Peoples and languages</span></h2>
-          <p><span data-l="az">Azərbaycanın xalqları rayonlar üzrə: ləzgilər, talışlar, avarlar, saxurlar, udinlər, tatlar, qırızlar, buduqlar, xınalıqlılar və başqaları, hər biri öz dili, dil ailəsi və UNESCO-ya görə vəziyyəti ilə.</span><span data-l="ru">Народы Азербайджана по районам: лезгины, талыши, аварцы, цахуры, удины, таты, крызы, будухи, хиналугцы и другие — с их языками, языковыми семьями и статусом по ЮНЕСКО.</span><span data-l="en">The peoples of Azerbaijan by district: Lezgins, Talysh, Avars, Tsakhurs, Udi, Tats, Kryz, Budukh, Khinalug and others, each with its language, family and UNESCO status.</span></p>
-          <p class="facts"><span data-l="az">18 xalq · 78 rayon · 1979–2019</span><span data-l="ru">18 народов · 78 районов · 1979–2019</span><span data-l="en">18 peoples · 78 districts · 1979–2019</span></p>
-        </a>
-      </li>
-      <li class="map">
-        <a href="/atlas/xanliqlar/" data-keep-lang>
-          <div class="pic"><img src="/atlas/xanliqlar/og.png" width="1200" height="630" alt="" loading="lazy"></div>
-          <h2><span data-l="az">Xanlıqlar</span><span data-l="ru">Ханства</span><span data-l="en">Khanates</span></h2>
-          <p><span data-l="az">Azərbaycan xanlıqları təxminən 1800-cü ildə: Quba, Bakı, Şirvan, Şəki, Gəncə, Qarabağ, Talış, Cavad, Naxçıvan, İrəvan, Arazın cənubundakılar; hansının nə vaxt Rusiyaya keçdiyi. Sərhədlər təxminidir.</span><span data-l="ru">Азербайджанские ханства около 1800 г.: Куба, Баку, Ширван, Шеки, Гянджа, Карабах, Талыш, Джавад, Нахичевань, Эривань и ханства к югу от Аракса; когда какое отошло России. Границы приблизительные.</span><span data-l="en">The khanates of Azerbaijan around 1800: Quba, Baku, Shirvan, Shaki, Ganja, Karabakh, Talysh, Javad, Nakhchivan, Erivan and those south of the Araz, and when each passed to Russia. Approximate borders.</span></p>
-          <p class="facts"><span data-l="az">22 xanlıq · təx. 1800</span><span data-l="ru">22 ханства · ок. 1800</span><span data-l="en">22 khanates · c. 1800</span></p>
-        </a>
-      </li>
-      <li class="map">
-        <a href="/atlas/1897/" data-keep-lang>
-          <div class="pic"><img src="/atlas/1897/og.png" width="1200" height="630" alt="" loading="lazy"></div>
-          <h2><span data-l="az">1897: ana dilləri</span><span data-l="ru">1897: родные языки</span><span data-l="en">Native languages, 1897</span></h2>
-          <p><span data-l="az">Qafqazda ilk siyahıyaalma: Bakı, Yelizavetpol, İrəvan quberniyaları, Dağıstan və Qars vilayətləri, Borçalı və Zaqatala qəza-qəza, ana dillərinə görə, şəhərləri ilə; bugünkü sərhədlərlə müqayisədə.</span><span data-l="ru">Первая перепись на Кавказе: Бакинская, Елисаветпольская, Эриванская губернии, Дагестанская и Карсская области, Борчалы и Закаталы — по уездам и родным языкам, с городами; в сравнении с нынешними границами.</span><span data-l="en">The first census of the Caucasus: the Baku, Elisabethpol and Erivan governorates, Dagestan, Kars, Borchali and Zaqatala, uezd by uezd and by native language, with their towns, against today's borders.</span></p>
-          <p class="facts"><span data-l="az">36 qəza · 1897</span><span data-l="ru">36 уездов · 1897</span><span data-l="en">36 uezds · 1897</span></p>
-        </a>
-      </li>
-      <li class="map">
-        <a href="/atlas/rayonlar/" data-keep-lang>
-          <div class="pic"><img src="/atlas/rayonlar/og.png" width="1200" height="630" alt="" loading="lazy"></div>
-          <h2><span data-l="az">Sovet rayonları</span><span data-l="ru">Советские районы</span><span data-l="en">Soviet raions</span></h2>
-          <p><span data-l="az">Azərbaycan SSR-in qəzaları, rayonları və şəhər sovetləri 1926, 1939, 1979 və 1989-cu il siyahıyaalmalarında: Dəvəçi, Qazax, Xanlar, İliç, Mardakert, Martuni və başqaları, əhalisi, sıxlığı, şəhər əhalisi və on ildə dəyişməsi ilə.</span><span data-l="ru">Уезды, районы и горсоветы Азербайджанской ССР по переписям 1926, 1939, 1979 и 1989 гг.: Дивичи, Казах, Ханлар, Ильичёвск, Мардакерт, Мартуни и другие — население, плотность, доля горожан и изменение за десять лет.</span><span data-l="en">The uezds, raions and city councils of the Azerbaijan SSR at the 1926, 1939, 1979 and 1989 censuses: Divichi, Kazakh, Khanlar, Ilyichevsk, Mardakert, Martuni and the rest, by people, density, urban share and change over the decade.</span></p>
-          <p class="facts"><span data-l="az">4 siyahıyaalma · 1926–1989</span><span data-l="ru">4 переписи · 1926–1989</span><span data-l="en">4 censuses · 1926–1989</span></p>
-        </a>
-      </li>
-      <li class="map">
-        <a href="/atlas/hovze/" data-keep-lang>
-          <div class="pic"><img src="/atlas/hovze/og.png" width="1200" height="630" alt="" loading="lazy"></div>
-          <h2><span data-l="az">Kür–Araz hövzəsi</span><span data-l="ru">Бассейн Куры и Аракса</span><span data-l="en">The Kura–Araz basin</span></h2>
-          <p><span data-l="az">Kür, Araz və onların bütün qolları mənbədən mənsəbədək, göllər və su anbarları, adları və uzunluqları ilə.</span><span data-l="ru">Кура, Аракс и все их притоки от истока до устья, озёра и водохранилища — с названиями и длиной.</span><span data-l="en">The Kura, the Araz and all their tributaries from source to mouth, with the lakes and reservoirs, their names and lengths.</span></p>
-          <p class="facts"><span data-l="az">312 çay · 108 göl və su anbarı</span><span data-l="ru">312 рек · 108 озёр и водохранилищ</span><span data-l="en">312 rivers · 108 lakes and reservoirs</span></p>
-        </a>
-      </li>
-    </ul>
+    <section class="group" aria-labelledby="g-borders">
+      <div class="group-head"><h2 id="g-borders"><span data-l="az">Sərhədlər və dövrlər</span><span data-l="ru">Границы и эпохи</span><span data-l="en">Borders and eras</span></h2><p><span data-l="az">Xanlıqlardan bugünkü rayonlaradək, hər dövr öz inzibati bölgüsü ilə.</span><span data-l="ru">От ханств до нынешних районов: каждая эпоха со своим делением.</span><span data-l="en">From the khanates to today’s districts, each era in its own divisions.</span></p></div>
+      <ul class="maps">
+        <li class="map">
+          <a href="/atlas/serhedler/" data-keep-lang>
+            <div class="pic"><img src="/atlas/serhedler/og.png" width="1200" height="630" alt="" loading="lazy"></div>
+            <h3><span data-l="az">Sərhədlər</span><span data-l="ru">Границы</span><span data-l="en">Borders</span></h3>
+            <p><span data-l="az">İki əsrin daxili sərhədləri bir xəritədə: xanlıqlar, 1897-ci ilin qəzaları, Sovet qəzaları və rayonları, bugünkü rayonlar. Dövrləri sürüşdürün, hekayə kimi oxuyun və ya «xəritədə tap» oynayın.</span><span data-l="ru">Внутренние границы за два века на одной карте: ханства, уезды 1897 г., советские уезды и районы, нынешние районы. Листайте эпохи, читайте как историю или играйте в «найди на карте».</span><span data-l="en">Two centuries of internal borders on one map: the khanates, the 1897 uezds, the Soviet uezds and raions, today's districts. Slide through the eras, read it as a scrolling story, or play «find it on the map».</span></p>
+            <p class="facts"><span data-l="az">6 dövr · 1800–bu gün</span><span data-l="ru">6 эпох · 1800–сегодня</span><span data-l="en">6 eras · 1800 to today</span></p>
+          </a>
+        </li>
+        <li class="map">
+          <a href="/atlas/xanliqlar/" data-keep-lang>
+            <div class="pic"><img src="/atlas/xanliqlar/og.png" width="1200" height="630" alt="" loading="lazy"></div>
+            <h3><span data-l="az">Xanlıqlar</span><span data-l="ru">Ханства</span><span data-l="en">Khanates</span></h3>
+            <p><span data-l="az">Azərbaycan xanlıqları təxminən 1800-cü ildə: Quba, Bakı, Şirvan, Şəki, Gəncə, Qarabağ, Talış, Cavad, Naxçıvan, İrəvan, Arazın cənubundakılar; hansının nə vaxt Rusiyaya keçdiyi. Sərhədlər təxminidir.</span><span data-l="ru">Азербайджанские ханства около 1800 г.: Куба, Баку, Ширван, Шеки, Гянджа, Карабах, Талыш, Джавад, Нахичевань, Эривань и ханства к югу от Аракса; когда какое отошло России. Границы приблизительные.</span><span data-l="en">The khanates of Azerbaijan around 1800: Quba, Baku, Shirvan, Shaki, Ganja, Karabakh, Talysh, Javad, Nakhchivan, Erivan and those south of the Araz, and when each passed to Russia. Approximate borders.</span></p>
+            <p class="facts"><span data-l="az">22 xanlıq · təx. 1800</span><span data-l="ru">22 ханства · ок. 1800</span><span data-l="en">22 khanates · c. 1800</span></p>
+          </a>
+        </li>
+        <li class="map">
+          <a href="/atlas/rayonlar/" data-keep-lang>
+            <div class="pic"><img src="/atlas/rayonlar/og.png" width="1200" height="630" alt="" loading="lazy"></div>
+            <h3><span data-l="az">Sovet rayonları</span><span data-l="ru">Советские районы</span><span data-l="en">Soviet raions</span></h3>
+            <p><span data-l="az">Azərbaycan SSR-in qəzaları, rayonları və şəhər sovetləri 1926, 1939, 1979 və 1989-cu il siyahıyaalmalarında: Dəvəçi, Qazax, Xanlar, İliç, Mardakert, Martuni və başqaları, əhalisi, sıxlığı, şəhər əhalisi və on ildə dəyişməsi ilə.</span><span data-l="ru">Уезды, районы и горсоветы Азербайджанской ССР по переписям 1926, 1939, 1979 и 1989 гг.: Дивичи, Казах, Ханлар, Ильичёвск, Мардакерт, Мартуни и другие — население, плотность, доля горожан и изменение за десять лет.</span><span data-l="en">The uezds, raions and city councils of the Azerbaijan SSR at the 1926, 1939, 1979 and 1989 censuses: Divichi, Kazakh, Khanlar, Ilyichevsk, Mardakert, Martuni and the rest, by people, density, urban share and change over the decade.</span></p>
+            <p class="facts"><span data-l="az">4 siyahıyaalma · 1926–1989</span><span data-l="ru">4 переписи · 1926–1989</span><span data-l="en">4 censuses · 1926–1989</span></p>
+          </a>
+        </li>
+      </ul>
+    </section>
+    <section class="group" aria-labelledby="g-people">
+      <div class="group-head"><h2 id="g-people"><span data-l="az">Əhali və dillər</span><span data-l="ru">Население и языки</span><span data-l="en">People and languages</span></h2><p><span data-l="az">Siyahıyaalmalar üzrə: neçə nəfər, harada, hansı dildə.</span><span data-l="ru">По переписям: сколько людей, где и на каком языке.</span><span data-l="en">Census by census: how many people, where, speaking what.</span></p></div>
+      <ul class="maps">
+        <li class="map">
+          <a href="/atlas/ehali/" data-keep-lang>
+            <div class="pic"><img src="/atlas/ehali/og.png" width="1200" height="630" alt="" loading="lazy"></div>
+            <h3><span data-l="az">Əhali</span><span data-l="ru">Население</span><span data-l="en">Population</span></h3>
+            <p><span data-l="az">Tarixi Azərbaycanın əhalisi siyahıyaalmalar üzrə: Azərbaycan Respublikasının rayonları və İranın dörd Azərbaycan ostanının şəhristanları, sayı, sıxlığı və dəyişməsi ilə.</span><span data-l="ru">Население исторического Азербайджана по переписям: районы Азербайджанской Республики и шахрестаны четырёх азербайджанских останов Ирана — численность, плотность, изменение.</span><span data-l="en">The population of historical Azerbaijan, census by census: the Republic's districts and the counties of Iran's four Azerbaijani provinces, by number, density and change.</span></p>
+            <p class="facts"><span data-l="az">133 bölgə · 8 siyahıyaalma · 1939–2019</span><span data-l="ru">133 единицы · 8 переписей · 1939–2019</span><span data-l="en">133 units · 8 censuses · 1939–2019</span></p>
+          </a>
+        </li>
+        <li class="map">
+          <a href="/atlas/icmalar/" data-keep-lang>
+            <div class="pic"><img src="/atlas/icmalar/og.png" width="1200" height="630" alt="" loading="lazy"></div>
+            <h3><span data-l="az">İcmalar</span><span data-l="ru">Общины</span><span data-l="en">Communities</span></h3>
+            <p><span data-l="az">Respublikadan kənarda azərbaycanlılar siyahıyaalmalar üzrə: Borçalı (Gürcüstan), Dərbənd (Dağıstan), İrəvan və Göyçə (Sovet Ermənistanı), burada doğulan şairlərlə.</span><span data-l="ru">Азербайджанцы за пределами республики по переписям: Борчалы (Грузия), Дербент (Дагестан), Иреван и Гёйча (Советская Армения) — с поэтами, родившимися там.</span><span data-l="en">Azerbaijanis beyond the Republic, census by census: Borchali (Georgia), Derbent (Dagestan), Irevan and Göyçə (Soviet Armenia), with the poets born there.</span></p>
+            <p class="facts"><span data-l="az">158 rayon · 10 siyahıyaalma · 1926–2021</span><span data-l="ru">158 районов · 10 переписей · 1926–2021</span><span data-l="en">158 districts · 10 censuses · 1926–2021</span></p>
+          </a>
+        </li>
+        <li class="map">
+          <a href="/atlas/xalqlar/" data-keep-lang>
+            <div class="pic"><img src="/atlas/xalqlar/og.png" width="1200" height="630" alt="" loading="lazy"></div>
+            <h3><span data-l="az">Xalqlar və dillər</span><span data-l="ru">Народы и языки</span><span data-l="en">Peoples and languages</span></h3>
+            <p><span data-l="az">Azərbaycanın xalqları rayonlar üzrə: ləzgilər, talışlar, avarlar, saxurlar, udinlər, tatlar, qırızlar, buduqlar, xınalıqlılar və başqaları, hər biri öz dili, dil ailəsi və UNESCO-ya görə vəziyyəti ilə.</span><span data-l="ru">Народы Азербайджана по районам: лезгины, талыши, аварцы, цахуры, удины, таты, крызы, будухи, хиналугцы и другие — с их языками, языковыми семьями и статусом по ЮНЕСКО.</span><span data-l="en">The peoples of Azerbaijan by district: Lezgins, Talysh, Avars, Tsakhurs, Udi, Tats, Kryz, Budukh, Khinalug and others, each with its language, family and UNESCO status.</span></p>
+            <p class="facts"><span data-l="az">18 xalq · 78 rayon · 1979–2019</span><span data-l="ru">18 народов · 78 районов · 1979–2019</span><span data-l="en">18 peoples · 78 districts · 1979–2019</span></p>
+          </a>
+        </li>
+        <li class="map">
+          <a href="/atlas/1897/" data-keep-lang>
+            <div class="pic"><img src="/atlas/1897/og.png" width="1200" height="630" alt="" loading="lazy"></div>
+            <h3><span data-l="az">1897: ana dilləri</span><span data-l="ru">1897: родные языки</span><span data-l="en">Native languages, 1897</span></h3>
+            <p><span data-l="az">Qafqazda ilk siyahıyaalma: Bakı, Yelizavetpol, İrəvan quberniyaları, Dağıstan və Qars vilayətləri, Borçalı və Zaqatala qəza-qəza, ana dillərinə görə, şəhərləri ilə; bugünkü sərhədlərlə müqayisədə.</span><span data-l="ru">Первая перепись на Кавказе: Бакинская, Елисаветпольская, Эриванская губернии, Дагестанская и Карсская области, Борчалы и Закаталы — по уездам и родным языкам, с городами; в сравнении с нынешними границами.</span><span data-l="en">The first census of the Caucasus: the Baku, Elisabethpol and Erivan governorates, Dagestan, Kars, Borchali and Zaqatala, uezd by uezd and by native language, with their towns, against today's borders.</span></p>
+            <p class="facts"><span data-l="az">36 qəza · 1897</span><span data-l="ru">36 уездов · 1897</span><span data-l="en">36 uezds · 1897</span></p>
+          </a>
+        </li>
+      </ul>
+    </section>
+    <section class="group" aria-labelledby="g-land">
+      <div class="group-head"><h2 id="g-land"><span data-l="az">Coğrafiya</span><span data-l="ru">География</span><span data-l="en">Geography</span></h2><p><span data-l="az">Torpaq və su.</span><span data-l="ru">Земля и вода.</span><span data-l="en">Land and water.</span></p></div>
+      <ul class="maps">
+        <li class="map">
+          <a href="/atlas/hovze/" data-keep-lang>
+            <div class="pic"><img src="/atlas/hovze/og.png" width="1200" height="630" alt="" loading="lazy"></div>
+            <h3><span data-l="az">Kür–Araz hövzəsi</span><span data-l="ru">Бассейн Куры и Аракса</span><span data-l="en">The Kura–Araz basin</span></h3>
+            <p><span data-l="az">Kür, Araz və onların bütün qolları mənbədən mənsəbədək, göllər və su anbarları, adları və uzunluqları ilə.</span><span data-l="ru">Кура, Аракс и все их притоки от истока до устья, озёра и водохранилища — с названиями и длиной.</span><span data-l="en">The Kura, the Araz and all their tributaries from source to mouth, with the lakes and reservoirs, their names and lengths.</span></p>
+            <p class="facts"><span data-l="az">312 çay · 108 göl və su anbarı</span><span data-l="ru">312 рек · 108 озёр и водохранилищ</span><span data-l="en">312 rivers · 108 lakes and reservoirs</span></p>
+          </a>
+        </li>
+      </ul>
+    </section>
 
     <p class="note"><span data-l="az"> Ədəbiyyat və sənət xəritələri <a href="/xeriteler/" data-keep-lang>Ədəbi xəritələr</a> bölməsindədir.</span><span data-l="ru"> Карты литературы и искусства — в разделе <a href="/xeriteler/" data-keep-lang>Литературные карты</a>.</span><span data-l="en"> Maps of literature and art are under <a href="/xeriteler/" data-keep-lang>Literary maps</a>.</span></p>
   </main>

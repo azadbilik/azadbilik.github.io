@@ -42,6 +42,7 @@ for (const [path, musts] of [
   ['/atlas/icmalar/', ['maplibre-gl', 'extras.json']],
   ['/atlas/xalqlar/', ['maplibre-gl', 'peoples.out.json', 'data/dots-']],
   ['/atlas/serhedler/', ['maplibre-gl', 'khanates.geojson', 'raions-1939.geojson']],
+  ['/atlas/serhedler/hekaye/', ['maplibre-gl', 'Gulistan', 'tomkeev-1901.webp']],
   ['/atlas/hovze/', ['maplibre-gl', 'rivers.geojson']],
   ['/atlas/caylar/', ['/atlas/hovze/']],
   ['/atlas/1897/', ['maplibre-gl', 'census.out.json']],
