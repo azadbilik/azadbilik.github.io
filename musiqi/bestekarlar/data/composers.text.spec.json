@@ -1,0 +1,260 @@
+{
+ "note": "Teacher-student links read by hand from the sentences in composers.candidates.json (az/ru/en Wikipedia). i = index of the sentence; t taught s. Names are the az labels of composers.raw.json. A sentence that lists several students gives several links.",
+ "links": [
+  [
+   4,
+   "Seyid Şuşinski",
+   "Əlibaba Məmmədov"
+  ],
+  [
+   15,
+   "Qara Qarayev",
+   "Fərəc Qarayev"
+  ],
+  [
+   24,
+   "Dmitri Şostakoviç",
+   "Cövdət Hacıyev"
+  ],
+  [
+   26,
+   "Üzeyir Hacıbəyov",
+   "Cövdət Hacıyev"
+  ],
+  [
+   44,
+   "Cövdət Hacıyev",
+   "Eldar Mansurov"
+  ],
+  [
+   42,
+   "Arif Məlikov",
+   "Eldar Mansurov"
+  ],
+  [
+   50,
+   "Səid Rüstəmov",
+   "Hacı Xanməmmədov"
+  ],
+  [
+   56,
+   "Hacı Xanməmmədov",
+   "Şəfiqə Axundova"
+  ],
+  [
+   71,
+   "Üzeyir Hacıbəyov",
+   "Əfrasiyab Bədəlbəyli"
+  ],
+  [
+   71,
+   "Üzeyir Hacıbəyov",
+   "Səid Rüstəmov"
+  ],
+  [
+   71,
+   "Üzeyir Hacıbəyov",
+   "Asəf Zeynallı"
+  ],
+  [
+   71,
+   "Üzeyir Hacıbəyov",
+   "Şəmsi Bədəlbəyli"
+  ],
+  [
+   71,
+   "Üzeyir Hacıbəyov",
+   "Niyazi"
+  ],
+  [
+   71,
+   "Üzeyir Hacıbəyov",
+   "Cövdət Hacıyev"
+  ],
+  [
+   71,
+   "Üzeyir Hacıbəyov",
+   "Tofiq Quliyev"
+  ],
+  [
+   71,
+   "Üzeyir Hacıbəyov",
+   "Qara Qarayev"
+  ],
+  [
+   71,
+   "Üzeyir Hacıbəyov",
+   "Cahangir Cahangirov"
+  ],
+  [
+   71,
+   "Üzeyir Hacıbəyov",
+   "Fikrət Əmirov"
+  ],
+  [
+   71,
+   "Üzeyir Hacıbəyov",
+   "Şəfiqə Axundova"
+  ],
+  [
+   106,
+   "Üzeyir Hacıbəyov",
+   "Ağabacı Rzayeva"
+  ],
+  [
+   188,
+   "Səid Rüstəmov",
+   "Ağabacı Rzayeva"
+  ],
+  [
+   189,
+   "Səid Rüstəmov",
+   "Adil Gəray"
+  ],
+  [
+   156,
+   "Üzeyir Hacıbəyov",
+   "Adil Gəray"
+  ],
+  [
+   107,
+   "Boris Zeydman",
+   "Soltan Hacıbəyov"
+  ],
+  [
+   108,
+   "Boris Zeydman",
+   "Cahangir Cahangirov"
+  ],
+  [
+   119,
+   "Üzeyir Hacıbəyov",
+   "Qara Qarayev"
+  ],
+  [
+   120,
+   "Qara Qarayev",
+   "Fərəc Qarayev"
+  ],
+  [
+   120,
+   "Qara Qarayev",
+   "Arif Mirzəyev"
+  ],
+  [
+   120,
+   "Qara Qarayev",
+   "Rauf Hacıyev"
+  ],
+  [
+   120,
+   "Qara Qarayev",
+   "Arif Məlikov"
+  ],
+  [
+   120,
+   "Qara Qarayev",
+   "Xəyyam Mirzəzadə"
+  ],
+  [
+   120,
+   "Qara Qarayev",
+   "Vasif Adıgözəlov"
+  ],
+  [
+   120,
+   "Qara Qarayev",
+   "Tofiq Bakıxanov"
+  ],
+  [
+   120,
+   "Qara Qarayev",
+   "Vladimir Shainsky"
+  ],
+  [
+   120,
+   "Qara Qarayev",
+   "Oqtay Zülfüqarov"
+  ],
+  [
+   120,
+   "Qara Qarayev",
+   "Firəngiz Əlizadə"
+  ],
+  [
+   120,
+   "Qara Qarayev",
+   "Məmməd Quliyev"
+  ],
+  [
+   120,
+   "Qara Qarayev",
+   "Sevda İbrahimova"
+  ],
+  [
+   120,
+   "Qara Qarayev",
+   "Polad Bülbüloğlu"
+  ],
+  [
+   131,
+   "Üzeyir Hacıbəyov",
+   "Fikrət Əmirov"
+  ],
+  [
+   145,
+   "Boris Zeydman",
+   "Fikrət Əmirov"
+  ],
+  [
+   155,
+   "Qara Qarayev",
+   "Andrey Babayev"
+  ],
+  [
+   160,
+   "Qara Qarayev",
+   "Nərgiz Şəfiyeva"
+  ],
+  [
+   168,
+   "Qara Qarayev",
+   "Oqtay Zülfüqarov"
+  ],
+  [
+   210,
+   "Asəf Zeynallı",
+   "Qara Qarayev"
+  ],
+  [
+   210,
+   "Asəf Zeynallı",
+   "Tofiq Quliyev"
+  ],
+  [
+   210,
+   "Asəf Zeynallı",
+   "Cövdət Hacıyev"
+  ],
+  [
+   218,
+   "Wassili Kalafati",
+   "Üzeyir Hacıbəyov"
+  ],
+  [
+   111,
+   "Qara Qarayev",
+   "Rauf Hacıyev"
+  ],
+  [
+   97,
+   "Evgeny Golubev",
+   "Asya Sultanova"
+  ],
+  [
+   96,
+   "Vissarion Shebalin",
+   "Asya Sultanova"
+  ]
+ ]
+}

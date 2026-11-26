@@ -82,3 +82,4 @@ Q39394656	P1066	Q2074733	S4656	"https://az.wikipedia.org/wiki/Adil_Bağırov_(ta
 Q12837124	P1066	Q12841892	S4656	"https://az.wikipedia.org/wiki/Aşıq_Məhərrəm_Hüseynli"
 Q1131312	P1066	Q4216454	S4656	"https://az.wikipedia.org/wiki/Cabbar_Qaryağdıoğlu"
 Q20557612	P1066	Q4216454	S4656	"https://az.wikipedia.org/wiki/Cabbar_Qaryağdıoğlu"
+Q12835418	P1066	Q2074733	S4656	"https://az.wikipedia.org/wiki/Səid_Rüstəmov"

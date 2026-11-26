@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="/shared/theme.js"></script>
+<title>Bəstəkarlar · Azad Bilik</title>
+<meta name="description" content="Azərbaycan bəstəkarları: 1908-ci ildən operalar, baletlər, simfoniyalar zaman xəttində, bəstəkar ustad-şagird şəbəkəsi, kitabdan səhnəyə. Azerbaijani composers: opera, ballet and symphony premieres since 1908, teacher–student network, from book to stage.">
+<meta name="theme-color" content="#F4EFE6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14100D" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://azadbilik.org/musiqi/bestekarlar/">
+<meta property="og:title" content="Bəstəkarlar · Azerbaijani composers, 1908 to today">
+<meta property="og:description" content="Leyli və Məcnun (1908), Yeddi gözəl, Koroğlu...: premyeralar, Qarayev məktəbi, kitabxana.az mətnləri. Wikidata (CC0).">
+<meta property="og:image" content="https://azadbilik.org/musiqi/bestekarlar/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="stylesheet" href="../ui.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="head">
+    <div id="top"></div>
+    <h1 data-i18n="title">Bəstəkarlar</h1>
+    <p class="sub" data-i18n="sub">Hacıbəylidən bu günə</p>
+    <p class="lede" id="lede"></p>
+  </header>
+  <main>
+    <section aria-labelledby="h-tl">
+      <h2 id="h-tl" data-i18n="tlH">Premyeralar, 1908 – bu gün</h2>
+      <div class="bar"><div class="chips" id="types" role="group"></div><div class="legend" id="legend"></div></div>
+      <div class="scroller"><svg id="tl" role="img" data-i18n-label="tlH"></svg></div>
+      <p class="hint" data-i18n="tlHint"></p>
+      <div class="info" id="winfo" aria-live="polite"></div>
+    </section>
+    <section aria-labelledby="h-kx">
+      <h2 id="h-kx" data-i18n="kxH">Kitabdan səhnəyə</h2>
+      <p class="hint" id="kxNote"></p>
+      <div class="cards" id="kx"></div>
+    </section>
+    <section aria-labelledby="h-net">
+      <h2 id="h-net" data-i18n="netH">Ustad–şagird şəbəkəsi</h2>
+      <div class="bar"><div class="chips" id="src" role="group"></div><div class="legend" id="nlegend"></div></div>
+      <div class="chips" id="jump" style="margin-bottom:.5rem"></div>
+      <div class="scroller" id="nscroll"><svg id="net" role="img" data-i18n-label="netH"></svg></div>
+      <p class="hint" data-i18n="netHint"></p>
+      <div class="info" id="pinfo" aria-live="polite"></div>
+      <h3 style="margin-top:1.25rem" data-i18n="linH"></h3>
+      <div class="lin" id="lin"></div>
+    </section>
+    <section aria-labelledby="h-all">
+      <h2 id="h-all" data-i18n="allH">Bütün əsərlər</h2>
+      <div class="tblwrap"><table class="tbl" id="all"></table></div>
+    </section>
+    <section aria-labelledby="h-listen">
+      <h2 id="h-listen" data-i18n="listenH">Dinləyin</h2>
+      <p class="hint" data-i18n="listenNote"></p>
+      <div class="cards" id="listen"></div>
+    </section>
+    <section aria-labelledby="h-method">
+      <h2 id="h-method" data-i18n="methodH">Necə yığılıb</h2>
+      <div class="method" id="method"></div>
+    </section>
+  </main>
+  <footer id="foot"></footer>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+<script src="../ui.js"></script>
+<script>
+(() => {
+const { esc, nm, yrs } = MQ;
+const T = {
+  az: { doc: 'Bəstəkarlar · Azad Bilik', music: 'Musiqi', title: 'Bəstəkarlar', sub: 'Hacıbəylidən bu günə',
+    lede: (s) => `1908-ci ildə Üzeyir Hacıbəyli «Leyli və Məcnun» ilə müsəlman Şərqinin ilk operasını yazdı. Bu səhifədə ${s.people} bəstəkar, onların ${s.works} səhnə və orkestr əsəri (${s.byType.opera} opera, ${s.byType.ballet} balet, ${s.byType.musical} musiqili komediya, ${s.byType.orchestral} simfonik əsər), ${s.links} ustad-şagird əlaqəsi var; ${s.withLibrary} əsərin librettosu və ya əsas mətni <a href="https://kitabxana.az">kitabxana.az</a>-dadır. Hamısı Wikidata-dandır (CC0), mətndən çıxarılan əlaqələr ayrıca qeyd olunub.`,
+    tlH: 'Premyeralar, 1908 – bu gün', tlHint: 'Hər nöqtə bir əsərdir; seçin. Rəng bəstəkarın doğum dövrüdür. Tarix Wikidata-dakı premyera tarixidir; olmayanda ilk qeyd olunan tarix götürülüb və ayrıca işarələnib.',
+    tOpera: 'Opera, musiqili dram', tMusical: 'Musiqili komediya, operetta', tBallet: 'Balet', tOrchestral: 'Simfonik, vokal-simfonik',
+    c1: '1900-dək', c2: '1900–1925', c3: '1926–1945', c4: '1945-dən sonra',
+    pickW: 'Əsəri seçin.', composer: 'Bəstəkar', year: 'İl', premiere: 'Premyera', basedOn: 'Əsasında', libretto: 'Libretto', kind: 'Növ', read: 'Vikipediya', wd: 'Wikidata', place: 'Yer', born: 'Doğulub', teachers: 'Ustadları', students: 'Şagirdləri', kx: 'Kitabxana',
+    noRef: 'Wikidata-da istinadsız', otherDate: 'tarix premyera deyil', viaWd: 'Wikidata', viaTx: 'mətndən', sWd: 'Wikidata', sTx: 'Mətndən',
+    listenH: 'Dinləyin', listenNote: 'Yalnız ictimai mülkiyyətdə olan yazılar: Hacıbəyli 1948-ci ildə vəfat edib (əsərləri 2018-dən azaddır), yazılar 1976-dan əvvəldir və ya ABŞ hökumətinindir. Qarayev, Əmirov, Niyazi və başqalarının heç bir azad yazısını tapmadım; onları rəsmi kanallarda axtarın.',
+    kxH: 'Kitabdan səhnəyə', kxNote: (n) => `${n} əsərin librettosu və ya əsas mətni kitabxana.az-dadır. Əlaqə əl ilə quraşdırılıb; hər keçid yoxlanıb.`,
+    lLibretto: 'Libretto', lSource: 'Mənbə mətn', lEssay: 'Bəstəkarın yazısı',
+    netH: 'Ustad–şagird şəbəkəsi', netHint: 'Sütunlar nəsillərdir. Düyünü seçin: ustadları, şagirdləri və bütün silsiləsi işıqlanır. Oxlar ustaddan şagirdə gedir; qırıq xətt mətndən çıxarılan əlaqədir. Boş dairə: xəritədən kənar ustad (Şostakoviç, Zeydman...).',
+    jHac: 'Hacıbəylinin silsiləsi', jQar: 'Qarayev məktəbi', offLegend: 'bəstəkar olmayan / kənar', pick: 'Bəstəkarı seçin.', linH: 'Silsilələr siyahı ilə',
+    allH: 'Bütün əsərlər', thYear: 'İl', thTitle: 'Əsər', thComp: 'Bəstəkar', thType: 'Növ', thLib: 'Kitabxana',
+    methodH: 'Necə yığılıb',
+    method: (s) => `<ul><li><b>Bəstəkarlar:</b> Wikidata-da «bəstəkar» (Q36834) peşəsi olan və Azərbaycan vətəndaşı, azərbaycanlı etnik mənşəli, yaxud Azərbaycanda doğulmuş şəxslər (275). Azərbaycanda doğulub başqa xalqın bəstəkarı olan beş nəfər (Tərteryan, Kajlayev, Kogan, Rabinoviç-Barakovski, Yekimyan) çıxarılıb. Müslüm Maqomayev (1885) və Niyazi filtrdən keçmədiyi üçün nömrə ilə əlavə olunub.</li>
+<li><b>Əsərlər:</b> bəstəkarı (P86) bu adamlar olan əsərlər; opera, balet, musiqili komediya və simfonik əsərlər ayrılıb (mahnılar, kino musiqisi yox). Tarix: premyera (P1191), yoxdursa ilk qeyd olunan tarix. Wikidata əsərlərin hamısını bilmir: məsələn Qarayevin «Vətən» operası və Cövdət Hacıyevin əsərlərinin çoxu yoxdur; bu bir <i>tam siyahı deyil</i>. ${s.unreffed} premyera tarixi Wikidata-da istinadsızdır.</li>
+<li><b>Ustad–şagird:</b> Wikidata-da «şagirdi» (P802) və «ustadı» (P1066) ilə yazılan ${s.wd} əlaqə, üstəlik az, ru və en Vikipediya məqalələrindən cümlələri əl ilə oxuyub çıxarılan ${s.tx} əlaqə (cümlə əlaqənin yanındadır). Üzeyir Hacıbəylinin «şagirdləri» siyahısı rus Vikipediyasından, «Qarayevin şagirdləri» siyahısı da oradandır. Hər cümləni oxumaq mümkün olmayıb: namizəd cümlələr <a href="data/composers.candidates.json">composers.candidates.json</a>, seçilənlər <a href="data/composers.text.spec.json">composers.text.spec.json</a>.</li>
+<li><b>Kitabxana:</b> libretto və ya əsas mətn kitabxana.az-da varsa göstərilir (Hacıbəylinin librettoları, Nizami, Füzuli, Cabbarlı); əlaqəni əl ilə qurmuşam.</li>
+<li><b>Yenidən qurmaq:</b> <code>node scripts/composers.mjs</code> (Wikidata), <code>node scripts/people-text.mjs</code> (cümlələr), sonra <code>node scripts/composers-build.mjs</code>.</li></ul>
+<p class="hint">Çatışmazlıqlar: Wikidata-da «birinci balet» kimi iddialar yoxdur, ona görə yalnız İngilis Vikipediyasında yazılanları iddia edirəm: «Leyli və Məcnun» Şərqin ilk operasıdır (1908), Şəfiqə Axundova opera yazan ilk şərqli qadındır («Gəlin qayası», 1972). Ustad–şagird siyahısı bəstəkarlıq siniflərini əhatə edir, özəl dərsləri yox. Bəzi Wikidata əlaqələri istinadsızdır (${s.wd} əlaqədən 8-i istinadlıdır).</p>`,
+    foot: (d) => `Mənbə: Wikidata (CC0) və az/ru/en Vikipediya (CC BY-SA, cümlələr qısa sitatdır), kitabxana.az, ${d}. Fayl: <a href="data/composers.json">composers.json</a>.` },
+  ru: { doc: 'Композиторы · Azad Bilik', music: 'Музыка', title: 'Композиторы', sub: 'От Гаджибекова до наших дней',
+    lede: (s) => `В 1908 году Узеир Гаджибеков написал оперу «Лейли и Меджнун», первую оперу мусульманского Востока. Здесь ${s.people} композиторов, ${s.works} их сценических и оркестровых произведений (${s.byType.opera} опер, ${s.byType.ballet} балетов, ${s.byType.musical} музыкальных комедий, ${s.byType.orchestral} симфонических), ${s.links} связей «учитель — ученик»; у ${s.withLibrary} произведений либретто или первоисточник есть на <a href="https://kitabxana.az">kitabxana.az</a>. Всё из Wikidata (CC0), связи, извлечённые из текстов, отмечены отдельно.`,
+    tlH: 'Премьеры, 1908 — наши дни', tlHint: 'Каждая точка — произведение; выберите. Цвет — поколение композитора. Дата — премьера из Wikidata; если её нет, взята первая указанная дата и это отмечено.',
+    tOpera: 'Опера, музыкальная драма', tMusical: 'Музыкальная комедия, оперетта', tBallet: 'Балет', tOrchestral: 'Симфонические, вокально-симфонические',
+    c1: 'до 1900', c2: '1900–1925', c3: '1926–1945', c4: 'после 1945',
+    pickW: 'Выберите произведение.', composer: 'Композитор', year: 'Год', premiere: 'Премьера', basedOn: 'По мотивам', libretto: 'Либретто', kind: 'Жанр', read: 'Википедия', wd: 'Wikidata', place: 'Место', born: 'Родился', teachers: 'Учителя', students: 'Ученики', kx: 'Библиотека',
+    noRef: 'в Wikidata без источника', otherDate: 'дата не премьеры', viaWd: 'Wikidata', viaTx: 'из текста', sWd: 'Wikidata', sTx: 'Из текста',
+    listenH: 'Послушать', listenNote: 'Только записи в общественном достоянии: Гаджибеков умер в 1948 году (произведения свободны с 2018), записи сделаны до 1976 года или принадлежат правительству США. Свободных записей Караева, Амирова, Ниязи и других я не нашёл; их стоит искать на официальных каналах.',
+    kxH: 'От книги к сцене', kxNote: (n) => `У ${n} произведений либретто или первоисточник есть на kitabxana.az. Связи подобраны вручную; каждая ссылка проверена.`,
+    lLibretto: 'Либретто', lSource: 'Первоисточник', lEssay: 'Статья композитора',
+    netH: 'Сеть «учитель — ученик»', netHint: 'Столбцы — поколения. Выберите узел: подсветятся учителя, ученики и вся линия. Стрелки идут от учителя к ученику; пунктир — связь из текста. Пустой кружок — учитель вне списка (Шостакович, Зейдман...).',
+    jHac: 'Линия Гаджибекова', jQar: 'Школа Караева', offLegend: 'вне списка', pick: 'Выберите композитора.', linH: 'Линии списком',
+    allH: 'Все произведения', thYear: 'Год', thTitle: 'Произведение', thComp: 'Композитор', thType: 'Жанр', thLib: 'Библиотека',
+    methodH: 'Как собрано',
+    method: (s) => `<ul><li><b>Композиторы:</b> в Wikidata с профессией «композитор» (Q36834) и гражданством Азербайджана, азербайджанским этносом или местом рождения в Азербайджане (275). Пятеро, родившихся там, но принадлежащих другим традициям (Тертерян, Кажлаев, Коган, Рабинович-Бараковский, Экимян), исключены. Муслим Магомаев (1885) и Ниязи не проходили фильтр и добавлены по номеру.</li>
+<li><b>Произведения:</b> те, у кого композитор (P86) — эти люди; отобраны опера, балет, музыкальная комедия и симфонические (не песни, не музыка к фильмам). Дата — премьера (P1191), иначе первая указанная. Wikidata знает не всё: например, нет оперы Караева «Ватан» и многих сочинений Джевдета Гаджиева; <i>список не полный</i>. ${s.unreffed} дат премьер в Wikidata без источника.</li>
+<li><b>Учитель — ученик:</b> ${s.wd} связей записаны в Wikidata (P802, P1066) и ${s.tx} извлечены из предложений статей az, ru и en Википедии, прочитанных вручную (предложение рядом со связью). Списки «учеников Гаджибекова» и «учеников Караева» взяты из русской Википедии. Кандидаты: <a href="data/composers.candidates.json">composers.candidates.json</a>, отобранные: <a href="data/composers.text.spec.json">composers.text.spec.json</a>.</li>
+<li><b>Библиотека:</b> показаны либретто и первоисточники, которые есть на kitabxana.az (либретто Гаджибекова, Низами, Физули, Джаббарлы); связи подобрал вручную.</li>
+<li><b>Пересборка:</b> <code>node scripts/composers.mjs</code> (Wikidata), <code>node scripts/people-text.mjs</code> (предложения), затем <code>node scripts/composers-build.mjs</code>.</li></ul>
+<p class="hint">Оговорки: утверждений вроде «первый балет» в Wikidata нет, поэтому я утверждаю лишь то, что есть в английской Википедии: «Лейли и Меджнун» — первая опера Востока (1908), Шафига Ахундова — первая женщина Востока, написавшая оперу («Невестина башня», 1972). Связи охватывают композиторские классы, но не частные уроки. Часть связей в Wikidata без источника (с источником — 8 из ${s.wd}).</p>`,
+    foot: (d) => `Источники: Wikidata (CC0) и az/ru/en Википедия (CC BY-SA, предложения — короткие цитаты), kitabxana.az, ${d}. Файл: <a href="data/composers.json">composers.json</a>.` },
+  en: { doc: 'Composers · Azad Bilik', music: 'Music', title: 'Composers', sub: 'From Hajibeyov to today',
+    lede: (s) => `In 1908 Uzeyir Hajibeyov wrote «Leyli and Majnun», the first opera of the Muslim East. This page holds ${s.people} composers, ${s.works} of their stage and orchestral works (${s.byType.opera} operas, ${s.byType.ballet} ballets, ${s.byType.musical} musical comedies, ${s.byType.orchestral} symphonic pieces) and ${s.links} teacher–student links; for ${s.withLibrary} works the libretto or source text is at <a href="https://kitabxana.az">kitabxana.az</a>. All from Wikidata (CC0); links read from texts are marked apart.`,
+    tlH: 'Premieres, 1908 to today', tlHint: 'Each dot is a work; pick one. Colour is the composer\'s generation. The date is Wikidata\'s premiere date; where there is none, the first date on the item is used and marked.',
+    tOpera: 'Opera, music drama', tMusical: 'Musical comedy, operetta', tBallet: 'Ballet', tOrchestral: 'Symphonic, vocal-symphonic',
+    c1: 'before 1900', c2: '1900–1925', c3: '1926–1945', c4: 'after 1945',
+    pickW: 'Pick a work.', composer: 'Composer', year: 'Year', premiere: 'Premiere', basedOn: 'Based on', libretto: 'Libretto', kind: 'Kind', read: 'Wikipedia', wd: 'Wikidata', place: 'Place', born: 'Born', teachers: 'Teachers', students: 'Students', kx: 'Library',
+    noRef: 'no reference on Wikidata', otherDate: 'date is not the premiere', viaWd: 'Wikidata', viaTx: 'from text', sWd: 'Wikidata', sTx: 'From text',
+    listenH: 'Listen', listenNote: 'Public-domain recordings only: Hajibeyov died in 1948 (his works are free since 2018) and the recordings are from before 1976 or by the US government. I found no free recording of Garayev, Amirov, Niyazi or the others; look for them on official channels.',
+    kxH: 'From book to stage', kxNote: (n) => `For ${n} works the libretto or source text is at kitabxana.az. The matches are made by hand; every link was checked.`,
+    lLibretto: 'Libretto', lSource: 'Source text', lEssay: 'Composer\'s essay',
+    netH: 'Teacher–student network', netHint: 'Columns are generations. Pick a node: its teachers, students and whole line light up. Arrows run from teacher to student; dashed is a link read from a text. A hollow circle is a teacher outside the list (Shostakovich, Zeidman...).',
+    jHac: 'Hajibeyov\'s line', jQar: 'Garayev\'s school', offLegend: 'outside the list', pick: 'Pick a composer.', linH: 'Lines as lists',
+    allH: 'All works', thYear: 'Year', thTitle: 'Work', thComp: 'Composer', thType: 'Kind', thLib: 'Library',
+    methodH: 'How it was gathered',
+    method: (s) => `<ul><li><b>Composers:</b> on Wikidata with occupation composer (Q36834) and citizenship of Azerbaijan, Azerbaijani ethnicity or a birthplace in Azerbaijan (275). Five born there but belonging to other traditions (Terterian, Kajlayev, Kogan, Rabinovitch-Barakovsky, Ekimyan) are left out. Muslim Magomayev (1885) and Niyazi did not pass the filter and are added by id.</li>
+<li><b>Works:</b> items whose composer (P86) is one of them; operas, ballets, musical comedies and symphonic works are kept (no songs, no film scores). Date: premiere (P1191), else the first date on the item. Wikidata does not know everything: Garayev's opera «Vatan» and most of Jovdat Hajiyev's works are missing, so this is <i>not a complete list</i>. ${s.unreffed} premiere dates have no reference on Wikidata.</li>
+<li><b>Teacher–student:</b> ${s.wd} links stated on Wikidata (P802, P1066) and ${s.tx} read by hand from sentences in the az, ru and en Wikipedia articles (the sentence sits beside the link). The lists of Hajibeyov's and Garayev's students come from the Russian Wikipedia. Candidates: <a href="data/composers.candidates.json">composers.candidates.json</a>; the chosen: <a href="data/composers.text.spec.json">composers.text.spec.json</a>.</li>
+<li><b>Library:</b> libretti and source texts that exist at kitabxana.az are shown (Hajibeyov's libretti, Nizami, Fuzuli, Jabbarli); I matched them by hand.</li>
+<li><b>Rebuild:</b> <code>node scripts/composers.mjs</code> (Wikidata), <code>node scripts/people-text.mjs</code> (sentences), then <code>node scripts/composers-build.mjs</code>.</li></ul>
+<p class="hint">Caveats: Wikidata has no «first ballet» claims, so I only state what English Wikipedia says: «Leyli and Majnun» is the first opera of the East (1908), Shafiga Akhundova the first woman of the East to compose an opera («Galin gayasi», 1972). The links cover composition classes, not private lessons. Some Wikidata links carry no reference (8 of ${s.wd} do).</p>`,
+    foot: (d) => `Sources: Wikidata (CC0) and az/ru/en Wikipedia (CC BY-SA; the sentences are short quotations), kitabxana.az, ${d}. File: <a href="data/composers.json">composers.json</a>.` },
+};
+const TYPES = ['opera', 'musical', 'ballet', 'orchestral'], TK = { opera: 'tOpera', musical: 'tMusical', ballet: 'tBallet', orchestral: 'tOrchestral' };
+const COHORT = (p) => (p.born ?? 9999) < 1900 ? 'var(--accent)' : p.born <= 1925 ? 'var(--second)' : p.born <= 1945 ? 'var(--third)' : p.born < 9999 ? 'var(--fourth)' : 'var(--muted)';
+const COH = [['c1', 'var(--accent)'], ['c2', 'var(--second)'], ['c3', 'var(--third)'], ['c4', 'var(--fourth)']];
+let REC = [], D = null, byQ, byW, show = { wikidata: true, text: true }, off = new Set(), selW = null, net = null, selP = null;
+const t = (k, ...a) => MQ.t(k, ...a);
+const wtitle = (w) => w[MQ.lang] || w.az || w.en || w.ru;
+const cname = (q) => nm(byQ.get(q));
+const kxHref = (k) => `${MQ.kxBase()}/${k.path}`;
+const LK = { libretto: 'lLibretto', source: 'lSource', essay: 'lEssay' };
+const kxLinks = (w) => (w.kx ?? []).map((k) => `<a href="${kxHref(k)}">${esc(t(LK[k.kind]))}</a>`).join(' · ');
+
+function timeline() {
+  const items = D.works.filter((w) => !off.has(w.type)).map((w) => ({ id: w.qid, lane: w.type, x0: w.year + (w.date ? (Number(w.date.slice(5, 7)) - 1) / 12 : 0), label: wtitle(w), sub: nm(byQ.get(w.composers[0])).split(' ').pop(), color: COHORT(byQ.get(w.composers[0])) }));
+  MQ.timeline(document.getElementById('tl'), { items, lanes: TYPES.filter((x) => !off.has(x)).map((x) => ({ id: x, label: t(TK[x]) })), from: 1905, to: 2025, px: 14, selected: selW, onPick: (id) => { selW = selW === id ? null : id; timeline(); describeW(); } });
+}
+function describeW() {
+  const w = byW.get(selW), el = document.getElementById('winfo');
+  if (!w) { el.innerHTML = `<p class="empty">${esc(t('pickW'))}</p>`; return; }
+  const row = (k, v) => v ? `<dt>${esc(t(k))}</dt><dd>${v}</dd>` : '';
+  const wk = w.wiki ? `<a href="https://en.wikipedia.org/wiki/${encodeURI(w.wiki)}">en</a>` : '';
+  el.innerHTML = `<div class="k">${esc(t(TK[w.type]))}</div><h3>${esc(wtitle(w))}</h3><dl>
+    ${row('composer', w.composers.map((q) => `<a href="#" data-p="${q}">${esc(cname(q))}</a>`).join(', '))}
+    ${row('premiere', `${esc(w.date ?? w.year)}${w.dated === 'other' ? `<span class="tag warn">${esc(t('otherDate'))}</span>` : w.ref ? '' : `<span class="tag warn">${esc(t('noRef'))}</span>`}`)}
+    ${row('basedOn', (w.base ?? []).map((b) => `${esc(b[MQ.lang] || b.az || b.en || b.ru || b.qid)}${b.author ? ` <span class="muted">(${esc(b.author)})</span>` : ''}`).join(', '))}
+    ${row('libretto', (w.librettists ?? []).map((b) => esc(b[MQ.lang] || b.az || b.en || b.ru)).join(', '))}
+    ${row('kx', kxLinks(w))}${row('read', wk)}${row('wd', `<a href="https://www.wikidata.org/wiki/${w.qid}">${w.qid}</a>`)}</dl>`;
+  el.querySelectorAll('a[data-p]').forEach((a) => a.onclick = (e) => { e.preventDefault(); document.getElementById('h-net').scrollIntoView({ behavior: 'smooth' }); net?.select(a.dataset.p); });
+}
+function types() {
+  document.getElementById('types').innerHTML = TYPES.map((x) => `<button type="button" data-x="${x}" aria-pressed="${!off.has(x)}">${esc(t(TK[x]))} (${D.stats.byType[x]})</button>`).join('');
+  document.querySelectorAll('[data-x]').forEach((b) => b.onclick = () => { off.has(b.dataset.x) ? off.delete(b.dataset.x) : off.add(b.dataset.x); if (off.size === TYPES.length) off.clear(); types(); timeline(); });
+  document.getElementById('legend').innerHTML = COH.map(([k, c]) => `<span><i style="--c:${c}"></i>${esc(t(k))}</span>`).join('');
+}
+function cards() {
+  const ws = D.works.filter((w) => w.kx);
+  document.getElementById('kxNote').textContent = t('kxNote', ws.length);
+  document.getElementById('kx').innerHTML = ws.map((w) => `<div class="card"><div class="row"><h3>${esc(wtitle(w))}</h3><span class="yr">${w.year}</span></div><div class="muted">${esc(t(TK[w.type]))} · ${w.composers.map((q) => esc(cname(q))).join(', ')}</div>${(w.base ?? []).length ? `<div class="muted">${esc(t('basedOn'))}: ${(w.base).map((b) => esc(b[MQ.lang] || b.az || b.en || '')).filter(Boolean).join(', ')}</div>` : ''}<div>${kxLinks(w)}</div></div>`).join('');
+}
+function links() { return D.links.filter((l) => show[l.src]); }
+function network() {
+  const ls = links(), used = new Set(ls.flatMap((l) => [l.t, l.s]));
+  net = MQ.network({ svg: '#net', scroller: '#nscroll', people: D.people, links: ls, name: nm, color: COHORT, off: (p) => !!p.offmap, onSelect: (q) => { selP = q; describeP(); } });
+  document.getElementById('nlegend').innerHTML = COH.map(([k, c]) => `<span><i style="--c:${c}"></i>${esc(t(k))}</span>`).join('') + `<span><i class="off"></i>${esc(t('offLegend'))}</span>`;
+  document.getElementById('lin').innerHTML = MQ.treeList(D.people, ls, { name: nm, color: COHORT });
+  const jump = [['Q317397', 'jHac'], ['Q580027', 'jQar']].filter(([q]) => used.has(q));
+  document.getElementById('jump').innerHTML = jump.map(([q, k]) => `<button type="button" data-j="${q}" style="border:1px solid var(--rule);border-radius:999px;padding:.25rem .6rem;font-size:.75rem">${esc(t(k))}</button>`).join('');
+  document.querySelectorAll('[data-j]').forEach((b) => b.onclick = () => net.select(b.dataset.j));
+  describeP();
+}
+function describeP() {
+  const p = byQ.get(selP), el = document.getElementById('pinfo');
+  if (!p) { el.innerHTML = `<p class="empty">${esc(t('pick'))}</p>`; return; }
+  const ls = links(), ts = ls.filter((l) => l.s === p.qid), ss = ls.filter((l) => l.t === p.qid);
+  const row = (k, v) => v ? `<dt>${esc(t(k))}</dt><dd>${v}</dd>` : '';
+  const line = (l, o) => `<li><a href="#" data-q="${o}">${esc(cname(o))}</a> <span class="muted">${yrs(byQ.get(o))}</span><span class="tag">${esc(t(l.src === 'text' ? 'viaTx' : 'viaWd'))}</span>${l.src === 'text' && l.sentence ? `<blockquote>${esc(l.sentence)} <a href="${esc(l.article)}">${esc(l.lang)}</a></blockquote>` : ''}</li>`;
+  const works = D.works.filter((w) => w.composers.includes(p.qid));
+  el.innerHTML = `<h3>${esc(nm(p))}</h3><dl>${row('born', esc(yrs(p)))}${row('place', esc(p.place ?? ''))}
+    ${row('teachers', ts.length ? `<ul>${ts.map((l) => line(l, l.t)).join('')}</ul>` : '')}${row('students', ss.length ? `<ul>${ss.map((l) => line(l, l.s)).join('')}</ul>` : '')}
+    ${row('premiere', works.map((w) => `${w.year} ${esc(wtitle(w))}`).join('<br>'))}
+    ${row('read', MQ.wikiLinks(p.wiki))}${/^Q\d/.test(p.qid) ? row('wd', `<a href="https://www.wikidata.org/wiki/${p.qid}">${p.qid}</a>`) : ''}${p.kitabxana ? row('kx', `<a href="${MQ.kxBase()}/authors/${esc(p.kitabxana)}">${esc(nm(p))}</a>`) : ''}</dl>`;
+  el.querySelectorAll('a[data-q]').forEach((a) => a.onclick = (e) => { e.preventDefault(); net?.select(a.dataset.q); });
+}
+function chips() {
+  const n = (s) => D.links.filter((l) => l.src === s).length;
+  document.getElementById('src').innerHTML = ['wikidata', 'text'].map((s) => `<button type="button" data-s="${s}" aria-pressed="${show[s]}"><i class="${s === 'text' ? 'dash' : ''}"></i>${esc(t(s === 'text' ? 'sTx' : 'sWd'))} (${n(s)})</button>`).join('');
+  document.querySelectorAll('[data-s]').forEach((b) => b.onclick = () => { show[b.dataset.s] = !show[b.dataset.s]; if (!show.wikidata && !show.text) show[b.dataset.s] = true; selP = null; chips(); network(); });
+}
+function table() {
+  const th = ['thYear', 'thTitle', 'thComp', 'thType', 'thLib'];
+  document.getElementById('all').innerHTML = `<thead><tr>${th.map((k, i) => `<th${i === 3 ? ' class="hide-s"' : ''}>${esc(t(k))}</th>`).join('')}</tr></thead><tbody>${D.works.map((w) => `<tr><td class="n">${w.date ?? w.year}</td><td>${esc(wtitle(w))}${w.dated === 'other' ? `<span class="tag warn">${esc(t('otherDate'))}</span>` : ''}</td><td>${w.composers.map((q) => esc(cname(q))).join(', ')}</td><td class="hide-s">${esc(t(TK[w.type]))}</td><td>${kxLinks(w)}</td></tr>`).join('')}</tbody>`;
+}
+function render() {
+  if (!D) return;
+  byQ = new Map(D.people.map((p) => [p.qid, p])); byW = new Map(D.works.map((w) => [w.qid, w]));
+  document.getElementById('lede').innerHTML = t('lede', D.stats);
+  document.getElementById('method').innerHTML = t('method', D.stats);
+  document.getElementById('foot').innerHTML = t('foot', D.built);
+  document.querySelectorAll('[data-i18n-label]').forEach((e) => e.setAttribute('aria-label', t(e.dataset.i18nLabel)));
+  types(); timeline(); describeW(); cards(); chips(); network(); table(); document.getElementById('listen').innerHTML = MQ.audio(REC);
+}
+const apply = MQ.boot(T, render);
+Promise.all([fetch('data/composers.json').then((r) => r.json()), fetch('data/recordings.json').then((r) => r.json())]).then(([d, r]) => { D = d; REC = r; apply(); });
+let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { if (D) { timeline(); network(); } }, 150); });
+})();
+</script>
+</body>
+</html>

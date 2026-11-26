@@ -1,0 +1,34 @@
+[
+ {
+  "id": "commons-azərbaycan-ssr-himni-1944-short-instrumental",
+  "title": {
+   "az": "Azərbaycan SSR Himni (1944 Short Instrumental)",
+   "ru": "Azərbaycan SSR Himni (1944 Short Instrumental)",
+   "en": "Azərbaycan SSR Himni (1944 Short Instrumental)"
+  },
+  "performer": "instrumental",
+  "composer": "Üzeyir Hacıbəyov",
+  "year": "1944",
+  "commons": "https://commons.wikimedia.org/wiki/File:Az%C9%99rbaycan_SSR_Himni_%281944_Short_Instrumental%29.oga",
+  "ogg": "https://upload.wikimedia.org/wikipedia/commons/7/76/Az%C9%99rbaycan_SSR_Himni_%281944_Short_Instrumental%29.oga",
+  "licence": "Public domain",
+  "evidence": "Commons file page template {{PD-old}}; extmetadata Copyrighted=False; no deletion/copyright hidden-category tags; uploader per API",
+  "why": "Hajibeyov d.1948 (PD in AZ since 2018); recording 1944 (<1976)."
+ },
+ {
+  "id": "commons-azərbaycan-marşı-instrumental",
+  "title": {
+   "az": "Azərbaycan marşı instrumental",
+   "ru": "Azərbaycan marşı instrumental",
+   "en": "Azərbaycan marşı instrumental"
+  },
+  "performer": "United States Navy Band",
+  "composer": "Üzeyir Hacıbəyov",
+  "year": "2004",
+  "commons": "https://commons.wikimedia.org/wiki/File:Az%C9%99rbaycan_mar%C5%9F%C4%B1_instrumental.ogg",
+  "ogg": "https://upload.wikimedia.org/wikipedia/commons/5/5d/Az%C9%99rbaycan_mar%C5%9F%C4%B1_instrumental.ogg",
+  "licence": "Public domain",
+  "evidence": "Commons file page template {{PD-USGov-Military-Navy}} + {{PD-AZ-exempt}}; extmetadata Copyrighted=False; no deletion/copyright hidden-category tags; uploader per API",
+  "why": "US-government work (recording) of a PD composition (Hajibeyov d.1948)."
+ }
+]

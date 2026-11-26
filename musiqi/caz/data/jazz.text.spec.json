@@ -1,0 +1,17 @@
+{
+ "note": "Links read by hand from the sentences in jazz.candidates.json (az/ru/en Wikipedia). i = index of the sentence(s); kind: teacher (t taught s), collab (t led, invited or made a project with s), influence (s studied t's music), family. The arrow runs t to s.",
+ "links": [
+  [[43], "Qara Qarayev", "Elza İbrahimova", "teacher"],
+  [[31], "Arif Məlikov", "Elza Seyidcahan", "teacher"],
+  [[12], "Arif Məlikov", "Eldar Mansurov", "teacher"],
+  [[35], "Tofiq Quliyev", "Pərviz Rüstəmbəyov", "collab"],
+  [[26], "Rafiq Babayev", "Cəmil Əmirov", "collab"],
+  [[4], "Rain Sultanov", "İsfar Sarabski", "collab"],
+  [[5], "Rain Sultanov", "Şahin Növrəsli", "collab"],
+  [[3], "Vaqif Mustafazadə", "Şahin Növrəsli", "influence"],
+  [[15], "Cəmil Əmirov", "Sevda Ələkbərzadə", "collab"],
+  [[50], "Salman Qəmbərov", "Sevda Ələkbərzadə", "collab"],
+  [[19], "Murad Arif", "Sevda Ələkbərzadə", "collab"],
+  [[55, 47], "Vaqif Mustafazadə", "Əzizə Mustafazadə", "family"]
+ ]
+}

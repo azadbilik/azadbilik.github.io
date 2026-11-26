@@ -1,0 +1,18 @@
+{
+ "note": "Where the library at kitabxana.az holds a stage work's libretto, or the text it was made from. Hand-matched (checked that each page answers by scripts/composers-build.mjs). byWork: libretto or related text by the work's Wikidata id; byBase: the source text by the id of the work it is based on (P144).",
+ "byWork": {
+  "Q1822437": [{ "kind": "libretto", "path": "works/hacibeyov-leyli-ve-mecnun-opera" }],
+  "Q4071363": [{ "kind": "libretto", "path": "works/hacibeyov-esli-ve-kerem-opera" }],
+  "Q4401101": [{ "kind": "libretto", "path": "works/hacibeyov-rustem-ve-sohrab" }],
+  "Q2660289": [{ "kind": "libretto", "path": "works/hacibeyov-arsin-mal-alan" }],
+  "Q4305798": [{ "kind": "libretto", "path": "works/hacibeyov-er-ve-arvad" }],
+  "Q2985139": [{ "kind": "essay", "path": "works/hacibeyov-koroglu-operasi" }]
+ },
+ "byBase": {
+  "Q15555061": [{ "kind": "source", "path": "collections/nizami-leyli-va-macnun" }],
+  "Q7243295": [{ "kind": "source", "path": "collections/fuzuli-leyli-ve-mecnun" }],
+  "Q4679100": [{ "kind": "source", "path": "collections/nizami-heft-peyker" }],
+  "Q61076": [{ "kind": "source", "path": "collections/nizami-xosrov-va-sirin" }],
+  "Q30598942": [{ "kind": "source", "path": "works/cabbarli-sevil-pyes" }]
+ }
+}

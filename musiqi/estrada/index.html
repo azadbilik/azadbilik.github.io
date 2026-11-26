@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="/shared/theme.js"></script>
+<title>Estrada · Azad Bilik</title>
+<meta name="description" content="Sovet dövrü Azərbaycan estradası: Rəşid Behbudov, Müslüm Maqomayev, Şövkət Ələkbərova, Zeynəb Xanlarova, Polad Bülbüloğlu, Qaya. Soviet-era Azerbaijani estrada: singers, ensembles, song composers.">
+<meta name="theme-color" content="#F4EFE6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14100D" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://azadbilik.org/musiqi/estrada/">
+<meta property="og:title" content="Estrada · Soviet-era Azerbaijani popular music">
+<meta property="og:description" content="Müğənnilər, ansambllar, mahnı bəstəkarları; azad yazılar və mənbələr. Wikidata (CC0).">
+<meta property="og:image" content="https://azadbilik.org/musiqi/estrada/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="stylesheet" href="../ui.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="head">
+    <div id="top"></div>
+    <h1 data-i18n="title">Estrada</h1>
+    <p class="sub" data-i18n="sub">Sovet dövrü müğənniləri</p>
+    <p class="lede" id="lede"></p>
+  </header>
+  <main>
+    <section aria-labelledby="h-tl">
+      <h2 id="h-tl" data-i18n="tlH">Zaman xətti</h2>
+      <div class="legend" id="legend"></div>
+      <div class="scroller" style="margin-top:.6rem"><svg id="tl" role="img" data-i18n-label="tlH"></svg></div>
+      <p class="hint" data-i18n="tlHint"></p>
+      <div class="info" id="info" aria-live="polite"></div>
+    </section>
+    <section aria-labelledby="h-cards">
+      <h2 id="h-cards" data-i18n="cardsH">Adlar</h2>
+      <div class="cards" id="cards"></div>
+    </section>
+    <section aria-labelledby="h-listen">
+      <h2 id="h-listen" data-i18n="listenH">Dinləyin</h2>
+      <div class="method"><p data-i18n-html="listenNote"></p></div>
+      <div class="cards" id="listen"></div>
+    </section>
+    <section aria-labelledby="h-method">
+      <h2 id="h-method" data-i18n="methodH">Necə yığılıb</h2>
+      <div class="method" id="method"></div>
+    </section>
+  </main>
+  <footer id="foot"></footer>
+</div>
+<script src="../ui.js"></script>
+<script>
+(() => {
+const { esc, nm, yrs } = MQ;
+const T = {
+  az: { doc: 'Estrada · Azad Bilik', music: 'Musiqi', title: 'Estrada', sub: 'Sovet dövrü müğənniləri',
+    lede: (n) => `Rəşid Behbudov, Bülbül, Müslüm Maqomayev, Şövkət Ələkbərova, Zeynəb Xanlarova, Polad Bülbüloğlu, Qaya kvarteti və mahnılarını yazan bəstəkarlar: əl ilə seçilmiş ${n} ad, Wikidata-dan. Bu, sovet dövrü estradasının tam siyahısı deyil, çıxış nöqtəsidir.`,
+    tlH: 'Ömür illəri', tlHint: 'Zolaqlar ömür illəridir (ansambl üçün yaranma ili). Seçin.', lSinger: 'Müğənnilər', lEnsemble: 'Ansambllar', lComposer: 'Mahnı bəstəkarları',
+    pick: 'Seçin.', born: 'Doğulub', place: 'Yer', genres: 'Janrlar', awards: 'Təltiflər', read: 'Vikipediya', wd: 'Wikidata', enNote: 'Janr və təltif adları Wikidata-nın ingilis dilindəki adlarıdır.', none: 'Tarix yoxdur',
+    cardsH: 'Adlar', listenH: 'Dinləyin',
+    listenNote: 'Burada yalnız hüquqi cəhətdən azad yazı çalınır. Azərbaycanda 1976-dan əvvəlki səsyazmaları ictimai mülkiyyətdədir, mahnının özü isə bəstəkarın ölümündən 70 il sonra; ona görə yalnız Commons-da «Public domain» işarəli və bəstəkarı məlum olmayan və ya vaxtı keçmiş bir yazı var. Behbudov, Maqomayev, Ələkbərova, Xanlarova, Bülbüloğlu, Qaya və Məmmədovun heç bir azad yazısını tapmadım (Commons-da Polad Bülbüloğlu və Maqomayev adı ilə iki CC fayl var, lakin yükləyən şəxs müəllif deyil və icazə yoxdur: çalmıram). Onların yazılarını rəsmi kanallarda və muzeylərdə axtarın.',
+    methodH: 'Necə yığılıb',
+    method: () => `<ul><li><b>Adlar:</b> <code>scripts/estrada.mjs</code>-də əl ilə yazılmış Wikidata nömrələri; doğum/ölüm, doğum yeri, janr (P136), təltiflər (P166), Vikipediya məqalələri Wikidata-dandır.</li>
+<li><b>Yazılar:</b> Commons-un API-si ilə axtarılıb; fayl yalnız lisenziya şablonu «ictimai mülkiyyət», yazı 1976-dan əvvəl və bəstəkar azad olduqda götürülüb. Şübhəli mənşəli yazılar (təsadüfi yükləyənlər, «öz işim» deyilən qorunan mahnılar) rədd edilib. Məşədi Məmməd Fərzəliyevin 1912-ci il «Aşiran» yazısı estrada deyil, erkən yazıdır, lakin bu səhifədə ən yaxın yerdir; digər üç Fərzəliyev yazısının bəstəkarı yoxlanılmayıb, ona görə yoxdur.</li>
+<li><b>Yenidən qurmaq:</b> <code>node scripts/estrada.mjs</code>.</li></ul>`,
+    foot: (d) => `Mənbə: Wikidata (CC0), Wikimedia Commons, ${d}. Fayl: <a href="data/estrada.raw.json">estrada.raw.json</a>.` },
+  ru: { doc: 'Эстрада · Azad Bilik', music: 'Музыка', title: 'Эстрада', sub: 'Певцы советской эпохи',
+    lede: (n) => `Рашид Бейбутов, Бюльбюль, Муслим Магомаев, Шовкет Алекперова, Зейнаб Ханларова, Полад Бюльбюльоглы, квартет «Гая» и авторы их песен: ${n} имён, выбранных вручную, данные из Wikidata. Это не полный список советской эстрады, а отправная точка.`,
+    tlH: 'Годы жизни', tlHint: 'Полосы — годы жизни (у ансамбля — год основания). Выберите.', lSinger: 'Певцы', lEnsemble: 'Ансамбли', lComposer: 'Авторы песен',
+    pick: 'Выберите.', born: 'Родился', place: 'Место', genres: 'Жанры', awards: 'Награды', read: 'Википедия', wd: 'Wikidata', enNote: 'Названия жанров и наград — английские метки Wikidata.', none: 'Даты нет',
+    cardsH: 'Имена', listenH: 'Послушать',
+    listenNote: 'Здесь звучат только юридически свободные записи. В Азербайджане звукозаписи до 1976 года в общественном достоянии, а сама песня — через 70 лет после смерти автора; поэтому есть лишь одна запись с пометкой «Public domain» на Commons. Свободных записей Бейбутова, Магомаева, Алекперовой, Ханларовой, Бюльбюльоглы, «Гаи» и Мамедова я не нашёл (на Commons есть два CC-файла под именами Полада Бюльбюльоглы и Магомаева, но загрузил их не автор и разрешения нет: я их не проигрываю). Их записи ищите на официальных каналах и в музеях.',
+    methodH: 'Как собрано',
+    method: () => `<ul><li><b>Имена:</b> номера Wikidata вписаны вручную в <code>scripts/estrada.mjs</code>; даты, место рождения, жанр (P136), награды (P166) и статьи Википедии — из Wikidata.</li>
+<li><b>Записи:</b> поиск через API Commons; файл берётся только если шаблон лицензии — общественное достояние, запись до 1976 года и композитор свободен. Записи сомнительного происхождения (случайные загрузчики, защищённые песни «own work») отклонены. «Аширан» Машади Мамеда Фарзалиева (1912) — не эстрада, а ранняя запись, но ближе всего к теме; у трёх других записей Фарзалиева композитор не проверен, поэтому их нет.</li>
+<li><b>Пересборка:</b> <code>node scripts/estrada.mjs</code>.</li></ul>`,
+    foot: (d) => `Источники: Wikidata (CC0), Wikimedia Commons, ${d}. Файл: <a href="data/estrada.raw.json">estrada.raw.json</a>.` },
+  en: { doc: 'Estrada · Azad Bilik', music: 'Music', title: 'Estrada', sub: 'Soviet-era singers',
+    lede: (n) => `Rashid Behbudov, Bulbul, Muslim Magomayev, Shovkat Alakbarova, Zeynab Khanlarova, Polad Bulbuloglu, the Gaya quartet and the composers of their songs: ${n} names chosen by hand, data from Wikidata. This is a starting point, not a full list of Soviet-era estrada.`,
+    tlH: 'Lifespans', tlHint: 'Bars are lifespans (for an ensemble, the year it was founded). Pick one.', lSinger: 'Singers', lEnsemble: 'Ensembles', lComposer: 'Song composers',
+    pick: 'Pick one.', born: 'Born', place: 'Place', genres: 'Genres', awards: 'Awards', read: 'Wikipedia', wd: 'Wikidata', enNote: 'Genre and award names are Wikidata\'s English labels.', none: 'No dates',
+    cardsH: 'Names', listenH: 'Listen',
+    listenNote: 'Only legally free recordings play here. In Azerbaijan sound recordings made before 1976 are public domain, the song itself 70 years after its composer\'s death; so there is just one recording marked «Public domain» on Commons. I found no free recording of Behbudov, Magomayev, Alakbarova, Khanlarova, Bulbuloglu, Gaya or Mammadov (Commons has two CC files under the names of Polad Bulbuloglu and Magomayev, but their uploaders are not the authors and no permission is on file, so I do not play them). Look for their recordings on official channels and in museums.',
+    methodH: 'How it was gathered',
+    method: () => `<ul><li><b>Names:</b> Wikidata ids written by hand in <code>scripts/estrada.mjs</code>; dates, birthplace, genre (P136), awards (P166) and Wikipedia articles are from Wikidata.</li>
+<li><b>Recordings:</b> searched through the Commons API; a file is taken only if its licence template says public domain, the recording is from before 1976 and the composer is free. Recordings of doubtful origin (casual uploaders, protected songs claimed as «own work») were rejected. Mashadi Mammad Farzaliyev's 1912 «Ashiran» is an early recording, not estrada, but the nearest fit here; the composer of his other three recordings was not checked, so they are left out.</li>
+<li><b>Rebuild:</b> <code>node scripts/estrada.mjs</code>.</li></ul>`,
+    foot: (d) => `Sources: Wikidata (CC0), Wikimedia Commons, ${d}. File: <a href="data/estrada.raw.json">estrada.raw.json</a>.` },
+};
+const KL = { singer: 'lSinger', ensemble: 'lEnsemble', composer: 'lComposer' }, KC = { singer: 'var(--accent)', ensemble: 'var(--fifth)', composer: 'var(--second)' };
+let D = null, REC = [], sel = null;
+const t = (k, ...a) => MQ.t(k, ...a);
+function timeline() {
+  const now = new Date().getFullYear();
+  const items = D.people.filter((p) => p.born).map((p) => ({ id: p.qid, lane: p.kind, x0: p.born, x1: p.kind === 'ensemble' ? p.born + 1 : (p.died ?? now), label: nm(p), color: KC[p.kind], dead: !!p.died }));
+  MQ.timeline(document.getElementById('tl'), { items, lanes: ['singer', 'ensemble', 'composer'].map((k) => ({ id: k, label: t(KL[k]) })), from: 1895, to: 2026, px: 7.5, selected: sel, onPick: (id) => { sel = sel === id ? null : id; timeline(); describe(); } });
+}
+const row = (k, v) => v ? `<dt>${esc(t(k))}</dt><dd>${v}</dd>` : '';
+const body = (p) => `<dl>${row('born', esc(p.kind === 'ensemble' ? (p.born ?? t('none')) : yrs(p) || t('none')))}${row('place', esc(p.place?.[MQ.lang] || p.place?.az || p.place?.en || ''))}${row('genres', esc(p.genres.join(', ')))}${row('awards', esc(p.awards.join('; ')))}${row('read', MQ.wikiLinks(p.wiki))}${row('wd', `<a href="https://www.wikidata.org/wiki/${p.qid}">${p.qid}</a>`)}</dl>`;
+function describe() {
+  const p = D.people.find((x) => x.qid === sel), el = document.getElementById('info');
+  el.innerHTML = p ? `<div class="k">${esc(t(KL[p.kind]))}</div><h3>${esc(nm(p))}</h3>${body(p)}<p class="hint">${esc(t('enNote'))}</p>` : `<p class="empty">${esc(t('pick'))}</p>`;
+}
+function render() {
+  document.getElementById('listen').innerHTML = MQ.audio(REC);
+  if (!D) return;
+  document.getElementById('lede').textContent = t('lede', D.people.length);
+  document.getElementById('legend').innerHTML = ['singer', 'ensemble', 'composer'].map((k) => `<span><i style="--c:${KC[k]}"></i>${esc(t(KL[k]))}</span>`).join('');
+  document.querySelectorAll('[data-i18n-label]').forEach((e) => e.setAttribute('aria-label', t(e.dataset.i18nLabel)));
+  document.getElementById('method').innerHTML = t('method'); document.getElementById('foot').innerHTML = t('foot', D.built);
+  document.getElementById('cards').innerHTML = D.people.map((p) => `<div class="card"><div class="k muted" style="font-size:.6875rem;letter-spacing:.08em;text-transform:uppercase">${esc(t(KL[p.kind]))}</div><h3>${esc(nm(p))}</h3>${body(p)}</div>`).join('');
+  timeline(); describe();
+}
+const apply = MQ.boot(T, render);
+Promise.all([fetch('data/estrada.raw.json').then((r) => r.json()), fetch('data/recordings.json').then((r) => r.json())]).then(([d, r]) => { D = d; REC = r; apply(); });
+let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => D && timeline(), 150); });
+})();
+</script>
+</body>
+</html>
