@@ -1,0 +1,707 @@
+<!doctype html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="/shared/theme.js"></script>
+<title>Tarixi Azərbaycanın insanları · Azad Bilik</title>
+<meta name="description" content="Wikidata-da tarixi Azərbaycan torpaqlarında doğulmuş insanlar: doğulduqları və öldükləri yerlər, köç yolları, peşələr. People of historical Azerbaijan on Wikidata: where they were born and died, migration routes, occupations.">
+<meta name="theme-color" content="#F4EFE6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14100D" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://azadbilik.org/sebeke/insanlar/">
+<meta property="og:title" content="Tarixi Azərbaycanın insanları · People of historical Azerbaijan">
+<meta property="og:description" content="Doğulduqları və öldükləri yer: Təbrizdən, Şuşadan, Şamaxıdan Bakıya, İstanbula, Tehrana, Parisə. Wikidata (CC0).">
+<meta property="og:image" content="https://azadbilik.org/sebeke/insanlar/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="stylesheet" href="/shared/story-map.css">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+<style>
+  :root { --e0: #7D6A57; --e1: #1F5C73; --e2: #A81E28; --e3: #C98414; --off: #9a9087; --soft: rgb(26 20 16 / .06); }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --e0: #BFA98F; --e1: #6FB3CC; --e2: #DA5A61; --e3: #E0A64A; --off: #6d645b; --soft: rgb(241 235 225 / .07); } }
+  :root[data-theme="dark"] { --e0: #BFA98F; --e1: #6FB3CC; --e2: #DA5A61; --e3: #E0A64A; --off: #6d645b; --soft: rgb(241 235 225 / .07); }
+  html, body { height: auto; }
+  body { overflow-x: hidden; overflow-y: auto; }
+  .wrap { max-width: 72rem; margin: 0 auto; padding: 0 1.5rem; }
+  header.head { border-bottom: 1px solid var(--rule); padding: 1.25rem 0 1.5rem; }
+  header .lede { margin-top: .75rem; max-width: 44rem; font: 400 1.0625rem/1.55 var(--serif); }
+  h1 { font-size: clamp(2rem, 6vw, 3.25rem); }
+  section { padding: 1.75rem 0; border-bottom: 1px solid var(--rule); }
+  h2 { font: 400 1.5rem/1.2 var(--serif); letter-spacing: -.01em; }
+  h3 { font: 500 .9375rem var(--sans); }
+  .kicker { font: 500 .75rem var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .muted { color: var(--muted); }
+  .intro { max-width: 44rem; margin-top: .5rem; font-size: .9375rem; }
+  .hint { font-size: .75rem; color: var(--muted); margin-top: .4rem; max-width: 46rem; }
+
+  .filters { display: grid; grid-template-columns: minmax(0, 1fr); gap: .6rem; margin: 1rem 0 .75rem; padding: .75rem .9rem; border: 1px solid var(--rule); border-radius: 4px; background: var(--paper); }
+  .frow { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: center; font-size: .8125rem; }
+  .frow label { display: inline-flex; align-items: center; gap: .4rem; color: var(--muted); }
+  .frow select { font: inherit; font-size: .8125rem; color: var(--ink); background: var(--paper); border: 1px solid var(--rule); border-radius: 3px; padding: .25rem .4rem; max-width: 100%; }
+  .frow input[type=range] { accent-color: var(--accent); width: 8rem; }
+  .frow > * { min-width: 0; max-width: 100%; } .frow select { text-overflow: ellipsis; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; }
+  .chip { display: inline-flex; align-items: center; gap: .4rem; padding: .3rem .65rem; border: 1px solid var(--rule); border-radius: 99px; font-size: .8125rem; color: var(--muted); }
+  .chip i { width: .65rem; height: .65rem; border-radius: 50%; background: var(--c); flex: none; opacity: .35; }
+  .chip[aria-pressed="true"] { color: var(--ink); border-color: var(--ink); }
+  .chip[aria-pressed="true"] i { opacity: 1; }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 4px; overflow: hidden; margin: .75rem 0; }
+  .stats div { background: var(--paper); padding: .6rem .9rem; }
+  .stats b { display: block; font: 400 1.5rem/1.1 var(--serif); font-variant-numeric: tabular-nums; }
+  .stats span { font-size: .75rem; color: var(--muted); }
+
+  .mapbox { position: relative; border: 1px solid var(--rule); border-radius: 4px; overflow: hidden; background: var(--water); }
+  #map { position: relative; inset: auto; height: min(72vh, 42rem); }
+  #pmap { height: 22rem; }
+  .mapbox .btns { position: absolute; left: .6rem; top: .6rem; z-index: 2; display: flex; gap: .3rem; }
+  .btns button { background: var(--panel); border: 1px solid var(--rule); border-radius: 3px; padding: .3rem .6rem; font-size: .75rem; }
+  .btns button:hover { border-color: var(--ink); }
+  .lgd { display: flex; flex-wrap: wrap; gap: .3rem 1rem; margin-top: .6rem; font-size: .75rem; color: var(--muted); }
+  .lgd span { display: inline-flex; align-items: center; gap: .35rem; }
+  .lgd i { width: .65rem; height: .65rem; border-radius: 50%; background: var(--c); display: inline-block; }
+  .lgd i.ln { height: 3px; border-radius: 0; width: 1.1rem; }
+  .maplibregl-ctrl-attrib { font: .6875rem var(--sans); background: var(--panel) !important; color: var(--muted); }
+  .maplibregl-ctrl-attrib a { color: var(--muted); }
+  .maplibregl-ctrl-group { background: var(--panel); border: 1px solid var(--rule); box-shadow: none !important; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .maplibregl-ctrl-group .maplibregl-ctrl-icon { filter: invert(1); } }
+  :root[data-theme="dark"] .maplibregl-ctrl-group .maplibregl-ctrl-icon { filter: invert(1); }
+  .maplibregl-popup-content { background: var(--paper); color: var(--ink); font: .8125rem var(--sans); padding: .4rem .6rem; border-radius: 3px; box-shadow: 0 2px 12px rgb(0 0 0 / .15); }
+  .maplibregl-popup-tip { display: none; }
+
+  .people { list-style: none; padding: 0; margin-top: .75rem; }
+  .people li { border-bottom: 1px solid var(--rule); }
+  .people button { display: grid; grid-template-columns: .65rem minmax(0, 1fr) auto; gap: .15rem .6rem; align-items: baseline; width: 100%; text-align: left; padding: .45rem .25rem; font-size: .875rem; border-radius: 2px; }
+  .people button:hover { background: var(--soft); }
+  .people i { width: .6rem; height: .6rem; border-radius: 50%; background: var(--c); align-self: center; }
+  .people .nm { font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .people .yr { font-size: .75rem; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .people .rt { grid-column: 2 / 4; font-size: .75rem; color: var(--muted); }
+  .listh { margin-top: 1rem; font-size: .875rem; }
+  .listh b { font-weight: 600; }
+
+  .gwrap { position: relative; border: 1px solid var(--rule); border-radius: 4px; background: var(--frame); overflow: hidden; }
+  #cg { height: min(74vh, 44rem); touch-action: none; position: relative; }
+  #cg canvas { display: block; width: 100%; height: 100%; }
+  .gtip { position: absolute; z-index: 3; pointer-events: none; background: var(--paper); border: 1px solid var(--rule); border-radius: 3px; padding: .3rem .55rem; font-size: .8125rem; box-shadow: 0 2px 12px rgb(0 0 0 / .15); max-width: 16rem; }
+  .gload { position: absolute; inset: 0; display: grid; place-items: center; color: var(--muted); font-size: .875rem; }
+  .gbar { position: absolute; right: .6rem; bottom: .6rem; display: flex; gap: .3rem; z-index: 2; }
+  .gbar button { background: var(--panel); border: 1px solid var(--rule); border-radius: 3px; padding: .3rem .6rem; font-size: .75rem; }
+  .gbar button:hover { border-color: var(--ink); }
+  .seg { display: inline-flex; flex-wrap: wrap; border: 1px solid var(--rule); border-radius: 3px; padding: 2px; }
+  .seg button { padding: .3rem .7rem; border-radius: 2px; font-size: .8125rem; color: var(--muted); }
+  .seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+  .hubs { display: flex; flex-wrap: wrap; gap: .3rem; margin-top: .6rem; }
+  .hubs button { padding: .2rem .55rem; border: 1px solid var(--rule); border-radius: 99px; font-size: .75rem; }
+  .hubs button:hover { border-color: var(--ink); }
+
+  .search { display: flex; gap: .5rem; margin-top: .9rem; }
+  .search input { flex: 1; min-width: 0; font: inherit; font-size: 1rem; padding: .55rem .75rem; color: var(--ink); background: var(--paper); border: 1px solid var(--ink); border-radius: 3px; }
+  .sgrid { display: grid; grid-template-columns: minmax(0, 20rem) minmax(0, 1fr); gap: 1.5rem; margin-top: .5rem; align-items: start; }
+  .card { border: 1px solid var(--rule); border-radius: 4px; padding: .9rem 1rem; margin-bottom: .9rem; }
+  .card .nm { font: 400 1.375rem/1.2 var(--serif); }
+  .card .alt { font-size: .8125rem; color: var(--muted); margin-top: .15rem; }
+  .card dl { display: grid; grid-template-columns: auto 1fr; gap: .25rem .8rem; margin-top: .6rem; font-size: .8125rem; }
+  .card dt { color: var(--muted); } .card dd { margin: 0; }
+  .card .links { margin-top: .7rem; display: flex; flex-wrap: wrap; gap: .3rem .9rem; font-size: .8125rem; }
+  .card .links a { font-weight: 500; }
+  .card .tag { display: inline-flex; align-items: center; gap: .35rem; margin-right: .6rem; }
+  .card .tag i { width: .6rem; height: .6rem; border-radius: 50%; background: var(--c); }
+  .sugg { display: flex; flex-wrap: wrap; gap: .3rem; margin-top: .6rem; font-size: .8125rem; align-items: center; color: var(--muted); }
+  .sugg button { padding: .2rem .55rem; border: 1px solid var(--rule); border-radius: 99px; color: var(--ink); }
+  .sugg button:hover { border-color: var(--ink); }
+
+  .charts { display: grid; grid-template-columns: 1.4fr 1fr; gap: 2rem; margin-top: 1rem; }
+  .charts figure { margin: 0; min-width: 0; }
+  .charts figcaption { font-size: .8125rem; font-weight: 500; margin-bottom: .3rem; }
+  .charts svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .charts .axis text { font: .6875rem var(--sans); fill: var(--muted); font-variant-numeric: tabular-nums; }
+  .charts .axis line { stroke: var(--rule); }
+  .bars { display: grid; gap: .35rem; font-size: .8125rem; }
+  .bars div { display: grid; grid-template-columns: minmax(0, 9rem) 1fr 3.4rem; gap: .5rem; align-items: center; }
+  .bars .t { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .bars .b { height: .55rem; background: var(--rule); border-radius: 2px; overflow: hidden; } .bars .b i { display: block; height: 100%; background: var(--c, var(--ink)); }
+  .bars .n { text-align: right; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .method { max-width: 46rem; display: grid; gap: .75rem; font-size: .9375rem; }
+  .method ul { padding-left: 1.25rem; display: grid; gap: .45rem; }
+  footer { padding: 1.5rem 0 2.5rem; font-size: .75rem; color: var(--muted); max-width: 48rem; line-height: 1.6; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  @media (max-width: 48rem) {
+    .wrap { padding: 0 1rem; }
+    .stats { grid-template-columns: 1fr 1fr; }
+    #map { height: min(66vh, 32rem); } #cg { height: min(66vh, 30rem); }
+    .sgrid, .charts { grid-template-columns: 1fr; gap: 1.25rem; }
+    .frow input[type=range] { width: 6rem; }
+    .frow label { display: flex; width: 100%; } .frow label select { flex: 1; min-width: 0; }
+    .bars div { grid-template-columns: minmax(0, 6.5rem) 1fr 3rem; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="head">
+    <div class="top"><a class="brand" href="/" data-keep-lang><svg viewBox="0 0 512 512" aria-hidden="true"><g class="star"><rect x="126" y="126" width="260" height="260"/><polygon points="256,72 440,256 256,440 72,256"/></g><polygon class="gem" points="256,196 316,256 256,316 196,256"/></svg>Azad Bilik</a><nav><a href="https://kitabxana.az" id="kx-nav" data-i18n="library">Kitabxana</a><span class="langs" role="group" aria-label="Dil · Язык · Language"><button type="button" data-lang="az">AZ</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="en">EN</button></span></nav></div>
+    <h1 data-i18n="title">Tarixi Azərbaycanın insanları</h1>
+    <p class="sub" data-i18n="sub"></p>
+    <p class="lede" id="lede"></p>
+  </header>
+
+  <main>
+    <section aria-labelledby="h-map">
+      <p class="kicker" data-i18n="mapK"></p>
+      <h2 id="h-map" data-i18n="mapH"></h2>
+      <p class="intro" id="mapP"></p>
+
+      <div class="filters" id="filters">
+        <div class="frow"><div class="chips" role="group" id="eras" data-i18n-label="erasL"></div></div>
+        <div class="frow">
+          <label><span data-i18n="catL"></span> <select id="fcat"></select></label>
+          <label><span data-i18n="grpL"></span> <select id="fgrp"></select></label>
+          <label><span data-i18n="sexL"></span> <select id="fsex"></select></label>
+          <label><span data-i18n="topL"></span> <input type="range" id="ftop" min="1" max="5" step="1" value="2"><output id="ftopo"></output></label>
+        </div>
+      </div>
+      <div class="stats" id="stats"></div>
+      <div class="mapbox"><div id="map" role="region" data-i18n-label="mapL"></div><div class="btns"><button type="button" id="mreg"></button><button type="button" id="mwide"></button></div></div>
+      <div class="lgd" id="maplgd"></div>
+      <p class="hint" id="mapHint"></p>
+      <div id="routeList" aria-live="polite"></div>
+    </section>
+
+    <section aria-labelledby="h-net">
+      <p class="kicker" data-i18n="netK"></p>
+      <h2 id="h-net" data-i18n="netH"></h2>
+      <p class="intro" id="netP"></p>
+      <div class="frow" style="margin:.9rem 0 .6rem">
+        <div class="seg" role="group" id="lay" data-i18n-label="layL"></div>
+        <div class="seg" role="group" id="col" data-i18n-label="colL"></div>
+      </div>
+      <div class="gwrap"><div id="cg" role="img" data-i18n-label="netL"></div><div class="gtip" id="gtip" hidden></div><div class="gload" id="gload"></div>
+        <div class="gbar"><button type="button" id="gfit"></button></div></div>
+      <div class="lgd" id="netlgd"></div>
+      <p class="hint" id="netHint"></p>
+      <div class="hubs" id="hubs"></div>
+      <div id="nodeList" aria-live="polite"></div>
+    </section>
+
+    <section aria-labelledby="h-find">
+      <p class="kicker" data-i18n="findK"></p>
+      <h2 id="h-find" data-i18n="findH"></h2>
+      <p class="intro" id="findP"></p>
+      <div class="search"><input type="search" id="q" autocomplete="off" spellcheck="false" data-i18n-ph="findPh" data-i18n-label="findPh"></div>
+      <div class="sugg" id="sugg"></div>
+      <div class="sgrid">
+        <div><ul class="people" id="results"></ul></div>
+        <div id="person" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section aria-labelledby="h-cov">
+      <p class="kicker" data-i18n="covK"></p>
+      <h2 id="h-cov" data-i18n="covH"></h2>
+      <p class="intro" id="covP"></p>
+      <div class="charts">
+        <figure><figcaption id="decCap"></figcaption><svg id="dec" role="img"></svg><div class="lgd" id="declgd"></div></figure>
+        <figure><figcaption id="grpCap"></figcaption><div class="bars" id="grps"></div><figcaption id="catCap" style="margin-top:1.2rem"></figcaption><div class="bars" id="cats"></div></figure>
+      </div>
+    </section>
+
+    <section aria-labelledby="h-method">
+      <h2 id="h-method" data-i18n="methodH"></h2>
+      <div class="method" id="method"></div>
+    </section>
+  </main>
+  <footer id="foot"></footer>
+</div>
+
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@cosmos.gl/graph@3.6.0/dist/index.min.js"></script>
+<script>
+(() => {
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+const LANGS = ['az', 'ru', 'en'];
+const qs = new URLSearchParams(location.search);
+let lang = (() => {
+  const q = qs.get('lang'); if (LANGS.includes(q)) return q;
+  try { const s = localStorage.getItem('lang'); if (LANGS.includes(s)) return s; } catch {}
+  return 'az';
+})();
+const NF = { az: 'az-Latn-AZ', ru: 'ru-RU', en: 'en-GB' };
+const nf = (v) => new Intl.NumberFormat(NF[lang]).format(v);
+const dark = () => (window.abTheme ? abTheme.dark() : matchMedia('(prefers-color-scheme: dark)').matches);
+const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const phone = () => matchMedia('(max-width: 48rem)').matches;
+const LI = { en: 0, az: 1, ru: 2 }; // index into [en, az, ru] label triples
+
+// ---- palettes
+const CATC = { l: ['#A81E28', '#D08A1E', '#C2457A', '#7A5C8E', '#2F8F7A', '#1F5C73', '#5B6B2E', '#8C5A2B', '#4C7FB8', '#6BA33A', '#9a9087'],
+               d: ['#DA5A61', '#E0A64A', '#E37A93', '#B596C9', '#5FC2A5', '#6FB3CC', '#A9BC6A', '#C79A6B', '#7FA9D6', '#8FCB5E', '#7d746b'] };
+const catColors = () => (dark() ? CATC.d : CATC.l);
+const eraColors = () => [css('--e0'), css('--e1'), css('--e2'), css('--e3')];
+const hex = (h) => { const n = parseInt(h.replace('#', ''), 16); return [(n >> 16) / 255, ((n >> 8) & 255) / 255, (n & 255) / 255]; };
+const cssRgb = (v) => { const m = /#([0-9a-f]{6})/i.exec(v); return m ? m[0] : '#888'; };
+
+// ---- text
+const CAT_ORDER = ['lit', 'music', 'art', 'stage', 'rel', 'sci', 'mil', 'pol', 'biz', 'sport', 'other'];
+const T = {
+az: { doc: 'Tarixi Azərbaycanın insanları · Azad Bilik', title: 'Tarixi Azərbaycanın insanları', sub: 'Harada doğuldular, harada öldülər, hara getdilər', library: 'Kitabxana',
+  mapK: 'Köç', mapH: 'Doğulduğu yerdən öldüyü yerə',
+  mapP: 'Hər qövs bir yerdə doğulub başqa yerdə ölmüş adamların yoludur; qalınlığı sayı göstərir. Qövs ölüm ilinə görə dövrə düşür (ölüm ili yoxdursa, doğum ilinə 60 əlavə olunur). Təbriz, Şuşa, Şamaxıdan Bakıya axını, İstanbul, Tehran, Paris və Moskvaya gedən yolları görmək üçün dövrləri açıb-bağlayın. İki yönlü qövslər bir-birindən ayrılsın deyə əyilir: gedişin sol tərəfinə.',
+  erasL: 'Dövrlər', eras: ['1828-ə qədər', '1828–1920', '1920–1991', '1991-dən sonra'], catL: 'Peşə', catAll: 'Hamısı', grpL: 'Doğum yeri', grpAll: 'Hamısı', sexL: 'Cins', sexAll: 'Hamısı', sexM: 'Kişilər', sexF: 'Qadınlar', topL: 'Qövs sayı',
+  grps: ['Azərbaycan Respublikası', 'İran Azərbaycanı', '1897-ci ilin digər qəzaları (Ermənistan, Gürcüstan, Dağıstan)', 'Etnik mənsubiyyət (P172), başqa yerdə doğulub'],
+  cats: { lit: 'Ədəbiyyat və jurnalistika', music: 'Musiqi', art: 'Təsviri sənət və memarlıq', stage: 'Teatr və kino', rel: 'Din', sci: 'Elm, təhsil, tibb', mil: 'Hərbçi', pol: 'Siyasət və dövlət', biz: 'Biznes', sport: 'İdman', other: 'Digər / bilinmir' },
+  stPeople: 'Süzgəcdən keçən insan', stArcs: 'Doğum və ölüm yeri məlum', stShown: 'Göstərilən qövs', stPlaces: 'Yer',
+  mapL: 'Köç xəritəsi', mreg: 'Bölgə', mwide: 'Bütün qövslər', mapHint: 'Qövsün və ya yerin üstünə gəlin və ya toxunun: o yoldan keçən ən məşhur insanlar aşağıda sıralanır. Yerin ölçüsü orada doğulanların sayıdır.',
+  legArc: 'Qövs: dövr', legDot: 'Dairə: orada doğulanlar',
+  route: (a, b, n) => `${a} → ${b}: ${n} nəfər`, placeList: (p, b, d) => `${p}: ${b} doğulub, ${d} ölüb`, born: 'doğulub', died: 'ölüb', more: (n) => `… və daha ${n}`,
+  netK: 'Şəbəkə', netH: 'Yerlər düyün, insan axını tilişdir', netP: 'Eyni süzgəc: hər düyün bir yerdir (şəhər, kənd), hər xətt oradan oraya doğulub-ölmüş insanların axınıdır. Düyünün rəngi orada doğulan və ölənlərin ən çox peşəsidir. «Coğrafiya» düzülüşündə yerlər xəritədəki yerindədir (uzaq yerlər yaxına çəkilib), «qüvvə» düzülüşündə isə qarşılıqlı bağları çox olan yerlər bir-birinə yaxınlaşır.',
+  layL: 'Düzülüş', lay: ['Coğrafiya', 'Qüvvə'], colL: 'Rəng', col: ['Peşə', 'Dövr'], netL: 'Yerlər arasında insan axını şəbəkəsi', gfit: 'Hamısı', gload: 'Şəbəkə yüklənir…',
+  netHint: 'Düyünün üstünə gəlin və ya toxunun; sürüşdürün, yaxınlaşdırın. Bağlı yerlərin sayı və axın ölçünü, rəng ən çox peşəni göstərir.', hubTitle: 'Ən çox bağlı yerlər:', netStats: (n, e) => `${nf(n)} yer, ${nf(e)} axın`,
+  findK: 'Axtarış', findH: 'Bir adamın yolu', findP: 'Adı yazın (latın, kiril və ya ingilis), doğulduğu yerdən yaşadığı və öldüyü yerlərə baxın.', findPh: 'Ad: Nizami, Üzeyir, Natavan…', sugg: 'Məsələn:', none: 'Tapılmadı.', shown: (n, m) => `${nf(n)} nəfərdən ${m} göstərilir`,
+  pBorn: 'Doğulub', pDied: 'Ölüb', pRes: 'Yaşayıb / işləyib', pOcc: 'Peşə', pLang: 'Dil', pGrp: 'Rayon', pSites: 'Wikimedia səhifələri', unknown: 'məlum deyil', alive: 'sağdır (Wikidata-da ölüm tarixi yoxdur)', resNote: 'tarixsiz, sıra bilinmir',
+  linkWd: 'Wikidata', pathNone: 'Doğum və ya ölüm yeri xəritədə göstərilə bilmir.', ctryOf: 'bu yer: ',
+  covK: 'Örtük', covH: 'Wikidata nəyi görür',
+  covP: 'Bu, «tarixi Azərbaycanın insanları» deyil, Wikidata-nın qeyd etdikləri və ən azı bir Vikimedia səhifəsi olanlardır. Aşağıdakı rəqəmlər əyriliyi göstərir.',
+  decCap: 'Doğum onilliyinə görə insanlar', gdM: 'kişi', gdF: 'qadın', gdO: 'digər', grpCap: 'Doğum yerinə görə', catCap: 'Peşəyə görə (bir adam bir peşədə)', undated: 'doğum ili yoxdur',
+  methodH: 'Metod və məhdudiyyətlər', method: () => `<p>Mənbə: Wikidata (CC0), sorğu xidməti query.wikidata.org. Seçilənlər: insan (Q5), doğum yeri (P19) koordinatı olan bir yer, ən azı bir Vikimedia səhifəsi (sitelink). Doğum yerinin nöqtəsi hubun öz sərhədlərinə görə yoxlanır: bugünkü 78 rayon, İranın 4 ostanının 55 şəhristanı və 1897-ci ildə ana dili kimi azərbaycancanı göstərənlərin ən azı 25% olduğu qəzalar (Dərbənd üçün 25 km-lik dairə). Etnik qrupu (P172) azərbaycanlı olanlar harada doğulmalarından asılı olmayaraq əlavə edilir.</p>
+  <ul><li><b>Əyrilik.</b> Wikidata sovet dövrünü, kişiləri, şəhərləri, yazıçıları və elm adamlarını çox göstərir; qadınlar azdır, 1828-dən əvvəlki insanlar və kəndlilər demək olar yoxdur. Bu, Azərbaycan əhalisinin portreti deyil, yazılı yaddaşın portretidir.</li>
+  <li><b>Qarışıq doğum yerləri.</b> «Digər qəzalar» qrupunda (İrəvan, Zəngəzur, Borçalı, Dərbənd…) çox erməni, gürcü, ləzgi, rus doğulub. Etnik mənsubiyyət Wikidata-da az adam üçün yazılıb, ona görə onları ayıra bilmirik; qrup üzrə süzgəc var.</li>
+  <li><b>Köç yolu.</b> Qövs yalnız doğum və ölüm yerini birləşdirir; arada yaşadığı yerlər (P551, P937) tarixsizdir və qövsə düşmür, adamın kartında göstərilir. Dövr ölüm ilinə görədir, köçün ili deyil.</li>
+  <li><b>Yerin koordinatı.</b> Yerin öz koordinatı yoxdursa, onun yuxarı inzibati vahidinin koordinatı (P131) götürülür; belə yerlər dəqiq deyil. Koordinatı olmayan doğum yerləri ayrılıb düşür.</li>
+  <li><b>Sağ olanlar.</b> Ölüm tarixi olmayan və 1906-dan sonra doğulanlar yalnız ən azı 3 Vikimedia saytında səhifəsi varsa göstərilir; yalnız Wikidata-da onsuz da olan məlumat (ad, il, yer) göstərilir.</li>
+  <li><b>Peşə rəngi.</b> Wikidata-dakı peşələr söz üzrə 11 qrupa bölünüb (skript: scripts/build.mjs); bir adamın ən çox sayılan qrupu götürülür. Qeyri-dəqiqdir.</li>
+  <li><b>Yoxlanmayıb.</b> Wikidata iddiaları (doğum yeri, tarix) əksəriyyətinin mənbəsi göstərilmir; heç biri burada müstəqil yoxlanmayıb.</li></ul>`,
+  foot: (b) => `Məlumat: <a href="https://www.wikidata.org/">Wikidata</a> (CC0), ${b} tarixində çəkilib; sərhədlər hubun öz məlumatlarından (<a href="/atlas/ehali/">əhali</a>, <a href="/atlas/1897/">1897</a>); xəritə: <a href="https://openfreemap.org/">OpenFreeMap</a>, © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>; şəbəkə: <a href="https://github.com/cosmosgl/graph">cosmos.gl</a> (MIT). Hub məlumatı CC0.` },
+ru: { doc: 'Люди исторического Азербайджана · Azad Bilik', title: 'Люди исторического Азербайджана', sub: 'Где родились, где умерли, куда уехали', library: 'Kitabxana',
+  mapK: 'Миграция', mapH: 'От места рождения к месту смерти',
+  mapP: 'Каждая дуга — путь людей, родившихся в одном месте и умерших в другом; толщина — их число. Дуга относится к эпохе по году смерти (если года нет — год рождения плюс 60). Включайте и выключайте эпохи, чтобы увидеть поток из Тебриза, Шуши, Шемахи в Баку и пути в Стамбул, Тегеран, Париж и Москву. Встречные дуги изгибаются влево по ходу, чтобы не сливаться.',
+  erasL: 'Эпохи', eras: ['до 1828', '1828–1920', '1920–1991', 'после 1991'], catL: 'Занятие', catAll: 'Все', grpL: 'Место рождения', grpAll: 'Все', sexL: 'Пол', sexAll: 'Все', sexM: 'Мужчины', sexF: 'Женщины', topL: 'Число дуг',
+  grps: ['Азербайджанская Республика', 'Иранский Азербайджан', 'Другие уезды 1897 г. (Армения, Грузия, Дагестан)', 'Этническая группа (P172), родились в другом месте'],
+  cats: { lit: 'Литература и журналистика', music: 'Музыка', art: 'Изобразительное искусство и архитектура', stage: 'Театр и кино', rel: 'Религия', sci: 'Наука, образование, медицина', mil: 'Военные', pol: 'Политика и власть', biz: 'Бизнес', sport: 'Спорт', other: 'Другое / не указано' },
+  stPeople: 'Людей по фильтру', stArcs: 'Известны оба места', stShown: 'Показано дуг', stPlaces: 'Мест',
+  mapL: 'Карта миграции', mreg: 'Регион', mwide: 'Все дуги', mapHint: 'Наведите или коснитесь дуги или места: самые известные люди этого пути ниже. Размер кружка — число родившихся там.',
+  legArc: 'Дуга: эпоха', legDot: 'Круг: родившиеся здесь',
+  route: (a, b, n) => `${a} → ${b}: ${n} чел.`, placeList: (p, b, d) => `${p}: родились ${b}, умерли ${d}`, born: 'родился', died: 'умер', more: (n) => `… и ещё ${n}`,
+  netK: 'Сеть', netH: 'Места — узлы, потоки людей — рёбра', netP: 'Тот же фильтр: узел — место (город, село), ребро — поток людей, родившихся в одном месте и умерших в другом. Цвет узла — преобладающее занятие тех, кто родился или умер там. В раскладке «география» места стоят там, где на карте (далёкие подтянуты ближе); в раскладке «силы» места со многими связями сближаются.',
+  layL: 'Раскладка', lay: ['География', 'Силы'], colL: 'Цвет', col: ['Занятие', 'Эпоха'], netL: 'Сеть потоков людей между местами', gfit: 'Всё', gload: 'Загрузка сети…',
+  netHint: 'Наведите или коснитесь узла; двигайте и приближайте. Размер — число связей и поток, цвет — преобладающее занятие.', hubTitle: 'Самые связанные места:', netStats: (n, e) => `${nf(n)} мест, ${nf(e)} потоков`,
+  findK: 'Поиск', findH: 'Путь одного человека', findP: 'Введите имя (латиницей, кириллицей или по-английски) и посмотрите путь от места рождения к местам жизни и смерти.', findPh: 'Имя: Низами, Узеир, Натаван…', sugg: 'Например:', none: 'Не найдено.', shown: (n, m) => `показано ${m} из ${nf(n)}`,
+  pBorn: 'Родился', pDied: 'Умер', pRes: 'Жил / работал', pOcc: 'Занятия', pLang: 'Язык', pGrp: 'Район', pSites: 'Страниц Викимедиа', unknown: 'неизвестно', alive: 'жив (в Wikidata нет даты смерти)', resNote: 'без дат, порядок неизвестен',
+  linkWd: 'Wikidata', pathNone: 'Место рождения или смерти нельзя показать на карте.', ctryOf: 'место: ',
+  covK: 'Охват', covH: 'Как видит Wikidata',
+  covP: 'Это не «люди исторического Азербайджана», а те, кого записала Wikidata и у кого есть хотя бы одна страница Викимедиа. Цифры ниже показывают перекос.',
+  decCap: 'Люди по десятилетию рождения', gdM: 'мужчины', gdF: 'женщины', gdO: 'другое', grpCap: 'По месту рождения', catCap: 'По занятию (один человек — одно занятие)', undated: 'без года рождения',
+  methodH: 'Метод и ограничения', method: () => `<p>Источник: Wikidata (CC0), сервис запросов query.wikidata.org. Отбор: человек (Q5), место рождения (P19) с координатами и хотя бы одна страница Викимедиа (sitelink). Точка места рождения проверяется на попадание в границы из самого хаба: 78 нынешних районов и 55 шахрестанов четырёх иранских останов, уезды 1897 года, где азербайджанский назвали родным не менее 25% (для Дербента — круг 25 км). Отдельно взяты люди с этнической группой (P172) «азербайджанцы», где бы ни родились.</p>
+  <ul><li><b>Перекос.</b> Wikidata переполнена советской эпохой, мужчинами, горожанами, писателями и учёными; женщин мало, людей до 1828 года и крестьян почти нет. Это портрет письменной памяти, а не населения.</li>
+  <li><b>Смешанные места рождения.</b> В группе «другие уезды» (Эривань, Зангезур, Борчалы, Дербент…) родилось много армян, грузин, лезгин, русских. Этническая группа в Wikidata указана у немногих, разделить нельзя; есть фильтр по группе.</li>
+  <li><b>Путь.</b> Только рождение и смерть; места жизни (P551, P937) без дат, в дугу не входят и видны в карточке человека. Эпоха — по году смерти, а не миграции.</li>
+  <li><b>Координаты.</b> Если у места нет своих координат, берутся координаты вышестоящей единицы (P131); такие места неточны. Места рождения без координат выпадают.</li>
+  <li><b>Живущие.</b> Люди без даты смерти, родившиеся после 1906 года, показаны только при странице минимум в трёх проектах Викимедиа; показано лишь то, что уже есть в Wikidata (имя, год, место).</li>
+  <li><b>Цвет занятия.</b> Занятия из Wikidata разнесены по 11 группам по словам (scripts/build.mjs); берётся самая частая у человека. Приблизительно.</li>
+  <li><b>Не проверено.</b> У большинства утверждений Wikidata (место, дата) источник не указан; здесь они независимо не проверялись.</li></ul>`,
+  foot: (b) => `Данные: <a href="https://www.wikidata.org/">Wikidata</a> (CC0), выгрузка ${b}; границы из данных самого хаба (<a href="/atlas/ehali/">население</a>, <a href="/atlas/1897/">1897</a>); карта: <a href="https://openfreemap.org/">OpenFreeMap</a>, © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>; сеть: <a href="https://github.com/cosmosgl/graph">cosmos.gl</a> (MIT). Данные хаба — CC0.` },
+en: { doc: 'People of historical Azerbaijan · Azad Bilik', title: 'People of historical Azerbaijan', sub: 'Where they were born, where they died, where they went', library: 'Kitabxana',
+  mapK: 'Migration', mapH: 'From the birthplace to the place of death',
+  mapP: 'Each arc is the path of people born in one place and dead in another; its width is their number. An arc belongs to an era by the year of death (birth year + 60 where there is none). Switch eras on and off to see the flow from Tabriz, Shusha and Shamakhi to Baku, and the routes to Istanbul, Tehran, Paris and Moscow. Opposite arcs bend to the left of their direction so they do not overlap.',
+  erasL: 'Eras', eras: ['Before 1828', '1828–1920', '1920–1991', '1991 and after'], catL: 'Occupation', catAll: 'All', grpL: 'Birthplace', grpAll: 'All', sexL: 'Sex', sexAll: 'All', sexM: 'Men', sexF: 'Women', topL: 'Arcs shown',
+  grps: ['Republic of Azerbaijan', 'Iranian Azerbaijan', 'Other 1897 uezds (Armenia, Georgia, Dagestan)', 'Ethnic group (P172), born elsewhere'],
+  cats: { lit: 'Literature and journalism', music: 'Music', art: 'Visual arts and architecture', stage: 'Theatre and film', rel: 'Religion', sci: 'Science, education, medicine', mil: 'Military', pol: 'Politics and state', biz: 'Business', sport: 'Sport', other: 'Other / not given' },
+  stPeople: 'People in the filter', stArcs: 'Both places known', stShown: 'Arcs shown', stPlaces: 'Places',
+  mapL: 'Migration map', mreg: 'Region', mwide: 'All arcs', mapHint: 'Hover or tap an arc or a place: the best-known people on that route are listed below. A circle\'s size is the number born there.',
+  legArc: 'Arc: era', legDot: 'Circle: born here',
+  route: (a, b, n) => `${a} → ${b}: ${n} people`, placeList: (p, b, d) => `${p}: ${b} born, ${d} died`, born: 'born', died: 'died', more: (n) => `… and ${n} more`,
+  netK: 'Network', netH: 'Places are nodes, flows of people are edges', netP: 'The same filter: each node is a place (town, village), each edge the flow of people born in one place and dead in another. A node\'s colour is the commonest occupation of those born or dead there. In the "geography" layout places sit where they are on the map (distant ones pulled in); in the "force" layout places with many ties draw together.',
+  layL: 'Layout', lay: ['Geography', 'Force'], colL: 'Colour', col: ['Occupation', 'Era'], netL: 'Network of people\'s flows between places', gfit: 'Fit', gload: 'Loading the network…',
+  netHint: 'Hover or tap a node; drag and zoom. Size is the number of ties and flow, colour the commonest occupation.', hubTitle: 'Best-connected places:', netStats: (n, e) => `${nf(n)} places, ${nf(e)} flows`,
+  findK: 'Search', findH: 'One person\'s path', findP: 'Type a name (Latin, Cyrillic or English) and follow the path from birthplace to the places lived in and the place of death.', findPh: 'Name: Nizami, Uzeyir, Natavan…', sugg: 'Try:', none: 'No match.', shown: (n, m) => `showing ${m} of ${nf(n)}`,
+  pBorn: 'Born', pDied: 'Died', pRes: 'Lived / worked', pOcc: 'Occupation', pLang: 'Language', pGrp: 'District', pSites: 'Wikimedia pages', unknown: 'unknown', alive: 'living (no death date on Wikidata)', resNote: 'undated, order unknown',
+  linkWd: 'Wikidata', pathNone: 'The birthplace or death place cannot be drawn on the map.', ctryOf: 'place: ',
+  covK: 'Coverage', covH: 'What Wikidata sees',
+  covP: 'This is not "the people of historical Azerbaijan" but those Wikidata has recorded and that have at least one Wikimedia page. The figures below show the tilt.',
+  decCap: 'People by decade of birth', gdM: 'men', gdF: 'women', gdO: 'other', grpCap: 'By birthplace', catCap: 'By occupation (one person, one group)', undated: 'no birth year',
+  methodH: 'Method and limits', method: () => `<p>Source: Wikidata (CC0), the query service at query.wikidata.org. Selected: humans (Q5) with a place of birth (P19) that has coordinates and at least one Wikimedia page (sitelink). The birthplace point is tested against boundaries from the hub's own data: today's 78 districts, the 55 counties of the four Iranian provinces, and the 1897 uezds where at least 25% gave Azerbaijani as native language (a 25 km disc for Derbent). People whose ethnic group (P172) is Azerbaijani are added wherever they were born.</p>
+  <ul><li><b>Tilt.</b> Wikidata over-represents the Soviet era, men, townspeople, writers and scholars; women are few, people before 1828 and peasants nearly absent. This is a portrait of written memory, not of the population.</li>
+  <li><b>Mixed birthplaces.</b> The "other uezds" group (Erivan, Zangezur, Borchali, Derbent…) includes many Armenians, Georgians, Lezgians and Russians. Ethnic group is recorded on Wikidata for few people, so they cannot be told apart; there is a filter by group.</li>
+  <li><b>The path.</b> Only birth and death; places lived in (P551, P937) are undated, not part of an arc, and appear on a person's card. The era is by the year of death, not of the move.</li>
+  <li><b>Coordinates.</b> A place without its own coordinates gets those of its parent unit (P131); such places are approximate. Birthplaces with no coordinates drop out.</li>
+  <li><b>Living people.</b> Those without a death date born after 1906 appear only with pages on at least three Wikimedia sites, and only what Wikidata already shows (name, year, place).</li>
+  <li><b>Occupation colour.</b> Wikidata's occupations are sorted into 11 groups by keywords (scripts/build.mjs); a person gets the group counted most often. Rough.</li>
+  <li><b>Unverified.</b> Most Wikidata claims (place, date) cite no source; none was independently checked here.</li></ul>`,
+  foot: (b) => `Data: <a href="https://www.wikidata.org/">Wikidata</a> (CC0), pulled ${b}; boundaries from the hub's own data (<a href="/atlas/ehali/">population</a>, <a href="/atlas/1897/">1897</a>); map: <a href="https://openfreemap.org/">OpenFreeMap</a>, © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>; network: <a href="https://github.com/cosmosgl/graph">cosmos.gl</a> (MIT). Hub data CC0.` },
+};
+T.ru.lede = (n, w) => `${nf(n)} человек, родившихся по обе стороны Аракса в Wikidata (нынешняя Азербайджанская Республика, иранские останы Восточный и Западный Азербайджан, Ардебиль, Зенджан, азербайджаноязычные уезды 1897 года, Борчалы, Закатала, Дербент); у ${nf(w)} известны и место рождения, и место смерти.`;
+T.az.lede = (n, w) => `Wikidata-da Araz boyunun hər iki tərəfində (bugünkü Azərbaycan Respublikası, İranın Şərqi və Qərbi Azərbaycan, Ərdəbil və Zəncan ostanları, 1897-ci ildə azərbaycanlı əhalisi çox olan qəzalar, Borçalı, Zaqatala, Dərbənd) doğulmuş ${nf(n)} insan; ${nf(w)} nəfərin həm doğulduğu, həm öldüyü yer məlumdur.`;
+T.en.lede = (n, w) => `${nf(n)} people on Wikidata born on either side of the Araz (today's Republic of Azerbaijan, the Iranian provinces of East and West Azerbaijan, Ardabil and Zanjan, the Azerbaijani-speaking uezds of 1897, Borchali, Zaqatala, Derbent); ${nf(w)} have both a birthplace and a death place on record.`;
+const t = (k) => T[lang][k];
+
+// ---- data
+let D = null, P = [], PL = [], catIdx = {}, idxOf = [];
+const R = { id: 0, en: 1, az: 2, ru: 3, born: 4, died: 5, bp: 6, dp: 7, cat: 8, sl: 9, sex: 10, grp: 11, res: 12, occ: 13, lng: 14, wp: 15, live: 16, unit: 17 };
+const pname = (r) => r[R[lang]] || r[R.en] || r[R.az] || r[R.ru] || ('Q' + r[0]);
+const plName = (i) => { const p = PL[i]; return p[LI[lang]] || p[0] || p[1] || p[2]; };
+const lbl = (a) => a[LI[lang]] || a[0] || a[1] || a[2];
+const keyYear = (r) => (r[R.died] ?? (r[R.born] != null ? r[R.born] + 60 : 1950));
+const eraOf = (y) => (y < 1828 ? 0 : y < 1920 ? 1 : y < 1991 ? 2 : 3);
+const years = (r) => `${r[R.born] ?? '?'}–${r[R.died] ?? (r[R.live] || (r[R.born] > 1906) ? '' : '?')}`;
+
+// ---- state
+const S = { eras: new Set([0, 1, 2, 3]), cat: -1, grp: -1, sex: 0, top: 2, lay: 'geo', col: 'cat' };
+const TOPN = [50, 100, 300, 1000, 5000];
+let view = []; // indices of people passing the filter
+let flows = new Map(); // "bp,dp,era" -> {bp, dp, era, n, people: []}
+const pass = (r) => (S.cat < 0 || r[R.cat] === S.cat) && (S.grp < 0 || r[R.grp] === S.grp) && (S.sex === 0 || r[R.sex] === S.sex);
+function refilter() {
+  view = []; flows = new Map();
+  for (let i = 0; i < P.length; i++) {
+    const r = P[i]; if (!pass(r)) continue; view.push(i);
+    if (r[R.bp] < 0 || r[R.dp] < 0 || r[R.bp] === r[R.dp]) continue;
+    const e = eraOf(keyYear(r)); if (!S.eras.has(e)) continue;
+    const k = r[R.bp] * 4 * 1e5 + r[R.dp] * 4 + e;
+    let f = flows.get(k); if (!f) flows.set(k, (f = { bp: r[R.bp], dp: r[R.dp], era: e, n: 0, people: [] }));
+    f.n++; f.people.push(i);
+  }
+}
+
+// ---- the migration map
+let map = null, mapReady = false, tip = null, regionBox = [[43.0, 35.4], [51.0, 42.6]];
+const BEZ = 24;
+function arc(a, b) {
+  const dx = b[0] - a[0], dy = b[1] - a[1], k = 0.2;
+  const c = [(a[0] + b[0]) / 2 - dy * k, (a[1] + b[1]) / 2 + dx * k], pts = [];
+  for (let i = 0; i <= BEZ; i++) { const s = i / BEZ, u = 1 - s; pts.push([u * u * a[0] + 2 * u * s * c[0] + s * s * b[0], u * u * a[1] + 2 * u * s * c[1] + s * s * b[1]]); }
+  return pts;
+}
+const plc = (i) => [PL[i][3], PL[i][4]];
+function mapData() {
+  const all = [...flows.values()].sort((a, b) => b.n - a.n);
+  const shown = all.slice(0, TOPN[S.top - 1]);
+  const lines = shown.map((f, k) => ({ type: 'Feature', id: k, properties: { n: f.n, era: f.era, k }, geometry: { type: 'LineString', coordinates: arc(plc(f.bp), plc(f.dp)) } }));
+  const born = new Map(), died = new Map();
+  for (const i of view) { const r = P[i]; if (r[R.bp] >= 0) born.set(r[R.bp], (born.get(r[R.bp]) ?? 0) + 1); if (r[R.dp] >= 0) died.set(r[R.dp], (died.get(r[R.dp]) ?? 0) + 1); }
+  const ids = new Set([...born.keys(), ...died.keys()]);
+  const dots = [...ids].map((i) => ({ type: 'Feature', properties: { i, b: born.get(i) ?? 0, d: died.get(i) ?? 0 }, geometry: { type: 'Point', coordinates: plc(i) } }));
+  return { shown, all, lines: { type: 'FeatureCollection', features: lines }, dots: { type: 'FeatureCollection', features: dots }, nplaces: ids.size };
+}
+let cur = null;
+function drawMap() {
+  cur = mapData();
+  if (mapReady) { map.getSource('arcs').setData(cur.lines); map.getSource('dots').setData(cur.dots); }
+  stats(); legendMap();
+}
+function initMap() {
+  map = new maplibregl.Map({ container: 'map', style: `https://tiles.openfreemap.org/styles/${dark() ? 'dark' : 'positron'}`, bounds: regionBox, fitBoundsOptions: { padding: 10 }, minZoom: 1.5, maxZoom: 11, attributionControl: { compact: true, customAttribution: '<a href="https://www.wikidata.org/">Wikidata</a> (CC0)' }, cooperativeGestures: phone() });
+  map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-right');
+  tip = new maplibregl.Popup({ closeButton: false, closeOnClick: false, offset: 8 });
+  map.on('style.load', () => {
+    for (const l of map.getStyle().layers) {
+      if (l.type === 'background') map.setPaintProperty(l.id, 'background-color', css('--land'));
+      if (l.type === 'fill' && /water|ocean|lake/.test(l.id)) map.setPaintProperty(l.id, 'fill-color', css('--water'));
+      if (l.type === 'symbol' && l.layout?.['text-field']) map.setLayoutProperty(l.id, 'text-field', ['coalesce', ['get', `name:${lang}`], ['get', lang === 'ru' ? 'name' : 'name:latin'], ['get', 'name']]);
+    }
+  });
+  map.on('load', () => {
+    const ec = eraColors();
+    const eraExpr = ['match', ['get', 'era'], 0, ec[0], 1, ec[1], 2, ec[2], ec[3]];
+    map.addSource('arcs', { type: 'geojson', data: cur.lines });
+    map.addSource('dots', { type: 'geojson', data: cur.dots });
+    map.addSource('sel', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
+    const w = ['interpolate', ['linear'], ['get', 'n'], 1, 1, 5, 2, 30, 4, 200, 8];
+    map.addLayer({ id: 'dots', type: 'circle', source: 'dots', paint: { 'circle-radius': ['interpolate', ['linear'], ['sqrt', ['get', 'b']], 0, 2, 3, 4, 10, 9, 30, 18], 'circle-color': css('--ink'), 'circle-opacity': .16, 'circle-stroke-color': css('--ink'), 'circle-stroke-opacity': .5, 'circle-stroke-width': .6 } });
+    map.addLayer({ id: 'arcs', type: 'line', source: 'arcs', layout: { 'line-cap': 'round' }, paint: { 'line-color': eraExpr, 'line-width': w, 'line-opacity': .62 } });
+    map.addLayer({ id: 'arcs-hit', type: 'line', source: 'arcs', paint: { 'line-color': '#000', 'line-opacity': 0, 'line-width': 14 } });
+    map.addLayer({ id: 'sel', type: 'line', source: 'sel', layout: { 'line-cap': 'round' }, paint: { 'line-color': css('--ink'), 'line-width': 3, 'line-opacity': .9 } });
+    mapReady = true;
+    const over = (e) => {
+      map.getCanvas().style.cursor = 'pointer';
+      const f = e.features[0], x = cur.shown[f.properties.k]; if (!x) return;
+      tip.setLngLat(e.lngLat).setHTML(esc(t('route')(plName(x.bp), plName(x.dp), x.n))).addTo(map);
+    };
+    const out = () => { map.getCanvas().style.cursor = ''; tip.remove(); };
+    map.on('mousemove', 'arcs-hit', over); map.on('mouseleave', 'arcs-hit', out);
+    map.on('click', 'arcs-hit', (e) => { const x = cur.shown[e.features[0].properties.k]; if (x) showRoute(x); });
+    map.on('mousemove', 'dots', (e) => { if (map.queryRenderedFeatures(e.point, { layers: ['arcs-hit'] }).length) return; map.getCanvas().style.cursor = 'pointer'; const p = e.features[0].properties; tip.setLngLat(e.lngLat).setHTML(esc(t('placeList')(plName(p.i), nf(p.b), nf(p.d)))).addTo(map); });
+    map.on('mouseleave', 'dots', out);
+    map.on('click', 'dots', (e) => { if (map.queryRenderedFeatures(e.point, { layers: ['arcs-hit'] }).length) return; showPlace(e.features[0].properties.i); });
+    document.querySelector('.maplibregl-ctrl-attrib')?.classList.remove('maplibregl-compact-show');
+    window.__map = map; window.__ready = true;
+  });
+}
+function peopleList(items, head, extra) {
+  const cc = catColors();
+  const rows = items.slice(0, 12).map((i) => { const r = P[i]; return `<li><button type="button" data-p="${i}"><i style="--c:${cc[r[R.cat]]}"></i><span class="nm">${esc(pname(r))}</span><span class="yr">${years(r)}</span><span class="rt">${esc(lbl(D.occs[r[R.occ][0]] ?? ['']) || t('cats')[CAT_ORDER[r[R.cat]]])}${r[R.bp] >= 0 ? ' · ' + esc(plName(r[R.bp])) : ''}${r[R.dp] >= 0 ? ' → ' + esc(plName(r[R.dp])) : ''}</span></button></li>`; }).join('');
+  return `<p class="listh">${head}</p><ul class="people">${rows}</ul>${items.length > 12 ? `<p class="hint">${t('more')(items.length - 12)}</p>` : ''}`;
+}
+function bindPeople(el) { el.querySelectorAll('[data-p]').forEach((b) => (b.onclick = () => selectPerson(+b.dataset.p, true))); }
+function showRoute(x) {
+  const el = $('routeList'); el.innerHTML = peopleList(x.people, `<b>${esc(plName(x.bp))} → ${esc(plName(x.dp))}</b>: ${nf(x.n)} · ${esc(t('eras')[x.era])}`); bindPeople(el);
+  if (mapReady) map.getSource('sel').setData({ type: 'FeatureCollection', features: [{ type: 'Feature', properties: {}, geometry: { type: 'LineString', coordinates: arc(plc(x.bp), plc(x.dp)) } }] });
+}
+function showPlace(pi) {
+  const items = view.filter((i) => P[i][R.bp] === pi || P[i][R.dp] === pi);
+  const b = items.filter((i) => P[i][R.bp] === pi).length, d = items.filter((i) => P[i][R.dp] === pi).length;
+  const el = $('routeList'); el.innerHTML = peopleList(items, `<b>${esc(plName(pi))}</b>: ${nf(b)} ${t('born')}, ${nf(d)} ${t('died')}`); bindPeople(el);
+  if (mapReady) map.getSource('sel').setData({ type: 'FeatureCollection', features: [] });
+}
+function stats() {
+  const withBoth = view.filter((i) => P[i][R.bp] >= 0 && P[i][R.dp] >= 0).length;
+  $('stats').innerHTML = [[nf(view.length), t('stPeople')], [nf(withBoth), t('stArcs')], [nf(cur.shown.length) + ' / ' + nf(cur.all.length), t('stShown')], [nf(cur.nplaces), t('stPlaces')]].map(([a, b]) => `<div><b>${a}</b><span>${esc(b)}</span></div>`).join('');
+  $('ftopo').textContent = nf(TOPN[S.top - 1]);
+}
+function legendMap() {
+  const ec = eraColors();
+  $('maplgd').innerHTML = `<span>${esc(t('legArc'))}</span>` + t('eras').map((e, i) => `<span><i class="ln" style="--c:${ec[i]};opacity:${S.eras.has(i) ? 1 : .3}"></i>${esc(e)}</span>`).join('') + `<span><i style="--c:var(--ink);opacity:.35"></i>${esc(t('legDot'))}</span>`;
+}
+
+// ---- the network (cosmos.gl)
+let graph = null, G = null, gReady = false;
+function geoXY(lon, lat) {
+  const cx = 47.2, cy = 39.6, dx = (lon - cx) * 0.78, dy = lat - cy, r = Math.hypot(dx, dy);
+  if (r < 0.001) return [0, 0];
+  const f = r <= 5 ? r : 5 + 4 * Math.log(r / 5), s = f / r; return [dx * s, -dy * s];
+}
+function netData() {
+  const agg = new Map(), node = new Map();
+  const touch = (pl, r) => { let n = node.get(pl); if (!n) node.set(pl, (n = { pl, c: new Array(11).fill(0), e: [0, 0, 0, 0], n: 0, deg: new Set() })); n.c[r[R.cat]]++; n.e[eraOf(keyYear(r))]++; n.n++; return n; };
+  for (const i of view) {
+    const r = P[i]; if (r[R.bp] < 0 || r[R.dp] < 0 || r[R.bp] === r[R.dp]) continue;
+    const e = eraOf(keyYear(r)); if (!S.eras.has(e)) continue;
+    const a = touch(r[R.bp], r), b = touch(r[R.dp], r); a.deg.add(r[R.dp]); b.deg.add(r[R.bp]);
+    const k = r[R.bp] * 1e5 + r[R.dp]; let l = agg.get(k); if (!l) agg.set(k, (l = { a: r[R.bp], b: r[R.dp], n: 0, e: [0, 0, 0, 0], c: new Array(11).fill(0) })); l.n++; l.e[e]++; l.c[r[R.cat]]++;
+  }
+  const nodes = [...node.values()], idx = new Map(nodes.map((n, i) => [n.pl, i]));
+  return { nodes, links: [...agg.values()], idx };
+}
+const argmax = (a, skipLast) => { let b = -1, v = 0; for (let i = 0; i < a.length - (skipLast ? 1 : 0); i++) if (a[i] > v) { v = a[i]; b = i; } return b < 0 ? a.length - 1 : b; };
+function paint() {
+  if (!G || !graph) return;
+  const cc = catColors().map(hex), ec = eraColors().map(cssRgb).map(hex), { nodes, links } = G;
+  const col = (src, isCat) => { const k = isCat ? argmax(src, true) : argmax(src, false); return (isCat ? cc : ec)[k]; };
+  const pc = new Float32Array(nodes.length * 4), ps = new Float32Array(nodes.length);
+  nodes.forEach((n, i) => { const c = col(S.col === 'cat' ? n.c : n.e, S.col === 'cat'); pc.set([c[0], c[1], c[2], 1], i * 4); ps[i] = 2.5 + Math.min(Math.sqrt(n.n + n.deg.size) * 0.6, 20); });
+  const lc = new Float32Array(links.length * 4), lw = new Float32Array(links.length);
+  const dk = dark(); links.forEach((l, i) => { const c = col(S.col === 'cat' ? l.c : l.e, S.col === 'cat'); lc.set([c[0], c[1], c[2], dk ? .34 : .4], i * 4); lw[i] = 0.5 + Math.sqrt(l.n) * 0.6; });
+  graph.setPointColors(pc); graph.setPointSizes(ps); graph.setLinkColors(lc); graph.setLinkWidths(lw); graph.render();
+  legendNet();
+}
+function legendNet() {
+  if (S.col === 'cat') { const cc = catColors(); $('netlgd').innerHTML = CAT_ORDER.map((k, i) => `<span><i style="--c:${cc[i]}"></i>${esc(t('cats')[k])}</span>`).join(''); }
+  else { const ec = eraColors(); $('netlgd').innerHTML = t('eras').map((e, i) => `<span><i style="--c:${ec[i]}"></i>${esc(e)}</span>`).join(''); }
+}
+function layout() {
+  const n = G.nodes.length, pos = new Float32Array(n * 2);
+  G.nodes.forEach((nd, i) => { const [x, y] = geoXY(PL[nd.pl][3], PL[nd.pl][4]); pos[2 * i] = 2048 + x * 95; pos[2 * i + 1] = 2048 + y * 95; });
+  const links = new Float32Array(G.links.length * 2); G.links.forEach((l, i) => { links[2 * i] = G.idx.get(l.a); links[2 * i + 1] = G.idx.get(l.b); });
+  return { pos, links };
+}
+function buildNet(keepView) {
+  G = netData();
+  $('netHint2')?.remove();
+  if (!G.nodes.length) { if (graph) { graph.setPointPositions(new Float32Array(0)); graph.setLinks(new Float32Array(0)); graph.render(); } return; }
+  const { pos, links } = layout();
+  const sim = S.lay === 'force';
+  if (!graph) {
+    graph = new window.Cosmos.Graph($('cg'), {
+      backgroundColor: css('--frame') || '#E9E2D6', spaceSize: 4096, enableSimulation: sim, enableDrag: true, fitViewOnInit: true, fitViewPadding: 0.1, scalePointsOnZoom: true,
+      curvedLinks: false, linkDefaultWidth: 1, pointDefaultSize: 4, renderHoveredPointRing: true, hoveredPointRingColor: css('--accent') || '#A81E28', showFPSMonitor: false, attribution: '',
+      simulationGravity: 0.12, simulationRepulsion: 1.6, simulationLinkSpring: 0.4, simulationLinkDistance: 14, simulationFriction: 0.88, simulationDecay: 4000,
+      onPointMouseOver: (i, _p, ev) => hubTip(i, ev), onPointMouseOut: () => { $('gtip').hidden = true; },
+      onPointClick: (i) => { selectNode(i); }, onClick: (i) => { if (i === undefined) $('gtip').hidden = true; },
+    });
+  } else {
+    graph.setConfigPartial?.({ enableSimulation: sim });
+  }
+  graph.setPointPositions(pos); graph.setLinks(links);
+  paint();
+  if (sim) graph.start(0.8); else graph.pause?.();
+  if (!keepView) setTimeout(() => graph.fitView(0, 0.08), 60);
+  $('gload').hidden = true; gReady = true; window.__graph = graph;
+  const hubs = G.nodes.map((n, i) => [i, n.deg.size + n.n * 0.1]).sort((a, b) => b[1] - a[1]).slice(0, 10);
+  $('hubs').innerHTML = `<span class="hint" style="margin:0 .3rem 0 0;align-self:center">${esc(t('hubTitle'))}</span>` + hubs.map(([i]) => `<button type="button" data-n="${i}">${esc(plName(G.nodes[i].pl))}</button>`).join('');
+  $('hubs').querySelectorAll('[data-n]').forEach((b) => (b.onclick = () => selectNode(+b.dataset.n, true)));
+  $('netHint').textContent = t('netStats')(G.nodes.length, G.links.length) + '. ' + t('netHint');
+}
+function hubTip(i, ev) {
+  const n = G.nodes[i]; if (!n) return;
+  const tp = $('gtip'); tp.hidden = false;
+  tp.innerHTML = `<b>${esc(plName(n.pl))}</b><br>${nf(n.n)} · ${nf(n.deg.size)} ${lang === 'az' ? 'bağ' : lang === 'ru' ? 'связей' : 'ties'}`;
+  if (ev) { const r = $('cg').getBoundingClientRect(); tp.style.left = Math.min(ev.clientX - r.left + 12, r.width - 150) + 'px'; tp.style.top = ev.clientY - r.top + 12 + 'px'; }
+}
+function selectNode(i, zoom) {
+  const n = G.nodes[i]; if (!n) return;
+  if (zoom) graph.zoomToPointByIndex?.(i, 600, 6, true);
+  graph.selectPointByIndex?.(i);
+  const items = view.filter((k) => P[k][R.bp] === n.pl || P[k][R.dp] === n.pl);
+  const b = items.filter((k) => P[k][R.bp] === n.pl).length, d = items.filter((k) => P[k][R.dp] === n.pl).length;
+  const el = $('nodeList'); el.innerHTML = peopleList(items, `<b>${esc(plName(n.pl))}</b>: ${nf(b)} ${t('born')}, ${nf(d)} ${t('died')}`); bindPeople(el);
+}
+
+// ---- search and a person's path
+let H = null, pmap = null, pmapReady = false, curP = -1;
+const norm = (s) => s.toLowerCase().replace(/ə/g, 'e').replace(/ı/g, 'i').replace(/ö/g, 'o').replace(/ü/g, 'u').replace(/ç/g, 'c').replace(/ş/g, 's').replace(/ğ/g, 'g').replace(/ё/g, 'е').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^\p{L}\p{N} ]/gu, ' ');
+function buildIndex() { H = P.map((r) => norm(r[R.en] + ' ' + r[R.az] + ' ' + r[R.ru])); }
+function search(q) {
+  const toks = norm(q).split(/\s+/).filter(Boolean); if (!toks.length) return null;
+  const hits = [];
+  for (let i = 0; i < P.length; i++) {
+    const h = H[i]; let ok = true, sc = 0;
+    for (const tk of toks) { const at = h.indexOf(tk); if (at < 0) { ok = false; break; } sc += at === 0 || h[at - 1] === ' ' ? 2 : 0; }
+    if (ok) hits.push([i, sc]);
+  }
+  hits.sort((a, b) => b[1] - a[1] || P[b[0]][R.sl] - P[a[0]][R.sl]);
+  return hits.map((h) => h[0]);
+}
+function runSearch() {
+  const q = $('q').value.trim(), el = $('results');
+  if (!q) { el.innerHTML = ''; return; }
+  const hits = search(q);
+  if (!hits.length) { el.innerHTML = `<li><p class="hint">${esc(t('none'))}</p></li>`; return; }
+  const cc = catColors();
+  el.innerHTML = hits.slice(0, 25).map((i) => { const r = P[i]; return `<li><button type="button" data-p="${i}"><i style="--c:${cc[r[R.cat]]}"></i><span class="nm">${esc(pname(r))}</span><span class="yr">${years(r)}</span><span class="rt">${r[R.bp] >= 0 ? esc(plName(r[R.bp])) : ''}${r[R.dp] >= 0 ? ' → ' + esc(plName(r[R.dp])) : ''}</span></button></li>`; }).join('') + (hits.length > 25 ? `<li><p class="hint">${esc(t('shown')(hits.length, 25))}</p></li>` : '');
+  bindPeople(el);
+}
+function selectPerson(i, scroll) {
+  curP = i; const r = P[i], cc = catColors();
+  const wd = `https://www.wikidata.org/wiki/Q${r[R.id]}`;
+  const wpl = [['en', 1], ['az', 2], ['ru', 4]].filter(([, m]) => r[R.wp] & m).map(([l]) => `<a href="https://www.wikidata.org/wiki/Special:GoToLinkedPage/${l}wiki/Q${r[R.id]}" rel="noopener">${l}.wikipedia</a>`);
+  const alt = [r[R.en], r[R.az], r[R.ru]].filter((x, k, a) => x && x !== pname(r) && a.indexOf(x) === k).join(' · ');
+  const occs = r[R.occ].map((o) => esc(lbl(D.occs[o]))).join(', ');
+  const langs = r[R.lng].map((o) => esc(lbl(D.langs[o]))).join(', ');
+  const res = r[R.res].map((p) => esc(plName(p))).join(', ');
+  const ctry = (p) => (PL[p][5] >= 0 ? ` <span class="muted">(${esc(lbl(D.countries[PL[p][5]]))})</span>` : '');
+  const place = (p, y) => (p >= 0 ? `${esc(plName(p))}${ctry(p)}` : esc(t('unknown'))) + (y ? `, ${y}` : '');
+  $('person').innerHTML = `<div class="card"><div class="nm">${esc(pname(r))}</div>${alt ? `<div class="alt">${esc(alt)}</div>` : ''}
+    <dl><dt>${t('pBorn')}</dt><dd>${place(r[R.bp], r[R.born])}</dd><dt>${t('pDied')}</dt><dd>${r[R.live] ? esc(t('alive')) : place(r[R.dp], r[R.died])}</dd>
+    ${res ? `<dt>${t('pRes')}</dt><dd>${res} <span class="muted">(${esc(t('resNote'))})</span></dd>` : ''}
+    <dt>${t('pOcc')}</dt><dd><span class="tag"><i style="--c:${cc[r[R.cat]]}"></i>${esc(t('cats')[CAT_ORDER[r[R.cat]]])}</span>${occs ? `<span class="muted">${occs}</span>` : ''}</dd>
+    ${langs ? `<dt>${t('pLang')}</dt><dd>${langs}</dd>` : ''}${r[R.unit] ? `<dt>${t('pGrp')}</dt><dd>${esc(r[R.unit])}</dd>` : ''}<dt>${t('pSites')}</dt><dd>${r[R.sl]}</dd></dl>
+    <div class="links"><a href="${wd}" rel="noopener">${t('linkWd')}</a>${wpl.length ? wpl.join('') : ''}</div></div><div class="mapbox"><div id="pmap"></div></div><p class="hint" id="pnote"></p>`;
+  history.replaceState(null, '', (() => { const u = new URL(location.href); u.searchParams.set('p', 'Q' + r[R.id]); return u; })());
+  drawPath(i);
+  if (scroll) $('h-find').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+}
+function drawPath(i) {
+  const r = P[i], pts = [], feats = [];
+  const bp = r[R.bp] >= 0 ? plc(r[R.bp]) : null, dp = r[R.dp] >= 0 ? plc(r[R.dp]) : null;
+  if (bp) pts.push({ c: bp, k: 'b', n: plName(r[R.bp]) });
+  r[R.res].forEach((p) => pts.push({ c: plc(p), k: 'r', n: plName(p) }));
+  if (dp) pts.push({ c: dp, k: 'd', n: plName(r[R.dp]) });
+  if (bp && dp && r[R.bp] !== r[R.dp]) feats.push({ type: 'Feature', properties: { l: 1 }, geometry: { type: 'LineString', coordinates: arc(bp, dp) } });
+  const dashed = [];
+  if (bp) r[R.res].forEach((p) => dashed.push({ type: 'Feature', properties: { l: 0 }, geometry: { type: 'LineString', coordinates: arc(bp, plc(p)) } }));
+  const pf = pts.map((p) => ({ type: 'Feature', properties: { k: p.k, n: p.n }, geometry: { type: 'Point', coordinates: p.c } }));
+  $('pnote').textContent = pts.length ? '' : t('pathNone');
+  if (pmap) { try { pmap.remove(); } catch {} pmap = null; }
+  if (!pts.length) { $('pmap').parentElement.hidden = true; return; }
+  pmap = new maplibregl.Map({ container: 'pmap', style: `https://tiles.openfreemap.org/styles/${dark() ? 'dark' : 'positron'}`, center: pts[0].c, zoom: 5, attributionControl: { compact: true }, cooperativeGestures: phone() });
+  pmap.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-right');
+  pmap.on('style.load', () => { for (const l of pmap.getStyle().layers) { if (l.type === 'background') pmap.setPaintProperty(l.id, 'background-color', css('--land')); if (l.type === 'fill' && /water|ocean|lake/.test(l.id)) pmap.setPaintProperty(l.id, 'fill-color', css('--water')); if (l.type === 'symbol' && l.layout?.['text-field']) pmap.setLayoutProperty(l.id, 'text-field', ['coalesce', ['get', `name:${lang}`], ['get', lang === 'ru' ? 'name' : 'name:latin'], ['get', 'name']]); } });
+  pmap.on('load', () => {
+    pmap.addSource('l', { type: 'geojson', data: { type: 'FeatureCollection', features: [...dashed, ...feats] } });
+    pmap.addSource('p', { type: 'geojson', data: { type: 'FeatureCollection', features: pf } });
+    pmap.addLayer({ id: 'ld', type: 'line', source: 'l', filter: ['==', ['get', 'l'], 0], paint: { 'line-color': css('--muted'), 'line-width': 1.2, 'line-dasharray': [2, 2] } });
+    pmap.addLayer({ id: 'ls', type: 'line', source: 'l', filter: ['==', ['get', 'l'], 1], layout: { 'line-cap': 'round' }, paint: { 'line-color': css('--accent'), 'line-width': 3 } });
+    pmap.addLayer({ id: 'pt', type: 'circle', source: 'p', paint: { 'circle-radius': ['match', ['get', 'k'], 'r', 5, 7], 'circle-color': ['match', ['get', 'k'], 'b', css('--e1'), 'd', css('--accent'), css('--paper')], 'circle-stroke-width': 2, 'circle-stroke-color': ['match', ['get', 'k'], 'r', css('--muted'), css('--paper')] } });
+    pmap.addLayer({ id: 'pl', type: 'symbol', source: 'p', layout: { 'text-field': ['get', 'n'], 'text-size': 12, 'text-offset': [0, 1.1], 'text-anchor': 'top', 'text-font': ['Noto Sans Regular'], 'text-allow-overlap': false }, paint: { 'text-color': css('--ink'), 'text-halo-color': css('--paper'), 'text-halo-width': 1.5 } });
+    const b = new maplibregl.LngLatBounds(); pts.forEach((p) => b.extend(p.c));
+    pmap.fitBounds(b, { padding: 50, maxZoom: 9, duration: 0 });
+    window.__pmapReady = true;
+  });
+}
+function suggest() {
+  const want = [234908, 317397, 315158, 983507, 535932, 1366531, 361311];
+  const byId = new Map(P.map((r, i) => [r[0], i]));
+  const pick = want.map((q) => byId.get(q)).filter((x) => x != null);
+  $('sugg').innerHTML = `<span>${esc(t('sugg'))}</span>` + pick.map((i) => `<button type="button" data-p="${i}">${esc(pname(P[i]))}</button>`).join('');
+  bindPeople($('sugg'));
+}
+
+// ---- coverage
+function coverage() {
+  const st = D.stats, dec = st.decades, keys = Object.keys(dec).filter((k) => k !== 'u').map(Number).sort((a, b) => a - b);
+  const lo = Math.max(keys[0], 1100), hi = keys.at(-1);
+  const ds = []; for (let d = lo; d <= hi; d += 10) ds.push(d);
+  // wide ranges before 1700 are pooled by century, so one chart tells the whole story
+  const bins = []; const pool = (a, b) => { const v = [0, 0, 0]; for (let d = a; d < b; d += 10) (dec[d] ?? [0, 0, 0]).forEach((x, i) => (v[i] += x)); return v; };
+  bins.push({ l: '<1700', v: pool(0, 1700), w: 4 }); for (let d = 1700; d <= hi; d += 10) bins.push({ l: String(d), v: dec[d] ?? [0, 0, 0], w: 1 });
+  const rawMax = Math.max(...bins.map((b) => b.v[0] + b.v[1] + b.v[2])), max = Math.ceil(rawMax / 400) * 400, W = 640, H = 220, L = 36, B = 22, bw = (W - L) / bins.length;
+  const col = [css('--e1'), css('--e2'), css('--off')]; // index 0 other, 1 male, 2 female per SEX codes
+  const sc = { 1: css('--e1'), 2: css('--e2'), 0: css('--off') };
+  let g = '', y0 = H - B;
+  for (let k = 0; k <= 4; k++) { const v = Math.round((max * k) / 4); const y = y0 - ((H - B - 6) * k) / 4; g += `<line x1="${L}" x2="${W}" y1="${y}" y2="${y}"/><text x="${L - 4}" y="${y + 3}" text-anchor="end">${nf(v)}</text>`; }
+  bins.forEach((b, i) => { let acc = 0; for (const s of [1, 2, 0]) { const h = ((H - B - 6) * b.v[s]) / max; g += `<rect x="${L + i * bw + 0.5}" y="${y0 - acc - h}" width="${Math.max(bw - 1, 1)}" height="${h}" fill="${sc[s]}"><title>${b.l}: ${b.v[s]}</title></rect>`; acc += h; } if (i === 0 || (i > 5 && b.l % 50 === 0)) g += `<text x="${L + i * bw}" y="${H - 6}" text-anchor="middle">${b.l}</text>`; });
+  $('dec').setAttribute('viewBox', `0 0 ${W} ${H}`); $('dec').innerHTML = `<g class="axis">${g}</g>`;
+  $('decCap').textContent = t('decCap');
+  const tot = st.total, f = st.bySex[2], m = st.bySex[1];
+  $('declgd').innerHTML = `<span><i style="--c:${sc[1]}"></i>${t('gdM')} ${nf(m)} (${Math.round((m / tot) * 100)}%)</span><span><i style="--c:${sc[2]}"></i>${t('gdF')} ${nf(f)} (${Math.round((f / tot) * 100)}%)</span><span><i style="--c:${sc[0]}"></i>${t('gdO')} ${nf(st.bySex[0])}</span><span>${t('undated')}: ${nf(tot - st.withBorn)}</span>`;
+  $('grpCap').textContent = t('grpCap'); $('catCap').textContent = t('catCap');
+  const bar = (rows) => { const mx = Math.max(...rows.map((r) => r[1])); return rows.map(([n, v, c]) => `<div><span class="t" title="${esc(n)}">${esc(n)}</span><span class="b"><i style="width:${(v / mx) * 100}%;--c:${c}"></i></span><span class="n">${nf(v)}</span></div>`).join(''); };
+  $('grps').innerHTML = bar(D.grps.map((g, i) => [t('grps')[i], st.byGrp[g] ?? 0, css('--ink')]));
+  const cc = catColors();
+  $('cats').innerHTML = bar(CAT_ORDER.map((k, i) => [t('cats')[k], st.byCat[k] ?? 0, cc[i]]).sort((a, b) => b[1] - a[1]));
+}
+
+// ---- controls
+function controls() {
+  const ec = eraColors();
+  $('eras').innerHTML = t('eras').map((e, i) => `<button type="button" class="chip" aria-pressed="${S.eras.has(i)}" data-e="${i}" style="--c:${ec[i]}"><i></i>${esc(e)}</button>`).join('');
+  $('eras').querySelectorAll('[data-e]').forEach((b) => (b.onclick = () => { const e = +b.dataset.e; S.eras.has(e) ? S.eras.delete(e) : S.eras.add(e); if (!S.eras.size) S.eras.add(e); controls(); update(); }));
+  const opt = (v, l, sel) => `<option value="${v}"${sel ? ' selected' : ''}>${esc(l)}</option>`;
+  $('fcat').innerHTML = opt(-1, t('catAll'), S.cat < 0) + CAT_ORDER.map((k, i) => opt(i, t('cats')[k], S.cat === i)).join('');
+  $('fgrp').innerHTML = opt(-1, t('grpAll'), S.grp < 0) + t('grps').map((g, i) => opt(i, g, S.grp === i)).join('');
+  $('fsex').innerHTML = opt(0, t('sexAll'), S.sex === 0) + opt(1, t('sexM'), S.sex === 1) + opt(2, t('sexF'), S.sex === 2);
+  const seg = (id, items, cur, key) => { $(id).innerHTML = items.map(([v, l]) => `<button type="button" data-v="${v}" aria-pressed="${cur === v}">${esc(l)}</button>`).join(''); $(id).querySelectorAll('button').forEach((b) => (b.onclick = () => { S[key] = b.dataset.v; controls(); if (key === 'lay') buildNet(true), setTimeout(() => graph.fitView(500, 0.08), 80); else paint(); })); };
+  seg('lay', [['geo', t('lay')[0]], ['force', t('lay')[1]]], S.lay, 'lay');
+  seg('col', [['cat', t('col')[0]], ['era', t('col')[1]]], S.col, 'col');
+}
+let ut = 0;
+function update() { clearTimeout(ut); ut = setTimeout(() => { refilter(); drawMap(); if (graph) buildNet(true); $('routeList').innerHTML = ''; if (mapReady) map.getSource('sel').setData({ type: 'FeatureCollection', features: [] }); }, 30); }
+$('fcat').onchange = (e) => { S.cat = +e.target.value; update(); };
+$('fgrp').onchange = (e) => { S.grp = +e.target.value; update(); };
+$('fsex').onchange = (e) => { S.sex = +e.target.value; update(); };
+$('ftop').oninput = (e) => { S.top = +e.target.value; drawMap(); };
+$('mreg').onclick = () => map.fitBounds(regionBox, { padding: 10, duration: 600 });
+$('mwide').onclick = () => { if (!cur?.shown.length) return; const b = new maplibregl.LngLatBounds(); cur.shown.forEach((x) => { b.extend(plc(x.bp)); b.extend(plc(x.dp)); }); map.fitBounds(b, { padding: 30, duration: 600 }); };
+$('gfit').onclick = () => graph?.fitView(500, 0.08);
+let qt = 0; $('q').oninput = () => { clearTimeout(qt); qt = setTimeout(runSearch, 120); };
+
+function applyLang() {
+  document.documentElement.lang = lang; document.title = t('doc');
+  document.querySelectorAll('[data-i18n]').forEach((e) => { const v = t(e.dataset.i18n); if (typeof v === 'string') e.textContent = v; });
+  document.querySelectorAll('[data-i18n-label]').forEach((e) => e.setAttribute('aria-label', t(e.dataset.i18nLabel)));
+  document.querySelectorAll('[data-i18n-ph]').forEach((e) => e.setAttribute('placeholder', t(e.dataset.i18nPh)));
+  document.querySelectorAll('[data-lang]').forEach((b) => b.setAttribute('aria-pressed', b.dataset.lang === lang));
+  document.querySelectorAll('[data-keep-lang]').forEach((a) => { const u = new URL(a.getAttribute('href'), location.href); if (lang === 'az') u.searchParams.delete('lang'); else u.searchParams.set('lang', lang); a.href = u.pathname + u.search; });
+  $('kx-nav').href = `https://kitabxana.az${lang === 'az' ? '' : '/' + lang}/`;
+  $('mapP').textContent = t('mapP'); $('netP').textContent = t('netP'); $('findP').textContent = t('findP'); $('covP').textContent = t('covP');
+  $('mreg').textContent = t('mreg'); $('mwide').textContent = t('mwide'); $('gfit').textContent = t('gfit'); $('mapHint').textContent = t('mapHint'); $('gload').textContent = t('gload');
+  $('method').innerHTML = t('method')(); $('ftop').setAttribute('aria-label', t('topL')); $('cg').setAttribute('aria-label', t('netL'));
+  if (!D) return;
+  $('lede').textContent = t('lede')(D.stats.total, D.stats.withDeathPlace); $('foot').innerHTML = t('foot')(D.built);
+  controls(); stats(); legendMap(); legendNet(); coverage(); suggest();
+  if (G) { $('netHint').textContent = t('netStats')(G.nodes.length, G.links.length) + '. ' + t('netHint'); }
+  if (curP >= 0) selectPerson(curP, false);
+}
+document.querySelectorAll('[data-lang]').forEach((b) => (b.onclick = () => {
+  lang = b.dataset.lang; try { localStorage.setItem('lang', lang); } catch {}
+  const u = new URL(location.href); if (lang === 'az') u.searchParams.delete('lang'); else u.searchParams.set('lang', lang); history.replaceState(null, '', u);
+  applyLang();
+}));
+addEventListener('themechange', () => { /* theme.js reloads pages with a map */ });
+applyLang();
+$('gload').textContent = t('gload');
+
+fetch('data/insanlar.json').then((r) => r.json()).then((d) => {
+  D = d; P = d.people; PL = d.places; D.cats.forEach((k, i) => (catIdx[k] = i));
+  refilter(); initMap(); drawMap(); buildIndex(); applyLang();
+  // the network starts when it comes into view (cosmos.gl wants the canvas sized)
+  const go = () => { if (!gReady) buildNet(false); };
+  if ('IntersectionObserver' in window) { const io = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting)) { go(); io.disconnect(); } }, { rootMargin: '300px' }); io.observe($('cg')); } else go();
+  const pq = qs.get('p'); if (pq) { const i = P.findIndex((r) => 'Q' + r[0] === pq); if (i >= 0) selectPerson(i, false); }
+  window.__people = { P, PL, S };
+}).catch((e) => { console.error(e); $('lede').textContent = 'Error: ' + e.message; });
+})();
+</script>
+</body>
+</html>
