@@ -4,8 +4,8 @@
 #  - the deepest zoom (zmax in data/gcps.json, near the scan's metres per pixel) is sampled straight
 #    from the scan through the same fit as warp.py; every zoom above is made by averaging four tiles of
 #    the one below, so nothing shimmers;
-#  - a plan with "restore" (a small, soft JPEG of a line drawing) gets more: the paper evened out by
-#    dividing by its own level, the JPEG mottle removed (non-local means), the ink darkened on cream;
+#  - a plan with "restore" (a small, soft photo of a faded drawing) is cleaned harder: the wash evened
+#    out, the JPEG grain removed (non-local means), the ink set on cream, no sharpening;
 #  - tiles outside the plan are written too (tiny, transparent), so the map never asks for a missing one.
 # Writes data/tiles/<year>/<z>/<x>/<y>.webp and the bounds and zooms into data/plans.json.
 #   python scripts/tiles.py [year]      (numpy, scipy, Pillow)
@@ -31,7 +31,7 @@ def tile_ll(z, x, y, n=256):
     lon = px / N * 360 - 180
     lat = np.degrees(np.arctan(np.sinh(np.pi * (1 - 2 * py / N))))
     return np.meshgrid(lon, lat)
-PAPER, INK = np.array([248, 244, 234], np.float32), np.array([44, 36, 32], np.float32)
+PAPER, INK = np.array([250, 247, 240], np.float32), np.array([30, 26, 24], np.float32)
 def ll_tile(lon, lat, z):
     n = 2 ** z
     return int((lon + 180) / 360 * n), int((1 - math.log(math.tan(math.radians(lat)) + 1 / math.cos(math.radians(lat))) / math.pi) / 2 * n)
@@ -52,19 +52,20 @@ for year, plan in G.items():
     # the scan, cleaned
     im = Image.open(RAW / plan['file']).convert('RGB')
     restore = plan.get('restore')
-    if restore:   # a small, soft scan of a line drawing: paper evened out, JPEG mottle removed, ink darkened
+    if restore:   # a small, soft photo of a faded drawing: the wash evened out (each pixel over the paper's
+        # level across ~40 px, so shaded blocks stay), JPEG grain removed (non-local means), ink on cream
         from skimage.restoration import denoise_nl_means
         g = np.asarray(im, np.float32).mean(2)
-        n = np.clip(g / gaussian_filter(grey_closing(g, size=(9, 9)), 6), 0, 1.1)   # paper = 1
-        n = denoise_nl_means(n, h=.04, patch_size=5, patch_distance=6, fast_mode=True)
-        dark = np.clip((1 - n) / .45, 0, 1) ** .85
+        n = np.clip(g / gaussian_filter(grey_closing(g, size=(41, 41)), 25), 0, 1)
+        n = denoise_nl_means(n, h=.02, patch_size=5, patch_distance=6, fast_mode=True)
+        dark = np.clip((1 - n - .03) / .32, 0, 1) ** 1.5
         im = Image.fromarray(np.clip(PAPER * (1 - dark[..., None]) + INK * dark[..., None], 0, 255).astype(np.uint8))
     else: im = ImageOps.autocontrast(im, cutoff=.5)
     if plan.get('auto', {}).get('streets') == 'ink' and not restore:     # a line drawing: paper to white, ink to ink
         g = np.asarray(im.convert('L')).astype(np.float32)
         g = np.clip((g - 60) / (215 - 60), 0, 1) ** 1.4 * 255
         im = Image.fromarray(g.astype(np.uint8)).convert('RGB')
-    im = im.filter(ImageFilter.UnsharpMask(radius=1.6, percent=55 if not restore else 60, threshold=2 if not restore else 1))
+    if not restore: im = im.filter(ImageFilter.UnsharpMask(radius=1.6, percent=55, threshold=2))
     a = np.asarray(im).astype(np.float32); h, w = a.shape[:2]
     # cubic resampling needs the scan pre-filtered; do it once, not for every tile
     a = np.stack([spline_filter(a[..., c], order=3, output=np.float32) for c in range(3)], -1)
