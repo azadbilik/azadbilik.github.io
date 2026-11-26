@@ -102,10 +102,10 @@
   "maxzoom": 16
  },
  "ganja-1873": {
-  "title": "Генеральный план Елисаветполя (Гянджи), 1873",
-  "source": "https://commons.wikimedia.org/wiki/File:General_plan_of_Ganja,_1873.jpg",
+  "title": "План проектированного расположения губернского города Елисаветполя в 1873 году (1872)",
+  "source": "https://www.prlib.ru/item/766261",
   "fit": "thin-plate spline",
-  "points": 25,
+  "points": 64,
   "meanErrorM": 0.0,
   "coordinates": [
    [
@@ -125,12 +125,12 @@
     40.64
    ]
   ],
-  "tiles": "data/tiles/ganja-1873/{z}/{x}/{y}.webp?v=2a207aec",
+  "tiles": "data/tiles/ganja-1873/{z}/{x}/{y}.webp?v=99b53349",
   "bounds": [
-   46.35383,
-   40.67623,
-   46.38876,
-   40.70236
+   46.30646,
+   40.63888,
+   46.37557,
+   40.69254
   ],
   "minzoom": 12,
   "maxzoom": 17

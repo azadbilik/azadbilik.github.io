@@ -103,18 +103,18 @@ const T = {
   az: { doc: 'Şəhərlər necə böyüdü · Azad Bilik', title: 'Şəhərlər necə böyüdü', sub: 'Köhnə planlar bugünkü şəhərin üstündə', now: 'bu gün',
     lens: 'Böyüdücü', swipe: 'Pərdə', scratch: 'Qaşı', fade: 'Şəffaf', size: 'Ölçü', clear: 'Təmizlə', opacity: 'Şəffaflıq',
     hint: { lens: 'Siçanı xəritədə gəzdirin: şüşənin içində köhnə plan görünür.', lensTouch: 'Xəritəni barmaqla sürüşdürün: köhnə plan mərkəzdəki şüşədədir.', swipe: 'Xətti sağa-sola çəkin.', scratch: 'Bugünkü şəhəri qaşıyıb köhnəsini açın.', fade: 'Sürüşdürücü ilə iki xəritəni qarışdırın.' },
-    fit: 'Yerləşdirmə', fitText: { similarity: 'iki abidəyə görə (Qız qalası, Şirvanşahlar sarayı)', auto: 'küçələrin bugünkü küçələrlə avtomatik tutuşdurulması ilə', pinned: 'dönüşü və miqyası küçələrə görə, yeri Şah Abbas məscidinin meydanına görə' }, acc: (m) => `dəqiqlik təxminən ${m} m`, source: 'Mənbə', places: 'Onda və indi',
-    note: 'Planlar ictimai mülkiyyətdədir (Wikimedia Commons). Bugünkü xəritə: OpenStreetMap. Köhnə planların öz xətaları qalır.' },
+    fit: 'Yerləşdirmə', fitText: { similarity: 'iki abidəyə görə (Qız qalası, Şirvanşahlar sarayı)', auto: 'küçələrin bugünkü küçələrlə avtomatik tutuşdurulması ilə', pinned: 'dönüşü və miqyası küçələrə görə, yeri Şah Abbas məscidinin meydanına görə', landmarks: 'üç yerə görə (Şah Abbas məscidi, Aleksandr Nevski kilsəsi, Xan bağı)' }, acc: (m) => `dəqiqlik təxminən ${m} m`, source: 'Mənbə', places: 'Onda və indi',
+    note: 'Planlar ictimai mülkiyyətdədir (Wikimedia Commons, Prezident kitabxanası). Bugünkü xəritə: OpenStreetMap. Köhnə planların öz xətaları qalır.' },
   ru: { doc: 'Как росли города · Azad Bilik', title: 'Как росли города', sub: 'Старые планы поверх нынешнего города', now: 'сейчас',
     lens: 'Лупа', swipe: 'Шторка', scratch: 'Стереть', fade: 'Прозрачно', size: 'Размер', clear: 'Сбросить', opacity: 'Прозрачность',
     hint: { lens: 'Водите мышью по карте: в линзе — старый план.', lensTouch: 'Двигайте карту пальцем: старый план — в линзе посередине.', swipe: 'Тяните линию влево и вправо.', scratch: 'Сотрите нынешний город, чтобы открыть старый.', fade: 'Смешайте две карты ползунком.' },
-    fit: 'Привязка', fitText: { similarity: 'по двум памятникам (Девичья башня, дворец Ширваншахов)', auto: 'автоматическим совмещением улиц с нынешними', pinned: 'поворот и масштаб — по улицам, место — по площади мечети Шах-Аббаса' }, acc: (m) => `точность около ${m} м`, source: 'Источник', places: 'Тогда и сейчас',
-    note: 'Планы — общественное достояние (Wikimedia Commons). Нынешняя карта: OpenStreetMap. Собственные ошибки старых планов остаются.' },
+    fit: 'Привязка', fitText: { similarity: 'по двум памятникам (Девичья башня, дворец Ширваншахов)', auto: 'автоматическим совмещением улиц с нынешними', pinned: 'поворот и масштаб — по улицам, место — по площади мечети Шах-Аббаса', landmarks: 'по трём ориентирам (мечеть Шах-Аббаса, церковь Александра Невского, Ханский сад)' }, acc: (m) => `точность около ${m} м`, source: 'Источник', places: 'Тогда и сейчас',
+    note: 'Планы — общественное достояние (Wikimedia Commons, Президентская библиотека). Нынешняя карта: OpenStreetMap. Собственные ошибки старых планов остаются.' },
   en: { doc: 'How the cities grew · Azad Bilik', title: 'How the cities grew', sub: "Old plans over today's city", now: 'today',
     lens: 'Lens', swipe: 'Swipe', scratch: 'Scratch', fade: 'Fade', size: 'Size', clear: 'Clear', opacity: 'Opacity',
     hint: { lens: 'Move the mouse over the map: the old plan shows in the glass.', lensTouch: 'Drag the map with a finger: the old plan shows in the glass in the middle.', swipe: 'Drag the line left and right.', scratch: "Scratch today's city away to uncover the old one.", fade: 'Blend the two maps with the slider.' },
-    fit: 'Placed', fitText: { similarity: "by two landmarks (the Maiden Tower, the Shirvanshahs' palace)", auto: "by matching its streets to today's automatically", pinned: "rotation and scale by matching its streets, its place by the Shah Abbas mosque's square" }, acc: (m) => `accurate to about ${m} m`, source: 'Source', places: 'Then and now',
-    note: "The plans are public domain (Wikimedia Commons). Today's map: OpenStreetMap. The old plans' own errors remain." },
+    fit: 'Placed', fitText: { similarity: "by two landmarks (the Maiden Tower, the Shirvanshahs' palace)", auto: "by matching its streets to today's automatically", pinned: "rotation and scale by matching its streets, its place by the Shah Abbas mosque's square", landmarks: "by three landmarks (the Shah Abbas mosque, the Alexander Nevsky church, the Khan's garden)" }, acc: (m) => `accurate to about ${m} m`, source: 'Source', places: 'Then and now',
+    note: "The plans are public domain (Wikimedia Commons, the Presidential Library). Today's map: OpenStreetMap. The old plans' own errors remain." },
 };
 const t = (k) => T[lang][k];
 const PLANS = {
@@ -128,9 +128,9 @@ const PLANS = {
     title: { az: 'Quberniya şəhəri, 1898–1900', ru: 'Губернский город, 1898–1900', en: 'The governorate town, 1898–1900' },
     text: { az: 'Polkovnik fon der Nonnenin planı: çəhrayı — tikilmiş məhəllələr, narıncı — planlaşdırılan. Nizami, Rəsul Rza küçələri və Parapet artıq bugünkü yerindədir.', ru: 'План полковника фон дер Нонне: розовым — застроенные кварталы, оранжевым — проектируемые. Улицы Низами, Расула Рзы и Парапет уже на своих местах.', en: "Colonel von der Nonne's plan: pink for built-up blocks, orange for planned ones. Nizami and Rasul Rza streets and the Parapet are already where they are now." } },
 };
-PLANS['ganja-1873'] = { fit: 'pinned', acc: 120, center: [46.362, 40.686], zoom: 14, label: '1873',
+PLANS['ganja-1873'] = { fit: 'landmarks', acc: 30, center: [46.357, 40.679], zoom: 14.2, label: '1873',
     title: { az: 'Yelizavetpol (Gəncə), 1873', ru: 'Елисаветполь (Гянджа), 1873', en: 'Elisabethpol (Ganja), 1873' },
-    text: { az: 'Gəncəçayın hər iki sahilində məhəllələr: cənub-şərqdə sıx köhnə şəhər (Şah Abbas məscidinin ətrafı), şimal-qərbdə yeni, düzbucaqlı məhəllələr. Plan solğun fotodan götürülüb; yeri təxminidir.', ru: 'Кварталы по обоим берегам Гянджачая: на юго-востоке — плотный старый город (вокруг мечети Шах-Аббаса), на северо-западе — новые прямоугольные кварталы. План снят с блёклой фотографии; привязка приблизительна.', en: 'Quarters on both banks of the Ganjachay: the dense old town to the south-east (around the Shah Abbas mosque), new grid quarters to the north-west. The plan is from a faint photograph; its placing is approximate.' } };
+    text: { az: 'Yeni quberniya şəhərinin layihə planı (1872-də təsdiq edilib): Gəncəçayın hər iki sahilində məhəllələr. Şah Abbas məscidi və bazar ətrafında sıx köhnə şəhər, onun qərbində və cənub-qərbində salınacaq düzbucaqlı məhəllələr, yaşıl — Xan bağı. Rusiya Dövlət Tarix Arxivindəki əl ilə çəkilmiş plan.', ru: 'Проект планировки нового губернского города (утверждён в 1872 г.): кварталы по обоим берегам Гянджачая. Плотный старый город вокруг мечети Шах-Аббаса и базара, к западу и юго-западу — намеченные прямоугольные кварталы, зелёным — Ханский сад. Рукописный план из РГИА.', en: "The layout planned for the new governorate town (approved in 1872): quarters on both banks of the Ganjachay. The dense old town around the Shah Abbas mosque and the bazaar, grid quarters to be laid out west and south-west of it, the Khan's garden in green. A hand-drawn plan in the Russian State Historical Archive." } };
 const CITIES = { baki: { name: { az: 'Bakı', ru: 'Баку', en: 'Baku' }, plans: ['1806', '1894', '1898'] }, ganja: { name: { az: 'Gəncə', ru: 'Гянджа', en: 'Ganja' }, plans: ['ganja-1873'] } };
 const YEARS = Object.values(CITIES).flatMap((c) => c.plans);
 const cityOf = (y) => Object.keys(CITIES).find((c) => CITIES[c].plans.includes(y));
@@ -145,8 +145,12 @@ const POIS = [
     text: { az: 'Dəniz buraya qədər gəlirdi; bulvar 1909-dan doldurulmuş sahildə salınıb.', ru: 'Море доходило досюда; бульвар разбит с 1909 г. на отвоёванном берегу.', en: 'The sea came up to here; the boulevard was laid out from 1909 on reclaimed shore.' } },
   { year: '1898', at: [49.8490, 40.3790], z: 16.3, name: { az: 'Vağzal', ru: 'Вокзал', en: 'The station' },
     text: { az: 'Tiflis dəmir yolu Bakıya 1883-də çatdı; şəhər vağzala doğru böyüdü.', ru: 'Тифлисская железная дорога дошла до Баку в 1883 г.; город рос навстречу вокзалу.', en: 'The Tiflis railway reached Baku in 1883; the town grew out towards the station.' } },
-  { year: 'ganja-1873', at: [46.3606, 40.6828], z: 15.5, name: { az: 'Şah Abbas məscidi', ru: 'Мечеть Шах-Аббаса', en: 'The Shah Abbas mosque' },
-    text: { az: 'Köhnə Gəncənin mərkəzi: məscid və onun meydanı 1873-cü il planında da var.', ru: 'Сердце старой Гянджи: мечеть и её площадь есть и на плане 1873 г.', en: "Old Ganja's heart: the mosque and its square are on the 1873 plan too." } },
+  { year: 'ganja-1873', at: [46.35887, 40.67752], z: 16.6, name: { az: 'Şah Abbas məscidi', ru: 'Мечеть Шах-Аббаса', en: 'The Shah Abbas mosque' },
+    text: { az: 'Köhnə Gəncənin mərkəzi: planda məscid həyəti ilə (13), yanında bazar sıraları.', ru: 'Сердце старой Гянджи: на плане мечеть с двором (13), рядом — торговые ряды.', en: "Old Ganja's heart: on the plan the mosque with its courtyard (13), the bazaar rows beside it." } },
+  { year: 'ganja-1873', at: [46.35646, 40.67928], z: 16.8, name: { az: 'Aleksandr Nevski kilsəsi', ru: 'Церковь Александра Невского', en: 'The Alexander Nevsky church' },
+    text: { az: 'Planda «A» hərfi ilə kilsə üçün ayrılmış meydan; kilsə 1887-də elə burada tikildi.', ru: 'На плане — площадь под церковь, отмеченная буквой «А»; церковь построили здесь в 1887 г.', en: 'The plan sets aside a square for a church, marked «A»; the church was built right here in 1887.' } },
+  { year: 'ganja-1873', at: [46.35403, 40.6762], z: 16.4, name: { az: 'Xan bağı', ru: 'Ханский сад', en: "The Khan's garden" },
+    text: { az: 'Planda yaşıl rənglə çəkilmiş bağ bu gün də parkdır.', ru: 'Сад, закрашенный на плане зелёным, — и сегодня парк.', en: 'The garden painted green on the plan is still a park today.' } },
   { year: '1894', at: [49.8820, 40.3800], z: 15, name: { az: 'Qara şəhər', ru: 'Чёрный город', en: 'The Black City' },
     text: { az: '1870-lərdə neft zavodları şəhərdən buraya köçürüldü; tüstüsündən adını aldı.', ru: 'В 1870-х нефтяные заводы вывели сюда из города; название — от копоти.', en: 'In the 1870s the refineries were moved out here from the town; it was named for the soot.' } },
 ];
@@ -158,7 +162,7 @@ let split = .5, fade = .85, R = 150, lensAt = null, meta = {}, poi = -1;
 
 const style = `https://tiles.openfreemap.org/styles/${dark ? 'dark' : 'positron'}`;
 const map = new maplibregl.Map({ container: 'map', style, center: [49.85, 40.373], zoom: 13.6, minZoom: 11, maxZoom: 18.5,
-  attributionControl: { compact: true, customAttribution: 'Plans: Wikimedia Commons (PD) · <a href="https://www.openstreetmap.org/copyright">© OpenStreetMap</a>' } });
+  attributionControl: { compact: true, customAttribution: 'Plans: Wikimedia Commons, Presidential Library (PD) · <a href="https://www.openstreetmap.org/copyright">© OpenStreetMap</a>' } });
 const old = new maplibregl.Map({ container: 'old', style, center: map.getCenter(), zoom: map.getZoom(), maxZoom: 18.5, interactive: false, attributionControl: false, fadeDuration: 0 });
 map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-right');
 // the camera leaves room for the panel; both maps share the padding, so they stay in step
@@ -274,7 +278,7 @@ function draw() {
   drawTool();
   const p = PLANS[year], m = meta[year];
   document.getElementById('side').innerHTML = `<div class="about"><h2>${esc(L(p.title))}</h2><p>${esc(L(p.text))}</p>
-      ${m ? `<p class="k">${t('fit')}: ${esc(t('fitText')[p.fit])}, ${esc(t('acc')(p.acc))}. ${t('source')}: <a href="${m.source}" target="_blank" rel="noopener">Wikimedia Commons ↗</a></p>` : ''}</div>
+      ${m ? `<p class="k">${t('fit')}: ${esc(t('fitText')[p.fit])}, ${esc(t('acc')(p.acc))}. ${t('source')}: <a href="${m.source}" target="_blank" rel="noopener">${/prlib/.test(m.source) ? (lang === 'en' ? 'Presidential Library (RGIA)' : lang === 'ru' ? 'Президентская библиотека (РГИА)' : 'Prezident kitabxanası (RGIA)') : 'Wikimedia Commons'} ↗</a></p>` : ''}</div>
     <h2 class="sec">${t('places')}</h2><ul class="pois">${POIS.map((q, i) => cityOf(q.year) !== city ? '' : `<li><button type="button" data-p="${i}" aria-current="${i === poi}"><span class="y">${lab(q.year)}</span><span><b>${esc(L(q.name))}</b><small>${esc(L(q.text))}</small></span></button></li>`).join('')}</ul>
     <p class="note">${t('note')}</p>`;
   document.querySelectorAll('[data-p]').forEach((b) => b.onclick = () => goPoi(+b.dataset.p));

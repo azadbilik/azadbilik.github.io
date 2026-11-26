@@ -21,7 +21,12 @@ F = cfg.get('down', 4)       # work at 1/F resolution
 img = Image.open(RAW / plan['file']).convert('RGB')
 a = np.asarray(img.resize((img.width // F, img.height // F), Image.BILINEAR)).astype(np.int16)
 R, Gc, B = a[..., 0], a[..., 1], a[..., 2]
-if cfg['streets'] == 'light':      # coloured blocks, streets left white
+if cfg['streets'] == 'tophat':     # coloured blocks with pale ones among them: a street is a thin line lighter than both sides
+    from scipy.ndimage import grey_opening
+    L = a.mean(2).astype(np.float32)
+    th = L - grey_opening(L, size=(cfg.get('width', 5),) * 2)
+    street = th > cfg.get('lift', 12)
+elif cfg['streets'] == 'light':    # coloured blocks, streets left white
     street = (R > 215) & (Gc > 210) & (B > 195)
 else:                              # line drawing: a street runs between two inked block edges
     ink = (R < 150)
@@ -61,14 +66,16 @@ def best_shift(theta, s, lim):
     k = np.unravel_index(np.argmax(cc), cc.shape)
     return cc[k], (k[1] - lim) * F, (k[0] - lim) * F
 best = None
-for s in np.arange(*cfg['scale']):
+if 'fixed' in cfg:   # the global fit given (from landmarks), only the local sharpening below is searched
+    th_, s_ = cfg['fixed']; best = (best_shift(th_, s_, 1)[0], th_, s_, 0, 0)
+for s in ([] if best else np.arange(*cfg['scale'])):
     for theta in np.arange(*cfg['rotation']):
         sc, dx, dy = best_shift(theta, s, cfg.get('shift', 60))
         if not best or sc > best[0]: best = (sc, theta, s, dx, dy)
 sc, theta, s, dx, dy = best
 print(f'{year}: rotation {theta:.1f}°, {s:.3f} m/px, shift {dx}, {dy} px (score {sc:.0f})')
 # refine around the best
-for s2 in np.arange(s - .02, s + .021, .005):
+for s2 in ([] if 'fixed' in cfg else np.arange(s - .02, s + .021, .005)):
     for t2 in np.arange(theta - 1, theta + 1.01, .25):
         sc2, dx2, dy2 = best_shift(t2, s2, cfg.get('shift', 60))
         if sc2 > sc: sc, theta, s, dx, dy = sc2, t2, s2, dx2, dy2

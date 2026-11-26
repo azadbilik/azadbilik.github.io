@@ -52,15 +52,15 @@ You look at a plan in one of four ways:
 - **a scratch-off;**
 - **a fade.**
 
-Five *then and now* places fly to their plan and open the lens on them. The camera leaves room for the side panel, which folds away.
+Eight *then and now* places fly to their plan and open the lens on them. The camera leaves room for the side panel, which folds away.
 
 ## Ganja and Tabriz
 
-- **Ganja, 1873** ([Commons](https://commons.wikimedia.org/wiki/File:General_plan_of_Ganja,_1873.jpg), from the State Historical Archive of Azerbaijan):
-  - It's a faint photograph of the plan, so the automatic match alone slid it about 130 m.
-  - Its rotation and scale come from the street match: −2.75°, 2.12 m a pixel. That run also weighted the Ganjachay river.
-  - Its position is pinned by the plan's open square at the Shah Abbas mosque.
-  - Accuracy about 120 m.
+- **Ganja, 1873:** the projected layout of the governorate town (approved at Livadia in 1872), hand-drawn in ink and watercolour; Russian State Historical Archive, fond 1293, op. 166, d. 2, scanned by the [Presidential Library](https://www.prlib.ru/item/766261). Its viewer serves 256 px tiles of a 15247 × 15391 px scan (`content.prlib.ru/fcgi-bin/iipsrv.fcgi`, `JTL=<level>,<n>`); level 5 (7624 × 7696) was stitched in a browser into `data/raw/plan-ganja-1872.jpg` (prlib.ru isn't reachable from every network).
+  - Placed by three landmarks that stand today: the Shah Abbas mosque (block 73, no. 13), the church square «A» (the Alexander Nevsky church, built there in 1887) and the Khan's garden. A similarity fits them within 4–7 m: 0.769 m a pixel, rotated 1.83°. `autoreg.py` writes it out as a grid of anchors (`auto.fixed`, no local shifts).
+  - The street match (a white top-hat picks the plan's thin streets) was tried: on its own it slid the plan ~85 m, pulled by planned quarters never built as drawn, and its local shifts scattered ±40 m, so it isn't used.
+  - Accuracy about 30 m away from the landmarks. Tiles to zoom 17.
+  - The faint 1873 photograph on [Commons](https://commons.wikimedia.org/wiki/File:General_plan_of_Ganja,_1873.jpg), used before, is a different, lighter draft; it was placed ~600 m wrong (by a misread mosque position).
   - Today's streets come from `data/raw/ganja.geojson` (osmium, bbox 46.28,40.63,46.44,40.73).
 - **Tabriz** was tried with the 1880 map printed for Crown Prince Mozaffar al-Din and left out:
   - The match turned it 59°, and nothing but the core around the Ark could be confirmed.
