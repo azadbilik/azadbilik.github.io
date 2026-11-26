@@ -15,80 +15,245 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="/fonts/fonts.css">
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
-<link rel="stylesheet" href="/shared/story-map.css">
+<script>
+  (() => { const L = ['az', 'ru', 'en']; let l = new URLSearchParams(location.search).get('lang'); if (!L.includes(l)) { try { l = localStorage.getItem('lang'); } catch {} } if (L.includes(l)) document.documentElement.lang = l; })();
+</script>
 <style>
-  .tabs { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--rule); }
-  .tabs button { padding: .7rem .5rem; font-size: .875rem; color: var(--muted); border-bottom: 2px solid transparent; }
-  .tabs button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--accent); font-weight: 500; }
-  .group h2 { padding: 1rem 1.5rem .35rem; font: 500 .75rem var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
-  .group ol { list-style: none; padding: 0; }
-  .rec { display: grid; grid-template-columns: 2rem 1fr; gap: .1rem .6rem; align-items: center; padding: .4rem 1.5rem; }
-  .rec:hover { background: var(--rule); }
-  .rec.on { background: var(--rule); box-shadow: inset 2px 0 var(--accent); }
-  .rec .play { grid-row: span 2; width: 2rem; height: 2rem; border: 1px solid var(--rule); border-radius: 50%; display: grid; place-items: center; font-size: .7rem; }
-  .rec .play:hover { border-color: var(--ink); }
-  .rec .name { font-weight: 500; }
-  .rec .meta { font-size: .8125rem; color: var(--muted); }
-  .rec .meta button { color: inherit; text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: .2em; }
-  .rec .meta button:hover { color: var(--ink); }
-  .rec .meta a { color: inherit; text-decoration: none; } .rec .meta a:hover { color: var(--accent); }
-  .player { border-top: 1px solid var(--rule); padding: .6rem 1rem .7rem; display: grid; gap: .3rem; background: var(--panel); }
-  .player[hidden] { display: none; }
-  .player .now { font-size: .8125rem; } .player .now small { color: var(--muted); }
-  .player audio { width: 100%; height: 2rem; }
-  .people { list-style: none; padding: 0; }
-  .people li button { display: grid; grid-template-columns: 1fr auto; gap: .05rem .75rem; width: 100%; text-align: left; padding: .35rem 1.5rem; font-size: .875rem; }
-  .people li button:hover { background: var(--rule); }
-  .people .role { font-size: .75rem; color: var(--muted); }
-  .people .kx { display: block; padding: 0 1.5rem .35rem; margin-top: -.25rem; font-size: .75rem; color: var(--muted); text-decoration: none; }
-  .people .kx:hover { color: var(--accent); }
-  .people .yrs { grid-row: span 2; font-size: .75rem; color: var(--muted); font-variant-numeric: tabular-nums; align-self: center; }
-  .place-head { padding: 1rem 1.5rem .25rem; }
-  .place-head h2 { font: 400 1.375rem/1.2 var(--serif); padding: 0; text-transform: none; letter-spacing: 0; color: var(--ink); }
-  /* Filters */
-  .chips { display: flex; flex-wrap: wrap; gap: .3rem; padding: .75rem 1.5rem 0; }
-  .chips button { font-size: .75rem; padding: .2rem .55rem; border: 1px solid var(--rule); border-radius: 999px; color: var(--muted); }
-  .chips button[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
-  .chips small { opacity: .7; margin-left: .2rem; font-variant-numeric: tabular-nums; }
-  @media (max-width: 48rem) { .chips { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; padding-inline: 1rem; } .chips::-webkit-scrollbar { display: none; } .chips button { flex: none; } }
-  /* Now playing: who sings, from where */
-  .player { grid-template-columns: auto 1fr; column-gap: .75rem; }
-  .player .face { grid-row: span 2; width: 3.25rem; height: 3.25rem; border-radius: 3px; object-fit: cover; background: var(--frame); }
-  .player .face.none { display: grid; place-items: center; font: 400 1.25rem var(--serif); color: var(--muted); }
-  .player .now a, .player .now button { color: inherit; text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: .2em; }
-  .player audio { grid-column: 1 / -1; }
-  .people .listen { font-size: .75rem; color: var(--accent); padding: 0 1.5rem .35rem; margin-top: -.25rem; display: inline-block; }
-  .dg { padding: 1rem 1.5rem .25rem; border-top: 1px solid var(--rule); }
-  .dg:first-child { border-top: 0; }
-  .dg h3 { font: 400 1.25rem/1.2 var(--serif); }
-  .dg .mood { font-size: .8125rem; color: var(--muted); font-style: italic; }
-  .dg .secs { display: flex; flex-wrap: wrap; gap: .25rem; margin-top: .5rem; }
-  .dg .secs span { font-size: .6875rem; padding: .05rem .4rem; border-radius: 3px; background: var(--rule); color: var(--muted); }
-  .dg ol { list-style: none; padding: 0; margin: .5rem -1.5rem 0; }
-  .from { font-size: .6875rem; color: var(--muted); border: 1px solid var(--rule); border-radius: 3px; padding: 0 .3rem; margin-left: .3rem; white-space: nowrap; }
+  :root {
+    --paper: #F4EFE6; --ink: #1A1410; --muted: #675E55; --rule: rgb(26 20 16 / .14); --frame: #E9E2D6;
+    --accent: #A81E28; --second: #1F5C73; --third: #5B6B2E; --fourth: #8A6A3B; --water: #E4DCCF; --land: #F4EFE6;
+    --vinyl: #171310; --groove: rgb(255 255 255 / .07);
+    --serif: 'Literata', Georgia, serif; --sans: 'Inter', system-ui, sans-serif;
+    --gutter: clamp(1rem, 4vw, 3rem);
+    color-scheme: light dark;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --paper: #14100D; --ink: #F1EBE1; --muted: #A0968B; --rule: rgb(241 235 225 / .14); --frame: #1F1914;
+      --accent: #DA5A61; --second: #6FB3CC; --third: #A9BC6A; --fourth: #CDA56A; --water: #0C0A08; --land: #1C1713; --vinyl: #050403; --groove: rgb(255 255 255 / .06); }
+  }
+  * { box-sizing: border-box; margin: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--paper); color: var(--ink); font: 400 1rem/1.55 var(--sans); -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: .22em; text-decoration-color: var(--rule); }
+  a:hover { text-decoration-color: currentColor; }
+  button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+  ::selection { background: color-mix(in srgb, var(--accent) 25%, transparent); }
+  [hidden] { display: none !important; }
+  .wrap { max-width: 80rem; margin: 0 auto; padding: 0 var(--gutter); }
+
+  /* The hub's header */
+  header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .75rem 1.5rem; padding-block: 1.75rem; }
+  .brand { display: inline-flex; align-items: center; gap: .6rem; font-weight: 600; font-size: .9375rem; text-decoration: none; white-space: nowrap; }
+  .brand svg { width: 1.375rem; height: 1.375rem; }
+  .star { fill: currentColor; } .gem { fill: var(--accent); }
+  header nav { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: .25rem 1.25rem; }
+  header nav a { font-size: .875rem; color: var(--muted); text-decoration: none; }
+  header nav a:hover, header nav a[aria-current] { color: var(--ink); }
+  header nav a[aria-current] { box-shadow: inset 0 -1px currentColor; }
+  .langs { display: inline-flex; gap: .15rem; margin-left: .25rem; }
+  .langs button { font-size: .75rem; letter-spacing: .04em; padding: .1rem .3rem; min-height: 1.75rem; min-width: 1.75rem; border-radius: 2px; color: var(--muted); }
+  .langs button[aria-pressed="true"] { color: var(--ink); box-shadow: inset 0 -1px currentColor; }
+
+  /* The stage: the record playing, and where its singer was born */
+  .stage { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 2rem 4rem; align-items: center; min-height: calc(100svh - 6rem); padding-block: 1rem 3rem; }
+  h1 { font: 300 clamp(2.5rem, 1.6rem + 3vw, 4.5rem)/1 var(--serif); letter-spacing: -.03em; }
+  h1 + .sub { margin-top: .75rem; font: italic 300 clamp(1.0625rem, 1rem + .4vw, 1.3125rem)/1.4 var(--serif); color: var(--muted); }
+  .deck { margin-top: 2.5rem; display: grid; grid-template-columns: auto 1fr; gap: 2rem; align-items: center; }
+  .deck .disc { width: clamp(9rem, 16vw, 14rem); }
+  .now-title { font: 400 clamp(1.75rem, 1.3rem + 1.6vw, 2.75rem)/1.1 var(--serif); letter-spacing: -.02em; text-wrap: balance; }
+  .now-who { margin-top: .5rem; font-size: 1.0625rem; }
+  .now-who button { text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: .22em; text-decoration-thickness: 1px; }
+  .now-who button:hover { text-decoration-color: currentColor; }
+  .now-meta { margin-top: .35rem; font-size: .875rem; color: var(--muted); }
+  .now-meta a { color: inherit; }
+  .controls { margin-top: 2rem; display: grid; grid-template-columns: auto auto auto 1fr; align-items: center; gap: .75rem 1rem; max-width: 36rem; }
+  .controls .big { width: 3.5rem; height: 3.5rem; border-radius: 50%; background: var(--ink); color: var(--paper); display: grid; place-items: center; transition: transform .15s; }
+  .controls .big:hover { transform: scale(1.05); }
+  .controls .big:active { transform: scale(.97); }
+  .controls .small { width: 2.5rem; height: 2.5rem; border-radius: 50%; display: grid; place-items: center; color: var(--muted); }
+  .controls .small:hover { color: var(--ink); background: var(--rule); }
+  .controls svg { width: 1.1rem; height: 1.1rem; fill: currentColor; }
+  .controls .big svg { width: 1.25rem; height: 1.25rem; }
+  .seek { display: grid; grid-template-columns: auto 1fr auto; gap: .6rem; align-items: center; font-size: .75rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+  input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 1.5rem; background: transparent; cursor: pointer; --p: 0%; }
+  input[type=range]::-webkit-slider-runnable-track { height: 3px; border-radius: 2px; background: linear-gradient(to right, var(--accent) var(--p), var(--rule) var(--p)); }
+  input[type=range]::-moz-range-track { height: 3px; border-radius: 2px; background: linear-gradient(to right, var(--accent) var(--p), var(--rule) var(--p)); }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: .85rem; height: .85rem; margin-top: -.35rem; border-radius: 50%; background: var(--ink); border: 0; }
+  input[type=range]::-moz-range-thumb { width: .85rem; height: .85rem; border-radius: 50%; background: var(--ink); border: 0; }
+  .inset { position: relative; margin: 0; aspect-ratio: 4 / 5; max-height: calc(100svh - 9rem); width: 100%; border-radius: 3px; overflow: hidden; background: var(--water); }
+  .inset #mini { position: absolute; inset: 0; }
+  .inset figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 2.5rem 1rem .9rem; font-size: .8125rem; line-height: 1.4; color: #F1EBE1; background: linear-gradient(to top, rgb(20 16 13 / .78), rgb(20 16 13 / 0)); }
+  .inset figcaption strong { font: 400 1.125rem var(--serif); display: block; }
+
+  /* Records: a disc of shellac, its paper label coloured by what is sung */
+  .disc { position: relative; aspect-ratio: 1; border-radius: 50%; display: block; }
+  .disc svg { width: 100%; height: 100%; display: block; filter: drop-shadow(0 6px 14px rgb(0 0 0 / .18)); }
+  .disc .spinner { transform-origin: 50% 50%; transform-box: view-box; }
+  .disc.spin .spinner { animation: spin 2.4s linear infinite; }
+  @keyframes spin { to { transform: rotate(1turn); } }
+  .k-mugham { --k: var(--accent); } .k-tesnif { --k: var(--second); } .k-song { --k: var(--third); } .k-instrumental { --k: var(--fourth); }
+
+  /* Sections below the stage */
+  section.block { padding-block: 3.5rem 4rem; border-top: 1px solid var(--rule); }
+  .block-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 1rem 2rem; margin-bottom: 2rem; }
+  .block-head h2 { font: 300 clamp(2rem, 1.5rem + 1.8vw, 3rem)/1.05 var(--serif); letter-spacing: -.025em; }
+  .block-head p { color: var(--muted); max-width: 40rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; }
+  .chips button { font-size: .8125rem; padding: .35rem .8rem; border-radius: 999px; color: var(--muted); display: inline-flex; align-items: center; gap: .4rem; }
+  .chips button:hover { background: var(--rule); color: var(--ink); }
+  .chips button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+  .chips i { width: .55rem; height: .55rem; border-radius: 50%; background: var(--k); }
+  .chips small { font-variant-numeric: tabular-nums; opacity: .8; }
+
+  /* The shelf: one row per singer, their discs side by side */
+  .singer { display: grid; grid-template-columns: minmax(12rem, 16rem) 1fr; gap: 1rem 2.5rem; padding-block: 1.75rem; border-top: 1px solid var(--rule); }
+  .singer:first-child { border-top: 0; padding-top: 0; }
+  .singer h3 { font: 400 1.5rem/1.15 var(--serif); letter-spacing: -.015em; }
+  .singer .who { margin-top: .35rem; font-size: .8125rem; color: var(--muted); }
+  .singer .who button { text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: .2em; }
+  .singer .who button:hover { color: var(--ink); }
+  .singer .face { width: 3.5rem; height: 3.5rem; border-radius: 50%; object-fit: cover; margin-bottom: .75rem; background: var(--frame); }
+  .discs { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(7.5rem, 1fr)); gap: 1.5rem 1.25rem; }
+  .discs button { display: block; width: 100%; text-align: center; font-size: .8125rem; line-height: 1.3; }
+  .discs .disc { width: 100%; transition: transform .25s cubic-bezier(.2, .7, .2, 1); }
+  .discs button:hover .disc { transform: translateY(-3px) rotate(8deg); }
+  .discs .t { display: block; margin-top: .6rem; }
+  .discs .m { display: block; color: var(--muted); font-size: .75rem; }
+  .discs button[aria-current] .t { color: var(--accent); }
+
+  /* The mugham system */
+  .modes { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr)); gap: 1rem; }
+  .mode { border: 1px solid var(--rule); border-radius: 3px; padding: 1.25rem 1.25rem 1rem; display: flex; flex-direction: column; gap: .6rem; }
+  .mode h3 { font: 400 1.5rem/1.1 var(--serif); }
+  .mode .mood { font: italic 300 1rem/1.35 var(--serif); color: var(--muted); }
+  .mode .secs { display: flex; flex-wrap: wrap; gap: .25rem; }
+  .mode .secs span { font-size: .6875rem; padding: .05rem .4rem; border-radius: 3px; background: var(--rule); color: var(--muted); }
+  .tracks { list-style: none; padding: 0; margin-top: .25rem; border-top: 1px solid var(--rule); }
+  .tracks button { display: grid; grid-template-columns: 1.75rem 1fr; gap: 0 .6rem; align-items: center; width: 100%; text-align: left; padding: .45rem 0; border-bottom: 1px solid var(--rule); font-size: .875rem; }
+  .tracks button:hover .t, .tracks button[aria-current] .t { color: var(--accent); }
+  .tracks .dot { grid-row: span 2; width: 1.75rem; height: 1.75rem; border-radius: 50%; background: var(--vinyl); display: grid; place-items: center; }
+  .tracks .dot::after { content: ''; width: .7rem; height: .7rem; border-radius: 50%; background: var(--k); }
+  .tracks .m { font-size: .75rem; color: var(--muted); }
+  .tracks .prob { font-size: .6875rem; color: var(--muted); border: 1px solid var(--rule); border-radius: 3px; padding: 0 .3rem; margin-left: .3rem; }
+  .mode .none { font-size: .8125rem; color: var(--muted); }
+  .fine { margin-top: 1.5rem; font-size: .8125rem; color: var(--muted); max-width: 46rem; }
+
+  /* The musicians: their birthplaces on the map, the list beside it */
+  .people-grid { display: grid; grid-template-columns: minmax(0, 1fr) 24rem; gap: 2rem; align-items: start; }
+  .bigmap { position: sticky; top: 1rem; height: calc(100svh - 2rem); max-height: 52rem; border-radius: 3px; overflow: hidden; background: var(--water); }
+  #map { position: absolute; inset: 0; }
+  .legend { position: absolute; top: .75rem; right: .75rem; background: color-mix(in srgb, var(--paper) 92%, transparent); border: 1px solid var(--rule); border-radius: 3px; padding: .5rem .7rem; font-size: .75rem; display: grid; gap: .2rem; }
+  .legend i { display: inline-block; width: .6rem; height: .6rem; border-radius: 50%; margin-right: .45rem; vertical-align: -.05rem; }
+  .pcol { height: calc(100svh - 2rem); max-height: 52rem; display: flex; flex-direction: column; min-height: 0; }
+  .pcol .plist { overflow-y: auto; flex: 1; min-height: 0; scrollbar-width: thin; scrollbar-color: var(--rule) transparent; }
+  .plist-head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-bottom: .5rem; }
+  .plist-head h3 { font: 400 1.375rem/1.2 var(--serif); }
+  .plist-head button { font-size: .8125rem; color: var(--accent); }
+  .plist { list-style: none; padding: 0; border-top: 1px solid var(--rule); }
+  .plist li { border-bottom: 1px solid var(--rule); }
+  .plist .p { display: grid; grid-template-columns: 1fr auto; gap: 0 .75rem; width: 100%; text-align: left; padding: .5rem 0; font-size: .9375rem; }
+  .plist .p:hover .n { color: var(--accent); }
+  .plist .r { font-size: .75rem; color: var(--muted); }
+  .plist .y { grid-row: span 2; align-self: center; font-size: .75rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .plist .more { display: flex; flex-wrap: wrap; gap: .25rem 1rem; padding: 0 0 .5rem; font-size: .75rem; }
+  .plist .more a { color: var(--muted); text-decoration: none; }
+  .plist .more button { color: var(--accent); }
+  .plist .more a:hover { color: var(--accent); }
+  .plist .on .n { color: var(--accent); }
   .pulse { width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--accent); animation: pulse 1.4s ease-out infinite; pointer-events: none; }
   @keyframes pulse { from { transform: scale(.6); opacity: 1; } to { transform: scale(2.2); opacity: 0; } }
-  @media (prefers-reduced-motion: reduce) { .pulse { animation: none; } }
-  .card .maplibregl-popup-content { padding: .75rem 1rem; }
-  .legend .row { display: flex; align-items: center; gap: .5rem; }
-  .legend .row i { width: .65rem; height: .65rem; border-radius: 50%; display: inline-block; }
+  .maplibregl-popup-content { background: var(--paper); color: var(--ink); font: .8125rem/1.4 var(--sans); padding: .5rem .75rem; border-radius: 3px; box-shadow: 0 2px 10px rgb(0 0 0 / .2); }
+  .maplibregl-popup-tip { display: none; }
+  .maplibregl-ctrl-attrib { background: color-mix(in srgb, var(--paper) 85%, transparent) !important; color: var(--muted); }
+  .maplibregl-ctrl-attrib a { color: var(--muted) !important; }
+
+  footer { border-top: 1px solid var(--rule); padding-block: 1.75rem 2.5rem; font-size: .8125rem; color: var(--muted); display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem 2rem; }
+  footer p { max-width: 46rem; }
+
+  @media (max-width: 56rem) {
+    .stage { grid-template-columns: 1fr; min-height: 0; padding-top: 0; }
+    .inset { aspect-ratio: 4 / 3; max-height: none; }
+    .deck { grid-template-columns: 7.5rem 1fr; gap: 1.25rem; margin-top: 1.75rem; }
+    .deck .disc { width: 7.5rem; }
+    .controls { grid-template-columns: auto auto auto; justify-content: start; }
+    .seek { grid-column: 1 / -1; }
+    .singer { grid-template-columns: 1fr; gap: .75rem; }
+    .singer .face { display: none; }
+    .discs { grid-template-columns: repeat(auto-fill, minmax(6rem, 1fr)); gap: 1.25rem 1rem; }
+    .people-grid { grid-template-columns: 1fr; }
+    .bigmap { position: relative; top: 0; height: 60svh; }
+    .pcol { height: 70svh; }
+    header nav { gap: .25rem .9rem; } header nav a { font-size: .8125rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } .disc.spin .spinner, .pulse { animation: none; } }
 </style>
 </head>
 <body>
-<div id="map" role="region" aria-label="Xəritə"></div>
+<div class="wrap">
+  <header>
+    <a class="brand" href="/" data-keep-lang><svg viewBox="0 0 512 512" aria-hidden="true"><g class="star"><rect x="126" y="126" width="260" height="260"/><polygon points="256,72 440,256 256,440 72,256"/></g><polygon class="gem" points="256,196 316,256 256,316 196,256"/></svg>Azad Bilik</a>
+    <nav aria-label="Azad Bilik"><a href="https://kitabxana.az" id="kx" data-i18n="library">Kitabxana</a><a href="/qalereya/" data-keep-lang data-i18n="gallery">Qalereya</a><a href="/xeriteler/" data-keep-lang data-i18n="maps">Ədəbi xəritələr</a><a href="/atlas/" data-keep-lang data-i18n="atlas">Atlas</a><a href="./" aria-current="page" data-keep-lang data-i18n="title">Musiqi</a><span class="langs" role="group" aria-label="Dil · Язык · Language"><button type="button" data-lang="az">AZ</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="en">EN</button></span></nav>
+  </header>
+</div>
 
-<aside class="panel">
-  <div class="head">
-    <div class="top"><a class="brand" href="/" data-keep-lang><svg viewBox="0 0 512 512" aria-hidden="true"><g class="star"><rect x="126" y="126" width="260" height="260"/><polygon points="256,72 440,256 256,440 72,256"/></g><polygon class="gem" points="256,196 316,256 256,316 196,256"/></svg>Azad Bilik</a><nav><a href="/qalereya/" data-i18n="gallery" data-keep-lang>Qalereya</a><span class="langs" role="group" aria-label="Dil · Язык · Language"><button type="button" data-lang="az">AZ</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="en">EN</button></span></nav></div>
-    <h1 data-i18n="title">Musiqi</h1>
-    <p class="sub" data-i18n="sub">İlk səs yazıları və musiqiçilərin yurdu</p>
-  </div>
-  <div class="tabs" role="tablist" style="grid-template-columns: repeat(3, 1fr)"><button type="button" role="tab" data-tab="recs" data-i18n="recs">Səs yazıları</button><button type="button" role="tab" data-tab="mugham" data-i18n="mughams">Muğamlar</button><button type="button" role="tab" data-tab="people" data-i18n="people">Musiqiçilər</button></div>
-  <div class="body" id="body" aria-live="polite"></div>
-  <div class="player" id="player" hidden><span id="face"></span><p class="now" id="now"></p><audio id="audio" controls preload="none"></audio></div>
-</aside>
+<main>
+  <section class="stage wrap" aria-labelledby="t-title">
+    <div>
+      <h1 id="t-title" data-i18n="title">Musiqi</h1>
+      <p class="sub" data-i18n="sub">İlk səs yazıları, 1902-dən</p>
+      <div class="deck">
+        <span class="disc" id="deck-disc"></span>
+        <div aria-live="polite">
+          <h2 class="now-title" id="now-title"></h2>
+          <p class="now-who" id="now-who"></p>
+          <p class="now-meta" id="now-meta"></p>
+        </div>
+      </div>
+      <div class="controls">
+        <button type="button" class="small" id="prev" data-i18n-label="prev"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5h2v14H6zM20 5v14L9 12z"/></svg></button>
+        <button type="button" class="big" id="toggle"><svg viewBox="0 0 24 24" aria-hidden="true" id="toggle-icon"><path d="M7 4.5v15l13-7.5z"/></svg></button>
+        <button type="button" class="small" id="next" data-i18n-label="next"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 5h2v14h-2zM4 5v14l11-7z"/></svg></button>
+        <div class="seek"><span id="cur">0:00</span><input type="range" id="seek" min="0" max="1000" value="0" step="1" data-i18n-label="position"><span id="dur">–:––</span></div>
+      </div>
+      <audio id="audio" preload="none"></audio>
+    </div>
+    <figure class="inset"><div id="mini" aria-hidden="true"></div><figcaption id="from"></figcaption></figure>
+  </section>
 
-<div class="legend" id="legend"></div>
+  <section class="block wrap" id="shelf" aria-labelledby="h-shelf">
+    <div class="block-head">
+      <h2 id="h-shelf" data-i18n="recs">Səs yazıları</h2>
+      <div class="chips" id="kinds" role="group"></div>
+    </div>
+    <div id="singers"></div>
+  </section>
+
+  <section class="block wrap" id="mugham" aria-labelledby="h-mugham">
+    <div class="block-head">
+      <h2 id="h-mugham" data-i18n="mughams">Muğamlar</h2>
+      <p data-i18n="dgLead"></p>
+    </div>
+    <div class="modes" id="modes"></div>
+    <p class="fine" data-i18n="dgNote"></p>
+  </section>
+
+  <section class="block wrap" id="people" aria-labelledby="h-people">
+    <div class="block-head">
+      <h2 id="h-people" data-i18n="people">Musiqiçilər</h2>
+      <p id="people-lead"></p>
+    </div>
+    <div class="people-grid">
+      <div class="bigmap"><div id="map" role="region" data-i18n-label="mapLabel"></div><div class="legend" id="legend"></div></div>
+      <div class="pcol">
+        <div class="plist-head"><h3 id="plist-title"></h3><button type="button" id="back" hidden></button></div>
+        <ol class="plist" id="plist"></ol>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="wrap"><footer><p data-i18n="note"></p><span><a href="/" data-keep-lang>Azad Bilik</a> · <a href="https://github.com/azadbilik">GitHub</a></span></footer></div>
 
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <script>
@@ -98,46 +263,61 @@ const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
 const still = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 const LANGS = ['az', 'ru', 'en'];
-let lang = (() => {
-  const q = new URLSearchParams(location.search).get('lang');
-  if (LANGS.includes(q)) return q;
-  try { const s = localStorage.getItem('lang'); if (LANGS.includes(s)) return s; } catch {}
-  return 'az';
-})();
+let lang = LANGS.includes(document.documentElement.lang) ? document.documentElement.lang : 'az';
 const T = {
-  az: { doc: 'Musiqi · Azad Bilik', title: 'Musiqi', sub: 'İlk səs yazıları və musiqiçilərin yurdu', gallery: 'Qalereya', recs: 'Səs yazıları', people: 'Musiqiçilər',
-    mugham: 'Muğamlar', tesnif: 'Təsniflər', song: 'Mahnılar', instrumental: 'Alətlə', khanende: 'xanəndə', tar: 'tarzən', ashik: 'aşıq', unknown: 'ifaçısı bilinmir',
-    play: 'Dinlə', commons: 'Commons', poems: 'şeirləri kitabxanada', alsoLit: 'Ədəbiyyat xəritəsində də var', back: '← Bütün musiqiçilər', nPeople: (n) => `${n} musiqiçi`, here: (n) => `${n} musiqiçi burada doğulub`,
-    one: { mugham: 'muğam', tesnif: 'təsnif', song: 'mahnı', instrumental: 'alətlə' }, mughams: 'Muğamlar', probable: 'ehtimal', others: 'Başqa muğamlar', sectionsL: 'Şöbələr', noRec: 'bu muğamın səs yazısı hələ yoxdur', dgNote: 'Yeddi əsas muğam (dəstgah), Üzeyir Hacıbəylinin bölgüsü ilə; əhval-ruhiyyə və şöbələr Vikipediyadakı mənbələrə görədir. «Ehtimal» olan yerlər dəqiqləşdirilməlidir.', all: 'Hamısı', listen: (n) => `▶ ${n} səs yazısı`, from: 'doğulub:', byHand: 'yer əl ilə', withRecs: 'səs yazısı olanlar', wiki: 'Vikipediya',
+  az: { doc: 'Musiqi · Azad Bilik', title: 'Musiqi', sub: 'İlk səs yazıları, 1902-dən', library: 'Kitabxana', gallery: 'Qalereya', maps: 'Ədəbi xəritələr', atlas: 'Atlas',
+    recs: 'Səs yazıları', people: 'Musiqiçilər', mughams: 'Muğamlar', all: 'Hamısı',
+    mugham: 'Muğamlar', tesnif: 'Təsniflər', song: 'Mahnılar', instrumental: 'Alətlə', one: { mugham: 'muğam', tesnif: 'təsnif', song: 'mahnı', instrumental: 'alətlə' },
+    khanende: 'xanəndə', tar: 'tarzən', ashik: 'aşıq', unknown: 'İfaçısı bilinmir', play: 'Dinlə', pause: 'Dayandır', prev: 'Əvvəlki', next: 'Sonrakı', position: 'Yer',
+    commons: 'Commons-da', probable: 'ehtimal', others: 'Başqa muğamlar', noRec: 'Bu muğamın səs yazısı hələ yoxdur.', sectionsL: 'Şöbələr',
+    dgLead: 'Yeddi əsas muğam, hər biri öz əhval-ruhiyyəsi və şöbələri ilə, və onları oxuyan yazılar.',
+    dgNote: 'Yeddi əsas muğam (dəstgah), Üzeyir Hacıbəylinin bölgüsü ilə; əhval-ruhiyyə və şöbələr Vikipediyadakı mənbələrə görədir. «Ehtimal» olan yerlər dəqiqləşdirilməlidir.',
+    bornHere: (who) => `${who} burada doğulub`, here: (n) => `${n} musiqiçi burada doğulub`, allPeople: (n, r) => `${n} xanəndə, tarzən və aşıq doğulduqları yerdə; ${r} nəfərin səs yazısı var.`, plistAll: 'Hamısı', back: '← Hamısı',
+    listen: (n) => `▶ ${n} səs yazısı`, poems: 'şeirləri kitabxanada ↗', alsoLit: 'ədəbiyyat xəritəsində →', byHand: 'yer əl ilə', withRecs: 'səs yazısı var', mapLabel: 'Musiqiçilərin xəritəsi',
+    discs: (n) => `${n} disk`, noPlace: 'Doğulduğu yer bilinmir',
     note: 'Səs yazıları Wikimedia Commons-dandır, hamısı ictimai mülkiyyətdədir: Azərbaycanda 1976-dan əvvəlki yazılar sərbəstdir. Mahnının sözləri hələ qəzəllərə bağlanmayıb. Musiqiçilər, doğulduqları yerlər və portretlər Wikidata-dandır.' },
-  ru: { doc: 'Музыка · Azad Bilik', title: 'Музыка', sub: 'Первые записи и родина музыкантов', gallery: 'Галерея', recs: 'Записи', people: 'Музыканты',
-    mugham: 'Мугамы', tesnif: 'Теснифы', song: 'Песни', instrumental: 'Инструментальные', khanende: 'ханенде', tar: 'тарист', ashik: 'ашуг', unknown: 'исполнитель неизвестен',
-    play: 'Слушать', commons: 'Commons', poems: 'стихи в библиотеке', alsoLit: 'Есть и на литературной карте', back: '← Все музыканты', nPeople: (n) => `${n} музыкантов`, here: (n) => `Здесь родились: ${n}`,
-    one: { mugham: 'мугам', tesnif: 'тесниф', song: 'песня', instrumental: 'инструментальная' }, mughams: 'Мугамы', probable: 'предположительно', others: 'Другие мугамы', sectionsL: 'Шёбе', noRec: 'записей этого мугама пока нет', dgNote: 'Семь основных мугамов (дестгяхов) по Узеиру Гаджибекову; характер и шёбе — по источникам Википедии. Места с пометкой «предположительно» требуют уточнения.', all: 'Все', listen: (n) => `▶ записей: ${n}`, from: 'родом из', byHand: 'место указано вручную', withRecs: 'есть записи', wiki: 'Википедия',
+  ru: { doc: 'Музыка · Azad Bilik', title: 'Музыка', sub: 'Первые записи, с 1902 года', library: 'Библиотека', gallery: 'Галерея', maps: 'Литературные карты', atlas: 'Атлас',
+    recs: 'Записи', people: 'Музыканты', mughams: 'Мугамы', all: 'Все',
+    mugham: 'Мугамы', tesnif: 'Теснифы', song: 'Песни', instrumental: 'Инструментальные', one: { mugham: 'мугам', tesnif: 'тесниф', song: 'песня', instrumental: 'инструментальная' },
+    khanende: 'ханенде', tar: 'тарист', ashik: 'ашуг', unknown: 'Исполнитель неизвестен', play: 'Слушать', pause: 'Пауза', prev: 'Предыдущая', next: 'Следующая', position: 'Позиция',
+    commons: 'на Викискладе', probable: 'предположительно', others: 'Другие мугамы', noRec: 'Записей этого мугама пока нет.', sectionsL: 'Шёбе',
+    dgLead: 'Семь основных мугамов — у каждого свой характер и свои шёбе — и записи, в которых они звучат.',
+    dgNote: 'Семь основных мугамов (дестгяхов) по Узеиру Гаджибекову; характер и шёбе — по источникам Википедии. Места с пометкой «предположительно» требуют уточнения.',
+    bornHere: (who) => `Здесь родился ${who}`, here: (n) => `Здесь родились: ${n}`, allPeople: (n, r) => `${n} ханенде, таристов и ашугов там, где они родились; у ${r} есть записи.`, plistAll: 'Все', back: '← Все',
+    listen: (n) => `▶ записей: ${n}`, poems: 'стихи в библиотеке ↗', alsoLit: 'на литературной карте →', byHand: 'место указано вручную', withRecs: 'есть записи', mapLabel: 'Карта музыкантов',
+    discs: (n) => `пластинок: ${n}`, noPlace: 'Место рождения неизвестно',
     note: 'Записи — с Викисклада, все в общественном достоянии: в Азербайджане записи до 1976 года свободны. Тексты песен ещё не связаны с газелями. Музыканты, места рождения и портреты — по Викиданным.' },
-  en: { doc: 'Music · Azad Bilik', title: 'Music', sub: 'The first recordings, and where the musicians came from', gallery: 'Gallery', recs: 'Recordings', people: 'Musicians',
-    mugham: 'Mughams', tesnif: 'Tasnifs', song: 'Songs', instrumental: 'Instrumental', khanende: 'khanende', tar: 'tar player', ashik: 'ashik', unknown: 'performer unknown',
-    play: 'Listen', commons: 'Commons', poems: 'poems in the library', alsoLit: 'Also on the literary map', back: '← All musicians', nPeople: (n) => `${n} musicians`, here: (n) => `${n} born here`,
-    one: { mugham: 'mugham', tesnif: 'tasnif', song: 'song', instrumental: 'instrumental' }, mughams: 'Mughams', probable: 'probable', others: 'Other mughams', sectionsL: 'Sections', noRec: 'no recording of this mugham yet', dgNote: 'The seven main mughams (dastgahs), as Uzeyir Hajibeyli classed them; their moods and sections from the sources Wikipedia cites. Placements marked "probable" are not yet settled.', all: 'All', listen: (n) => `▶ ${n} recording${n === 1 ? '' : 's'}`, from: 'born in', byHand: 'place set by hand', withRecs: 'recorded', wiki: 'Wikipedia',
+  en: { doc: 'Music · Azad Bilik', title: 'Music', sub: 'The first recordings, from 1902', library: 'Library', gallery: 'Gallery', maps: 'Literary maps', atlas: 'Atlas',
+    recs: 'Recordings', people: 'Musicians', mughams: 'Mughams', all: 'All',
+    mugham: 'Mughams', tesnif: 'Tasnifs', song: 'Songs', instrumental: 'Instrumental', one: { mugham: 'mugham', tesnif: 'tasnif', song: 'song', instrumental: 'instrumental' },
+    khanende: 'khanende', tar: 'tar player', ashik: 'ashik', unknown: 'Performer unknown', play: 'Play', pause: 'Pause', prev: 'Previous', next: 'Next', position: 'Position',
+    commons: 'on Commons', probable: 'probable', others: 'Other mughams', noRec: 'No recording of this mugham yet.', sectionsL: 'Sections',
+    dgLead: 'The seven main mughams, each with its mood and sections, and the recordings that sing them.',
+    dgNote: 'The seven main mughams (dastgahs), as Uzeyir Hajibeyli classed them; their moods and sections from the sources Wikipedia cites. Placements marked "probable" are not yet settled.',
+    bornHere: (who) => `${who} was born here`, here: (n) => `${n} born here`, allPeople: (n, r) => `${n} singers, tar players and ashiks where they were born; ${r} of them are on record.`, plistAll: 'All', back: '← All',
+    listen: (n) => `▶ ${n} recording${n === 1 ? '' : 's'}`, poems: 'poems in the library ↗', alsoLit: 'on the literary map →', byHand: 'place set by hand', withRecs: 'on record', mapLabel: 'Map of the musicians',
+    discs: (n) => `${n} disc${n === 1 ? '' : 's'}`, noPlace: 'Birthplace unknown',
     note: "The recordings are from Wikimedia Commons, all in the public domain: in Azerbaijan, recordings made before 1976 are free. The songs' words are not yet matched to their ghazals. The musicians, their birthplaces and portraits are from Wikidata." },
 };
 const t = (k) => T[lang][k];
 const L = (o) => o?.[lang] || o?.az || o?.en || '';
 const KX = () => `https://kitabxana.az${lang === 'az' ? '' : '/' + lang}`;
-const ROLE = () => ({ khanende: css('--accent'), tar: css('--second'), ashik: css('--third') || '#5B6B2E' });
-const when = (y) => !y ? '' : lang === 'en' ? y.replace(/^Unknown date$/i, '') : y
+const short = (p) => L(p).replace(/ \(.*\)$/, '');
+const when = (y) => !y ? '' : lang === 'en' ? y.replace(/^Unknown date$/i, '').replace(/^Early XX c\.$/i, 'early 20th century') : y
   .replace(/^early 20th century$/i, lang === 'ru' ? 'начало XX века' : 'XX əsrin əvvəli')
   .replace(/^first half of 20th century$/i, lang === 'ru' ? 'первая половина XX века' : 'XX əsrin birinci yarısı')
   .replace(/^Early XX c\.$/i, lang === 'ru' ? 'начало XX века' : 'XX əsrin əvvəli')
   .replace(/^(\d{4})s$/, lang === 'ru' ? '$1-е' : '$1-cı illər').replace(/^c\. (\d{4})$/, lang === 'ru' ? 'ок. $1' : 'təq. $1')
   .replace(/^Unknown date$/i, '');
 const years = (p) => p.born || p.died ? `${p.born ?? '?'}–${p.died ?? ''}` : '';
-const nameOf = (p) => p[lang] || p.az || p.en;
+const ROLE = () => ({ khanende: css('--accent'), tar: css('--second'), ashik: css('--third') });
+const KINDS = ['mugham', 'tesnif', 'song', 'instrumental'];
 
 const params = new URLSearchParams(location.search);
-let litSlug = new Map(); // Wikidata id → author slug on the literary map (azadbilik.org/xerite/)
-let recs = [], people = [], byQid = new Map(), places = new Map(), placeIds = [], mugham = { dastgahs: [], pieces: [] };
-// A recording's mugham: its title without a take number or an instrument, looked up in mugham.json
+let recs = [], people = [], byQid = new Map(), places = new Map(), placeIds = [], mugham = { dastgahs: [], pieces: [] }, litSlug = new Map();
+let kind = null, current = null, place = null, first = null;
+const recsOf = (qid) => recs.filter((r) => r.performer?.qid === qid);
+const keyOf = (r) => r.performer?.qid ?? r.performer?.az ?? '_';
 const pieceOf = (r) => mugham.pieces.find((p) => p.name === r.title.az.replace(/ \((\d|qarmonda|sazda)\)$/, ''));
 function dastgahOf(r) {
   if (r.kind === 'song' || r.kind === 'tesnif') return null;
@@ -145,212 +325,272 @@ function dastgahOf(r) {
   const d = p?.dastgah && mugham.dastgahs.find((x) => x.id === p.dastgah);
   return d ? { d, piece: p, sure: p.confidence === 'sourced' } : null;
 }
-let tab = ['people', 'mugham'].includes(params.get('tab')) ? params.get('tab') : 'recs', place = null, who = params.get('who'), kind = null, playing = null;
-const recsOf = (qid) => recs.filter((r) => r.performer?.qid === qid);
 
-const map = new maplibregl.Map({
-  container: 'map', style: `https://tiles.openfreemap.org/styles/${dark ? 'dark' : 'positron'}`,
-  bounds: [[43, 37.5], [50.6, 42.5]], minZoom: 3, maxZoom: 11,
-  attributionControl: { compact: true, customAttribution: '<a href="https://commons.wikimedia.org">Wikimedia Commons</a> · <a href="https://www.wikidata.org">Wikidata</a>' },
-});
-map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-right');
-const tip = new maplibregl.Popup({ closeButton: false, closeOnClick: false, offset: 10 });
-// The marker element is MapLibre's to position (its transform); the ring inside it animates
-const pulseEl = document.createElement('div'); pulseEl.innerHTML = '<div class="pulse"></div>';
-const pulse = new maplibregl.Marker({ element: pulseEl });
-const phone = () => matchMedia('(max-width: 48rem)').matches;
-const pad = () => phone() ? { top: 60, right: 24, left: 24, bottom: document.querySelector('.panel').offsetHeight + 24 } : { top: 48, right: 64, bottom: 48, left: 27 * 16 + 48 };
+// A 78 of shellac: grooves, a paper label in the colour of its kind, the title round the label
+let uid = 0;
+function disc(r, spin, id) {
+  const arc = `arc${uid++}`;
+  const grooves = Array.from({ length: 9 }, (_, i) => `<circle cx="50" cy="50" r="${47 - i * 2.4}" fill="none" stroke="var(--groove)" stroke-width=".6"/>`).join('');
+  const title = esc(L(r.title).slice(0, 26));
+  return `<span${id ? ` id="${id}"` : ''} class="disc k-${r.kind}${spin ? ' spin' : ''}"><svg viewBox="0 0 100 100" aria-hidden="true">
+    <circle cx="50" cy="50" r="49.5" fill="var(--vinyl)"/>${grooves}
+    <g class="spinner"><circle cx="50" cy="50" r="18" fill="var(--k)"/><circle cx="50" cy="50" r="16.2" fill="none" stroke="rgb(255 255 255 / .35)" stroke-width=".4"/>
+    <path id="${arc}" d="M50 37 a13 13 0 1 1 -0.01 0" fill="none"/><text font-size="3.6" fill="rgb(255 255 255 / .9)" font-family="Inter, sans-serif" letter-spacing=".3"><textPath href="#${arc}">${title}</textPath></text>
+    <rect x="48.6" y="40" width="2.8" height="2.8" transform="rotate(45 50 41.4)" fill="rgb(255 255 255 / .8)"/></g>
+    <circle cx="50" cy="50" r="1.6" fill="var(--paper)"/>
+    <path d="M14 32 A40 40 0 0 1 40 11" fill="none" stroke="rgb(255 255 255 / .12)" stroke-width="3" stroke-linecap="round"/></svg></span>`;
+}
+
+// Two maps: a small one beside the record, lighting the singer's birthplace; a large one of all 201
+const STYLE = `https://tiles.openfreemap.org/styles/${dark ? 'dark' : 'positron'}`;
+const BOUNDS = [[43, 37.5], [50.6, 42.5]];
 const labelExpr = () => ['coalesce', ['get', `name:${lang}`], ['get', lang === 'ru' ? 'name' : 'name:latin'], ['get', 'name']];
-map.on('style.load', () => {
-  for (const l of map.getStyle().layers) {
-    if (l.type === 'background') map.setPaintProperty(l.id, 'background-color', css('--land'));
-    if (l.type === 'fill' && /water|ocean|lake/.test(l.id)) map.setPaintProperty(l.id, 'fill-color', css('--water'));
-    if (l.type === 'symbol' && l.layout?.['text-field']) map.setLayoutProperty(l.id, 'text-field', labelExpr());
-  }
-});
-map.on('load', async () => {
-  [recs, people, mugham] = await Promise.all(['recordings.json', 'musicians.json', 'mugham.json'].map((f) => fetch(`data/${f}`).then((r) => r.json())));
-  byQid = new Map(people.map((p) => [p.qid, p]));
-  for (const p of people) {
-    if (!places.has(p.place.id)) places.set(p.place.id, { ...p.place, people: [] });
-    places.get(p.place.id).people.push(p);
+function tint(m) {
+  m.on('style.load', () => {
+    for (const l of m.getStyle().layers) {
+      if (l.type === 'background') m.setPaintProperty(l.id, 'background-color', css('--land'));
+      if (l.type === 'fill' && /water|ocean|lake/.test(l.id)) m.setPaintProperty(l.id, 'fill-color', css('--water'));
+      if (l.type === 'symbol' && l.layout?.['text-field']) m.setLayoutProperty(l.id, 'text-field', labelExpr());
+    }
+  });
+}
+const mini = new maplibregl.Map({ container: 'mini', style: STYLE, bounds: BOUNDS, interactive: false, attributionControl: false, fitBoundsOptions: { padding: 24 } });
+tint(mini);
+const map = new maplibregl.Map({ container: 'map', style: STYLE, bounds: BOUNDS, minZoom: 3, maxZoom: 11, cooperativeGestures: true,
+  attributionControl: { compact: true, customAttribution: '<a href="https://commons.wikimedia.org">Wikimedia Commons</a> · <a href="https://www.wikidata.org">Wikidata</a>' } });
+map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-right');
+tint(map);
+const pulseOn = () => { const el = document.createElement('div'); el.innerHTML = '<div class="pulse"></div>'; return new maplibregl.Marker({ element: el }); };
+const miniPulse = pulseOn(), bigPulse = pulseOn();
+const tip = new maplibregl.Popup({ closeButton: false, closeOnClick: false, offset: 10 });
+
+const ready = (m) => new Promise((ok) => m.loaded() ? ok() : m.once('load', ok));
+Promise.all([...['recordings.json', 'musicians.json', 'mugham.json'].map((f) => fetch(`data/${f}`).then((r) => r.json())), ready(mini), ready(map)]).then(([r, p, m]) => {
+  recs = r; people = p; mugham = m;
+  byQid = new Map(people.map((x) => [x.qid, x]));
+  for (const x of people) {
+    if (!places.has(x.place.id)) places.set(x.place.id, { ...x.place, people: [] });
+    places.get(x.place.id).people.push(x);
   }
   placeIds = [...places.keys()];
-  map.fitBounds([[43, 37.5], [50.6, 42.5]], { padding: pad(), duration: 0 });
-  document.querySelector('.maplibregl-ctrl-attrib')?.classList.remove('maplibregl-compact-show');
-  const C = ROLE();
-  // A dot per birthplace, sized by how many were born there, coloured by the commonest role;
-  // a ring where someone born there is on the recordings
-  map.addSource('places', { type: 'geojson', generateId: true, data: { type: 'FeatureCollection', features: placeIds.map((id) => {
-    const pl = places.get(id);
-    const roles = pl.people.flatMap((p) => p.roles);
-    const top = ['khanende', 'tar', 'ashik'].sort((a, b) => roles.filter((r) => r === b).length - roles.filter((r) => r === a).length)[0];
-    return { type: 'Feature', geometry: { type: 'Point', coordinates: [pl.lng, pl.lat] }, properties: { id, n: pl.people.length, color: C[top], rec: pl.people.some((p) => recsOf(p.qid).length) } };
-  }) } });
-  map.addLayer({ id: 'rings', type: 'circle', source: 'places', filter: ['get', 'rec'], paint: {
-    'circle-radius': ['+', ['interpolate', ['linear'], ['sqrt', ['get', 'n']], 1, 4, 3, 9, 6, 16], 4],
-    'circle-color': 'rgba(0,0,0,0)', 'circle-stroke-color': css('--ink'), 'circle-stroke-width': 1.25, 'circle-stroke-opacity': ['case', ['boolean', ['feature-state', 'dim'], false], .2, .7],
-  } });
-  map.addLayer({ id: 'places', type: 'circle', source: 'places', paint: {
-    'circle-radius': ['interpolate', ['linear'], ['sqrt', ['get', 'n']], 1, 4, 3, 9, 6, 16],
-    'circle-color': ['get', 'color'], 'circle-opacity': ['case', ['boolean', ['feature-state', 'dim'], false], .2, .85],
-    'circle-stroke-color': css('--paper'), 'circle-stroke-width': ['case', ['boolean', ['feature-state', 'sel'], false], 2.5, 1],
-  } });
-  map.on('mousemove', 'places', (e) => {
-    map.getCanvas().style.cursor = 'pointer';
-    const pl = places.get(e.features[0].properties.id);
-    const recd = pl.people.filter((p) => recsOf(p.qid).length);
-    tip.setLngLat(e.features[0].geometry.coordinates).setHTML(`<strong>${esc(L(pl))}</strong> · ${t('here')(pl.people.length)}${recd.length ? `<br>♪ ${recd.map((p) => esc(nameOf(p))).join(', ')}` : ''}`).addTo(map);
-  });
-  map.on('mouseleave', 'places', () => { map.getCanvas().style.cursor = ''; tip.remove(); });
-  map.on('click', 'places', (e) => showPlace(e.features[0].properties.id));
+  addDots(map, true); addDots(mini, false);
+  // What to put on the turntable first: a linked recording, a linked singer's first, else the oldest disc
+  const who = params.get('who');
+  first = recs.find((x) => x.year === '1902') ?? recs[0];
+  current = recs.find((x) => x.id === params.get('r')) ?? (who && recs.find((x) => keyOf(x) === who)) ?? first;
   const person = byQid.get(params.get('person'));
-  if (who && byQid.has(who)) tab = 'recs';
-  else if (person) { tab = 'people'; place = person.place.id; mark(); }
-  draw();
-  if (person && tab === 'people') showPlace(person.place.id, person.qid);
-  fetch('/xerite/data/authors.json').then((r) => r.json()).then((xs) => {
-    litSlug = new Map(xs.filter((x) => x.wikidata).map((x) => [x.wikidata, x.slug]));
-    if (tab === 'people') draw();
-  }).catch(() => {});
+  drawAll();
+  load(current, false);
+  if (person) showPlace(person.place.id, person.qid, true);
+  else if (params.get('tab') === 'people') document.getElementById('people').scrollIntoView();
+  else if (params.get('tab') === 'mugham') document.getElementById('mugham').scrollIntoView();
+  else if (who) document.querySelector(`[data-singer="${CSS.escape(who)}"]`)?.scrollIntoView({ block: 'start' });
+  fetch('/xerite/data/authors.json').then((x) => x.json()).then((xs) => { litSlug = new Map(xs.filter((a) => a.wikidata).map((a) => [a.wikidata, a.slug])); drawPeople(); }).catch(() => {});
 });
 
-function mark() {
-  if (!map.getSource('places')) return;
-  placeIds.forEach((id, fid) => map.setFeatureState({ source: 'places', id: fid }, { dim: place != null && id !== place, sel: id === place }));
-}
-function showPlace(id, qid) {
-  place = id; tab = 'people';
-  mark();
-  const pl = places.get(id);
-  map.easeTo({ center: [pl.lng, pl.lat], zoom: Math.max(map.getZoom(), 7), padding: pad(), duration: still() ? 0 : 700 });
-  draw();
-  if (qid) document.querySelector(`[data-p="${qid}"]`)?.scrollIntoView({ block: 'center' });
+// A dot per birthplace, sized by how many were born there, coloured by the commonest role; a ring where someone is on record
+function addDots(m, big) {
+  const C = ROLE();
+  m.addSource('places', { type: 'geojson', generateId: true, data: { type: 'FeatureCollection', features: placeIds.map((id) => {
+    const pl = places.get(id);
+    const roles = pl.people.flatMap((x) => x.roles);
+    const top = ['khanende', 'tar', 'ashik'].sort((a, b) => roles.filter((x) => x === b).length - roles.filter((x) => x === a).length)[0];
+    return { type: 'Feature', geometry: { type: 'Point', coordinates: [pl.lng, pl.lat] }, properties: { id, n: pl.people.length, color: C[top], rec: pl.people.some((x) => recsOf(x.qid).length) } };
+  }) } });
+  const r = big ? ['interpolate', ['linear'], ['sqrt', ['get', 'n']], 1, 4, 3, 9, 6, 16] : ['interpolate', ['linear'], ['sqrt', ['get', 'n']], 1, 2.5, 6, 7];
+  if (big) m.addLayer({ id: 'rings', type: 'circle', source: 'places', filter: ['get', 'rec'], paint: { 'circle-radius': ['+', r, 4], 'circle-color': 'rgba(0,0,0,0)', 'circle-stroke-color': css('--ink'), 'circle-stroke-width': 1.25, 'circle-stroke-opacity': ['case', ['boolean', ['feature-state', 'dim'], false], .2, .7] } });
+  m.addLayer({ id: 'places', type: 'circle', source: 'places', paint: { 'circle-radius': r, 'circle-color': ['get', 'color'],
+    'circle-opacity': big ? ['case', ['boolean', ['feature-state', 'dim'], false], .2, .85] : .45,
+    'circle-stroke-color': css('--paper'), 'circle-stroke-width': big ? ['case', ['boolean', ['feature-state', 'sel'], false], 2.5, 1] : .5 } });
+  if (!big) return;
+  m.on('mousemove', 'places', (e) => {
+    m.getCanvas().style.cursor = 'pointer';
+    const pl = places.get(e.features[0].properties.id);
+    const recd = pl.people.filter((x) => recsOf(x.qid).length);
+    tip.setLngLat(e.features[0].geometry.coordinates).setHTML(`<strong>${esc(L(pl))}</strong> · ${t('here')(pl.people.length)}${recd.length ? `<br>♪ ${recd.map((x) => esc(L(x))).join(', ')}` : ''}`).addTo(m);
+  });
+  m.on('mouseleave', 'places', () => { m.getCanvas().style.cursor = ''; tip.remove(); });
+  m.on('click', 'places', (e) => showPlace(e.features[0].properties.id));
 }
 
-// The recordings: filtered by performer and kind; the one playing marked
-function drawRecs(el) {
-  const performers = [...new Map(recs.filter((r) => r.performer).map((r) => [r.performer.qid ?? r.performer.az, r.performer])).values()];
-  const n = (f) => recs.filter(f).length;
-  const chips = `<div class="chips" role="group">${[[null, t('all'), recs.length], ...performers.map((p) => [p.qid ?? p.az, L(p).replace(/ \(.*\)$/, ''), n((r) => (r.performer?.qid ?? r.performer?.az) === (p.qid ?? p.az))])].map(([id, label, c]) => `<button type="button" data-who="${esc(id ?? '')}" aria-pressed="${(who ?? '') === (id ?? '')}">${esc(label)}<small>${c}</small></button>`).join('')}</div>
-    <div class="chips" role="group">${[null, 'mugham', 'tesnif', 'song', 'instrumental'].map((k) => `<button type="button" data-kind="${k ?? ''}" aria-pressed="${(kind ?? '') === (k ?? '')}">${k ? t(k) : t('all')}<small>${n((r) => !k || r.kind === k)}</small></button>`).join('')}</div>`;
-  const shown = recs.filter((r) => (!who || (r.performer?.qid ?? r.performer?.az) === who) && (!kind || r.kind === kind));
-  const groups = ['mugham', 'tesnif', 'song', 'instrumental'];
-  el.innerHTML = chips + groups.map((g) => {
-    const rs = shown.filter((r) => r.kind === g);
+// ---- The turntable
+const audio = document.getElementById('audio');
+const seek = document.getElementById('seek');
+const PLAY = '<path d="M7 4.5v15l13-7.5z"/>', PAUSE = '<path d="M6 4.5h4.2v15H6zM13.8 4.5H18v15h-4.2z"/>';
+const fmt = (s) => !isFinite(s) ? '–:––' : `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+let singerOrder = [];
+const order = (r) => singerOrder.indexOf(keyOf(r)) * 1000 + KINDS.indexOf(r.kind) * 100 + recs.indexOf(r) / 100;
+const queue = () => recs.filter((r) => !kind || r.kind === kind).sort((a, b) => order(a) - order(b));
+let placed = null;
+function load(r, autoplay) {
+  current = r;
+  if (audio.dataset.id !== r.id) {
+    audio.src = r.mp3; audio.dataset.id = r.id;
+    seek.value = 0; seek.style.setProperty('--p', '0%');
+    document.getElementById('cur').textContent = '0:00'; document.getElementById('dur').textContent = '–:––';
+  }
+  drawNow();
+  if (autoplay) audio.play().catch(() => {});
+  drawShelfState();
+  keepUrl();
+}
+function drawNow() {
+  const r = current; if (!r) return;
+  const p = r.performer?.qid && byQid.get(r.performer.qid);
+  const dg = dastgahOf(r);
+  document.getElementById('deck-disc').outerHTML = disc(r, !audio.paused, 'deck-disc');
+  document.getElementById('now-title').textContent = L(r.title);
+  document.getElementById('now-who').innerHTML = r.performer ? (p ? `<button type="button" id="now-singer">${esc(short(r.performer))}</button>` : esc(short(r.performer))) : t('unknown');
+  document.getElementById('now-meta').innerHTML = [t('one')[r.kind], dg ? `${esc(L(dg.d.name))}${dg.sure ? '' : ` (${t('probable')})`}${dg.d.character ? ` — <i>${esc(L(dg.d.character))}</i>` : ''}` : '', esc(when(r.year)), `<a href="${esc(r.commons)}" target="_blank" rel="noopener">${t('commons')} ↗</a>`].filter(Boolean).join(' · ');
+  document.getElementById('now-singer')?.addEventListener('click', () => showPlace(p.place.id, p.qid, true));
+  document.getElementById('toggle').setAttribute('aria-label', `${audio.paused ? t('play') : t('pause')}: ${L(r.title)}`);
+  document.getElementById('toggle-icon').innerHTML = audio.paused ? PLAY : PAUSE;
+  // Where the singer was born, lit on the small map (moved only when the place changes)
+  const from = document.getElementById('from');
+  const at = p ? p.place.id : null;
+  from.innerHTML = p ? `<strong>${esc(L(p.place))}</strong>${esc(t('bornHere')(short(r.performer)))}${years(p) ? ` · ${years(p)}` : ''}` : `<strong>${t('noPlace')}</strong>`;
+  if (at === placed) return;
+  placed = at;
+  if (p) {
+    miniPulse.setLngLat([p.place.lng, p.place.lat]).addTo(mini);
+    mini.easeTo({ center: [p.place.lng, p.place.lat], zoom: 6.4, duration: still() ? 0 : 1200 });
+  } else {
+    miniPulse.remove();
+    mini.fitBounds(BOUNDS, { padding: 24, duration: still() ? 0 : 1200 });
+  }
+}
+function step(d) {
+  const q = queue(); const i = q.indexOf(current);
+  const n = q[(i + d + q.length) % q.length];
+  if (n) load(n, true);
+}
+document.getElementById('toggle').onclick = () => { if (audio.paused) audio.play().catch(() => {}); else audio.pause(); };
+document.getElementById('prev').onclick = () => { if (audio.currentTime > 3) audio.currentTime = 0; else step(-1); };
+document.getElementById('next').onclick = () => step(1);
+audio.addEventListener('play', () => { drawNow(); drawShelfState(); });
+audio.addEventListener('pause', () => { drawNow(); drawShelfState(); });
+audio.addEventListener('ended', () => step(1));
+audio.addEventListener('loadedmetadata', () => { document.getElementById('dur').textContent = fmt(audio.duration); });
+audio.addEventListener('timeupdate', () => {
+  if (!audio.duration) return;
+  const p = audio.currentTime / audio.duration;
+  if (!seek.matches(':active')) seek.value = Math.round(p * 1000);
+  seek.style.setProperty('--p', `${p * 100}%`);
+  document.getElementById('cur').textContent = fmt(audio.currentTime);
+});
+seek.oninput = () => { seek.style.setProperty('--p', `${seek.value / 10}%`); if (audio.duration) audio.currentTime = seek.value / 1000 * audio.duration; };
+const toTop = () => window.scrollTo({ top: 0, behavior: still() ? 'auto' : 'smooth' });
+const playFrom = (id) => { const r = recs.find((x) => x.id === id); if (r === current) { if (audio.paused) audio.play().catch(() => {}); else audio.pause(); } else { load(r, true); toTop(); } };
+
+// ---- The shelf
+function drawKinds() {
+  const n = (k) => recs.filter((r) => !k || r.kind === k).length;
+  const el = document.getElementById('kinds');
+  el.setAttribute('aria-label', t('recs'));
+  el.innerHTML = [null, ...KINDS].filter((k) => !k || n(k)).map((k) => `<button type="button" data-kind="${k ?? ''}" aria-pressed="${(kind ?? '') === (k ?? '')}"${k ? ` class="k-${k}"` : ''}>${k ? '<i></i>' : ''}${k ? t(k) : t('all')} <small>${n(k)}</small></button>`).join('');
+  el.querySelectorAll('button').forEach((b) => b.onclick = () => { kind = b.dataset.kind || null; drawKinds(); drawShelf(); });
+}
+function drawShelf() {
+  const groups = new Map();
+  for (const r of recs) { const k = keyOf(r); if (!groups.has(k)) groups.set(k, []); groups.get(k).push(r); }
+  singerOrder = [...groups.keys()].sort((a, b) => (a === '_') - (b === '_') || groups.get(b).length - groups.get(a).length);
+  document.getElementById('singers').innerHTML = singerOrder.map((k) => {
+    const rs = groups.get(k).filter((r) => !kind || r.kind === kind).sort((a, b) => KINDS.indexOf(a.kind) - KINDS.indexOf(b.kind));
     if (!rs.length) return '';
-    return `<section class="group"><h2>${t(g)} · ${rs.length}</h2><ol>${rs.map((r) => {
-      const p = r.performer?.qid && byQid.get(r.performer.qid);
-      const dg = dastgahOf(r);
-      return `<li class="rec${playing === r.id ? ' on' : ''}"><button type="button" class="play" data-play="${esc(r.id)}" aria-label="${t('play')}: ${esc(L(r.title))}">${playing === r.id && !audio.paused ? '❚❚' : '▶'}</button>
-        <span class="name">${esc(L(r.title))}${dg && dg.piece.kind !== 'dastgah' ? `<span class="from">${esc(L(dg.d.name))}${dg.sure ? '' : ' · ' + t('probable')}</span>` : ''}</span>
-        <span class="meta">${r.performer ? esc(L(r.performer).replace(/ \(.*\)$/, '')) : t('unknown')}${p ? ` · <button type="button" data-place="${p.place.id}" data-q="${p.qid}">${esc(L(p.place))}</button>` : ''}${when(r.year) ? ` · ${esc(when(r.year))}` : ''} · <a href="${esc(r.commons)}" target="_blank" rel="noopener">${t('commons')} ↗</a></span></li>`;
-    }).join('')}</ol></section>`;
-  }).join('') + `<p class="note">${t('note')}</p>`;
-  el.querySelectorAll('[data-play]').forEach((b) => b.onclick = () => play(b.dataset.play));
-  el.querySelectorAll('[data-who]').forEach((b) => b.onclick = () => { who = b.dataset.who || null; draw(); keepUrl(); if (who && byQid.has(who)) flyTo(byQid.get(who)); });
-  el.querySelectorAll('[data-kind]').forEach((b) => b.onclick = () => { kind = b.dataset.kind || null; draw(); });
-  el.querySelectorAll('[data-place]').forEach((b) => b.onclick = () => showPlace(b.dataset.place, b.dataset.q));
+    const perf = rs[0].performer, p = perf?.qid && byQid.get(perf.qid);
+    return `<article class="singer" data-singer="${esc(k)}"><div>${p?.image ? `<img class="face" src="${esc(p.image)}" alt="" loading="lazy" referrerpolicy="no-referrer">` : ''}
+      <h3>${perf ? esc(short(perf)) : t('unknown')}</h3>
+      <p class="who">${p ? `${p.roles.map((x) => t(x)).join(', ')} · <button type="button" data-place="${esc(p.place.id)}" data-q="${esc(p.qid)}">${esc(L(p.place))}</button>${years(p) ? ` · ${years(p)}` : ''} · ` : ''}${t('discs')(groups.get(k).length)}</p></div>
+      <ul class="discs">${rs.map((r) => `<li><button type="button" data-play="${esc(r.id)}">${disc(r)}<span class="t">${esc(L(r.title))}</span><span class="m">${t('one')[r.kind]}${when(r.year) ? ` · ${esc(when(r.year))}` : ''}</span></button></li>`).join('')}</ul></article>`;
+  }).join('');
+  document.querySelectorAll('#singers [data-play]').forEach((b) => b.onclick = () => playFrom(b.dataset.play));
+  document.querySelectorAll('#singers [data-place]').forEach((b) => b.onclick = () => showPlace(b.dataset.place, b.dataset.q, true));
+  drawShelfState();
+}
+function drawShelfState() {
+  document.querySelectorAll('[data-play]').forEach((b) => {
+    const on = current && b.dataset.play === current.id;
+    if (on) b.setAttribute('aria-current', 'true'); else b.removeAttribute('aria-current');
+    b.querySelector('.disc')?.classList.toggle('spin', on && !audio.paused);
+    b.setAttribute('aria-label', `${on && !audio.paused ? t('pause') : t('play')}: ${b.querySelector('.t')?.textContent ?? ''}`);
+  });
 }
 
-// The musicians: all, or those of one place; a recorded one can be played from here
-function drawPeople(el) {
-  const list = (place ? people.filter((p) => p.place.id === place) : [...people]).sort((a, b) => recsOf(b.qid).length - recsOf(a.qid).length || (a.born ?? 9999) - (b.born ?? 9999));
-  const pl = place && places.get(place);
-  const extra = (p) => {
-    const rs = recsOf(p.qid);
-    return (rs.length ? `<button type="button" class="listen" data-listen="${p.qid}">${t('listen')(rs.length)}</button>` : '')
-      + (p.kitabxana ? `<a class="kx" href="${KX()}/authors/${p.kitabxana}">${t('poems')} ↗</a>` : '')
-      + (litSlug.has(p.qid) ? `<a class="kx" href="/xerite/?author=${litSlug.get(p.qid)}${lang === 'az' ? '' : '&lang=' + lang}">${t('alsoLit')} →</a>` : '');
-  };
-  el.innerHTML = (pl ? `<button type="button" class="back" id="back">${t('back')}</button><div class="place-head"><h2>${esc(L(pl))}</h2><p class="meta">${t('here')(list.length)}</p></div>` : `<section class="group"><h2>${t('nPeople')(people.length)} · ♪ ${people.filter((p) => recsOf(p.qid).length).length} ${t('withRecs')}</h2></section>`)
-    + `<ol class="people">${list.map((p) => `<li><button type="button" data-p="${p.qid}"><span>${recsOf(p.qid).length ? '♪ ' : ''}${esc(nameOf(p))}</span><span class="yrs">${years(p)}</span><span class="role">${p.roles.map((r) => t(r)).join(', ')}${pl ? '' : ` · ${esc(L(p.place))}`}${p.byHand ? ` (${t('byHand')})` : ''}</span></button>${extra(p)}</li>`).join('')}</ol>`
-    + (pl ? '' : `<p class="note">${t('note')}</p>`);
-  document.getElementById('back')?.addEventListener('click', () => { place = null; mark(); draw(); map.fitBounds([[43, 37.5], [50.6, 42.5]], { padding: pad(), duration: still() ? 0 : 700 }); });
-  el.querySelectorAll('[data-p]').forEach((b) => b.onclick = () => { const p = byQid.get(b.dataset.p); showPlace(p.place.id, p.qid); });
-  el.querySelectorAll('[data-listen]').forEach((b) => b.onclick = () => { who = b.dataset.listen; tab = 'recs'; place = null; mark(); play(recsOf(who)[0].id); keepUrl(); });
-}
-
-// The seven dastgahs: mood, sections, and the recordings that belong to each
-function drawMugham(el) {
-  const row = (r, dg) => `<li class="rec${playing === r.id ? ' on' : ''}"><button type="button" class="play" data-play="${esc(r.id)}" aria-label="${t('play')}: ${esc(L(r.title))}">${playing === r.id && !audio.paused ? '❚❚' : '▶'}</button><span class="name">${esc(L(r.title))}${dg && !dg.sure ? `<span class="from">${t('probable')}</span>` : ''}</span><span class="meta">${r.performer ? esc(L(r.performer).replace(/ \(.*\)$/, '')) : t('unknown')}${when(r.year) ? ` · ${esc(when(r.year))}` : ''}</span></li>`;
-  const placed = new Set();
+// ---- The mugham system
+function drawModes() {
+  const seen = new Set();
+  const row = (r, dg) => `<li><button type="button" data-play="${esc(r.id)}" class="k-${r.kind}"><span class="dot"></span><span class="t">${esc(L(r.title))}${dg && !dg.sure ? `<span class="prob">${t('probable')}</span>` : ''}</span><span class="m">${r.performer ? esc(short(r.performer)) : t('unknown')}</span></button></li>`;
   const cards = mugham.dastgahs.map((d) => {
     const rs = recs.filter((r) => dastgahOf(r)?.d.id === d.id);
-    rs.forEach((r) => placed.add(r.id));
-    return `<section class="dg"><h3>${esc(L(d.name))}</h3>${d.character ? `<p class="mood">${esc(L(d.character))}</p>` : ''}
+    rs.forEach((r) => seen.add(r.id));
+    return `<article class="mode"><h3>${esc(L(d.name))}</h3>${d.character ? `<p class="mood">${esc(L(d.character))}</p>` : ''}
       <div class="secs" aria-label="${t('sectionsL')}">${d.sections.map((x) => `<span>${esc(x[lang] ?? x.az)}</span>`).join('')}</div>
-      ${rs.length ? `<ol>${rs.map((r) => row(r, dastgahOf(r))).join('')}</ol>` : `<p class="mood">${t('noRec')}</p>`}</section>`;
+      ${rs.length ? `<ol class="tracks">${rs.map((r) => row(r, dastgahOf(r))).join('')}</ol>` : `<p class="none">${t('noRec')}</p>`}</article>`;
   }).join('');
-  const rest = recs.filter((r) => !placed.has(r.id) && (r.kind === 'mugham' || r.kind === 'instrumental'));
-  el.innerHTML = cards + (rest.length ? `<section class="dg"><h3>${t('others')}</h3><ol>${rest.map((r) => row(r)).join('')}</ol></section>` : '') + `<p class="note">${t('dgNote')}</p>`;
-  el.querySelectorAll('[data-play]').forEach((b) => b.onclick = () => play(b.dataset.play));
+  const rest = recs.filter((r) => !seen.has(r.id) && (r.kind === 'mugham' || r.kind === 'instrumental'));
+  document.getElementById('modes').innerHTML = cards + (rest.length ? `<article class="mode"><h3>${t('others')}</h3><ol class="tracks">${rest.map((r) => row(r)).join('')}</ol></article>` : '');
+  document.querySelectorAll('#modes [data-play]').forEach((b) => b.onclick = () => playFrom(b.dataset.play));
+  drawShelfState();
 }
 
-function flyTo(p) {
-  map.easeTo({ center: [p.place.lng, p.place.lat], zoom: Math.max(map.getZoom(), 6.5), padding: pad(), duration: still() ? 0 : 900 });
+// ---- The musicians
+function mark() { placeIds.forEach((id, fid) => map.setFeatureState({ source: 'places', id: fid }, { dim: place != null && id !== place, sel: id === place })); }
+function showPlace(id, qid, scroll) {
+  place = id; mark();
+  const pl = places.get(id);
+  if (scroll) document.getElementById('people').scrollIntoView({ behavior: still() ? 'auto' : 'smooth' });
+  map.easeTo({ center: [pl.lng, pl.lat], zoom: Math.max(map.getZoom(), 7), duration: still() ? 0 : 700 });
+  drawPeople(qid);
 }
-
-// Playing: the performer's portrait and birthplace in the player, their place pulsing on the map
-const audio = document.getElementById('audio');
-function play(id) {
-  const r = recs.find((x) => x.id === id);
-  if (playing === id) { if (audio.paused) audio.play(); else audio.pause(); return; }
-  playing = id;
-  audio.src = r.mp3;
-  const p = r.performer?.qid && byQid.get(r.performer.qid);
-  document.getElementById('face').outerHTML = p?.image ? `<img id="face" class="face" src="${esc(p.image)}" alt="" referrerpolicy="no-referrer">` : `<span id="face" class="face none">♪</span>`;
-  document.getElementById('now').innerHTML = `<strong>${esc(L(r.title))}</strong> · ${t('one')[r.kind]}${dastgahOf(r) ? ` · ${esc(L(dastgahOf(r).d.name))}${dastgahOf(r).sure ? '' : ` (${t('probable')})`}${dastgahOf(r).d.character ? ` <small>(${esc(L(dastgahOf(r).d.character))})</small>` : ''}` : ''}<br><small>${r.performer ? (p?.wiki ? `<a href="${esc(p.wiki)}" target="_blank" rel="noopener">${esc(L(r.performer))}</a>` : esc(L(r.performer))) : t('unknown')}${p ? ` · ${years(p)} · ${t('from')} <button type="button" id="now-place">${esc(L(p.place))}</button>` : ''}${when(r.year) ? ` · ${esc(when(r.year))}` : ''}</small>`;
-  document.getElementById('now-place')?.addEventListener('click', () => showPlace(p.place.id, p.qid));
-  document.getElementById('player').hidden = false;
-  if (p) { pulse.setLngLat([p.place.lng, p.place.lat]).addTo(map); flyTo(p); } else pulse.remove();
-  audio.play().catch(() => {});
-  draw();
-}
-audio.addEventListener('play', () => draw());
-audio.addEventListener('pause', () => draw());
-audio.addEventListener('ended', () => {
-  const shown = recs.filter((r) => (!who || (r.performer?.qid ?? r.performer?.az) === who) && (!kind || r.kind === kind));
-  const i = shown.findIndex((r) => r.id === playing);
-  if (i >= 0 && i < shown.length - 1) play(shown[i + 1].id); else pulse.remove();
-});
-
-function keepUrl() {
-  const q = new URLSearchParams();
-  if (lang !== 'az') q.set('lang', lang);
-  if (tab !== 'recs') q.set('tab', tab);
-  if (who) q.set('who', who);
-  history.replaceState(null, '', `${location.pathname}${q.size ? '?' + q : ''}`);
+function drawPeople(qid) {
+  if (!people.length) return;
+  const recd = people.filter((p) => recsOf(p.qid).length).length;
+  document.getElementById('people-lead').textContent = t('allPeople')(people.length, recd);
+  const pl = place && places.get(place);
+  const list = (pl ? [...pl.people] : [...people]).sort((a, b) => recsOf(b.qid).length - recsOf(a.qid).length || (a.born ?? 9999) - (b.born ?? 9999));
+  document.getElementById('plist-title').textContent = pl ? L(pl) : `${t('plistAll')} · ${people.length}`;
+  const back = document.getElementById('back'); back.hidden = !pl; back.textContent = t('back');
+  back.onclick = () => { place = null; mark(); drawPeople(); map.fitBounds(BOUNDS, { padding: 40, duration: still() ? 0 : 700 }); };
+  document.getElementById('plist').innerHTML = list.map((p) => {
+    const n = recsOf(p.qid).length;
+    const more = [n ? `<button type="button" data-listen="${p.qid}">${t('listen')(n)}</button>` : '', p.kitabxana ? `<a href="${KX()}/authors/${p.kitabxana}">${t('poems')}</a>` : '', litSlug.has(p.qid) ? `<a href="/xerite/?author=${litSlug.get(p.qid)}${lang === 'az' ? '' : '&lang=' + lang}">${t('alsoLit')}</a>` : ''].filter(Boolean).join('');
+    return `<li${p.qid === qid ? ' class="on"' : ''}><button type="button" class="p" data-p="${p.qid}"><span class="n">${esc(L(p))}</span><span class="y">${years(p)}</span><span class="r">${p.roles.map((x) => t(x)).join(', ')}${pl ? '' : ` · ${esc(L(p.place))}`}${p.byHand ? ` (${t('byHand')})` : ''}</span></button>${more ? `<div class="more">${more}</div>` : ''}</li>`;
+  }).join('');
+  document.querySelectorAll('#plist [data-p]').forEach((b) => b.onclick = () => { const p = byQid.get(b.dataset.p); showPlace(p.place.id, p.qid); });
+  document.querySelectorAll('#plist [data-listen]').forEach((b) => b.onclick = () => { load(recsOf(b.dataset.listen)[0], true); toTop(); });
+  if (qid) document.querySelector('#plist .on')?.scrollIntoView({ block: 'nearest' });
+  const p = qid && byQid.get(qid);
+  if (p) bigPulse.setLngLat([p.place.lng, p.place.lat]).addTo(map); else bigPulse.remove();
 }
 function drawLegend() {
   const C = ROLE();
-  document.getElementById('legend').innerHTML = ['khanende', 'tar', 'ashik'].map((r) => `<div class="row"><i style="background:${C[r]}"></i>${t(r)}</div>`).join('')
-    + `<div class="row"><i style="background:transparent;border:1.25px solid ${css('--ink')}"></i>♪ ${t('withRecs')}</div>`;
+  document.getElementById('legend').innerHTML = ['khanende', 'tar', 'ashik'].map((r) => `<div><i style="background:${C[r]}"></i>${t(r)}</div>`).join('')
+    + `<div><i style="background:transparent;border:1.25px solid ${css('--ink')}"></i>${t('withRecs')}</div>`;
 }
-function draw() {
-  document.querySelectorAll('[data-tab]').forEach((b) => b.setAttribute('aria-selected', b.dataset.tab === tab));
-  const el = document.getElementById('body');
-  if (!recs.length) return;
-  const top = el.scrollTop;
-  if (tab === 'recs') drawRecs(el); else if (tab === 'mugham') drawMugham(el); else drawPeople(el);
-  el.scrollTop = top;
-  drawLegend();
+
+function drawAll() { drawKinds(); drawShelf(); drawModes(); drawPeople(); drawLegend(); }
+function keepUrl() {
+  const q = new URLSearchParams();
+  if (lang !== 'az') q.set('lang', lang);
+  if (current && current !== first) q.set('r', current.id);
+  history.replaceState(null, '', `${location.pathname}${q.size ? '?' + q : ''}${location.hash}`);
 }
-document.querySelectorAll('[data-tab]').forEach((b) => b.onclick = () => { tab = b.dataset.tab; if (tab === 'recs') { place = null; mark(); } draw(); keepUrl(); document.getElementById('body').scrollTop = 0; });
 function applyLang() {
   document.documentElement.lang = lang;
   document.title = t('doc');
-  document.querySelectorAll('[data-i18n]').forEach((el) => el.textContent = t(el.dataset.i18n));
+  document.querySelectorAll('[data-i18n]').forEach((el) => { const v = t(el.dataset.i18n); if (typeof v === 'string') el.textContent = v; });
+  document.querySelectorAll('[data-i18n-label]').forEach((el) => el.setAttribute('aria-label', t(el.dataset.i18nLabel)));
   document.querySelectorAll('[data-lang]').forEach((b) => b.setAttribute('aria-pressed', b.dataset.lang === lang));
   document.querySelectorAll('[data-keep-lang]').forEach((a) => { const u = new URL(a.getAttribute('href'), location.href); if (lang === 'az') u.searchParams.delete('lang'); else u.searchParams.set('lang', lang); a.href = u.pathname + u.search; });
+  document.getElementById('kx').href = KX();
 }
 applyLang();
 document.querySelectorAll('[data-lang]').forEach((b) => b.onclick = () => {
   lang = b.dataset.lang;
   try { localStorage.setItem('lang', lang); } catch {}
-  applyLang(); keepUrl(); draw();
-  if (playing) { const id = playing; playing = null; const was = audio.paused; const tm = audio.currentTime; play(id); audio.currentTime = tm; if (was) audio.pause(); }
-  if (map.getStyle()) for (const l of map.getStyle().layers) if (l.type === 'symbol' && l.layout?.['text-field']) map.setLayoutProperty(l.id, 'text-field', labelExpr());
+  applyLang();
+  if (recs.length) { placed = undefined; drawAll(); drawNow(); keepUrl(); }
+  for (const m of [map, mini]) if (m.getStyle()) for (const l of m.getStyle().layers) if (l.type === 'symbol' && l.layout?.['text-field']) m.setLayoutProperty(l.id, 'text-field', labelExpr());
 });
 })();
 </script>
