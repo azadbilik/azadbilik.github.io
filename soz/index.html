@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Söz ehtiyatı · Azad Bilik</title>
+<meta name="description" content="Şairlər neçə fərqli söz işlədir: kitabxana.az-dakı 76 şairin ilk 10 000 şeir sözü. How many different words a poet uses, in the first 10,000 words of their verse.">
+<meta name="theme-color" content="#F4EFE6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14100D" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://azadbilik.org/soz/">
+<meta property="og:title" content="Söz ehtiyatı · Poets' vocabulary">
+<meta property="og:description" content="Füzulidən Ramiz Rövşənə: 76 şairin ilk 10 000 sözündə neçə fərqli söz var?">
+<meta property="og:image" content="https://azadbilik.org/soz/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="stylesheet" href="/shared/story-map.css">
+<style>
+  /* A page, not a map: it scrolls. Era colours on top of the story maps' tokens */
+  :root { --c-classical: var(--accent); --c-c19: #A86B12; --c-c20: var(--second); --c-modern: var(--third); --c-folk: #7A5C8E; --c-unknown: var(--muted); }
+  @media (prefers-color-scheme: dark) { :root { --c-c19: #E0A64A; --c-folk: #B596C9; } }
+  html, body { height: auto; }
+  body { overflow-x: hidden; overflow-y: auto; }
+  .wrap { max-width: 64rem; margin: 0 auto; padding: 0 1.5rem; }
+  header.head { border-bottom: 1px solid var(--rule); padding: 1.25rem 0 1.5rem; }
+  header .lede { margin-top: .75rem; max-width: 40rem; font: 400 1.0625rem/1.55 var(--serif); }
+  h1 { font-size: clamp(2rem, 6vw, 3.25rem); }
+  section { padding: 1.75rem 0; border-bottom: 1px solid var(--rule); }
+  h2 { font: 400 1.5rem/1.2 var(--serif); letter-spacing: -.01em; }
+  .kicker { font: 500 .75rem var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .muted { color: var(--muted); }
+
+  .bar { display: flex; flex-wrap: wrap; gap: .75rem 1.25rem; align-items: center; justify-content: space-between; margin-bottom: .75rem; }
+  .seg { display: inline-grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--rule); border-radius: 3px; padding: 2px; }
+  .seg button { padding: .35rem .75rem; border-radius: 2px; font-size: .8125rem; color: var(--muted); }
+  .seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+  .eras-box { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem .6rem; } .eras-k { font-size: .75rem; color: var(--muted); }
+  .eras { display: flex; flex-wrap: wrap; gap: .3rem; }
+  .eras button { display: inline-flex; align-items: center; gap: .35rem; font-size: .75rem; padding: .2rem .55rem; border: 1px solid var(--rule); border-radius: 999px; color: var(--ink); }
+  .eras button i { width: .6rem; height: .6rem; border-radius: 50%; background: var(--c); }
+  .eras button[aria-pressed="false"] { color: var(--muted); }
+  .eras button[aria-pressed="false"] i { background: transparent; box-shadow: inset 0 0 0 1.5px var(--c); }
+
+  .chart-wrap { position: relative; }
+  #chart { display: block; width: 100%; height: auto; overflow: visible; touch-action: manipulation; user-select: none; -webkit-user-select: none; }
+  #chart .axis line { stroke: var(--rule); }
+  #chart .axis text, #chart .axis-title { font: .6875rem var(--sans); fill: var(--muted); font-variant-numeric: tabular-nums; }
+  #chart .grid { stroke: var(--rule); stroke-dasharray: 2 3; }
+  #chart circle.dot { fill: var(--c); stroke: var(--paper); stroke-width: 1; transition: transform 1s cubic-bezier(.2, .8, .2, 1), opacity .3s; cursor: pointer; }
+  #chart circle.dot.off { opacity: .12; }
+  #chart circle.dot.on { stroke: var(--ink); stroke-width: 2; }
+  #chart .lab { font: 500 .6875rem var(--sans); fill: var(--ink); paint-order: stroke; stroke: var(--paper); stroke-width: 3px; stroke-linejoin: round; pointer-events: none; transition: opacity .3s; }
+  #chart .ring { fill: none; stroke: var(--ink); stroke-width: 1.5; pointer-events: none; }
+
+  .card { position: absolute; z-index: 3; width: 17rem; background: var(--paper); border: 1px solid var(--rule); border-radius: 4px; padding: .75rem .9rem; box-shadow: 0 2px 14px rgb(0 0 0 / .14); font-size: .8125rem; }
+  .card[hidden] { display: none; }
+  .card .nm { font: 400 1.125rem/1.2 var(--serif); }
+  .card .yrs { color: var(--muted); font-size: .75rem; }
+  .card .big { margin-top: .35rem; font: 400 1.75rem/1 var(--serif); font-variant-numeric: tabular-nums; }
+  .card .big small { font: .75rem var(--sans); color: var(--muted); margin-left: .3rem; }
+  .card dl { display: grid; grid-template-columns: auto 1fr; gap: .1rem .6rem; margin-top: .45rem; }
+  .card dt { color: var(--muted); } .card dd { margin: 0; text-align: right; font-variant-numeric: tabular-nums; }
+  .card .own { margin-top: .5rem; } .card .own span { color: var(--muted); display: block; font-size: .75rem; }
+  .card .own em { font: italic 400 .9375rem/1.4 var(--serif); }
+  .card .src { margin-top: .4rem; font-size: .6875rem; color: var(--muted); }
+  .card a.kx { display: inline-block; margin-top: .5rem; font-weight: 500; text-decoration: none; color: var(--accent); }
+  .card a.kx:hover { text-decoration: underline; }
+  .card .x { position: absolute; top: .35rem; right: .45rem; width: 1.5rem; height: 1.5rem; color: var(--muted); font-size: 1rem; }
+  .hint { font-size: .75rem; color: var(--muted); margin-top: .35rem; }
+
+  /* The game */
+  .game { display: grid; gap: .9rem; max-width: 40rem; }
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
+  .pick { display: grid; gap: .25rem; text-align: left; padding: .9rem 1rem; border: 1px solid var(--rule); border-radius: 4px; background: var(--frame); transition: border-color .2s, transform .15s; min-height: 5.5rem; align-content: start; }
+  .pick:hover:not([disabled]) { border-color: var(--ink); transform: translateY(-1px); }
+  .pick[disabled] { cursor: default; }
+  .pick .nm { font: 400 1.25rem/1.2 var(--serif); }
+  .pick .yrs { font-size: .75rem; color: var(--muted); }
+  .pick .meter { height: .5rem; margin-top: .4rem; background: var(--rule); border-radius: 2px; overflow: hidden; }
+  .pick .meter b { display: block; height: 100%; width: 0; background: var(--muted); transition: width .9s cubic-bezier(.2, .8, .2, 1); }
+  .pick .n { font-variant-numeric: tabular-nums; font-size: .875rem; min-height: 1.3em; }
+  .pick.win { border-color: var(--third); } .pick.win .meter b { background: var(--third); }
+  .pick.chosen.lose { border-color: var(--accent); } .pick.lose .meter b { background: var(--accent); }
+  .verdict { min-height: 1.5em; font: 400 1.0625rem/1.4 var(--serif); }
+  .score { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: center; font-size: .875rem; }
+  .score b { font-variant-numeric: tabular-nums; }
+  .btn { padding: .45rem .9rem; border: 1px solid var(--ink); border-radius: 3px; font-size: .875rem; font-weight: 500; }
+  .btn:hover { background: var(--ink); color: var(--paper); }
+  .pop { animation: pop .45s ease-out; }
+  @keyframes pop { 40% { transform: scale(1.35); } }
+
+  /* The list */
+  .rank { list-style: none; padding: 0; margin-top: .75rem; columns: 2; column-gap: 2rem; }
+  .rank li { break-inside: avoid; }
+  .rank button { display: grid; grid-template-columns: 1.75rem 1fr auto; gap: .5rem; align-items: center; width: 100%; text-align: left; padding: .28rem .25rem; font-size: .875rem; border-radius: 2px; }
+  .rank button:hover, .rank button.on { background: var(--rule); }
+  .rank .k { font-size: .75rem; color: var(--muted); font-variant-numeric: tabular-nums; text-align: right; }
+  .rank .who { display: flex; align-items: center; gap: .4rem; min-width: 0; }
+  .rank .who i { flex: none; width: .5rem; height: .5rem; border-radius: 50%; background: var(--c); }
+  .rank .who span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .rank .v { font-variant-numeric: tabular-nums; color: var(--muted); font-size: .8125rem; }
+  .unranked { margin-top: .5rem; font-size: .8125rem; color: var(--muted); line-height: 1.7; }
+  .unranked a { text-decoration: none; } .unranked a:hover { color: var(--ink); text-decoration: underline; }
+  .unranked small { font-variant-numeric: tabular-nums; opacity: .8; }
+
+  .method { max-width: 42rem; display: grid; gap: .75rem; font-size: .9375rem; }
+  .method ol { padding-left: 1.25rem; display: grid; gap: .4rem; }
+  footer { padding: 1.5rem 0 2.5rem; font-size: .75rem; color: var(--muted); }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  @media (max-width: 48rem) {
+    .wrap { padding: 0 1rem; }
+    .card { position: relative; left: auto !important; top: auto !important; width: auto; margin-top: .5rem; box-shadow: none; }
+    .rank { columns: 1; }
+    .pair { gap: .5rem; } .pick { padding: .75rem; } .pick .nm { font-size: 1.0625rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { #chart circle.dot, .pick .meter b { transition: none !important; } .pop { animation: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="head">
+    <div class="top"><a class="brand" href="/" data-keep-lang><svg viewBox="0 0 512 512" aria-hidden="true"><g class="star"><rect x="126" y="126" width="260" height="260"/><polygon points="256,72 440,256 256,440 72,256"/></g><polygon class="gem" points="256,196 316,256 256,316 196,256"/></svg>Azad Bilik</a><nav><a href="https://kitabxana.az" id="kx-nav" data-i18n="library">Kitabxana</a><span class="langs" role="group" aria-label="Dil · Язык · Language"><button type="button" data-lang="az">AZ</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="en">EN</button></span></nav></div>
+    <h1 data-i18n="title">Söz ehtiyatı</h1>
+    <p class="sub" data-i18n="sub">Şair neçə fərqli söz işlədir?</p>
+    <p class="lede" id="lede"></p>
+  </header>
+
+  <main>
+    <section aria-labelledby="h-chart">
+      <h2 id="h-chart" class="sr" data-i18n="chartH">Şairlər fərqli sözlərin sayına görə</h2>
+      <div class="bar">
+        <div class="seg" role="group" id="views"><button type="button" data-view="swarm" data-i18n="vSwarm">Fərqli sözlər</button><button type="button" data-view="loan" data-i18n="vLoan">Ərəb-fars sözləri</button></div>
+        <div class="eras-box"><span class="eras-k" data-i18n="byBirth">doğum ilinə görə</span><div class="eras" role="group" id="eras"></div></div>
+      </div>
+      <div class="chart-wrap" id="chart-wrap">
+        <svg id="chart" role="img"></svg>
+        <div class="card" id="card" hidden aria-live="polite"></div>
+      </div>
+      <p class="hint" data-i18n="hint">Nöqtənin üstünə gəlin və ya toxunun.</p>
+    </section>
+
+    <section aria-labelledby="h-game">
+      <p class="kicker" data-i18n="gameK">Oyun</p>
+      <h2 id="h-game" data-i18n="gameH">Kimin söz ehtiyatı böyükdür?</h2>
+      <div class="game" style="margin-top:.75rem">
+        <p class="muted" data-i18n="gameQ">İki şair. Hansının ilk 10 000 sözündə daha çox fərqli söz var?</p>
+        <div class="pair" id="pair"></div>
+        <p class="verdict" id="verdict" aria-live="polite"></p>
+        <div class="score"><span><span data-i18n="streak">Ardıcıl düz cavab</span>: <b id="streak">0</b></span><span><span data-i18n="best">Ən yaxşı</span>: <b id="best">0</b></span><button type="button" class="btn" id="next" data-i18n="next">Növbəti cüt</button></div>
+      </div>
+    </section>
+
+    <section aria-labelledby="h-rank">
+      <h2 id="h-rank" data-i18n="rankH">Sıralama</h2>
+      <ol class="rank" id="rank"></ol>
+      <details style="margin-top:1.5rem"><summary class="kicker" id="unrankedH" style="cursor:pointer"></summary>
+      <p class="unranked" id="unranked"></p></details>
+    </section>
+
+    <section aria-labelledby="h-method">
+      <h2 id="h-method" data-i18n="methodH">Necə sayılıb</h2>
+      <div class="method" id="method"></div>
+    </section>
+  </main>
+  <footer id="foot"></footer>
+</div>
+
+<script>
+(() => {
+const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+const still = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+const phone = () => matchMedia('(max-width: 48rem)').matches;
+
+const LANGS = ['az', 'ru', 'en'];
+let lang = (() => {
+  const q = new URLSearchParams(location.search).get('lang');
+  if (LANGS.includes(q)) return q;
+  try { const s = localStorage.getItem('lang'); if (LANGS.includes(s)) return s; } catch {}
+  return 'az';
+})();
+// Azerbaijani groups thousands with a space (5 419); not every browser has its locale data
+const nf = (v, d = 0) => {
+  const s = new Intl.NumberFormat(lang === 'ru' ? 'ru-RU' : 'en-GB', { maximumFractionDigits: d, minimumFractionDigits: d }).format(v);
+  return lang === 'az' ? s.replace(/[,.]/g, (c) => (c === ',' ? '\u202F' : ',')) : s;
+};
+const pct = (v) => `${nf(v * 100)}%`;
+const T = {
+  az: { doc: 'Söz ehtiyatı · Azad Bilik', title: 'Söz ehtiyatı', sub: 'Şair neçə fərqli söz işlədir?', library: 'Kitabxana',
+    lede: (n, r, p) => `Hər şairin şeirlərindən ilk ${n} söz götürülüb və bu sözlərin neçəsinin fərqli olduğu sayılıb. Kitabxana.az-da Azərbaycan dilində şeiri olan ${p} şairdən ${r}-nin bu qədər mətni var. Hər nöqtə bir şairdir.`,
+    chartH: 'Şairlər fərqli sözlərin sayına görə', vSwarm: 'Fərqli sözlər', vLoan: 'Ərəb-fars sözləri',
+    xAxis: (n) => `fərqli söz, ilk ${n} sözdə →`, yAxis: 'ərəb-fars sözlərinin payı (təxmini) →',
+    chartAlt: (r, a, b) => `${r} şair fərqli sözlərin sayına görə: ən çox ${a}, ən az ${b}. Tam siyahı aşağıdadır.`,
+    byBirth: 'doğum ilinə görə', hint: 'Nöqtənin üstünə gəlin və ya toxunun; tarixi dövrə görə süzün.',
+    eras: { classical: 'Klassik', c19: 'XIX əsr', c20: 'XX əsr', modern: 'Müasir', folk: 'Xalq', unknown: 'Naməlum' },
+    eraNote: { classical: '1760-dan əvvəl doğulanlar', c19: '1760–1869 doğulanlar', c20: '1870–1945 doğulanlar', modern: '1946-dan sonra doğulanlar', folk: 'xalq yaradıcılığı', unknown: '' },
+    distinct: 'fərqli söz', rankOf: (k, n) => `${k} / ${n}`, place: 'yeri', loan: 'ərəb-fars sözləri', once: 'bir dəfə işlənən', own: 'Ancaq onda (başqa şairlərin nümunəsində yoxdur):',
+    scanned: (p) => `nümunənin ${p}-i kitab skanından tanınıb və yoxlanılıb`, read: 'Kitabxanada oxu ↗', close: 'Bağla',
+    gameK: 'Oyun', gameH: 'Kimin söz ehtiyatı böyükdür?', gameQ: 'İki şair. Hansının ilk 10 000 sözündə daha çox fərqli söz var?',
+    pickLabel: (n) => `${n} seç`, right: 'Düzdür!', wrong: 'Yox.', more: (a, na, b, nb, d) => `${a}: ${na} fərqli söz, ${b}: ${nb} (fərq ${d}).`,
+    streak: 'Ardıcıl düz cavab', best: 'Ən yaxşı', next: 'Növbəti cüt', words: 'söz',
+    rankH: 'Sıralama', unrankedH: (n, c) => `${c} sözə çatmayan ${n} şair (sıralanmır)`,
+    methodH: 'Necə sayılıb',
+    method: (n, r, p) => `<p>Fikir The Pudding saytının <a href="https://pudding.cool/projects/vocabulary/">«The Largest Vocabulary in Hip Hop»</a> layihəsindən götürülüb: hər müəllifdən eyni sayda söz götürülür ki, çox yazan şair irəli düşməsin.</p>
+<ol><li>Mətnlər kitabxana.az-ın bazasındandır: oxucuya açıq olan, <b>Azərbaycan dilində, latın qrafikasında yazılmış</b> şeirlər (nəsr, dram və tərcümələr daxil deyil). Klassiklərin mətnləri müasir əlifbaya çevrilmiş nəşrlərdəndir.</li>
+<li>Markdown təmizlənir, mətn Azərbaycan qaydası ilə kiçik hərfə salınır (İ → i, I → ı), söz hərflərdən ibarətdir (ə, ğ, ı, ö, ü, ş, ç daxil), sözün içindəki apostrof saxlanılır («mə’na»), defis sözü ayırır.</li>
+<li>Hər şairin əsərləri sabit sırayla (kitab, sonra kitabdakı yeri) düzülür və <b>ilk ${n} söz</b> götürülür. ${p} şairdən ${r}-nin bu qədər sözü var; qalanları siyahıda göstərilir, amma sıralanmır.</li>
+<li>Bu ${n} sözün içində neçə <b>fərqli söz forması</b> olduğu sayılır. «Dərd», «dərdim», «dərdimdən» üç ayrı sözdür: kök yox, forma sayılır. Bu, şəkilçi ilə zəngin dildə rəqəmləri ingiliscədən xeyli yuxarı aparır.</li>
+<li><b>Ərəb-fars sözləri</b> (təxmini): nümunədəki sözlərin neçə faizinin saytın lüğətində («Klassik Azərbaycan ədəbiyyatında işlənən ərəb və fars sözləri lüğəti», 2005) olduğu, söz olduğu kimi və ya adi şəkilçilər atılandan sonra. Lüğət klassik ədəbiyyat üçündür, ona görə «dəniz» kimi türk sözləri ora düşmür, amma bəzi ümumi alınmalar düşür, köhnə yazılışlar isə tapılmır.</li>
+<li>«Ancaq onda» sözləri: sıralanan şairlərdən yalnız birinin nümunəsində olan, ən azı dörd hərfli sözlər, ən çox işləndiyi qaydada; şairin öz adı (təxəllüs: «Vaqifəm») çıxarılıb.</li></ol>
+<p><b>Ehtiyatla oxuyun.</b> Mətnlərin çoxu kitab skanlarından tanınıb (OCR) və yoxlanılıb, amma tanınma səhvləri qalıbsa, hər biri «yeni söz» sayılır. Köhnə yazılışlar («mənüm», «niçe», «kıla») və bəzi mətnlərdə itən hərflər («gunəş», «urək») da fərqli sözləri artırır. Klassiklərin nümunəsi çox vaxt qəzəllərdən, müasirlərinki sərbəst şeirdən ibarətdir: janr da rəqəmə təsir edir. Fərq bir neçə yüz sözdürsə, sıralama dəqiq deyil.</p>`,
+    foot: (d) => `Məlumat: kitabxana.az, ${d}. Hesablama skripti və məlumat faylı: <a href="data/vocab.json">vocab.json</a>. İstənilən məqsəd üçün sərbəstdir.` },
+  ru: { doc: 'Словарный запас · Azad Bilik', title: 'Словарный запас', sub: 'Сколько разных слов у поэта?', library: 'Библиотека',
+    lede: (n, r, p) => `Из стихов каждого поэта взяты первые ${n} слов и подсчитано, сколько среди них разных. Из ${p} поэтов, чьи стихи на азербайджанском есть на kitabxana.az, столько текста набирается у ${r}. Каждая точка — поэт.`,
+    chartH: 'Поэты по числу разных слов', vSwarm: 'Разные слова', vLoan: 'Арабские и персидские',
+    xAxis: (n) => `разных слов в первых ${n} →`, yAxis: 'доля арабских и персидских слов (примерно) →',
+    chartAlt: (r, a, b) => `${r} поэтов по числу разных слов: больше всего у поэта ${a}, меньше всего у поэта ${b}. Полный список ниже.`,
+    byBirth: 'по году рождения', hint: 'Наведите на точку или нажмите; эпохи можно отключать.',
+    eras: { classical: 'Классики', c19: 'XIX век', c20: 'XX век', modern: 'Современные', folk: 'Народное', unknown: 'Неизвестно' },
+    eraNote: { classical: 'родились до 1760', c19: 'родились в 1760–1869', c20: 'родились в 1870–1945', modern: 'родились после 1945', folk: 'народное творчество', unknown: '' },
+    distinct: 'разных слов', rankOf: (k, n) => `${k} из ${n}`, place: 'место', loan: 'арабские и персидские', once: 'встречаются один раз', own: 'Только у него (нет в выборках других поэтов):',
+    scanned: (p) => `${p} выборки распознано со сканов книг и вычитано`, read: 'Читать в библиотеке ↗', close: 'Закрыть',
+    gameK: 'Игра', gameH: 'У кого словарь больше?', gameQ: 'Два поэта. У кого в первых 10 000 слов больше разных?',
+    pickLabel: (n) => `Выбрать: ${n}`, right: 'Верно!', wrong: 'Нет.', more: (a, na, b, nb, d) => `${a}: ${na} разных слов, ${b}: ${nb} (разница ${d}).`,
+    streak: 'Верных подряд', best: 'Лучший результат', next: 'Следующая пара', words: 'слов',
+    rankH: 'Рейтинг', unrankedH: (n, c) => `${n} поэтов, у которых меньше ${c} слов (без места)`,
+    methodH: 'Как считали',
+    method: (n, r, p) => `<p>Идея взята у The Pudding, <a href="https://pudding.cool/projects/vocabulary/">«The Largest Vocabulary in Hip Hop»</a>: у каждого автора берётся одинаковое число слов, чтобы плодовитые не получали преимущества.</p>
+<ol><li>Тексты — из базы kitabxana.az: открытые читателям стихи, <b>написанные по-азербайджански, в латинице</b> (без прозы, драмы и переводов). Классики — в изданиях, переведённых на современный алфавит.</li>
+<li>Разметка Markdown убирается, текст переводится в нижний регистр по азербайджанским правилам (İ → i, I → ı); слово — это буквы (включая ə, ğ, ı, ö, ü, ş, ç) с апострофом внутри («mə’na»), дефис разделяет слова.</li>
+<li>Произведения поэта выстраиваются в постоянном порядке (книга, затем место в ней), берутся <b>первые ${n} слов</b>. Столько набирается у ${r} из ${p} поэтов; остальные перечислены, но без места.</li>
+<li>Считается число <b>разных словоформ</b>: «dərd», «dərdim», «dərdimdən» — три слова. Корни не сводятся, поэтому в агглютинативном языке числа заметно выше, чем в английском.</li>
+<li><b>Арабские и персидские слова</b> (примерно): доля слов выборки, найденных в словаре сайта («Словарь арабских и персидских слов в классической азербайджанской литературе», 2005) как есть или после снятия обычных аффиксов. Словарь составлен для классики: тюркские слова в него не попадают, некоторые общие заимствования попадают, а старые написания не находятся.</li>
+<li>«Только у него» — слова не короче четырёх букв, которые есть в выборке лишь одного из ранжированных поэтов, по частоте; имя поэта (тахаллус: «Vaqifəm») исключено.</li></ol>
+<p><b>Читайте с оговорками.</b> Многие тексты распознаны со сканов (OCR) и вычитаны, но каждая оставшаяся ошибка считается «новым словом». Старые написания («mənüm», «niçe», «kıla») и потерянные в некоторых текстах буквы («gunəş», «urək») тоже прибавляют разные слова. У классиков выборка обычно состоит из газелей, у современных — из свободного стиха: жанр тоже влияет. Разница в пару сотен слов — не точное место.</p>`,
+    foot: (d) => `Данные: kitabxana.az, ${d}. Файл данных: <a href="data/vocab.json">vocab.json</a>. Свободно для любых целей.` },
+  en: { doc: "Poets' vocabulary · Azad Bilik", title: "Poets' vocabulary", sub: 'How many different words does a poet use?', library: 'Library',
+    lede: (n, r, p) => `We took the first ${n} words of each poet's verse and counted how many of them are different. Of the ${p} poets with Azerbaijani verse on kitabxana.az, ${r} have that much text. Each dot is a poet.`,
+    chartH: 'Poets by number of different words', vSwarm: 'Different words', vLoan: 'Arabic & Persian',
+    xAxis: (n) => `different words in the first ${n} →`, yAxis: 'share of Arabic and Persian words (approx.) →',
+    chartAlt: (r, a, b) => `${r} poets by number of different words: most, ${a}; fewest, ${b}. The full list is below.`,
+    byBirth: 'by year of birth', hint: 'Hover or tap a dot; switch eras on and off.',
+    eras: { classical: 'Classical', c19: '19th century', c20: '20th century', modern: 'Contemporary', folk: 'Folk', unknown: 'Unknown' },
+    eraNote: { classical: 'born before 1760', c19: 'born 1760–1869', c20: 'born 1870–1945', modern: 'born after 1945', folk: 'folk poetry', unknown: '' },
+    distinct: 'different words', rankOf: (k, n) => `${k} of ${n}`, place: 'rank', loan: 'Arabic & Persian', once: 'used only once', own: 'Only theirs (in no other poet’s sample):',
+    scanned: (p) => `${p} of the sample read from book scans and proofread`, read: 'Read in the library ↗', close: 'Close',
+    gameK: 'Game', gameH: 'Who has the bigger vocabulary?', gameQ: 'Two poets. Whose first 10,000 words hold more different words?',
+    pickLabel: (n) => `Pick ${n}`, right: 'Right!', wrong: 'No.', more: (a, na, b, nb, d) => `${a}: ${na} different words; ${b}: ${nb} (${d} more).`,
+    streak: 'Streak', best: 'Best', next: 'Next pair', words: 'words',
+    rankH: 'Ranking', unrankedH: (n, c) => `${n} poets with fewer than ${c} words (not ranked)`,
+    methodH: 'How it was counted',
+    method: (n, r, p) => `<p>The idea is The Pudding's <a href="https://pudding.cool/projects/vocabulary/">“The Largest Vocabulary in Hip Hop”</a>: take the same number of words from every writer, so the prolific are not favoured.</p>
+<ol><li>The texts are from the kitabxana.az database: verse open to readers, <b>written in Azerbaijani in the Latin script</b> (no prose, drama or translations). The classics are in editions transcribed into the modern alphabet.</li>
+<li>Markdown is stripped, the text lower-cased by Azerbaijani rules (İ → i, I → ı); a word is a run of letters (ə, ğ, ı, ö, ü, ş, ç included) with any apostrophe inside it («mə’na»); a hyphen splits words.</li>
+<li>Each poet's works are put in a fixed order (book, then place in the book) and the <b>first ${n} words</b> taken. ${r} of ${p} poets have that many; the rest are listed but not ranked.</li>
+<li>We count the <b>different word forms</b> in those ${n}: «dərd», «dərdim», «dərdimdən» are three words. Nothing is reduced to its root, so in a language that stacks suffixes the numbers run far above English ones.</li>
+<li><b>Arabic and Persian words</b> (approximate): the share of the sample found in the site's dictionary («Arabic and Persian words in classical Azerbaijani literature», 2005), as written or after common suffixes are taken off. The dictionary is made for the classics: Turkic words stay out, some everyday loans count, and old spellings are missed.</li>
+<li>“Only theirs”: words of four letters or more found in only one ranked poet's sample, most used first; the poet's own name (the pen name in the last couplet, «Vaqifəm») left out.</li></ol>
+<p><b>Read with care.</b> Many texts were read from book scans (OCR) and proofread, but any slip left counts as a “new word”. Old spellings («mənüm», «niçe», «kıla») and letters lost in some texts («gunəş» for «günəş») add different words too. The classics' samples are mostly ghazals, the moderns' often free verse: form matters as well. A gap of a few hundred words is not a firm ranking.</p>`,
+    foot: (d) => `Data: kitabxana.az, ${d}. Data file: <a href="data/vocab.json">vocab.json</a>. Free to use for anything.` },
+};
+const t = (k) => T[lang][k];
+const L = (a) => a[lang] || a.az;
+const KX = () => `https://kitabxana.az${lang === 'az' ? '' : '/' + lang}`;
+const ERAS = ['classical', 'c19', 'c20', 'modern', 'folk', 'unknown'];
+const years = (a) => a.born || a.died ? `${a.born ?? '?'}–${a.died ?? ''}` : '';
+
+let data = null, ranked = [], view = 'swarm', shown = new Set(ERAS), pinned = null, hover = null, pos = new Map(), first = true;
+const svg = document.getElementById('chart'), card = document.getElementById('card'), wrap = document.getElementById('chart-wrap');
+const NS = 'http://www.w3.org/2000/svg';
+const el = (name, attrs = {}, parent = svg) => { const e = document.createElementNS(NS, name); for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v); parent.appendChild(e); return e; };
+
+// Layout: a beeswarm on one axis, or a scatter of different words against the loan share
+function layout() {
+  const W = Math.max(280, wrap.clientWidth), small = W < 560;
+  const r = small ? 5 : 8, m = { l: view === 'loan' ? (small ? 30 : 40) : 18, r: 18, t: 22, b: 34 };
+  const vals = ranked.map((a) => a.distinct);
+  const lo = Math.floor(Math.min(...vals) / 250) * 250, hi = Math.ceil(Math.max(...vals) / 250) * 250;
+  const x = (v) => m.l + (v - lo) / (hi - lo) * (W - m.l - m.r);
+  const out = new Map();
+  let H;
+  if (view === 'swarm') {
+    // Each dot as near the axis as it can sit without touching the ones already placed
+    const placed = [];
+    const gap = 2 * r + 1;
+    for (const a of [...ranked].sort((p, q) => p.distinct - q.distinct)) {
+      const cx = x(a.distinct);
+      let cy = 0;
+      for (let k = 0; ; k++) {
+        cy = (k % 2 ? 1 : -1) * Math.ceil(k / 2) * gap * .87;
+        if (!placed.some((p) => (p.x - cx) ** 2 + (p.y - cy) ** 2 < gap * gap)) break;
+      }
+      placed.push({ x: cx, y: cy, a });
+    }
+    const ext = Math.max(...placed.map((p) => Math.abs(p.y))) + r + 18;
+    H = m.t + 2 * ext + m.b;
+    for (const p of placed) out.set(p.a.slug, { x: p.x, y: m.t + ext + p.y });
+  } else {
+    H = small ? 380 : 460;
+    const top = Math.ceil(Math.max(...ranked.map((a) => a.loan)) * 10) / 10;
+    const y = (v) => H - m.b - v / top * (H - m.t - m.b);
+    for (const a of ranked) out.set(a.slug, { x: x(a.distinct), y: y(a.loan) });
+    out.yTicks = Array.from({ length: Math.round(top * 10) + 1 }, (_, i) => i / 10).map((v) => ({ v, y: y(v) }));
+  }
+  const step = small ? 500 : 250;
+  out.xTicks = []; for (let v = lo; v <= hi; v += step) out.xTicks.push({ v, x: x(v) });
+  Object.assign(out, { W, H, r, m, small });
+  return out;
+}
+
+function draw() {
+  if (!data) return;
+  const g = layout();
+  pos = g;
+  svg.setAttribute('viewBox', `0 0 ${g.W} ${g.H}`);
+  svg.setAttribute('aria-label', t('chartAlt')(ranked.length, L(ranked[0]), L(ranked[ranked.length - 1])));
+  // Axes are redrawn; the dots are kept, so they glide to their new places
+  svg.querySelectorAll('.axis, .lab, .ring').forEach((n) => n.remove());
+  const ax = el('g', { class: 'axis' });
+  svg.insertBefore(ax, svg.firstChild);
+  const base = g.H - g.m.b;
+  el('line', { x1: g.m.l, x2: g.W - g.m.r, y1: base, y2: base }, ax);
+  for (const k of g.xTicks) {
+    el('line', { x1: k.x, x2: k.x, y1: base, y2: base + 4 }, ax);
+    const tx = el('text', { x: k.x, y: base + 16, 'text-anchor': 'middle' }, ax); tx.textContent = nf(k.v);
+  }
+  const xt = el('text', { class: 'axis-title', x: g.W - g.m.r, y: g.H - 2, 'text-anchor': 'end' }, ax); xt.textContent = t('xAxis')(nf(data.n));
+  if (view === 'loan') {
+    for (const k of g.yTicks) {
+      if (k.v) el('line', { class: 'grid', x1: g.m.l, x2: g.W - g.m.r, y1: k.y, y2: k.y }, ax);
+      const ty = el('text', { x: g.m.l - 6, y: k.y + 4, 'text-anchor': 'end' }, ax); ty.textContent = `${Math.round(k.v * 100)}%`;
+    }
+    const yt = el('text', { class: 'axis-title', x: g.m.l, y: 10 }, ax); yt.textContent = t('yAxis');
+  }
+  for (const [i, a] of ranked.entries()) {
+    let c = svg.querySelector(`circle[data-slug="${CSS.escape(a.slug)}"]`);
+    const p = g.get(a.slug);
+    if (!c) {
+      c = el('circle', { class: 'dot', 'data-slug': a.slug, cx: 0, cy: 0 });
+      c.style.setProperty('--c', `var(--c-${a.era})`);
+      // Born on the axis' left end, then sent off to their places one after another
+      c.style.transition = 'none';
+      c.style.transform = still() ? `translate(${p.x}px, ${p.y}px)` : `translate(${g.m.l}px, ${g.H / 2}px)`;
+    }
+    c.setAttribute('r', g.r);
+    c.style.transitionDelay = first && !still() ? `${(ranked.length - i) * 14}ms` : '0ms';
+    c.classList.toggle('off', !shown.has(a.era));
+    c.classList.toggle('on', pinned === a);
+    c.dataset.x = p.x; c.dataset.y = p.y;
+  }
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    for (const c of svg.querySelectorAll('circle.dot')) { c.style.transition = ''; c.style.transform = `translate(${c.dataset.x}px, ${c.dataset.y}px)`; }
+    first = false;
+  }));
+  // Names: the ends of the scale, and whoever is picked
+  const vis = ranked.filter((a) => shown.has(a.era));
+  const named = new Set([vis[0], vis[vis.length - 1]]);
+  if (view === 'loan' && vis.length) { const byLoan = [...vis].sort((p, q) => q.loan - p.loan); named.add(byLoan[0]); named.add(byLoan[byLoan.length - 1]); }
+  if (pinned) named.add(pinned);
+  for (const a of named) {
+    if (!a) continue;
+    const p = g.get(a.slug);
+    const right = p.x > g.W * .6;
+    const lab = el('text', { class: 'lab', x: p.x + (right ? -g.r - 4 : g.r + 4), y: p.y - g.r - 3, 'text-anchor': right ? 'end' : 'start' });
+    lab.textContent = L(a);
+    if (first && !still()) { lab.style.opacity = 0; setTimeout(() => { lab.style.opacity = 1; }, 1300); }
+  }
+  if (pinned || hover) ring(hover || pinned);
+}
+function ring(a) {
+  svg.querySelectorAll('.ring').forEach((n) => n.remove());
+  if (!a) return;
+  const p = pos.get(a.slug);
+  el('circle', { class: 'ring', cx: p.x, cy: p.y, r: pos.r + 4 });
+}
+
+function showCard(a, anchor = true) {
+  if (!a) { card.hidden = true; return; }
+  const rank = ranked.indexOf(a) + 1;
+  card.innerHTML = `<button type="button" class="x" aria-label="${esc(t('close'))}">×</button>
+    <div class="nm">${esc(L(a))}</div><div class="yrs">${esc(years(a))}${years(a) ? ' · ' : ''}${esc(t('eras')[a.era])}</div>
+    <div class="big">${nf(a.distinct)}<small>${esc(t('distinct'))}</small></div>
+    <dl><dt>${esc(t('place'))}</dt><dd>${t('rankOf')(rank, ranked.length)}</dd>
+    <dt>${esc(t('loan'))}</dt><dd>${pct(a.loan)}</dd>
+    <dt>${esc(t('once'))}</dt><dd>${nf(a.once)}</dd></dl>
+    ${a.own.length ? `<div class="own"><span>${esc(t('own'))}</span><em lang="az">${a.own.map(esc).join(', ')}</em></div>` : ''}
+    ${a.scanned >= .5 ? `<div class="src">${esc(t('scanned')(pct(a.scanned)))}</div>` : ''}
+    <a class="kx" href="${KX()}/authors/${encodeURIComponent(a.slug)}">${esc(t('read'))}</a>`;
+  card.querySelector('.x').onclick = () => select(null);
+  card.hidden = false;
+  if (phone() || !anchor) { card.style.left = card.style.top = ''; return; }
+  const p = pos.get(a.slug), scale = svg.getBoundingClientRect().width / pos.W;
+  const cw = card.offsetWidth, ch = card.offsetHeight, W = wrap.clientWidth;
+  let left = p.x * scale + 16, top = p.y * scale - ch / 2;
+  if (left + cw > W) left = p.x * scale - cw - 16;
+  top = Math.max(-8, Math.min(top, svg.getBoundingClientRect().height - ch + 8));
+  card.style.left = `${Math.max(0, left)}px`; card.style.top = `${top}px`;
+}
+
+function select(a) {
+  pinned = a; hover = null;
+  draw(); showCard(a);
+  document.querySelectorAll('.rank button').forEach((b) => b.classList.toggle('on', a && b.dataset.slug === a.slug));
+}
+
+// The nearest dot within reach of the pointer, so small dots are easy to hit on a phone
+function nearest(e) {
+  const rect = svg.getBoundingClientRect(), s = pos.W / rect.width;
+  const px = (e.clientX - rect.left) * s, py = (e.clientY - rect.top) * s;
+  let best = null, bd = (e.pointerType === 'touch' ? 22 : 14) * s;
+  for (const a of ranked) {
+    if (!shown.has(a.era)) continue;
+    const p = pos.get(a.slug), d = Math.hypot(p.x - px, p.y - py);
+    if (d < bd) { bd = d; best = a; }
+  }
+  return best;
+}
+svg.addEventListener('pointermove', (e) => {
+  if (e.pointerType === 'touch') return;
+  const a = nearest(e);
+  svg.style.cursor = a ? 'pointer' : '';
+  if (a === hover) return;
+  hover = a;
+  ring(a || pinned);
+  showCard(a || pinned);
+});
+svg.addEventListener('pointerleave', () => { hover = null; ring(pinned); showCard(pinned); });
+svg.addEventListener('click', (e) => { const a = nearest(e); select(a && a !== pinned ? a : null); });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && pinned) select(null); });
+
+function controls() {
+  document.querySelectorAll('[data-view]').forEach((b) => b.setAttribute('aria-pressed', b.dataset.view === view));
+  document.getElementById('eras').innerHTML = ERAS.filter((e) => ranked.some((a) => a.era === e)).map((e) =>
+    `<button type="button" data-era="${e}" aria-pressed="${shown.has(e)}" title="${esc(t('eraNote')[e])}" style="--c:var(--c-${e})"><i></i>${esc(t('eras')[e])}</button>`).join('');
+  document.querySelectorAll('[data-era]').forEach((b) => b.onclick = () => {
+    const e = b.dataset.era;
+    // All on and one clicked: just that one. Otherwise toggle; none left means all again
+    if (shown.size === ERAS.length) shown = new Set([e]);
+    else if (shown.has(e)) shown.delete(e); else shown.add(e);
+    if (!ranked.some((a) => shown.has(a.era))) shown = new Set(ERAS);
+    if (pinned && !shown.has(pinned.era)) { pinned = null; showCard(null); }
+    controls(); draw();
+  });
+}
+document.querySelectorAll('[data-view]').forEach((b) => b.onclick = () => { view = b.dataset.view; controls(); draw(); if (pinned) showCard(pinned); });
+
+function list() {
+  document.getElementById('rank').innerHTML = ranked.map((a, i) => `<li><button type="button" data-slug="${esc(a.slug)}" style="--c:var(--c-${a.era})"><span class="k">${i + 1}</span><span class="who"><i aria-hidden="true"></i><span>${esc(L(a))}</span></span><span class="v">${nf(a.distinct)}</span></button></li>`).join('');
+  document.querySelectorAll('.rank button').forEach((b) => b.onclick = () => {
+    const a = ranked.find((x) => x.slug === b.dataset.slug);
+    if (!shown.has(a.era)) { shown = new Set(ERAS); controls(); }
+    select(a);
+    wrap.scrollIntoView({ behavior: still() ? 'auto' : 'smooth', block: 'center' });
+  });
+  const rest = data.authors.filter((a) => !a.ranked && a.words >= 1000);
+  const tiny = data.authors.filter((a) => !a.ranked && a.words < 1000).length;
+  document.getElementById('unrankedH').textContent = t('unrankedH')(data.poets - data.ranked, nf(data.n));
+  document.getElementById('unranked').innerHTML = rest.map((a) => `<a href="${KX()}/authors/${encodeURIComponent(a.slug)}">${esc(L(a))}</a> <small>${nf(a.words)}</small>`).join(' · ')
+    + (tiny ? ` · <span>+ ${nf(tiny)} (&lt; ${nf(1000)})</span>` : '');
+}
+
+// The game: two poets, the reader picks; a streak kept for this visit only
+let pair = null, answered = false, streak = 0, best = 0;
+function newPair() {
+  let a, b;
+  do { a = ranked[Math.floor(Math.random() * ranked.length)]; b = ranked[Math.floor(Math.random() * ranked.length)]; }
+  while (a === b || Math.abs(a.distinct - b.distinct) < 60 || (pair && (pair.includes(a) || pair.includes(b))));
+  pair = [a, b]; answered = false;
+  document.getElementById('verdict').textContent = '';
+  renderPair();
+  document.getElementById('next').hidden = true;
+}
+function renderPair() {
+  const top = Math.max(...ranked.map((a) => a.distinct));
+  document.getElementById('pair').innerHTML = pair.map((a, i) => `<button type="button" class="pick" data-i="${i}" aria-label="${esc(t('pickLabel')(L(a)))}"><span class="nm">${esc(L(a))}</span><span class="yrs">${esc([years(a), t('eras')[a.era]].filter(Boolean).join(' · '))}</span><span class="meter" aria-hidden="true"><b data-w="${(a.distinct / top * 100).toFixed(1)}"></b></span><span class="n"></span></button>`).join('');
+  document.querySelectorAll('.pick').forEach((b) => b.onclick = () => answer(+b.dataset.i));
+  if (answered) reveal(answered.choice, false);
+}
+function answer(i) {
+  if (answered) return;
+  answered = { choice: i };
+  const [a, b] = pair, win = a.distinct > b.distinct ? 0 : 1, ok = i === win;
+  streak = ok ? streak + 1 : 0; best = Math.max(best, streak);
+  answered.ok = ok;
+  reveal(i, true);
+  const w = pair[win], l = pair[1 - win];
+  document.getElementById('verdict').textContent = `${ok ? t('right') : t('wrong')} ${t('more')(L(w), nf(w.distinct), L(l), nf(l.distinct), nf(w.distinct - l.distinct))}`;
+  const s = document.getElementById('streak');
+  s.textContent = streak; document.getElementById('best').textContent = best;
+  if (ok) { s.classList.remove('pop'); void s.offsetWidth; s.classList.add('pop'); }
+  const next = document.getElementById('next');
+  next.hidden = false; next.focus();
+}
+function reveal(i, animate) {
+  const win = pair[0].distinct > pair[1].distinct ? 0 : 1;
+  document.querySelectorAll('.pick').forEach((b, k) => {
+    b.disabled = true;
+    b.classList.add(k === win ? 'win' : 'lose');
+    if (k === i) b.classList.add('chosen');
+    b.querySelector('.n').textContent = `${nf(pair[k].distinct)} ${t('distinct')}`;
+    const bar = b.querySelector('.meter b');
+    if (!animate) bar.style.transition = 'none';
+    requestAnimationFrame(() => { bar.style.width = `${bar.dataset.w}%`; });
+  });
+}
+document.getElementById('next').onclick = () => { newPair(); document.querySelector('.pick')?.focus(); };
+
+function applyLang() {
+  document.documentElement.lang = lang;
+  document.title = t('doc');
+  document.querySelectorAll('[data-i18n]').forEach((e) => e.textContent = t(e.dataset.i18n));
+  document.querySelectorAll('[data-lang]').forEach((b) => b.setAttribute('aria-pressed', b.dataset.lang === lang));
+  document.querySelectorAll('[data-keep-lang]').forEach((a) => { const u = new URL(a.getAttribute('href'), location.href); if (lang === 'az') u.searchParams.delete('lang'); else u.searchParams.set('lang', lang); a.href = u.pathname + u.search; });
+  document.getElementById('kx-nav').href = KX() + '/';
+  if (!data) return;
+  document.getElementById('lede').textContent = t('lede')(nf(data.n), data.ranked, data.poets);
+  document.getElementById('method').innerHTML = t('method')(nf(data.n), data.ranked, data.poets);
+  document.getElementById('foot').innerHTML = t('foot')(data.built);
+  document.querySelector('[data-i18n="gameQ"]').textContent = t('gameQ');
+  controls(); list(); draw();
+  if (pinned) showCard(pinned);
+  if (pair) {
+    renderPair();
+    if (answered) { const win = pair[0].distinct > pair[1].distinct ? 0 : 1, w = pair[win], l = pair[1 - win];
+      document.getElementById('verdict').textContent = `${answered.ok ? t('right') : t('wrong')} ${t('more')(L(w), nf(w.distinct), L(l), nf(l.distinct), nf(w.distinct - l.distinct))}`; }
+  }
+}
+document.querySelectorAll('[data-lang]').forEach((b) => b.onclick = () => {
+  lang = b.dataset.lang;
+  try { localStorage.setItem('lang', lang); } catch {}
+  const u = new URL(location.href);
+  if (lang === 'az') u.searchParams.delete('lang'); else u.searchParams.set('lang', lang);
+  history.replaceState(null, '', u);
+  applyLang();
+});
+
+let resizeTimer;
+addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(() => { draw(); if (pinned) showCard(pinned); }, 120); });
+
+applyLang();
+fetch('data/vocab.json').then((r) => r.json()).then((d) => {
+  data = d;
+  ranked = d.authors.filter((a) => a.ranked);
+  applyLang();
+  newPair();
+});
+})();
+</script>
+</body>
+</html>

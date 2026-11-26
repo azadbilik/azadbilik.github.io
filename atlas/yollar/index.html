@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Karvan yolu · Azad Bilik</title>
+<meta name="description" content="Xanlıqların paytaxtları arasında karvanla və atla neçə gün yol idi? Relyefə əsaslanan səyahət modeli. How many days by caravan or on horseback between the khanates' capitals? A travel model built on the terrain.">
+<meta name="theme-color" content="#F4EFE6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14100D" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://azadbilik.org/atlas/yollar/">
+<meta property="og:title" content="Karvan yolu · By caravan, c. 1800">
+<meta property="og:description" content="Şuşadan Şamaxıya neçə gün? Xanlıqların paytaxtları arasında yol, relyefə görə.">
+<meta property="og:image" content="https://azadbilik.org/atlas/yollar/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+<link rel="stylesheet" href="/shared/story-map.css">
+<style>
+  .controls { padding: 1rem 1.5rem; border-bottom: 1px solid var(--rule); display: grid; gap: .7rem; }
+  .pair { display: grid; grid-template-columns: 1fr auto 1fr; gap: .4rem; align-items: center; }
+  .pair select { width: 100%; padding: .4rem; border: 1px solid var(--rule); border-radius: 3px; background: var(--paper); color: var(--ink); font: inherit; font-size: .875rem; }
+  .pair button { padding: .3rem .45rem; border: 1px solid var(--rule); border-radius: 3px; }
+  .seg { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--rule); border-radius: 3px; padding: 2px; }
+  .seg button { padding: .35rem; border-radius: 2px; font-size: .8125rem; color: var(--muted); }
+  .seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+  .result { padding: 1rem 1.5rem 0; display: grid; gap: .3rem; }
+  .result .days { font: 400 3rem/1 var(--serif); font-variant-numeric: tabular-nums; }
+  .result .days small { font: 400 1rem var(--sans); color: var(--muted); margin-left: .35rem; }
+  .result .sub { font-size: .8125rem; color: var(--muted); }
+  .play-game { padding: .45rem; border: 1px solid var(--accent); color: var(--accent); border-radius: 3px; font-size: .8125rem; font-weight: 500; }
+  .play-game:hover, .play-game[aria-pressed="true"] { background: var(--accent); color: var(--paper); }
+  .game { padding: 1rem 1.5rem 0; display: grid; gap: .7rem; }
+  .game .q { font: 400 1.375rem/1.25 var(--serif); }
+  .game input[type=range] { width: 100%; accent-color: var(--accent); }
+  .game .guess { font: 400 2rem/1 var(--serif); font-variant-numeric: tabular-nums; }
+  .game .row { display: flex; gap: .5rem; }
+  .game .row button { flex: 1; padding: .45rem; border: 1px solid var(--rule); border-radius: 3px; font-size: .875rem; }
+  .game .row button.go { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .game .verdict { font-weight: 500; min-height: 1.3rem; }
+  .game .stats { display: flex; gap: 1.25rem; font-size: .8125rem; color: var(--muted); }
+  .game .stats b { color: var(--ink); font-size: 1rem; }
+  .about { padding: 1rem 1.5rem 0; font-size: .8125rem; color: var(--muted); display: grid; gap: .5rem; }
+  .legend .ramp { display: flex; } .legend .ramp span { flex: 1; height: .6rem; }
+  .legend .ticks { display: flex; justify-content: space-between; font-size: .625rem; color: var(--muted); }
+  .legend { min-width: 12rem; }
+  .traveller { width: 14px; height: 14px; border-radius: 50%; background: var(--accent); border: 2px solid var(--paper); box-shadow: 0 0 0 2px var(--accent); }
+</style>
+</head>
+<body>
+<div id="map" role="region" aria-label="Xəritə"></div>
+<aside class="panel">
+  <div class="head">
+    <div class="top"><a class="brand" href="/" data-keep-lang><svg viewBox="0 0 512 512" aria-hidden="true"><g class="star"><rect x="126" y="126" width="260" height="260"/><polygon points="256,72 440,256 256,440 72,256"/></g><polygon class="gem" points="256,196 316,256 256,316 196,256"/></svg>Azad Bilik</a><nav><a href="/atlas/" data-keep-lang>Atlas</a><span class="langs" role="group" aria-label="Dil · Язык · Language"><button type="button" data-lang="az">AZ</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="en">EN</button></span></nav></div>
+    <h1 data-i18n="title">Karvan yolu</h1>
+    <p class="sub" data-i18n="sub">Paytaxtlar arasında neçə gün, təxminən 1800</p>
+  </div>
+  <div class="body" id="body">
+    <div class="controls">
+      <div class="pair"><select id="from" aria-label="From"></select><button type="button" id="swap" aria-label="⇄">⇄</button><select id="to" aria-label="To"></select></div>
+      <div class="seg" role="group" id="modes"></div>
+      <button type="button" class="play-game" id="game" aria-pressed="false" data-i18n="gameBtn">Oyun: neçə gün?</button>
+    </div>
+    <div id="side" aria-live="polite"></div>
+  </div>
+</aside>
+<div class="legend" id="legend"></div>
+
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script>
+(() => {
+const dark = matchMedia('(prefers-color-scheme: dark)').matches;
+const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+const still = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+const LANGS = ['az', 'ru', 'en'];
+let lang = (() => {
+  const q = new URLSearchParams(location.search).get('lang');
+  if (LANGS.includes(q)) return q;
+  try { const s = localStorage.getItem('lang'); if (LANGS.includes(s)) return s; } catch {}
+  return 'az';
+})();
+const LI = { az: 0, ru: 1, en: 2 };
+const T = {
+  az: { doc: 'Karvan yolu · Azad Bilik', title: 'Karvan yolu', sub: 'Paytaxtlar arasında neçə gün, təxminən 1800', caravan: 'Karvanla', rider: 'Atlı çapar', days: 'gün', km: (k) => `təxminən ${k} km yol`, by: (m) => m === 'caravan' ? 'yüklü karvan, gündə 8 saat yol' : 'atlı çapar, gündə 10 saat yol', reach: 'Rənglər: karvanın bu paytaxtdan neçə günə çatdığı torpaq', legend: 'Karvanla, gün', gameBtn: 'Oyun: neçə gün?', gameEnd: 'Oyunu bitir', q: (a, b) => `${a}-dan ${b}-a karvanla neçə gün?`, check: 'Yoxla', next: 'Növbəti', guess: (d) => `${d} gün`, off: (d) => d < 1 ? 'Əla! Bir gündən az fərq.' : `${d} gün fərq.`, score: 'Xal', rounds: 'Sual', best: 'Rekord',
+    about: ['Bu, yolların yox, torpağın modelidir (Stanford-un ORBIS layihəsi kimi): hər addımın sürəti yerin mailliyindən asılıdır (Toblerin piyada düsturu), Xəzər, Göyçə, Urmiya və Van gölləri keçilməzdir, Kür və Arazdan keçmək yarım gün aparır. Əsl karvanlar bilinən yollarla, karvansaralardan karvansaralara gedirdi; rəqəmlər onların sürətinə yaxındır, amma yolu göstərmir.', 'Relyef: Mapzen/AWS terrain tiles. Göllər: Natural Earth. Çaylar: OpenStreetMap.'] },
+  ru: { doc: 'Караванный путь · Azad Bilik', title: 'Караванный путь', sub: 'Сколько дней между столицами, около 1800', caravan: 'Караван', rider: 'Конный гонец', days: 'дн.', km: (k) => `около ${k} км пути`, by: (m) => m === 'caravan' ? 'гружёный караван, 8 часов пути в день' : 'конный гонец, 10 часов пути в день', reach: 'Цвета: куда караван доходит из этой столицы за столько-то дней', legend: 'Караваном, дней', gameBtn: 'Игра: сколько дней?', gameEnd: 'Закончить игру', q: (a, b) => `Сколько дней караваном из ${a} в ${b}?`, check: 'Проверить', next: 'Дальше', guess: (d) => `${d} дн.`, off: (d) => d < 1 ? 'Отлично! Меньше дня разницы.' : `Разница ${d} дн.`, score: 'Очки', rounds: 'Вопрос', best: 'Рекорд',
+    about: ['Это модель местности, а не дорог (как стэнфордский ORBIS): скорость каждого шага зависит от уклона (формула Тоблера для пешехода), Каспий, Севан, Урмия и Ван непроходимы, переправа через Куру и Аракс стоит полдня. Настоящие караваны шли известными дорогами, от караван-сарая к караван-сараю; цифры близки к их скорости, но не показывают их путь.', 'Рельеф: Mapzen/AWS terrain tiles. Озёра: Natural Earth. Реки: OpenStreetMap.'] },
+  en: { doc: 'By caravan · Azad Bilik', title: 'By caravan', sub: 'How many days between the capitals, c. 1800', caravan: 'Caravan', rider: 'Mounted courier', days: 'days', km: (k) => `about ${k} km of travel`, by: (m) => m === 'caravan' ? 'a laden caravan, 8 hours on the move a day' : 'a mounted courier, 10 hours in the saddle a day', reach: 'Colours: the land a caravan reaches from this capital in so many days', legend: 'By caravan, days', gameBtn: 'Game: how many days?', gameEnd: 'End the game', q: (a, b) => `How many days by caravan from ${a} to ${b}?`, check: 'Check', next: 'Next', guess: (d) => `${d} days`, off: (d) => d < 1 ? 'Spot on! Less than a day out.' : `${d} days out.`, score: 'Score', rounds: 'Question', best: 'Best',
+    about: ["This is a model of the land, not of the roads (in the manner of Stanford's ORBIS): each step's speed depends on the slope (Tobler's hiking function), the Caspian and Lakes Sevan, Urmia and Van cannot be crossed, and crossing the Kura or the Araz costs half a day. Real caravans kept to known roads, from caravanserai to caravanserai; the figures are close to their pace but do not show their way.", 'Terrain: Mapzen/AWS terrain tiles. Lakes: Natural Earth. Rivers: OpenStreetMap.'] },
+};
+const t = (k) => T[lang][k];
+const params = new URLSearchParams(location.search);
+let table = null, routes = null, reach = null, from = params.get('a') || 'karabakh', to = params.get('b') || 'shirvan', mode = params.get('m') === 'rider' ? 'rider' : 'caravan', game = null;
+const RAMP = dark ? ['#7A1B1E', '#8E3430', '#B33A37', '#C9634E', '#D2836A', '#E0A88E', '#EACAB6', '#F2E6DA'] : ['#7A1B1E', '#A6362E', '#BF5C48', '#D2836A', '#E0A88E', '#EACAB6', '#F2E6DA', '#F7F0E8'];
+const name = (p) => p.capitalName?.[LI[lang]] ?? p.names[LI[lang]];
+const place = (id) => table.places.find((p) => p.id === id);
+
+const map = new maplibregl.Map({
+  container: 'map', style: `https://tiles.openfreemap.org/styles/${dark ? 'dark' : 'positron'}`,
+  bounds: [[43.0, 36.9], [50.6, 42.3]], minZoom: 4.5, maxZoom: 10,
+  attributionControl: { compact: true, customAttribution: 'Terrain: Mapzen/AWS · Natural Earth · OpenStreetMap · Wikidata' },
+});
+map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-right');
+const phone = () => matchMedia('(max-width: 48rem)').matches;
+const pad = () => phone() ? { top: 60, right: 16, left: 16, bottom: document.querySelector('.panel').offsetHeight + 16 } : { top: 40, right: 40, bottom: 40, left: 27 * 16 + 40 };
+map.on('style.load', () => {
+  for (const l of map.getStyle().layers) {
+    if (l.type === 'background') map.setPaintProperty(l.id, 'background-color', css('--land'));
+    if (l.type === 'fill' && /water|ocean|lake/.test(l.id)) map.setPaintProperty(l.id, 'fill-color', css('--water'));
+    if (l.type === 'symbol' && l.layout?.['text-field']) map.setLayoutProperty(l.id, 'visibility', 'none');   // only our capitals' names
+  }
+});
+const traveller = new maplibregl.Marker({ element: Object.assign(document.createElement('div'), { className: 'traveller' }) });
+map.on('load', async () => {
+  [table, routes, reach] = await Promise.all(['data/table.json', 'data/routes.geojson', 'data/reach.geojson'].map((f) => fetch(f).then((r) => r.json())));
+  map.fitBounds([[43.0, 36.9], [50.6, 42.3]], { padding: pad(), duration: 0 });
+  const firstSymbol = map.getStyle().layers.find((l) => l.type === 'symbol')?.id;
+  map.addSource('reach', { type: 'geojson', data: reach });
+  // the rings: the 12-day ring under the 11-day one, … the 1-day one on top
+  map.addLayer({ id: 'reach', type: 'fill', source: 'reach', filter: ['==', ['get', 'from'], ''], paint: { 'fill-color': ['step', ['get', 'days'], RAMP[0], 2, RAMP[1], 3, RAMP[2], 5, RAMP[3], 7, RAMP[4], 9, RAMP[5], 11, RAMP[6]], 'fill-opacity': .26, 'fill-opacity-transition': { duration: still() ? 0 : 600 } }, layout: { 'fill-sort-key': ['-', ['get', 'days']] } }, firstSymbol);
+  map.addLayer({ id: 'reach-line', type: 'line', source: 'reach', filter: ['==', ['get', 'from'], ''], paint: { 'line-color': css('--paper'), 'line-width': .6, 'line-opacity': .7 } }, firstSymbol);
+  map.addSource('route', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
+  map.addLayer({ id: 'route-halo', type: 'line', source: 'route', paint: { 'line-color': css('--paper'), 'line-width': 6 }, layout: { 'line-cap': 'round', 'line-join': 'round' } });
+  map.addLayer({ id: 'route', type: 'line', source: 'route', paint: { 'line-color': css('--ink'), 'line-width': 2.5, 'line-dasharray': [1, 1.5] }, layout: { 'line-cap': 'round', 'line-join': 'round' } });
+  map.addSource('places', { type: 'geojson', data: { type: 'FeatureCollection', features: table.places.map((p) => ({ type: 'Feature', geometry: { type: 'Point', coordinates: p.lonlat }, properties: { id: p.id, az: p.capitalName[0], ru: p.capitalName[1], en: p.capitalName[2] } })) } });
+  map.addLayer({ id: 'places', type: 'circle', source: 'places', paint: { 'circle-radius': ['case', ['in', ['get', 'id'], ['literal', []]], 6, 4], 'circle-color': css('--ink'), 'circle-stroke-color': css('--paper'), 'circle-stroke-width': 1.5 } });
+  map.addLayer({ id: 'place-names', type: 'symbol', source: 'places', layout: { 'text-field': ['get', lang], 'text-font': ['Noto Sans Regular'], 'text-size': 12, 'text-variable-anchor': ['top', 'bottom', 'left', 'right'], 'text-radial-offset': .7 }, paint: { 'text-color': css('--ink'), 'text-halo-color': css('--paper'), 'text-halo-width': 1.6 } });
+  map.on('mouseenter', 'places', () => { map.getCanvas().style.cursor = 'pointer'; });
+  map.on('mouseleave', 'places', () => { map.getCanvas().style.cursor = ''; });
+  // a click on a capital: first sets where from, then where to
+  let next = 'to';
+  map.on('click', 'places', (e) => { if (game) return; const id = e.features[0].properties.id; if (id === from || id === to) return; if (next === 'to') to = id; else from = id; next = next === 'to' ? 'from' : 'to'; show(); });
+  drawSelects(); show();
+});
+
+// the route draws itself while a traveller walks it, the day count ticking up
+let anim = null;
+function walk(coords, days, onTick) {
+  cancelAnimationFrame(anim);
+  const lens = [0]; for (let i = 1; i < coords.length; i++) lens.push(lens[i - 1] + Math.hypot(coords[i][0] - coords[i - 1][0], coords[i][1] - coords[i - 1][1]));
+  const total = lens.at(-1), dur = still() ? 0 : Math.min(4500, 900 + days * 140), t0 = performance.now();
+  const step = (now) => {
+    const k = dur ? Math.min(1, (now - t0) / dur) : 1, e = k < .5 ? 2 * k * k : 1 - (-2 * k + 2) ** 2 / 2, d = e * total;
+    let i = lens.findIndex((l) => l >= d); if (i < 1) i = 1;
+    const f = (d - lens[i - 1]) / ((lens[i] - lens[i - 1]) || 1), pt = [coords[i - 1][0] + (coords[i][0] - coords[i - 1][0]) * f, coords[i - 1][1] + (coords[i][1] - coords[i - 1][1]) * f];
+    map.getSource('route').setData({ type: 'Feature', geometry: { type: 'LineString', coordinates: [...coords.slice(0, i), pt] } });
+    traveller.setLngLat(pt).addTo(map);
+    onTick?.(e * days);
+    if (k < 1) anim = requestAnimationFrame(step);
+  };
+  anim = requestAnimationFrame(step);
+}
+function routeOf(a, b) {
+  const f = routes.features.find((x) => (x.properties.a === a && x.properties.b === b) || (x.properties.a === b && x.properties.b === a));
+  const c = f.geometry.coordinates; return { coords: f.properties.a === a ? c : [...c].reverse(), km: f.properties.km };
+}
+function show() {
+  if (!table) return;
+  const r = routeOf(from, to), days = table.days[mode][from][to];
+  map.setFilter('reach', ['==', ['get', 'from'], from]); map.setFilter('reach-line', ['==', ['get', 'from'], from]);
+  map.setPaintProperty('places', 'circle-radius', ['case', ['in', ['get', 'id'], ['literal', [from, to]]], 7, 4]);
+  const b = r.coords.reduce((a, [x, y]) => [Math.min(a[0], x), Math.min(a[1], y), Math.max(a[2], x), Math.max(a[3], y)], [180, 90, -180, -90]);
+  map.fitBounds([[b[0], b[1]], [b[2], b[3]]], { padding: pad(), maxZoom: 7.5, duration: still() ? 0 : 900 });
+  drawSide(days, r.km);
+  walk(r.coords, days, (d) => { const el = document.getElementById('count'); if (el) el.textContent = d.toFixed(1); });
+  drawSelects(); drawLegend(); keepUrl();
+}
+function drawSide(days, km) {
+  const el = document.getElementById('side');
+  if (game) return drawGame(el);
+  el.innerHTML = `<div class="result"><p class="days"><span id="count">0</span><small>${t('days')}</small></p>
+    <p>${esc(name(place(from)))} → ${esc(name(place(to)))}</p><p class="sub">${esc(t('by')(mode))} · ${esc(t('km')(km))}</p></div>
+    <div class="about"><p>${esc(t('reach'))}</p>${t('about').map((p) => `<p>${esc(p)}</p>`).join('')}</div>`;
+  const c = document.getElementById('count'); if (c && still()) c.textContent = days.toFixed(1);
+}
+function drawSelects() {
+  if (!table) return;
+  const opts = (sel) => [...table.places].sort((a, b) => name(a).localeCompare(name(b), lang)).map((p) => `<option value="${p.id}"${p.id === sel ? ' selected' : ''}>${esc(name(p))}</option>`).join('');
+  document.getElementById('from').innerHTML = opts(from); document.getElementById('to').innerHTML = opts(to);
+  document.getElementById('modes').innerHTML = ['caravan', 'rider'].map((m) => `<button type="button" data-m="${m}" aria-pressed="${m === mode}">${t(m)}</button>`).join('');
+  document.querySelectorAll('#modes button').forEach((b) => b.onclick = () => { mode = b.dataset.m; show(); });
+  document.getElementById('game').textContent = game ? t('gameEnd') : t('gameBtn');
+  document.getElementById('game').setAttribute('aria-pressed', !!game);
+}
+function drawLegend() {
+  const ticks = ['1', '2', '3', '5', '7', '9', '11', '12'];
+  document.getElementById('legend').innerHTML = `<span>${t('legend')}</span><div class="ramp">${RAMP.map((c) => `<span style="background:${c};opacity:.7"></span>`).join('')}</div><div class="ticks">${ticks.map((x) => `<span>${x}</span>`).join('')}</div>`;
+}
+
+// the game: a pair of capitals, the reader guesses the caravan days, the caravan walks, points for nearness
+function newRound() {
+  const ps = table.places.filter((p) => !['tiflis'].includes(p.id));
+  let a, b; do { a = ps[Math.floor(Math.random() * ps.length)].id; b = ps[Math.floor(Math.random() * ps.length)].id; } while (a === b || table.days.caravan[a][b] > 30);
+  game.a = a; game.b = b; game.guess = 8; game.revealed = false; game.n++;
+  mode = 'caravan'; from = a; to = b;
+  map.getSource('route').setData({ type: 'FeatureCollection', features: [] }); traveller.remove();
+  map.setFilter('reach', ['==', ['get', 'from'], '']); map.setFilter('reach-line', ['==', ['get', 'from'], '']);
+  map.setPaintProperty('places', 'circle-radius', ['case', ['in', ['get', 'id'], ['literal', [a, b]]], 7, 4]);
+  map.fitBounds([[Math.min(place(a).lonlat[0], place(b).lonlat[0]), Math.min(place(a).lonlat[1], place(b).lonlat[1])], [Math.max(place(a).lonlat[0], place(b).lonlat[0]), Math.max(place(a).lonlat[1], place(b).lonlat[1])]], { padding: pad(), maxZoom: 7, duration: still() ? 0 : 800 });
+  drawSelects(); drawGame(document.getElementById('side'));
+}
+function best() { try { return +localStorage.getItem('yollar-best') || 0; } catch { return 0; } }
+function drawGame(el) {
+  const g = game, actual = table.days.caravan[g.a][g.b];
+  el.innerHTML = `<div class="game"><p class="sub" style="font-size:.8125rem;color:var(--muted)">${t('rounds')} ${g.n}/5</p>
+    <p class="q">${esc(t('q')(name(place(g.a)), name(place(g.b))))}</p>
+    <p class="guess"><span id="gv">${t('guess')(g.guess)}</span></p>
+    <input type="range" id="gr" min="1" max="30" value="${g.guess}" ${g.revealed ? 'disabled' : ''} aria-label="${esc(t('days'))}">
+    <p class="verdict" id="verdict">${g.revealed ? `${actual.toFixed(1)} ${t('days')} · ${esc(t('off')(Math.abs(actual - g.guess)))}` : ''}</p>
+    <div class="stats"><span>${t('score')} <b>${g.score}</b></span><span>${t('best')} <b>${best() || '—'}</b></span></div>
+    <div class="row">${g.revealed ? `<button type="button" class="go" id="next">${g.n >= 5 ? t('gameEnd') : t('next')}</button>` : `<button type="button" class="go" id="check">${t('check')}</button>`}</div></div>`;
+  document.getElementById('gr').oninput = (e) => { g.guess = +e.target.value; document.getElementById('gv').textContent = t('guess')(g.guess); };
+  document.getElementById('check')?.addEventListener('click', () => {
+    g.revealed = true; const off = Math.abs(actual - g.guess); g.score += Math.max(0, Math.round(10 - off * 2));
+    const r = routeOf(g.a, g.b); drawGame(el);
+    walk(r.coords, actual, null);
+    if (g.n >= 5) { try { if (g.score > best()) localStorage.setItem('yollar-best', g.score); } catch {} }
+  });
+  document.getElementById('next')?.addEventListener('click', () => { if (g.n >= 5) { game = null; show(); } else newRound(); });
+}
+document.getElementById('game').onclick = () => { if (game) { game = null; show(); } else { game = { n: 0, score: 0 }; newRound(); } };
+document.getElementById('from').onchange = (e) => { if (e.target.value === to) to = from; from = e.target.value; show(); };
+document.getElementById('to').onchange = (e) => { if (e.target.value === from) from = to; to = e.target.value; show(); };
+document.getElementById('swap').onclick = () => { [from, to] = [to, from]; show(); };
+
+function keepUrl() {
+  const q = new URLSearchParams();
+  if (lang !== 'az') q.set('lang', lang);
+  q.set('a', from); q.set('b', to); if (mode !== 'caravan') q.set('m', mode);
+  history.replaceState(null, '', `${location.pathname}?${q}`);
+}
+function applyLang() {
+  document.documentElement.lang = lang;
+  document.title = t('doc');
+  document.querySelectorAll('[data-i18n]').forEach((el) => el.textContent = t(el.dataset.i18n));
+  document.querySelectorAll('[data-lang]').forEach((b) => b.setAttribute('aria-pressed', b.dataset.lang === lang));
+  document.querySelectorAll('[data-keep-lang]').forEach((a) => { const u = new URL(a.getAttribute('href'), location.href); if (lang === 'az') u.searchParams.delete('lang'); else u.searchParams.set('lang', lang); a.href = u.pathname + u.search; });
+}
+applyLang(); drawLegend();
+document.querySelectorAll('[data-lang]').forEach((b) => b.onclick = () => {
+  lang = b.dataset.lang;
+  try { localStorage.setItem('lang', lang); } catch {}
+  applyLang();
+  if (map.getLayer('place-names')) map.setLayoutProperty('place-names', 'text-field', ['get', lang]);
+  if (game) { drawSelects(); drawGame(document.getElementById('side')); } else show();
+});
+})();
+</script>
+</body>
+</html>
