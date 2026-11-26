@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="/shared/theme.js"></script>
+<link rel="stylesheet" href="/shared/graph.css">
 <title>Hüquqi aktlar şəbəkəsi · Azad Bilik</title>
 <meta name="description" content="Azərbaycanın hüquqi aktları və aralarındakı əlaqələr: kim kimi dəyişdirib, icra edir, ləğv edib. Ədliyyə Nazirliyinin Hüquqi Aktların Dövlət Reyestri (e-qanun.az). The network of Azerbaijan's legal acts: which act amends, implements or repeals which.">
 <meta name="theme-color" content="#F4EFE6" media="(prefers-color-scheme: light)">
@@ -60,10 +61,12 @@
   .stats div { background: var(--paper); padding: .6rem .9rem; }
   .stats b { display: block; font: 400 1.5rem/1.1 var(--serif); font-variant-numeric: tabular-nums; }
   .stats span { font-size: .75rem; color: var(--muted); }
-  .gwrap { position: relative; border: 1px solid var(--rule); border-radius: 4px; background: var(--frame); overflow: hidden; }
-  #cg { height: min(74vh, 44rem); touch-action: none; position: relative; }
-  #cg canvas { display: block; width: 100%; height: 100%; }
-  .gtip { position: absolute; z-index: 3; pointer-events: none; background: var(--paper); border: 1px solid var(--rule); border-radius: 3px; padding: .3rem .55rem; font-size: .8125rem; box-shadow: 0 2px 12px rgb(0 0 0 / .15); max-width: 18rem; }
+  .gwrap { position: relative; }
+  #cg { height: min(74vh, 44rem); }
+  #cg .muted { color: var(--muted); }
+  /* the act card in the graph's side panel (a bottom sheet on a phone): the panel has its own close */
+  .gx-body .card { border: 0; padding: 0; margin: 0; background: none; } .gx-body .card .x { display: none; } .gx-body .card h3 { padding-right: 1.75rem; }
+  #gcard:empty { display: none; }
   .gload { position: absolute; inset: 0; display: grid; place-items: center; color: var(--muted); font-size: .875rem; pointer-events: none; }
   .gbar { position: absolute; right: .6rem; bottom: .6rem; display: flex; gap: .3rem; z-index: 2; }
   .gbar button { background: var(--panel); border: 1px solid var(--rule); border-radius: 3px; padding: .3rem .6rem; font-size: .75rem; }
@@ -153,8 +156,7 @@
         </div>
       </div>
       <div class="stats" id="stats"></div>
-      <div class="gwrap"><div id="cg" role="img" data-i18n-label="netL"></div><div class="gtip" id="gtip" hidden></div><div class="gload" id="gload"></div>
-        <div class="gbar"><button type="button" id="gpause"></button><button type="button" id="gfit"></button></div></div>
+      <div class="gwrap"><div id="cg" role="region" data-i18n-label="netL"></div><div class="gload" id="gload"></div></div>
       <div class="lgd" id="lgd"></div>
       <p class="hint" id="netHint"></p>
       <div id="gcard" aria-live="polite"></div>
@@ -195,7 +197,6 @@
   </main>
   <footer id="foot"></footer>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/@cosmos.gl/graph@3.6.0/dist/index.min.js"></script>
 <script>
 (() => {
 const $ = (id) => document.getElementById(id);
@@ -228,7 +229,7 @@ az: {
   kinds: ['dəyişdirir', 'icra edir', 'tətbiq edir / təsdiq edir', 'ləğv edir'],
   kindsFrom: ['dəyişdirir', 'icra edir', 'tətbiq / təsdiq edir', 'ləğv edir'],
   stNodes: 'akt', stLinks: 'əlaqə', stAmend: 'dəyişiklik', stYears: 'illər',
-  gload: 'Şəbəkə yüklənir…', gfit: 'Hamısını göstər', gpause: 'Dayandır', gresume: 'Davam et', gnone: 'Bu süzgəclə heç bir əlaqə yoxdur.',
+  gload: 'Şəbəkə yüklənir…', gsearch: 'Akt axtar…', gfit: 'Hamısını göstər', gpause: 'Dayandır', gresume: 'Davam et', gnone: 'Bu süzgəclə heç bir əlaqə yoxdur.',
   netHint: 'Status süzgəci seçilmiş statuslu aktları və onlarla bağlı digər aktları (solğun) göstərir. Xəttin istiqaməti: hərəkət edən aktdan hədəfə. Nöqtələrin yeri qüvvə modeli ilə hesablanır, mənası yalnız yaxınlıqdadır: çox əlaqəli aktlar mərkəzə yığılır.',
   tip: (n) => `${n} dəyişiklik`,
   findK: 'Axtarış', findH: 'Aktı tapın', findP: 'Başlığa və ya nömrəyə görə axtarın (reyestrdə əlaqəsi olan aktlar).', findPh: 'Məs.: Vergi Məcəlləsi',
@@ -251,7 +252,7 @@ az: {
 <li>Reyestrdə “dəyişdirilib” əlaqələri 2008-dən başlayır: bundan əvvəlki dəyişikliklər əlaqə kimi göstərilmir, ona görə qrafiklərdə və reytinqlərdə 2008-dən əvvəl dəyişiklik yoxdur. Bu, dəyişikliyin olmaması demək deyil.</li>
 <li>e-qanun.az-da robots.txt və yayımlanmış istifadə şərtləri yoxdur. Məlumat saytın ictimai API-sindən (api.e-qanun.az) oxunub; səhifə hər aktı mənbəyinə yönləndirir.</li>
 <li>Bu səhifə hüquqi məsləhət deyil və rəsmi reyestri əvəz etmir; qüvvədə olan redaksiya üçün e-qanun.az-a baxın.</li></ul>`,
-  foot: (b) => `Mənbə: Azərbaycan Respublikası Ədliyyə Nazirliyi, <a href="https://e-qanun.az/">Hüquqi Aktların Dövlət Reyestri (e-qanun.az)</a>, 2026-11-26-da götürülüb, ${b} tarixində işlənib; şəbəkə: <a href="https://github.com/cosmosgl/graph">cosmos.gl</a> (MIT). Aktların başlıqları rəsmidir. Hub kodu və yığma skripti açıqdır.`,
+  foot: (b) => `Mənbə: Azərbaycan Respublikası Ədliyyə Nazirliyi, <a href="https://e-qanun.az/">Hüquqi Aktların Dövlət Reyestri (e-qanun.az)</a>, 2026-11-26-da götürülüb, ${b} tarixində işlənib; şəbəkə: <a href="https://www.sigmajs.org">sigma.js</a>, <a href="https://graphology.github.io">graphology</a> (MIT). Aktların başlıqları rəsmidir. Hub kodu və yığma skripti açıqdır.`,
 },
 ru: {
   title: 'Сеть правовых актов', sub: 'Правовые акты Азербайджана: какой акт изменяет, исполняет или отменяет какой',
@@ -264,7 +265,7 @@ ru: {
   kinds: ['изменяет', 'исполняет', 'вводит в действие / утверждает', 'отменяет'],
   kindsFrom: ['изменяет', 'исполняет', 'вводит / утверждает', 'отменяет'],
   stNodes: 'актов', stLinks: 'связей', stAmend: 'изменений', stYears: 'годы',
-  gload: 'Загрузка сети…', gfit: 'Показать всё', gpause: 'Остановить', gresume: 'Продолжить', gnone: 'С этим фильтром связей нет.',
+  gload: 'Загрузка сети…', gsearch: 'Найти акт…', gfit: 'Показать всё', gpause: 'Остановить', gresume: 'Продолжить', gnone: 'С этим фильтром связей нет.',
   netHint: 'Фильтр статуса показывает акты с выбранным статусом и связанные с ними (блеклые). Направление связи: от действующего акта к тому, на который он действует. Положение точек рассчитано силовой моделью и значимо только как близость: акты с многими связями собираются в центре.',
   tip: (n) => `изменений: ${n}`,
   findK: 'Поиск', findH: 'Найти акт', findP: 'Ищите по названию или номеру (акты, имеющие связи в реестре).', findPh: 'Напр.: Налоговый кодекс',
@@ -287,7 +288,7 @@ ru: {
 <li>Связи «изменён» в реестре начинаются с 2008 года: более ранние изменения связями не показаны, поэтому до 2008 года на графиках и в рейтингах изменений нет. Это не значит, что изменений не было.</li>
 <li>У e-qanun.az нет robots.txt и опубликованных условий использования. Данные прочитаны из публичного API сайта (api.e-qanun.az); каждый акт ведёт к источнику.</li>
 <li>Страница не является юридической консультацией и не заменяет официальный реестр; действующую редакцию смотрите на e-qanun.az.</li></ul>`,
-  foot: (b) => `Источник: Министерство юстиции Азербайджанской Республики, <a href="https://e-qanun.az/">Государственный реестр правовых актов (e-qanun.az)</a>, выгрузка 2026-11-26, обработка ${b}; сеть: <a href="https://github.com/cosmosgl/graph">cosmos.gl</a> (MIT). Названия актов официальные. Код хаба и скрипт сборки открыты.`,
+  foot: (b) => `Источник: Министерство юстиции Азербайджанской Республики, <a href="https://e-qanun.az/">Государственный реестр правовых актов (e-qanun.az)</a>, выгрузка 2026-11-26, обработка ${b}; сеть: <a href="https://www.sigmajs.org">sigma.js</a>, <a href="https://graphology.github.io">graphology</a> (MIT). Названия актов официальные. Код хаба и скрипт сборки открыты.`,
 },
 en: {
   title: 'Network of legal acts', sub: "Azerbaijan's legal acts: which act amends, implements or repeals which",
@@ -300,7 +301,7 @@ en: {
   kinds: ['amends', 'implements', 'puts into effect / approves', 'repeals'],
   kindsFrom: ['amends', 'implements', 'puts into effect / approves', 'repeals'],
   stNodes: 'acts', stLinks: 'ties', stAmend: 'amendments', stYears: 'years',
-  gload: 'Loading the network…', gfit: 'Show all', gpause: 'Pause', gresume: 'Resume', gnone: 'No ties with this filter.',
+  gload: 'Loading the network…', gsearch: 'Find an act…', gfit: 'Show all', gpause: 'Pause', gresume: 'Resume', gnone: 'No ties with this filter.',
   netHint: 'The status filter shows acts with the chosen status and the acts tied to them (faded). A tie points from the acting act to the act it acts on. Position comes from a force layout and means closeness only: acts with many ties gather in the middle.',
   tip: (n) => `${n} amendments`,
   findK: 'Search', findH: 'Find an act', findP: 'Search by title or number (acts that have ties in the register).', findPh: 'E.g. Tax Code',
@@ -323,13 +324,13 @@ en: {
 <li>The register’s “amended” ties begin in 2008: earlier amendments are not shown as ties, so charts and rankings have no amendments before 2008. That does not mean there were none.</li>
 <li>e-qanun.az has no robots.txt and no published terms of use. The data was read from the site’s public API (api.e-qanun.az); every act links back to the source.</li>
 <li>This page is not legal advice and does not replace the official register; for the redaction in force, see e-qanun.az.</li></ul>`,
-  foot: (b) => `Source: Ministry of Justice of the Republic of Azerbaijan, <a href="https://e-qanun.az/">State Register of Legal Acts (e-qanun.az)</a>, fetched 2026-11-26, processed ${b}; network: <a href="https://github.com/cosmosgl/graph">cosmos.gl</a> (MIT). Act titles are official. The hub's code and build script are open.`,
+  foot: (b) => `Source: Ministry of Justice of the Republic of Azerbaijan, <a href="https://e-qanun.az/">State Register of Legal Acts (e-qanun.az)</a>, fetched 2026-11-26, processed ${b}; network: <a href="https://www.sigmajs.org">sigma.js</a>, <a href="https://graphology.github.io">graphology</a> (MIT). Act titles are official. The hub's code and build script are open.`,
 },
 };
 const t = (k) => T[lang][k];
 
 // ---- state
-let D = null, TT = null, ttPromise = null, graph = null, vis = [], gReady = false, paused = false;
+let D = null, TT = null, ttPromise = null, vis = [], gReady = false;
 const CORE = [0, 1, 2, 3, 5];
 const S = { cats: new Set(CORE), st: 0, kinds: new Set([0, 1, 2, 3]), from: 0, to: 9999, rank: 0, sel: -1 };
 let N = 0, TNC = [], CAT = null, DATE = null, ST = null, EDG = null, OUT = null, IN = null, AMD = null;
@@ -384,68 +385,68 @@ $('yfrom').oninput = () => { S.from = Math.min(+$('yfrom').value, S.to); $('yfro
 $('yto').oninput = () => { S.to = Math.max(+$('yto').value, S.from); $('yto').value = S.to; $('ytoo').textContent = S.to; rebuildSoon(); };
 let rt = 0; const rebuildSoon = () => { clearTimeout(rt); rt = setTimeout(rebuild, 120); };
 
-// ---- the network
-const pos = { x: null, y: null };
-function initPos() {
-  pos.x = new Float32Array(N); pos.y = new Float32Array(N); let s = 12345;
-  const rnd = () => ((s = (s * 1664525 + 1013904223) >>> 0) / 4294967296);
-  for (let i = 0; i < N; i++) { const a = rnd() * 6.2832, r = 700 * Math.sqrt(rnd()); pos.x[i] = 2048 + Math.cos(a) * r; pos.y[i] = 2048 + Math.sin(a) * r; }
-}
+// ---- the network (shared/graph.js: sigma.js over graphology). Laid out at build time (scripts/layout.mjs):
+// the positions come with the data, and every filter here only hides and shows, it never moves an act.
+let G = null, LB = {}, POS = null;
+const shortTitle = (s) => s.replace(/\s+/g, ' ').trim().replace(/^Azərbaycan Respublikasının\s+|^Azərbaycan Respublikası\s+/u, '')
+  .replace(/\s*\(QÜVVƏDƏN DÜŞÜB\)\s*$/u, ', köhnə').replace(/["“”„]/g, '«').replace(/«([^«]*)«/g, '«$1»');
 const stOk = (i) => ST[i] === (S.st === 1 ? 1 : 0);
+const nodeOk = (i) => { const y = yr(i); return S.cats.has(CAT[i]) && y >= S.from && y <= S.to; };
+const edgeOk = (s, d, c) => S.kinds.has(c) && (S.st === 0 || stOk(s) || stOk(d));
 function visible() {
-  const ok = new Uint8Array(N);
-  for (let i = 0; i < N; i++) { const y = yr(i); ok[i] = S.cats.has(CAT[i]) && y >= S.from && y <= S.to ? 1 : 0; }
+  // what the filters leave: the counts above the graph (the graph applies the same filters itself)
+  const ok = new Uint8Array(N); for (let i = 0; i < N; i++) ok[i] = nodeOk(i) ? 1 : 0;
   const has = new Uint8Array(N), L = [];
-  for (let k = 0; k < EDG.length; k += 3) { const s = EDG[k], d = EDG[k + 1], c = EDG[k + 2]; if (ok[s] && ok[d] && S.kinds.has(c) && (S.st === 0 || stOk(s) || stOk(d))) { has[s] = has[d] = 1; L.push(s, d, c); } }
-  const idx = new Int32Array(N).fill(-1); vis = []; for (let i = 0; i < N; i++) if (has[i]) { idx[i] = vis.length; vis.push(i); }
-  return { idx, L };
+  for (let k = 0; k < EDG.length; k += 3) { const s = EDG[k], d = EDG[k + 1], c = EDG[k + 2]; if (ok[s] && ok[d] && edgeOk(s, d, c)) { has[s] = has[d] = 1; L.push(s, d, c); } }
+  vis = []; for (let i = 0; i < N; i++) if (has[i]) vis.push(i);
+  return { L };
 }
 let cur = null;
 const amCount = () => { let a = 0; for (let k = 2; k < cur.L.length; k += 3) if (cur.L[k] === 0) a++; return a; };
 function rebuild() {
   if (!D) return;
-  if (graph && gReady) { try { const p = graph.getPointPositions(); vis.forEach((n, j) => { if (p[2 * j] === p[2 * j] && Math.abs(p[2 * j]) < 1e6) { pos.x[n] = p[2 * j]; pos.y[n] = p[2 * j + 1]; } }); } catch {} }
-  const { idx, L } = visible(); cur = { idx, L };
-  const nl = L.length / 3;
-  $('stats').innerHTML = [[vis.length, t('stNodes')], [nl, t('stLinks')], [amCount(), t('stAmend')], [`${S.from}–${S.to}`, t('stYears')]].map(([v, l]) => `<div><b>${typeof v === 'number' ? nf(v) : v}</b><span>${esc(l)}</span></div>`).join('');
+  cur = visible(); statsOnly();
   $('gload').textContent = vis.length ? '' : t('gnone'); $('gload').hidden = !!vis.length;
-  if (!graph) { if (!vis.length) return; makeGraph(); }
-  const P = new Float32Array(vis.length * 2); vis.forEach((n, j) => { P[2 * j] = pos.x[n]; P[2 * j + 1] = pos.y[n]; });
-  const LK = new Float32Array(nl * 2); for (let k = 0; k < nl; k++) { LK[2 * k] = idx[L[3 * k]]; LK[2 * k + 1] = idx[L[3 * k + 1]]; }
-  graph.setPointPositions(P); graph.setLinks(LK); paint();
-  if (vis.length) { graph.start(0.9); paused = false; $('gpause').textContent = t('gpause'); }
-  if (!rebuild.fitted) { rebuild.fitted = 1; setTimeout(() => graph.fitView(600, 0.06), 3500); } else setTimeout(() => graph.fitView(500, 0.06), 2000);
-  $('netHint').textContent = t('netHint');
+  if (!G) { makeGraph(); return; }
+  G.setFilter((n) => nodeOk(n.id), (e) => edgeOk(e.source, e.target, e.c));
+  paint();
 }
-function makeGraph() {
-  graph = new window.Cosmos.Graph($('cg'), {
-    backgroundColor: css('--frame') || '#E9E2D6', spaceSize: 4096, enableSimulation: true, enableDrag: true, fitViewOnInit: false, scalePointsOnZoom: true,
-    curvedLinks: false, linkDefaultWidth: 0.6, pointDefaultSize: 2, renderHoveredPointRing: true, hoveredPointRingColor: css('--accent') || '#A81E28', showFPSMonitor: false, attribution: '',
-    simulationGravity: 0.12, simulationRepulsion: 1.4, simulationLinkSpring: 0.8, simulationLinkDistance: 8, simulationFriction: 0.88, simulationDecay: 6000,
-    onPointMouseOver: (j, _p, ev) => tip(j, ev), onPointMouseOut: () => { $('gtip').hidden = true; },
-    onPointClick: (j) => { const i = vis[j]; if (i !== undefined) show(i, 'gcard'); }, onClick: (j) => { if (j === undefined) $('gtip').hidden = true; },
+const actLabel = (i) => (TT ? shortTitle(TT.title[i]) : LB[i] ?? '');
+const actColor = (i) => (S.st === 0 || stOk(i) ? `var(--c${CAT[i]})` : `color-mix(in srgb, var(--c${CAT[i]}) 30%, var(--paper))`);
+async function makeGraph() {
+  gReady = true;
+  const [{ createGraph }, pb, lb] = await Promise.all([import('/shared/graph.js'), fetch('data/pos.bin').then((r) => r.arrayBuffer()), fetch('data/labels.json').then((r) => r.json())]);
+  LB = lb; const q = new Int16Array(pb), positions = {};
+  const zk = Math.min(1, Math.max(0.6, $('cg').clientWidth / 1000));   // a phone's stage: smaller nodes
+  for (let i = 0; i < N; i++) positions[i] = { x: q[2 * i], y: -q[2 * i + 1] };
+  const nodes = Array.from({ length: N }, (_, i) => ({ id: i }));
+  const edges = []; for (let k = 0; k < EDG.length; k += 3) edges.push({ id: 'k' + k / 3, source: EDG[k], target: EDG[k + 1], c: EDG[k + 2] });
+  G = createGraph($('cg'), {
+    nodes, edges, positions,
+    label: (n) => actLabel(n.id), color: (n) => actColor(n.id), size: (n) => (1.3 + Math.min(Math.sqrt(AMD[n.id]) * 0.7, 11)) * zk,
+    edgeColor: (e) => `var(${KC[e.c]})`, edgeAlpha: 0.2, lodEdgeWidth: 0.5, reshape: true, stretch: 1.4, curve: 0.12, labelSize: 11,
+    strings: { search: t('gsearch') },
+    tooltip: (n) => tipHtml(n.id), panel: $('gcard'),
+    onSelect: (f) => {
+      if (f?.type === 'node') show(+f.id, 'gcard', true);
+      else if (!f) { $('gcard').innerHTML = ''; delete $('gcard').dataset.a; S.sel = -1; try { const u = new URL(location.href); u.searchParams.delete('a'); history.replaceState(null, '', u); } catch {} }
+    },
   });
-  gReady = true; window.__graph = graph;
+  G.setFilter((n) => nodeOk(n.id), (e) => edgeOk(e.source, e.target, e.c));
+  window.__graph = G;
+  // the full titles (9 MB) replace the short labels once they are in
+  loadTitles().then(() => G.relabel());
+  await G.ready;
+  const a = +qs.get('a'); if (a) { const i = D.nodes.id.indexOf(a); if (i >= 0 && G.isVisible(i)) G.focus(i); }
+  paint();
 }
 function paint() {
-  if (!graph || !cur) return;
-  const cc = catCol().map(hex), kc = kindCol().map(hex), dk = dark();
-  const pc = new Float32Array(vis.length * 4), ps = new Float32Array(vis.length);
-  vis.forEach((n, j) => { const c = cc[CAT[n]]; pc.set([c[0], c[1], c[2], S.st === 0 || stOk(n) ? 1 : 0.3], 4 * j); ps[j] = 2 + Math.min(Math.sqrt(AMD[n]) * 1.1, 16); });
-  const nl = cur.L.length / 3, lc = new Float32Array(nl * 4), lw = new Float32Array(nl);
-  for (let k = 0; k < nl; k++) { const c = kc[cur.L[3 * k + 2]]; lc.set([c[0], c[1], c[2], dk ? 0.3 : 0.35], 4 * k); lw[k] = 0.6; }
-  graph.setConfigPartial({ backgroundColor: css('--frame') || '#E9E2D6' });
-  graph.setPointColors(pc); graph.setPointSizes(ps); graph.setLinkColors(lc); graph.setLinkWidths(lw); graph.render();
+  if (!D) return;
+  G?.relabel();
   const lk = kindCol(), cs = catCol();
   $('lgd').innerHTML = [...S.cats].sort().map((c) => `<span><i style="--c:${cs[c]}"></i>${esc(t('cats')[D.cats[c]])}</span>`).join('') + [0, 1, 2, 3].filter((k) => S.kinds.has(k)).map((k) => `<span><i class="ln" style="--c:${lk[k]}"></i>${esc(t('kindsFrom')[k])}</span>`).join('');
 }
-function tip(j, ev) {
-  const i = vis[j]; if (i === undefined) return; const tp = $('gtip'); tp.hidden = false;
-  tp.innerHTML = `<b>${esc(TT ? titleOf(i).slice(0, 140) : pretty(typeName(i)))}</b><br><span class="muted">${esc(t('cats')[D.cats[CAT[i]]])} · ${fmtDate(DATE[i])} · ${esc(t('tip')(nf(AMD[i])))}</span>`;
-  if (ev) { const r = $('cg').getBoundingClientRect(); tp.style.left = Math.max(4, Math.min(ev.clientX - r.left + 12, r.width - 200)) + 'px'; tp.style.top = ev.clientY - r.top + 12 + 'px'; }
-}
-$('gfit').onclick = () => graph && graph.fitView(300, 0.08);
-$('gpause').onclick = () => { if (!graph) return; paused = !paused; paused ? graph.pause() : graph.start(0.5); $('gpause').textContent = paused ? t('gresume') : t('gpause'); };
+const tipHtml = (i) => `<b>${esc(TT ? titleOf(i).slice(0, 140) : LB[i] ?? pretty(typeName(i)))}</b><br><span class="muted">${esc(t('cats')[D.cats[CAT[i]]])} · ${fmtDate(DATE[i])} · ${esc(t('tip')(nf(AMD[i])))}</span>`;
 
 // ---- the card
 const spark = (years) => {
@@ -486,7 +487,7 @@ function show(i, target, noscroll) {
   if (!TT) loadTitles().then(() => { if (+el.dataset.a === i && el.firstChild) draw(); });
   try { const u = new URL(location.href); u.searchParams.set('a', D.nodes.id[i]); history.replaceState(null, '', u); } catch {}
   if (!noscroll) el.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-  if (graph && vis.length) { const j = cur.idx[i]; try { j >= 0 ? graph.selectPointByIndex(j) : graph.unselectPoints(); } catch {} }
+  if (G && target === 'gcard' && G.selected()?.id !== String(i) && G.isVisible(i)) G.focus(i);
 }
 
 // ---- search
@@ -548,7 +549,7 @@ function applyLang() {
   if (!D) return;
   const s = D.stats;
   $('lede').textContent = t('lede')(s.actsInRegister, s.nodes, s.edges); $('method').innerHTML = t('method')(s); $('foot').innerHTML = t('foot')(D.built);
-  $('gfit').textContent = t('gfit'); $('gpause').textContent = paused ? t('gresume') : t('gpause');
+  G?.setStrings({ search: t('gsearch') });
   controls(); ranking(); years(); search();
   if (cur) { paint(); statsOnly(); }
   $('netHint').textContent = t('netHint');
@@ -565,8 +566,8 @@ applyLang();
 $('gload').textContent = t('gload');
 
 fetch('data/qanunlar.json').then((r) => r.json()).then((d) => {
-  D = d; prep(); initPos(); applyLang();
-  const go = () => { if (!gReady) { rebuild(); const a = +qs.get('a'); if (a) { const i = D.nodes.id.indexOf(a); if (i >= 0) { show(i, 'gcard', true); } } } };
+  D = d; prep(); applyLang();
+  const go = () => { if (!gReady) rebuild(); };
   if ('IntersectionObserver' in window) { const io = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting)) { go(); io.disconnect(); } }, { rootMargin: '300px' }); io.observe($('cg')); } else go();
   if ('requestIdleCallback' in window) requestIdleCallback(() => loadTitles(), { timeout: 4000 }); else setTimeout(loadTitles, 2500);
   window.__q = { D, S };

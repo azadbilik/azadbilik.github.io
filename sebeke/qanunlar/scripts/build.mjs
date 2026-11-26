@@ -104,3 +104,6 @@ console.log('nodes by category', Object.fromEntries(CATS.map((c) => [c, [...Arra
 console.log('most amended', mostAmended.slice(0, 5).map(([i, n]) => n + ' ' + acts.get(ids[i]).title.slice(0, 80)));
 console.log('single year', inOneYear.slice(0, 5).map(([i, n, y]) => n + ' ' + y + ' ' + acts.get(ids[i]).title.slice(0, 80)));
 console.log('implemented', mostImplemented.slice(0, 5).map(([i, n]) => n + ' ' + acts.get(ids[i]).title.slice(0, 80)));
+
+// the networks' positions (ForceAtlas2 at build time, see layout.mjs)
+await import('./layout.mjs');
