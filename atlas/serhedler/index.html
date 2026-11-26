@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sərhədlər · Azad Bilik</title>
-<meta name="description" content="Azərbaycanın daxili sərhədləri iki əsrdə bir xəritədə: xanlıqlar (təxminən 1800), 1897-ci ilin qəzaları, Sovet rayonları (1926, 1939, 1979–1989) və bugünkü rayonlar. Two centuries of Azerbaijan's internal borders on one map.">
+<meta name="description" content="Azərbaycanın daxili sərhədləri iki əsrdə bir xəritədə: Səfəvi dövləti (təxminən 1700), xanlıqlar (təxminən 1800), 1897-ci ilin qəzaları, Sovet rayonları (1926, 1939, 1979–1989) və bugünkü rayonlar. Three centuries of Azerbaijan's borders on one map.">
 <meta name="theme-color" content="#F4EFE6" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#14100D" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -79,12 +79,12 @@
   <div class="head">
     <div class="top"><a class="brand" href="/" data-keep-lang><svg viewBox="0 0 512 512" aria-hidden="true"><g class="star"><rect x="126" y="126" width="260" height="260"/><polygon points="256,72 440,256 256,440 72,256"/></g><polygon class="gem" points="256,196 316,256 256,316 196,256"/></svg>Azad Bilik</a><nav><a href="/atlas/" data-keep-lang>Atlas</a><span class="langs" role="group" aria-label="Dil · Язык · Language"><button type="button" data-lang="az">AZ</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="en">EN</button></span></nav></div>
     <h1 data-i18n="title">Sərhədlər</h1>
-    <p class="sub" data-i18n="sub">Xanlıqlardan bugünkü rayonlara</p>
+    <p class="sub" data-i18n="sub">Səfəvilərdən bugünkü rayonlara</p>
   </div>
   <div class="body" id="body">
     <div class="eras">
       <div class="now"><b id="era-year"></b><span id="era-name"></span></div>
-      <input type="range" id="era" min="0" max="5" step="1" value="0" aria-describedby="era-name">
+      <input type="range" id="era" min="0" max="6" step="1" value="0" aria-describedby="era-name">
       <div class="ticks" id="ticks"></div>
       <div class="step"><button type="button" id="prev">←</button><button type="button" id="play" aria-pressed="false">▶</button><button type="button" id="next">→</button></div>
       <label class="scan" id="scan-row" hidden><span data-i18n="scan">1901-ci il xəritəsi</span><input type="range" id="scan" min="0" max="100" value="0"></label>
@@ -117,7 +117,14 @@ const parse = (v) => v == null || v === 'null' ? null : typeof v === 'string' ? 
 
 // The eras, oldest first. Each is drawn from its own map's data; the panel links back to that map.
 const ERAS = [
-  { id: '1800', tick: '1800', file: '../xanliqlar/data/khanates.geojson', page: '/atlas/xanliqlar/', unitParam: 'k',
+  { id: '1700', tick: '1700', file: 'safavi/data/safavid-1700.geojson', page: 'hekaye/', bounds: [[37.5, 23.5], [71.5, 43.5]], scan: 'delisle',
+    year: { az: 'təx. 1700', ru: 'ок. 1700', en: 'c. 1700' },
+    name: { az: 'Səfəvi dövləti', ru: 'Государство Сефевидов', en: 'The Safavid empire' },
+    about: { az: 'Qafqazdan Qəndəharadək uzanan Səfəvi dövləti və Arazın şimalındakı üç bəylərbəyiliyi: Şirvan, Qarabağ (Gəncə), Çuxursəəd (İrəvan). Sərhəd təxminidir: şərqi Delilin 1724-cü il xəritəsindən köçürülüb, qalanı müqavilə xətləri ilə; bəylərbəyiliklər sonrakı xanlıqlardan yığılıb.',
+             ru: 'Государство Сефевидов от Кавказа до Кандагара и три беглербегства к северу от Аракса: Ширванское, Карабахское (Гянджинское), Чухур-Саадское (Эриванское). Граница приблизительна: восточная перенесена с карты Делиля 1724 г., остальное — по линиям договоров; беглербегства собраны из позднейших ханств.',
+             en: "The Safavid empire from the Caucasus to Kandahar, and its three governorships north of the Araz: Shirvan, Karabakh (Ganja), Chukhur-Saad (Erivan). The outline is approximate: the east is traced from Delisle's 1724 map, the rest follows the treaty lines; the governorships are built from the later khanates." },
+    open: { az: 'Hekayədə: Səfəvilərdən bu günə', ru: 'В истории: от Сефевидов до наших дней', en: 'In the story: from the Safavids to today' } },
+  { id: '1800', tick: '1800', file: '../xanliqlar/data/khanates.geojson', page: '/atlas/xanliqlar/', unitParam: 'k', scan: 'tomkeev',
     year: { az: 'təx. 1800', ru: 'ок. 1800', en: 'c. 1800' },
     name: { az: 'Xanlıqlar', ru: 'Ханства', en: 'The khanates' },
     about: { az: 'Arazın şimalındakı xanlıqlar Rusiyaya keçəndə: sərhədlər V. İ. Tomkeyevin 1801–1813-cü illərin sərhədlərini göstərən xəritəsindən (Tiflis, 1901) köçürülüb. İlisu, Qazax və Borçalı 1897-ci il qəzaları ilə göstərilir.',
@@ -163,9 +170,9 @@ const ERAS = [
     open: { az: 'Əhali xəritəsi', ru: 'Карта населения', en: 'The population map' } },
 ];
 const T = {
-  az: { doc: 'Sərhədlər · Azad Bilik', title: 'Sərhədlər', sub: 'Xanlıqlardan bugünkü rayonlara', todayLines: 'Bugünkü rayon sərhədləri üstündə', scan: 'Tomkeyevin xəritəsi (1901)', open: 'Ayrıca xəritədə aç', unitOpen: 'Bu vahidi öz xəritəsində aç', pop: 'Əhali', capital: 'Paytaxtı', annexed: (y) => `Rusiyaya keçib: ${y}`, gov: 'Quberniya', today: 'Bugünkü rayonlar', legendUnit: 'vahid', legendGap: 'aydın deyil', legendToday: 'bugünkü rayonlar', prev: 'Əvvəlki dövr', next: 'Sonrakı dövr', play: 'Dövrləri bir-bir göstər', pause: 'Dayandır', hint: 'Xəritədə bir vahidə toxunun.', storyLink: 'Hekayə kimi oxu: sərhədlər necə dəyişdi →', gameBtn: 'Oyun: xəritədə tap', gameEnd: 'Oyunu bitir', ask: 'Xəritədə tapın:', ok: 'Düzdür!', no: (x) => `Yox, bu ${x} idi`, skip: 'Keç', score: 'Xal', streak: 'Ardıcıl', best: 'Rekord', again: 'Yenidən', done: (a, b) => `${b} sualdan ${a} düz`, noBest: '—' },
-  ru: { doc: 'Границы · Azad Bilik', title: 'Границы', sub: 'От ханств до нынешних районов', todayLines: 'Поверх — границы нынешних районов', scan: 'Карта Томкеева (1901)', open: 'Открыть отдельную карту', unitOpen: 'Открыть на своей карте', pop: 'Население', capital: 'Столица', annexed: (y) => `Отошло России: ${y}`, gov: 'Губерния', today: 'Нынешние районы', legendUnit: 'единица', legendGap: 'не установлено', legendToday: 'нынешние районы', prev: 'Предыдущая эпоха', next: 'Следующая эпоха', play: 'Показать эпохи по очереди', pause: 'Остановить', hint: 'Нажмите на единицу на карте.', storyLink: 'Читать как историю: как менялись границы →', gameBtn: 'Игра: найди на карте', gameEnd: 'Закончить игру', ask: 'Найдите на карте:', ok: 'Верно!', no: (x) => `Нет, это ${x}`, skip: 'Пропустить', score: 'Очки', streak: 'Подряд', best: 'Рекорд', again: 'Ещё раз', done: (a, b) => `${a} из ${b} верно`, noBest: '—' },
-  en: { doc: 'Borders · Azad Bilik', title: 'Borders', sub: "From the khanates to today's districts", todayLines: "Today's district borders on top", scan: "Tomkeev's map (1901)", open: 'Open its own map', unitOpen: 'Open on its own map', pop: 'Population', capital: 'Capital', annexed: (y) => `Passed to Russia: ${y}`, gov: 'Governorate', today: "Today's districts", legendUnit: 'unit', legendGap: 'not established', legendToday: "today's districts", prev: 'Earlier', next: 'Later', play: 'Play through the eras', pause: 'Pause', hint: 'Tap a unit on the map.', storyLink: 'Read it as a story: how the borders moved →', gameBtn: 'Game: find it on the map', gameEnd: 'End the game', ask: 'Find on the map:', ok: 'Right!', no: (x) => `No, that was ${x}`, skip: 'Skip', score: 'Score', streak: 'Streak', best: 'Best', again: 'Play again', done: (a, b) => `${a} of ${b} right`, noBest: '—' },
+  az: { doc: 'Sərhədlər · Azad Bilik', title: 'Sərhədlər', sub: 'Səfəvilərdən bugünkü rayonlara', todayLines: 'Bugünkü rayon sərhədləri üstündə', scan: 'Tomkeyevin xəritəsi (1901)', scanDelisle: 'Delilin xəritəsi (1724)', seat: 'Mərkəzi', open: 'Ayrıca xəritədə aç', unitOpen: 'Bu vahidi öz xəritəsində aç', pop: 'Əhali', capital: 'Paytaxtı', annexed: (y) => `Rusiyaya keçib: ${y}`, gov: 'Quberniya', today: 'Bugünkü rayonlar', legendUnit: 'vahid', legendGap: 'aydın deyil', legendToday: 'bugünkü rayonlar', prev: 'Əvvəlki dövr', next: 'Sonrakı dövr', play: 'Dövrləri bir-bir göstər', pause: 'Dayandır', hint: 'Xəritədə bir vahidə toxunun.', storyLink: 'Hekayə kimi oxu: sərhədlər necə dəyişdi →', gameBtn: 'Oyun: xəritədə tap', gameEnd: 'Oyunu bitir', ask: 'Xəritədə tapın:', ok: 'Düzdür!', no: (x) => `Yox, bu ${x} idi`, skip: 'Keç', score: 'Xal', streak: 'Ardıcıl', best: 'Rekord', again: 'Yenidən', done: (a, b) => `${b} sualdan ${a} düz`, noBest: '—' },
+  ru: { doc: 'Границы · Azad Bilik', title: 'Границы', sub: 'От Сефевидов до нынешних районов', todayLines: 'Поверх — границы нынешних районов', scan: 'Карта Томкеева (1901)', scanDelisle: 'Карта Делиля (1724)', seat: 'Центр', open: 'Открыть отдельную карту', unitOpen: 'Открыть на своей карте', pop: 'Население', capital: 'Столица', annexed: (y) => `Отошло России: ${y}`, gov: 'Губерния', today: 'Нынешние районы', legendUnit: 'единица', legendGap: 'не установлено', legendToday: 'нынешние районы', prev: 'Предыдущая эпоха', next: 'Следующая эпоха', play: 'Показать эпохи по очереди', pause: 'Остановить', hint: 'Нажмите на единицу на карте.', storyLink: 'Читать как историю: как менялись границы →', gameBtn: 'Игра: найди на карте', gameEnd: 'Закончить игру', ask: 'Найдите на карте:', ok: 'Верно!', no: (x) => `Нет, это ${x}`, skip: 'Пропустить', score: 'Очки', streak: 'Подряд', best: 'Рекорд', again: 'Ещё раз', done: (a, b) => `${a} из ${b} верно`, noBest: '—' },
+  en: { doc: 'Borders · Azad Bilik', title: 'Borders', sub: "From the Safavids to today's districts", todayLines: "Today's district borders on top", scan: "Tomkeev's map (1901)", scanDelisle: "Delisle's map (1724)", seat: 'Seat', open: 'Open its own map', unitOpen: 'Open on its own map', pop: 'Population', capital: 'Capital', annexed: (y) => `Passed to Russia: ${y}`, gov: 'Governorate', today: "Today's districts", legendUnit: 'unit', legendGap: 'not established', legendToday: "today's districts", prev: 'Earlier', next: 'Later', play: 'Play through the eras', pause: 'Pause', hint: 'Tap a unit on the map.', storyLink: 'Read it as a story: how the borders moved →', gameBtn: 'Game: find it on the map', gameEnd: 'End the game', ask: 'Find on the map:', ok: 'Right!', no: (x) => `No, that was ${x}`, skip: 'Skip', score: 'Score', streak: 'Streak', best: 'Best', again: 'Play again', done: (a, b) => `${a} of ${b} right`, noBest: '—' },
 };
 const t = (k) => T[lang][k];
 const L = (o) => o?.[lang] ?? o?.az ?? o;
@@ -192,7 +199,7 @@ function colour(gj) {
 
 const map = new maplibregl.Map({
   container: 'map', style: `https://tiles.openfreemap.org/styles/${dark ? 'dark' : 'positron'}`,
-  bounds: BOUNDS, minZoom: 4.5, maxZoom: 10,
+  bounds: BOUNDS, minZoom: 2.5, maxZoom: 10,
   attributionControl: { compact: true, customAttribution: 'Tomkeev 1901 · <a href="https://ristat.org/">RISTAT</a> · Demoscope · <a href="https://www.geoboundaries.org">geoBoundaries</a> · OpenStreetMap' },
 });
 map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-right');
@@ -208,14 +215,14 @@ map.on('style.load', () => {
   }
 });
 map.on('load', async () => {
-  map.fitBounds(BOUNDS, { padding: pad(), duration: 0 });
+  map.fitBounds(ERAS[era].bounds ?? BOUNDS, { padding: pad(), duration: 0 });
   document.querySelector('.maplibregl-ctrl-attrib')?.classList.remove('maplibregl-compact-show');
   const firstSymbol = map.getStyle().layers.find((l) => l.type === 'symbol')?.id;
   const ink = css('--ink');
   // the era on screen first, the rest after it
   const add = async (i) => {
     const e = ERAS[i], gj = await fetch(e.file).then((r) => r.json());
-    gj.features = gj.features.filter((f) => f.geometry && f.geometry.type !== 'Point' && (!e.only || e.only(f)));
+    gj.features = gj.features.filter((f) => f.geometry && f.geometry.type !== 'Point' && !f.geometry.type.includes('Line') && (!e.only || e.only(f)));
     gj.features.forEach((f, k) => { f.id = k; });
     colour(gj);
     data[e.id] = gj;
@@ -229,9 +236,11 @@ map.on('load', async () => {
       'line-opacity': on ? .75 : 0, 'line-opacity-transition': { duration: still() ? 0 : 450 } } }, firstSymbol);
   };
   // Tomkeev's 1901 map, warped onto the web map (xanliqlar/scripts/trace/warp.py): faded in on the khanates
-  const sc = await fetch('../xanliqlar/data/tomkeev-1901.json').then((r) => r.json());
-  map.addSource('scan', { type: 'image', url: '../xanliqlar/data/tomkeev-1901.webp', coordinates: sc.coordinates });
-  map.addLayer({ id: 'scan', type: 'raster', source: 'scan', paint: { 'raster-opacity': 0, 'raster-opacity-transition': { duration: 0 } } }, firstSymbol);
+  for (const [id, base] of [['tomkeev', '../xanliqlar/data/tomkeev-1901'], ['delisle', 'safavi/data/delisle-1724']]) {
+    const sc = await fetch(`${base}.json`).then((r) => r.json());
+    map.addSource(id, { type: 'image', url: `${base}.webp`, coordinates: sc.coordinates });
+    map.addLayer({ id, type: 'raster', source: id, paint: { 'raster-opacity': 0, 'raster-opacity-transition': { duration: 0 } } }, firstSymbol);
+  }
   map.addSource('hl', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
   await add(era);
   map.addLayer({ id: 'hl-fill', type: 'fill', source: 'hl', paint: { 'fill-color': ['get', 'c'], 'fill-opacity': 0 } }, firstSymbol);
@@ -263,11 +272,11 @@ map.on('load', async () => {
 
 // the scan shows only on the khanates; as it comes in, their colours step back to outlines
 function applyScan() {
-  const on = ERAS[era].id === '1800' ? scan / 100 : 0;
-  document.getElementById('scan-row').hidden = ERAS[era].id !== '1800';
-  if (!map.getLayer('scan')) return;
-  map.setPaintProperty('scan', 'raster-opacity', on);
-  if (map.getLayer('1800-fill') && ERAS[era].id === '1800') map.setPaintProperty('1800-fill', 'fill-opacity', on ? ['*', FILL, 1 - on * .85] : FILL);
+  const e = ERAS[era], on = e.scan ? scan / 100 : 0;
+  document.getElementById('scan-row').hidden = !e.scan;
+  document.querySelector('#scan-row [data-i18n]').textContent = t(e.scan === 'delisle' ? 'scanDelisle' : 'scan');
+  for (const id of ['tomkeev', 'delisle']) if (map.getLayer(id)) map.setPaintProperty(id, 'raster-opacity', e.scan === id ? on : 0);
+  if (map.getLayer(`${e.id}-fill`) && e.scan) map.setPaintProperty(`${e.id}-fill`, 'fill-opacity', on ? ['*', FILL, 1 - on * .85] : FILL);
 }
 // a unit flashes: green where it is, red where the reader tapped; two soft pulses
 function flash(items) {
@@ -288,7 +297,7 @@ function startGame() {
   const pool = units(); if (!pool.length) return;
   const order = pool.map((f) => f.id).sort(() => Math.random() - .5).slice(0, Math.min(10, pool.length));
   game = { era: ERAS[era].id, order, i: 0, score: 0, streak: 0, verdict: null };
-  select(null, false); stopPlay(); map.fitBounds(BOUNDS, { padding: pad(), duration: still() ? 0 : 600 });
+  select(null, false); stopPlay(); map.fitBounds(ERAS[era].bounds ?? BOUNDS, { padding: pad(), duration: still() ? 0 : 600 });
   draw();
 }
 function endGame() { game = null; gameLock = false; draw(); }
@@ -321,6 +330,7 @@ function setEra(i) {
   select(null, false);
   const was = ERAS[era].id; era = i; const now = ERAS[era].id;
   if (game) { game = null; setTimeout(startGame, 500); }
+  if (ERAS[i].bounds || ERAS.find((e) => e.id === was)?.bounds) map.fitBounds(ERAS[i].bounds ?? BOUNDS, { padding: pad(), duration: still() ? 0 : 1200 });
   if (map.getLayer(`${was}-fill`)) { map.setPaintProperty(`${was}-fill`, 'fill-opacity', 0); map.setPaintProperty(`${was}-line`, 'line-opacity', 0); }
   if (map.getLayer(`${now}-fill`)) { map.setPaintProperty(`${now}-fill`, 'fill-opacity', FILL); map.setPaintProperty(`${now}-line`, 'line-opacity', .75); }
   applyScan();
@@ -343,6 +353,7 @@ function unitCard() {
   const link = e.unitParam ? (() => { const u = new URL(e.page, location.href); u.searchParams.set(e.unitParam, key); if (lang !== 'az') u.searchParams.set('lang', lang); return u.pathname + u.search; })() : null;
   return `<div class="card"><h3><i style="background:${p.kind === 'gap' ? css('--muted') : p.tone}"></i>${esc(p[lang] ?? p.az)}</h3>
     ${cap ? `<p><span class="k">${t('capital')}:</span> ${esc(cap[LANGS.indexOf(lang)])}</p>` : ''}
+    ${p.seat ? `<p><span class="k">${t('seat')}:</span> ${esc(p.seat)}</p>` : ''}
     ${p.annexed && e.id === '1800' ? `<p class="k">${t('annexed')(p.annexed)}</p>` : ''}
     ${gov ? `<p><span class="k">${t('gov')}:</span> ${esc(gov[LANGS.indexOf(lang)])}</p>` : ''}
     ${popNow ? `<p><span class="k">${t('pop')}:</span> ${fmt(popNow)}</p>` : ''}
@@ -379,7 +390,7 @@ function keepUrl() {
   if (lang !== 'az') q.set('lang', lang);
   if (era !== 0) q.set('e', ERAS[era].id);
   if (showToday) q.set('t', '1');
-  if (scan && ERAS[era].id === '1800') q.set('s', scan);
+  if (scan && ERAS[era].scan) q.set('s', scan);
   if (selected && data[selected.src]) q.set('u', data[selected.src].features[selected.id].properties.id);
   history.replaceState(null, '', `${location.pathname}${q.size ? '?' + q : ''}`);
 }
@@ -421,7 +432,7 @@ draw();
 document.querySelectorAll('[data-lang]').forEach((b) => b.onclick = () => {
   lang = b.dataset.lang;
   try { localStorage.setItem('lang', lang); } catch {}
-  applyLang(); draw(); drawPlay();
+  applyLang(); draw(); drawPlay(); applyScan();
   if (map.getStyle()) for (const l of map.getStyle().layers) if (l.type === 'symbol' && l.layout?.['text-field']) map.setLayoutProperty(l.id, 'text-field', labelExpr());
 });
 })();
