@@ -1,0 +1,815 @@
+<!doctype html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="/shared/theme.js"></script>
+<title>Elm şəbəkəsi · Azad Bilik</title>
+<meta name="description" content="Azərbaycan elminin əməkdaşlıq şəbəkəsi: OpenAlex-də Azərbaycan təşkilatı göstərilən işlər, tərəfdaş ölkələr, təşkilatlar, tədqiqatçılar, sahələr. Azerbaijan's science network from OpenAlex (CC0).">
+<meta name="theme-color" content="#F4EFE6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14100D" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://azadbilik.org/sebeke/elm/">
+<meta property="og:title" content="Elm şəbəkəsi · Azerbaijan's science network">
+<meta property="og:description" content="Kimlərlə birgə yazırıq? Tərəfdaş ölkələr, təşkilatlar, tədqiqatçılar və sahələr, 1970–2026 (OpenAlex).">
+<meta property="og:image" content="https://azadbilik.org/sebeke/elm/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<script>
+  (() => { const L = ['az', 'ru', 'en']; let l = new URLSearchParams(location.search).get('lang'); if (!L.includes(l)) { try { l = localStorage.getItem('lang'); } catch {} } if (L.includes(l)) document.documentElement.lang = l; })();
+</script>
+<style>
+  :root {
+    --paper: #F4EFE6; --ink: #1A1410; --muted: #675E55; --rule: rgb(26 20 16 / .14); --frame: #E9E2D6; --panel: rgb(244 239 230 / .97);
+    --accent: #A81E28; --second: #1F5C73;
+    --d0: #2F6F96; --d1: #4F8A2B; --d2: #C07A0C; --d3: #B2384A; /* domains: physical, life, social, health */
+    --serif: 'Literata', Georgia, serif; --sans: 'Inter', system-ui, sans-serif;
+    --gutter: clamp(1rem, 4vw, 3rem);
+    color-scheme: light dark;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --paper: #14100D; --ink: #F1EBE1; --muted: #A0968B; --rule: rgb(241 235 225 / .16); --frame: #1F1914; --panel: rgb(20 16 13 / .97);
+      --accent: #DA5A61; --second: #6FB3CC; --d0: #6FB3CC; --d1: #A9BC6A; --d2: #E0A64A; --d3: #E8828C; }
+  }
+  :root[data-theme="dark"] { --paper: #14100D; --ink: #F1EBE1; --muted: #A0968B; --rule: rgb(241 235 225 / .16); --frame: #1F1914; --panel: rgb(20 16 13 / .97);
+      --accent: #DA5A61; --second: #6FB3CC; --d0: #6FB3CC; --d1: #A9BC6A; --d2: #E0A64A; --d3: #E8828C; }
+  * { box-sizing: border-box; margin: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: 6.5rem; }
+  body { background: var(--paper); color: var(--ink); font: 400 1rem/1.55 var(--sans); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: .22em; text-decoration-color: var(--rule); }
+  a:hover { text-decoration-color: currentColor; }
+  button, select, input { font: inherit; color: inherit; }
+  button { background: none; border: 0; padding: 0; cursor: pointer; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+  [hidden] { display: none !important; }
+  .wrap { max-width: 72rem; margin: 0 auto; padding: 0 var(--gutter); }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .muted { color: var(--muted); }
+
+  header.hub { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem 1.5rem; padding-block: 1.25rem; }
+  .brand { display: inline-flex; align-items: center; gap: .6rem; font-weight: 600; font-size: .9375rem; text-decoration: none; white-space: nowrap; }
+  .brand svg { width: 1.375rem; height: 1.375rem; } .star { fill: currentColor; } .gem { fill: var(--accent); }
+  header.hub nav { display: flex; align-items: center; gap: .25rem 1.25rem; }
+  header.hub nav a { font-size: .875rem; color: var(--muted); text-decoration: none; } header.hub nav a:hover { color: var(--ink); }
+  .langs { display: inline-flex; gap: .15rem; align-items: center; }
+  .langs button[data-lang] { font-size: .75rem; letter-spacing: .04em; padding: .1rem .3rem; min-height: 1.75rem; min-width: 1.75rem; border-radius: 2px; color: var(--muted); }
+  .langs button[aria-pressed="true"] { color: var(--ink); box-shadow: inset 0 -1px currentColor; }
+
+  .intro { padding: 1.5rem 0 1.75rem; }
+  h1 { font: 300 clamp(2.25rem, 1.4rem + 3.4vw, 4rem)/1 var(--serif); letter-spacing: -.03em; }
+  .sub { margin-top: .6rem; font: italic 300 clamp(1.0625rem, 1rem + .4vw, 1.3125rem)/1.4 var(--serif); color: var(--muted); }
+  .lede { margin-top: 1.25rem; max-width: 46rem; font: 400 1.0625rem/1.6 var(--serif); }
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr)); gap: 1px; margin-top: 1.5rem; border-top: 1px solid var(--rule); border-left: 1px solid var(--rule); }
+  .tile { padding: .8rem 1rem; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+  .tile b { display: block; font: 300 1.9rem/1.1 var(--serif); letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+  .tile span { font-size: .75rem; color: var(--muted); display: block; margin-top: .15rem; }
+
+  /* time bar */
+  .bar { position: sticky; top: 0; z-index: 20; background: var(--panel); backdrop-filter: blur(8px); border-block: 1px solid var(--rule); }
+  .bar .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1.5rem; padding-block: .55rem; }
+  .yr { display: flex; align-items: center; gap: .6rem; flex: 1 1 22rem; min-width: 0; font-size: .8125rem; color: var(--muted); }
+  .yr output { font-variant-numeric: tabular-nums; color: var(--ink); min-width: 2.6rem; font-weight: 500; }
+  .yr .sliders { position: relative; flex: 1; min-width: 6rem; height: 1.6rem; }
+  .yr input[type=range] { position: absolute; inset: 0; width: 100%; height: 1.6rem; margin: 0; background: none; pointer-events: none; -webkit-appearance: none; appearance: none; }
+  .yr .track { position: absolute; left: 0; right: 0; top: 50%; height: 3px; margin-top: -1.5px; background: var(--rule); border-radius: 2px; }
+  .yr .fill { position: absolute; top: 50%; height: 3px; margin-top: -1.5px; background: var(--accent); border-radius: 2px; }
+  .yr input[type=range]::-webkit-slider-runnable-track { background: none; height: 3px; }
+  .yr input[type=range]::-moz-range-track { background: none; }
+  .yr input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; pointer-events: auto; width: 1.05rem; height: 1.05rem; margin-top: -.45rem; border-radius: 50%; background: var(--ink); border: 2px solid var(--paper); cursor: pointer; }
+  .yr input[type=range]::-moz-range-thumb { pointer-events: auto; width: .85rem; height: .85rem; border-radius: 50%; background: var(--ink); border: 2px solid var(--paper); cursor: pointer; }
+  .presets, .seg { display: inline-flex; flex-wrap: wrap; gap: .15rem; }
+  .presets button, .seg button { font-size: .75rem; padding: .25rem .6rem; border-radius: 999px; color: var(--muted); border: 1px solid var(--rule); }
+  .presets button:hover, .seg button:hover { color: var(--ink); border-color: currentColor; }
+  .presets button[aria-pressed="true"], .seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .jump { display: flex; gap: 1rem; margin-left: auto; }
+  .jump a { font-size: .8125rem; color: var(--muted); text-decoration: none; } .jump a:hover { color: var(--ink); }
+
+  section.block { padding-block: 3rem 3.25rem; border-bottom: 1px solid var(--rule); }
+  .block h2 { font: 300 clamp(1.75rem, 1.4rem + 1.4vw, 2.5rem)/1.1 var(--serif); letter-spacing: -.02em; }
+  .block .what { margin-top: .6rem; max-width: 44rem; color: var(--muted); }
+  .block h3 { font: 400 1.125rem/1.3 var(--serif); margin: 1.75rem 0 .5rem; }
+  .ctl { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1.25rem; margin: 1.25rem 0 .75rem; font-size: .8125rem; color: var(--muted); }
+  .ctl label { display: inline-flex; align-items: center; gap: .4rem; }
+  .ctl label { max-width: 100%; } .ctl select { max-width: 100%; text-overflow: ellipsis; } #pfield { max-width: 14rem; }
+  .ctl select, .ctl input[type=search] { background: var(--paper); border: 1px solid var(--rule); border-radius: 3px; padding: .3rem .5rem; font-size: .8125rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .3rem; margin: .5rem 0 1rem; }
+  .chips button { display: inline-flex; align-items: center; gap: .4rem; font-size: .75rem; padding: .22rem .6rem; border: 1px solid var(--rule); border-radius: 999px; color: var(--muted); }
+  .chips button i { width: .6rem; height: .6rem; border-radius: 50%; box-shadow: inset 0 0 0 1.5px var(--c); }
+  .chips button[aria-pressed="true"] { color: var(--ink); border-color: var(--c); } .chips button[aria-pressed="true"] i { background: var(--c); }
+
+  svg.chart { display: block; width: 100%; height: auto; overflow: visible; user-select: none; -webkit-user-select: none; }
+  svg.chart .ax line { stroke: var(--rule); } svg.chart text { font: .6875rem var(--sans); fill: var(--muted); font-variant-numeric: tabular-nums; }
+  svg.chart .grid { stroke: var(--rule); stroke-dasharray: 2 3; }
+  svg.chart path.ln { fill: none; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+  svg.chart .cross { stroke: var(--ink); stroke-width: 1; opacity: .5; }
+  svg.chart .dim { opacity: .28; }
+  .plot { position: relative; }
+  .tip { position: absolute; z-index: 30; pointer-events: none; background: var(--panel); border: 1px solid var(--rule); border-radius: 4px; padding: .5rem .7rem; font-size: .75rem; box-shadow: 0 2px 14px rgb(0 0 0 / .14); max-width: 17rem; }
+  .tip b { font-weight: 600; display: block; margin-bottom: .15rem; } .tip i { display: inline-block; width: .55rem; height: .55rem; border-radius: 50%; margin-right: .35rem; }
+  .tip .row { display: flex; justify-content: space-between; gap: 1rem; } .tip .row span:last-child { font-variant-numeric: tabular-nums; }
+
+  .cols { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: 2rem 3rem; }
+  .rank { list-style: none; padding: 0; font-size: .875rem; }
+  .rank li button { display: grid; grid-template-columns: 7.5rem 1fr 3.5rem; gap: .6rem; align-items: center; width: 100%; padding: .22rem 0; text-align: left; }
+  .rank .nm { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .rank .bt { height: .55rem; background: var(--rule); border-radius: 1px; overflow: hidden; } .rank .bt i { display: block; height: 100%; background: var(--c, var(--second)); }
+  .rank .v { text-align: right; font-variant-numeric: tabular-nums; color: var(--muted); font-size: .8125rem; }
+  .rank button[aria-pressed="true"] .nm { font-weight: 600; }
+  .legend { display: flex; flex-wrap: wrap; gap: .3rem .9rem; font-size: .75rem; color: var(--muted); margin: .6rem 0; }
+  .legend i { display: inline-block; width: .6rem; height: .6rem; border-radius: 50%; margin-right: .3rem; background: var(--c); }
+  .legend button { display: inline-flex; align-items: center; } .legend button[aria-pressed="false"] { opacity: .4; }
+
+  .stage { position: relative; border: 1px solid var(--rule); border-radius: 3px; background: var(--frame); overflow: hidden; height: min(72vh, 44rem); min-height: 22rem; }
+  .stage canvas { display: block; width: 100%; height: 100%; touch-action: none; }
+  .stage .cosmos { position: absolute; inset: 0; }
+  .stage .hint { position: absolute; left: .8rem; bottom: .6rem; font-size: .75rem; color: var(--muted); pointer-events: none; text-shadow: 0 0 4px var(--frame), 0 0 4px var(--frame); }
+  .card { position: absolute; top: .75rem; right: .75rem; width: min(19rem, calc(100% - 1.5rem)); max-height: calc(100% - 1.5rem); overflow: auto; background: var(--panel); border: 1px solid var(--rule); border-radius: 4px; padding: .8rem 1rem; font-size: .8125rem; box-shadow: 0 2px 14px rgb(0 0 0 / .14); z-index: 5; }
+  .card h4 { font: 400 1.0625rem/1.25 var(--serif); padding-right: 1.5rem; } .card .x { position: absolute; top: .4rem; right: .5rem; width: 1.75rem; height: 1.75rem; font-size: 1.1rem; color: var(--muted); }
+  .card p { margin-top: .35rem; color: var(--muted); } .card ul { list-style: none; padding: 0; margin: .4rem 0 0; } .card li { display: flex; justify-content: space-between; gap: .8rem; padding: .1rem 0; } .card li span:last-child { font-variant-numeric: tabular-nums; color: var(--muted); }
+  .card svg { width: 100%; height: 3rem; display: block; margin-top: .5rem; }
+  .card a { color: var(--ink); }
+  .search { position: relative; } .search input { width: min(18rem, 70vw); }
+  .results { position: absolute; z-index: 15; top: 100%; left: 0; width: min(22rem, 90vw); background: var(--panel); border: 1px solid var(--rule); border-radius: 4px; margin-top: .2rem; box-shadow: 0 6px 24px rgb(0 0 0 / .16); max-height: 18rem; overflow: auto; }
+  .results button { display: flex; justify-content: space-between; gap: .8rem; width: 100%; text-align: left; padding: .4rem .7rem; font-size: .8125rem; color: var(--ink); }
+  .results button:hover, .results button:focus-visible { background: var(--rule); } .results small { color: var(--muted); }
+  .nogl { padding: 2rem; color: var(--muted); }
+
+  table.f { width: 100%; border-collapse: collapse; font-size: .8125rem; margin-top: 1rem; }
+  table.f th { text-align: left; font-weight: 500; color: var(--muted); padding: .35rem .5rem; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+  table.f th button { color: inherit; font-weight: inherit; } table.f th button[aria-sort] { color: var(--ink); }
+  table.f td { padding: .35rem .5rem; border-bottom: 1px solid var(--rule); font-variant-numeric: tabular-nums; }
+  table.f td:first-child { white-space: nowrap; } table.f th.n, table.f td.n { text-align: right; }
+  table.f tr { cursor: pointer; } table.f tr:hover td, table.f tr[aria-selected="true"] td { background: color-mix(in srgb, var(--rule) 60%, transparent); }
+  table.f i { display: inline-block; width: .6rem; height: .6rem; border-radius: 50%; margin-right: .45rem; background: var(--c); }
+  .scroll { overflow-x: auto; }
+  .note { margin-top: 1rem; font-size: .8125rem; color: var(--muted); max-width: 46rem; }
+  ul.caveats { max-width: 46rem; padding-left: 1.1rem; margin-top: .75rem; } ul.caveats li { margin: .5rem 0; font-size: .9375rem; }
+  footer.foot { padding-block: 2rem 3rem; font-size: .8125rem; color: var(--muted); max-width: 46rem; }
+  footer.foot p + p { margin-top: .5rem; }
+
+  @media (max-width: 48rem) {
+    .cols { grid-template-columns: minmax(0, 1fr); }
+    .jump, .presets { display: none; } .bar .wrap { gap: .35rem 1rem; }
+    .stage { height: 70vh; } .card { position: absolute; top: auto; bottom: .5rem; right: .5rem; left: .5rem; width: auto; max-height: 55%; }
+    .rank li button { grid-template-columns: 6rem 1fr 3rem; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hub">
+    <a class="brand" href="/" data-keep-lang><svg viewBox="0 0 512 512" aria-hidden="true"><g class="star"><rect x="126" y="126" width="260" height="260"/><polygon points="256,72 440,256 256,440 72,256"/></g><polygon class="gem" points="256,196 316,256 256,316 196,256"/></svg>Azad Bilik</a>
+    <nav><a href="https://kitabxana.az" id="kx-nav">Kitabxana</a><span class="langs" role="group" aria-label="Dil · Язык · Language"><button type="button" data-lang="az">AZ</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="en">EN</button></span></nav>
+  </header>
+  <div class="intro">
+    <h1 data-i18n="title">Elm şəbəkəsi</h1>
+    <p class="sub" data-i18n="sub">Azərbaycan elmi kimlərlə birgə yazır?</p>
+    <p class="lede" id="lede"></p>
+    <div class="tiles" id="tiles"></div>
+  </div>
+</div>
+
+<div class="bar" id="bar"><div class="wrap">
+  <div class="yr" role="group" aria-labelledby="yr-l">
+    <span id="yr-l" data-i18n="years">Illər</span>
+    <output id="o-from"></output>
+    <div class="sliders"><div class="track"></div><div class="fill" id="fill"></div>
+      <input type="range" id="r-from" aria-label="From year"><input type="range" id="r-to" aria-label="To year"></div>
+    <output id="o-to"></output>
+  </div>
+  <div class="presets" id="presets" role="group"></div>
+  <div class="seg" id="teams" role="group"><button type="button" data-v="all" data-i18n="tAll">Bütün işlər</button><button type="button" data-v="small" data-i18n="tSmall">≤ 20 müəllif</button></div>
+  <div class="jump"><a href="#countries" data-i18n="nCountries">Ölkələr</a><a href="#institutions" data-i18n="nInst">Təşkilatlar</a><a href="#people" data-i18n="nPeople">Tədqiqatçılar</a><a href="#fields" data-i18n="nFields">Sahələr</a><a href="#data" data-i18n="nData">Məlumat</a></div>
+</div></div>
+
+<main class="wrap">
+  <section class="block" id="countries">
+    <h2 data-i18n="cH">Hansı ölkələrlə birgə yazırıq</h2>
+    <p class="what" data-i18n="cWhat"></p>
+    <h3 data-i18n="vH">İllik iş sayı</h3>
+    <div class="plot"><svg class="chart" id="volume" role="img"></svg><div class="tip" id="tip-volume" hidden></div></div>
+    <div class="legend" id="vlegend"></div>
+    <h3 data-i18n="pH">Tərəfdaş ölkələr</h3>
+    <div class="ctl">
+      <span class="seg" id="metric" role="group"><button type="button" data-v="share" data-i18n="mShare">Azərbaycan işlərinin payı</button><button type="button" data-v="count" data-i18n="mCount">İş sayı</button></span>
+      <label><span data-i18n="addC">Ölkə əlavə et</span> <select id="addc"></select></label>
+    </div>
+    <div class="chips" id="cchips"></div>
+    <div class="cols">
+      <div class="plot"><svg class="chart" id="partners" role="img"></svg><div class="tip" id="tip-partners" hidden></div></div>
+      <div><h3 style="margin-top:0" data-i18n="rH">Seçilmiş illərdə</h3><ol class="rank" id="crank"></ol></div>
+    </div>
+    <p class="note" id="cnote"></p>
+  </section>
+
+  <section class="block" id="institutions">
+    <h2 data-i18n="iH">Təşkilatlar şəbəkəsi</h2>
+    <p class="what" data-i18n="iWhat"></p>
+    <div class="ctl">
+      <label><span data-i18n="colorBy">Rəng</span> <select id="icolor"><option value="domain" data-i18n="byDomain">istiqamət (4)</option><option value="field" data-i18n="byField">sahə</option></select></label>
+      <label><span data-i18n="minJoint">Ən azı birgə iş</span> <select id="iminw"><option>1</option><option>3</option><option selected>5</option><option>10</option><option>25</option><option>50</option></select></label>
+      <label><input type="checkbox" id="iforeign" checked> <span data-i18n="showForeign">Xarici tərəfdaşları göstər</span></label>
+    </div>
+    <div class="legend" id="ilegend"></div>
+    <div class="stage" id="istage"><canvas id="icanvas" aria-label="Institutions network"></canvas><div class="card" id="icard" hidden></div><div class="tip" id="tip-inst" hidden></div><div class="hint" data-i18n="iHint"></div></div>
+    <p class="note" id="inote"></p>
+  </section>
+
+  <section class="block" id="people">
+    <h2 data-i18n="pplH">Tədqiqatçı şəbəkəsi</h2>
+    <p class="what" id="pwhat"></p>
+    <div class="ctl">
+      <div class="search"><label><span class="sr" data-i18n="search">Axtar</span><input type="search" id="psearch" autocomplete="off" aria-label="Search"></label><div class="results" id="presults" hidden></div></div>
+      <label><span data-i18n="colorBy">Rəng</span> <select id="pcolor"><option value="domain" data-i18n="byDomain">istiqamət (4)</option><option value="field" data-i18n="byField">sahə</option></select></label>
+      <label><span data-i18n="field">Sahə</span> <select id="pfield"></select></label>
+      <span id="pcount"></span>
+    </div>
+    <div class="legend" id="plegend"></div>
+    <div class="stage" id="pstage"><div class="cosmos" id="cosmos"></div><div class="card" id="pcard" hidden></div><div class="tip" id="tip-ppl" hidden></div><div class="hint" data-i18n="pHint"></div></div>
+    <p class="note" id="pnote"></p>
+  </section>
+
+  <section class="block" id="fields">
+    <h2 data-i18n="fH">Sahələr</h2>
+    <p class="what" data-i18n="fWhat"></p>
+    <div class="legend" id="flegend"></div>
+    <div class="plot"><svg class="chart" id="fscatter" role="img"></svg><div class="tip" id="tip-fields" hidden></div></div>
+    <div class="scroll"><table class="f" id="ftable"></table></div>
+    <div id="fdetail"></div>
+  </section>
+
+  <section class="block" id="data">
+    <h2 data-i18n="dH">Nəşr yerləri və məlumatın məhdudiyyətləri</h2>
+    <p class="what" data-i18n="dWhat"></p>
+    <div class="plot"><svg class="chart" id="venues" role="img"></svg><div class="tip" id="tip-venues" hidden></div></div>
+    <div class="legend" id="venlegend"></div>
+    <h3 data-i18n="topSrc">Son üç ilin ən çox işi olan nəşr yerləri</h3>
+    <div class="scroll"><table class="f" id="srctable"></table></div>
+    <h3 data-i18n="cavH">Nəyi nəzərə almaq lazımdır</h3>
+    <ul class="caveats" id="caveats"></ul>
+  </section>
+</main>
+<footer class="wrap foot" id="foot"></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@cosmos.gl/graph@3.6.0/dist/index.min.js"></script>
+<script>
+(() => {
+'use strict';
+const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+const $ = (id) => document.getElementById(id);
+const sum = (a, i0 = 0, i1 = a.length - 1) => { let s = 0; for (let i = i0; i <= i1; i++) s += a[i]; return s; };
+const LANGS = ['az', 'ru', 'en'];
+let lang = (() => { const q = new URLSearchParams(location.search).get('lang'); if (LANGS.includes(q)) return q; try { const s = localStorage.getItem('lang'); if (LANGS.includes(s)) return s; } catch {} return 'az'; })();
+const nf = (v, d = 0) => { const s = new Intl.NumberFormat(lang === 'ru' ? 'ru-RU' : 'en-GB', { maximumFractionDigits: d, minimumFractionDigits: d }).format(v); return lang === 'az' ? s.replace(/[,.]/g, (c) => (c === ',' ? ' ' : ',')) : s; };
+const pc = (v, d = 0) => nf(v * 100, d) + '%';
+const fold = (s) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[əƏ]/g, 'e').replace(/ı/g, 'i').replace(/ß/g, 'ss');
+
+const T = {
+az: { doc: 'Elm şəbəkəsi · Azad Bilik', title: 'Elm şəbəkəsi', sub: 'Azərbaycan elmi kimlərlə birgə yazır?', years: 'İllər', tAll: 'Bütün işlər', tSmall: '≤ 20 müəllif',
+  nCountries: 'Ölkələr', nInst: 'Təşkilatlar', nPeople: 'Tədqiqatçılar', nFields: 'Sahələr', nData: 'Məlumat', all: 'Hamısı',
+  dom: ['Fiziki elmlər', 'Həyat elmləri', 'İctimai elmlər', 'Sağlamlıq elmləri'],
+  lede: (d) => `OpenAlex-də (CC0) müəlliflərindən ən azı biri Azərbaycandakı təşkilatla əlaqələndirilmiş ${d.works} iş. Bu səhifə həmin işlərin kimlərlə birgə yazıldığını göstərir: ölkələr, təşkilatlar, tədqiqatçılar, sahələr. Rəqəmlər OpenAlex-in avtomatik oxuduğu məlumata əsaslanır və qiymətləndirmə deyil, təsvirdir; “Məlumat” bölməsində məhdudiyyətlər var.`,
+  tiles: ['iş seçilmiş illərdə', 'xarici həmmüəllifi olan', 'böyük əməkdaşlıq (100+ müəllif)', 'Azərbaycan təşkilatı', 'tədqiqatçı şəbəkədə'],
+  cH: 'Hansı ölkələrlə birgə yazırıq', cWhat: 'İşin müəlliflərindən birinin təşkilatı həmin ölkədə göstərilibsə, iş o ölkə ilə birgə sayılır. Bir iş bir neçə ölkəyə sayıla bilər. 2026 hələ bitməyib.',
+  vH: 'İllik iş sayı', vOnly: 'yalnız Azərbaycan təşkilatları', vIntl: 'ən azı bir xarici ölkə', vBig: 'o cümlədən 100+ müəllifli',
+  pH: 'Tərəfdaş ölkələr', mShare: 'Azərbaycan işlərinin payı', mCount: 'İş sayı', addC: 'Ölkə əlavə et', rH: 'Seçilmiş illərdə', rNote: (n) => `Siyahı: ${n} ölkədən ən çoxu; bir ölkəni vurun, qrafikə əlavə olunsun.`,
+  cNote: (d) => `“≤ 20 müəllif” seçimi böyük fizika əməkdaşlıqlarını (yüzlərlə müəllif) çıxarır; onlar Almaniya, ABŞ, İsveçrə kimi ölkələrin payını xeyli artırır. 1991-dən əvvəl ${d.pre1991} iş var (indiki Azərbaycan təşkilatlarından); onların tərəfdaşları əsasən ${d.pre1991Partners}.`,
+  iH: 'Təşkilatlar şəbəkəsi', iWhat: 'Düyün: təşkilat. Ölçü: seçilmiş illərdə iş sayı. Xətt: birgə yazılmış işlərin sayı. Dolu dairə Azərbaycan təşkilatıdır, boş halqa xarici tərəfdaş. Qrafik yalnız 100-dən az müəllifli işlərdən qurulub.',
+  colorBy: 'Rəng', byDomain: 'istiqamət (4)', byField: 'sahə', minJoint: 'Ən azı birgə iş', showForeign: 'Xarici tərəfdaşları göstər', iHint: 'Sürüşdür, böyüt, düyünə vur.',
+  iNote: (a, f, e) => `${a} Azərbaycan təşkilatı (ən azı 25 iş) və birgə işləri ən çox olan ${f} xarici təşkilat; ${e} əlaqə.`,
+  works: 'iş', worksIn: 'seçilmiş illərdə iş', withForeign: 'xarici həmmüəllifi olan', topFields: 'Əsas sahələr', topPartners: 'Ən çox birgə iş', foreignCountries: 'Ölkə', inOA: 'OpenAlex-də aç', joint: 'birgə iş', close: 'Bağla', type: 'Növ',
+  pplH: 'Tədqiqatçı şəbəkəsi', pwhat: (d) => `${d.n} tədqiqatçı (Azərbaycan təşkilatı göstərilən ən azı ${d.min} işi və şəbəkədə ən azı bir həmmüəllifi olanlar), ${d.links} həmmüəlliflik əlaqəsi. Əlaqə: ≤ ${d.cap} müəllifli ortaq işlər. Yalnız Azərbaycan təşkilatları ilə əlaqələndirilmiş müəlliflər göstərilir; xarici həmmüəlliflər yoxdur. Adlar OpenAlex-dən götürülüb və eyni adlı insanlar qarışa bilər.`,
+  search: 'Axtar', searchPh: 'Ada görə axtar…', field: 'Sahə', anyField: 'Bütün sahələr', pHint: 'Böyüt, sürüşdür, nöqtəyə vur.', active: 'seçilmiş illərdə aktiv', noGl: 'Bu şəbəkə WebGL2 tələb edir; brauzeriniz onu dəstəkləmir.', loading: 'Yüklənir…',
+  pcard: { works: 'iş', years: 'illər', inst: 'Əsas təşkilat', field: 'Əsas sahə', coauth: 'Həmmüəllif (şəbəkədə)' },
+  pNote: 'Şəbəkənin düzülüşü avtomatikdir: yaxın nöqtələr tez-tez birgə yazanlardır. Rəng əsas sahəni göstərir.',
+  fH: 'Sahələr', fWhat: 'OpenAlex hər işə bir əsas mövzu verir; mövzular 26 sahəyə və 4 istiqamətə bölünür. Burada: sahədə neçə iş var və onların neçə faizində ən azı bir xarici ölkənin təşkilatı göstərilib. Aşağı pay bu sahədə işlərin əsasən yalnız Azərbaycan təşkilatları ilə yazıldığı deməkdir; bu keyfiyyət ölçüsü deyil.',
+  fx: 'iş sayı (log)', fy: 'xarici həmmüəllifi olan işlərin payı', th: ['Sahə', 'İş', 'Xarici ilə', 'Pay', 'Ən çox tərəfdaş'], fSub: 'Alt sahələr', fPartners: 'Tərəfdaşlar',
+  dH: 'Nəşr yerləri və məlumatın məhdudiyyətləri', dWhat: 'OpenAlex hər nəşr yerini (jurnal, konfrans) bir sıra açıq siyahılarla (CWTS Core, DOAJ, MEDLINE, ERIH PLUS və ölkə siyahıları) uyğunlaşdırır. Aşağıdakı xətt: işin çıxdığı nəşr yeri bu siyahıların heç birində olmayan işlərin payı. Bu “yırtıcı jurnal” siyahısı deyil: siyahıda olmamaq tək başına nəticə vermir.',
+  vNone: 'heç bir siyahıda olmayan nəşr yeri', vCore: 'CWTS Core nəşr yeri', vDoaj: 'DOAJ-da', vNoSrc: 'nəşr yeri göstərilməyib',
+  topSrc: 'Son üç ilin ən çox işi olan nəşr yerləri', thS: ['Nəşr yeri', 'Naşir', 'İş', 'Siyahılar'], listed: 'siyahılarda', unlisted: 'heç birində',
+  cavH: 'Nəyi nəzərə almaq lazımdır',
+  cav: (d) => [
+    `Təşkilatlar OpenAlex-in müəllif adının yanındakı mətni avtomatik tanımasıdır. Səhv tanıma, eyni təşkilatın bir neçə yazılışı, institutun universitet və ya Akademiyanın altında birləşməsi və ya ayrılması rəqəmləri dəyişə bilər. Məsələn, Fizika İnstitutu OpenAlex-də iki ayrı qeyd kimi görünür (“Institute of Physics” və “Fizika İnstitutu Publik Hüquqi Şəxs”); burada onlar birləşdirilməyib.`,
+    `Müəlliflər: OpenAlex eyni adlı insanları qarışdıra və bir insanı bir neçə qeyd kimi saxlaya bilər. Azərbaycan və rus adlarının çevrilməsi bunu artırır. Tədqiqatçı şəbəkəsi buna görə təxmini mənzərədir, fərdi hesabat deyil.`,
+    `OpenAlex 2024–2026-cı illərdə Azərbaycan təşkilatları ilə əlaqələndirilmiş işlərin sayında kəskin artım göstərir (${d.growth}). Bunun nə qədəri real nəşr artımı, nə qədəri OpenAlex-in əhatəsinin və təşkilat tanımasının genişlənməsidir, bu məlumatdan ayırmaq olmur. Son üç ilin işlərinin ${d.top15} aşağıdakı 15 nəşr yerində çıxıb (siyahıda Zenodo yüklənmələri, kitab seriyaları və konfrans topluları da var).`,
+    `${d.big} iş (${d.bigp}) 100 və daha çox müəllifli böyük əməkdaşlıqlardandır (əsasən yüksək enerji fizikası; OpenAlex siyahıda yalnız ilk 100 müəllifi saxlayır, ona görə ${d.outside} işdə Azərbaycan təşkilatı siyahıdan kənarda qalıb və yalnız ümumi saya düşür). Bir Azərbaycan müəllifi olan belə iş də Azərbaycan işi sayılır. “≤ 20 müəllif” seçimi bunu çıxarır.`,
+    `1991-dən əvvəlki işlər indiki Azərbaycan təşkilatlarından sayılır; o dövrdə xarici tərəfdaş ölkə kodu SSRİ-nin hissəsi kimi OpenAlex-də Rusiya və ya digər indiki ölkələr kimi görünə bilər.`,
+    `Ölkələr yalnız təşkilatın ölkəsidir: müəllifin vətəndaşlığı və ya doğulduğu yer yox. Əməkdaşlıq bir müəllifin iki təşkilatda göstərilməsindən də yarana bilər.`,
+    `Hər nəşr yeri siyahısı fərqli meyarla qurulub və dəyişir. Açıq lisenziyalı “yırtıcı jurnal” siyahısı istifadə edilmir.`,
+  ],
+  foot: (g, n) => `Məlumat: <a href="https://openalex.org">OpenAlex</a> (CC0), ${g} tarixində alınıb, ${n} iş. Təşkilat-il cədvəli: <a href="data/institution-years.csv">institution-years.csv</a>. Mənbələr, üsul və yenidən qurma: <a href="https://github.com/azadbilik/azadbilik.github.io/tree/main/sebeke/elm">README</a>. Azad Bilik: açıq, CC0.` },
+ru: { doc: 'Сеть науки · Azad Bilik', title: 'Сеть науки', sub: 'С кем пишет азербайджанская наука?', years: 'Годы', tAll: 'Все работы', tSmall: '≤ 20 авторов',
+  nCountries: 'Страны', nInst: 'Организации', nPeople: 'Исследователи', nFields: 'Области', nData: 'Данные', all: 'Все',
+  dom: ['Физические науки', 'Науки о жизни', 'Общественные науки', 'Науки о здоровье'],
+  lede: (d) => `${d.works} работ в OpenAlex (CC0), у которых хотя бы один автор связан с организацией в Азербайджане. Страница показывает, с кем эти работы написаны: страны, организации, исследователи, области. Цифры опираются на автоматический разбор OpenAlex и описывают, а не оценивают; ограничения описаны в разделе «Данные».`,
+  tiles: ['работ за выбранные годы', 'с зарубежным соавтором', 'большие коллаборации (100+ авторов)', 'организации Азербайджана', 'исследователей в сети'],
+  cH: 'С какими странами мы пишем', cWhat: 'Работа считается совместной со страной, если организация хотя бы одного автора указана в этой стране. Одна работа может считаться для нескольких стран. 2026 год ещё не закончился.',
+  vH: 'Работ в год', vOnly: 'только организации Азербайджана', vIntl: 'есть хотя бы одна зарубежная страна', vBig: 'из них 100+ авторов',
+  pH: 'Страны-партнёры', mShare: 'Доля работ Азербайджана', mCount: 'Число работ', addC: 'Добавить страну', rH: 'За выбранные годы', rNote: (n) => `Список: крупнейшие из ${n} стран; нажмите на страну, чтобы добавить её на график.`,
+  cNote: (d) => `Вариант «≤ 20 авторов» убирает большие физические коллаборации (сотни авторов): они заметно увеличивают долю таких стран, как Германия, США, Швейцария. До 1991 года в данных ${d.pre1991} работ (от нынешних организаций Азербайджана); партнёры в основном: ${d.pre1991Partners}.`,
+  iH: 'Сеть организаций', iWhat: 'Узел: организация. Размер: число работ за выбранные годы. Линия: число совместных работ. Заполненный круг: организация Азербайджана, кольцо: зарубежный партнёр. Граф строится только по работам с числом авторов меньше 100.',
+  colorBy: 'Цвет', byDomain: 'направление (4)', byField: 'область', minJoint: 'Совместных работ не менее', showForeign: 'Показывать зарубежных партнёров', iHint: 'Перетащите, приблизьте, нажмите на узел.',
+  iNote: (a, f, e) => `${a} организаций Азербайджана (не менее 25 работ) и ${f} зарубежных с наибольшим числом совместных работ; ${e} связей.`,
+  works: 'работ', worksIn: 'работ за выбранные годы', withForeign: 'с зарубежным соавтором', topFields: 'Основные области', topPartners: 'Больше всего совместных работ', foreignCountries: 'Страна', inOA: 'Открыть в OpenAlex', joint: 'совм. работ', close: 'Закрыть', type: 'Тип',
+  pplH: 'Сеть исследователей', pwhat: (d) => `${d.n} исследователей (не менее ${d.min} работ с организацией Азербайджана и хотя бы один соавтор в сети), ${d.links} связей соавторства. Связь: общая работа с ≤ ${d.cap} авторами. Показаны только авторы, связанные с организациями Азербайджана; зарубежных соавторов нет. Имена взяты из OpenAlex; однофамильцы могут быть смешаны.`,
+  search: 'Поиск', searchPh: 'Поиск по имени…', field: 'Область', anyField: 'Все области', pHint: 'Приближайте, перетаскивайте, нажимайте на точку.', active: 'активен в выбранные годы', noGl: 'Для этой сети нужен WebGL2; ваш браузер его не поддерживает.', loading: 'Загрузка…',
+  pcard: { works: 'работ', years: 'годы', inst: 'Основная организация', field: 'Основная область', coauth: 'Соавторы (в сети)' },
+  pNote: 'Расположение вычисляется автоматически: близкие точки часто пишут вместе. Цвет показывает основную область.',
+  fH: 'Области', fWhat: 'OpenAlex присваивает каждой работе одну основную тему; темы сгруппированы в 26 областей и 4 направления. Здесь: сколько работ в области и в скольких из них указана организация хотя бы одной зарубежной страны. Низкая доля означает, что работы области в основном написаны только с организациями Азербайджана; это не оценка качества.',
+  fx: 'число работ (лог.)', fy: 'доля работ с зарубежным соавтором', th: ['Область', 'Работ', 'С зарубежными', 'Доля', 'Главные партнёры'], fSub: 'Подобласти', fPartners: 'Партнёры',
+  dH: 'Где печатаются и ограничения данных', dWhat: 'OpenAlex сопоставляет каждое издание (журнал, конференцию) с рядом открытых списков (CWTS Core, DOAJ, MEDLINE, ERIH PLUS и национальные списки). Линия показывает долю работ, вышедших в изданиях, которых нет ни в одном из этих списков. Это не список «хищнических журналов»: отсутствие в списках само по себе ничего не доказывает.',
+  vNone: 'издание не в одном из списков', vCore: 'издание из CWTS Core', vDoaj: 'в DOAJ', vNoSrc: 'издание не указано',
+  topSrc: 'Издания с наибольшим числом работ за последние три года', thS: ['Издание', 'Издатель', 'Работ', 'Списки'], listed: 'в списках', unlisted: 'ни в одном',
+  cavH: 'Что учитывать',
+  cav: (d) => [
+    `Организации определяет автоматически OpenAlex по тексту рядом с именем автора. Ошибки разбора, разные написания одной организации, слияние и разделение институтов с университетом или Академией могут менять цифры. Например, Институт физики в OpenAlex значится двумя записями («Institute of Physics» и «Fizika İnstitutu Publik Hüquqi Şəxs»); здесь они не объединены.`,
+    `Авторы: OpenAlex может смешать однофамильцев и разделить одного человека на несколько записей; транслитерация азербайджанских и русских имён усиливает это. Поэтому сеть исследователей приблизительна и не служит персональным отчётом.`,
+    `В 2024–2026 годах OpenAlex показывает резкий рост числа работ, связанных с организациями Азербайджана (${d.growth}). Отделить реальный рост публикаций от расширения охвата OpenAlex и распознавания организаций по этим данным нельзя. ${d.top15} работ последних трёх лет вышли в 15 изданиях из таблицы ниже (среди них загрузки в Zenodo, книжные серии, сборники конференций).`,
+    `${d.big} работ (${d.bigp}) принадлежат большим коллаборациям (100 и более авторов, в основном физика высоких энергий; OpenAlex хранит в списке только первых 100 авторов, поэтому в ${d.outside} работах организация Азербайджана осталась за пределами списка и учтена только в общем числе). Работа с одним автором из Азербайджана тоже считается работой Азербайджана. Вариант «≤ 20 авторов» их убирает.`,
+    `Работы до 1991 года отнесены к нынешним организациям Азербайджана; зарубежные партнёры того времени в OpenAlex могут значиться как Россия или другие нынешние страны.`,
+    `Страна: только страна организации, не гражданство и не место рождения. Сотрудничество может возникнуть и из того, что один автор указал две организации.`,
+    `Каждый список изданий составлен по своим критериям и меняется. Открытый «список хищнических журналов» не используется.`,
+  ],
+  foot: (g, n) => `Данные: <a href="https://openalex.org">OpenAlex</a> (CC0), получены ${g}, ${n} работ. Таблица «организация-год»: <a href="data/institution-years.csv">institution-years.csv</a>. Источники, метод, пересборка: <a href="https://github.com/azadbilik/azadbilik.github.io/tree/main/sebeke/elm">README</a>. Azad Bilik: открыто, CC0.` },
+en: { doc: 'Science network · Azad Bilik', title: 'Science network', sub: 'Who does Azerbaijani research co-author with?', years: 'Years', tAll: 'All works', tSmall: '≤ 20 authors',
+  nCountries: 'Countries', nInst: 'Institutions', nPeople: 'Researchers', nFields: 'Fields', nData: 'Data', all: 'All',
+  dom: ['Physical Sciences', 'Life Sciences', 'Social Sciences', 'Health Sciences'],
+  lede: (d) => `${d.works} works in OpenAlex (CC0) with at least one author linked to an institution in Azerbaijan. This page shows who they are written with: countries, institutions, researchers, fields. The figures rest on OpenAlex's automatic parsing and describe rather than judge; the Data section lists the limits.`,
+  tiles: ['works in the chosen years', 'with a foreign co-author', 'large collaborations (100+ authors)', 'Azerbaijani institutions', 'researchers in the network'],
+  cH: 'Which countries Azerbaijan co-authors with', cWhat: "A work counts for a country when at least one author's institution is listed there. One work can count for several countries. 2026 is not over yet.",
+  vH: 'Works per year', vOnly: 'Azerbaijani institutions only', vIntl: 'at least one foreign country', vBig: 'of which 100+ authors',
+  pH: 'Partner countries', mShare: "Share of Azerbaijan's works", mCount: 'Number of works', addC: 'Add a country', rH: 'In the chosen years', rNote: (n) => `The list: the largest of ${n} countries; click one to add it to the chart.`,
+  cNote: (d) => `The “≤ 20 authors” option removes the large physics collaborations (hundreds of authors); they raise the share of countries like Germany, the US and Switzerland a lot. Before 1991 the data holds ${d.pre1991} works (from today's Azerbaijani institutions); their partners were mostly ${d.pre1991Partners}.`,
+  iH: 'Institutions network', iWhat: 'Node: an institution. Size: works in the chosen years. Line: works written together. A filled circle is an Azerbaijani institution, a ring a foreign partner. The graph is built only from works with fewer than 100 authors.',
+  colorBy: 'Colour', byDomain: 'domain (4)', byField: 'field', minJoint: 'At least joint works', showForeign: 'Show foreign partners', iHint: 'Drag, zoom, click a node.',
+  iNote: (a, f, e) => `${a} Azerbaijani institutions (at least 25 works) and the ${f} foreign institutions with the most joint works; ${e} links.`,
+  works: 'works', worksIn: 'works in the chosen years', withForeign: 'with a foreign co-author', topFields: 'Main fields', topPartners: 'Most joint works', foreignCountries: 'Country', inOA: 'Open in OpenAlex', joint: 'joint works', close: 'Close', type: 'Type',
+  pplH: 'Researcher network', pwhat: (d) => `${d.n} researchers (at least ${d.min} works with an Azerbaijani institution and at least one co-author in the network), ${d.links} co-authorship links. A link: a shared work with ≤ ${d.cap} authors. Only authors linked to Azerbaijani institutions are shown; foreign co-authors are not. Names come from OpenAlex; people with the same name may be merged.`,
+  search: 'Search', searchPh: 'Search by name…', field: 'Field', anyField: 'All fields', pHint: 'Zoom, drag, click a point.', active: 'active in the chosen years', noGl: 'This network needs WebGL2, which your browser does not support.', loading: 'Loading…',
+  pcard: { works: 'works', years: 'years', inst: 'Main institution', field: 'Main field', coauth: 'Co-authors (in network)' },
+  pNote: 'The layout is automatic: points that sit close are people who often write together. Colour is the main field.',
+  fH: 'Fields', fWhat: 'OpenAlex gives each work one primary topic; topics group into 26 fields and 4 domains. Here: how many works a field has and in how many of them an institution of at least one foreign country is listed. A low share means the field’s works are mostly written with Azerbaijani institutions only; it is not a quality measure.',
+  fx: 'works (log)', fy: 'share of works with a foreign co-author', th: ['Field', 'Works', 'With foreign', 'Share', 'Main partners'], fSub: 'Subfields', fPartners: 'Partners',
+  dH: 'Where it is published, and the limits of the data', dWhat: "OpenAlex matches each venue (journal, conference) against open lists (CWTS Core, DOAJ, MEDLINE, ERIH PLUS and national lists). The line shows the share of works whose venue is on none of them. It is not a list of “predatory journals”: absence from the lists proves nothing by itself.",
+  vNone: 'venue on none of the lists', vCore: 'CWTS Core venue', vDoaj: 'in DOAJ', vNoSrc: 'no venue given',
+  topSrc: 'Venues with the most works in the last three years', thS: ['Venue', 'Publisher', 'Works', 'Lists'], listed: 'listed', unlisted: 'none',
+  cavH: 'What to keep in mind',
+  cav: (d) => [
+    `Institutions are OpenAlex's automatic reading of the text next to an author's name. Misreadings, several spellings of one institution, and institutes merged into or split from a university or the Academy can all move the numbers. For example, the Institute of Physics appears in OpenAlex as two records (“Institute of Physics” and “Fizika İnstitutu Publik Hüquqi Şəxs”); they are not merged here.`,
+    `Authors: OpenAlex can merge people who share a name and split one person into several records; transliteration of Azerbaijani and Russian names makes it worse. The researcher network is therefore a rough picture, not an individual's record.`,
+    `OpenAlex shows a sharp rise in works linked to Azerbaijani institutions in 2024–2026 (${d.growth}). This data cannot separate real growth in publishing from OpenAlex's wider coverage and better institution matching. ${d.top15} of the last three years' works appear in the 15 venues of the table below (they include Zenodo uploads, book series and conference proceedings).`,
+    `${d.big} works (${d.bigp}) come from large collaborations (100 or more authors, mostly high-energy physics; OpenAlex keeps only the first 100 authors in its list, so in ${d.outside} works the Azerbaijani institution falls outside it and counts only in the overall totals). A work with a single Azerbaijani author counts as an Azerbaijani work. The “≤ 20 authors” option removes them.`,
+    `Works before 1991 are attributed to today's Azerbaijani institutions; foreign partners of that time may show in OpenAlex as Russia or other present-day countries.`,
+    `Country means the institution's country only, not citizenship or birthplace. A tie can also arise from one author listing two institutions.`,
+    `Each venue list has its own criteria and changes over time. No openly licensed “predatory journal” list is used.`,
+  ],
+  foot: (g, n) => `Data: <a href="https://openalex.org">OpenAlex</a> (CC0), retrieved ${g}, ${n} works. Institution-by-year table: <a href="data/institution-years.csv">institution-years.csv</a>. Sources, method and rebuild: <a href="https://github.com/azadbilik/azadbilik.github.io/tree/main/sebeke/elm">README</a>. Azad Bilik: open, CC0.` },
+};
+const t = (k) => T[lang][k] ?? T.en[k];
+
+// ---------------------------------------------------------------- state
+let D = null, A = null, Y0 = 1970, Y1 = 2026;
+const S = { from: 1991, to: 2026, small: false, metric: 'share', sel: new Set(['TR', 'RU', 'IR', 'US', 'DE', 'GB', 'CN']), icolor: 'domain', iminw: 5, iforeign: true, pcolor: 'domain', pfield: -1 };
+const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const domCol = () => [css('--d0'), css('--d1'), css('--d2'), css('--d3')];
+const FIELD_PAL_L = ['#2F6F96', '#4F8A2B', '#C07A0C', '#B2384A', '#7A5C8E', '#2A9D8F', '#D1603D', '#6B705C', '#C9A227', '#3D5A80', '#A44A7C'];
+const FIELD_PAL_D = ['#6FB3CC', '#A9BC6A', '#E0A64A', '#E8828C', '#B596C9', '#5FC4B8', '#EE8F6C', '#A5A58D', '#E5C65A', '#7FA3D0', '#D985B3'];
+const isDark = () => window.abTheme ? window.abTheme.dark() : matchMedia('(prefers-color-scheme: dark)').matches;
+let fieldRank = [], fieldColorIdx = new Map();
+const fieldCol = (fi) => { if (fi < 0 || fi === 255) return css('--muted'); const k = fieldColorIdx.get(fi); const pal = isDark() ? FIELD_PAL_D : FIELD_PAL_L; return k === undefined ? css('--muted') : pal[k]; };
+const colorFor = (mode, fi) => (fi < 0 || fi === 255) ? css('--muted') : mode === 'domain' ? domCol()[D.fields[fi].domain] : fieldCol(fi);
+const fname = (f) => f.name;
+const cname = (c) => (c.name[lang] || c.name.en);
+const regionName = (code) => { try { return new Intl.DisplayNames([lang === 'az' ? 'az' : lang], { type: 'region' }).of(code) || code; } catch { return code; } };
+const iy = (y) => y - Y0;
+const rng = (a) => sum(a, S.from - Y0, S.to - Y0);
+const hex2rgba = (h, a = 1) => { const c = document.createElement('canvas').getContext('2d'); c.fillStyle = h; c.fillRect(0, 0, 1, 1); const d = c.getImageData(0, 0, 1, 1).data; return [d[0] / 255, d[1] / 255, d[2] / 255, a]; };
+const rgbOf = (h) => { const c = hex2rgba(h); return [Math.round(c[0] * 255), Math.round(c[1] * 255), Math.round(c[2] * 255)]; };
+
+// totals under the "teams" switch
+const tAll = () => S.small ? D.totals.small : D.totals.all;
+const tIntl = () => S.small ? D.totals.smallIntl : D.totals.intl;
+const cVals = (c) => S.small ? c.small : c.all;
+
+// ---------------------------------------------------------------- tooltip helper
+function showTip(el, html, ev, host) {
+  el.innerHTML = html; el.hidden = false;
+  const r = host.getBoundingClientRect();
+  let x = ev.clientX - r.left + 14, y = ev.clientY - r.top + 12;
+  if (x + el.offsetWidth > r.width - 4) x = ev.clientX - r.left - el.offsetWidth - 14;
+  if (y + el.offsetHeight > r.height - 4) y = Math.max(4, r.height - el.offsetHeight - 4);
+  el.style.left = Math.max(4, x) + 'px'; el.style.top = Math.max(4, y) + 'px';
+}
+
+// ---------------------------------------------------------------- generic svg line/bar charts
+function chartFrame(svg, h, yMax, yFmt, opts = {}) {
+  const w = Math.max(280, svg.parentNode.clientWidth), m = { l: opts.yTitle ? 46 : 40, r: 10, t: 8, b: 22 };
+  svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+  const x = d3.scaleLinear([Y0 + (opts.x0 ?? 0), Y1], [m.l, w - m.r]);
+  const y = d3.scaleLinear([0, yMax], [h - m.b, m.t]).nice();
+  const xs = opts.bars ? d3.scaleBand(d3.range(x.domain()[0], Y1 + 1), [m.l, w - m.r]).paddingInner(.15) : null;
+  let g = '';
+  for (const v of y.ticks(4)) g += `<line class="grid" x1="${m.l}" x2="${w - m.r}" y1="${y(v)}" y2="${y(v)}"/><text x="${m.l - 6}" y="${y(v) + 3}" text-anchor="end">${yFmt(v)}</text>`;
+  const step = w < 520 ? 10 : 5, x0 = x.domain()[0];
+  for (let yr = Math.ceil(x0 / step) * step; yr <= Y1; yr += step) g += `<text x="${opts.bars ? xs(yr) + xs.bandwidth() / 2 : x(yr)}" y="${h - 5}" text-anchor="middle">${yr}</text>`;
+  return { w, h, m, x, y, xs, g };
+}
+function hoverYear(svg, tip, fr, content) {
+  const host = svg.parentNode;
+  const move = (ev) => {
+    const r = svg.getBoundingClientRect(), px = (ev.clientX - r.left) * fr.w / r.width;
+    const yr = Math.max(fr.x.domain()[0], Math.min(Y1, Math.round(fr.x.invert(px))));
+    const cx = fr.xs ? fr.xs(yr) + fr.xs.bandwidth() / 2 : fr.x(yr);
+    let cross = svg.querySelector('.cross'); if (!cross) { cross = document.createElementNS('http://www.w3.org/2000/svg', 'line'); cross.setAttribute('class', 'cross'); svg.appendChild(cross); }
+    cross.setAttribute('x1', cx); cross.setAttribute('x2', cx); cross.setAttribute('y1', fr.m.t); cross.setAttribute('y2', fr.h - fr.m.b);
+    showTip(tip, content(yr), ev, host);
+  };
+  svg.onpointermove = move; svg.onpointerdown = move;
+  svg.onpointerleave = () => { tip.hidden = true; const c = svg.querySelector('.cross'); if (c) c.remove(); };
+}
+
+function drawVolume() {
+  const svg = $('volume'), tip = $('tip-volume');
+  const tot = tAll(), intl = tIntl(), h = window.innerWidth < 600 ? 200 : 260;
+  const x0 = 20; // 1990
+  const fr = chartFrame(svg, h, d3.max(tot.slice(x0)), (v) => nf(v), { bars: true, x0 });
+  let s = fr.g;
+  const yrs = d3.range(Y0 + x0, Y1 + 1);
+  const cOnly = css('--second'), cIntl = css('--accent');
+  for (const yr of yrs) {
+    const i = iy(yr), on = yr >= S.from && yr <= S.to, bw = fr.xs.bandwidth(), bx = fr.xs(yr);
+    const a = tot[i] - intl[i], b = intl[i];
+    s += `<g opacity="${on ? 1 : .25}"><rect x="${bx}" width="${bw}" y="${fr.y(a)}" height="${fr.y(0) - fr.y(a)}" fill="${cOnly}"/><rect x="${bx}" width="${bw}" y="${fr.y(a + b)}" height="${fr.y(a) - fr.y(a + b)}" fill="${cIntl}"/></g>`;
+  }
+  svg.innerHTML = s;
+  hoverYear(svg, tip, fr, (yr) => { const i = iy(yr); return `<b>${yr}${yr === Y1 ? ' *' : ''}</b><div class="row"><span><i style="background:${cIntl}"></i>${t('vIntl')}</span><span>${nf(intl[i])}</span></div><div class="row"><span><i style="background:${cOnly}"></i>${t('vOnly')}</span><span>${nf(tot[i] - intl[i])}</span></div><div class="row"><span>${t('vBig')}</span><span>${nf(D.totals.big[i])}</span></div>`; });
+  $('vlegend').innerHTML = `<span><i style="--c:${cOnly}"></i>${t('vOnly')}</span><span><i style="--c:${cIntl}"></i>${t('vIntl')}</span>`;
+}
+
+const cPalette = () => isDark() ? ['#6FB3CC', '#E8828C', '#A9BC6A', '#E0A64A', '#B596C9', '#5FC4B8', '#EE8F6C', '#7FA3D0', '#E5C65A', '#D985B3', '#A5A58D', '#8FD16E', '#CDA56A', '#9AA5E0']
+  : ['#1F5C73', '#A81E28', '#5B6B2E', '#C07A0C', '#7A5C8E', '#2A9D8F', '#D1603D', '#3D5A80', '#8A6A3B', '#A44A7C', '#6B705C', '#3E8E3E', '#8A4B2E', '#4C5BA8'];
+function cColor(code) { const i = D.countries.findIndex((c) => c.code === code); return cPalette()[i % 14]; }
+
+function drawPartners() {
+  const svg = $('partners'), tip = $('tip-partners'), totA = tAll(), h = window.innerWidth < 600 ? 240 : 320;
+  const sel = D.countries.filter((c) => S.sel.has(c.code));
+  const val = (c, i) => S.metric === 'share' ? (totA[i] ? cVals(c)[i] / totA[i] : 0) : cVals(c)[i];
+  const x0 = 20;
+  const yMax = Math.max(0.01, d3.max(sel, (c) => d3.max(d3.range(x0, Y1 - Y0 + 1), (i) => val(c, i))) || 1);
+  const fr = chartFrame(svg, h, yMax, (v) => S.metric === 'share' ? pc(v) : nf(v), { x0 });
+  let s = fr.g;
+  const line = d3.line().x((i) => fr.x(Y0 + i)).y((i) => fr.y(val_)).curve(d3.curveMonotoneX);
+  for (const c of sel) {
+    const pts = d3.range(x0, Y1 - Y0 + 1).map((i) => `${i === x0 ? 'M' : 'L'}${fr.x(Y0 + i).toFixed(1)},${fr.y(val(c, i)).toFixed(1)}`).join('');
+    s += `<path class="ln" d="${pts}" stroke="${cColor(c.code)}"/>`;
+  }
+  s += `<rect x="${fr.x(S.from)}" width="${Math.max(0, fr.x(S.to) - fr.x(S.from))}" y="${fr.m.t}" height="${h - fr.m.b - fr.m.t}" fill="var(--ink)" opacity=".05" pointer-events="none"/>`;
+  svg.innerHTML = s;
+  hoverYear(svg, tip, fr, (yr) => { const i = iy(yr); return `<b>${yr}${yr === Y1 ? ' *' : ''}</b>` + [...sel].sort((a, b) => val(b, i) - val(a, i)).map((c) => `<div class="row"><span><i style="background:${cColor(c.code)}"></i>${esc(cname(c))}</span><span>${S.metric === 'share' ? pc(val(c, i), 1) : nf(val(c, i))}</span></div>`).join(''); });
+}
+
+function drawCountryList() {
+  const top = D.countries.map((c) => ({ c, v: rng(cVals(c)) })).sort((a, b) => b.v - a.v);
+  const max = top[0]?.v || 1, totIntl = rng(tIntl());
+  $('crank').innerHTML = top.slice(0, 18).map(({ c, v }) => `<li><button type="button" data-c="${c.code}" aria-pressed="${S.sel.has(c.code)}" style="--c:${cColor(c.code)}"><span class="nm">${esc(cname(c))}</span><span class="bt"><i style="width:${(100 * v / max).toFixed(1)}%"></i></span><span class="v">${nf(v)}</span></button></li>`).join('');
+  $('crank').querySelectorAll('button').forEach((b) => b.onclick = () => { toggleCountry(b.dataset.c); });
+  $('cchips').innerHTML = D.countries.slice(0, 0).map(() => '').join('');
+  const chips = [...S.sel].map((code) => D.countries.find((c) => c.code === code)).filter(Boolean);
+  $('cchips').innerHTML = chips.map((c) => `<button type="button" aria-pressed="true" data-c="${c.code}" style="--c:${cColor(c.code)}"><i></i>${esc(cname(c))}</button>`).join('');
+  $('cchips').querySelectorAll('button').forEach((b) => b.onclick = () => toggleCountry(b.dataset.c));
+  const sel = $('addc'); const cur = sel.value;
+  sel.innerHTML = `<option value="">…</option>` + D.countries.filter((c) => !S.sel.has(c.code)).map((c) => `<option value="${c.code}">${esc(cname(c))}</option>`).join('');
+  sel.value = ''; void cur;
+}
+function toggleCountry(code) { if (S.sel.has(code)) S.sel.delete(code); else S.sel.add(code); drawCountryList(); drawPartners(); }
+
+// ---------------------------------------------------------------- tiles
+function drawTiles() {
+  const all = rng(tAll()), intl = rng(tIntl()), big = rng(D.totals.big);
+  const nA = D.institutions.filter((r) => r.cc === 'AZ' && rng(r.w) > 0).length;
+  const vals = [nf(all), all ? pc(intl / all) : '–', all ? pc(big / rng(D.totals.all)) : '–', nf(nA), nf(A.n)];
+  $('tiles').innerHTML = vals.map((v, i) => `<div class="tile"><b>${v}</b><span>${t('tiles')[i]}</span></div>`).join('');
+  if (S.small) $('tiles').children[2].querySelector('b').textContent = pc(big / (rng(D.totals.all) || 1));
+}
+
+// ---------------------------------------------------------------- institutions (canvas + d3-force)
+const I = { nodes: [], links: [], tf: d3.zoomIdentity, hover: null, sel: null, ready: false, raf: 0 };
+function initInstitutions() {
+  I.nodes = D.institutions.map((r, i) => ({ i, r, az: r.cc === 'AZ', x: (Math.random() - .5) * 600, y: (Math.random() - .5) * 600 }));
+  I.links = D.edges.map(([a, b, y]) => ({ source: a, target: b, y, tot: sum(y) }));
+  const tw = new Float64Array(I.nodes.length);
+  I.nodes.forEach((n) => { if (n.az) tw[n.i] = sum(n.r.w); });
+  I.links.forEach((l) => { const a = I.nodes[l.source], b = I.nodes[l.target]; if (!a.az) tw[a.i] += l.tot; if (!b.az) tw[b.i] += l.tot; });
+  const sim = d3.forceSimulation(I.nodes)
+    .force('link', d3.forceLink(I.links).distance((l) => 40 + 90 / (1 + Math.log10(l.tot))).strength((l) => Math.min(0.35, 0.03 + Math.log10(l.tot) * 0.05)))
+    .force('charge', d3.forceManyBody().strength(-160).distanceMax(500))
+    .force('x', d3.forceX(0).strength(0.05)).force('y', d3.forceY(0).strength(0.05))
+    .force('collide', d3.forceCollide((n) => rad(n, tw[n.i]) + 3)).stop();
+  for (let k = 0; k < 400; k++) sim.tick();
+  I.nodes.forEach((n) => { n.vx = n.vy = 0; });
+  // links keep their endpoints as node objects now
+  const cv = $('icanvas');
+  I.zoom = d3.zoom().scaleExtent([.3, 12]).on('zoom', (e) => { I.tf = e.transform; drawInst(); });
+  d3.select(cv).call(I.zoom);
+  cv.addEventListener('pointermove', (ev) => { const n = pickInst(ev); if (n !== I.hover) { I.hover = n; drawInst(); } if (n) tipInst(n, ev); else $('tip-inst').hidden = true; });
+  cv.addEventListener('pointerleave', () => { I.hover = null; $('tip-inst').hidden = true; drawInst(); });
+  cv.addEventListener('click', (ev) => { const n = pickInst(ev); I.sel = n; drawInst(); cardInst(n); });
+  I.ready = true; sizeInst(); fitInst();
+}
+function sizeInst() { const cv = $('icanvas'), r = cv.parentNode.getBoundingClientRect(), d = devicePixelRatio || 1; cv.width = Math.round(r.width * d); cv.height = Math.round(r.height * d); I.w = r.width; I.h = r.height; I.d = d; }
+function fitInst() {
+  // fit on the central 94% of the nodes: a few far-off partners must not shrink the picture
+  const q = (a, p) => { const s = [...a].sort((x, y) => x - y); return s[Math.min(s.length - 1, Math.max(0, Math.round(p * (s.length - 1))))]; };
+  const xs = I.nodes.map((n) => n.x), ys = I.nodes.map((n) => n.y), x0 = q(xs, .03), x1 = q(xs, .97), y0 = q(ys, .03), y1 = q(ys, .97);
+  const k = Math.min(I.w / (x1 - x0 + 60), I.h / (y1 - y0 + 60), 4);
+  d3.select($('icanvas')).call(I.zoom.transform, d3.zoomIdentity.translate(I.w / 2 - k * (x0 + x1) / 2, I.h / 2 - k * (y0 + y1) / 2).scale(k));
+}
+function instStats() {
+  // works per node in range; foreign nodes sized by joint works with Azerbaijani nodes
+  const w = new Float64Array(I.nodes.length);
+  I.nodes.forEach((n) => { if (n.az) w[n.i] = rng(n.r.w); });
+  I.links.forEach((l) => { l.v = rng(l.y); const a = l.source, b = l.target; if (!a.az) w[a.i] += l.v; if (!b.az) w[b.i] += l.v; });
+  return w;
+}
+function instColor(n) { return n.az ? colorFor(S.icolor, n.r.f[0]?.[0] ?? -1) : css('--muted'); }
+const rad = (n, w) => n.az ? 2.5 + Math.sqrt(w) * 0.3 : 2 + Math.sqrt(w) * 0.3;
+function visibleInst(l) { return l.v >= S.iminw && (S.iforeign || (l.source.az && l.target.az)); }
+function drawInst() {
+  if (!I.ready) return;
+  const cv = $('icanvas'), c = cv.getContext('2d'); const w = I.w_ = instStats(); I.W = w;
+  c.setTransform(I.d, 0, 0, I.d, 0, 0); c.clearRect(0, 0, I.w, I.h);
+  c.translate(I.tf.x, I.tf.y); c.scale(I.tf.k, I.tf.k);
+  const focus = I.sel || I.hover; const near = new Set(); if (focus) { near.add(focus.i); I.links.forEach((l) => { if (l.v && (l.source === focus || l.target === focus)) { near.add(l.source.i); near.add(l.target.i); } }); }
+  const ink = rgbOf(css('--ink'));
+  for (const l of I.links) {
+    if (!visibleInst(l)) continue;
+    const hot = focus && (l.source === focus || l.target === focus);
+    c.globalAlpha = focus ? (hot ? .75 : .05) : .22; c.lineWidth = (0.4 + Math.sqrt(l.v) * 0.3) / Math.sqrt(I.tf.k);
+    c.strokeStyle = `rgb(${ink[0]} ${ink[1]} ${ink[2]})`; c.beginPath(); c.moveTo(l.source.x, l.source.y); c.lineTo(l.target.x, l.target.y); c.stroke();
+  }
+  const labels = [];
+  for (const n of I.nodes) {
+    if (!n.az && !S.iforeign) continue;
+    const wv = w[n.i]; if (!n.az && wv < S.iminw) continue; if (n.az && wv <= 0) continue;
+    const r = rad(n, wv), dim = focus && !near.has(n.i);
+    c.globalAlpha = dim ? .15 : 1; c.beginPath(); c.arc(n.x, n.y, r, 0, 6.2832);
+    if (n.az) { c.fillStyle = instColor(n); c.fill(); c.lineWidth = 1 / Math.sqrt(I.tf.k); c.strokeStyle = css('--paper'); c.stroke(); }
+    else { c.lineWidth = 1.4 / Math.sqrt(I.tf.k); c.strokeStyle = css('--muted'); c.stroke(); }
+    if (!dim && ((n.az && r * I.tf.k > 14) || n === focus || (near.has(n.i) && focus && I.tf.k > 1.2) || (I.tf.k > 3 && r > 4))) labels.push([n, r]);
+  }
+  c.globalAlpha = 1; c.font = `${11 / Math.sqrt(I.tf.k)}px Inter, sans-serif`; c.textAlign = 'center'; c.fillStyle = css('--ink'); c.strokeStyle = css('--frame'); c.lineWidth = 3 / Math.sqrt(I.tf.k); c.lineJoin = 'round';
+  for (const [n, r] of labels) { const s = n.r.name.length > 34 ? n.r.name.slice(0, 32) + '…' : n.r.name; c.strokeText(s, n.x, n.y + r + 11 / Math.sqrt(I.tf.k)); c.fillText(s, n.x, n.y + r + 11 / Math.sqrt(I.tf.k)); }
+}
+function pickInst(ev) {
+  const r = $('icanvas').getBoundingClientRect(), px = (ev.clientX - r.left - I.tf.x) / I.tf.k, py = (ev.clientY - r.top - I.tf.y) / I.tf.k; let best = null, bd = 1e9; const w = I.W;
+  for (const n of I.nodes) { if (!w || (!n.az && (!S.iforeign || w[n.i] < S.iminw)) || (n.az && w[n.i] <= 0)) continue; const d = Math.hypot(n.x - px, n.y - py) - rad(n, w[n.i]); if (d < bd) { bd = d; best = n; } }
+  return bd < 6 / I.tf.k ? best : null;
+}
+function tipInst(n, ev) {
+  const fc = n.az ? `<div class="row"><span>${t('withForeign')}</span><span>${nf(rng(n.r.fw))}</span></div>` : '';
+  showTip($('tip-inst'), `<b>${esc(n.r.name)}</b><div class="row"><span>${n.az ? t('worksIn') : t('joint')}</span><span>${nf(I.W[n.i])}</span></div>${fc}`, ev, $('istage'));
+}
+function spark(arr, from, to, color) {
+  const w = 280, h = 48, a = arr.slice(20), max = Math.max(1, d3.max(a)), bw = w / a.length;
+  return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" aria-hidden="true">${a.map((v, i) => { const yr = 1990 + i; return `<rect x="${(i * bw + .5).toFixed(1)}" width="${(bw - 1).toFixed(1)}" y="${(h - h * v / max).toFixed(1)}" height="${(h * v / max).toFixed(1)}" fill="${color}" opacity="${yr >= from && yr <= to ? 1 : .3}"/>`; }).join('')}</svg>`;
+}
+function cardInst(n) {
+  const el = $('icard'); if (!n) { el.hidden = true; return; }
+  const parts = [];
+  I.links.forEach((l) => { if (l.v > 0 && (l.source === n || l.target === n)) { const o = l.source === n ? l.target : l.source; parts.push([o, l.v]); } });
+  parts.sort((a, b) => b[1] - a[1]);
+  const ccn = regionName;
+  const flds = n.az ? n.r.f.map(([fi]) => D.fields[fi].name).join(', ') : '';
+  el.hidden = false;
+  el.innerHTML = `<button class="x" type="button" aria-label="${t('close')}">×</button><h4>${esc(n.r.name)}</h4><p>${n.az ? 'Azerbaijan' : esc(ccn(n.r.cc))} · ${esc(n.r.type ?? '')}</p>`
+    + (n.az ? spark(n.r.w, S.from, S.to, instColor(n)) + `<p>${nf(rng(n.r.w))} ${t('worksIn')} · ${nf(rng(n.r.fw))} ${t('withForeign')}</p>${flds ? `<p>${t('topFields')}: ${esc(flds)}</p>` : ''}` : '')
+    + `<p style="margin-top:.6rem">${t('topPartners')}</p><ul>${parts.slice(0, 8).map(([o, v]) => `<li><span>${esc(o.r.name)}${o.az ? '' : ' (' + esc(o.r.cc) + ')'}</span><span>${nf(v)}</span></li>`).join('')}</ul>`
+    + `<p><a href="https://openalex.org/institutions/${n.r.id}" rel="noopener">${t('inOA')} ↗</a></p>`;
+  el.querySelector('.x').onclick = () => { I.sel = null; drawInst(); cardInst(null); };
+}
+function legendFor(el, mode, onClickToggle) {
+  if (mode === 'domain') el.innerHTML = t('dom').map((d, i) => `<span><i style="--c:${domCol()[i]}"></i>${esc(d)}</span>`).join('');
+  else el.innerHTML = fieldRank.slice(0, 11).map(([fi]) => `<span><i style="--c:${fieldCol(fi)}"></i>${esc(D.fields[fi].name)}</span>`).join('') + `<span><i style="--c:${css('--muted')}"></i>…</span>`;
+}
+
+// ---------------------------------------------------------------- researchers (cosmos.gl)
+const P = { g: null, ready: false, adj: null, sel: -1, hover: -1, N: 0 };
+const nameFold = [];
+async function initPeople() {
+  const stage = $('cosmos');
+  const gl = document.createElement('canvas').getContext('webgl2');
+  if (!gl || !window.Cosmos) { stage.innerHTML = `<div class="nogl">${t('noGl')}</div>`; return; }
+  const [nb, lb, mb] = await Promise.all(['authors-nodes.bin', 'authors-links.bin', 'authors-linkmeta.bin'].map((f) => fetch('data/' + f).then((r) => r.arrayBuffer())));
+  const N = A.n; P.N = N;
+  P.w = new Uint16Array(nb, 0, N); P.inst = new Uint16Array(nb, 2 * N, N); P.first = new Uint8Array(nb, 4 * N, N); P.last = new Uint8Array(nb, 5 * N, N); P.field = new Uint8Array(nb, 6 * N, N);
+  P.links = new Uint32Array(lb); P.lw = new Uint8Array(mb).filter((_, i) => i % 2 === 0); P.ly = new Uint8Array(mb).filter((_, i) => i % 2 === 1);
+  const M = P.links.length / 2;
+  // adjacency (CSR)
+  const deg = new Uint32Array(N + 1); for (let k = 0; k < P.links.length; k++) deg[P.links[k] + 1]++;
+  for (let i = 0; i < N; i++) deg[i + 1] += deg[i];
+  const fill = deg.slice(0, N), adj = new Uint32Array(P.links.length), adjL = new Uint32Array(P.links.length);
+  for (let k = 0; k < M; k++) { const a = P.links[2 * k], b = P.links[2 * k + 1]; adj[fill[a]] = b; adjL[fill[a]++] = k; adj[fill[b]] = a; adjL[fill[b]++] = k; }
+  P.off = deg; P.adj = adj; P.adjL = adjL; P.M = M;
+  A.names.forEach((n, i) => { nameFold[i] = fold(n); });
+  // initial positions: random disc, simulation does the rest
+  const pos = new Float32Array(2 * N); const R = 2048;
+  for (let i = 0; i < N; i++) { const a = Math.random() * 6.2832, r = Math.sqrt(Math.random()) * R * .6; pos[2 * i] = R + Math.cos(a) * r; pos[2 * i + 1] = R + Math.sin(a) * r; }
+  P.g = new Cosmos.Graph(stage, {
+    backgroundColor: [0, 0, 0, 0], rescalePositions: false, enableDrag: false, fitViewOnInit: false,
+    pointSizeScale: 1, scalePointsOnZoom: true, linkOpacity: 1, linkDefaultWidth: 0.4, curvedLinks: false, renderHoveredPointRing: true, hoveredPointRingColor: '#ffffff',
+    simulationGravity: 0.25, simulationRepulsion: 0.9, simulationLinkSpring: 1.2, simulationLinkDistance: 6, simulationFriction: 0.85, simulationDecay: 6000,
+    onSimulationEnd: () => { if (!P.touched) P.g.fitView(600, 0.06); },
+    onPointMouseOver: (i) => { P.hover = i; tipPeople(i, P.mouse); },
+    onPointMouseOut: () => { P.hover = -1; $('tip-ppl').hidden = true; },
+    onClick: (i) => { selectPerson(i === undefined ? -1 : i); },
+  });
+  stage.addEventListener('pointermove', (e) => { P.mouse = e; });
+  stage.addEventListener('wheel', () => { P.touched = true; }, { passive: true });
+  stage.addEventListener('pointerdown', () => { P.touched = true; });
+  P.g.setPointPositions(pos);
+  setTimeout(() => { if (!P.touched) P.g.fitView(600, 0.06); }, 3500);
+  P.g.setLinks(new Float32Array(P.links));
+  paintPeople(); P.g.render(); P.ready = true;
+  try { await P.g.ready; } catch {}
+  $('pcount').textContent = '';
+}
+function paintPeople() {
+  if (!P.g) return;
+  const N = P.N, from = S.from, to = S.to, mode = S.pcolor, ff = S.pfield, sel = P.sel;
+  const pal = new Map(); const col = (fi) => { let c = pal.get(fi); if (!c) { c = hex2rgba(colorFor(mode, fi)); pal.set(fi, c); } return c; };
+  const colors = new Float32Array(4 * N), sizes = new Float32Array(N), act = new Uint8Array(N);
+  const nb = new Set(); if (sel >= 0) { nb.add(sel); for (let k = P.off[sel]; k < P.off[sel + 1]; k++) nb.add(P.adj[k]); }
+  let active = 0;
+  for (let i = 0; i < N; i++) {
+    const on = (P.first[i] + 1950) <= to && (P.last[i] + 1950) >= from && (ff < 0 || P.field[i] === ff);
+    act[i] = on ? 1 : 0; if (on) active++;
+    const c = col(P.field[i] === 255 ? -1 : P.field[i]); let a = on ? 0.9 : 0;
+    if (sel >= 0 && !nb.has(i)) a *= .2;
+    colors[4 * i] = c[0]; colors[4 * i + 1] = c[1]; colors[4 * i + 2] = c[2]; colors[4 * i + 3] = a;
+    sizes[i] = on ? 1.5 + Math.sqrt(P.w[i]) * 0.4 : 0.01;
+  }
+  P.act = act; P.active = active;
+  const lc = new Float32Array(4 * P.M), ink = hex2rgba(css('--muted'));
+  for (let k = 0; k < P.M; k++) {
+    const a = P.links[2 * k], b = P.links[2 * k + 1]; let al = (act[a] && act[b] && (P.ly[k] + 1950) <= to) ? 0.16 : 0;
+    if (sel >= 0) al = (a === sel || b === sel) && al ? 0.8 : al ? 0.015 : 0;
+    lc[4 * k] = ink[0]; lc[4 * k + 1] = ink[1]; lc[4 * k + 2] = ink[2]; lc[4 * k + 3] = al;
+  }
+  P.g.setPointColors(colors); P.g.setPointSizes(sizes); P.g.setLinkColors(lc); P.g.render();
+  $('pcount').textContent = `${nf(active)} / ${nf(N)} ${t('active')}`;
+}
+let paintTimer; const paintPeopleSoon = () => { clearTimeout(paintTimer); paintTimer = setTimeout(paintPeople, 80); };
+function personInfo(i) {
+  const inst = P.inst[i] === 65535 ? '' : D.institutions[P.inst[i]].name, fi = P.field[i] === 255 ? '' : D.fields[P.field[i]].name;
+  return { inst, fi };
+}
+function tipPeople(i, ev) { if (!ev || !P.act?.[i]) { $('tip-ppl').hidden = true; return; } const { inst, fi } = personInfo(i); showTip($('tip-ppl'), `<b>${esc(A.names[i])}</b><div>${esc(inst)}</div><div class="muted">${esc(fi)} · ${P.w[i]} ${t('pcard').works} · ${P.first[i] + 1950}–${P.last[i] + 1950}</div>`, ev, $('pstage')); }
+function selectPerson(i) {
+  P.sel = i; paintPeople(); const el = $('pcard');
+  if (i < 0) { el.hidden = true; return; }
+  const { inst, fi } = personInfo(i), c = t('pcard'), co = [];
+  for (let k = P.off[i]; k < P.off[i + 1]; k++) co.push([P.adj[k], P.lw[P.adjL[k]]]);
+  co.sort((a, b) => b[1] - a[1] || P.w[b[0]] - P.w[a[0]]);
+  el.hidden = false;
+  el.innerHTML = `<button class="x" type="button" aria-label="${t('close')}">×</button><h4>${esc(A.names[i])}</h4><p>${esc(inst)}</p><p>${c.field}: ${esc(fi)}<br>${nf(P.w[i])} ${c.works} · ${c.years}: ${P.first[i] + 1950}–${P.last[i] + 1950}</p><p style="margin-top:.6rem">${c.coauth}: ${co.length}</p><ul>${co.slice(0, 10).map(([j, w]) => `<li><span><button type="button" data-j="${j}" style="text-align:left;text-decoration:underline;text-decoration-color:var(--rule)">${esc(A.names[j])}</button></span><span>${w}</span></li>`).join('')}</ul>`;
+  el.querySelector('.x').onclick = () => selectPerson(-1);
+  el.querySelectorAll('[data-j]').forEach((b) => b.onclick = () => { const j = +b.dataset.j; selectPerson(j); P.g.zoomToPointByIndex(j, 600, 4, true); });
+}
+function searchPeople(q) {
+  const box = $('presults'); q = fold(q.trim());
+  if (q.length < 2 || !P.ready) { box.hidden = true; return; }
+  const out = []; for (let i = 0; i < P.N && out.length < 8; i++) if (nameFold[i].includes(q)) out.push(i);
+  box.innerHTML = out.map((i) => `<button type="button" data-i="${i}"><span>${esc(A.names[i])}</span><small>${P.w[i]} · ${esc(personInfo(i).inst.slice(0, 26))}</small></button>`).join('');
+  box.hidden = !out.length;
+  box.querySelectorAll('button').forEach((b) => b.onclick = () => { const i = +b.dataset.i; box.hidden = true; $('psearch').value = A.names[i]; P.touched = true; selectPerson(i); P.g.zoomToPointByIndex(i, 800, 4, true); });
+}
+
+// ---------------------------------------------------------------- fields
+let fSort = 'w';
+function fieldRows() {
+  return D.fields.map((f, i) => { const w = S.small ? sum(f.sm, S.from - Y0, S.to - Y0) : rng(f.w), n = S.small ? sum(f.smIntl, S.from - Y0, S.to - Y0) : rng(f.intl); return { i, f, w, n, p: w ? n / w : 0 }; }).filter((r) => r.w > 0);
+}
+function drawFields() {
+  const rows = fieldRows(), svg = $('fscatter'), tip = $('tip-fields'), w = Math.max(300, svg.parentNode.clientWidth), h = w < 600 ? 300 : 380, m = { l: 46, r: 14, t: 10, b: 36 };
+  svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+  const x = d3.scaleLog([Math.max(1, d3.min(rows, (r) => r.w) * .8), d3.max(rows, (r) => r.w) * 1.2], [m.l, w - m.r]), y = d3.scaleLinear([0, 1], [h - m.b, m.t]);
+  let s = '';
+  for (const v of [0, .25, .5, .75, 1]) s += `<line class="grid" x1="${m.l}" x2="${w - m.r}" y1="${y(v)}" y2="${y(v)}"/><text x="${m.l - 6}" y="${y(v) + 3}" text-anchor="end">${pc(v)}</text>`;
+  for (const v of x.ticks(5)) if (Number.isInteger(Math.log10(v)) || [2, 5].includes(v / 10 ** Math.floor(Math.log10(v)))) s += `<text x="${x(v)}" y="${h - 18}" text-anchor="middle">${nf(v)}</text>`;
+  s += `<text x="${(m.l + w - m.r) / 2}" y="${h - 3}" text-anchor="middle">${t('fx')}</text><text transform="translate(11 ${(m.t + h - m.b) / 2}) rotate(-90)" text-anchor="middle">${t('fy')}</text>`;
+  const dc = domCol();
+  for (const r of rows) s += `<circle data-i="${r.i}" cx="${x(r.w)}" cy="${y(r.p)}" r="${5 + (r.i === selField ? 2 : 0)}" fill="${dc[r.f.domain]}" stroke="${r.i === selField ? css('--ink') : css('--paper')}" stroke-width="${r.i === selField ? 2 : 1}" opacity=".9" style="cursor:pointer"/>`;
+  svg.innerHTML = s;
+  svg.querySelectorAll('circle').forEach((c) => { const r = rows.find((q) => q.i === +c.dataset.i); c.onpointermove = (ev) => showTip(tip, `<b>${esc(r.f.name)}</b><div class="row"><span>${t('works')}</span><span>${nf(r.w)}</span></div><div class="row"><span>${t('withForeign')}</span><span>${pc(r.p)}</span></div>`, ev, svg.parentNode); c.onpointerleave = () => tip.hidden = true; c.onclick = () => { selField = r.i; drawFields(); }; });
+  $('flegend').innerHTML = t('dom').map((d, i) => `<span><i style="--c:${dc[i]}"></i>${esc(d)}</span>`).join('');
+  // table
+  const sorted = [...rows].sort((a, b) => fSort === 'p' ? b.p - a.p : b.w - a.w); const th = t('th');
+  const topP = (f) => f.partners.slice(0, 3).map(([c]) => { return regionName(c); }).join(', ');
+  $('ftable').innerHTML = `<thead><tr><th>${th[0]}</th><th class="n"><button type="button" data-s="w" ${fSort === 'w' ? 'aria-sort="descending"' : ''}>${th[1]}</button></th><th class="n">${th[2]}</th><th class="n"><button type="button" data-s="p" ${fSort === 'p' ? 'aria-sort="descending"' : ''}>${th[3]}</button></th><th>${th[4]}</th></tr></thead><tbody>${sorted.map((r) => `<tr data-i="${r.i}" tabindex="0" aria-selected="${r.i === selField}"><td><i style="--c:${dc[r.f.domain]}"></i>${esc(r.f.name)}</td><td class="n">${nf(r.w)}</td><td class="n">${nf(r.n)}</td><td class="n">${pc(r.p)}</td><td>${esc(topP(r.f))}</td></tr>`).join('')}</tbody>`;
+  $('ftable').querySelectorAll('th button').forEach((b) => b.onclick = () => { fSort = b.dataset.s; drawFields(); });
+  $('ftable').querySelectorAll('tbody tr').forEach((tr) => { tr.onclick = () => { selField = +tr.dataset.i; drawFields(); }; tr.onkeydown = (e) => { if (e.key === 'Enter') { selField = +tr.dataset.i; drawFields(); } }; });
+  const fd = $('fdetail');
+  if (selField >= 0 && rows.find((r) => r.i === selField)) { const f = D.fields[selField]; fd.innerHTML = `<h3>${esc(f.name)}</h3><p class="note">${t('fSub')}: ${esc(f.sub.map(([n, c]) => `${n} (${nf(c)})`).join(' · '))}<br>${t('fPartners')}: ${esc(f.partners.map(([c, n]) => { return `${regionName(c)} (${nf(n)})`; }).join(' · '))}</p>`; } else fd.innerHTML = '';
+}
+let selField = -1;
+
+// ---------------------------------------------------------------- venues
+function drawVenues() {
+  const svg = $('venues'), tip = $('tip-venues'), V = D.venues, h = window.innerWidth < 600 ? 200 : 260, x0 = 25;
+  const share = (a) => a.map((v, i) => D.totals.all[i] ? v / D.totals.all[i] : 0);
+  const ser = [{ k: 'vNone', a: share(V.none), c: css('--accent') }, { k: 'vCore', a: share(V.core), c: css('--second') }, { k: 'vDoaj', a: share(V.doaj), c: css('--d1') }, { k: 'vNoSrc', a: share(V.nosource), c: css('--muted') }];
+  const fr = chartFrame(svg, h, 1, (v) => pc(v), { x0 });
+  let s = fr.g;
+  for (const q of ser) s += `<path class="ln" stroke="${q.c}" d="${d3.range(x0, Y1 - Y0 + 1).map((i) => `${i === x0 ? 'M' : 'L'}${fr.x(Y0 + i).toFixed(1)},${fr.y(q.a[i]).toFixed(1)}`).join('')}"/>`;
+  s += `<rect x="${fr.x(Math.max(S.from, Y0 + x0))}" width="${Math.max(0, fr.x(S.to) - fr.x(Math.max(S.from, Y0 + x0)))}" y="${fr.m.t}" height="${h - fr.m.b - fr.m.t}" fill="var(--ink)" opacity=".05" pointer-events="none"/>`;
+  svg.innerHTML = s;
+  hoverYear(svg, tip, fr, (yr) => { const i = iy(yr); return `<b>${yr}${yr === Y1 ? ' *' : ''}</b>` + ser.map((q) => `<div class="row"><span><i style="background:${q.c}"></i>${t(q.k)}</span><span>${pc(q.a[i], 1)}</span></div>`).join('') + `<div class="row"><span>${t('works')}</span><span>${nf(D.totals.all[i])}</span></div>`; });
+  $('venlegend').innerHTML = ser.map((q) => `<span><i style="--c:${q.c}"></i>${t(q.k)}</span>`).join('');
+  const th = t('thS');
+  $('srctable').innerHTML = `<thead><tr><th>${th[0]}</th><th>${th[1]}</th><th class="n">${th[2]}</th><th>${th[3]}</th></tr></thead><tbody>${V.recentTop.map((r) => `<tr style="cursor:default"><td>${esc(r.name)}</td><td>${esc(r.host ?? '')}</td><td class="n">${nf(r.n)}</td><td>${[r.core ? 'CWTS Core' : '', r.doaj ? 'DOAJ' : '', r.listed ? `${r.listed} ${t('listed')}` : ''].filter(Boolean).join(', ') || t('unlisted')}</td></tr>`).join('')}</tbody>`;
+}
+
+// ---------------------------------------------------------------- chrome: language, years, presets
+function setRange(a, b, from) {
+  S.from = Math.min(a, b); S.to = Math.max(a, b);
+  $('r-from').value = S.from; $('r-to').value = S.to; $('o-from').textContent = S.from; $('o-to').textContent = S.to;
+  const lo = +$('r-from').min, hi = +$('r-from').max; $('fill').style.left = (100 * (S.from - lo) / (hi - lo)) + '%'; $('fill').style.right = (100 - 100 * (S.to - lo) / (hi - lo)) + '%';
+  document.querySelectorAll('#presets button').forEach((b2) => b2.setAttribute('aria-pressed', +b2.dataset.a === S.from && +b2.dataset.b === S.to));
+  void from;
+}
+function refresh(light) {
+  drawTiles(); drawVolume(); drawPartners(); drawCountryList(); drawInst(); if (I.sel) cardInst(I.sel); drawFields(); drawVenues();
+  if (!light) paintPeopleSoon(); else paintPeopleSoon();
+  document.querySelectorAll('#teams button').forEach((b) => b.setAttribute('aria-pressed', (b.dataset.v === 'small') === S.small));
+  document.querySelectorAll('#metric button').forEach((b) => b.setAttribute('aria-pressed', b.dataset.v === S.metric));
+}
+function words() {
+  const d = D, big = sum(d.totals.big), all = sum(d.totals.all);
+  const g = (y) => sum(d.totals.all, iy(y), iy(y));
+  return { works: nf(d.works), pre1991: nf(d.pre1991), pre1991Partners: d.pre1991Partners.slice(0, 4).map(([c]) => { const cc = d.countries.find((q) => q.code === c); return cc ? cname(cc) : c; }).join(', ') || '–',
+    growth: `${nf(g(2022))} → ${nf(g(2023))} → ${nf(g(2024))} → ${nf(g(2025))} → ${nf(g(2026))}`, big: nf(big), bigp: pc(big / all, 1), outside: nf(d.outside), top15: pc(d.venues.topShare) };
+}
+function applyLang() {
+  document.documentElement.lang = lang; document.title = t('doc');
+  document.querySelectorAll('[data-i18n]').forEach((e) => { const v = t(e.dataset.i18n); if (typeof v === 'string') e.textContent = v; });
+  document.querySelectorAll('[data-lang]').forEach((b) => b.setAttribute('aria-pressed', b.dataset.lang === lang));
+  document.querySelectorAll('[data-keep-lang]').forEach((a) => { const u = new URL(a.getAttribute('href'), location.href); if (lang === 'az') u.searchParams.delete('lang'); else u.searchParams.set('lang', lang); a.href = u.pathname + u.search; });
+  $('kx-nav').href = (location.hostname === 'localhost' ? 'https://kitabxana.az' : 'https://kitabxana.az') + '/';
+  $('psearch').placeholder = t('searchPh'); document.querySelectorAll('#presets button').forEach((b) => { b.textContent = b.dataset.a === '1970' && b.dataset.b === '2026' ? t('all') : b.dataset.label; });
+  if (!D) return;
+  const w = words();
+  $('lede').textContent = t('lede')(w);
+  $('cnote').textContent = t('cNote')(w) + ' ' + t('rNote')(D.countries.length + D.countriesRest);
+  $('inote').textContent = t('iNote')(D.azCount, D.institutions.length - D.azCount, D.edges.length);
+  $('pwhat').textContent = t('pplH') && t('pwhat')({ n: nf(A.n), links: nf(A.links), min: A.minWorks, cap: A.cap });
+  $('pnote').textContent = t('pNote');
+  $('caveats').innerHTML = t('cav')(w).map((x) => `<li>${esc(x)}</li>`).join('');
+  $('foot').innerHTML = `<p>${t('foot')(D.generated, nf(D.works))}</p>`;
+  const pf = $('pfield'), cur = pf.value; pf.innerHTML = `<option value="-1">${t('anyField')}</option>` + fieldRank.map(([fi]) => `<option value="${fi}">${esc(D.fields[fi].name)}</option>`).join(''); pf.value = cur || '-1';
+  legendFor($('ilegend'), S.icolor); legendFor($('plegend'), S.pcolor);
+  refresh(); if (P.sel >= 0) selectPerson(P.sel);
+}
+function buildPresets() {
+  const defs = [['1991', '2026', '1991–'], ['1991', '1999', '1990s'], ['2000', '2009', '2000s'], ['2010', '2019', '2010s'], ['2020', '2026', '2020–'], ['1970', '2026', '']];
+  $('presets').innerHTML = defs.map(([a, b, l]) => `<button type="button" data-a="${a}" data-b="${b}" data-label="${l}">${l}</button>`).join('');
+  $('presets').querySelectorAll('button').forEach((b) => b.onclick = () => { setRange(+b.dataset.a, +b.dataset.b); refresh(); });
+}
+
+document.querySelectorAll('[data-lang]').forEach((b) => b.onclick = () => { lang = b.dataset.lang; try { localStorage.setItem('lang', lang); } catch {} const u = new URL(location.href); if (lang === 'az') u.searchParams.delete('lang'); else u.searchParams.set('lang', lang); history.replaceState(null, '', u); applyLang(); });
+for (const id of ['r-from', 'r-to']) $(id).addEventListener('input', () => {
+  let a = +$('r-from').value, b = +$('r-to').value; if (id === 'r-from' && a > b) b = a; if (id === 'r-to' && b < a) a = b; setRange(a, b); refresh(true);
+});
+document.querySelectorAll('#teams button').forEach((b) => b.onclick = () => { S.small = b.dataset.v === 'small'; refresh(); });
+document.querySelectorAll('#metric button').forEach((b) => b.onclick = () => { S.metric = b.dataset.v; refresh(); });
+$('addc').onchange = (e) => { if (e.target.value) { S.sel.add(e.target.value); drawCountryList(); drawPartners(); } };
+$('icolor').onchange = (e) => { S.icolor = e.target.value; legendFor($('ilegend'), S.icolor); drawInst(); if (I.sel) cardInst(I.sel); };
+$('iminw').onchange = (e) => { S.iminw = +e.target.value; drawInst(); if (I.sel) cardInst(I.sel); };
+$('iforeign').onchange = (e) => { S.iforeign = e.target.checked; drawInst(); };
+$('pcolor').onchange = (e) => { S.pcolor = e.target.value; legendFor($('plegend'), S.pcolor); paintPeople(); };
+$('pfield').onchange = (e) => { S.pfield = +e.target.value; paintPeople(); };
+$('psearch').addEventListener('input', (e) => searchPeople(e.target.value));
+document.addEventListener('click', (e) => { if (!e.target.closest('.search')) $('presults').hidden = true; });
+let rz; addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(() => { if (!D) return; drawVolume(); drawPartners(); drawFields(); drawVenues(); if (I.ready) { sizeInst(); drawInst(); } }, 120); });
+addEventListener('themechange', () => { if (D) { legendFor($('ilegend'), S.icolor); legendFor($('plegend'), S.pcolor); refresh(); } });
+matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change', () => { if (D) setTimeout(() => { legendFor($('ilegend'), S.icolor); legendFor($('plegend'), S.pcolor); refresh(); }, 50); });
+
+// ---------------------------------------------------------------- boot
+(async () => {
+  buildPresets();
+  const [d, a] = await Promise.all([fetch('data/elm.json').then((r) => r.json()), fetch('data/authors.json').then((r) => r.json())]);
+  D = d; A = a; [Y0, Y1] = D.years;
+  for (const id of ['r-from', 'r-to']) { $(id).min = Y0; $(id).max = Y1; }
+  const q = new URLSearchParams(location.search);
+  const f = +q.get('from') || 1991, to = +q.get('to') || Y1; setRange(Math.max(Y0, f), Math.min(Y1, to));
+  if (q.get('teams') === 'small') S.small = true;
+  fieldRank = D.fields.map((f2, i) => [i, sum(f2.w)]).sort((x, y) => y[1] - x[1]); fieldRank.slice(0, 11).forEach(([fi], k) => fieldColorIdx.set(fi, k));
+  applyLang();
+  initInstitutions(); drawInst();
+  initPeople().catch((e) => { console.error(e); $('cosmos').innerHTML = `<div class="nogl">${esc(String(e.message || e))}</div>`; });
+  window.__elm = { S, D, I, P, fitInst, sizeInst, ready: true };
+})();
+})();
+</script>
+</body>
+</html>
