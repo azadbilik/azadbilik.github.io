@@ -21,9 +21,9 @@
 
 The hub's shared graph view, [`/shared/graph.js`](../../shared/graph.js) + `graph.css`: sigma.js 3.0.3 over graphology 0.26.0 (MIT), jsDelivr.
 
-- **Tree (default):** ELK's layered algorithm (elkjs 0.11.1, EPL-2.0, loaded only for this view), direction RIGHT: each generation a column, crossings minimised (layer sweep), nodes placed by network simplex. Each connected lineage is laid out alone: the largest on top, the small chains below it in rows, largest first. Edges are ELK's splines with arrows from master to student; Wikidata links solid, text-derived links dashed. The whole drawing scales with the zoom; labels never go below 10.5 px and the ones that would collide wait for a closer zoom.
+- **Tree (default):** ELK's layered algorithm (elkjs 0.11.1, EPL-2.0, loaded only for this view), direction RIGHT: each generation a column, crossings minimised (layer sweep), nodes placed by network simplex. Each connected lineage is laid out alone: the largest on top, the small chains below it in rows, largest first. Edges are ELK's splines with arrows from master to student; Wikidata links solid, darker and wider (ink, 1.45×), text-derived links dashed and lighter (muted). The whole drawing scales with the zoom; labels never go below 9.5 px, and one that would run into the next is cut short with … rather than dropped (`trimLabels`). The page opens framed on the largest lineage (`start: 'main'`); the fit button shows all of them. On a phone it opens on that lineage's first generations at a readable size, with a note that it pans (`panHint`).
 - **Network:** the same links by ForceAtlas2 (graphology-layout-forceatlas2 0.10.1), seeded, a fixed number of iterations, so the same on every load.
-- Hover or tap lights a musician's whole line (every master above, every student below); a click pins it and opens the card (side panel; a bottom sheet on a phone). The Wikidata / text chips hide links without relayout. Node size: √ students; hollow: a master not on the map.
+- Hover or tap lights a musician's whole line (every master above, every student below), drawn in the musician's own colour at full strength (`litColor: 'node'`); a click pins it and opens the card (side panel; a bottom sheet on a phone). The Wikidata / text chips hide links without relayout. Node size: √ students; hollow: a master not on the map.
 
 ## Caveats
 

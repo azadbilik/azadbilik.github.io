@@ -201,8 +201,11 @@ function draw() {
     layout: 'layered', direction: 'RIGHT', toggle: true, edgeClick: false,
     label: lab, searchText: (p) => [p.az, p.ru, p.en].join(' '), color: (p) => COL[role(p)], hollow: (p) => !!p.offmap,
     size: (p) => 4.2 + 1.5 * Math.sqrt(allKids.get(p.qid) ?? 0),
-    dashed: (e) => e.src === 'text', edgeAlpha: 0.7, labelSize: 12,
-    edgeColor: () => 'var(--muted)',
+    // Wikidata solid and dark, text dashed and lighter; a focused line in the musician's own colour
+    dashed: (e) => e.src === 'text', dash: [3, 3.5], edgeWidth: (e) => (e.src === 'text' ? 1 : 1.45), edgeAlpha: 0.65, labelSize: 12,
+    edgeColor: (e) => (e.src === 'text' ? 'var(--muted)' : 'var(--ink)'), litColor: 'node',
+    // labels down to 9.5 px, cut short rather than dropped; open on the main lineage (a phone: its left part)
+    minLabel: 9.5, trimLabels: true, start: 'main', panHint: true,
     // a musician lights up their whole line: every master above and every student below
     focus: (q) => {
       const up = closure(q, parents, 't'), down = closure(q, kids, 's'), es = new Set();

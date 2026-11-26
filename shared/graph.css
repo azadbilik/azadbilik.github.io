@@ -54,3 +54,6 @@
 @media (min-width: 48.01rem) {
   .gx.gx-wide { width: min(calc(100vw - 3rem), 80rem); margin-left: calc(50% - min(50vw - 1.5rem, 40rem)); }
 }
+/* panHint: a note that the tree goes on past the stage's edge; gone at the first touch, drag or wheel */
+.gx-pan { position: absolute; z-index: 2; left: 50%; bottom: .7rem; transform: translateX(-50%); max-width: calc(100% - 1.5rem); padding: .35rem .75rem; border-radius: 999px; background: var(--ink); color: var(--paper); font-size: .75rem; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; pointer-events: none; opacity: .9; transition: opacity .4s; }
+.gx-pan.gx-gone { opacity: 0; }

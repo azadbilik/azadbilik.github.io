@@ -25,6 +25,16 @@
 //     strings: { search, fit, zoomIn, zoomOut, close, force, layered },
 //     toggle: true,                        // a force / layered switch in the toolbar
 //     edgeClick: true,                     // edges can be hovered and clicked (onSelect type 'edge')
+//     shape: (n) => 'circle',              // or 'square' | 'diamond' | 'triangle' (drawn by us, filled; hollow() makes it an outline)
+//     edgeWidth: (e) => 1,                 // a line's width relative to the default (1 px; lit and hovered lines scale too)
+//     dash: [4, 3],                        // the dashed() lines' pattern, px at width 1
+//     litColor: 'edge' | 'node',           // 'node': lines lit by a focused node take that node's colour at full strength
+//     labelRank: (n) => size,              // which labels win a collision (higher first); below 0: shown only on focus
+//     minLabel: 10.5,                      // layered: the smallest label size, px, however far out the zoom
+//     trimLabels: false,                   // layered: a label that would collide is shortened with … to fit, not dropped
+//     start: 'all' | 'main',               // layered: open on the largest lineage ('main'), the fit button shows all;
+//                                          //   on a stage narrower than the tree it opens on the tree's left part, at a readable height
+//     panHint: false,                      // a "drag to see more" note while the start view shows part of the tree (strings.pan)
 //   });
 //   g.focus(id) / g.focusEdge(id) / g.clear(); g.search('füz') → [{ id, label }]; g.setFilter(nodeFn, edgeFn);
 //   g.fit(); g.zoom(±1); g.setLayout('force'|'layered'); g.relabel(); g.setStrings({...}); g.positions(); g.destroy()
@@ -47,9 +57,9 @@ import forceAtlas2 from 'https://cdn.jsdelivr.net/npm/graphology-layout-forceatl
 
 const ELK_URL = 'https://cdn.jsdelivr.net/npm/elkjs@0.11.1/lib/elk.bundled.js/+esm';
 const STRINGS = {
-  az: { search: 'Axtar…', fit: 'Hamısı', zoomIn: 'Yaxınlaşdır', zoomOut: 'Uzaqlaşdır', close: 'Bağla', force: 'Şəbəkə', layered: 'Ağac', none: 'Tapılmadı' },
-  ru: { search: 'Поиск…', fit: 'Всё', zoomIn: 'Приблизить', zoomOut: 'Отдалить', close: 'Закрыть', force: 'Сеть', layered: 'Дерево', none: 'Не найдено' },
-  en: { search: 'Search…', fit: 'Fit', zoomIn: 'Zoom in', zoomOut: 'Zoom out', close: 'Close', force: 'Network', layered: 'Tree', none: 'Nothing found' },
+  az: { search: 'Axtar…', fit: 'Hamısı', zoomIn: 'Yaxınlaşdır', zoomOut: 'Uzaqlaşdır', close: 'Bağla', force: 'Şəbəkə', layered: 'Ağac', none: 'Tapılmadı', pan: 'Sürüşdürün: ağac sağa davam edir →' },
+  ru: { search: 'Поиск…', fit: 'Всё', zoomIn: 'Приблизить', zoomOut: 'Отдалить', close: 'Закрыть', force: 'Сеть', layered: 'Дерево', none: 'Не найдено', pan: 'Листайте: дерево продолжается вправо →' },
+  en: { search: 'Search…', fit: 'Fit', zoomIn: 'Zoom in', zoomOut: 'Zoom out', close: 'Close', force: 'Network', layered: 'Tree', none: 'Nothing found', pan: 'Drag: the tree goes on to the right →' },
 };
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
 // Search folds case and diacritics, and Azerbaijani letters to their Latin look-alikes
@@ -122,14 +132,17 @@ export function createGraph(container, o) {
     if (!ccache.has(c)) { probe.style.color = ''; probe.style.color = c; ccache.set(c, parseColor(getComputedStyle(probe).color)); }
     return ccache.get(c);
   };
+  const shapeOf = (n) => { const s = opt.shape?.(n); return s && s !== 'circle' ? s : null; };
   function readTheme() {
     ccache.clear();
     C = { paper: css('var(--paper)'), ink: css('var(--ink)'), muted: css('var(--muted)'), accent: css('var(--accent)') };
     const font = getComputedStyle(container).getPropertyValue('--sans').trim() || "'Inter', system-ui, sans-serif";
     C.font = font;
     graph.forEachNode((id) => {
-      const n = byId.get(id), c = css(opt.color(n));
-      graph.mergeNodeAttributes(id, { rgb: c, color: rgba(opt.hollow(n) ? C.paper : c), faded: rgba(mix(opt.hollow(n) ? C.paper : c, C.paper, 0.84)) });
+      const n = byId.get(id), c = css(opt.color(n)), sh = shapeOf(n);
+      // a shaped node is drawn by us (paint), sigma's disc only takes the pointer
+      if (sh) graph.mergeNodeAttributes(id, { rgb: c, shape: sh, color: 'rgba(0,0,0,0)', faded: 'rgba(0,0,0,0)' });
+      else graph.mergeNodeAttributes(id, { rgb: c, color: rgba(opt.hollow(n) ? C.paper : c), faded: rgba(mix(opt.hollow(n) ? C.paper : c, C.paper, 0.84)) });
     });
     graph.forEachEdge((id) => { const e = edgeById.get(id); graph.setEdgeAttribute(id, 'rgb', css(opt.edgeColor(e)) ?? null); });
   }
@@ -222,10 +235,11 @@ export function createGraph(container, o) {
       if (!edgeOn(id)) return;
       const ps = P.get(s), pt = P.get(t); if (!ps || !pt) return;
       const e = edgeById.get(id), on = lit?.edges.has(id), hot = hoverEdge === id || (pinned?.type === 'edge' && pinned.id === id);
-      const base = a.rgb ?? graph.getNodeAttribute(s, 'rgb');
-      const alpha = hot ? 1 : on ? 0.95 : lit ? 0.06 : opt.weak(e) ? opt.edgeAlpha * 0.5 : opt.edgeAlpha;
+      const nodeLit = opt.litColor === 'node' && on && lit?.center != null;
+      const base = nodeLit ? graph.getNodeAttribute(lit.center, 'rgb') : a.rgb ?? graph.getNodeAttribute(s, 'rgb');
+      const alpha = hot || nodeLit ? 1 : on ? 0.95 : lit ? 0.06 : opt.weak(e) ? opt.edgeAlpha * 0.5 : opt.edgeAlpha;
       const zk = layered() ? Math.min(1, Math.max(0.35, k)) : 1;   // a zoomed-out diagram thins its lines and arrows
-      const w = (hot ? 2.6 : on ? 1.8 : 1) * zk;
+      const w = +((hot ? 2.6 : on ? 1.8 : 1) * zk * (opt.edgeWidth ? opt.edgeWidth(e) : 1)).toFixed(2);
       const key = `${rgba(base, alpha)}|${w}|${opt.dashed(e) ? 1 : 0}`;
       const b = bucket(key);
       let tipX, tipY, ux, uy;
@@ -260,7 +274,8 @@ export function createGraph(container, o) {
     for (const [key, b] of order) {
       const [col, w, dash] = key.split('|');
       ectx.strokeStyle = col; ectx.fillStyle = col; ectx.lineWidth = +w;
-      ectx.setLineDash(dash === '1' ? [4 * Math.max(1, +w * 0.7), 3 * Math.max(1, +w * 0.7)] : []);
+      const dp = opt.dash ?? [4, 3];
+      ectx.setLineDash(dash === '1' ? [dp[0] * Math.max(1, +w * 0.7), dp[1] * Math.max(1, +w * 0.7)] : []);
       ectx.stroke(b.line); ectx.setLineDash([]); ectx.fill(b.head);
     }
     // hollow nodes: a ring in their colour
@@ -268,7 +283,20 @@ export function createGraph(container, o) {
       const a = graph.getNodeAttributes(id); if (!a.hollow) continue;
       const faded = lit && !lit.nodes.has(id);
       lctx.beginPath(); lctx.arc(p.x, p.y, Math.max(1, p.r - 0.9), 0, Math.PI * 2);
+      if (a.shape) continue;
       lctx.lineWidth = 1.8; lctx.strokeStyle = rgba(faded ? mix(a.rgb, C.paper, 0.84) : a.rgb); lctx.stroke();
+    }
+    // shaped nodes: a square, a diamond or a triangle of about the disc's area, on a paper halo
+    for (const [id, p] of P) {
+      const a = graph.getNodeAttributes(id); if (!a.shape) continue;
+      const faded = lit && !lit.nodes.has(id), col = rgba(faded ? mix(a.rgb, C.paper, 0.84) : a.rgb), r = p.r;
+      lctx.beginPath();
+      if (a.shape === 'square') { const h = r * 0.9; lctx.rect(p.x - h, p.y - h, 2 * h, 2 * h); }
+      else if (a.shape === 'diamond') { const h = r * 1.2; lctx.moveTo(p.x, p.y - h); lctx.lineTo(p.x + h, p.y); lctx.lineTo(p.x, p.y + h); lctx.lineTo(p.x - h, p.y); lctx.closePath(); }
+      else { const h = r * 1.25; lctx.moveTo(p.x, p.y - h); lctx.lineTo(p.x + h * 0.95, p.y + h * 0.62); lctx.lineTo(p.x - h * 0.95, p.y + h * 0.62); lctx.closePath(); }
+      lctx.lineJoin = 'round';
+      if (a.hollow) { lctx.fillStyle = rgba(C.paper); lctx.fill(); lctx.lineWidth = 1.8; lctx.strokeStyle = col; lctx.stroke(); }
+      else { lctx.lineWidth = 1.5; lctx.strokeStyle = rgba(C.paper); lctx.stroke(); lctx.fillStyle = col; lctx.fill(); }
     }
     labels(P, k, W, H);
   }
@@ -287,20 +315,31 @@ export function createGraph(container, o) {
     const center = lit?.center ?? (pinned?.type === 'node' ? pinned.id : null);
     const forced = new Set(lit ? lit.nodes : []); if (hovered) forced.add(hovered);
     const ids = [...P.keys()];
-    const size = (id) => graph.getNodeAttribute(id, 'size');
+    const size = opt.labelRank ? (id) => opt.labelRank(byId.get(id)) : (id) => graph.getNodeAttribute(id, 'size');
     ids.sort((a, b) => (b === center) - (a === center) || forced.has(b) - forced.has(a) || size(b) - size(a) || (a < b ? -1 : 1));
     lctx.lineJoin = 'round'; lctx.textBaseline = 'middle';
     const below = layered() && opt.direction === 'DOWN';
     for (const id of ids) {
       const p = P.get(id), f = forced.has(id);
+      if (!f && opt.labelRank && size(id) < 0) continue;
       // a diagram's labels grow and shrink with it, but never below a readable size: those that would then
       // collide wait for a closer zoom
-      const fs = Math.min(Math.max(scaled, layered() ? 10.5 : scaled), base * 1.5);
-      const text = short(graph.getNodeAttribute(id, 'label') || '');
+      const fs = Math.min(Math.max(scaled, layered() ? opt.minLabel ?? 10.5 : scaled), base * 1.5);
+      let text = short(graph.getNodeAttribute(id, 'label') || '');
       if (!text) continue;
       const weight = id === center ? 650 : 500;
       const font = `${weight} ${fs.toFixed(1)}px ${C.font}`;
-      const w = textW(lctx, text, font), h = fs * (layered() ? 1.1 : 1.25);
+      let w = textW(lctx, text, font); const h = fs * (layered() ? 1.1 : 1.25);
+      if (opt.trimLabels && layered() && !below) {
+        // a lineage label that would run into the next one is cut short (at least 6 letters and …) rather than dropped
+        const x = p.x + p.r + 4, y = p.y, pad = f ? 1 : 3;
+        const room = placed.filter((o) => o[0] >= x && o[1] < y + h / 2 && o[3] > y - h / 2).reduce((m, o) => Math.min(m, o[0] - pad - 2 - x), Infinity);
+        if (w > room) {
+          let cut = text.replace(/…$/, '');
+          while (cut.length > 6 && textW(lctx, `${cut}…`, font) > room) cut = cut.slice(0, -1).trimEnd();
+          if (cut.length > 6 || textW(lctx, `${cut}…`, font) <= room) { text = `${cut}…`; w = textW(lctx, text, font); }
+        }
+      }
       const pad = f ? 1 : 3;
       const cands = below
         ? [[p.x - w / 2, p.y + p.r + 2 + h / 2], [p.x + p.r + 4, p.y]]
@@ -675,7 +714,8 @@ export function createGraph(container, o) {
     }
     const box = { x0: Infinity, x1: -Infinity, y0: Infinity, y1: -Infinity };
     for (const c of res.children) { box.x0 = Math.min(box.x0, c.x); box.x1 = Math.max(box.x1, c.x + c.width); box.y0 = Math.min(box.y0, -(c.y + c.height)); box.y1 = Math.max(box.y1, -c.y); }
-    saved.layered = { pos, routes, box };
+    const mb = outs[0] ? { x0: 0, x1: outs[0].width, y0: -outs[0].height, y1: 0 } : box;
+    saved.layered = { pos, routes, box, main: mb, mainIds: comps[0] ?? [] };
     setPositions(pos);
   }
 
@@ -691,19 +731,57 @@ export function createGraph(container, o) {
     }
     const b = layered() ? saved.layered.box : bounds(snapshot(), visible);
     renderer.setCustomBBox({ x: [b.x0, b.x1], y: [b.y0, b.y1] });
+    if (layered() && opt.start === 'main') renderer.refresh();   // the box's mapping, which startView reads
     camera.setState(startView());
     renderer.refresh();
+    if (opt.panHint) showPanHint(layered() && partial);
   }
 
   // A tree much wider than the stage (a phone) starts at a readable height, from its left edge (masters
-  // first), to be panned; anything else starts fitted
+  // first), to be panned; anything else starts fitted. start: 'main' frames the largest lineage instead
+  let partial = false;
   function startView() {
     const W = container.clientWidth || 1, H = container.clientHeight || 1;
+    partial = false;
+    if (layered() && saved.layered && opt.start === 'main') return mainView(W, H);
     if (layered() && saved.layered) {
       const b = saved.layered.box, bw = b.x1 - b.x0, bh = b.y1 - b.y0;
-      if (W / H < 0.75 * (bw / bh)) { const r = Math.max(0.3, (W * bh) / (H * bw)); return { x: r / 2, y: 0.5, ratio: r, angle: 0 }; }
+      if (W / H < 0.75 * (bw / bh)) { partial = true; const r = Math.max(0.3, (W * bh) / (H * bw)); return { x: r / 2, y: 0.5, ratio: r, angle: 0 }; }
     }
     return { x: 0.5, y: 0.5, ratio: 1, angle: 0 };
+  }
+  function mainView(W, H) {
+    const b = saved.layered.main, one = { x: 0.5, y: 0.5, ratio: 1, angle: 0 };
+    // the main lineage's corners in px with the camera at rest (ratio 1 = the whole picture fitted)
+    const a = renderer.graphToViewport({ x: b.x0, y: b.y1 }, { cameraState: one }), z = renderer.graphToViewport({ x: b.x1, y: b.y0 }, { cameraState: one });
+    const bw = Math.abs(z.x - a.x), bh = Math.abs(z.y - a.y), top = 56, side = 16;
+    let r = Math.max(bw / (W - 2 * side), bh / (H - top - side));
+    // much wider than the stage (a phone): fit its height, or less if the labels would then be too small to
+    // read, and start from its left edge (the masters)
+    if (W / H < 0.75 * (bw / bh)) {
+      const k = bw / (b.x1 - b.x0 || 1), readable = (opt.labelSize * k) / Math.max(10, opt.minLabel ?? 10.5);   // labels at their smallest size
+      r = Math.min(bh / (H - top - side), readable); partial = true;
+    }
+    r = Math.max(0.08, r);
+    // camera so that the box's left (partial) or centre lands in the open stage; a partial view centres
+    // on the height of what it shows (the first generations), not on the whole lineage's
+    let my = (a.y + z.y) / 2;
+    if (partial) {
+      const k = bw / (b.x1 - b.x0 || 1), reach = b.x0 + ((W - side) * r) / k, ys = [];
+      for (const id of saved.layered.mainIds) { const q = saved.layered.pos[id]; if (q && q.x <= reach) ys.push(q.y); }
+      if (ys.length) my = renderer.graphToViewport({ x: b.x0, y: (Math.min(...ys) + Math.max(...ys)) / 2 }, { cameraState: one }).y;
+    }
+    const cx = partial ? Math.min(a.x, z.x) + (W / 2 - side) * r : (a.x + z.x) / 2, cy = my - (top - side) / 2 * r;
+    const c = renderer.viewportToFramedGraph({ x: cx, y: cy }, { cameraState: one });
+    return { x: c.x, y: c.y, ratio: r, angle: 0 };
+  }
+  let hintEl = null;
+  function showPanHint(on) {
+    hintEl?.remove(); hintEl = null;
+    if (!on) return;
+    hintEl = el('div', 'gx-pan'); hintEl.textContent = strings.pan; container.append(hintEl);
+    const off = () => { hintEl?.classList.add('gx-gone'); stage.removeEventListener('pointerdown', off); stage.removeEventListener('wheel', off); };
+    stage.addEventListener('pointerdown', off); stage.addEventListener('wheel', off, { passive: true });
   }
 
   // ---- theme and size changes
@@ -753,7 +831,7 @@ export function createGraph(container, o) {
       if (pinned) { lit = focusOf(pinned); frame('fit'); }
     },
     relabel() { sizes(); measure.clear(); readTheme(); renderer.refresh(); },
-    setStrings(s) { strings = { ...STRINGS[lang()], ...(o.strings || {}), ...(s || {}) }; buildTools(); },
+    setStrings(s) { strings = { ...STRINGS[lang()], ...(o.strings || {}), ...(s || {}) }; buildTools(); if (hintEl) hintEl.textContent = strings.pan; },
     positions: () => (layoutMode === 'force' ? snapshot() : saved.force),
     destroy() {
       destroyed = true; removeEventListener('themechange', onTheme); mq.removeEventListener('change', onTheme);
