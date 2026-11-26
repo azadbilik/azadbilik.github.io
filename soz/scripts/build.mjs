@@ -1,5 +1,5 @@
 // Builds data/vocab.json for «Söz ehtiyatı»: how many different words each poet uses in the
-// first N words of their verse, after The Pudding's «The Largest Vocabulary in Hip Hop».
+// first N words of their verse, in Azerbaijani and, as a separate track, in Persian, after The Pudding's «The Largest Vocabulary in Hip Hop».
 //
 // Reads the kitabxana.az library database (local PostgreSQL) and the glossary's Arabic–Persian
 // dictionary from a checkout of the kitabxana repo. Nothing secret is written anywhere: the
@@ -27,17 +27,19 @@ const sql = (q) => execFileSync('psql', [url, '-At', '-v', 'ON_ERROR_STOP=1', '-
   .split('\n').filter(Boolean).map((l) => JSON.parse(l));
 
 // Readers' rule (VISIBLE_WORK in works.service.ts): published works of published authors.
-// Verse only, written in Azerbaijani in the Latin script, with a text of its own (no translations)
-const VISIBLE = `w.status = 'PUBLISHED' AND a.status = 'PUBLISHED' AND w."originalLang" = 'AZ_LATIN' AND w.body <> '' AND w.genre = 'POEM'`;
-const authors = sql(`SELECT row_to_json(x) FROM (
-  SELECT a.id, a.slug, a."nameAz" AS az, a."nameRu" AS ru, a."nameEn" AS en, a."bornYear" AS born, a."diedYear" AS died, a.period, a.type
-  FROM "Author" a WHERE EXISTS (SELECT 1 FROM "Work" w WHERE w."authorId" = a.id AND ${VISIBLE})) x`);
-// A fixed order: by book (collection), then the work's place in it; loose works last
-const works = sql(`SELECT row_to_json(x) FROM (
+// Verse only, in the track's language, with a text of its own (no translations)
+const VISIBLE = (lang) => `w.status = 'PUBLISHED' AND a.status = 'PUBLISHED' AND w."originalLang" = '${lang}' AND w.body <> '' AND w.genre = 'POEM'`;
+const load = (lang) => ({
+  authors: sql(`SELECT row_to_json(x) FROM (
+  SELECT a.id, a.slug, a."nameAz" AS az, a."nameRu" AS ru, a."nameEn" AS en, a."nameFa" AS fa, a."bornYear" AS born, a."diedYear" AS died, a.period, a.type
+  FROM "Author" a WHERE EXISTS (SELECT 1 FROM "Work" w WHERE w."authorId" = a.id AND ${VISIBLE(lang)})) x`),
+  // A fixed order: by book (collection), then the work's place in it; loose works last
+  works: sql(`SELECT row_to_json(x) FROM (
   SELECT w."authorId" AS a, w.body, split_part(coalesce(w."sourceId", ''), '-', 1) AS src
   FROM "Work" w JOIN "Author" a ON a.id = w."authorId" LEFT JOIN "Collection" c ON c.id = w."collectionId"
-  WHERE ${VISIBLE}
-  ORDER BY w."authorId", c.order NULLS LAST, c.year NULLS LAST, c.slug NULLS LAST, w.order NULLS LAST, w.year NULLS LAST, w.slug) x`);
+  WHERE ${VISIBLE(lang)}
+  ORDER BY w."authorId", c.order NULLS LAST, c.year NULLS LAST, c.slug NULLS LAST, w.order NULLS LAST, w.year NULLS LAST, w.slug) x`),
+});
 
 // Markdown to plain words: footnote texts, headings' marks, emphasis, links' targets and tags go
 const plain = (md) => md
@@ -47,24 +49,36 @@ const plain = (md) => md
   .replace(/!?\[([^\]]*)\]\([^)]*\)/g, '$1')
   .replace(/^\s{0,3}(#{1,6}|>|[-*+]\s|\d+\.\s)/gm, ' ')
   .replace(/[*_~`]+/g, ' ');
-// Lower case by Azerbaijani rules (İ → i, I → ı); a word is letters, with apostrophes inside it
+// Azerbaijani: lower case by its rules (İ → i, I → ı); a word is letters, with apostrophes inside it
 const LET = 'a-zçəğıöşüâîûäëïéè';
 const WORD = new RegExp(`[${LET}]+(?:’[${LET}]+)*`, 'g');
-const tokens = (md) => plain(md).normalize('NFC').toLocaleLowerCase('az').replace(/[ʼ'`ʻ‘′]/g, '’').match(WORD) ?? [];
+const tokensAz = (md) => plain(md).normalize('NFC').toLocaleLowerCase('az').replace(/[ʼ'`ʻ‘′]/g, '’').match(WORD) ?? [];
+// Persian: Arabic-script letters, one spelling for the letters typed two ways (ي ى → ی, ك → ک,
+// ة → ه, أ إ آ ٱ → ا, ؤ → و), no short vowels or tatweel; a ZWNJ joins a word («می‌رود»)
+const FA_LET = 'ء-غف-يٮ-ۓەۺ-ۿ';
+const FA_WORD = new RegExp(`[${FA_LET}]+(?:‌[${FA_LET}]+)*`, 'g');
+const tokensFa = (md) => (plain(md).normalize('NFC')
+  .replace(/[ً-ٰٟـ]/g, '')
+  .replace(/[يى]/g, 'ی').replace(/ك/g, 'ک').replace(/ة/g, 'ه')
+  .replace(/[أإآٱ]/g, 'ا').replace(/ؤ/g, 'و')
+  .match(FA_WORD) ?? []);
 
-// Scans read by OCR (or a scan's decoded text layer), proofread; the rest were typed (Wikisource and others)
+// Scans read by OCR (or a scan's decoded text layer), proofread; the rest were typed (Wikisource, Ganjoor and others)
 const SCANNED = new Set(['anl', 'turuz', 'halle', 'archive', 'preslib', 'kxn']);
 
-const byAuthor = new Map(authors.map((a) => [a.id, { ...a, sample: [], total: 0, scanned: 0 }]));
-for (const w of works) {
-  const a = byAuthor.get(w.a);
-  const words = tokens(w.body);
-  a.total += words.length;
-  const room = N - a.sample.length;
-  if (room <= 0) continue;
-  const take = words.slice(0, room);
-  a.sample.push(...take);
-  if (SCANNED.has(w.src)) a.scanned += take.length;
+function sample({ authors, works }, tokens) {
+  const byAuthor = new Map(authors.map((a) => [a.id, { ...a, sample: [], total: 0, scanned: 0 }]));
+  for (const w of works) {
+    const a = byAuthor.get(w.a);
+    const words = tokens(w.body);
+    a.total += words.length;
+    const room = N - a.sample.length;
+    if (room <= 0) continue;
+    const take = words.slice(0, room);
+    a.sample.push(...take);
+    if (SCANNED.has(w.src)) a.scanned += take.length;
+  }
+  return [...byAuthor.values()];
 }
 
 // The glossary's dictionary («Ərəb və fars sözləri lüğəti», 2005) and a simplified form of its
@@ -126,42 +140,46 @@ function era(a) {
   return 'modern';
 }
 
-const all = [...byAuthor.values()];
-const ranked = all.filter((a) => a.sample.length >= N);
-// Words only one ranked poet uses within the samples: their own, shown by how often they use them
-const users = new Map();
-for (const a of ranked) for (const w of new Set(a.sample)) users.set(w, (users.get(w) ?? 0) + 1);
+function build(all, { loans, tokens }) {
+  const ranked = all.filter((a) => a.sample.length >= N);
+  // Words only one ranked poet of the track uses within the samples: their own, by how often they use them
+  const users = new Map();
+  for (const a of ranked) for (const w of new Set(a.sample)) users.set(w, (users.get(w) ?? 0) + 1);
+  const authors = all.map((a) => {
+    const counts = new Map();
+    for (const w of a.sample) counts.set(w, (counts.get(w) ?? 0) + 1);
+    const row = {
+      slug: a.slug, az: a.az, ru: a.ru || null, en: a.en || null, born: a.born, died: a.died, era: era(a),
+      words: a.total, sample: a.sample.length, distinct: counts.size,
+    };
+    if (a.sample.length < N) return row;
+    // Their own words, less the poet's name in the last couplet («Vaqifəm», «Ələsgərəm»)
+    const name = [...tokens(a.az), ...(a.fa ? tokens(a.fa) : [])].filter((p) => p.length >= 4);
+    const own = [...counts].filter(([w]) => users.get(w) === 1 && w.length >= 4 && !name.some((p) => w.startsWith(p)))
+      .sort((x, y) => y[1] - x[1] || x[0].localeCompare(y[0]));
+    return {
+      ...row, ranked: true,
+      ...(loans ? {
+        loan: +(a.sample.filter(isLoan).length / a.sample.length).toFixed(4),
+        loanTypes: +([...counts.keys()].filter(isLoan).length / counts.size).toFixed(4),
+      } : {}),
+      once: [...counts.values()].filter((c) => c === 1).length,
+      ownCount: own.length,
+      own: own.slice(0, RARE).map(([w]) => w),
+      scanned: +(a.scanned / a.sample.length).toFixed(2),
+    };
+  }).sort((x, y) => (y.ranked ? 1 : 0) - (x.ranked ? 1 : 0) || (x.ranked ? y.distinct - x.distinct : y.words - x.words));
+  return { n: N, ranked: ranked.length, poets: all.length, authors };
+}
 
-const out = all.map((a) => {
-  const counts = new Map();
-  for (const w of a.sample) counts.set(w, (counts.get(w) ?? 0) + 1);
-  const isRanked = a.sample.length >= N;
-  const row = {
-    slug: a.slug, az: a.az, ru: a.ru || null, en: a.en || null, born: a.born, died: a.died, era: era(a),
-    words: a.total, sample: a.sample.length, distinct: counts.size,
-  };
-  if (!isRanked) return row;
-  const loanTokens = a.sample.filter(isLoan).length;
-  // Their own words, less the poet's name in the last couplet («Vaqifəm», «Ələsgərəm»)
-  const name = a.az.toLocaleLowerCase('az').split(/[\s-]+/).filter((p) => p.length >= 4);
-  const own = [...counts].filter(([w]) => users.get(w) === 1 && w.length >= 4 && !name.some((p) => w.startsWith(p)))
-    .sort((x, y) => y[1] - x[1] || x[0].localeCompare(y[0], 'az'));
-  return {
-    ...row, ranked: true,
-    loan: +(loanTokens / a.sample.length).toFixed(4),
-    loanTypes: +([...counts.keys()].filter(isLoan).length / counts.size).toFixed(4),
-    once: [...counts.values()].filter((c) => c === 1).length,
-    ownCount: own.length,
-    own: own.slice(0, RARE).map(([w]) => w),
-    scanned: +(a.scanned / a.sample.length).toFixed(2),
-  };
-}).sort((x, y) => (y.ranked ? 1 : 0) - (x.ranked ? 1 : 0) || (x.ranked ? y.distinct - x.distinct : y.words - x.words));
-
-const data = {
-  built: new Date().toISOString().slice(0, 10), n: N,
-  ranked: ranked.length, poets: all.length,
-  authors: out,
+// Two tracks, never on one axis: verse in Azerbaijani (Latin script) and in Persian
+const tracks = {
+  az: build(sample(load('AZ_LATIN'), tokensAz), { loans: true, tokens: tokensAz }),
+  fa: build(sample(load('FA'), tokensFa), { loans: false, tokens: tokensFa }),
 };
+const data = { built: new Date().toISOString().slice(0, 10), n: N, tracks };
 await writeFile(new URL('../data/vocab.json', import.meta.url), JSON.stringify(data) + '\n');
-console.log(`${all.length} poets with Azerbaijani verse; ${ranked.length} have ${N} words or more`);
-for (const a of out.filter((a) => a.ranked)) console.log(String(a.distinct).padStart(6), (a.loan * 100).toFixed(1).padStart(5) + '%', a.era.padEnd(9), String(a.scanned).padEnd(4), a.az, '·', a.own.slice(0, 4).join(' '));
+for (const [k, tr] of Object.entries(tracks)) {
+  console.log(`\n${k}: ${tr.poets} poets with verse; ${tr.ranked} have ${N} words or more`);
+  for (const a of tr.authors.filter((a) => a.ranked)) console.log(String(a.distinct).padStart(6), a.loan != null ? (a.loan * 100).toFixed(1).padStart(5) + '%' : '', a.era.padEnd(9), String(a.scanned).padEnd(4), a.az, '·', a.own.slice(0, 4).join(' '));
+}

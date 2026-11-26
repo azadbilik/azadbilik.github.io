@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Söz ehtiyatı · Azad Bilik</title>
-<meta name="description" content="Şairlər neçə fərqli söz işlədir: kitabxana.az-dakı 76 şairin ilk 10 000 şeir sözü. How many different words a poet uses, in the first 10,000 words of their verse.">
+<meta name="description" content="Şairlər neçə fərqli söz işlədir: kitabxana.az-dakı şairlərin ilk 10 000 şeir sözü, azərbaycanca və farsca ayrıca. How many different words a poet uses, in the first 10,000 words of their verse.">
 <meta name="theme-color" content="#F4EFE6" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#14100D" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="canonical" href="https://azadbilik.org/soz/">
 <meta property="og:title" content="Söz ehtiyatı · Poets' vocabulary">
-<meta property="og:description" content="Füzulidən Ramiz Rövşənə: 76 şairin ilk 10 000 sözündə neçə fərqli söz var?">
+<meta property="og:description" content="Nizamidən Ramiz Rövşənə: şairlərin ilk 10 000 sözündə neçə fərqli söz var?">
 <meta property="og:image" content="https://azadbilik.org/soz/og.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="/fonts/fonts.css">
@@ -30,6 +30,7 @@
   .kicker { font: 500 .75rem var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
   .muted { color: var(--muted); }
 
+  .bar .seg[hidden] { display: none; }
   .bar { display: flex; flex-wrap: wrap; gap: .75rem 1.25rem; align-items: center; justify-content: space-between; margin-bottom: .75rem; }
   .seg { display: inline-grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--rule); border-radius: 3px; padding: 2px; }
   .seg button { padding: .35rem .75rem; border-radius: 2px; font-size: .8125rem; color: var(--muted); }
@@ -50,6 +51,7 @@
   #chart circle.dot.off { opacity: .12; }
   #chart circle.dot.on { stroke: var(--ink); stroke-width: 2; }
   #chart .lab { font: 500 .6875rem var(--sans); fill: var(--ink); paint-order: stroke; stroke: var(--paper); stroke-width: 3px; stroke-linejoin: round; pointer-events: none; transition: opacity .3s; }
+  #chart .lead { stroke: var(--muted); stroke-width: 1; pointer-events: none; transition: opacity .3s; }
   #chart .ring { fill: none; stroke: var(--ink); stroke-width: 1.5; pointer-events: none; }
 
   .card { position: absolute; z-index: 3; width: 17rem; background: var(--paper); border: 1px solid var(--rule); border-radius: 4px; padding: .75rem .9rem; box-shadow: 0 2px 14px rgb(0 0 0 / .14); font-size: .8125rem; }
@@ -130,6 +132,7 @@
     <section aria-labelledby="h-chart">
       <h2 id="h-chart" class="sr" data-i18n="chartH">Şairlər fərqli sözlərin sayına görə</h2>
       <div class="bar">
+        <div class="seg" role="group" id="tracks"><button type="button" data-track="az" data-i18n="tAz">Azərbaycanca</button><button type="button" data-track="fa" data-i18n="tFa">Farsca</button></div>
         <div class="seg" role="group" id="views"><button type="button" data-view="swarm" data-i18n="vSwarm">Fərqli sözlər</button><button type="button" data-view="loan" data-i18n="vLoan">Ərəb-fars sözləri</button></div>
         <div class="eras-box"><span class="eras-k" data-i18n="byBirth">doğum ilinə görə</span><div class="eras" role="group" id="eras"></div></div>
       </div>
@@ -137,6 +140,7 @@
         <svg id="chart" role="img"></svg>
         <div class="card" id="card" hidden aria-live="polite"></div>
       </div>
+      <p class="hint" data-i18n="apart">Hər dilin öz oxu var.</p>
       <p class="hint" data-i18n="hint">Nöqtənin üstünə gəlin və ya toxunun.</p>
     </section>
 
@@ -144,7 +148,7 @@
       <p class="kicker" data-i18n="gameK">Oyun</p>
       <h2 id="h-game" data-i18n="gameH">Kimin söz ehtiyatı böyükdür?</h2>
       <div class="game" style="margin-top:.75rem">
-        <p class="muted" data-i18n="gameQ">İki şair. Hansının ilk 10 000 sözündə daha çox fərqli söz var?</p>
+        <p class="muted" data-i18n="gameQ" data-fn>İki şair. Hansının ilk 10 000 sözündə daha çox fərqli söz var?</p>
         <div class="pair" id="pair"></div>
         <p class="verdict" id="verdict" aria-live="polite"></p>
         <div class="score"><span><span data-i18n="streak">Ardıcıl düz cavab</span>: <b id="streak">0</b></span><span><span data-i18n="best">Ən yaxşı</span>: <b id="best">0</b></span><button type="button" class="btn" id="next" data-i18n="next">Növbəti cüt</button></div>
@@ -187,75 +191,78 @@ const nf = (v, d = 0) => {
 const pct = (v) => `${nf(v * 100)}%`;
 const T = {
   az: { doc: 'Söz ehtiyatı · Azad Bilik', title: 'Söz ehtiyatı', sub: 'Şair neçə fərqli söz işlədir?', library: 'Kitabxana',
-    lede: (n, r, p) => `Hər şairin şeirlərindən ilk ${n} söz götürülüb və bu sözlərin neçəsinin fərqli olduğu sayılıb. Kitabxana.az-da Azərbaycan dilində şeiri olan ${p} şairdən ${r}-nin bu qədər mətni var. Hər nöqtə bir şairdir.`,
+    lede: (n, r, p, r2, p2) => `Hər şairin şeirlərindən ilk ${n} söz götürülüb və bu sözlərin neçəsinin fərqli olduğu sayılıb. Kitabxana.az-da azərbaycanca şeiri olan ${p} şairdən ${r}-nin, farsca şeiri olan ${p2} şairdən ${r2}-nin bu qədər mətni var. Hər nöqtə bir şairdir.`,
     chartH: 'Şairlər fərqli sözlərin sayına görə', vSwarm: 'Fərqli sözlər', vLoan: 'Ərəb-fars sözləri',
     xAxis: (n) => `fərqli söz, ilk ${n} sözdə →`, yAxis: 'ərəb-fars sözlərinin payı (təxmini) →',
     chartAlt: (r, a, b) => `${r} şair fərqli sözlərin sayına görə: ən çox ${a}, ən az ${b}. Tam siyahı aşağıdadır.`,
-    byBirth: 'doğum ilinə görə', hint: 'Nöqtənin üstünə gəlin və ya toxunun; tarixi dövrə görə süzün.',
+    byBirth: 'doğum ilinə görə', tAz: 'Azərbaycanca', tFa: 'Farsca', apart: 'Hər dilin öz oxu var: iki dilin şairləri heç vaxt bir oxda göstərilmir. Farsca sözə azərbaycancadakından az şəkilçi qoşulur, ona görə rəqəmlər bir-biri ilə müqayisə olunmur.', hint: 'Nöqtənin üstünə gəlin və ya toxunun; tarixi dövrə görə süzün.',
     eras: { classical: 'Klassik', c19: 'XIX əsr', c20: 'XX əsr', modern: 'Müasir', folk: 'Xalq', unknown: 'Naməlum' },
     eraNote: { classical: '1760-dan əvvəl doğulanlar', c19: '1760–1869 doğulanlar', c20: '1870–1945 doğulanlar', modern: '1946-dan sonra doğulanlar', folk: 'xalq yaradıcılığı', unknown: '' },
     distinct: 'fərqli söz', rankOf: (k, n) => `${k} / ${n}`, place: 'yeri', loan: 'ərəb-fars sözləri', once: 'bir dəfə işlənən', own: 'Ancaq onda (başqa şairlərin nümunəsində yoxdur):',
     scanned: (p) => `nümunənin ${p}-i kitab skanından tanınıb və yoxlanılıb`, read: 'Kitabxanada oxu ↗', close: 'Bağla',
-    gameK: 'Oyun', gameH: 'Kimin söz ehtiyatı böyükdür?', gameQ: 'İki şair. Hansının ilk 10 000 sözündə daha çox fərqli söz var?',
+    gameK: 'Oyun', gameH: 'Kimin söz ehtiyatı böyükdür?', gameQ: (tr) => `İki şair, ${tr}. Hansının ilk 10 000 sözündə daha çox fərqli söz var?`,
     pickLabel: (n) => `${n} seç`, right: 'Düzdür!', wrong: 'Yox.', more: (a, na, b, nb, d) => `${a}: ${na} fərqli söz, ${b}: ${nb} (fərq ${d}).`,
     streak: 'Ardıcıl düz cavab', best: 'Ən yaxşı', next: 'Növbəti cüt', words: 'söz',
     rankH: 'Sıralama', unrankedH: (n, c) => `${c} sözə çatmayan ${n} şair (sıralanmır)`,
     methodH: 'Necə sayılıb',
-    method: (n, r, p) => `<p>Fikir The Pudding saytının <a href="https://pudding.cool/projects/vocabulary/">«The Largest Vocabulary in Hip Hop»</a> layihəsindən götürülüb: hər müəllifdən eyni sayda söz götürülür ki, çox yazan şair irəli düşməsin.</p>
+    method: (n, r, p, r2, p2) => `<p>Fikir The Pudding saytının <a href="https://pudding.cool/projects/vocabulary/">«The Largest Vocabulary in Hip Hop»</a> layihəsindən götürülüb: hər müəllifdən eyni sayda söz götürülür ki, çox yazan şair irəli düşməsin.</p>
 <ol><li>Mətnlər kitabxana.az-ın bazasındandır: oxucuya açıq olan, <b>Azərbaycan dilində, latın qrafikasında yazılmış</b> şeirlər (nəsr, dram və tərcümələr daxil deyil). Klassiklərin mətnləri müasir əlifbaya çevrilmiş nəşrlərdəndir.</li>
 <li>Markdown təmizlənir, mətn Azərbaycan qaydası ilə kiçik hərfə salınır (İ → i, I → ı), söz hərflərdən ibarətdir (ə, ğ, ı, ö, ü, ş, ç daxil), sözün içindəki apostrof saxlanılır («mə’na»), defis sözü ayırır.</li>
 <li>Hər şairin əsərləri sabit sırayla (kitab, sonra kitabdakı yeri) düzülür və <b>ilk ${n} söz</b> götürülür. ${p} şairdən ${r}-nin bu qədər sözü var; qalanları siyahıda göstərilir, amma sıralanmır.</li>
 <li>Bu ${n} sözün içində neçə <b>fərqli söz forması</b> olduğu sayılır. «Dərd», «dərdim», «dərdimdən» üç ayrı sözdür: kök yox, forma sayılır. Bu, şəkilçi ilə zəngin dildə rəqəmləri ingiliscədən xeyli yuxarı aparır.</li>
 <li><b>Ərəb-fars sözləri</b> (təxmini): nümunədəki sözlərin neçə faizinin saytın lüğətində («Klassik Azərbaycan ədəbiyyatında işlənən ərəb və fars sözləri lüğəti», 2005) olduğu, söz olduğu kimi və ya adi şəkilçilər atılandan sonra. Lüğət klassik ədəbiyyat üçündür, ona görə «dəniz» kimi türk sözləri ora düşmür, amma bəzi ümumi alınmalar düşür, köhnə yazılışlar isə tapılmır.</li>
-<li>«Ancaq onda» sözləri: sıralanan şairlərdən yalnız birinin nümunəsində olan, ən azı dörd hərfli sözlər, ən çox işləndiyi qaydada; şairin öz adı (təxəllüs: «Vaqifəm») çıxarılıb.</li></ol>
+<li>«Ancaq onda» sözləri: sıralanan şairlərdən yalnız birinin nümunəsində olan, ən azı dörd hərfli sözlər, ən çox işləndiyi qaydada; şairin öz adı (təxəllüs: «Vaqifəm») çıxarılıb.</li>
+<li><b>Farsca şeirlər</b> (Nizami, Xaqani, Saib, Füzulinin farsca divanı və b., mətnlər əsasən Ganjoor-dandır) eyni qayda ilə, amma ayrıca sayılır: ${p2} şairdən ${r2}-si sıralanır. Söz ərəb qrafikasının hərfləridir; iki cür yazılan hərflər birləşdirilir (ي → ی, ك → ک, ة → ه, أ إ آ → ا, ؤ → و), hərəkələr və tətvil atılır, ZWNJ sözü birləşdirir («می‌رود» bir sözdür). Farsca sözə azərbaycancadakından az şəkilçi qoşulur, ona görə rəqəmlər aşağıdır və iki dil müqayisə olunmur. Ərəb-fars sözləri ölçüsü farscaya tətbiq olunmur.</li></ol>
 <p><b>Ehtiyatla oxuyun.</b> Mətnlərin çoxu kitab skanlarından tanınıb (OCR) və yoxlanılıb, amma tanınma səhvləri qalıbsa, hər biri «yeni söz» sayılır. Köhnə yazılışlar («mənüm», «niçe», «kıla») və bəzi mətnlərdə itən hərflər («gunəş», «urək») da fərqli sözləri artırır. Klassiklərin nümunəsi çox vaxt qəzəllərdən, müasirlərinki sərbəst şeirdən ibarətdir: janr da rəqəmə təsir edir. Fərq bir neçə yüz sözdürsə, sıralama dəqiq deyil.</p>`,
     foot: (d) => `Məlumat: kitabxana.az, ${d}. Hesablama skripti və məlumat faylı: <a href="data/vocab.json">vocab.json</a>. İstənilən məqsəd üçün sərbəstdir.` },
   ru: { doc: 'Словарный запас · Azad Bilik', title: 'Словарный запас', sub: 'Сколько разных слов у поэта?', library: 'Библиотека',
-    lede: (n, r, p) => `Из стихов каждого поэта взяты первые ${n} слов и подсчитано, сколько среди них разных. Из ${p} поэтов, чьи стихи на азербайджанском есть на kitabxana.az, столько текста набирается у ${r}. Каждая точка — поэт.`,
+    lede: (n, r, p, r2, p2) => `Из стихов каждого поэта взяты первые ${n} слов и подсчитано, сколько среди них разных. На kitabxana.az столько текста набирается у ${r} из ${p} поэтов, писавших на азербайджанском, и у ${r2} из ${p2} — на персидском. Каждая точка — поэт.`,
     chartH: 'Поэты по числу разных слов', vSwarm: 'Разные слова', vLoan: 'Арабские и персидские',
     xAxis: (n) => `разных слов в первых ${n} →`, yAxis: 'доля арабских и персидских слов (примерно) →',
     chartAlt: (r, a, b) => `${r} поэтов по числу разных слов: больше всего у поэта ${a}, меньше всего у поэта ${b}. Полный список ниже.`,
-    byBirth: 'по году рождения', hint: 'Наведите на точку или нажмите; эпохи можно отключать.',
+    byBirth: 'по году рождения', tAz: 'На азербайджанском', tFa: 'На персидском', apart: 'У каждого языка своя шкала: поэты двух языков никогда не стоят на одной оси. Персидские слова присоединяют меньше аффиксов, чем азербайджанские, поэтому числа двух языков не сравнимы.', hint: 'Наведите на точку или нажмите; эпохи можно отключать.',
     eras: { classical: 'Классики', c19: 'XIX век', c20: 'XX век', modern: 'Современные', folk: 'Народное', unknown: 'Неизвестно' },
     eraNote: { classical: 'родились до 1760', c19: 'родились в 1760–1869', c20: 'родились в 1870–1945', modern: 'родились после 1945', folk: 'народное творчество', unknown: '' },
     distinct: 'разных слов', rankOf: (k, n) => `${k} из ${n}`, place: 'место', loan: 'арабские и персидские', once: 'встречаются один раз', own: 'Только у него (нет в выборках других поэтов):',
     scanned: (p) => `${p} выборки распознано со сканов книг и вычитано`, read: 'Читать в библиотеке ↗', close: 'Закрыть',
-    gameK: 'Игра', gameH: 'У кого словарь больше?', gameQ: 'Два поэта. У кого в первых 10 000 слов больше разных?',
-    pickLabel: (n) => `Выбрать: ${n}`, right: 'Верно!', wrong: 'Нет.', more: (a, na, b, nb, d) => `${a}: ${na} разных слов, ${b}: ${nb} (разница ${d}).`,
+    gameK: 'Игра', gameH: 'У кого словарь больше?', gameQ: (tr) => `Два поэта, ${tr}. У кого в первых 10 000 слов больше разных?`,
+    pickLabel: (n) => `Выбрать: ${n}`, right: 'Верно!', wrong: 'Нет.', more: (a, na, b, nb, d) => `${a}: ${na}, ${b}: ${nb} (разница ${d}).`,
     streak: 'Верных подряд', best: 'Лучший результат', next: 'Следующая пара', words: 'слов',
     rankH: 'Рейтинг', unrankedH: (n, c) => `${n} поэтов, у которых меньше ${c} слов (без места)`,
     methodH: 'Как считали',
-    method: (n, r, p) => `<p>Идея взята у The Pudding, <a href="https://pudding.cool/projects/vocabulary/">«The Largest Vocabulary in Hip Hop»</a>: у каждого автора берётся одинаковое число слов, чтобы плодовитые не получали преимущества.</p>
+    method: (n, r, p, r2, p2) => `<p>Идея взята у The Pudding, <a href="https://pudding.cool/projects/vocabulary/">«The Largest Vocabulary in Hip Hop»</a>: у каждого автора берётся одинаковое число слов, чтобы плодовитые не получали преимущества.</p>
 <ol><li>Тексты — из базы kitabxana.az: открытые читателям стихи, <b>написанные по-азербайджански, в латинице</b> (без прозы, драмы и переводов). Классики — в изданиях, переведённых на современный алфавит.</li>
 <li>Разметка Markdown убирается, текст переводится в нижний регистр по азербайджанским правилам (İ → i, I → ı); слово — это буквы (включая ə, ğ, ı, ö, ü, ş, ç) с апострофом внутри («mə’na»), дефис разделяет слова.</li>
 <li>Произведения поэта выстраиваются в постоянном порядке (книга, затем место в ней), берутся <b>первые ${n} слов</b>. Столько набирается у ${r} из ${p} поэтов; остальные перечислены, но без места.</li>
 <li>Считается число <b>разных словоформ</b>: «dərd», «dərdim», «dərdimdən» — три слова. Корни не сводятся, поэтому в агглютинативном языке числа заметно выше, чем в английском.</li>
 <li><b>Арабские и персидские слова</b> (примерно): доля слов выборки, найденных в словаре сайта («Словарь арабских и персидских слов в классической азербайджанской литературе», 2005) как есть или после снятия обычных аффиксов. Словарь составлен для классики: тюркские слова в него не попадают, некоторые общие заимствования попадают, а старые написания не находятся.</li>
-<li>«Только у него» — слова не короче четырёх букв, которые есть в выборке лишь одного из ранжированных поэтов, по частоте; имя поэта (тахаллус: «Vaqifəm») исключено.</li></ol>
+<li>«Только у него» — слова не короче четырёх букв, которые есть в выборке лишь одного из ранжированных поэтов, по частоте; имя поэта (тахаллус: «Vaqifəm») исключено.</li>
+<li><b>Стихи на персидском</b> (Низами, Хагани, Саиб, персидский диван Физули и др., тексты в основном с Ganjoor) считаются так же, но отдельно: ранжированы ${r2} из ${p2} поэтов. Слово — буквы арабского письма; буквы, которые пишут двумя способами, сведены к одной (ي → ی, ك → ک, ة → ه, أ إ آ → ا, ؤ → و), огласовки и татвил убраны, ZWNJ соединяет слово («می‌رود» — одно слово). Персидские слова присоединяют меньше аффиксов, чем азербайджанские, поэтому числа ниже и языки не сравниваются. Доля арабских и персидских слов для персидского не считается.</li></ol>
 <p><b>Читайте с оговорками.</b> Многие тексты распознаны со сканов (OCR) и вычитаны, но каждая оставшаяся ошибка считается «новым словом». Старые написания («mənüm», «niçe», «kıla») и потерянные в некоторых текстах буквы («gunəş», «urək») тоже прибавляют разные слова. У классиков выборка обычно состоит из газелей, у современных — из свободного стиха: жанр тоже влияет. Разница в пару сотен слов — не точное место.</p>`,
     foot: (d) => `Данные: kitabxana.az, ${d}. Файл данных: <a href="data/vocab.json">vocab.json</a>. Свободно для любых целей.` },
   en: { doc: "Poets' vocabulary · Azad Bilik", title: "Poets' vocabulary", sub: 'How many different words does a poet use?', library: 'Library',
-    lede: (n, r, p) => `We took the first ${n} words of each poet's verse and counted how many of them are different. Of the ${p} poets with Azerbaijani verse on kitabxana.az, ${r} have that much text. Each dot is a poet.`,
+    lede: (n, r, p, r2, p2) => `We took the first ${n} words of each poet's verse and counted how many of them are different. On kitabxana.az, ${r} of ${p} poets with verse in Azerbaijani have that much text, and ${r2} of ${p2} with verse in Persian. Each dot is a poet.`,
     chartH: 'Poets by number of different words', vSwarm: 'Different words', vLoan: 'Arabic & Persian',
     xAxis: (n) => `different words in the first ${n} →`, yAxis: 'share of Arabic and Persian words (approx.) →',
     chartAlt: (r, a, b) => `${r} poets by number of different words: most, ${a}; fewest, ${b}. The full list is below.`,
-    byBirth: 'by year of birth', hint: 'Hover or tap a dot; switch eras on and off.',
+    byBirth: 'by year of birth', tAz: 'In Azerbaijani', tFa: 'In Persian', apart: 'Each language has its own axis: the two are never plotted together. Persian words take fewer suffixes than Azerbaijani ones, so their numbers are not comparable.', hint: 'Hover or tap a dot; switch eras on and off.',
     eras: { classical: 'Classical', c19: '19th century', c20: '20th century', modern: 'Contemporary', folk: 'Folk', unknown: 'Unknown' },
     eraNote: { classical: 'born before 1760', c19: 'born 1760–1869', c20: 'born 1870–1945', modern: 'born after 1945', folk: 'folk poetry', unknown: '' },
     distinct: 'different words', rankOf: (k, n) => `${k} of ${n}`, place: 'rank', loan: 'Arabic & Persian', once: 'used only once', own: 'Only theirs (in no other poet’s sample):',
     scanned: (p) => `${p} of the sample read from book scans and proofread`, read: 'Read in the library ↗', close: 'Close',
-    gameK: 'Game', gameH: 'Who has the bigger vocabulary?', gameQ: 'Two poets. Whose first 10,000 words hold more different words?',
+    gameK: 'Game', gameH: 'Who has the bigger vocabulary?', gameQ: (tr) => `Two poets, ${tr}. Whose first 10,000 words hold more different words?`,
     pickLabel: (n) => `Pick ${n}`, right: 'Right!', wrong: 'No.', more: (a, na, b, nb, d) => `${a}: ${na} different words; ${b}: ${nb} (${d} more).`,
     streak: 'Streak', best: 'Best', next: 'Next pair', words: 'words',
     rankH: 'Ranking', unrankedH: (n, c) => `${n} poets with fewer than ${c} words (not ranked)`,
     methodH: 'How it was counted',
-    method: (n, r, p) => `<p>The idea is The Pudding's <a href="https://pudding.cool/projects/vocabulary/">“The Largest Vocabulary in Hip Hop”</a>: take the same number of words from every writer, so the prolific are not favoured.</p>
+    method: (n, r, p, r2, p2) => `<p>The idea is The Pudding's <a href="https://pudding.cool/projects/vocabulary/">“The Largest Vocabulary in Hip Hop”</a>: take the same number of words from every writer, so the prolific are not favoured.</p>
 <ol><li>The texts are from the kitabxana.az database: verse open to readers, <b>written in Azerbaijani in the Latin script</b> (no prose, drama or translations). The classics are in editions transcribed into the modern alphabet.</li>
 <li>Markdown is stripped, the text lower-cased by Azerbaijani rules (İ → i, I → ı); a word is a run of letters (ə, ğ, ı, ö, ü, ş, ç included) with any apostrophe inside it («mə’na»); a hyphen splits words.</li>
 <li>Each poet's works are put in a fixed order (book, then place in the book) and the <b>first ${n} words</b> taken. ${r} of ${p} poets have that many; the rest are listed but not ranked.</li>
 <li>We count the <b>different word forms</b> in those ${n}: «dərd», «dərdim», «dərdimdən» are three words. Nothing is reduced to its root, so in a language that stacks suffixes the numbers run far above English ones.</li>
 <li><b>Arabic and Persian words</b> (approximate): the share of the sample found in the site's dictionary («Arabic and Persian words in classical Azerbaijani literature», 2005), as written or after common suffixes are taken off. The dictionary is made for the classics: Turkic words stay out, some everyday loans count, and old spellings are missed.</li>
-<li>“Only theirs”: words of four letters or more found in only one ranked poet's sample, most used first; the poet's own name (the pen name in the last couplet, «Vaqifəm») left out.</li></ol>
+<li>“Only theirs”: words of four letters or more found in only one ranked poet's sample, most used first; the poet's own name (the pen name in the last couplet, «Vaqifəm») left out.</li>
+<li><b>Verse in Persian</b> (Nizami, Khaqani, Saib, Fuzuli's Persian divan and others, mostly from Ganjoor) is counted the same way but on its own: ${r2} of ${p2} poets are ranked. A word is a run of Arabic-script letters; letters typed two ways are made one (ي → ی, ك → ک, ة → ه, أ إ آ → ا, ؤ → و), short vowels and tatweel dropped, and a ZWNJ joins a word («می‌رود» is one). Persian words take fewer suffixes than Azerbaijani ones, so the numbers are lower and the two languages are not compared. The Arabic-and-Persian measure does not apply to Persian.</li></ol>
 <p><b>Read with care.</b> Many texts were read from book scans (OCR) and proofread, but any slip left counts as a “new word”. Old spellings («mənüm», «niçe», «kıla») and letters lost in some texts («gunəş» for «günəş») add different words too. The classics' samples are mostly ghazals, the moderns' often free verse: form matters as well. A gap of a few hundred words is not a firm ranking.</p>`,
     foot: (d) => `Data: kitabxana.az, ${d}. Data file: <a href="data/vocab.json">vocab.json</a>. Free to use for anything.` },
 };
@@ -265,7 +272,7 @@ const KX = () => `https://kitabxana.az${lang === 'az' ? '' : '/' + lang}`;
 const ERAS = ['classical', 'c19', 'c20', 'modern', 'folk', 'unknown'];
 const years = (a) => a.born || a.died ? `${a.born ?? '?'}–${a.died ?? ''}` : '';
 
-let data = null, ranked = [], view = 'swarm', shown = new Set(ERAS), pinned = null, hover = null, pos = new Map(), first = true;
+let source = null, track = 'az', data = null, ranked = [], view = 'swarm', shown = new Set(ERAS), pinned = null, hover = null, pos = new Map(), first = true;
 const svg = document.getElementById('chart'), card = document.getElementById('card'), wrap = document.getElementById('chart-wrap');
 const NS = 'http://www.w3.org/2000/svg';
 const el = (name, attrs = {}, parent = svg) => { const e = document.createElementNS(NS, name); for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v); parent.appendChild(e); return e; };
@@ -315,7 +322,7 @@ function draw() {
   svg.setAttribute('viewBox', `0 0 ${g.W} ${g.H}`);
   svg.setAttribute('aria-label', t('chartAlt')(ranked.length, L(ranked[0]), L(ranked[ranked.length - 1])));
   // Axes are redrawn; the dots are kept, so they glide to their new places
-  svg.querySelectorAll('.axis, .lab, .ring').forEach((n) => n.remove());
+  svg.querySelectorAll('.axis, .lab, .lead, .ring').forEach((n) => n.remove());
   const ax = el('g', { class: 'axis' });
   svg.insertBefore(ax, svg.firstChild);
   const base = g.H - g.m.b;
@@ -361,9 +368,22 @@ function draw() {
     if (!a) continue;
     const p = g.get(a.slug);
     const right = p.x > g.W * .6;
-    const lab = el('text', { class: 'lab', x: p.x + (right ? -g.r - 4 : g.r + 4), y: p.y - g.r - 3, 'text-anchor': right ? 'end' : 'start' });
+    const lx = p.x + (right ? g.r + 2 : -g.r - 2), anchor = right ? 'end' : 'start';
+    const lab = el('text', { class: 'lab', x: lx, y: p.y - g.r - 4, 'text-anchor': anchor });
     lab.textContent = L(a);
-    if (first && !still()) { lab.style.opacity = 0; setTimeout(() => { lab.style.opacity = 1; }, 1300); }
+    // Above the dot, and higher still while the name would cover a neighbour; a thin line leads back
+    const w = lab.getComputedTextLength(), x0 = right ? lx - w : lx, x1 = right ? lx : lx + w;
+    let y = p.y - g.r - 4;
+    for (let k = 0; k < 40; k++) {
+      const hit = ranked.some((b) => b !== a && shown.has(b.era) && (() => { const q = g.get(b.slug); return q.x + g.r > x0 - 2 && q.x - g.r < x1 + 2 && q.y + g.r > y - 11 && q.y - g.r < y + 3; })());
+      if (!hit) break;
+      y -= 4;
+    }
+    y = Math.max(11, y);
+    lab.setAttribute('y', y);
+    let lead = null;
+    if (y < p.y - g.r - 6) lead = el('line', { class: 'lead', x1: p.x, y1: p.y - g.r, x2: p.x, y2: y + 2 });
+    if (first && !still()) for (const n of [lab, lead]) if (n) { n.style.opacity = 0; setTimeout(() => { n.style.opacity = 1; }, 1300); }
   }
   if (pinned || hover) ring(hover || pinned);
 }
@@ -381,9 +401,9 @@ function showCard(a, anchor = true) {
     <div class="nm">${esc(L(a))}</div><div class="yrs">${esc(years(a))}${years(a) ? ' · ' : ''}${esc(t('eras')[a.era])}</div>
     <div class="big">${nf(a.distinct)}<small>${esc(t('distinct'))}</small></div>
     <dl><dt>${esc(t('place'))}</dt><dd>${t('rankOf')(rank, ranked.length)}</dd>
-    <dt>${esc(t('loan'))}</dt><dd>${pct(a.loan)}</dd>
+    ${a.loan != null ? `<dt>${esc(t('loan'))}</dt><dd>${pct(a.loan)}</dd>` : ''}
     <dt>${esc(t('once'))}</dt><dd>${nf(a.once)}</dd></dl>
-    ${a.own.length ? `<div class="own"><span>${esc(t('own'))}</span><em lang="az">${a.own.map(esc).join(', ')}</em></div>` : ''}
+    ${a.own.length ? `<div class="own"><span>${esc(t('own'))}</span><em ${track === 'fa' ? 'lang="fa" dir="rtl"' : 'lang="az"'}>${a.own.map(esc).join(track === 'fa' ? '، ' : ', ')}</em></div>` : ''}
     ${a.scanned >= .5 ? `<div class="src">${esc(t('scanned')(pct(a.scanned)))}</div>` : ''}
     <a class="kx" href="${KX()}/authors/${encodeURIComponent(a.slug)}">${esc(t('read'))}</a>`;
   card.querySelector('.x').onclick = () => select(null);
@@ -430,6 +450,9 @@ document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && pinned) 
 
 function controls() {
   document.querySelectorAll('[data-view]').forEach((b) => b.setAttribute('aria-pressed', b.dataset.view === view));
+  document.querySelectorAll('[data-track]').forEach((b) => b.setAttribute('aria-pressed', b.dataset.track === track));
+  // The loanword measure is Arabic and Persian words in Azerbaijani: it has no meaning for Persian
+  document.getElementById('views').hidden = track === 'fa';
   document.getElementById('eras').innerHTML = ERAS.filter((e) => ranked.some((a) => a.era === e)).map((e) =>
     `<button type="button" data-era="${e}" aria-pressed="${shown.has(e)}" title="${esc(t('eraNote')[e])}" style="--c:var(--c-${e})"><i></i>${esc(t('eras')[e])}</button>`).join('');
   document.querySelectorAll('[data-era]').forEach((b) => b.onclick = () => {
@@ -443,6 +466,22 @@ function controls() {
   });
 }
 document.querySelectorAll('[data-view]').forEach((b) => b.onclick = () => { view = b.dataset.view; controls(); draw(); if (pinned) showCard(pinned); });
+// A track is its own chart: the dots of the other language go, the new ones fly in, the game draws from it
+function setTrack(k) {
+  track = k;
+  if (track === 'fa') view = 'swarm';
+  data = { ...source.tracks[track], built: source.built };
+  ranked = data.authors.filter((a) => a.ranked);
+  shown = new Set(ERAS); pinned = null; hover = null; showCard(null);
+  svg.querySelectorAll('circle.dot').forEach((c) => c.remove());
+  first = true;
+  pair = null;
+  applyLang();
+  newPair();
+}
+document.querySelectorAll('[data-track]').forEach((b) => b.onclick = () => { if (b.dataset.track !== track) setTrack(b.dataset.track); });
+const lc = (s) => s.charAt(0).toLowerCase() + s.slice(1);
+const counts = () => [source.tracks.az.ranked, source.tracks.az.poets, source.tracks.fa.ranked, source.tracks.fa.poets];
 
 function list() {
   document.getElementById('rank').innerHTML = ranked.map((a, i) => `<li><button type="button" data-slug="${esc(a.slug)}" style="--c:var(--c-${a.era})"><span class="k">${i + 1}</span><span class="who"><i aria-hidden="true"></i><span>${esc(L(a))}</span></span><span class="v">${nf(a.distinct)}</span></button></li>`).join('');
@@ -508,15 +547,15 @@ document.getElementById('next').onclick = () => { newPair(); document.querySelec
 function applyLang() {
   document.documentElement.lang = lang;
   document.title = t('doc');
-  document.querySelectorAll('[data-i18n]').forEach((e) => e.textContent = t(e.dataset.i18n));
+  document.querySelectorAll('[data-i18n]:not([data-fn])').forEach((e) => e.textContent = t(e.dataset.i18n));
   document.querySelectorAll('[data-lang]').forEach((b) => b.setAttribute('aria-pressed', b.dataset.lang === lang));
   document.querySelectorAll('[data-keep-lang]').forEach((a) => { const u = new URL(a.getAttribute('href'), location.href); if (lang === 'az') u.searchParams.delete('lang'); else u.searchParams.set('lang', lang); a.href = u.pathname + u.search; });
   document.getElementById('kx-nav').href = KX() + '/';
   if (!data) return;
-  document.getElementById('lede').textContent = t('lede')(nf(data.n), data.ranked, data.poets);
-  document.getElementById('method').innerHTML = t('method')(nf(data.n), data.ranked, data.poets);
+  document.getElementById('lede').textContent = t('lede')(nf(data.n), ...counts());
+  document.getElementById('method').innerHTML = t('method')(nf(data.n), ...counts());
   document.getElementById('foot').innerHTML = t('foot')(data.built);
-  document.querySelector('[data-i18n="gameQ"]').textContent = t('gameQ');
+  document.querySelector('[data-i18n="gameQ"]').textContent = t('gameQ')(lc(t(track === 'fa' ? 'tFa' : 'tAz')));
   controls(); list(); draw();
   if (pinned) showCard(pinned);
   if (pair) {
@@ -539,10 +578,8 @@ addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setT
 
 applyLang();
 fetch('data/vocab.json').then((r) => r.json()).then((d) => {
-  data = d;
-  ranked = d.authors.filter((a) => a.ranked);
-  applyLang();
-  newPair();
+  source = d;
+  setTrack('az');
 });
 })();
 </script>

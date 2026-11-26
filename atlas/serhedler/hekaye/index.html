@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sərhədlər necə dəyişdi · Azad Bilik</title>
-<meta name="description" content="Xanlıqlardan bugünkü rayonlara: Azərbaycanın daxili sərhədləri 1800–1991-ci illərdə necə dəyişdi, xəritə üzərində addım-addım. How Azerbaijan's internal borders changed, 1800–1991, step by step on the map.">
+<meta name="description" content="Səfəvilərdən bugünkü rayonlara: Azərbaycanın daxili sərhədləri 1700–1991-ci illərdə necə dəyişdi, xəritə üzərində addım-addım. How Azerbaijan's internal borders changed, 1700–1991, step by step on the map.">
 <meta name="theme-color" content="#F4EFE6" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#14100D" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="canonical" href="https://azadbilik.org/atlas/serhedler/hekaye/">
-<meta property="og:title" content="Sərhədlər necə dəyişdi · How the borders moved, 1800–1991">
+<meta property="og:title" content="Sərhədlər necə dəyişdi · How the borders moved, 1700–1991">
 <meta property="og:description" content="Xanlıqlardan bugünkü rayonlara, xəritə üzərində addım-addım.">
 <meta property="og:image" content="https://azadbilik.org/atlas/serhedler/og.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -65,6 +65,7 @@ const T = { az: { doc: 'Sərhədlər necə dəyişdi · Azad Bilik', back: 'Sər
 
 // The layers, from the atlas's own maps
 const LAYERS = {
+  'safavid': '../safavi/data/safavid-1700.geojson', 'prov': '../safavi/data/safavid-1700.geojson',
   '1800': '../../xanliqlar/data/khanates.geojson', '1897': '../../1897/data/units.geojson',
   '1926': '../../rayonlar/data/raions-1926.geojson', '1939': '../../rayonlar/data/raions-1939.geojson',
   '1989': '../../rayonlar/data/raions.geojson', 'today': '../../ehali/data/units.geojson',
@@ -72,6 +73,25 @@ const LAYERS = {
 const ALL = [[44.0, 38.3], [50.6, 42.2]], AZ = [[44.7, 38.35], [50.5, 41.95]];
 // The story. Each step: the layer, where the camera goes, the units it lights, the 1901 scan's opacity
 const STEPS = [
+  { layer: 'safavid', year: '~1700', bounds: [[37.5, 23.5], [71.5, 43.5]], scan2: .55,
+    when: { az: 'Təxminən 1700', ru: 'Около 1700', en: 'Around 1700' },
+    title: { az: 'Səfəvi dövləti', ru: 'Государство Сефевидов', en: 'The Safavid empire' },
+    text: { az: '1501-ci ildə Təbrizdə Şah İsmayıl Səfəvi dövlətini qurdu. Təxminən 1700-cü ildə o, Qafqazdan Qəndəharadək — Böyük Moğolların Hindistanı ilə sərhədədək, Fars körfəzindən Mərvədək uzanırdı; paytaxt 1598-dən İsfahan idi. Saray və qızılbaş ordusu türkcə danışırdı; Şah İsmayıl özü Xətai təxəllüsü ilə azərbaycanca şeir yazırdı. Sərhəd təxminidir: şərqi Delilin 1724-cü il xəritəsindən (arxada) köçürülüb, qalanı müqavilə xətləri ilə çəkilib.',
+            ru: 'В 1501 г. в Тебризе шах Исмаил основал государство Сефевидов. Около 1700 г. оно простиралось от Кавказа до Кандагара — до границы Великих Моголов, от Персидского залива до Мерва; столицей с 1598 г. был Исфахан. Двор и кызылбашское войско говорили по-тюркски; сам шах Исмаил писал стихи на азербайджанском под именем Хатаи. Граница приблизительна: восточная перенесена с карты Делиля 1724 г. (на фоне), остальное — по линиям договоров.',
+            en: "In 1501 Shah Ismail founded the Safavid state at Tabriz. Around 1700 it reached from the Caucasus to Kandahar — the border of Mughal India — and from the Persian Gulf to Merv; its capital since 1598 was Isfahan. The court and the Qizilbash army spoke Turkic; Shah Ismail himself wrote Azerbaijani verse as Khatai. The outline is approximate: the east is traced from Delisle's 1724 map (behind), the rest follows the treaty lines." },
+    link: { href: { az: 'https://kitabxana.az/authors/xetai', ru: 'https://kitabxana.az/ru/authors/xetai', en: 'https://kitabxana.az/en/authors/xetai' }, text: { az: 'Xətainin şeirləri kitabxanada', ru: 'Стихи Хатаи в библиотеке', en: "Khatai's poems in the library" } } },
+  { layer: 'prov', year: '~1700', bounds: ALL, ids: ['shirvan', 'karabakh', 'chukhur-saad'],
+    when: { az: 'Təxminən 1700', ru: 'Около 1700', en: 'Around 1700' },
+    title: { az: 'Şimal-qərb vilayətləri', ru: 'Северо-западные провинции', en: 'The north-western provinces' },
+    text: { az: 'Arazın şimalındakı torpaqlar bəylərbəyiliklərə bölünürdü: Şirvan (Şamaxı), Qarabağ (Gəncə) və Çuxursəəd (İrəvan); cənubda Azərbaycan (Təbriz) bəylərbəyiliyi idi. Burada onlar sonrakı xanlıqlardan yığılıb, ona görə sərhədlər təxminidir.',
+            ru: 'Земли к северу от Аракса делились между беглербегствами: Ширванским (Шемаха), Карабахским (Гянджа) и Чухур-Саадским (Эривань); к югу лежало Азербайджанское (Тебриз). Здесь они собраны из позднейших ханств, поэтому границы приблизительны.',
+            en: 'North of the Araz the land was split among governorships (beglarbegiliks): Shirvan (Shamakhi), Karabakh (Ganja) and Chukhur-Saad (Erivan); south of it lay Azerbaijan (Tabriz). They are drawn here from the later khanates, so the borders are approximate.' } },
+  { layer: 'prov', year: '1722–1747', bounds: ALL, dim: true,
+    when: { az: '1722–1747', ru: '1722–1747', en: '1722–1747' },
+    title: { az: 'Dağılma', ru: 'Распад', en: 'Collapse' },
+    text: { az: '1722-də əfqan üsyançıları İsfahanı aldı. Osmanlı və Rusiya orduları Xəzər və Qafqaz vilayətlərini aralarında bölüşdü (1723–1724). Türk əfşar tayfasından olan sərkərdə Nadir onları çıxardı və 1736-da Muğan düzündə şah elan edildi. 1747-də o öldürüləndə şimalın hakimləri və yerli bəyləri özlərini xan elan etdilər.',
+            ru: 'В 1722 г. афганские мятежники взяли Исфахан. Османская и российская армии поделили прикаспийские и кавказские провинции (1723–1724). Полководец Надир из тюркского племени афшар изгнал их и в 1736 г. был провозглашён шахом в Муганской степи. Когда в 1747 г. его убили, наместники и местные владетели севера объявили себя ханами.',
+            en: 'In 1722 Afghan rebels took Isfahan. Ottoman and Russian armies shared out the Caspian and Caucasian provinces (1723–1724). Nader, a general of the Turkic Afshar tribe, drove them out and in 1736 was proclaimed shah on the Mughan plain. When he was murdered in 1747, the governors and local lords of the north made themselves khans.' } },
   { layer: '1800', year: '~1800', bounds: ALL, scan: 0,
     when: { az: 'Təxminən 1800', ru: 'Около 1800', en: 'Around 1800' },
     title: { az: 'Xanlıqlar', ru: 'Ханства', en: 'The khanates' },
@@ -150,14 +170,14 @@ function render() {
   document.querySelectorAll('[data-lang]').forEach((b) => b.setAttribute('aria-pressed', b.dataset.lang === lang));
   document.querySelectorAll('[data-keep-lang]').forEach((a) => { const u = new URL(a.getAttribute('href'), location.href); if (lang === 'az') u.searchParams.delete('lang'); else u.searchParams.set('lang', lang); a.href = u.pathname + u.search; });
   const q = lang === 'az' ? '' : `?lang=${lang}`;
-  document.getElementById('story').innerHTML = STEPS.map((s, i) => `<section class="step${s.end ? ' end' : ''}" data-i="${i}"><p class="when">${esc(L(s.when))}</p><h2>${esc(L(s.title))}</h2><p>${esc(L(s.text))}</p>${s.end ? `<div class="links">${LINKS[lang].map(([h, n]) => `<a href="${h}${q}">${esc(n)} →</a>`).join('')}</div>` : ''}</section>`).join('');
+  document.getElementById('story').innerHTML = STEPS.map((s, i) => `<section class="step${s.end ? ' end' : ''}" data-i="${i}"><p class="when">${esc(L(s.when))}</p><h2>${esc(L(s.title))}</h2><p>${esc(L(s.text))}</p>${s.link ? `<p><a href="${esc(L(s.link.href))}" target="_blank" rel="noopener">${esc(L(s.link.text))} ↗</a></p>` : ''}${s.end ? `<div class="links">${LINKS[lang].map(([h, n]) => `<a href="${h}${q}">${esc(n)} →</a>`).join('')}</div>` : ''}</section>`).join('');
   observe();
 }
 
 const map = new maplibregl.Map({
   container: 'map', style: `https://tiles.openfreemap.org/styles/${dark ? 'dark' : 'positron'}`,
-  bounds: ALL, minZoom: 4, maxZoom: 9, interactive: false,
-  attributionControl: { compact: true, customAttribution: 'Tomkeev 1901 · <a href="https://ristat.org/">RISTAT</a> · Demoscope · <a href="https://www.geoboundaries.org">geoBoundaries</a>' },
+  bounds: [[37.5, 23.5], [71.5, 43.5]], minZoom: 2.5, maxZoom: 9, interactive: false,
+  attributionControl: { compact: true, customAttribution: 'Delisle 1724 · Tomkeev 1901 · Natural Earth · <a href="https://ristat.org/">RISTAT</a> · Demoscope · <a href="https://www.geoboundaries.org">geoBoundaries</a>' },
 });
 const pad = () => matchMedia('(max-width: 48rem)').matches ? { top: 80, right: 20, left: 20, bottom: innerHeight * .45 } : { top: 40, right: 40, bottom: 40, left: Math.min(26 * 16, innerWidth * .4) + 40 };
 map.on('style.load', () => {
@@ -173,9 +193,12 @@ map.on('load', async () => {
   const sc = await fetch('../../xanliqlar/data/tomkeev-1901.json').then((r) => r.json());
   map.addSource('scan', { type: 'image', url: '../../xanliqlar/data/tomkeev-1901.webp', coordinates: sc.coordinates });
   map.addLayer({ id: 'scan', type: 'raster', source: 'scan', paint: { 'raster-opacity': 0, 'raster-opacity-transition': { duration: still() ? 0 : 900 } } }, firstSymbol);
+  const d2 = await fetch('../safavi/data/delisle-1724.json').then((r) => r.json());
+  map.addSource('scan2', { type: 'image', url: '../safavi/data/delisle-1724.webp', coordinates: d2.coordinates });
+  map.addLayer({ id: 'scan2', type: 'raster', source: 'scan2', paint: { 'raster-opacity': 0, 'raster-opacity-transition': { duration: still() ? 0 : 900 } } }, firstSymbol);
   await Promise.all(Object.entries(LAYERS).map(async ([id, file]) => {
     const gj = await fetch(file).then((r) => r.json());
-    gj.features = gj.features.filter((f) => f.geometry && f.geometry.type !== 'Point' && (id !== 'today' || f.properties.country === 'az') && (id !== '1897' || !['Дагестанская область', 'Карская область'].includes(f.properties.govKey)));
+    gj.features = gj.features.filter((f) => f.geometry && f.geometry.type !== 'Point' && !f.geometry.type.includes('Line') && (id !== 'safavid' || f.properties.id === 'safavid') && (id !== 'prov' || f.properties.kind === 'province') && (id !== 'today' || f.properties.country === 'az') && (id !== '1897' || !['Дагестанская область', 'Карская область'].includes(f.properties.govKey)));
     colour(gj);
     map.addSource(id, { type: 'geojson', data: gj });
     const fade = { duration: still() ? 0 : 800 };
@@ -204,6 +227,9 @@ function go(i, force = false) {
     map.setPaintProperty(`${id}-hl`, 'line-opacity', on && ids.length ? 1 : 0);
   }
   map.setPaintProperty('scan', 'raster-opacity', s.scan ?? 0);
+  map.setPaintProperty('scan2', 'raster-opacity', s.scan2 ?? 0);
+  if (s.dim) map.setPaintProperty(`${s.layer}-fill`, 'fill-opacity', .12);
+  if (s.layer === 'safavid') map.setPaintProperty('safavid-fill', 'fill-opacity', s.scan2 ? .22 : .45);
   if (s.scan) map.setPaintProperty(`${s.layer}-fill`, 'fill-opacity', ids.length ? ['case', ['in', ['get', 'id'], ['literal', ids]], .35, 0] : 0);
   map.fitBounds(s.bounds, { padding: pad(), duration: still() ? 0 : 1600, essential: true });
 }
