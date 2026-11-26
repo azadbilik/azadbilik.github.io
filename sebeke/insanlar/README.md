@@ -34,6 +34,10 @@ Delete `data/raw/` to refetch from scratch. Node 20+; no dependencies.
 - 12% women, 86% men; 568 born before 1828, 9,286 born 1920–1990.
 - `data/insanlar.json` is 2.2 MB (about 0.7 MB gzipped).
 
+## Defaults
+
+The birthplace filter starts on «Republic + Iran» (10,696 people, 6,334 with both places): the group «other 1897 uezds» (Erivan, Zangezur, Borchali, Derbent…, 4,800 people) is off, because many of those born there are not Azerbaijani by any measure and Wikidata rarely records ethnic group. It can be switched on in the filter; the coverage charts always show everyone.
+
 ## Method
 
 - **Selection.** Humans (Q5) with a sitelink to at least one Wikimedia site and a birth place that has its own coordinates inside a 1° tile (WDQS `wikibase:box`, tiles split on timeout). The coordinates are then tested against the polygons above (point in polygon), not against Wikidata's administrative chain. People whose ethnic group (P172) is Azerbaijanis, Iranian Azerbaijanis, or Azerbaijanis in Russia/Armenia/Ukraine are added wherever they were born.

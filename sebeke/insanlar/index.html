@@ -162,6 +162,7 @@
           <label><span data-i18n="topL"></span> <input type="range" id="ftop" min="1" max="5" step="1" value="2"><output id="ftopo"></output></label>
         </div>
       </div>
+      <p class="hint" id="grpNote"></p>
       <div class="stats" id="stats"></div>
       <div class="mapbox"><div id="map" role="region" data-i18n-label="mapL"></div><div class="btns"><button type="button" id="mreg"></button><button type="button" id="mwide"></button></div></div>
       <div class="lgd" id="maplgd"></div>
@@ -249,7 +250,7 @@ const T = {
 az: { doc: 'Tarixi Azərbaycanın insanları · Azad Bilik', title: 'Tarixi Azərbaycanın insanları', sub: 'Harada doğuldular, harada öldülər, hara getdilər', library: 'Kitabxana',
   mapK: 'Köç', mapH: 'Doğulduğu yerdən öldüyü yerə',
   mapP: 'Hər qövs bir yerdə doğulub başqa yerdə ölmüş adamların yoludur; qalınlığı sayı göstərir. Qövs ölüm ilinə görə dövrə düşür (ölüm ili yoxdursa, doğum ilinə 60 əlavə olunur). Təbriz, Şuşa, Şamaxıdan Bakıya axını, İstanbul, Tehran, Paris və Moskvaya gedən yolları görmək üçün dövrləri açıb-bağlayın. İki yönlü qövslər bir-birindən ayrılsın deyə əyilir: gedişin sol tərəfinə.',
-  erasL: 'Dövrlər', eras: ['1828-ə qədər', '1828–1920', '1920–1991', '1991-dən sonra'], catL: 'Peşə', catAll: 'Hamısı', grpL: 'Doğum yeri', grpAll: 'Hamısı', sexL: 'Cins', sexAll: 'Hamısı', sexM: 'Kişilər', sexF: 'Qadınlar', topL: 'Qövs sayı',
+  erasL: 'Dövrlər', eras: ['1828-ə qədər', '1828–1920', '1920–1991', '1991-dən sonra'], catL: 'Peşə', catAll: 'Hamısı', grpL: 'Doğum yeri', grpAll: 'Hamısı (1897 qəzaları daxil)', grpDef: 'Standart: Respublika + İran', grpNote: '«1897-ci ilin digər qəzaları» (İrəvan, Zəngəzur, Borçalı, Dərbənd…) standart olaraq gizlidir: orada doğulanların çoxu erməni, gürcü, ləzgi, rusdur, Wikidata isə etnik mənsubiyyəti az yazır. Süzgəcdən seçib görə bilərsiniz.', sexL: 'Cins', sexAll: 'Hamısı', sexM: 'Kişilər', sexF: 'Qadınlar', topL: 'Qövs sayı',
   grps: ['Azərbaycan Respublikası', 'İran Azərbaycanı', '1897-ci ilin digər qəzaları (Ermənistan, Gürcüstan, Dağıstan)', 'Etnik mənsubiyyət (P172), başqa yerdə doğulub'],
   cats: { lit: 'Ədəbiyyat və jurnalistika', music: 'Musiqi', art: 'Təsviri sənət və memarlıq', stage: 'Teatr və kino', rel: 'Din', sci: 'Elm, təhsil, tibb', mil: 'Hərbçi', pol: 'Siyasət və dövlət', biz: 'Biznes', sport: 'İdman', other: 'Digər / bilinmir' },
   stPeople: 'Süzgəcdən keçən insan', stArcs: 'Doğum və ölüm yeri məlum', stShown: 'Göstərilən qövs', stPlaces: 'Yer',
@@ -277,7 +278,7 @@ az: { doc: 'Tarixi Azərbaycanın insanları · Azad Bilik', title: 'Tarixi Azə
 ru: { doc: 'Люди исторического Азербайджана · Azad Bilik', title: 'Люди исторического Азербайджана', sub: 'Где родились, где умерли, куда уехали', library: 'Kitabxana',
   mapK: 'Миграция', mapH: 'От места рождения к месту смерти',
   mapP: 'Каждая дуга — путь людей, родившихся в одном месте и умерших в другом; толщина — их число. Дуга относится к эпохе по году смерти (если года нет — год рождения плюс 60). Включайте и выключайте эпохи, чтобы увидеть поток из Тебриза, Шуши, Шемахи в Баку и пути в Стамбул, Тегеран, Париж и Москву. Встречные дуги изгибаются влево по ходу, чтобы не сливаться.',
-  erasL: 'Эпохи', eras: ['до 1828', '1828–1920', '1920–1991', 'после 1991'], catL: 'Занятие', catAll: 'Все', grpL: 'Место рождения', grpAll: 'Все', sexL: 'Пол', sexAll: 'Все', sexM: 'Мужчины', sexF: 'Женщины', topL: 'Число дуг',
+  erasL: 'Эпохи', eras: ['до 1828', '1828–1920', '1920–1991', 'после 1991'], catL: 'Занятие', catAll: 'Все', grpL: 'Место рождения', grpAll: 'Все (с уездами 1897 г.)', grpDef: 'По умолчанию: Республика + Иран', grpNote: '«Другие уезды 1897 г.» (Эривань, Зангезур, Борчалы, Дербент…) по умолчанию скрыты: среди родившихся там много армян, грузин, лезгин, русских, а этническая группа в Wikidata указана у немногих. Их можно включить в фильтре.', sexL: 'Пол', sexAll: 'Все', sexM: 'Мужчины', sexF: 'Женщины', topL: 'Число дуг',
   grps: ['Азербайджанская Республика', 'Иранский Азербайджан', 'Другие уезды 1897 г. (Армения, Грузия, Дагестан)', 'Этническая группа (P172), родились в другом месте'],
   cats: { lit: 'Литература и журналистика', music: 'Музыка', art: 'Изобразительное искусство и архитектура', stage: 'Театр и кино', rel: 'Религия', sci: 'Наука, образование, медицина', mil: 'Военные', pol: 'Политика и власть', biz: 'Бизнес', sport: 'Спорт', other: 'Другое / не указано' },
   stPeople: 'Людей по фильтру', stArcs: 'Известны оба места', stShown: 'Показано дуг', stPlaces: 'Мест',
@@ -305,7 +306,7 @@ ru: { doc: 'Люди исторического Азербайджана · Azad
 en: { doc: 'People of historical Azerbaijan · Azad Bilik', title: 'People of historical Azerbaijan', sub: 'Where they were born, where they died, where they went', library: 'Kitabxana',
   mapK: 'Migration', mapH: 'From the birthplace to the place of death',
   mapP: 'Each arc is the path of people born in one place and dead in another; its width is their number. An arc belongs to an era by the year of death (birth year + 60 where there is none). Switch eras on and off to see the flow from Tabriz, Shusha and Shamakhi to Baku, and the routes to Istanbul, Tehran, Paris and Moscow. Opposite arcs bend to the left of their direction so they do not overlap.',
-  erasL: 'Eras', eras: ['Before 1828', '1828–1920', '1920–1991', '1991 and after'], catL: 'Occupation', catAll: 'All', grpL: 'Birthplace', grpAll: 'All', sexL: 'Sex', sexAll: 'All', sexM: 'Men', sexF: 'Women', topL: 'Arcs shown',
+  erasL: 'Eras', eras: ['Before 1828', '1828–1920', '1920–1991', '1991 and after'], catL: 'Occupation', catAll: 'All', grpL: 'Birthplace', grpAll: 'All (with the 1897 uezds)', grpDef: 'Default: Republic + Iran', grpNote: '"Other 1897 uezds" (Erivan, Zangezur, Borchali, Derbent…) are off by default: many of those born there are Armenians, Georgians, Lezgians or Russians, and Wikidata records ethnic group for few. Pick them in the filter to see them.', sexL: 'Sex', sexAll: 'All', sexM: 'Men', sexF: 'Women', topL: 'Arcs shown',
   grps: ['Republic of Azerbaijan', 'Iranian Azerbaijan', 'Other 1897 uezds (Armenia, Georgia, Dagestan)', 'Ethnic group (P172), born elsewhere'],
   cats: { lit: 'Literature and journalism', music: 'Music', art: 'Visual arts and architecture', stage: 'Theatre and film', rel: 'Religion', sci: 'Science, education, medicine', mil: 'Military', pol: 'Politics and state', biz: 'Business', sport: 'Sport', other: 'Other / not given' },
   stPeople: 'People in the filter', stArcs: 'Both places known', stShown: 'Arcs shown', stPlaces: 'Places',
@@ -347,11 +348,11 @@ const eraOf = (y) => (y < 1828 ? 0 : y < 1920 ? 1 : y < 1991 ? 2 : 3);
 const years = (r) => `${r[R.born] ?? '?'}–${r[R.died] ?? (r[R.live] || (r[R.born] > 1906) ? '' : '?')}`;
 
 // ---- state
-const S = { eras: new Set([0, 1, 2, 3]), cat: -1, grp: -1, sex: 0, top: 2, lay: 'geo', col: 'cat' };
+const S = { eras: new Set([0, 1, 2, 3]), cat: -1, grp: -2, sex: 0, top: 2, lay: 'geo', col: 'cat' };
 const TOPN = [50, 100, 300, 1000, 5000];
 let view = []; // indices of people passing the filter
 let flows = new Map(); // "bp,dp,era" -> {bp, dp, era, n, people: []}
-const pass = (r) => (S.cat < 0 || r[R.cat] === S.cat) && (S.grp < 0 || r[R.grp] === S.grp) && (S.sex === 0 || r[R.sex] === S.sex);
+const pass = (r) => (S.cat < 0 || r[R.cat] === S.cat) && (S.grp === -1 || (S.grp === -2 ? r[R.grp] !== 2 : r[R.grp] === S.grp)) && (S.sex === 0 || r[R.sex] === S.sex);
 function refilter() {
   view = []; flows = new Map();
   for (let i = 0; i < P.length; i++) {
@@ -649,7 +650,7 @@ function controls() {
   $('eras').querySelectorAll('[data-e]').forEach((b) => (b.onclick = () => { const e = +b.dataset.e; S.eras.has(e) ? S.eras.delete(e) : S.eras.add(e); if (!S.eras.size) S.eras.add(e); controls(); update(); }));
   const opt = (v, l, sel) => `<option value="${v}"${sel ? ' selected' : ''}>${esc(l)}</option>`;
   $('fcat').innerHTML = opt(-1, t('catAll'), S.cat < 0) + CAT_ORDER.map((k, i) => opt(i, t('cats')[k], S.cat === i)).join('');
-  $('fgrp').innerHTML = opt(-1, t('grpAll'), S.grp < 0) + t('grps').map((g, i) => opt(i, g, S.grp === i)).join('');
+  $('fgrp').innerHTML = opt(-2, t('grpDef'), S.grp === -2) + opt(-1, t('grpAll'), S.grp === -1) + t('grps').map((g, i) => opt(i, g, S.grp === i)).join('');
   $('fsex').innerHTML = opt(0, t('sexAll'), S.sex === 0) + opt(1, t('sexM'), S.sex === 1) + opt(2, t('sexF'), S.sex === 2);
   const seg = (id, items, cur, key) => { $(id).innerHTML = items.map(([v, l]) => `<button type="button" data-v="${v}" aria-pressed="${cur === v}">${esc(l)}</button>`).join(''); $(id).querySelectorAll('button').forEach((b) => (b.onclick = () => { S[key] = b.dataset.v; controls(); if (key === 'lay') buildNet(true), setTimeout(() => graph.fitView(500, 0.08), 80); else paint(); })); };
   seg('lay', [['geo', t('lay')[0]], ['force', t('lay')[1]]], S.lay, 'lay');
@@ -675,7 +676,7 @@ function applyLang() {
   document.querySelectorAll('[data-keep-lang]').forEach((a) => { const u = new URL(a.getAttribute('href'), location.href); if (lang === 'az') u.searchParams.delete('lang'); else u.searchParams.set('lang', lang); a.href = u.pathname + u.search; });
   $('kx-nav').href = `https://kitabxana.az${lang === 'az' ? '' : '/' + lang}/`;
   $('mapP').textContent = t('mapP'); $('netP').textContent = t('netP'); $('findP').textContent = t('findP'); $('covP').textContent = t('covP');
-  $('mreg').textContent = t('mreg'); $('mwide').textContent = t('mwide'); $('gfit').textContent = t('gfit'); $('mapHint').textContent = t('mapHint'); $('gload').textContent = t('gload');
+  $('grpNote').textContent = t('grpNote'); $('mreg').textContent = t('mreg'); $('mwide').textContent = t('mwide'); $('gfit').textContent = t('gfit'); $('mapHint').textContent = t('mapHint'); $('gload').textContent = t('gload');
   $('method').innerHTML = t('method')(); $('ftop').setAttribute('aria-label', t('topL')); $('cg').setAttribute('aria-label', t('netL'));
   if (!D) return;
   $('lede').textContent = t('lede')(D.stats.total, D.stats.withDeathPlace); $('foot').innerHTML = t('foot')(D.built);
