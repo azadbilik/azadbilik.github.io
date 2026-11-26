@@ -168,6 +168,19 @@
   .maplibregl-ctrl-attrib { background: color-mix(in srgb, var(--paper) 85%, transparent) !important; color: var(--muted); }
   .maplibregl-ctrl-attrib a { color: var(--muted) !important; }
 
+  /* Once the turntable scrolls away, the record follows in a bar at the bottom */
+  .dock { position: fixed; left: 50%; bottom: max(.75rem, env(safe-area-inset-bottom)); translate: -50% 0; z-index: 10; width: min(34rem, calc(100% - 1.5rem));
+    display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: .75rem; padding: .5rem .5rem .5rem .6rem; border-radius: 999px;
+    background: color-mix(in srgb, var(--paper) 88%, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--rule); box-shadow: 0 8px 28px rgb(0 0 0 / .18); transition: opacity .25s, translate .35s cubic-bezier(.2, .7, .2, 1); }
+  .dock.off { opacity: 0; translate: -50% 150%; pointer-events: none; }
+  .dock .disc { width: 2.75rem; }
+  .dock .txt { min-width: 0; text-align: left; line-height: 1.25; }
+  .dock .txt b { display: block; font: 400 1rem var(--serif); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .dock .txt span { display: block; font-size: .75rem; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .dock .play { width: 2.75rem; height: 2.75rem; border-radius: 50%; background: var(--ink); color: var(--paper); display: grid; place-items: center; }
+  .dock .play svg { width: 1rem; height: 1rem; fill: currentColor; }
+  .dock .bar { position: absolute; left: 1.5rem; right: 1.5rem; bottom: 0; height: 2px; border-radius: 2px; background: linear-gradient(to right, var(--accent) var(--p, 0%), transparent var(--p, 0%)); }
   footer { border-top: 1px solid var(--rule); padding-block: 1.75rem 2.5rem; font-size: .8125rem; color: var(--muted); display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem 2rem; }
   footer p { max-width: 46rem; }
 
@@ -180,7 +193,19 @@
     .seek { grid-column: 1 / -1; }
     .singer { grid-template-columns: 1fr; gap: .75rem; }
     .singer .face { display: none; }
-    .discs { grid-template-columns: repeat(auto-fill, minmax(6rem, 1fr)); gap: 1.25rem 1rem; }
+    /* On a phone each singer's discs are one row to swipe through */
+    .discs { display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin-inline: calc(var(--gutter) * -1); padding: .25rem var(--gutter) .5rem; scroll-padding-inline: var(--gutter); }
+    .discs::-webkit-scrollbar { display: none; }
+    .discs li { flex: 0 0 6.25rem; scroll-snap-align: start; }
+    .singer { padding-block: 1.25rem; }
+    .singer h3 { font-size: 1.25rem; }
+    .block-head { margin-bottom: 1.25rem; }
+    .chips { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter); width: calc(100% + 2 * var(--gutter)); }
+    .chips::-webkit-scrollbar { display: none; }
+    .chips button { flex: none; }
+    section.block { padding-block: 2.5rem 3rem; }
+    .stage h1 { font-size: 2.5rem; }
+    footer { padding-bottom: 5.5rem; }
     .people-grid { grid-template-columns: 1fr; }
     .bigmap { position: relative; top: 0; height: 60svh; }
     .pcol { height: 70svh; }
@@ -253,6 +278,8 @@
   </section>
 </main>
 
+<div class="dock off" id="dock" aria-hidden="true"><button type="button" id="dock-top" data-i18n-label="toTop"><span class="disc" id="dock-disc"></span></button><button type="button" class="txt" id="dock-txt"><b id="dock-title"></b><span id="dock-who"></span></button><button type="button" class="play" id="dock-toggle"><svg viewBox="0 0 24 24" aria-hidden="true" id="dock-icon"></svg></button><i class="bar" id="dock-bar"></i></div>
+
 <div class="wrap"><footer><p data-i18n="note"></p><span><a href="/" data-keep-lang>Azad Bilik</a> · <a href="https://github.com/azadbilik">GitHub</a></span></footer></div>
 
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
@@ -268,7 +295,7 @@ const T = {
   az: { doc: 'Musiqi · Azad Bilik', title: 'Musiqi', sub: 'İlk səs yazıları, 1902-dən', library: 'Kitabxana', gallery: 'Qalereya', maps: 'Ədəbi xəritələr', atlas: 'Atlas',
     recs: 'Səs yazıları', people: 'Musiqiçilər', mughams: 'Muğamlar', all: 'Hamısı',
     mugham: 'Muğamlar', tesnif: 'Təsniflər', song: 'Mahnılar', instrumental: 'Alətlə', one: { mugham: 'muğam', tesnif: 'təsnif', song: 'mahnı', instrumental: 'alətlə' },
-    khanende: 'xanəndə', tar: 'tarzən', ashik: 'aşıq', unknown: 'İfaçısı bilinmir', play: 'Dinlə', pause: 'Dayandır', prev: 'Əvvəlki', next: 'Sonrakı', position: 'Yer',
+    khanende: 'xanəndə', tar: 'tarzən', ashik: 'aşıq', unknown: 'İfaçısı bilinmir', play: 'Dinlə', pause: 'Dayandır', prev: 'Əvvəlki', next: 'Sonrakı', position: 'Yer', toTop: 'Yuxarı, pleyerə',
     commons: 'Commons-da', probable: 'ehtimal', others: 'Başqa muğamlar', noRec: 'Bu muğamın səs yazısı hələ yoxdur.', sectionsL: 'Şöbələr',
     dgLead: 'Yeddi əsas muğam, hər biri öz əhval-ruhiyyəsi və şöbələri ilə, və onları oxuyan yazılar.',
     dgNote: 'Yeddi əsas muğam (dəstgah), Üzeyir Hacıbəylinin bölgüsü ilə; əhval-ruhiyyə və şöbələr Vikipediyadakı mənbələrə görədir. «Ehtimal» olan yerlər dəqiqləşdirilməlidir.',
@@ -279,7 +306,7 @@ const T = {
   ru: { doc: 'Музыка · Azad Bilik', title: 'Музыка', sub: 'Первые записи, с 1902 года', library: 'Библиотека', gallery: 'Галерея', maps: 'Литературные карты', atlas: 'Атлас',
     recs: 'Записи', people: 'Музыканты', mughams: 'Мугамы', all: 'Все',
     mugham: 'Мугамы', tesnif: 'Теснифы', song: 'Песни', instrumental: 'Инструментальные', one: { mugham: 'мугам', tesnif: 'тесниф', song: 'песня', instrumental: 'инструментальная' },
-    khanende: 'ханенде', tar: 'тарист', ashik: 'ашуг', unknown: 'Исполнитель неизвестен', play: 'Слушать', pause: 'Пауза', prev: 'Предыдущая', next: 'Следующая', position: 'Позиция',
+    khanende: 'ханенде', tar: 'тарист', ashik: 'ашуг', unknown: 'Исполнитель неизвестен', play: 'Слушать', pause: 'Пауза', prev: 'Предыдущая', next: 'Следующая', position: 'Позиция', toTop: 'Наверх, к плееру',
     commons: 'на Викискладе', probable: 'предположительно', others: 'Другие мугамы', noRec: 'Записей этого мугама пока нет.', sectionsL: 'Шёбе',
     dgLead: 'Семь основных мугамов — у каждого свой характер и свои шёбе — и записи, в которых они звучат.',
     dgNote: 'Семь основных мугамов (дестгяхов) по Узеиру Гаджибекову; характер и шёбе — по источникам Википедии. Места с пометкой «предположительно» требуют уточнения.',
@@ -290,7 +317,7 @@ const T = {
   en: { doc: 'Music · Azad Bilik', title: 'Music', sub: 'The first recordings, from 1902', library: 'Library', gallery: 'Gallery', maps: 'Literary maps', atlas: 'Atlas',
     recs: 'Recordings', people: 'Musicians', mughams: 'Mughams', all: 'All',
     mugham: 'Mughams', tesnif: 'Tasnifs', song: 'Songs', instrumental: 'Instrumental', one: { mugham: 'mugham', tesnif: 'tasnif', song: 'song', instrumental: 'instrumental' },
-    khanende: 'khanende', tar: 'tar player', ashik: 'ashik', unknown: 'Performer unknown', play: 'Play', pause: 'Pause', prev: 'Previous', next: 'Next', position: 'Position',
+    khanende: 'khanende', tar: 'tar player', ashik: 'ashik', unknown: 'Performer unknown', play: 'Play', pause: 'Pause', prev: 'Previous', next: 'Next', position: 'Position', toTop: 'Back to the player',
     commons: 'on Commons', probable: 'probable', others: 'Other mughams', noRec: 'No recording of this mugham yet.', sectionsL: 'Sections',
     dgLead: 'The seven main mughams, each with its mood and sections, and the recordings that sing them.',
     dgNote: 'The seven main mughams (dastgahs), as Uzeyir Hajibeyli classed them; their moods and sections from the sources Wikipedia cites. Placements marked "probable" are not yet settled.',
@@ -431,7 +458,7 @@ function load(r, autoplay) {
   }
   drawNow();
   if (autoplay) audio.play().catch(() => {});
-  drawShelfState();
+  drawShelfState(); drawDock();
   keepUrl();
 }
 function drawNow() {
@@ -459,6 +486,23 @@ function drawNow() {
     mini.fitBounds(BOUNDS, { padding: 24, duration: still() ? 0 : 1200 });
   }
 }
+// The dock: shown once something has played and the turntable is out of view
+const dock = document.getElementById('dock');
+let stageSeen = true, played = false;
+new IntersectionObserver(([e]) => { stageSeen = e.isIntersecting; drawDock(); }, { threshold: .15 }).observe(document.querySelector('.stage'));
+function drawDock() {
+  const show = played && !stageSeen && current;
+  dock.classList.toggle('off', !show); dock.setAttribute('aria-hidden', !show);
+  dock.querySelectorAll('button').forEach((b) => b.tabIndex = show ? 0 : -1);
+  if (!current) return;
+  document.getElementById('dock-disc').outerHTML = disc(current, !audio.paused, 'dock-disc');
+  document.getElementById('dock-title').textContent = L(current.title);
+  document.getElementById('dock-who').textContent = current.performer ? short(current.performer) : t('unknown');
+  document.getElementById('dock-icon').innerHTML = audio.paused ? PLAY : PAUSE;
+  document.getElementById('dock-toggle').setAttribute('aria-label', `${audio.paused ? t('play') : t('pause')}: ${L(current.title)}`);
+}
+document.getElementById('dock-toggle').onclick = () => { if (audio.paused) audio.play().catch(() => {}); else audio.pause(); };
+document.getElementById('dock-top').onclick = document.getElementById('dock-txt').onclick = () => toTop();
 function step(d) {
   const q = queue(); const i = q.indexOf(current);
   const n = q[(i + d + q.length) % q.length];
@@ -467,8 +511,8 @@ function step(d) {
 document.getElementById('toggle').onclick = () => { if (audio.paused) audio.play().catch(() => {}); else audio.pause(); };
 document.getElementById('prev').onclick = () => { if (audio.currentTime > 3) audio.currentTime = 0; else step(-1); };
 document.getElementById('next').onclick = () => step(1);
-audio.addEventListener('play', () => { drawNow(); drawShelfState(); });
-audio.addEventListener('pause', () => { drawNow(); drawShelfState(); });
+audio.addEventListener('play', () => { played = true; drawNow(); drawShelfState(); drawDock(); });
+audio.addEventListener('pause', () => { drawNow(); drawShelfState(); drawDock(); });
 audio.addEventListener('ended', () => step(1));
 audio.addEventListener('loadedmetadata', () => { document.getElementById('dur').textContent = fmt(audio.duration); });
 audio.addEventListener('timeupdate', () => {
@@ -476,11 +520,12 @@ audio.addEventListener('timeupdate', () => {
   const p = audio.currentTime / audio.duration;
   if (!seek.matches(':active')) seek.value = Math.round(p * 1000);
   seek.style.setProperty('--p', `${p * 100}%`);
+  document.getElementById('dock-bar').style.setProperty('--p', `${p * 100}%`);
   document.getElementById('cur').textContent = fmt(audio.currentTime);
 });
 seek.oninput = () => { seek.style.setProperty('--p', `${seek.value / 10}%`); if (audio.duration) audio.currentTime = seek.value / 1000 * audio.duration; };
 const toTop = () => window.scrollTo({ top: 0, behavior: still() ? 'auto' : 'smooth' });
-const playFrom = (id) => { const r = recs.find((x) => x.id === id); if (r === current) { if (audio.paused) audio.play().catch(() => {}); else audio.pause(); } else { load(r, true); toTop(); } };
+const playFrom = (id) => { const r = recs.find((x) => x.id === id); if (r === current) { if (audio.paused) audio.play().catch(() => {}); else audio.pause(); } else load(r, true); };
 
 // ---- The shelf
 function drawKinds() {
@@ -557,7 +602,7 @@ function drawPeople(qid) {
     return `<li${p.qid === qid ? ' class="on"' : ''}><button type="button" class="p" data-p="${p.qid}"><span class="n">${esc(L(p))}</span><span class="y">${years(p)}</span><span class="r">${p.roles.map((x) => t(x)).join(', ')}${pl ? '' : ` · ${esc(L(p.place))}`}${p.byHand ? ` (${t('byHand')})` : ''}</span></button>${more ? `<div class="more">${more}</div>` : ''}</li>`;
   }).join('');
   document.querySelectorAll('#plist [data-p]').forEach((b) => b.onclick = () => { const p = byQid.get(b.dataset.p); showPlace(p.place.id, p.qid); });
-  document.querySelectorAll('#plist [data-listen]').forEach((b) => b.onclick = () => { load(recsOf(b.dataset.listen)[0], true); toTop(); });
+  document.querySelectorAll('#plist [data-listen]').forEach((b) => b.onclick = () => load(recsOf(b.dataset.listen)[0], true));
   if (qid) document.querySelector('#plist .on')?.scrollIntoView({ block: 'nearest' });
   const p = qid && byQid.get(qid);
   if (p) bigPulse.setLngLat([p.place.lng, p.place.lat]).addTo(map); else bigPulse.remove();

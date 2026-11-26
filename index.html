@@ -84,10 +84,9 @@
   .langs button { min-height: 1.75rem; min-width: 1.75rem; }
 
   /* Two frames, each a screen: culture, then the atlas. Words on one side, one picture on the other */
-  html { scroll-snap-type: y proximity; }
   body > .wrap { max-width: none; padding: 0; }
   header { padding: 1.75rem var(--gutter); height: 5.5rem; }
-  .frame { min-height: 100svh; display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); scroll-snap-align: start; }
+  .frame { min-height: 100svh; display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
   .frame:first-of-type { min-height: calc(100svh - 5.5rem); }
   .frame + .frame { border-top: 1px solid var(--rule); }
   .frame .words { display: flex; flex-direction: column; justify-content: center; gap: 2.5rem; padding: 3rem var(--gutter); max-width: 46rem; margin-left: auto; width: 100%; }
@@ -115,21 +114,23 @@
   .rows a:hover b { color: var(--accent); }
   .open { font-size: .875rem; color: var(--muted); }
   .open a { color: var(--ink); }
-  footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem 2rem; font-size: .8125rem; color: var(--muted); padding-top: 1.25rem; border-top: 1px solid var(--rule); }
+  footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem 2rem; font-size: .8125rem; color: var(--muted); padding: 1.5rem var(--gutter) 2rem; border-top: 1px solid var(--rule); }
   footer a { color: var(--ink); }
 
   @media (max-width: 52rem) {
-    html { scroll-snap-type: none; }
     header { height: auto; }
     .frame, .frame.flip { grid-template-columns: 1fr; min-height: 0; }
     .frame.flip .pic { order: 0; }
-    .pic { height: 46svh; }
+    .pic { height: 38svh; }
+    h1, .frame h2 { font-size: clamp(2.25rem, 9vw, 2.75rem); }
+    .rows b { font-size: 1.25rem; }
+    .rows a { padding: .75rem 0; }
     .frame .words { padding: 2.5rem var(--gutter) 3.5rem; gap: 2rem; }
     .rows a { grid-template-columns: 1fr auto; }
     .rows span.l { grid-column: 1; grid-row: 2; font-size: .875rem; }
     .rows a::after { grid-row: 1 / 3; align-self: center; }
   }
-  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } html { scroll-snap-type: none; } }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
   .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 </style>
 </head>
@@ -166,10 +167,6 @@
         </div>
         <ul class="rows"><li><a href="/atlas/#g-borders" data-keep-lang><b><span data-l="az">Sərhədlər</span><span data-l="ru">Границы</span><span data-l="en">Borders</span></b><span class="l"><span data-l="az">Xanlıqlardan bugünkü rayonlaradək</span><span data-l="ru">От ханств до нынешних районов</span><span data-l="en">From the khanates to today’s districts</span></span></a></li><li><a href="/atlas/#g-people" data-keep-lang><b><span data-l="az">Əhali və dillər</span><span data-l="ru">Население и языки</span><span data-l="en">People and languages</span></b><span class="l"><span data-l="az">Siyahıyaalmalar, xalqlar, dillər</span><span data-l="ru">Переписи, народы, языки</span><span data-l="en">Censuses, peoples, languages</span></span></a></li><li><a href="/atlas/#g-land" data-keep-lang><b><span data-l="az">Coğrafiya</span><span data-l="ru">География</span><span data-l="en">Geography</span></b><span class="l"><span data-l="az">Kür–Araz hövzəsi, karvan yolları</span><span data-l="ru">Бассейн Куры и Аракса, караванные пути</span><span data-l="en">The Kura–Araz basin, caravan routes</span></span></a></li></ul>
         <p class="open"><span data-l="az">Bütün məlumatlar açıqdır: CSV, CC0, Zenodo-da DOI ilə.</span><span data-l="ru">Все данные открыты: CSV, CC0, с DOI на Zenodo.</span><span data-l="en">All the data is open: CSV, CC0, with a DOI on Zenodo.</span> <a href="https://github.com/azadbilik/data"><span data-l="az">Məlumatlar</span><span data-l="ru">Данные</span><span data-l="en">The data</span> →</a></p>
-        <footer>
-          <span><span data-l="az">Səhv tapdınız və ya mənbəniz var? <a href="https://github.com/azadbilik/kitabxana/issues">Bizə yazın</a></span><span data-l="ru">Нашли ошибку или у вас есть источник? <a href="https://github.com/azadbilik/kitabxana/issues">Напишите нам</a></span><span data-l="en">Found a mistake or have a source? <a href="https://github.com/azadbilik/kitabxana/issues">Tell us</a></span></span>
-          <span><a href="mailto:hello@azadbilik.org">hello@azadbilik.org</a> · <a href="https://github.com/azadbilik">GitHub</a></span>
-        </footer>
       </div>
       <figure class="pic">
         <img src="/atlas/home.webp" width="900" height="1170" alt="" loading="lazy" style="object-position: 60% 45%">
@@ -177,6 +174,10 @@
       </figure>
     </section>
   </main>
+  <footer>
+    <span><span data-l="az">Səhv tapdınız və ya mənbəniz var? <a href="https://github.com/azadbilik/kitabxana/issues">Bizə yazın</a></span><span data-l="ru">Нашли ошибку или у вас есть источник? <a href="https://github.com/azadbilik/kitabxana/issues">Напишите нам</a></span><span data-l="en">Found a mistake or have a source? <a href="https://github.com/azadbilik/kitabxana/issues">Tell us</a></span></span>
+    <span><a href="mailto:hello@azadbilik.org">hello@azadbilik.org</a> · <a href="https://github.com/azadbilik">GitHub</a></span>
+  </footer>
 </div>
 <script>
   const T = { az: ['Azad Bilik', 'Azərbaycan mədəniyyəti və tarixi haqqında açıq bilik.'], ru: ['Azad Bilik', 'Открытые знания об азербайджанской культуре и истории.'], en: ['Azad Bilik', 'Open knowledge about Azerbaijani culture and history.'] };
