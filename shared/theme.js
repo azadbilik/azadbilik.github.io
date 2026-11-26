@@ -142,3 +142,5 @@
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mount); else mount();
 })();
+// The site's search (and a map page's data line) come with the theme script, so every page has them
+(() => { if (document.querySelector('script[src="/shared/hub.js"]')) return; const s = document.createElement('script'); s.src = '/shared/hub.js'; s.async = true; document.head.appendChild(s); })();
