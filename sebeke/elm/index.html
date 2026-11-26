@@ -153,13 +153,24 @@
     .stage { height: 70vh; } .card { position: absolute; top: auto; bottom: .5rem; right: .5rem; left: .5rem; width: auto; max-height: 55%; }
     .rank li button { grid-template-columns: 6rem 1fr 3rem; }
   }
+  /* The hub's header: one language at a time, the sections wrapping on a narrow screen */
+  html:not([lang="az"]) [data-l="az"], html:not([lang="ru"]) [data-l="ru"], html:not([lang="en"]) [data-l="en"] { display: none !important; }
+  header nav { flex-wrap: wrap; justify-content: flex-end; row-gap: .25rem; }
+  header nav a { color: var(--muted); text-decoration: none; }
+  header nav a:hover { color: var(--ink); }
+  @media (max-width: 40rem) {
+    header.hub { position: relative; flex-wrap: wrap; row-gap: .6rem; }
+    header.hub nav { width: 100%; justify-content: flex-start; gap: .25rem .9rem; }
+    header.hub nav a { font-size: .8125rem; }
+    header .langs { position: absolute; top: calc(1.25rem - .1rem); right: 0; margin: 0; }
+  }
 </style>
 </head>
 <body>
 <div class="wrap">
   <header class="hub">
     <a class="brand" href="/" data-keep-lang><svg viewBox="0 0 512 512" aria-hidden="true"><g class="star"><rect x="126" y="126" width="260" height="260"/><polygon points="256,72 440,256 256,440 72,256"/></g><polygon class="gem" points="256,196 316,256 256,316 196,256"/></svg>Azad Bilik</a>
-    <nav><a href="https://kitabxana.az" id="kx-nav">Kitabxana</a><span class="langs" role="group" aria-label="Dil · Язык · Language"><button type="button" data-lang="az">AZ</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="en">EN</button></span></nav>
+    <nav><a href="https://kitabxana.az" id="kx-nav"><span data-l="az">Kitabxana</span><span data-l="ru">Библиотека</span><span data-l="en">Library</span></a><a href="/qalereya/" data-keep-lang><span data-l="az">Qalereya</span><span data-l="ru">Галерея</span><span data-l="en">Gallery</span></a><a href="/xeriteler/" data-keep-lang><span data-l="az">Ədəbi xəritələr</span><span data-l="ru">Литературные карты</span><span data-l="en">Literary maps</span></a><a href="/atlas/" data-keep-lang><span data-l="az">Atlas</span><span data-l="ru">Атлас</span><span data-l="en">Atlas</span></a><a href="/musiqi/" data-keep-lang><span data-l="az">Musiqi</span><span data-l="ru">Музыка</span><span data-l="en">Music</span></a><span class="langs" role="group" aria-label="Dil · Язык · Language"><button type="button" data-lang="az">AZ</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="en">EN</button></span></nav>
   </header>
   <div class="intro">
     <h1 data-i18n="title">Elm şəbəkəsi</h1>
@@ -755,7 +766,7 @@ function applyLang() {
   document.querySelectorAll('[data-i18n]').forEach((e) => { const v = t(e.dataset.i18n); if (typeof v === 'string') e.textContent = v; });
   document.querySelectorAll('[data-lang]').forEach((b) => b.setAttribute('aria-pressed', b.dataset.lang === lang));
   document.querySelectorAll('[data-keep-lang]').forEach((a) => { const u = new URL(a.getAttribute('href'), location.href); if (lang === 'az') u.searchParams.delete('lang'); else u.searchParams.set('lang', lang); a.href = u.pathname + u.search; });
-  $('kx-nav').href = (location.hostname === 'localhost' ? 'https://kitabxana.az' : 'https://kitabxana.az') + '/';
+  $('kx-nav').href = `https://kitabxana.az${lang === 'az' ? '' : '/' + lang}/`;
   $('psearch').placeholder = t('searchPh'); document.querySelectorAll('#presets button').forEach((b) => { b.textContent = b.dataset.a === '1970' && b.dataset.b === '2026' ? t('all') : b.dataset.label; });
   if (!D) return;
   const w = words();

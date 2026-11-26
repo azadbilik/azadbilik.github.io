@@ -136,12 +136,23 @@
     .frow label { display: flex; width: 100%; } .frow label select { flex: 1; min-width: 0; }
     .bars div { grid-template-columns: minmax(0, 6.5rem) 1fr 3rem; }
   }
+  /* The hub's header: one language at a time, the sections wrapping on a narrow screen */
+  html:not([lang="az"]) [data-l="az"], html:not([lang="ru"]) [data-l="ru"], html:not([lang="en"]) [data-l="en"] { display: none !important; }
+  header nav { flex-wrap: wrap; justify-content: flex-end; row-gap: .25rem; }
+  header nav a { color: var(--muted); text-decoration: none; }
+  header nav a:hover { color: var(--ink); }
+  @media (max-width: 40rem) {
+    header .top { position: relative; flex-wrap: wrap; row-gap: .6rem; }
+    header nav { width: 100%; justify-content: flex-start; gap: .25rem .9rem; }
+    header nav a { font-size: .8125rem; }
+    header .langs { position: absolute; top: 0; right: 0; margin: 0; }
+  }
 </style>
 </head>
 <body>
 <div class="wrap">
   <header class="head">
-    <div class="top"><a class="brand" href="/" data-keep-lang><svg viewBox="0 0 512 512" aria-hidden="true"><g class="star"><rect x="126" y="126" width="260" height="260"/><polygon points="256,72 440,256 256,440 72,256"/></g><polygon class="gem" points="256,196 316,256 256,316 196,256"/></svg>Azad Bilik</a><nav><a href="https://kitabxana.az" id="kx-nav" data-i18n="library">Kitabxana</a><span class="langs" role="group" aria-label="Dil · Язык · Language"><button type="button" data-lang="az">AZ</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="en">EN</button></span></nav></div>
+    <div class="top"><a class="brand" href="/" data-keep-lang><svg viewBox="0 0 512 512" aria-hidden="true"><g class="star"><rect x="126" y="126" width="260" height="260"/><polygon points="256,72 440,256 256,440 72,256"/></g><polygon class="gem" points="256,196 316,256 256,316 196,256"/></svg>Azad Bilik</a><nav><a href="https://kitabxana.az" id="kx-nav"><span data-l="az">Kitabxana</span><span data-l="ru">Библиотека</span><span data-l="en">Library</span></a><a href="/qalereya/" data-keep-lang><span data-l="az">Qalereya</span><span data-l="ru">Галерея</span><span data-l="en">Gallery</span></a><a href="/xeriteler/" data-keep-lang><span data-l="az">Ədəbi xəritələr</span><span data-l="ru">Литературные карты</span><span data-l="en">Literary maps</span></a><a href="/atlas/" data-keep-lang><span data-l="az">Atlas</span><span data-l="ru">Атлас</span><span data-l="en">Atlas</span></a><a href="/musiqi/" data-keep-lang><span data-l="az">Musiqi</span><span data-l="ru">Музыка</span><span data-l="en">Music</span></a><span class="langs" role="group" aria-label="Dil · Язык · Language"><button type="button" data-lang="az">AZ</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="en">EN</button></span></nav></div>
     <h1 data-i18n="title">Tarixi Azərbaycanın insanları</h1>
     <p class="sub" data-i18n="sub"></p>
     <p class="lede" id="lede"></p>
