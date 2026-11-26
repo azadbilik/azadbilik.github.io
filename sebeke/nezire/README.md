@@ -1,13 +1,22 @@
 # Nəzirə şəbəkəsi · The answer-poem network
 
-[azadbilik.org/sebeke/nezire](https://azadbilik.org/sebeke/nezire/): who answered whose poem (nəzirə, təxmis, cavab) in the verse of the kitabxana.az library. Poets or poems as nodes (toggle), laid out by the poet's birth year; click a node or a line to see both poems' lines and the evidence.
+[azadbilik.org/sebeke/nezire](https://azadbilik.org/sebeke/nezire/): who answered whose poem (nəzirə, təxmis, cavab) in the verse of the kitabxana.az library. Poets or poems as nodes (toggle), older poets to the left; click a node or a line to see both poems' lines and the evidence.
 
 | File | What |
 |---|---|
-| `index.html` | The page (az, ru, en), D3 7.9.0 from jsDelivr |
+| `index.html` | The page (az, ru, en); the graph is `/shared/graph.js` |
 | `data/nezire.json` | What the page reads, built by `scripts/build.mjs` |
 | `scripts/build.mjs` | Reads the kitabxana.az library database and finds the links |
 | `og.png` | Share card |
+
+## Rendering
+
+The graph is the hub's shared graph view, [`/shared/graph.js`](../../shared/graph.js) + `graph.css`: sigma.js 3.0.3 (WebGL nodes) over graphology 0.26.0, laid out by ForceAtlas2 (graphology-layout-forceatlas2 0.10.1), all MIT, from jsDelivr.
+
+- Every tier (A, B, C) is in the graph; the checkboxes only hide edges (and poets left without one), so nothing moves. The links on show by default (A + B) are laid out first, the weak-only ones placed around them afterwards.
+- Seeded and deterministic: each node starts at its poet's year on x (the centuries before 1700 squeezed into the first 30%, as before) and is pulled back there softly while ForceAtlas2 runs a fixed number of iterations, so older poets stay left and the picture is the same on every load. Then it is stretched (≤ 1.5×, poems 2.2×) to the stage's shape. About a quarter of a second for the larger (poems) view, so positions are not cached in the data.
+- Node size: √ of how many poets answered it; colour: the century; dashed edge: poets of one time (direction unknown); arrow: from the answer to the poem answered.
+- Hover lights a node and its neighbours, a click pins it and opens the card (the old detail panel, now a side panel / bottom sheet); Esc or empty space clears. Search, zoom and fit in the stage's toolbar; nodes can be dragged.
 
 ## Rebuilding
 
@@ -39,4 +48,4 @@ A shared radif and qafiyə is the formal mark of a nəzirə, not proof of one (m
 
 `built`, `stats`; `poets` (`slug`, `az`/`ru`/`en`, `born`, `died`, `date`); `poems` (`slug`, `t` title, `p` poet index, `m` first two lines); `links` (`a` answering poem, `b` poem answered, `tier`, `k`: `e` {head}, `q` {n, of, ev}, `f` {m letters shared, r radif letters, c poems ending so, sh rhyme stems shared, und}); `named` (poet-level: titled poem `a`, poet `to`, `head`, `rev`/`und`).
 
-Sources: poem texts and metadata from the kitabxana.az library (texts stay there, each carries its own source note; the data holds only titles and first two lines). Data CC0. D3 7.9.0, ISC.
+Sources: poem texts and metadata from the kitabxana.az library (texts stay there, each carries its own source note; the data holds only titles and first two lines). Data CC0. sigma.js, graphology, ForceAtlas2: MIT.

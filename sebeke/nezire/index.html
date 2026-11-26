@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="/fonts/fonts.css">
 <link rel="stylesheet" href="/shared/hub.css">
 <link rel="stylesheet" href="/shared/story-map.css">
+<link rel="stylesheet" href="/shared/graph.css">
 <style>
   /* A page, not a map: it scrolls. Century colours on top of the story maps' tokens */
   :root { --k14: #7A5C8E; --k16: #1F5C73; --k18: #5B6B2E; --k19: #A86B12; --k20: #A81E28; --k21: #5A5048; }
@@ -46,26 +47,14 @@
   .keys span { display: inline-flex; align-items: center; gap: .35rem; }
   .keys i { width: .6rem; height: .6rem; border-radius: 50%; background: var(--c); }
 
-  .stage { position: relative; border: 1px solid var(--rule); border-radius: 4px; background: var(--paper); }
-  #g { display: block; width: 100%; touch-action: manipulation; user-select: none; -webkit-user-select: none; }
-  #g .axis line { stroke: var(--rule); } #g .axis text { font: .6875rem var(--sans); fill: var(--muted); font-variant-numeric: tabular-nums; }
-  #g .grid { stroke: var(--rule); stroke-dasharray: 2 4; }
-  #g .e { fill: none; stroke: var(--c); stroke-opacity: .42; stroke-width: 1.2; pointer-events: none; transition: stroke-opacity .2s; }
-  #g .e.und { stroke-dasharray: 4 3; }
-  #g .hit { fill: none; stroke: transparent; stroke-width: 9; cursor: pointer; }
-  #g .e.weak { stroke-opacity: .22; }
-  #g .e.hi { stroke-opacity: .95; stroke-width: 2.2; }
-  #g .e.sel { stroke-opacity: 1; stroke-width: 3; }
-  #g.dim .e:not(.hi):not(.sel) { stroke-opacity: .07; }
-  #g .n { fill: var(--c); stroke: var(--paper); stroke-width: 1.2; cursor: pointer; transition: opacity .2s; }
-  #g .n.nodate { stroke: var(--c); stroke-dasharray: 2 2; fill-opacity: .4; }
-  #g.dim .n:not(.hi):not(.sel) { opacity: .18; }
-  #g .n.sel { stroke: var(--ink); stroke-width: 2.4; }
-  #g .lab { font: 500 .6875rem var(--sans); fill: var(--ink); paint-order: stroke; stroke: var(--paper); stroke-width: 3px; stroke-linejoin: round; pointer-events: none; }
-  #g.dim .lab:not(.hi) { opacity: .25; }
-  .tip { position: absolute; z-index: 3; max-width: 15rem; pointer-events: none; background: var(--paper); border: 1px solid var(--rule); border-radius: 4px; padding: .5rem .65rem; box-shadow: 0 2px 14px rgb(0 0 0 / .14); font-size: .8125rem; }
-  .tip[hidden] { display: none; }
-  .tip b { font: 400 1rem/1.2 var(--serif); display: block; }
+  .stage { height: clamp(28rem, 74vh, 46rem); }
+  .stage .tt b { font: 400 1rem/1.2 var(--serif); display: block; }
+  .stage .tt span { color: var(--muted); }
+  /* the info card in the graph's panel: one column, room for the close button */
+  .gx-body .cols, .gx-body .two { grid-template-columns: 1fr; gap: 1rem; }
+  .gx-body .dh { padding-right: 1.75rem; }
+  .gx-body .dh b { font-size: 1.25rem; }
+  .gx-body #detail { margin-top: 0; }
   .hint { font-size: .75rem; color: var(--muted); margin-top: .35rem; }
 
   #detail { margin-top: 1rem; }
@@ -121,7 +110,6 @@
     .cols, .two, .rks { grid-template-columns: 1fr; gap: 1rem; }
     .tbl { min-width: 34rem; }
   }
-  @media (prefers-reduced-motion: reduce) { #g .e, #g .n { transition: none; } }
   /* The hub's header: one language at a time, the sections wrapping on a narrow screen */
   html:not([lang="az"]) [data-l="az"], html:not([lang="ru"]) [data-l="ru"], html:not([lang="en"]) [data-l="en"] { display: none !important; }
   header nav { flex-wrap: wrap; justify-content: flex-end; row-gap: .25rem; }
@@ -155,10 +143,8 @@
         <div class="tiers" id="tiers" role="group"></div>
       </div>
       <div class="keys" id="legend"></div>
-      <div class="stage" id="stage">
-        <svg id="g" role="img" aria-labelledby="g-t"><title id="g-t"></title></svg>
-        <div class="tip" id="tip" hidden></div>
-      </div>
+      <p class="sr" id="g-t"></p>
+      <div class="stage gx-wide" id="stage" role="region" aria-labelledby="g-t"></div>
       <p class="hint" id="hint"></p>
       <div id="detail" aria-live="polite"></div>
     </section>
@@ -181,8 +167,8 @@
   <footer id="foot"></footer>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
-<script>
+<script type="module">
+import { createGraph } from '/shared/graph.js';
 (() => {
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
 const still = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -209,7 +195,7 @@ const T = {
     tA: 'Adı çəkilib və ya sətirləri gətirilib', tB: 'Eyni rədif və qafiyə: güclü', tC: 'Eyni rədif və qafiyə: zəif',
     era: ['XIV–XV əsr', 'XVI–XVII', 'XVIII', 'XIX', 'XX əsrin ilk yarısı', '1950-dən'],
     graphT: (m, n, e) => `${m === 'poets' ? 'Şairlər' : 'Şeirlər'}: ${n} düyün, ${e} əlaqə`,
-    hint: 'Üfüqi ox: şairin doğum ili. Düyünə və ya xəttə toxunun. Qırıq xətt: şairlər eyni dövrdəndir, kimin kimə cavab verdiyi bəlli deyil. Düyünün ölçüsü: neçə şair ona cavab yazıb.',
+    hint: 'Köhnə şairlər solda, sonrakılar sağda (doğum ilinə görə, təxmini). Düyünün üstünə gəlin: əlaqələri işıqlanır; toxunun: cavablar açılır. Ox cavab yazandan cavab verilənə gedir; qırıq xətt: şairlər eyni dövrdəndir, istiqamət bəlli deyil. Düyünün ölçüsü: neçə şair ona cavab yazıb. Təkərlə və ya iki barmaqla yaxınlaşdırın; düyünləri sürüşdürmək olar.',
     tipPoet: (n, a, b) => `${n ? `${n} şair cavab yazıb` : 'cavab alınmayıb'}${b ? ` · ${b} şairə cavab yazıb` : ''}`,
     tipPoem: (n) => (n ? `${n} şair cavab yazıb` : 'cavab alınmayıb'),
     open: 'kitabxana.az-da', pick: 'Şəbəkədə bir şair, şeir və ya xətt seçin.',
@@ -238,7 +224,7 @@ const T = {
 <tr><td>Rədif və qafiyə: zəif</td><td class="n">${s.nC}</td><td class="n">40 təsadüfi</td><td>6 aydın, 33 zəif (çox yayılmış rədif, qısa qafiyə), 1 təsadüf. Çoxu bəlkə təsadüfdür, ona görə varsayılan olaraq gizlədilib.</td></tr>
 </tbody></table></div>
 <p>Nə deməli deyil: eyni rədif və qafiyə şeirin cavab olduğunu <i>sübut etmir</i>, yalnız nəzirənin formal əlamətini göstərir (vəzn yoxlanmayıb, yalnız hecaların sayı). Bir neçə şeir eyni sonluğu paylaşanda hamısı bir-birinə bağlanır, halbuki əsl nümunə bunlardan yalnız biri ola bilər. Kitabxana klassik şairlərin hamısını əhatə etmir, buna görə «ən çox cavab alan» kitabxanadakı şeirlərə görədir.</p>
-<p>Mənbələr və lisenziyalar: şeirlərin mətnləri kitabxana.az-dadır (hər mətnin mənbəyi orada göstərilib; burada yalnız başlıq və ilk iki sətir göstərilir). Cavab əlaqələri (<code>data/nezire.json</code>) CC0. Qrafik: D3 7.9.0 (ISC).</p>`,
+<p>Mənbələr və lisenziyalar: şeirlərin mətnləri kitabxana.az-dadır (hər mətnin mənbəyi orada göstərilib; burada yalnız başlıq və ilk iki sətir göstərilir). Cavab əlaqələri (<code>data/nezire.json</code>) CC0. Qrafik: sigma.js 3, graphology, ForceAtlas2 (MIT).</p>`,
     foot: (d) => `Məlumat CC0, mətnlər kitabxana.az-dadır. Tikilib: ${d}. Qayda və qurma əmri: <a href="https://github.com/azadbilik/azadbilik.github.io/tree/main/sebeke/nezire">README</a>.`,
   },
   ru: {
@@ -248,7 +234,7 @@ const T = {
     tA: 'Назван в заглавии или строки взяты', tB: 'Те же редиф и кафия: сильное', tC: 'Те же редиф и кафия: слабое',
     era: ['XIV–XV вв.', 'XVI–XVII', 'XVIII', 'XIX', 'первая половина XX', 'с 1950'],
     graphT: (m, n, e) => `${m === 'poets' ? 'Поэты' : 'Стихи'}: ${n} узлов, ${e} связей`,
-    hint: 'По горизонтали год рождения поэта. Коснитесь узла или линии. Пунктир: поэты одного времени, кто кому отвечал, неизвестно. Размер узла: сколько поэтов ему ответили.',
+    hint: 'Старшие поэты слева, поздние справа (по году рождения, приблизительно). Наведите на узел — подсветятся его связи; коснитесь — откроются ответы. Стрелка идёт от ответившего к тому, кому ответили; пунктир: поэты одного времени, направление неизвестно. Размер узла: сколько поэтов ему ответили. Колесо или два пальца — масштаб; узлы можно перетаскивать.',
     tipPoet: (n, a, b) => `${n ? `ответили: ${n}` : 'ответов нет'}${b ? ` · сам ответил ${b}` : ''}`,
     tipPoem: (n) => (n ? `ответили: ${n}` : 'ответов нет'),
     open: 'на kitabxana.az', pick: 'Выберите поэта, стихотворение или линию.',
@@ -277,7 +263,7 @@ const T = {
 <tr><td>Редиф и кафия: слабое</td><td class="n">${s.nC}</td><td class="n">40 случайных</td><td>6 ясных, 33 слабых (частый редиф, короткая кафия), 1 совпадение. Многое, вероятно, случайно, поэтому по умолчанию скрыто.</td></tr>
 </tbody></table></div>
 <p>Что это не значит: одинаковые редиф и кафия <i>не доказывают</i>, что стихотворение ответ, а лишь формальный признак назира (размер не проверялся, только число слогов). Когда окончание есть у нескольких стихов, все они связаны друг с другом, хотя настоящий образец может быть один. Библиотека не охватывает всех классиков, поэтому «чаще всего отвечали» относится к стихам в ней.</p>
-<p>Источники и лицензии: тексты стихов на kitabxana.az (источник каждого указан там; здесь только заглавие и первые две строки). Данные о связях (<code>data/nezire.json</code>) CC0. Граф: D3 7.9.0 (ISC).</p>`,
+<p>Источники и лицензии: тексты стихов на kitabxana.az (источник каждого указан там; здесь только заглавие и первые две строки). Данные о связях (<code>data/nezire.json</code>) CC0. Граф: sigma.js 3, graphology, ForceAtlas2 (MIT).</p>`,
     foot: (d) => `Данные CC0, тексты на kitabxana.az. Собрано: ${d}. Правила и команда сборки: <a href="https://github.com/azadbilik/azadbilik.github.io/tree/main/sebeke/nezire">README</a>.`,
   },
   en: {
@@ -287,7 +273,7 @@ const T = {
     tA: 'Named in a title or lines quoted', tB: 'Same radif and qafiya: strong', tC: 'Same radif and qafiya: weak',
     era: ['14th–15th c.', '16th–17th', '18th', '19th', 'early 20th', 'from 1950'],
     graphT: (m, n, e) => `${m === 'poets' ? 'Poets' : 'Poems'}: ${n} nodes, ${e} links`,
-    hint: 'Horizontal axis: the poet’s birth year. Tap a node or a line. Dashed line: poets of one time, so who answered whom is unknown. Node size: how many poets answered it.',
+    hint: 'Older poets to the left, later ones to the right (by birth year, loosely). Hover a node to light up its links; click it to open the answers. Arrows run from the poet who answered to the poet answered; a dashed line: poets of one time, direction unknown. Node size: how many poets answered it. Wheel or pinch to zoom; drag a node to move it.',
     tipPoet: (n, a, b) => `${n ? `answered by ${n}` : 'no answers'}${b ? ` · answered ${b}` : ''}`,
     tipPoem: (n) => (n ? `answered by ${n} poets` : 'no answers'),
     open: 'on kitabxana.az', pick: 'Pick a poet, a poem or a line in the network.',
@@ -316,7 +302,7 @@ const T = {
 <tr><td>Radif and qafiya: weak</td><td class="n">${s.nC}</td><td class="n">40 at random</td><td>6 clear, 33 weak (a common radif, a short qafiya), 1 coincidence. Much of it is probably chance, so it is off by default.</td></tr>
 </tbody></table></div>
 <p>What this does not say: the same radif and qafiya do <i>not prove</i> that a poem is an answer; they show the formal mark of a nazīra (the metre is not checked, only the syllable count). When several poems share an ending they are all linked to each other, though the real model may be one. The library does not hold every classical poet, so «most answered» means among the poems in it.</p>
-<p>Sources and licences: the poems’ texts are on kitabxana.az (each text’s source is given there; here only the title and the first two lines are shown). The links data (<code>data/nezire.json</code>) is CC0. Graph: D3 7.9.0 (ISC).</p>`,
+<p>Sources and licences: the poems’ texts are on kitabxana.az (each text’s source is given there; here only the title and the first two lines are shown). The links data (<code>data/nezire.json</code>) is CC0. Graph: sigma.js 3, graphology, ForceAtlas2 (MIT).</p>`,
     foot: (d) => `Data CC0, texts on kitabxana.az. Built: ${d}. Rules and rebuild command: <a href="https://github.com/azadbilik/azadbilik.github.io/tree/main/sebeke/nezire">README</a>.`,
   },
 };
@@ -342,178 +328,85 @@ function prepare(d) {
 const active = () => plinks.filter((l) => tiers[l.tier]);
 const tierName = (l) => (l.tier === 'C' ? 'mFw' : 'mF');
 
-// Poet-level edges: from the answering poet to the poet answered
-function poetEdges() {
+// Poet-level edges, from the answering poet to the poet answered, over the given tiers
+function poetEdges(on = tiers) {
   const m = new Map();
   const add = (a, b, kind, extra) => {
-    const key = `${a}|${b}`;
-    const e = m.get(key) ?? m.set(key, { from: a, to: b, links: [], named: [], und: true, tiers: new Set() }).get(key);
+    const key = `${a}>${b}`;
+    const e = m.get(key) ?? m.set(key, { id: key, from: a, to: b, source: a, target: b, links: [], named: [], und: true, tiers: new Set() }).get(key);
     if (kind === 'l') { e.links.push(extra); e.tiers.add(extra.tier); if (!extra.und) e.und = false; }
     else { e.named.push(extra); e.tiers.add('A'); if (!extra.und) e.und = false; }
   };
-  for (const l of active()) add(l.pa, l.pb, 'l', l);
-  if (tiers.A) for (const n of named) { const pa = poems[n.a].p; if (n.rev) add(n.to, pa, 'n', n); else add(pa, n.to, 'n', n); }
+  for (const l of plinks) if (on[l.tier]) add(l.pa, l.pb, 'l', l);
+  if (on.A) for (const n of named) { const pa = poems[n.a].p; if (n.rev) add(n.to, pa, 'n', n); else add(pa, n.to, 'n', n); }
   return [...m.values()];
 }
+const ALL = { A: true, B: true, C: true };
+const edgeKey = (e) => `${e.from}>${e.to}`;
+const shownTiers = (e) => [...e.tiers].some((k) => tiers[k]);
+const isWeak = (e) => e.tiers.size === 1 && e.tiers.has('C');
+let poets_of = (x) => x;
 
-// ---- layout
-const svg = d3.select('#g');
+// ---- the graph (shared/graph.js): every tier is laid out once, the checkboxes only hide
 const stage = $('stage');
-const tip = $('tip');
-function counts(edges, nodeOf) {
-  const ans = new Map(), by = new Map();       // answered by (distinct poets), answers (distinct poets)
-  for (const e of edges) {
-    if (e.und) continue;
+let G = null, ans = new Map(), by = new Map();
+const posCache = {};
+// the old centuries squeezed: nearly all the answering is later (1330 → 0, 1700 → .3, 2000 → 1)
+const yearX = (d) => (d == null ? null : d < 1700 ? 0.3 * (d - 1330) / 370 : 0.3 + 0.7 * (d - 1700) / 300);
+function counts() {
+  ans = new Map(); by = new Map();
+  for (const e of built.edges) {
+    if (e.und || !shownTiers(e)) continue;
     (ans.get(e.to) ?? ans.set(e.to, new Set()).get(e.to)).add(poets_of(e.from));
     (by.get(e.from) ?? by.set(e.from, new Set()).get(e.from)).add(poets_of(e.to));
   }
-  return { ans, by };
 }
-let poets_of = (x) => x;
-
+const lab = (n) => (n.kind === 'poet' ? nameOf(poets[n.id]) : poems[n.id].t.replace(/^Qəzəl:\s*/, ''));
+const nodeSize = (n) => (mode === 'poets' ? 3.8 + 2.6 * Math.sqrt(ans.get(n.id)?.size ?? 0) : 2.6 + 2.6 * Math.sqrt(ans.get(n.id)?.size ?? 0));
 function build() {
+  if (G) { posCache[G.mode] = G.positions(); G.destroy(); G = null; }
   let nodes, edges;
   if (mode === 'poets') {
     poets_of = (x) => x;
-    edges = poetEdges();
+    edges = poetEdges(ALL);
     const ids = new Set(edges.flatMap((e) => [e.from, e.to]));
-    nodes = [...ids].map((id) => ({ id, label: nameOf(poets[id]), date: poets[id].date, kind: 'poet' }));
+    nodes = [...ids].map((id) => ({ id, date: poets[id].date, kind: 'poet' }));
   } else {
     poets_of = (x) => poems[x].p;
-    edges = active().map((l) => ({ from: l.a, to: l.b, link: l, und: l.und, tiers: new Set([l.tier]) }));
+    edges = plinks.map((l) => ({ id: `${l.a}>${l.b}`, from: l.a, to: l.b, source: l.a, target: l.b, link: l, und: l.und, tiers: new Set([l.tier]) }));
     const ids = new Set(edges.flatMap((e) => [e.from, e.to]));
-    nodes = [...ids].map((id) => ({ id, label: poems[id].t.replace(/^Qəzəl:\s*/, ''), date: poets[poems[id].p].date, kind: 'poem', poet: poems[id].p }));
+    nodes = [...ids].map((id) => ({ id, date: poets[poems[id].p].date, kind: 'poem', poet: poems[id].p }));
   }
-  const { ans, by } = counts(edges);
-  nodes.forEach((n) => { n.in = ans.get(n.id)?.size ?? 0; n.out = by.get(n.id)?.size ?? 0; n.r = (mode === 'poets' ? 4.5 + 2.4 * Math.sqrt(n.in) : 3.2 + 3 * Math.sqrt(n.in)); });
-  built = { nodes, edges, byId: new Map(nodes.map((n) => [n.id, n])) };
-  layout();
-}
-
-function layout() {
-  if (!built) return;
-  const W = Math.max(300, stage.clientWidth), H = phone() ? 560 : 560;
-  const m = { l: 18, r: 18, t: 14, b: 30 };
-  const x = d3.scaleLinear([1330, 1700, 2000], [m.l, m.l + (W - m.l - m.r) * 0.3, W - m.r]);   // the old centuries squeezed: nearly all the answering is later
-  const { nodes, edges, byId } = built;
-  const rnd = d3.randomLcg(7);
-  nodes.forEach((n) => { n.x = x(n.date ?? 1870); n.y = m.t + (H - m.t - m.b) * rnd(); });
-  const links = edges.map((e) => ({ source: byId.get(e.from), target: byId.get(e.to) }));
-  const sim = d3.forceSimulation(nodes)
-    .force('x', d3.forceX((n) => x(n.date ?? 1870)).strength(0.9))
-    .force('y', d3.forceY((H - m.b + m.t) / 2).strength(0.02))
-    .force('link', d3.forceLink(links).strength(0.04).distance(60))
-    .force('charge', d3.forceManyBody().strength(mode === 'poets' ? -40 : -6))
-    .force('collide', d3.forceCollide((n) => n.r + 1.6).strength(0.9))
-    .stop();
-  for (let i = 0; i < 320; i++) {
-    sim.tick();
-    nodes.forEach((n) => { n.y = Math.max(m.t + n.r, Math.min(H - m.b - n.r, n.y)); });
-  }
-  built.W = W; built.H = H; built.x = x; built.m = m;
-  draw();
-}
-
-function curve(a, b) {
-  const dx = b.x - a.x, dy = b.y - a.y, d = Math.hypot(dx, dy) || 1;
-  const bow = Math.min(90, d * 0.22);       // always bowed upward
-  const mx = (a.x + b.x) / 2 + Math.sign(dx || 1) * (dy / d) * bow, my = (a.y + b.y) / 2 - (Math.abs(dx) / d) * bow;
-  return `M${a.x.toFixed(1)},${a.y.toFixed(1)} Q${mx.toFixed(1)},${my.toFixed(1)} ${b.x.toFixed(1)},${b.y.toFixed(1)}`;
-}
-
-const edgeKey = (e) => `${e.from}>${e.to}`;
-function draw() {
-  const { nodes, edges, byId, W, H, x, m } = built;
-  svg.attr('viewBox', `0 0 ${W} ${H}`).attr('height', H);
+  built = { nodes, edges, byId: new Map(nodes.map((n) => [n.id, n])), byKey: new Map(edges.map((e) => [e.id, e])) };
+  counts();
+  const m = mode;
+  G = createGraph(stage, {
+    nodes, edges,
+    label: lab, size: nodeSize, searchText: (n) => { const po = poets[n.kind === 'poet' ? n.id : n.poet]; return [po.az, po.ru, po.en].join(' '); }, color: (n) => colour(n.date), hollow: (n) => n.date == null,
+    dashed: (e) => e.und, weak: isWeak, weight: (e) => (isWeak(e) ? 0.3 : 1 + 0.25 * Math.min(4, (e.links?.length ?? 1) - 1)),
+    seedX: (n) => yearX(n.date ?? 1870), seedSpread: 2.4, positions: posCache[m],
+    labelSize: 12, edgeAlpha: 0.3, curve: 0.16, stretch: m === 'poems' ? 2.2 : 1.5,
+    tooltip: (n) => `<div class="tt"><b>${esc(lab(n))}</b><span>${mode === 'poets' ? esc(t('tipPoet')(ans.get(n.id)?.size ?? 0, 0, by.get(n.id)?.size ?? 0)) : `${esc(nameOf(poets[n.poet]))} · ${esc(t('tipPoem')(ans.get(n.id)?.size ?? 0))}`}</span></div>`,
+    edgeTooltip: (e) => `<div class="tt"><b>${esc(lab(built.byId.get(e.from)))} → ${esc(lab(built.byId.get(e.to)))}</b></div>`,
+    panel: $('detail'),
+    onSelect: (f) => { sel = f ? (f.type === 'edge' ? { k: 'edge', id: f.id } : { k: mode === 'poets' ? 'poet' : 'poem', id: +f.id }) : null; renderDetail(); },
+  });
+  G.mode = m;
+  filter();
   $('g-t').textContent = t('graphT')(mode, nodes.length, edges.length);
-  svg.selectAll('*:not(title)').remove();
-  const axis = svg.append('g').attr('class', 'axis');
-  for (const yr of (W < 600 ? [1400, 1700, 1800, 1900, 2000] : [1400, 1500, 1600, 1700, 1800, 1900, 2000])) {
-    axis.append('line').attr('class', 'grid').attr('x1', x(yr)).attr('x2', x(yr)).attr('y1', m.t).attr('y2', H - m.b);
-    axis.append('text').attr('x', x(yr)).attr('y', H - 10).attr('text-anchor', 'middle').text(yr);
-  }
-  const ge = svg.append('g');
-  const ordered = [...edges].sort((a, b) => (a.tiers.has('C') && a.tiers.size === 1 ? -1 : 0) - (b.tiers.has('C') && b.tiers.size === 1 ? -1 : 0));
-  const path = ge.selectAll('g').data(ordered).join('g');
-  path.append('path').attr('class', (e) => `e${e.und ? ' und' : ''}${e.tiers.size === 1 && e.tiers.has('C') ? ' weak' : ''}`)
-    .attr('d', (e) => curve(byId.get(e.from), byId.get(e.to))).style('--c', (e) => colour(poets[mode === 'poets' ? e.from : poems[e.from].p].date));
-  path.append('path').attr('class', 'hit').attr('d', (e) => curve(byId.get(e.from), byId.get(e.to)))
-    .on('click', (ev, e) => { ev.stopPropagation(); select({ k: 'edge', id: edgeKey(e) }); })
-    .on('pointerenter', (ev, e) => tipEdge(ev, e)).on('pointerleave', () => { tip.hidden = true; });
-  const gn = svg.append('g');
-  gn.selectAll('circle').data([...nodes].sort((a, b) => b.r - a.r)).join('circle')
-    .attr('class', (n) => `n${n.date == null ? ' nodate' : ''}`).attr('cx', (n) => n.x).attr('cy', (n) => n.y).attr('r', (n) => n.r)
-    .style('--c', (n) => colour(n.date)).attr('tabindex', 0).attr('role', 'button').attr('aria-label', (n) => n.label)
-    .on('click', (ev, n) => { ev.stopPropagation(); select({ k: mode === 'poets' ? 'poet' : 'poem', id: n.id }); })
-    .on('keydown', (ev, n) => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); select({ k: mode === 'poets' ? 'poet' : 'poem', id: n.id }); } })
-    .on('pointerenter', (ev, n) => tipNode(ev, n)).on('pointerleave', () => { tip.hidden = true; });
-  // labels: the most answered always; the rest when there is room
-  // each label tries above, below, right, left of its node, inside the picture; one that would cover another
-  // label (or another labelled node) is left to the tooltip. The most answered are placed first.
-  const want = nodes.filter((n) => (mode === 'poets' ? n.in >= 2 || n.out >= 6 : n.in >= 2)).sort((a, b) => b.in - a.in || b.r - a.r);
-  const text = (n) => (n.label.length > 26 ? `${n.label.slice(0, 25)}…` : n.label);
-  const boxes = want.map((n) => ({ x0: n.x - n.r, x1: n.x + n.r, y0: n.y - n.r, y1: n.y + n.r }));
-  const hit = (b, o) => b.x0 < o.x1 + 3 && b.x1 + 3 > o.x0 && b.y0 < o.y1 + 1 && b.y1 + 1 > o.y0;
-  const placed = [];
-  for (const n of want) {
-    const w = text(n).length * 6.1, h = 11;
-    const tries = [[n.x, n.y - n.r - 3, 'middle'], [n.x, n.y + n.r + h + 1, 'middle'], [n.x + n.r + 4, n.y + 4, 'start'], [n.x - n.r - 4, n.y + 4, 'end']];
-    for (const [tx0, ty, anchor] of tries) {
-      let tx = tx0;
-      const left = () => (anchor === 'middle' ? tx - w / 2 : anchor === 'start' ? tx : tx - w);
-      if (left() < 2) tx += 2 - left();
-      if (left() + w > W - 2) tx -= left() + w - (W - 2);
-      const b = { x0: left(), x1: left() + w, y0: ty - h + 2, y1: ty + 2 };
-      if (b.y0 < 0 || b.y1 > H - 18) continue;
-      if (placed.some((p) => hit(b, p.b)) || boxes.some((o, i) => want[i] !== n && hit(b, o))) continue;
-      placed.push({ n, x: tx, y: ty, anchor, b }); break;
-    }
-  }
-  svg.append('g').selectAll('text').data(placed).join('text').attr('class', 'lab').attr('x', (p) => p.x).attr('y', (p) => p.y).attr('text-anchor', (p) => p.anchor)
-    .text((p) => text(p.n));
-  const labelled = placed.map((p) => p.n);
-  svg.on('click', () => select(null));
-  paintSel();
 }
-
-function place(ev) {
-  const r = stage.getBoundingClientRect();
-  const tx = Math.min(Math.max(ev.clientX - r.left + 12, 6), Math.max(6, r.width - 250));
-  tip.style.left = `${tx}px`; tip.style.top = `${Math.max(6, ev.clientY - r.top + 14)}px`;
+function filter() {
+  if (!G) return;
+  counts();
+  G.setFilter(null, shownTiers);
+  G.relabel();
+  const vis = built.nodes.filter((n) => G.isVisible(n.id)).length, ne = built.edges.filter(shownTiers).length;
+  $('g-t').textContent = t('graphT')(mode, vis, ne);
 }
-function tipNode(ev, n) {
-  tip.innerHTML = `<b>${esc(n.label)}</b>${mode === 'poets' ? esc(t('tipPoet')(n.in, 0, n.out)) : `${esc(nameOf(poets[n.poet]))}<br>${esc(t('tipPoem')(n.in))}`}`;
-  tip.hidden = false; place(ev);
-}
-function tipEdge(ev, e) {
-  const a = built.byId.get(e.from), b = built.byId.get(e.to);
-  tip.innerHTML = `<b>${esc(a.label)} → ${esc(b.label)}</b>`;
-  tip.hidden = false; place(ev);
-}
-
-// ---- selection
-function neighbours() {
-  const ids = new Set(), eks = new Set();
-  if (!sel) return { ids, eks };
-  const { edges } = built;
-  if (sel.k === 'edge') { const e = edges.find((x) => edgeKey(x) === sel.id); if (e) { ids.add(e.from); ids.add(e.to); eks.add(sel.id); } return { ids, eks }; }
-  const wantMode = sel.k === 'poet' ? 'poets' : 'poems';
-  if (wantMode !== mode) return { ids, eks };
-  ids.add(sel.id);
-  for (const e of edges) if (e.from === sel.id || e.to === sel.id) { ids.add(e.from); ids.add(e.to); eks.add(edgeKey(e)); }
-  return { ids, eks };
-}
-function paintSel() {
-  const { ids, eks } = neighbours();
-  svg.classed('dim', !!sel && ids.size > 0);
-  svg.selectAll('.n').classed('hi', (n) => ids.has(n.id)).classed('sel', (n) => !!sel && sel.id === n.id);
-  svg.selectAll('path.e').classed('hi', (e) => eks.has(edgeKey(e))).classed('sel', (e) => sel?.k === 'edge' && sel.id === edgeKey(e));
-  svg.selectAll('.lab').classed('hi', (p) => ids.has(p.n.id));
-}
+// a selection made from outside the graph (rankings, the card's lists)
 function select(s) {
-  sel = s;
-  paintSel();
-  renderDetail();
+  if (!s) { G?.clear(); return; }
+  if (s.k === 'edge') G.focusEdge(s.id); else G.focus(s.id);
 }
 
 // ---- evidence
@@ -550,10 +443,10 @@ function pairHtml(l) {
 function renderDetail() {
   const el = $('detail');
   if (!sel) { el.innerHTML = ''; return; }
-  const { edges } = built;
+  const edges = built.edges.filter(shownTiers);
   const row = (label, sub, n, on, k, id) => `<li><button type="button" data-k="${k}" data-id="${esc(id)}" class="${on ? 'on' : ''}"><span>${label}${sub ? ` <small>${sub}</small>` : ''}</span><small>${n}</small></button></li>`;
   if (sel.k === 'edge') {
-    const e = edges.find((x) => edgeKey(x) === sel.id);
+    const e = built.byKey.get(sel.id);
     if (!e) { el.innerHTML = ''; return; }
     el.innerHTML = edgeDetail(e);
     return;
@@ -576,18 +469,17 @@ function renderDetail() {
 function edgeDetail(e) {
   const a = built.byId.get(e.from), b = built.byId.get(e.to);
   if (mode === 'poems') return `<div class="ev">${pairHtml(e.link)}</div>`;
-  const n = e.links.length;
+  const links = e.links.filter((l) => tiers[l.tier]), n = links.length;
   const named1 = e.named.map((x) => `<p class="nt">${t('namedFrom')(nameOf(poets[poems[x.a].p]), x.head)}</p>`).join('');
-  return `<div class="dh"><div><b>${esc(a.label)} → ${esc(b.label)}</b></div></div>
+  return `<div class="dh"><div><b>${esc(lab(a))} → ${esc(lab(b))}</b></div></div>
     ${n ? `<p class="hint">${esc(t('pairsH')(n))}</p>` : ''}
-    <div class="ev">${e.links.sort((x, y) => x.tier.localeCompare(y.tier)).map(pairHtml).join('')}${e.named.length ? `<div class="pair"><div class="chips"><span class="chip A">${esc(t('mA'))}</span></div>${n ? '' : `<p class="nt" style="margin-top:0">${esc(t('namedOnly'))}</p>`}${named1}</div>` : ''}</div>`;
+    <div class="ev">${links.sort((x, y) => x.tier.localeCompare(y.tier)).map(pairHtml).join('')}${e.named.length && tiers.A ? `<div class="pair"><div class="chips"><span class="chip A">${esc(t('mA'))}</span></div>${n ? '' : `<p class="nt" style="margin-top:0">${esc(t('namedOnly'))}</p>`}${named1}</div>` : ''}</div>`;
 }
 $('detail').addEventListener('click', (ev) => {
   const b = ev.target.closest('button[data-k]'); if (!b) return;
   if (b.dataset.k === 'edge') {
     // an edge of the other level opens in the current one
     select({ k: 'edge', id: b.dataset.id });
-    $('detail').scrollIntoView({ block: 'nearest', behavior: still() ? 'auto' : 'smooth' });
   }
 });
 
@@ -608,9 +500,9 @@ function rank() {
 for (const id of ['r1', 'r2', 'r3']) $(id).addEventListener('click', (ev) => {
   const b = ev.target.closest('button[data-rk]'); if (!b) return;
   const k = b.dataset.rk, v = +b.dataset.id;
-  setMode(k === 'poem' ? 'poems' : 'poets');
-  select({ k, id: v });
-  $('g').scrollIntoView({ block: 'center', behavior: still() ? 'auto' : 'smooth' });
+  const changed = setMode(k === 'poem' ? 'poems' : 'poets');
+  stage.scrollIntoView({ block: 'center', behavior: still() ? 'auto' : 'smooth' });
+  if (changed) G.ready.then(() => select({ k, id: v })); else select({ k, id: v });
 });
 
 // ---- controls
@@ -624,11 +516,14 @@ $('tiers').addEventListener('change', (ev) => {
   const k = ev.target.dataset.tier; if (!k) return;
   tiers[k] = ev.target.checked;
   if (!Object.values(tiers).some(Boolean)) { tiers.A = true; controls(); }
-  refresh();
+  if (!D) return;
+  filter(); lists(); renderDetail();
 });
 function setMode(m) {
-  if (m === mode) return;
-  mode = m; sel = null; controls(); refresh();
+  if (m === mode) return false;
+  mode = m; sel = null; controls();
+  if (D) { build(); lists(); renderDetail(); }
+  return true;
 }
 document.querySelectorAll('[data-mode]').forEach((b) => b.onclick = () => { setMode(b.dataset.mode); });
 
@@ -648,12 +543,6 @@ function lists() {
   $('rankNote').textContent = t('rankNote')(act.join('; '));
   rank();
 }
-function refresh() {
-  if (!D) return;
-  build(); lists();
-  if (sel) { const ok = neighbours().ids.size > 0 || sel.k === 'edge'; if (!ok) sel = null; }
-  paintSel(); renderDetail();
-}
 
 function applyLang() {
   document.documentElement.lang = lang;
@@ -663,8 +552,8 @@ function applyLang() {
   document.querySelectorAll('[data-keep-lang]').forEach((a) => { const u = new URL(a.getAttribute('href'), location.href); if (lang === 'az') u.searchParams.delete('lang'); else u.searchParams.set('lang', lang); a.href = u.pathname + u.search; });
   $('kx-nav').href = KX() + '/';
   controls();
-  if (!D) return;
-  build(); lists(); paintSel(); renderDetail();
+  if (!D || !G) return;
+  G.setStrings(); G.relabel(); filter(); lists(); renderDetail();
 }
 document.querySelectorAll('[data-lang]').forEach((b) => b.onclick = () => {
   lang = b.dataset.lang;
@@ -674,21 +563,16 @@ document.querySelectorAll('[data-lang]').forEach((b) => b.onclick = () => {
   history.replaceState(null, '', u);
   applyLang();
 });
-let rt;
-let lastW = 0;
-addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { if (stage.clientWidth !== lastW) { lastW = stage.clientWidth; layout(); paintSel(); } }, 150); });
 
 applyLang();
-if (typeof d3 === 'undefined') { $('hint').textContent = 'The graph library (d3) did not load.'; return; }
 fetch('data/nezire.json').then((r) => r.json()).then((d) => {
   prepare(d);
-  lastW = stage.clientWidth;
   const q = new URLSearchParams(location.search);
   if (q.get('mode') === 'poems') mode = 'poems';
   if (q.get('weak') === '1') tiers.C = true;
   controls(); build(); lists();
   const want = q.get('poet');
-  if (want) { const i = poets.findIndex((p) => p.slug === want); if (i >= 0 && mode === 'poets') select({ k: 'poet', id: i }); }
+  if (want) { const i = poets.findIndex((p) => p.slug === want); if (i >= 0 && mode === 'poets') G.ready.then(() => select({ k: 'poet', id: i })); }
   applyLang();
 });
 })();
