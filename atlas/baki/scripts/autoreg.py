@@ -34,12 +34,13 @@ target -= target.mean()
 lat0, lon0 = cfg['anchor'][2], cfg['anchor'][3]
 def local(lon, lat): return ((lon - lon0) * 111320 * math.cos(math.radians(lat0)), (lat - lat0) * 110540)
 lines = []
-for f in json.load(open(RAW / 'baku.geojson'))['features']:
+for f in json.load(open(RAW / plan.get('osm', 'baku.geojson')))['features']:
     p, g = f['properties'], f['geometry']
-    if g['type'] != 'LineString' or p.get('highway') not in ('primary', 'secondary', 'tertiary', 'residential', 'unclassified', 'pedestrian'): continue
+    river = cfg.get('river') and p.get('waterway') == 'river'
+    if g['type'] != 'LineString' or (p.get('highway') not in ('primary', 'secondary', 'tertiary', 'residential', 'unclassified', 'pedestrian') and not river): continue
     pts = [local(*c) for c in g['coordinates']]
     if all(math.hypot(*q) > cfg.get('radius', 2500) for q in pts): continue
-    lines.append(pts)
+    lines.append((pts, 7 if river else 2))      # a river counts as a broad, strong line
 
 H, W = street.shape
 def render(theta, s):
@@ -47,9 +48,9 @@ def render(theta, s):
     c, si = math.cos(math.radians(theta)), math.sin(math.radians(theta))
     im = Image.new('L', (W, H), 0); d = ImageDraw.Draw(im)
     ax, ay = cfg['anchor'][0] / F, cfg['anchor'][1] / F
-    for pts in lines:
+    for pts, lw in lines:
         xy = [(ax + (c * e + si * n) / s / F, ay - (-si * e + c * n) / s / F) for e, n in pts]
-        d.line(xy, fill=255, width=2)
+        d.line(xy, fill=255, width=lw)
     m = np.asarray(im, np.float32) / 255
     return m - m.mean()
 FT = np.fft.rfft2(target)

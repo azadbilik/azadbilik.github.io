@@ -54,3 +54,16 @@ You look at a plan in one of four ways:
 
 Five *then and now* places fly to their plan and open the lens on them. The camera leaves room for the side panel, which folds away.
 
+## Ganja and Tabriz
+
+- **Ganja, 1873** ([Commons](https://commons.wikimedia.org/wiki/File:General_plan_of_Ganja,_1873.jpg), from the State Historical Archive of Azerbaijan):
+  - It's a faint photograph of the plan, so the automatic match alone slid it about 130 m.
+  - Its rotation and scale come from the street match: −2.75°, 2.12 m a pixel. That run also weighted the Ganjachay river.
+  - Its position is pinned by the plan's open square at the Shah Abbas mosque.
+  - Accuracy about 120 m.
+  - Today's streets come from `data/raw/ganja.geojson` (osmium, bbox 46.28,40.63,46.44,40.73).
+- **Tabriz** was tried with the 1880 map printed for Crown Prince Mozaffar al-Din and left out:
+  - The match turned it 59°, and nothing but the core around the Ark could be confirmed.
+  - The old city was rebuilt too much for street matching. It needs hand-read anchors: the Ark, the Blue Mosque, the bazaar, the bends of the Mehranrud.
+  - The 1827 Russian army plans of the walled city would need the same.
+

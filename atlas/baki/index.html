@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="/shared/theme.js"></script>
-<title>Bakı necə böyüdü · Azad Bilik</title>
+<title>Şəhərlər necə böyüdü · Azad Bilik</title>
 <meta name="description" content="Bakının köhnə planları bugünkü xəritənin üstündə: 1806-cı ilin qala şəhəri, 1894-cü və 1898-ci illərin neft şəhəri. Böyüdücü şüşə, pərdə, qaşıma. Old plans of Baku over today's city, 1806, 1894 and 1898: a spyglass, a swipe, a scratch-off.">
 <meta name="theme-color" content="#F4EFE6" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#14100D" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="canonical" href="https://azadbilik.org/atlas/baki/">
-<meta property="og:title" content="Bakı necə böyüdü · How Baku grew">
+<meta property="og:title" content="Şəhərlər necə böyüdü · How Baku and Ganja grew">
 <meta property="og:description" content="1806, 1894 və 1898-ci illərin planları bugünkü Bakının üstündə.">
 <meta property="og:image" content="https://azadbilik.org/atlas/baki/og.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -36,6 +36,7 @@
   .years { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--rule); border-radius: 3px; padding: 2px; }
   .years button { padding: .45rem .2rem; border-radius: 2px; font-size: .9375rem; color: var(--muted); font-variant-numeric: tabular-nums; }
   .years button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+  .cities { grid-template-columns: 1fr 1fr; } .cities button { font-weight: 500; }
   .modes { display: grid; grid-template-columns: repeat(4, 1fr); gap: .35rem; }
   .modes button { display: grid; gap: .15rem; justify-items: center; padding: .45rem .2rem; border: 1px solid var(--rule); border-radius: 4px; font-size: .75rem; color: var(--muted); }
   .modes button i { font-style: normal; font-size: 1.05rem; }
@@ -66,11 +67,12 @@
 <aside class="panel" id="panel">
   <div class="head">
     <div class="top"><a class="brand" href="/" data-keep-lang><svg viewBox="0 0 512 512" aria-hidden="true"><g class="star"><rect x="126" y="126" width="260" height="260"/><polygon points="256,72 440,256 256,440 72,256"/></g><polygon class="gem" points="256,196 316,256 256,316 196,256"/></svg>Azad Bilik</a><nav><a href="/atlas/" data-keep-lang>Atlas</a><span class="langs" role="group" aria-label="Dil · Язык · Language"><button type="button" data-lang="az">AZ</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="en">EN</button></span></nav></div>
-    <div class="row"><h1 data-i18n="title">Bakı necə böyüdü</h1><button type="button" class="fold" id="fold" aria-expanded="true">‹</button></div>
+    <div class="row"><h1 data-i18n="title">Şəhərlər necə böyüdü</h1><button type="button" class="fold" id="fold" aria-expanded="true">‹</button></div>
     <p class="sub" data-i18n="sub">Köhnə planlar bugünkü şəhərin üstündə</p>
   </div>
   <div class="body" id="body">
     <div class="controls">
+      <div class="years cities" role="group" id="cities"></div>
       <div class="years" role="group" id="years"></div>
       <div class="modes" role="group" id="modes"></div>
       <div class="row2" id="tool-row"></div>
@@ -98,20 +100,20 @@ let lang = (() => {
 })();
 const L = (o) => o?.[lang] ?? o?.az;
 const T = {
-  az: { doc: 'Bakı necə böyüdü · Azad Bilik', title: 'Bakı necə böyüdü', sub: 'Köhnə planlar bugünkü şəhərin üstündə', now: 'bu gün',
+  az: { doc: 'Şəhərlər necə böyüdü · Azad Bilik', title: 'Şəhərlər necə böyüdü', sub: 'Köhnə planlar bugünkü şəhərin üstündə', now: 'bu gün',
     lens: 'Böyüdücü', swipe: 'Pərdə', scratch: 'Qaşı', fade: 'Şəffaf', size: 'Ölçü', clear: 'Təmizlə', opacity: 'Şəffaflıq',
     hint: { lens: 'Siçanı xəritədə gəzdirin: şüşənin içində köhnə plan görünür.', lensTouch: 'Xəritəni barmaqla sürüşdürün: köhnə plan mərkəzdəki şüşədədir.', swipe: 'Xətti sağa-sola çəkin.', scratch: 'Bugünkü şəhəri qaşıyıb köhnəsini açın.', fade: 'Sürüşdürücü ilə iki xəritəni qarışdırın.' },
-    fit: 'Yerləşdirmə', fitText: { similarity: 'iki abidəyə görə (Qız qalası, Şirvanşahlar sarayı)', auto: 'küçələrin bugünkü küçələrlə avtomatik tutuşdurulması ilə' }, acc: (m) => `dəqiqlik təxminən ${m} m`, source: 'Mənbə', places: 'Onda və indi',
+    fit: 'Yerləşdirmə', fitText: { similarity: 'iki abidəyə görə (Qız qalası, Şirvanşahlar sarayı)', auto: 'küçələrin bugünkü küçələrlə avtomatik tutuşdurulması ilə', pinned: 'dönüşü və miqyası küçələrə görə, yeri Şah Abbas məscidinin meydanına görə' }, acc: (m) => `dəqiqlik təxminən ${m} m`, source: 'Mənbə', places: 'Onda və indi',
     note: 'Planlar ictimai mülkiyyətdədir (Wikimedia Commons). Bugünkü xəritə: OpenStreetMap. Köhnə planların öz xətaları qalır.' },
-  ru: { doc: 'Как рос Баку · Azad Bilik', title: 'Как рос Баку', sub: 'Старые планы поверх нынешнего города', now: 'сейчас',
+  ru: { doc: 'Как росли города · Azad Bilik', title: 'Как росли города', sub: 'Старые планы поверх нынешнего города', now: 'сейчас',
     lens: 'Лупа', swipe: 'Шторка', scratch: 'Стереть', fade: 'Прозрачно', size: 'Размер', clear: 'Сбросить', opacity: 'Прозрачность',
     hint: { lens: 'Водите мышью по карте: в линзе — старый план.', lensTouch: 'Двигайте карту пальцем: старый план — в линзе посередине.', swipe: 'Тяните линию влево и вправо.', scratch: 'Сотрите нынешний город, чтобы открыть старый.', fade: 'Смешайте две карты ползунком.' },
-    fit: 'Привязка', fitText: { similarity: 'по двум памятникам (Девичья башня, дворец Ширваншахов)', auto: 'автоматическим совмещением улиц с нынешними' }, acc: (m) => `точность около ${m} м`, source: 'Источник', places: 'Тогда и сейчас',
+    fit: 'Привязка', fitText: { similarity: 'по двум памятникам (Девичья башня, дворец Ширваншахов)', auto: 'автоматическим совмещением улиц с нынешними', pinned: 'поворот и масштаб — по улицам, место — по площади мечети Шах-Аббаса' }, acc: (m) => `точность около ${m} м`, source: 'Источник', places: 'Тогда и сейчас',
     note: 'Планы — общественное достояние (Wikimedia Commons). Нынешняя карта: OpenStreetMap. Собственные ошибки старых планов остаются.' },
-  en: { doc: 'How Baku grew · Azad Bilik', title: 'How Baku grew', sub: "Old plans over today's city", now: 'today',
+  en: { doc: 'How the cities grew · Azad Bilik', title: 'How the cities grew', sub: "Old plans over today's city", now: 'today',
     lens: 'Lens', swipe: 'Swipe', scratch: 'Scratch', fade: 'Fade', size: 'Size', clear: 'Clear', opacity: 'Opacity',
     hint: { lens: 'Move the mouse over the map: the old plan shows in the glass.', lensTouch: 'Drag the map with a finger: the old plan shows in the glass in the middle.', swipe: 'Drag the line left and right.', scratch: "Scratch today's city away to uncover the old one.", fade: 'Blend the two maps with the slider.' },
-    fit: 'Placed', fitText: { similarity: "by two landmarks (the Maiden Tower, the Shirvanshahs' palace)", auto: "by matching its streets to today's automatically" }, acc: (m) => `accurate to about ${m} m`, source: 'Source', places: 'Then and now',
+    fit: 'Placed', fitText: { similarity: "by two landmarks (the Maiden Tower, the Shirvanshahs' palace)", auto: "by matching its streets to today's automatically", pinned: "rotation and scale by matching its streets, its place by the Shah Abbas mosque's square" }, acc: (m) => `accurate to about ${m} m`, source: 'Source', places: 'Then and now',
     note: "The plans are public domain (Wikimedia Commons). Today's map: OpenStreetMap. The old plans' own errors remain." },
 };
 const t = (k) => T[lang][k];
@@ -126,7 +128,13 @@ const PLANS = {
     title: { az: 'Quberniya şəhəri, 1898–1900', ru: 'Губернский город, 1898–1900', en: 'The governorate town, 1898–1900' },
     text: { az: 'Polkovnik fon der Nonnenin planı: çəhrayı — tikilmiş məhəllələr, narıncı — planlaşdırılan. Nizami, Rəsul Rza küçələri və Parapet artıq bugünkü yerindədir.', ru: 'План полковника фон дер Нонне: розовым — застроенные кварталы, оранжевым — проектируемые. Улицы Низами, Расула Рзы и Парапет уже на своих местах.', en: "Colonel von der Nonne's plan: pink for built-up blocks, orange for planned ones. Nizami and Rasul Rza streets and the Parapet are already where they are now." } },
 };
-const YEARS = ['1806', '1894', '1898'];
+PLANS['ganja-1873'] = { fit: 'pinned', acc: 120, center: [46.362, 40.686], zoom: 14, label: '1873',
+    title: { az: 'Yelizavetpol (Gəncə), 1873', ru: 'Елисаветполь (Гянджа), 1873', en: 'Elisabethpol (Ganja), 1873' },
+    text: { az: 'Gəncəçayın hər iki sahilində məhəllələr: cənub-şərqdə sıx köhnə şəhər (Şah Abbas məscidinin ətrafı), şimal-qərbdə yeni, düzbucaqlı məhəllələr. Plan solğun fotodan götürülüb; yeri təxminidir.', ru: 'Кварталы по обоим берегам Гянджачая: на юго-востоке — плотный старый город (вокруг мечети Шах-Аббаса), на северо-западе — новые прямоугольные кварталы. План снят с блёклой фотографии; привязка приблизительна.', en: 'Quarters on both banks of the Ganjachay: the dense old town to the south-east (around the Shah Abbas mosque), new grid quarters to the north-west. The plan is from a faint photograph; its placing is approximate.' } };
+const CITIES = { baki: { name: { az: 'Bakı', ru: 'Баку', en: 'Baku' }, plans: ['1806', '1894', '1898'] }, ganja: { name: { az: 'Gəncə', ru: 'Гянджа', en: 'Ganja' }, plans: ['ganja-1873'] } };
+const YEARS = Object.values(CITIES).flatMap((c) => c.plans);
+const cityOf = (y) => Object.keys(CITIES).find((c) => CITIES[c].plans.includes(y));
+const lab = (y) => PLANS[y].label ?? y;
 // places to start from: each flies there, picks its plan and opens the lens on it
 const POIS = [
   { year: '1806', at: [49.83727, 40.36615], z: 16.4, name: { az: 'Qız qalası', ru: 'Девичья башня', en: 'The Maiden Tower' },
@@ -137,11 +145,14 @@ const POIS = [
     text: { az: 'Dəniz buraya qədər gəlirdi; bulvar 1909-dan doldurulmuş sahildə salınıb.', ru: 'Море доходило досюда; бульвар разбит с 1909 г. на отвоёванном берегу.', en: 'The sea came up to here; the boulevard was laid out from 1909 on reclaimed shore.' } },
   { year: '1898', at: [49.8490, 40.3790], z: 16.3, name: { az: 'Vağzal', ru: 'Вокзал', en: 'The station' },
     text: { az: 'Tiflis dəmir yolu Bakıya 1883-də çatdı; şəhər vağzala doğru böyüdü.', ru: 'Тифлисская железная дорога дошла до Баку в 1883 г.; город рос навстречу вокзалу.', en: 'The Tiflis railway reached Baku in 1883; the town grew out towards the station.' } },
+  { year: 'ganja-1873', at: [46.3606, 40.6828], z: 15.5, name: { az: 'Şah Abbas məscidi', ru: 'Мечеть Шах-Аббаса', en: 'The Shah Abbas mosque' },
+    text: { az: 'Köhnə Gəncənin mərkəzi: məscid və onun meydanı 1873-cü il planında da var.', ru: 'Сердце старой Гянджи: мечеть и её площадь есть и на плане 1873 г.', en: "Old Ganja's heart: the mosque and its square are on the 1873 plan too." } },
   { year: '1894', at: [49.8820, 40.3800], z: 15, name: { az: 'Qara şəhər', ru: 'Чёрный город', en: 'The Black City' },
     text: { az: '1870-lərdə neft zavodları şəhərdən buraya köçürüldü; tüstüsündən adını aldı.', ru: 'В 1870-х нефтяные заводы вывели сюда из города; название — от копоти.', en: 'In the 1870s the refineries were moved out here from the town; it was named for the soot.' } },
 ];
 const params = new URLSearchParams(location.search);
 let year = YEARS.includes(params.get('y')) ? params.get('y') : '1898';
+let city = cityOf(year);
 let mode = ['lens', 'swipe', 'scratch', 'fade'].includes(params.get('m')) ? params.get('m') : 'lens';
 let split = .5, fade = .85, R = 150, lensAt = null, meta = {}, poi = -1;
 
@@ -188,12 +199,12 @@ function draw2() {
     const [x, y] = lensAt;
     oldEl.style.clipPath = `circle(${R}px at ${x}px ${y}px)`;
     Object.assign(lensEl.style, { display: 'block', left: `${x - R}px`, top: `${y - R}px`, width: `${2 * R}px`, height: `${2 * R}px` });
-    document.getElementById('lens-tag').textContent = year;
+    document.getElementById('lens-tag').textContent = lab(year);
   } else if (mode === 'swipe') {
     const x = Math.round(split * innerWidth);
     oldEl.style.clipPath = `inset(0 ${innerWidth - x}px 0 0)`; dv.style.left = `${x}px`; dv.classList.add('on');
     dv.setAttribute('aria-valuenow', Math.round(split * 100));
-    document.getElementById('yl').textContent = year; document.getElementById('yr').textContent = t('now');
+    document.getElementById('yl').textContent = lab(year); document.getElementById('yr').textContent = t('now');
   } else if (mode === 'scratch') {
     oldEl.style.clipPath = 'none';
     const url = `url(${scratch.toDataURL()})`; oldEl.style.webkitMaskImage = oldEl.style.maskImage = url;
@@ -228,6 +239,7 @@ function peek() {
 }
 
 function apply(fly = false, first = false) {
+  city = cityOf(year);
   for (const y of YEARS) if (old.getLayer(`p${y}`)) old.setPaintProperty(`p${y}`, 'raster-opacity', y === year ? (mode === 'fade' ? fade : 1) : 0);
   if (fly) map.flyTo({ center: PLANS[year].center, zoom: PLANS[year].zoom, duration: still() || first ? 0 : 1400, essential: true });
   draw2(); draw();
@@ -242,7 +254,7 @@ function setMode(m) {
 function drawTool() {
   const el = document.getElementById('tool-row');
   if (mode === 'lens') el.innerHTML = `<span>${t('size')}</span><input type="range" id="tool" min="60" max="360" value="${R}"><span></span>`;
-  else if (mode === 'fade') el.innerHTML = `<span>${t('now')}</span><input type="range" id="tool" min="0" max="100" value="${Math.round(fade * 100)}"><span>${year}</span>`;
+  else if (mode === 'fade') el.innerHTML = `<span>${t('now')}</span><input type="range" id="tool" min="0" max="100" value="${Math.round(fade * 100)}"><span>${lab(year)}</span>`;
   else if (mode === 'scratch') el.innerHTML = `<span></span><span></span><button type="button" id="clear">${t('clear')}</button>`;
   else el.innerHTML = '';
   const r = document.getElementById('tool');
@@ -251,7 +263,10 @@ function drawTool() {
   document.getElementById('hint').textContent = t('hint')[mode === 'lens' && coarse() ? 'lensTouch' : mode];
 }
 function draw() {
-  document.getElementById('years').innerHTML = YEARS.map((y) => `<button type="button" data-y="${y}" aria-pressed="${y === year}">${y}</button>`).join('');
+  document.getElementById('cities').innerHTML = Object.entries(CITIES).map(([k, c]) => `<button type="button" data-c="${k}" aria-pressed="${k === city}">${esc(L(c.name))}</button>`).join('');
+  document.querySelectorAll('#cities button').forEach((b) => b.onclick = () => { city = b.dataset.c; year = CITIES[city].plans.at(-1); poi = -1; apply(true); });
+  document.getElementById('years').style.gridTemplateColumns = `repeat(${CITIES[city].plans.length}, 1fr)`;
+  document.getElementById('years').innerHTML = CITIES[city].plans.map((y) => `<button type="button" data-y="${y}" aria-pressed="${y === year}">${lab(y)}</button>`).join('');
   document.querySelectorAll('#years button').forEach((b) => b.onclick = () => { year = b.dataset.y; poi = -1; apply(true); });
   const ICON = { lens: '◎', swipe: '⇆', scratch: '✎', fade: '◐' };
   document.getElementById('modes').innerHTML = ['lens', 'swipe', 'scratch', 'fade'].map((m) => `<button type="button" data-m="${m}" aria-pressed="${m === mode}"><i aria-hidden="true">${ICON[m]}</i>${t(m)}</button>`).join('');
@@ -260,14 +275,14 @@ function draw() {
   const p = PLANS[year], m = meta[year];
   document.getElementById('side').innerHTML = `<div class="about"><h2>${esc(L(p.title))}</h2><p>${esc(L(p.text))}</p>
       ${m ? `<p class="k">${t('fit')}: ${esc(t('fitText')[p.fit])}, ${esc(t('acc')(p.acc))}. ${t('source')}: <a href="${m.source}" target="_blank" rel="noopener">Wikimedia Commons ↗</a></p>` : ''}</div>
-    <h2 class="sec">${t('places')}</h2><ul class="pois">${POIS.map((q, i) => `<li><button type="button" data-p="${i}" aria-current="${i === poi}"><span class="y">${q.year}</span><span><b>${esc(L(q.name))}</b><small>${esc(L(q.text))}</small></span></button></li>`).join('')}</ul>
+    <h2 class="sec">${t('places')}</h2><ul class="pois">${POIS.map((q, i) => cityOf(q.year) !== city ? '' : `<li><button type="button" data-p="${i}" aria-current="${i === poi}"><span class="y">${lab(q.year)}</span><span><b>${esc(L(q.name))}</b><small>${esc(L(q.text))}</small></span></button></li>`).join('')}</ul>
     <p class="note">${t('note')}</p>`;
   document.querySelectorAll('[data-p]').forEach((b) => b.onclick = () => goPoi(+b.dataset.p));
   const q = new URLSearchParams(); if (lang !== 'az') q.set('lang', lang); if (year !== '1898') q.set('y', year); if (mode !== 'lens') q.set('m', mode);
   history.replaceState(null, '', `${location.pathname}${q.size ? '?' + q : ''}`);
 }
 function goPoi(i) {
-  const q = POIS[i]; poi = i; year = q.year;
+  const q = POIS[i]; poi = i; year = q.year; city = cityOf(year);
   if (mode !== 'lens' && mode !== 'swipe') mode = 'lens';
   apply();
   map.flyTo({ center: q.at, zoom: q.z, duration: still() ? 0 : 1600, essential: true });

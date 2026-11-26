@@ -15,7 +15,6 @@ HERE = Path(__file__).resolve().parents[1]
 DATA, RAW = HERE / 'data', HERE / 'data' / 'raw'
 G = json.load(open(DATA / 'gcps.json'))
 meta = json.load(open(DATA / 'plans.json')) if (DATA / 'plans.json').exists() else {}
-W, E, S, N = 49.79, 49.93, 40.335, 40.41      # central Baku, the bay and the Black City
 merc = lambda la: math.log(math.tan(math.pi / 4 + math.radians(la) / 2))
 Image.MAX_IMAGE_PIXELS = None
 
@@ -44,6 +43,7 @@ for year, plan in G.items():
     # how far each landmark lands from where it is
     res = fwd(px) - ll
     err = [math.hypot(dx * 111320 * math.cos(math.radians(40.37)), dy * 110540) for dx, dy in res]
+    W, E, S, N = plan.get('bbox', [49.79, 49.93, 40.335, 40.41])   # this city's part of the map
     WIDTH = plan.get('width', 2600)
     HEIGHT = round(WIDTH * (merc(N) - merc(S)) / math.radians(E - W))
     lons = np.linspace(W, E, WIDTH)
