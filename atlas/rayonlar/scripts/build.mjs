@@ -134,7 +134,7 @@ async function era(file, YEARS, out) {
   await writeFile(here(`../data/${out}.geojson`), JSON.stringify({ type: 'FeatureCollection', features }) + '\n');
   await writeFile(here(`../data/${out.replace('raions', 'edges')}.geojson`), JSON.stringify({ type: 'FeatureCollection', features: edges }) + '\n');
   const drawn = features.filter((f) => f.properties.kind !== 'gap');
-  console.log(`${YEARS.join(', ')}: ${drawn.length} shapes for ${units.length} Soviet units (${drawn.filter((f) => f.properties.fit === 'approx').length} approximate), ${gaps.length} of today's districts in grey; ${YEARS.map((y) => `${y} ${drawn.reduce((a, f) => a + f.properties.pop[y], 0).toLocaleString('en')}`).join(', ')}: all match the republic${YEARS.includes('1926') ? '' : ', urban too'}`);
+  console.log(`${YEARS.join(', ')}: ${drawn.length} shapes for ${units.length} Soviet units (${drawn.filter((f) => f.properties.fit === 'approx').length} approximate), ${gaps.length} of today's districts in grey; ${YEARS.map((y) => `${y} ${drawn.reduce((a, f) => a + f.properties.pop[y], 0).toLocaleString('en')}`).join(', ')}: all match the republic, urban too`);
   // one row per Soviet unit and census, as counted (merged pairs apart)
   return units.flatMap((u) => YEARS.map((y) => {
     const c = count({ ...u, id: `${u.id} (csv)` }, y, false);

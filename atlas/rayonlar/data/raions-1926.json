@@ -1,14 +1,14 @@
 {
- "about": "The uezds of the Azerbaijan SSR at the 1926 census, each drawn roughly as the districts of today that lie mostly within it (none of them matches closely, so every one is approximate). c26 names the rows of data/raw/census-1926.json summed for it; Baku and Ganja are drawn with their uezds.",
+ "about": "The uezds of the Azerbaijan SSR at the 1926 census, each drawn roughly as the districts of today that lie mostly within it (none of them matches closely, so every one is approximate). c26 names the rows of data/raw/census-1926.json summed for it; an uezd includes its city.",
  "units": [
   {
    "id": "baku",
-   "kind": "city",
-   "az": "Bakı",
-   "ru": "г. Баку",
-   "en": "Baku",
+   "kind": "raion",
+   "az": "Bakı qəzası",
+   "ru": "Бакинский уезд",
+   "en": "Baku uezd",
    "c26": [
-    "г. Баку"
+    "Бакинский уезд"
    ],
    "shapes": [
     "Baku City",
@@ -17,39 +17,20 @@
     "Khizi District"
    ],
    "fit": "approx",
-   "with": "baku-uezd",
    "note": [
-    "Şəhər, öz qəzası ilə bir yerdə çəkilib.",
-    "Город, показан вместе со своим уездом.",
-    "The city, drawn with its uezd."
-   ]
-  },
-  {
-   "id": "baku-uezd",
-   "kind": "raion",
-   "az": "Bakı qəzası",
-   "ru": "Бакинский уезд",
-   "en": "Baku uezd",
-   "c26": [
-    "Бакинский уезд"
-   ],
-   "shapes": [],
-   "fit": "approx",
-   "with": "baku",
-   "note": [
-    "Abşeron yarımadasının kəndləri və Xızı sahəsi (mərkəzi Altıağac).",
-    "Сёла Апшерона и Хизинский участок (центр — Алты-Агач).",
-    "The villages of Absheron and the Khizi section (centre Altıağac)."
+    "Bakı şəhəri ilə (453 333 nəfər, qəzanın bütün şəhər əhalisi); kəndləri Abşeronda və Xızı sahəsində (mərkəzi Altıağac).",
+    "С городом Баку (453 333 чел., всё городское население уезда); сёла — на Апшероне и в Хизинском участке (центр — Алты-Агач).",
+    "With the city of Baku (453,333, all of the uezd's urban population); its villages on Absheron and in the Khizi section (centre Altıağac)."
    ]
   },
   {
    "id": "ganja",
-   "kind": "city",
-   "az": "Gəncə",
-   "ru": "г. Гянджа",
-   "en": "Ganja",
+   "kind": "raion",
+   "az": "Gəncə qəzası",
+   "ru": "Ганджинский уезд",
+   "en": "Ganja uezd",
    "c26": [
-    "г. Ганджа"
+    "Ганджинский уезд"
    ],
    "shapes": [
     "Ganja City",
@@ -65,29 +46,10 @@
     "Mingachevir City"
    ],
    "fit": "approx",
-   "with": "ganja-uezd",
    "note": [
-    "Şəhər, öz qəzası ilə bir yerdə çəkilib.",
-    "Город, показан вместе со своим уездом.",
-    "The city, drawn with its uezd."
-   ]
-  },
-  {
-   "id": "ganja-uezd",
-   "kind": "raion",
-   "az": "Gəncə qəzası",
-   "ru": "Ганджинский уезд",
-   "en": "Ganja uezd",
-   "c26": [
-    "Ганджинский уезд"
-   ],
-   "shapes": [],
-   "fit": "approx",
-   "with": "ganja",
-   "note": [
-    "Yevlax və Mingəçevirin bu qəzada olduğunu yoxlamamışıq.",
-    "Что Евлах и Мингечаур входили в этот уезд, мы не проверили.",
-    "That Yevlakh and Mingachevir lay in this uezd is not checked."
+    "Gəncə şəhəri ilə (57 393 nəfər). Yevlax və Mingəçevirin bu qəzada olduğunu yoxlamamışıq.",
+    "С городом Гянджа (57 393 чел.). Что Евлах и Мингечаур входили в этот уезд, мы не проверили.",
+    "With the city of Ganja (57,393). That Yevlakh and Mingachevir lay in this uezd is not checked."
    ]
   },
   {
@@ -321,11 +283,11 @@
   {
    "id": "nakhchivan",
    "kind": "raion",
-   "az": "Naxçıvan SSR",
+   "az": "Naxçıvan",
    "ru": "Нахичеванская ССР",
    "en": "Nakhichevan SSR",
    "c26": [
-    "Нахичеванская ССР"
+    "Нахичеванская АССР"
    ],
    "shapes": [
     "Nakhchivan City",

@@ -1,99 +1,102 @@
 {
- "source": "https://ethno-kavkaz.narod.ru/rnazerbaijan.html",
- "note": "All-Union census of 17 December 1926, Azerbaijan SSR by uezd (without the Nagorno-Karabakh AO), total population as ethno-kavkaz.narod.ru tabulates it from the census volumes (vol. XIV); every uezd total agrees with Russian Wikipedia's uezd articles, which cite Demoscope. Baku and Ganja are counted apart from their uezds. No urban figures. Nagorno-Karabakh from Demoscope's nationality table. Copied 2026-11-25/26 while Demoscope itself was unreachable.",
+ "source": "https://www.demoscope.ru/weekly/ssp/ussr_26_b.php",
+ "note": "All-Union census of 17 December 1926, Azerbaijan SSR by uezd: present population, total and urban, from Demoskop Weekly's page for each unit (reg=62…77), read 2026-11-26. An uezd's figure includes its city (Baku 453,333 and Ganja 57,393 are counted in their uezds; their own figures agree with ethno-kavkaz.narod.ru's tabulation). Units add up to the republic, total and urban.",
  "rows": [
   {
    "name": "Азербайджанская ССР",
-   "total": 2314430,
-   "urban": null,
-   "comment": "The sum of the rows below (2,314,430); the census total usually cited is 2,314,571."
-  },
-  {
-   "name": "г. Баку",
-   "total": 453333,
-   "urban": null
-  },
-  {
-   "name": "г. Ганджа",
-   "total": 57393,
-   "urban": null
+   "total": 2314571,
+   "urban": 649557,
+   "source": "https://www.demoscope.ru/weekly/ssp/ussr_26_b.php?reg=62"
   },
   {
    "name": "Бакинский уезд",
-   "total": 73887,
-   "urban": null
+   "total": 527220,
+   "urban": 453333,
+   "source": "https://www.demoscope.ru/weekly/ssp/ussr_26_b.php?reg=63"
   },
   {
    "name": "Агдамский уезд",
    "total": 123352,
-   "urban": null
+   "urban": 10270,
+   "source": "https://www.demoscope.ru/weekly/ssp/ussr_26_b.php?reg=64"
   },
   {
    "name": "Ганджинский уезд",
-   "total": 149294,
-   "urban": null
+   "total": 206687,
+   "urban": 63544,
+   "source": "https://www.demoscope.ru/weekly/ssp/ussr_26_b.php?reg=65"
   },
   {
    "name": "Геокчайский уезд",
    "total": 172851,
-   "urban": null
+   "urban": 11118,
+   "source": "https://www.demoscope.ru/weekly/ssp/ussr_26_b.php?reg=66"
   },
   {
    "name": "Джебраильский уезд",
    "total": 75371,
-   "urban": null
+   "urban": 3160,
+   "source": "https://www.demoscope.ru/weekly/ssp/ussr_26_b.php?reg=67"
   },
   {
    "name": "Закатальский уезд",
    "total": 80204,
-   "urban": null
+   "urban": 3304,
+   "source": "https://www.demoscope.ru/weekly/ssp/ussr_26_b.php?reg=68"
   },
   {
    "name": "Казахский уезд",
    "total": 121255,
-   "urban": null
+   "urban": 6767,
+   "source": "https://www.demoscope.ru/weekly/ssp/ussr_26_b.php?reg=69"
   },
   {
    "name": "Кубинский уезд",
    "total": 189916,
-   "urban": null
+   "urban": 17902,
+   "source": "https://www.demoscope.ru/weekly/ssp/ussr_26_b.php?reg=70"
   },
   {
    "name": "Курдистанский уезд",
    "total": 51426,
-   "urban": null
+   "urban": 435,
+   "source": "https://www.demoscope.ru/weekly/ssp/ussr_26_b.php?reg=71"
   },
   {
    "name": "Ленкоранский уезд",
    "total": 208479,
-   "urban": null
+   "urban": 12835,
+   "source": "https://www.demoscope.ru/weekly/ssp/ussr_26_b.php?reg=72"
   },
   {
    "name": "Нухинский уезд",
    "total": 107049,
-   "urban": null
+   "urban": 22944,
+   "source": "https://www.demoscope.ru/weekly/ssp/ussr_26_b.php?reg=73"
   },
   {
    "name": "Сальянский уезд",
    "total": 129367,
-   "urban": null
+   "urban": 13203,
+   "source": "https://www.demoscope.ru/weekly/ssp/ussr_26_b.php?reg=74"
   },
   {
    "name": "Шемахинский уезд",
    "total": 91185,
-   "urban": null
+   "urban": 7747,
+   "source": "https://www.demoscope.ru/weekly/ssp/ussr_26_b.php?reg=75"
   },
   {
-   "name": "Нахичеванская ССР",
+   "name": "Нахичеванская АССР",
    "total": 104909,
-   "urban": null
+   "urban": 14702,
+   "source": "https://www.demoscope.ru/weekly/ssp/ussr_26_b.php?reg=76"
   },
   {
    "name": "АО Нагорного Карабаха",
-   "total": 125159,
-   "urban": null,
-   "source": "https://www.demoscope.ru/weekly/ssp/sng_nac_26.php?reg=2304",
-   "comment": "From Demoscope's nationality table for the oblast, as Russian Wikipedia's article on the NKAO transcribes it (its 1939 figure there, 150,837, matches Demoscope's 1939 table exactly)."
+   "total": 125300,
+   "urban": 8293,
+   "source": "https://www.demoscope.ru/weekly/ssp/ussr_26_b.php?reg=77"
   }
  ]
 }
