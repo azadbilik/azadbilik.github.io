@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="/shared/theme.js"></script>
 <title>Sərhədlər · Azad Bilik</title>
 <meta name="description" content="Azərbaycanın daxili sərhədləri iki əsrdə bir xəritədə: Səfəvi dövləti (təxminən 1700), xanlıqlar (təxminən 1800), 1897-ci ilin qəzaları, Sovet rayonları (1926, 1939, 1979–1989) və bugünkü rayonlar. Three centuries of Azerbaijan's borders on one map.">
 <meta name="theme-color" content="#F4EFE6" media="(prefers-color-scheme: light)">
@@ -101,7 +102,7 @@
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <script>
 (() => {
-const dark = matchMedia('(prefers-color-scheme: dark)').matches;
+const dark = window.abTheme ? abTheme.dark() : matchMedia('(prefers-color-scheme: dark)').matches;
 const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
 const still = () => matchMedia('(prefers-reduced-motion: reduce)').matches;

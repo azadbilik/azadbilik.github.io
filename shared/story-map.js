@@ -13,7 +13,7 @@
 //
 // Needs maplibre-gl and /shared/viewer.js before it, and the markup of the story pages.
 (() => {
-  const dark = matchMedia('(prefers-color-scheme: dark)').matches;
+  const dark = window.abTheme ? abTheme.dark() : matchMedia('(prefers-color-scheme: dark)').matches;
   const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
   const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
   const still = () => matchMedia('(prefers-reduced-motion: reduce)').matches;

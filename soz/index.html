@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="/shared/theme.js"></script>
 <title>Söz ehtiyatı · Azad Bilik</title>
 <meta name="description" content="Şairlər neçə fərqli söz işlədir: kitabxana.az-dakı şairlərin ilk 10 000 şeir sözü, azərbaycanca və farsca ayrıca. How many different words a poet uses, in the first 10,000 words of their verse.">
 <meta name="theme-color" content="#F4EFE6" media="(prefers-color-scheme: light)">
@@ -18,7 +19,9 @@
 <style>
   /* A page, not a map: it scrolls. Era colours on top of the story maps' tokens */
   :root { --c-classical: var(--accent); --c-c19: #A86B12; --c-c20: var(--second); --c-modern: var(--third); --c-folk: #7A5C8E; --c-unknown: var(--muted); }
-  @media (prefers-color-scheme: dark) { :root { --c-c19: #E0A64A; --c-folk: #B596C9; } }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --c-c19: #E0A64A; --c-folk: #B596C9; } }
+  :root[data-theme="dark"] { --c-c19: #E0A64A; --c-folk: #B596C9; }
+
   html, body { height: auto; }
   body { overflow-x: hidden; overflow-y: auto; }
   .wrap { max-width: 64rem; margin: 0 auto; padding: 0 1.5rem; }

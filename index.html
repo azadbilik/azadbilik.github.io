@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="/shared/theme.js"></script>
 <title>Azad Bilik</title>
 <meta name="description" content="Azərbaycan mədəniyyəti və tarixi haqqında açıq bilik. Open knowledge about Azerbaijani culture and history.">
 <meta name="theme-color" content="#F4EFE6" media="(prefers-color-scheme: light)">
@@ -36,7 +37,7 @@
     color-scheme: light dark;
   }
   @media (prefers-color-scheme: dark) {
-    :root {
+    :root:not([data-theme="light"]) {
       --paper: #14100D;
       --ink: #F1EBE1;
       --muted: #A0968B;
@@ -45,6 +46,15 @@
       --frame: #1F1914;
     }
   }
+  :root[data-theme="dark"] {
+      --paper: #14100D;
+      --ink: #F1EBE1;
+      --muted: #A0968B;
+      --rule: rgb(241 235 225 / 0.16);
+      --accent: #DA5A61;
+      --frame: #1F1914;
+    }
+
 
   * { box-sizing: border-box; margin: 0; }
   html { -webkit-text-size-adjust: 100%; text-rendering: optimizeLegibility; }

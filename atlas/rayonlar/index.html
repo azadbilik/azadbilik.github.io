@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="/shared/theme.js"></script>
 <title>Sovet rayonları · Azad Bilik</title>
 <meta name="description" content="Azərbaycan SSR-in rayonları və şəhər sovetləri 1926, 1939, 1979 və 1989-cu il siyahıyaalmalarında: əhali, sıxlıq, dəyişmə, şəhər əhalisi. The raions of the Azerbaijan SSR at the 1926, 1939, 1979 and 1989 censuses.">
 <meta name="theme-color" content="#F4EFE6" media="(prefers-color-scheme: light)">
@@ -87,7 +88,7 @@
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <script>
 (() => {
-const dark = matchMedia('(prefers-color-scheme: dark)').matches;
+const dark = window.abTheme ? abTheme.dark() : matchMedia('(prefers-color-scheme: dark)').matches;
 const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
 const still = () => matchMedia('(prefers-reduced-motion: reduce)').matches;

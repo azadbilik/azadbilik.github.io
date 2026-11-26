@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="/shared/theme.js"></script>
 <title>Musiqi · Azad Bilik</title>
 <meta name="description" content="Azərbaycan musiqisinin ilk səs yazıları (1902–1963), sərbəst istifadədə, və xanəndələrin, tarzənlərin, aşıqların doğulduğu yerlər. The first recordings of Azerbaijani music and where its singers and players were born.">
 <meta name="theme-color" content="#F4EFE6" media="(prefers-color-scheme: light)">
@@ -28,9 +29,12 @@
     color-scheme: light dark;
   }
   @media (prefers-color-scheme: dark) {
-    :root { --paper: #14100D; --ink: #F1EBE1; --muted: #A0968B; --rule: rgb(241 235 225 / .14); --frame: #1F1914;
+    :root:not([data-theme="light"]) { --paper: #14100D; --ink: #F1EBE1; --muted: #A0968B; --rule: rgb(241 235 225 / .14); --frame: #1F1914;
       --accent: #DA5A61; --second: #6FB3CC; --third: #A9BC6A; --fourth: #CDA56A; --water: #0C0A08; --land: #1C1713; --vinyl: #050403; --groove: rgb(255 255 255 / .06); }
   }
+  :root[data-theme="dark"] { --paper: #14100D; --ink: #F1EBE1; --muted: #A0968B; --rule: rgb(241 235 225 / .14); --frame: #1F1914;
+      --accent: #DA5A61; --second: #6FB3CC; --third: #A9BC6A; --fourth: #CDA56A; --water: #0C0A08; --land: #1C1713; --vinyl: #050403; --groove: rgb(255 255 255 / .06); }
+
   * { box-sizing: border-box; margin: 0; }
   html { scroll-behavior: smooth; }
   body { background: var(--paper); color: var(--ink); font: 400 1rem/1.55 var(--sans); -webkit-font-smoothing: antialiased; }
@@ -287,7 +291,7 @@
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <script>
 (() => {
-const dark = matchMedia('(prefers-color-scheme: dark)').matches;
+const dark = window.abTheme ? abTheme.dark() : matchMedia('(prefers-color-scheme: dark)').matches;
 const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
 const still = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
