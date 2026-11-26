@@ -67,6 +67,8 @@ const DROP = {
   Q1189603: 'one single titled in Persian, doubtful', Q134286966: 'only a feature credit', Q107926164: 'Bengt Johansson: namesake (Swedish pop)',
   Q12850037: 'Əli Quliyev: rap namesake', Q16368221: 'two Gülyaz Məmmədovas, unclear', Q12838981: 'Ehtiram Hüseynov: breakbeat namesake',
   Q12846316: 'Sakhavat Mammadov (1953–1991): the Apple artist is the Wikidata-linked one born 1993 (Q140127954)', Q25543577: 'Səbuhi Cəfərov: spoken-word namesake',
+  Q16370169: 'Mirza Mansur Mansurov (d. 1967): only two 2024 singles, no historical release and no title naming him',
+  Q1959615: 'Ilyinsky (d. 1920): no album or title carries his name, only others\' performances of one piece',
   Q12838356: 'only a feature credit', Q19715058: 'only a feature credit',
   Q1483971: 'Fərqanə Qasımova: the name search found her father Alim Qasımov\'s artist page (shared id)', Q4223720: 'Aleksandr Klimov (conductor, 1898–1974): the Apple artist is a pop singer of the 2020s',
 };
@@ -74,6 +76,8 @@ const DROP = {
 const FORCE = { Q714526: 838358820, Q714776: 1660753163 };
 // Apple splits some artists over several ids: other ids of the same artist, merged in (hand-checked, same name and repertoire)
 const ALSO = { Q317397: [1748748666] }; // «Üzeyir Hacıbəyov» (az storefront) beside «Uzeyir Hajibeyov»
+// Notes shown with a person's previews
+const NOTES = { Q714526: { az: 'Bu fraqmentlər Niyazinin dirijorluq etdiyi yazılardır (Xaçaturyan, Qarayev), onun bəstələri deyil.', ru: 'Это записи, которыми дирижировал Ниязи (Хачатурян, Караев), а не его собственные сочинения.', en: 'These are recordings Niyazi conducted (Khachaturian, Karayev), not his own compositions.' } };
 const COUNTRIES = ['az', 'us', 'ru', 'tr']; // storefronts tried for a P2850 id
 
 const match = {};
@@ -196,7 +200,7 @@ for (const [q, m] of Object.entries(match)) {
     if (pass === 0 && used.has(x.albumId)) continue; // first one track per album
     sk.add(k); used.add(x.albumId); pv.push({ t: x.name, a: x.album, u: x.preview, l: x.url });
   }
-  RIGHT[q] = { id: c.id, url: c.url?.replace(/\?uo=\d+$/, ''), name: c.name, src: c.src === 'search' ? 'name' : c.src, ev: (c.src === 'wikidata' ? 'Wikidata P2850' : c.src === 'hand' ? 'checked by hand' : `name «${c.name}» fits a label of «${m.name}» (az/ru/en/aliases)`) + `; artist ${c.id}${c.genre ? ', ' + c.genre : ''}; ${rec.length} albums${rec.length ? ' ' + rec[0][1] + '–' + rec[rec.length - 1][1] : ''}, ${(m.songs ?? []).filter((x) => x.preview).length} tracks with a preview`, pv, rec: rec.slice(0, 60), more: rec.length > 60 ? 1 : 0, n: rec.length };
+  RIGHT[q] = { ...(NOTES[q] ? { note: NOTES[q] } : {}), id: c.id, url: c.url?.replace(/\?uo=\d+$/, ''), name: c.name, src: c.src === 'search' ? 'name' : c.src, ev: (c.src === 'wikidata' ? 'Wikidata P2850' : c.src === 'hand' ? 'checked by hand' : `name «${c.name}» fits a label of «${m.name}» (az/ru/en/aliases)`) + `; artist ${c.id}${c.genre ? ', ' + c.genre : ''}; ${rec.length} albums${rec.length ? ' ' + rec[0][1] + '–' + rec[rec.length - 1][1] : ''}, ${(m.songs ?? []).filter((x) => x.preview).length} tracks with a preview`, pv, rec: rec.slice(0, 60), more: rec.length > 60 ? 1 : 0, n: rec.length };
   nA++; if (pv.length) nP++; nR += rec.length;
 }
 for (const [q, w] of Object.entries(WD)) { if (!w.spotify?.length && !w.spotAlbums?.length) continue; SPOT[q] = { a: w.spotify?.[0], al: w.spotAlbums.map((x) => ({ q: x.qid, id: x.id })) }; if (w.spotify?.length) nS++; }

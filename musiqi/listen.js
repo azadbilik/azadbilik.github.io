@@ -22,7 +22,7 @@ MQL.links = (q) => {
 };
 MQL.previews = (q) => {
   const a = MQL.A[q]; if (!a?.pv?.length) return '';
-  return `<div class="lsn-pvs"><div class="lsn-h"><span class="lsn-mark">${t('apple')}</span> ${esc(t('pv'))}</div>${a.pv.map((p) => `<div class="lsn-pv"><div class="lsn-tt"><b>${esc(p.t)}</b>${p.a ? ` <span class="lsn-sub">${esc(p.a)}</span>` : ''}</div><audio controls preload="none" src="${esc(p.u)}" aria-label="${esc(p.t)} · ${esc(t('pv'))}"></audio><div class="lsn-from"><span class="lsn-mark">${t('apple')}</span><a href="${esc(p.l)}" rel="noopener">${esc(t('onApple'))} ↗</a></div></div>`).join('')}<p class="lsn-note">${esc(t('pvNote'))}</p></div>`;
+  return `<div class="lsn-pvs"><div class="lsn-h"><span class="lsn-mark">${t('apple')}</span> ${esc(t('pv'))}</div>${a.pv.map((p) => `<div class="lsn-pv"><div class="lsn-tt"><b>${esc(p.t)}</b>${p.a ? ` <span class="lsn-sub">${esc(p.a)}</span>` : ''}</div><audio controls preload="none" src="${esc(p.u)}" aria-label="${esc(p.t)} · ${esc(t('pv'))}"></audio><div class="lsn-from"><span class="lsn-mark">${t('apple')}</span><a href="${esc(p.l)}" rel="noopener">${esc(t('onApple'))} ↗</a></div></div>`).join('')}${a.note ? `<p class="lsn-note"><b>${esc(a.note[lang()] ?? a.note.az)}</b></p>` : ''}<p class="lsn-note">${esc(t('pvNote'))}</p></div>`;
 };
 MQL.recs = (q) => {
   const a = MQL.A[q]; if (!a?.rec?.length) return '';
