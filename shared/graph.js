@@ -35,6 +35,12 @@
 //     start: 'all' | 'main',               // layered: open on the largest lineage ('main'), the fit button shows all;
 //                                          //   on a stage narrower than the tree it opens on the tree's left part, at a readable height
 //     panHint: false,                      // a "drag to see more" note while the start view shows part of the tree (strings.pan)
+//     lod: auto,                           // large-graph mode, on by itself past 4,000 nodes or 8,000 edges: the lines are
+//                                          //   drawn by sigma on the GPU (straight, no arrows; edgeAlpha, lodEdgeWidth px),
+//                                          //   only the lit ones by us (curved, arrows); labels are tried for the
+//                                          //   labelCandidates (700) best-ranked nodes on screen; edges are picked among lit ones
+//     reshape: false,                      // positions given: widen or heighten them towards the stage's shape (up to stretch)
+//     keepIsolated: false,                 // with an edge filter, a node the node filter keeps stays even with no line on show
 //   });
 //   g.focus(id) / g.focusEdge(id) / g.clear(); g.search('füz') → [{ id, label }]; g.setFilter(nodeFn, edgeFn);
 //   g.fit(); g.zoom(±1); g.setLayout('force'|'layered'); g.relabel(); g.setStrings({...}); g.positions(); g.destroy()
@@ -145,8 +151,15 @@ export function createGraph(container, o) {
       else graph.mergeNodeAttributes(id, { rgb: c, color: rgba(opt.hollow(n) ? C.paper : c), faded: rgba(mix(opt.hollow(n) ? C.paper : c, C.paper, 0.84)) });
     });
     graph.forEachEdge((id) => { const e = edgeById.get(id); graph.setEdgeAttribute(id, 'rgb', css(opt.edgeColor(e)) ?? null); });
+    if (lod) graph.forEachEdge((id, a, s) => {
+      // the GPU's lines: their colour at rest and when something else is lit, and width
+      const e = edgeById.get(id), base = a.rgb ?? graph.getNodeAttribute(s, 'rgb'), al = opt.weak(e) ? opt.edgeAlpha * 0.5 : opt.edgeAlpha;
+      // opaque, mixed into the paper: sigma blends premultiplied, so a translucent colour would come out pale
+      graph.mergeEdgeAttributes(id, { ec: rgba(mix(base, C.paper, 1 - al)), ecf: rgba(mix(base, C.paper, 1 - Math.min(al, 0.05))), esz: (opt.lodEdgeWidth ?? 0.6) * (opt.edgeWidth ? opt.edgeWidth(e) : 1) });
+    });
   }
   function sizes() {
+    rankList = null; specialList = null;
     graph.forEachNode((id) => {
       const n = byId.get(id);
       graph.mergeNodeAttributes(id, { size: opt.size(n), label: opt.label(n), fold: fold(opt.label(n)), alt: opt.searchText ? fold(opt.searchText(n)) : '', hollow: !!opt.hollow(n) });
@@ -165,10 +178,21 @@ export function createGraph(container, o) {
   // a node shown by a filter but with no edge left on show is hidden too
   let visible = new Set();
   function computeVisible() {
-    visible = new Set();
-    graph.forEachEdge((id, a, s, t) => { if (edgeOn(id)) { visible.add(s); visible.add(t); } });
-    if (!edgeFilter) graph.forEachNode((id) => { if (nodeOn(id)) visible.add(id); });
+    visible = new Set(); edgeVis = lod ? new Set() : null; rankList = null; specialList = null;
+    graph.forEachEdge((id, a, s, t) => { if (edgeOn(id)) { visible.add(s); visible.add(t); edgeVis?.add(id); } });
+    if (!edgeFilter || opt.keepIsolated) graph.forEachNode((id) => { if (nodeOn(id)) visible.add(id); });
   }
+  // A large graph (lod): sigma draws the lines on the GPU, our canvas only the lit ones (curved, with arrows);
+  // labels are tried for the highest-ranked nodes on screen only. Small graphs are drawn as before.
+  const lod = opt.lod ?? (graph.order > 4000 || graph.size > 8000);
+  let edgeVis = null, rankList = null;
+  const rankOf = (id) => (opt.labelRank ? opt.labelRank(byId.get(id)) : graph.getNodeAttribute(id, 'size'));
+  function ranked() {
+    if (!rankList) { rankList = [...visible]; const r = new Map(rankList.map((id) => [id, rankOf(id)])); rankList.sort((a, b) => r.get(b) - r.get(a) || (a < b ? -1 : 1)); }
+    return rankList;
+  }
+  let specialList = null;
+  const specials = () => specialList ??= [...visible].filter((id) => { const a = graph.getNodeAttributes(id); return a.hollow || a.shape; });
 
   function focusOf(f) {
     if (!f) return null;
@@ -185,7 +209,7 @@ export function createGraph(container, o) {
   const layered = () => layoutMode === 'layered';
   const renderer = new Sigma(graph, stage, {
     renderLabels: false, renderEdgeLabels: false, enableEdgeEvents: false, allowInvalidContainer: true,
-    zIndex: true, stagePadding: 52, minCameraRatio: 0.06, maxCameraRatio: 4, labelFont: C.font,
+    zIndex: true, stagePadding: 52, minCameraRatio: lod ? 0.008 : 0.06, maxCameraRatio: 4, labelFont: C.font,
     defaultDrawNodeHover: drawRing,
     nodeReducer: (id, a) => {
       const r = { ...a };
@@ -194,7 +218,8 @@ export function createGraph(container, o) {
       if (pinned?.type === 'node' && pinned.id === id) r.highlighted = true;
       return r;
     },
-    edgeReducer: (id, a) => ({ ...a, hidden: true }),
+    edgeReducer: (id, a) => (!lod || !edgeVis.has(id) || lit?.edges.has(id) ? { ...a, hidden: true }
+      : { ...a, hidden: false, color: lit ? a.ecf : a.ec, size: a.esz, zIndex: 0 }),
   });
   applyScale();
   const ectx = context('gx-edges', { beforeLayer: 'nodes' });
@@ -221,17 +246,33 @@ export function createGraph(container, o) {
     const { width: W, height: H } = renderer.getDimensions();
     ectx.clearRect(0, 0, W, H); lctx.clearRect(0, 0, W, H);
     const P = new Map();
-    graph.forEachNode((id) => {
-      if (!visible.has(id)) return;
+    const at = (id) => {
+      if (P.has(id) || !visible.has(id)) return P.get(id);
       const d = renderer.getNodeDisplayData(id); if (!d) return;
-      const v = renderer.framedGraphToViewport(d);
-      P.set(id, { x: v.x, y: v.y, r: renderer.scaleSize(d.size) });
-    });
+      const v = renderer.framedGraphToViewport(d), p = { x: v.x, y: v.y, r: renderer.scaleSize(d.size) };
+      P.set(id, p); return p;
+    };
+    if (!lod) graph.forEachNode(at);
+    else {
+      // only what can be drawn: the lit nodes, the rings and shapes, and the best-ranked on screen
+      if (lit) for (const id of lit.nodes) at(id);
+      if (hovered) at(hovered);
+      for (const id of specials()) at(id);
+      const want = opt.labelCandidates ?? 700; let got = 0;
+      for (const id of ranked()) {
+        if (got >= want) break;
+        const p = at(id); if (p && p.x > -40 && p.x < W + 40 && p.y > -20 && p.y < H + 20) got++; else P.delete(id);
+      }
+      if (lit) for (const id of lit.nodes) at(id);
+    }
     const k = pxPerUnit();
     // edges: one path per style
     const buckets = new Map();
     const bucket = (key) => buckets.get(key) ?? buckets.set(key, { line: new Path2D(), head: new Path2D() }).get(key);
-    graph.forEachEdge((id, a, s, t) => {
+    const eachEdge = lod
+      ? (fn) => { const on = new Set(lit ? lit.edges : []); if (hoverEdge) on.add(hoverEdge); for (const id of on) if (graph.hasEdge(id)) fn(id, graph.getEdgeAttributes(id), graph.source(id), graph.target(id)); }
+      : (fn) => graph.forEachEdge(fn);
+    eachEdge((id, a, s, t) => {
       if (!edgeOn(id)) return;
       const ps = P.get(s), pt = P.get(t); if (!ps || !pt) return;
       const e = edgeById.get(id), on = lit?.edges.has(id), hot = hoverEdge === id || (pinned?.type === 'edge' && pinned.id === id);
@@ -259,7 +300,9 @@ export function createGraph(container, o) {
         tipX = pt.x - ux * (pt.r + 1.5); tipY = pt.y - uy * (pt.r + 1.5);
         if (len < pt.r + ps.r + 2) return;
         const back = opt.arrows ? Math.min(4 + w * 1.5, len * 0.3) : 0;
-        b.line.moveTo(ps.x, ps.y); b.line.quadraticCurveTo(cx, cy, tipX - ux * back * 0.6, tipY - uy * back * 0.6);
+        // a large graph draws its lit lines above the faded nodes, so they start at the source's rim
+        const sd = lod ? (ps.r + 1) / (Math.hypot(cx - ps.x, cy - ps.y) || 1) : 0;
+        b.line.moveTo(ps.x + (cx - ps.x) * sd, ps.y + (cy - ps.y) * sd); b.line.quadraticCurveTo(cx, cy, tipX - ux * back * 0.6, tipY - uy * back * 0.6);
       }
       if (opt.arrows && (on || hot || !lit)) {
         const L = ((on || hot ? 7 : 5) + w) * zk, Wd = L * 0.42;
@@ -271,12 +314,13 @@ export function createGraph(container, o) {
     });
     // faint first, so lit edges draw on top
     const order = [...buckets.entries()].sort((x, y) => alphaOf(x[0]) - alphaOf(y[0]));
+    const ex = lod ? lctx : ectx;
     for (const [key, b] of order) {
       const [col, w, dash] = key.split('|');
-      ectx.strokeStyle = col; ectx.fillStyle = col; ectx.lineWidth = +w;
+      ex.strokeStyle = col; ex.fillStyle = col; ex.lineWidth = +w;
       const dp = opt.dash ?? [4, 3];
-      ectx.setLineDash(dash === '1' ? [dp[0] * Math.max(1, +w * 0.7), dp[1] * Math.max(1, +w * 0.7)] : []);
-      ectx.stroke(b.line); ectx.setLineDash([]); ectx.fill(b.head);
+      ex.setLineDash(dash === '1' ? [dp[0] * Math.max(1, +w * 0.7), dp[1] * Math.max(1, +w * 0.7)] : []);
+      ex.stroke(b.line); ex.setLineDash([]); ex.fill(b.head);
     }
     // hollow nodes: a ring in their colour
     for (const [id, p] of P) {
@@ -370,7 +414,9 @@ export function createGraph(container, o) {
   function edgeAt(x, y) {
     let best = null, bd = 6;
     const P = (id) => { const d = renderer.getNodeDisplayData(id); return d && renderer.framedGraphToViewport(d); };
-    graph.forEachEdge((id, a, s, t) => {
+    // a large graph picks among the lit lines only (a hover over tens of thousands would stall the pointer)
+    const each = lod ? (fn) => { for (const id of lit?.edges ?? []) if (graph.hasEdge(id)) fn(id, null, graph.source(id), graph.target(id)); } : (fn) => graph.forEachEdge(fn);
+    each((id, a, s, t) => {
       if (!edgeOn(id)) return;
       let pts;
       if (layered() && routes?.has(id)) pts = sampleBez(routes.get(id).map(([u, v]) => renderer.graphToViewport({ x: u, y: v })));
@@ -551,7 +597,19 @@ export function createGraph(container, o) {
   }
   async function forceLayout() {
     if (saved.force) { setPositions(saved.force); return; }
-    if (opt.positions) { setPositions(opt.positions); saved.force = snapshot(); return; }
+    if (opt.positions) {
+      setPositions(opt.positions);
+      if (opt.reshape) {
+        // positions from a build: widen (or heighten) them towards the stage's shape, as a layout run here would
+        const raw = snapshot(), b = bounds(raw, visible), out = {};
+        const want = (container.clientWidth || 4) / (container.clientHeight || 3), have = (b.x1 - b.x0) / (b.y1 - b.y0 || 1);
+        const fx = have < want ? Math.min(want / have, opt.stretch ?? 1.5) : 1, fy = have > want ? Math.min(have / want, opt.stretch ?? 1.5) : 1;
+        const cx = (b.x0 + b.x1) / 2, cy = (b.y0 + b.y1) / 2;
+        for (const [id, p] of Object.entries(raw)) out[id] = { x: cx + (p.x - cx) * fx, y: cy + (p.y - cy) * fy };
+        setPositions(out);
+      }
+      saved.force = snapshot(); return;
+    }
     seedPositions();
     // What is on show is laid out first, alone; what the filters hide is placed afterwards around it, with
     // the first part held still, so switching a filter on adds to the picture without moving it.
