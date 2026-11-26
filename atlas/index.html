@@ -42,7 +42,11 @@
   .star { fill: currentColor; } .gem { fill: var(--accent); }
   nav { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: .25rem 1.25rem; }
   nav a { font-size: .875rem; color: var(--muted); text-decoration: none; }
-  nav a:hover { color: var(--ink); }
+  nav a:hover, nav a[aria-current] { color: var(--ink); }
+  nav a[aria-current] { box-shadow: inset 0 -1px currentColor; }
+  @media (max-width: 40rem) { nav { gap: .25rem .9rem; } nav a { font-size: .8125rem; } }
+  .langs { margin-left: .25rem; }
+  .langs button { min-height: 1.75rem; min-width: 1.75rem; }
   .langs { display: inline-flex; gap: .15rem; }
   .langs button { font: inherit; font-size: .75rem; letter-spacing: .04em; padding: .1rem .3rem; border: 0; border-radius: 2px; background: none; color: var(--muted); cursor: pointer; }
   .langs button[aria-pressed="true"] { color: var(--ink); box-shadow: inset 0 -1px currentColor; }
@@ -77,7 +81,7 @@
 <div class="wrap">
   <header>
     <a class="brand" href="/" data-keep-lang><svg viewBox="0 0 512 512" aria-hidden="true"><g class="star"><rect x="126" y="126" width="260" height="260"/><polygon points="256,72 440,256 256,440 72,256"/></g><polygon class="gem" points="256,196 316,256 256,316 196,256"/></svg>Azad Bilik</a>
-    <nav><a href="https://kitabxana.az" data-kx><span data-l="az">Kitabxana</span><span data-l="ru">Библиотека</span><span data-l="en">Library</span></a><a href="/qalereya/" data-keep-lang><span data-l="az">Qalereya</span><span data-l="ru">Галерея</span><span data-l="en">Gallery</span></a><span class="langs" role="group" aria-label="Dil · Язык · Language"><button type="button" data-lang="az">AZ</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="en">EN</button></span></nav>
+    <nav aria-label="Azad Bilik"><a href="https://kitabxana.az" data-kx><span data-l="az">Kitabxana</span><span data-l="ru">Библиотека</span><span data-l="en">Library</span></a><a href="/qalereya/" data-keep-lang><span data-l="az">Qalereya</span><span data-l="ru">Галерея</span><span data-l="en">Gallery</span></a><a href="/xeriteler/" data-keep-lang><span data-l="az">Ədəbi xəritələr</span><span data-l="ru">Литературные карты</span><span data-l="en">Literary maps</span></a><a href="/atlas/" data-keep-lang aria-current="page"><span data-l="az">Atlas</span><span data-l="ru">Атлас</span><span data-l="en">Atlas</span></a><a href="/musiqi/" data-keep-lang><span data-l="az">Musiqi</span><span data-l="ru">Музыка</span><span data-l="en">Music</span></a><span class="langs" role="group" aria-label="Dil · Язык · Language"><button type="button" data-lang="az">AZ</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="en">EN</button></span></nav>
   </header>
 
   <main>
@@ -95,14 +99,6 @@
             <h3><span data-l="az">Sərhədlər</span><span data-l="ru">Границы</span><span data-l="en">Borders</span></h3>
             <p><span data-l="az">İki əsrin daxili sərhədləri bir xəritədə: xanlıqlar, 1897-ci ilin qəzaları, Sovet qəzaları və rayonları, bugünkü rayonlar. Dövrləri sürüşdürün, hekayə kimi oxuyun və ya «xəritədə tap» oynayın.</span><span data-l="ru">Внутренние границы за два века на одной карте: ханства, уезды 1897 г., советские уезды и районы, нынешние районы. Листайте эпохи, читайте как историю или играйте в «найди на карте».</span><span data-l="en">Two centuries of internal borders on one map: the khanates, the 1897 uezds, the Soviet uezds and raions, today's districts. Slide through the eras, read it as a scrolling story, or play «find it on the map».</span></p>
             <p class="facts"><span data-l="az">6 dövr · 1800–bu gün</span><span data-l="ru">6 эпох · 1800–сегодня</span><span data-l="en">6 eras · 1800 to today</span></p>
-          </a>
-        </li>
-        <li class="map">
-          <a href="/atlas/yollar/" data-keep-lang>
-            <div class="pic"><img src="/atlas/yollar/og.png" width="1200" height="630" alt="" loading="lazy"></div>
-            <h2><span data-l="az">Karvan yolu</span><span data-l="ru">Караванный путь</span><span data-l="en">By caravan</span></h2>
-            <p><span data-l="az">Xanlıqların paytaxtları arasında karvanla və atla neçə gün yol idi, relyefə görə (Stanford-un ORBIS modeli kimi). Karvan yolu xəritədə gedir; «neçə gün?» oyununda özünüz təxmin edin.</span><span data-l="ru">Сколько дней караваном и верхом между столицами ханств, по рельефу (как стэнфордский ORBIS). Караван идёт по карте; в игре «сколько дней?» угадайте сами.</span><span data-l="en">How many days by caravan or on horseback between the khanates' capitals, by the terrain (after Stanford's ORBIS). The caravan walks the map; guess for yourself in the «how many days?» game.</span></p>
-            <p class="facts"><span data-l="az">23 şəhər · 2 səyahət üsulu</span><span data-l="ru">23 города · 2 способа</span><span data-l="en">23 towns · 2 ways to travel</span></p>
           </a>
         </li>
         <li class="map">
@@ -161,7 +157,7 @@
       </ul>
     </section>
     <section class="group" aria-labelledby="g-land">
-      <div class="group-head"><h2 id="g-land"><span data-l="az">Coğrafiya</span><span data-l="ru">География</span><span data-l="en">Geography</span></h2><p><span data-l="az">Torpaq və su.</span><span data-l="ru">Земля и вода.</span><span data-l="en">Land and water.</span></p></div>
+      <div class="group-head"><h2 id="g-land"><span data-l="az">Coğrafiya</span><span data-l="ru">География</span><span data-l="en">Geography</span></h2><p><span data-l="az">Torpaq, su və yollar.</span><span data-l="ru">Земля, вода и дороги.</span><span data-l="en">Land, water and roads.</span></p></div>
       <ul class="maps">
         <li class="map">
           <a href="/atlas/hovze/" data-keep-lang>
@@ -169,6 +165,14 @@
             <h3><span data-l="az">Kür–Araz hövzəsi</span><span data-l="ru">Бассейн Куры и Аракса</span><span data-l="en">The Kura–Araz basin</span></h3>
             <p><span data-l="az">Kür, Araz və onların bütün qolları mənbədən mənsəbədək, göllər və su anbarları, adları və uzunluqları ilə.</span><span data-l="ru">Кура, Аракс и все их притоки от истока до устья, озёра и водохранилища — с названиями и длиной.</span><span data-l="en">The Kura, the Araz and all their tributaries from source to mouth, with the lakes and reservoirs, their names and lengths.</span></p>
             <p class="facts"><span data-l="az">312 çay · 108 göl və su anbarı</span><span data-l="ru">312 рек · 108 озёр и водохранилищ</span><span data-l="en">312 rivers · 108 lakes and reservoirs</span></p>
+          </a>
+        </li>
+        <li class="map">
+          <a href="/atlas/yollar/" data-keep-lang>
+            <div class="pic"><img src="/atlas/yollar/og.png" width="1200" height="630" alt="" loading="lazy"></div>
+            <h3><span data-l="az">Karvan yolu</span><span data-l="ru">Караванный путь</span><span data-l="en">By caravan</span></h3>
+            <p><span data-l="az">Xanlıqların paytaxtları arasında karvanla və atla neçə gün yol idi, relyefə görə (Stanford-un ORBIS modeli kimi). Karvan yolu xəritədə gedir; «neçə gün?» oyununda özünüz təxmin edin.</span><span data-l="ru">Сколько дней караваном и верхом между столицами ханств, по рельефу (как стэнфордский ORBIS). Караван идёт по карте; в игре «сколько дней?» угадайте сами.</span><span data-l="en">How many days by caravan or on horseback between the khanates' capitals, by the terrain (after Stanford's ORBIS). The caravan walks the map; guess for yourself in the «how many days?» game.</span></p>
+            <p class="facts"><span data-l="az">23 şəhər · 2 səyahət üsulu</span><span data-l="ru">23 города · 2 способа</span><span data-l="en">23 towns · 2 ways to travel</span></p>
           </a>
         </li>
       </ul>
@@ -182,7 +186,7 @@
 <script>
   function apply(l) {
     document.documentElement.lang = l;
-    document.title = 'Atlas · Azad Bilik';
+    document.title = (l === 'ru' ? 'Атлас' : 'Atlas') + ' · Azad Bilik';
     document.querySelectorAll('[data-lang]').forEach((b) => b.setAttribute('aria-pressed', b.dataset.lang === l));
     document.querySelectorAll('[data-kx]').forEach((a) => a.href = `https://kitabxana.az${l === 'az' ? '' : '/' + l}`);
     document.querySelectorAll('[data-keep-lang]').forEach((a) => { const u = new URL(a.getAttribute('href'), location.href); if (l === 'az') u.searchParams.delete('lang'); else u.searchParams.set('lang', l); a.href = u.pathname + u.search; });
