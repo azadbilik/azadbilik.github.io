@@ -16,7 +16,12 @@ const ymap = y => (y < Y0 ? -1 : Math.min(y, Y1) - Y0);
 const works = new Map();
 for (const f of readdirSync(raw).filter(f => f.endsWith('.json.gz')).sort())
   for (const w of JSON.parse(gunzipSync(readFileSync(join(raw, f))))) works.set(w.id, w);
-console.log('works', works.size);
+// Editorial merge: OpenAlex holds the Institute of Physics twice; both ids are kept in the data (`ids`).
+const MERGE = { 'https://openalex.org/I4405283603': 'https://openalex.org/I4210100222' };
+const MERGED_NAME = 'Institute of Physics';
+const mergedIds = new Set();
+for (const w of works.values()) for (const a of w.authorships ?? []) for (const i of a.institutions ?? []) if (MERGE[i.id]) { mergedIds.add(i.id); i.id = MERGE[i.id]; i.display_name = MERGED_NAME; }
+console.log('works', works.size, 'merged ids', [...mergedIds]);
 
 const fieldIdx = new Map(), fields = []; // {name, domain}
 const domains = ['Physical Sciences', 'Life Sciences', 'Social Sciences', 'Health Sciences'];
@@ -133,7 +138,7 @@ nodeList.sort((a, b) => (a.cc === 'AZ' ? 0 : 1) - (b.cc === 'AZ' ? 0 : 1) || sum
 const nodeIdx = new Map(nodeList.map((r, i) => ['https://openalex.org/' + r.id, i]));
 const instOut = nodeList.map(r => {
   const top = [...r.f.entries()].sort((a, b) => b[1] - a[1]);
-  return { id: r.id, name: r.name, type: r.type, cc: r.cc, w: [...r.w], fw: [...r.fw], f: top.slice(0, 3).map(([i, n]) => [i, n]) };
+  return { id: r.id, ids: r.id === 'I4210100222' ? ['I4210100222', 'I4405283603'] : undefined, name: r.name, type: r.type, cc: r.cc, w: [...r.w], fw: [...r.fw], f: top.slice(0, 3).map(([i, n]) => [i, n]) };
 });
 // edges among kept nodes, weight >= 2, top 3500
 let edgeList = [];

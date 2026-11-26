@@ -39,7 +39,7 @@ No API key and no e-mail address are sent. OpenAlex's free tier (without a key) 
 
 ## Limits (also on the page)
 
-- Affiliations are parsed automatically; misreadings and several records for one institution exist. The Institute of Physics is two records (`Institute of Physics`, `Fizika İnstitutu Publik Hüquqi Şəxs`) and is not merged here; the Ministry of Science and Education also appears as an institution of its own.
+- Affiliations are parsed automatically; misreadings and several records for one institution exist. The Institute of Physics is two OpenAlex records (`I4210100222` “Institute of Physics”, `I4405283603` “Fizika İnstitutu Publik Hüquqi Şəxs”); they are merged into one node (editorial choice, `MERGE` in `scripts/build.mjs`), both ids kept in `elm.json` (`ids`), and the CSV counts them together under `I4210100222`. Other duplicates are not merged; the Ministry of Science and Education also appears as an institution of its own.
 - Author disambiguation is imperfect: people with the same name are merged, one person can be several records (Latin/Cyrillic transliteration). The researcher network is a rough picture.
 - The count rises from 5,925 (2023) to 9,061 (2024), 12,363 (2025) and 15,089 (2026, not over). The 15 venues with the most works in 2024–2026 hold 19 % of them and include Zenodo uploads, book series and conference proceedings; how much of the rise is real and how much OpenAlex's wider coverage cannot be told from this data. In 2020–2026 the countries Azerbaijan co-authors with most after Türkiye (Saudi Arabia, China, Pakistan, India) are partly an effect of such series and of mass-affiliation patterns; the page does not judge it.
 - 1996 has a spike (256 works against 90 in neighbouring years); not investigated.
