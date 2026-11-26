@@ -1,0 +1,587 @@
+{
+ "collections": [
+  {
+   "id": "plakat",
+   "az": "Plakatlar",
+   "ru": "Плакаты",
+   "en": "Posters"
+  },
+  {
+   "id": "xerite",
+   "az": "Xəritələr və planlar",
+   "ru": "Карты и планы",
+   "en": "Maps and plans"
+  },
+  {
+   "id": "elyazma",
+   "az": "Əlyazmalar və sənədlər",
+   "ru": "Рукописи и документы",
+   "en": "Manuscripts and documents"
+  },
+  {
+   "id": "kitab",
+   "az": "Kitablar",
+   "ru": "Книги",
+   "en": "Books"
+  },
+  {
+   "id": "statistika",
+   "az": "Statistika",
+   "ru": "Статистика",
+   "en": "Statistics"
+  }
+ ],
+ "holders": {
+  "rgb": {
+   "az": "Rusiya Dövlət Kitabxanası",
+   "ru": "Российская государственная библиотека",
+   "en": "Russian State Library"
+  },
+  "rnb": {
+   "az": "Rusiya Milli Kitabxanası",
+   "ru": "Российская национальная библиотека",
+   "en": "National Library of Russia"
+  },
+  "rgia": {
+   "az": "Rusiya Dövlət Tarix Arxivi",
+   "ru": "Российский государственный исторический архив",
+   "en": "Russian State Historical Archive"
+  },
+  "prlib": {
+   "az": "Prezident kitabxanası",
+   "ru": "Президентская библиотека",
+   "en": "Presidential Library"
+  }
+ },
+ "items": [
+  {
+   "id": "bakinskaya-yarmarka-1924",
+   "c": "plakat",
+   "az": "Bakı yarmarkası, 20 may – 5 iyul 1924",
+   "ru": "Бакинская ярмарка с 20 мая по 5 июля 1924 года",
+   "en": "The Baku Fair, 20 May – 5 July 1924",
+   "date": "1924",
+   "place": {
+    "az": "Moskva",
+    "ru": "Москва",
+    "en": "Moscow"
+   },
+   "lang": "ru, az (ərəb əlifbası)",
+   "holder": "rgb",
+   "cipher": "П2-23/2",
+   "url": "https://kp.rusneb.ru/item/material/bakinskaya-yarmarka-s-20-maya-1924-god-po-5-iyulya-1924-god",
+   "n": 1,
+   "total": 3,
+   "ratio": 0.633
+  },
+  {
+   "id": "azgosselsklad-1925",
+   "c": "plakat",
+   "az": "Azdövkəndanbar: Azərbaycan dövlət kənd təsərrüfatı anbarları",
+   "ru": "Азгоссельсклад: Правление Азербайджанских гос. сельско-хозяйственных складов",
+   "en": "Azgosselsklad: the Azerbaijan state agricultural stores",
+   "date": "[1925]",
+   "place": {
+    "az": "Bakı",
+    "ru": "Баку",
+    "en": "Baku"
+   },
+   "lang": "ru, az",
+   "holder": "rgb",
+   "cipher": "Р2-6/32",
+   "url": "https://kp.rusneb.ru/item/material/azgosselsklad-pravlenie-azerbajdzhanskih-gos-selsko-hozyajstvennyh-skladov-plakat",
+   "n": 1,
+   "total": 3,
+   "ratio": 0.669
+  },
+  {
+   "id": "savadli-savadsiza-1925",
+   "c": "plakat",
+   "az": "Savadlı, savadsıza öyrət!",
+   "ru": "Грамотный, обучи неграмотного!",
+   "en": "You who can read, teach those who can't!",
+   "date": "[1925?]",
+   "place": {
+    "az": "Bakı",
+    "ru": "Баку",
+    "en": "Baku"
+   },
+   "lang": "ru, az (latın əlifbası)",
+   "holder": "rgb",
+   "cipher": "П2-28/12",
+   "url": "https://kp.rusneb.ru/item/material/gramotnyj-obuchi-negramotnogo",
+   "n": 1,
+   "total": 3,
+   "ratio": 0.664
+  },
+  {
+   "id": "kooperativ-1925",
+   "c": "plakat",
+   "az": "Həmkarlar ittifaqı üzvü! Kooperativə üzv yazıldınmı?",
+   "ru": "Член профсоюза! Записался ли ты в члены кооператива?",
+   "en": "Union member! Have you joined the cooperative?",
+   "date": "[1925?]",
+   "place": {
+    "az": "Bakı",
+    "ru": "Баку",
+    "en": "Baku"
+   },
+   "lang": "ru, az (latın əlifbası)",
+   "holder": "rgb",
+   "cipher": "П2-24/31",
+   "url": "https://kp.rusneb.ru/item/material/chlen-profsoyuza-zapisalsya-li-ty-v-chleny-kooperativa",
+   "n": 1,
+   "total": 3,
+   "ratio": 0.555
+  },
+  {
+   "id": "caypulu-1925",
+   "c": "plakat",
+   "az": "Rədd olsun çaypulu! Əvvəl… İndi",
+   "ru": "Долой чаевые! Раньше… Теперь",
+   "en": "Down with tipping! Before… Now",
+   "date": "[1925?]",
+   "place": {
+    "az": "Bakı",
+    "ru": "Баку",
+    "en": "Baku"
+   },
+   "lang": "ru, az (ərəb əlifbası)",
+   "holder": "rgb",
+   "cipher": "П2-26/4",
+   "url": "https://kp.rusneb.ru/item/material/doloy-chaevye-ranshe-teper",
+   "n": 1,
+   "total": 3,
+   "ratio": 0.669
+  },
+  {
+   "id": "oxu-1925",
+   "c": "plakat",
+   "az": "Oxu! Klub ikihəftəliyi 15 sentyabrda başlayır",
+   "ru": "Читай! «Начать 15-го сентября клубный двухнедельник…»",
+   "en": "Read! The club fortnight begins on 15 September",
+   "date": "[1925?]",
+   "place": {
+    "az": "Bakı",
+    "ru": "Баку",
+    "en": "Baku"
+   },
+   "lang": "ru, az (ərəb əlifbası)",
+   "holder": "rgb",
+   "cipher": "П2-28/45",
+   "url": "https://kp.rusneb.ru/item/material/chitay-nachat-15-go-sentyabrya-klubnyy-dvuhnedelnik-",
+   "n": 1,
+   "total": 3,
+   "ratio": 1.24
+  },
+  {
+   "id": "bakinski-rabochi-1925a",
+   "c": "plakat",
+   "az": "«Bakinski raboçi» qəzetinə 1925-ci il üçün abunə olun",
+   "ru": "Подписывайтесь на газету «Бакинский рабочий» на 1925 год",
+   "en": "Subscribe to «Bakinsky Rabochy» for 1925",
+   "date": "[1925]",
+   "place": {
+    "az": "Bakı",
+    "ru": "Баку",
+    "en": "Baku"
+   },
+   "lang": "ru",
+   "holder": "rgb",
+   "cipher": "П2-34/20",
+   "url": "https://kp.rusneb.ru/item/material/podpisyvajtes-na-gazetu-bakinskij-rabochij-na-1925-god",
+   "n": 1,
+   "total": 3,
+   "ratio": 0.641
+  },
+  {
+   "id": "bakinski-rabochi-1925b",
+   "c": "plakat",
+   "az": "Abunə olun! Böyük gündəlik qəzet «Bakinski raboçi»",
+   "ru": "Подписывайтесь!! На большую ежедневную газету «Бакинский рабочий»",
+   "en": "Subscribe! The big daily «Bakinsky Rabochy»",
+   "date": "[1925]",
+   "place": {
+    "az": "Bakı",
+    "ru": "Баку",
+    "en": "Baku"
+   },
+   "lang": "ru",
+   "holder": "rgb",
+   "cipher": "П2-34/16",
+   "url": "https://kp.rusneb.ru/item/material/podpisyvajtes-na-bolshuyu-ezhednevnuyu-gazetu-bakinskij-rabochij",
+   "n": 1,
+   "total": 3,
+   "ratio": 0.75
+  },
+  {
+   "id": "vahid-cebhe-1925",
+   "c": "plakat",
+   "az": "Vahid fəhlə cəbhəsinin qələbəsini istəyirsənsə, onun mübarizəsindən xəbərdar ol",
+   "ru": "Ты желаешь победы единого рабочего фронта, так будь в курсе борьбы за него",
+   "en": "If you want the united workers' front to win, follow its struggle",
+   "date": "[1925]",
+   "place": {
+    "az": "Bakı",
+    "ru": "Баку",
+    "en": "Baku"
+   },
+   "lang": "ru",
+   "holder": "rgb",
+   "cipher": "П2-35/53",
+   "url": "https://kp.rusneb.ru/item/material/ty-zhelaesh-pobedy-edinogo-rabochego-fronta-tak-bud-v-kurse-borby-za-nego",
+   "n": 1,
+   "total": 3,
+   "ratio": 0.641
+  },
+  {
+   "id": "vetendas-muharibesi-1921",
+   "c": "plakat",
+   "az": "İmperialist müharibəni dünya vətəndaş müharibəsinə çevirəcəyik!",
+   "ru": "Империалистическую войну мы превратим в мировую гражданскую войну!",
+   "en": "We shall turn the imperialist war into a world civil war!",
+   "date": "1921–1925",
+   "place": {
+    "az": "Bakı",
+    "ru": "Баку",
+    "en": "Baku"
+   },
+   "lang": "ru",
+   "holder": "rgb",
+   "cipher": "П2-52/27",
+   "url": "https://kp.rusneb.ru/item/material/imperialisticheskuyu-vojnu-my-prevratim-v-mirovuyu-grazhdanskuyu-vojnu",
+   "n": 1,
+   "total": 3,
+   "ratio": 1.356
+  },
+  {
+   "id": "naft-sabunu",
+   "c": "plakat",
+   "az": "Nobel qardaşları: «Naft» neft sabunu",
+   "ru": "Т-во бр. Нобель. Мыло «Нафт»: нефтяное мягкое мыло",
+   "en": "Nobel Brothers: «Naft» petroleum soap",
+   "date": {
+    "az": "XX əsrin əvvəli",
+    "ru": "начало XX века",
+    "en": "early 20th century"
+   },
+   "place": {
+    "az": "Sankt-Peterburq",
+    "ru": "Санкт-Петербург",
+    "en": "St Petersburg"
+   },
+   "lang": "ru",
+   "holder": "rgb",
+   "cipher": "P0 I №10/2",
+   "url": "https://kp.rusneb.ru/item/material/t-vo-br-nobel-novoe-mylo-naft--mylo-naft-neftyanoe-myagkoe-mylo",
+   "n": 1,
+   "total": 1,
+   "ratio": 0.764
+  },
+  {
+   "id": "ter-qriqoryev-tutun",
+   "c": "plakat",
+   "az": "Ter-Qriqoryev, Mejlumov və Ko tütün fabriki, Bakı",
+   "ru": "Табачная фабрика Тер-Григорьева, Межлумова и К°. Баку",
+   "en": "Ter-Grigoriev, Mezhlumov & Co. tobacco factory, Baku",
+   "date": {
+    "az": "XX əsrin əvvəli",
+    "ru": "начало XX века",
+    "en": "early 20th century"
+   },
+   "place": {
+    "az": "Moskva",
+    "ru": "Москва",
+    "en": "Moscow"
+   },
+   "lang": "ru",
+   "holder": "rgb",
+   "cipher": "P0 I №9/22",
+   "url": "https://kp.rusneb.ru/item/material/tabachnaya-fabrika-ter-grigoreva-mezhlumova-i-kdeg-baku",
+   "n": 1,
+   "total": 1,
+   "ratio": 0.738
+  },
+  {
+   "id": "sonya-papiros",
+   "c": "plakat",
+   "az": "«Sonya» papirosları: Y. və M. Mirzəbəyan qardaşlarının tütün fabriki",
+   "ru": "Рекомендуются вновь выпущенные папиросы «Соня» табачной фабрики братьев Е. и М. Мирзабекян",
+   "en": "New «Sonya» cigarettes from the Mirzabekian brothers' tobacco factory",
+   "date": "190-",
+   "place": {
+    "az": "Bakı",
+    "ru": "Баку",
+    "en": "Baku"
+   },
+   "lang": "ru",
+   "holder": "rgb",
+   "cipher": "Р0 №10/17",
+   "url": "https://kp.rusneb.ru/item/material/rekomenduyutsya-vnov-vypushchennye-papirosy-sonya-tabachnoy-fabriki-bratev-e-i-m-mirzabekyan",
+   "n": 1,
+   "total": 1,
+   "ratio": 0.558
+  },
+  {
+   "id": "elisavetpol-1872",
+   "c": "xerite",
+   "az": "Yelizavetpol quberniya şəhərinin layihə planı, 1873-cü il üçün",
+   "ru": "План проектированного расположения губернского города Елисаветполя в 1873 году",
+   "en": "The planned layout of the governorate town of Elisavetpol, for 1873",
+   "date": "1872",
+   "lang": "ru",
+   "holder": "rgia",
+   "via": "prlib",
+   "cipher": "Ф. 1293, оп. 166, д. 2",
+   "url": "https://www.prlib.ru/item/766261",
+   "also": {
+    "href": "/atlas/baki/?y=ganja-1873",
+    "az": "Bugünkü Gəncənin üstündə",
+    "ru": "Поверх нынешней Гянджи",
+    "en": "Over today's Ganja"
+   },
+   "n": 1,
+   "total": 1,
+   "ratio": 0.99
+  },
+  {
+   "id": "baki-adalari-1847",
+   "c": "xerite",
+   "az": "Bakı adalarının planı",
+   "ru": "План Бакинских островов",
+   "en": "Plan of the Baku islands",
+   "date": "1847",
+   "place": {
+    "az": "Sankt-Peterburq",
+    "ru": "Санкт-Петербург",
+    "en": "St Petersburg"
+   },
+   "lang": "ru",
+   "holder": "rnb",
+   "cipher": "К 2-Кав 1/5",
+   "url": "https://kp.rusneb.ru/item/material/plan-bakinskih-ostrovov",
+   "n": 1,
+   "total": 1,
+   "ratio": 0.72
+  },
+  {
+   "id": "baki-quberniyasi-186x",
+   "c": "xerite",
+   "az": "Bakı quberniyasının xəritəsi",
+   "ru": "Карта Бакинской губернии",
+   "en": "Map of Baku governorate",
+   "date": "[186-?]",
+   "place": {
+    "az": "Tiflis",
+    "ru": "Тифлис",
+    "en": "Tiflis"
+   },
+   "lang": "ru",
+   "holder": "rgb",
+   "cipher": "Ко 15/III-2",
+   "url": "https://kp.rusneb.ru/item/material/karta-bakinskoy-gubernii",
+   "n": 3,
+   "total": 3,
+   "ratio": 0.73
+  },
+  {
+   "id": "kondratenko-etnoqrafik",
+   "c": "xerite",
+   "az": "Zaqafqaziya quberniya və vilayətlərinin etnoqrafik xəritələri (E. Kondratenko)",
+   "ru": "Этнографические карты губерний и областей Закавказского края (сост. Е. Кондратенко)",
+   "en": "Ethnographic maps of the Transcaucasian governorates and provinces (E. Kondratenko)",
+   "date": {
+    "az": "XIX əsrin sonu",
+    "ru": "конец XIX века",
+    "en": "late 19th century"
+   },
+   "lang": "ru",
+   "note": {
+    "az": "İmperator Rus Coğrafiya Cəmiyyətinin Qafqaz şöbəsinin «Zapiski»sinin XVIII kitabına əlavə. Hər quberniya üçün bir xəritə: kənd icmaları xalqlara görə rənglənib.",
+    "ru": "Приложение к XVIII кн. «Записок» Кавказского отдела ИРГО. По карте на губернию: сельские общества окрашены по народностям.",
+    "en": "Supplement to vol. XVIII of the Caucasus branch of the Russian Geographical Society's «Zapiski». One map per governorate, rural societies coloured by people."
+   },
+   "holder": "rgia",
+   "via": "prlib",
+   "url": "https://www.prlib.ru/item/768136",
+   "cipher": "Ф. 1293, оп. 167, д. 28",
+   "n": 7,
+   "total": 19,
+   "ratio": 1.468
+  },
+  {
+   "id": "qafqaz-xeritesi-a",
+   "c": "xerite",
+   "az": "Qafqaz diyarının xəritəsi",
+   "ru": "Карта Кавказского края",
+   "en": "Map of the Caucasus region",
+   "date": "1869",
+   "lang": "ru",
+   "holder": "rgia",
+   "url": "https://www.prlib.ru/item/1381186",
+   "via": "prlib",
+   "cipher": "Ф. 1399, оп. 2, д. 119",
+   "note": {
+    "az": "Hərbi topoqraflar korpusunun kartoqrafiya şöbəsi, Moskva.",
+    "ru": "Картографический отдел Корпуса военных топографов, Москва.",
+    "en": "Cartographic department of the Corps of Military Topographers, Moscow."
+   },
+   "n": 2,
+   "total": 7,
+   "ratio": 2.222
+  },
+  {
+   "id": "qafqaz-xeritesi-b",
+   "c": "xerite",
+   "az": "Qafqaz diyarının xəritəsi",
+   "ru": "Кавказ. Карта Кавказского края",
+   "en": "Map of the Caucasus region",
+   "date": "1868",
+   "lang": "ru",
+   "holder": "rgia",
+   "via": "prlib",
+   "url": "https://www.prlib.ru/item/767821",
+   "cipher": "Ф. 1293, оп. 167, д. 24",
+   "n": 2,
+   "total": 6,
+   "ratio": 1.24
+  },
+  {
+   "id": "qafqaz-xeritesi-c",
+   "c": "xerite",
+   "az": "Qafqaz diyarının xəritəsi",
+   "ru": "Кавказ. Карта Кавказского края",
+   "en": "Map of the Caucasus region",
+   "date": "1864",
+   "lang": "ru",
+   "holder": "rgia",
+   "via": "prlib",
+   "url": "https://www.prlib.ru/item/767757",
+   "cipher": "Ф. 1293, оп. 167, д. 23",
+   "note": {
+    "az": "A. İlyinin kartoqrafiya müəssisəsi.",
+    "ru": "Картографическое заведение А. Ильина.",
+    "en": "A. Ilyin's cartographic house."
+   },
+   "n": 1,
+   "total": 2,
+   "ratio": 1.301
+  },
+  {
+   "id": "qara-seher-fotogen",
+   "c": "xerite",
+   "az": "Bakı yaxınlığında Qara şəhərin fotogen zavodlarının planı",
+   "ru": "План фотогеновых заводов Черного городка близ города Баку",
+   "en": "Plan of the kerosene works of the Black City near Baku",
+   "lang": "ru",
+   "holder": "prlib",
+   "url": "https://www.prlib.ru/item/1948593",
+   "note": {
+    "az": "Texnoloq St. Qulişambarovun kitabına əlavə.",
+    "ru": "Приложение к книге технолога Ст. Гулишамбарова.",
+    "en": "From a book by the engineer S. Gulishambarov."
+   },
+   "n": 1,
+   "total": 6,
+   "ratio": 1.33
+  },
+  {
+   "id": "derbend-name-1816",
+   "c": "elyazma",
+   "az": "Dərbəndnamə (əlyazma surəti)",
+   "ru": "Дербенд-наме, или Дербентская история (рукописный список)",
+   "en": "Derbend-name, the history of Derbent (manuscript copy)",
+   "date": "1816",
+   "lang": "az (ərəb əlifbası)",
+   "holder": "rgb",
+   "cipher": "Ф. 256 № 833",
+   "url": "https://kp.rusneb.ru/item/material/drbndnamh-derbend-nama-ili-derbentskaya-istoriyarukopis-spisok",
+   "n": 45,
+   "total": 45,
+   "ratio": 0.835
+  },
+  {
+   "id": "sultan-huseyn-hokmu-1721",
+   "c": "elyazma",
+   "az": "Şah Sultan Hüseynin hökmü",
+   "ru": "Указ (хукм) шаха Султан Хусейна",
+   "en": "A decree (hukm) of Shah Sultan Husayn",
+   "date": "1721",
+   "lang": "fa",
+   "holder": "rgb",
+   "cipher": "Ф. 256 № 827",
+   "url": "https://kp.rusneb.ru/item/material/hkm-sltan-hsyn-rukopis",
+   "note": {
+    "az": "Səfəvi şahının fərmanı.",
+    "ru": "Указ сефевидского шаха.",
+    "en": "A Safavid royal decree."
+   },
+   "n": 3,
+   "total": 3,
+   "ratio": 0.4
+  },
+  {
+   "id": "tezkire-1594",
+   "c": "elyazma",
+   "ia": true,
+   "az": "Təzkirətüş-şüəra: fars şairləri və yazıçılarının tərcümeyi-halları",
+   "ru": "Тазкират аш-шуара: биографии персидских поэтов и писателей",
+   "en": "Tazkirat al-shu'ara: lives of the Persian poets",
+   "date": "1594",
+   "lang": "fa",
+   "holder": "rgb",
+   "cipher": "Ф. 256 № 826",
+   "url": "https://kp.rusneb.ru/item/material/tthkra-alshaaraaa-biografii-persidskih-poetov-i-pisatelej-s-izvlecheniyami-iz-ih-sochineniy",
+   "n": 0,
+   "total": 647,
+   "ratio": 0.705
+  },
+  {
+   "id": "sahname-tebriz-1858",
+   "c": "kitab",
+   "ia": true,
+   "az": "Firdovsi, «Şahnamə» (daşbasma)",
+   "ru": "Фирдоуси, «Шахнаме» (литография)",
+   "en": "Ferdowsi, «Shahnameh» (lithograph)",
+   "date": "1858",
+   "place": {
+    "az": "Təbriz",
+    "ru": "Тебриз",
+    "en": "Tabriz"
+   },
+   "lang": "fa",
+   "holder": "rgb",
+   "cipher": "ЗВ 17-2/1",
+   "url": "https://kp.rusneb.ru/item/material/shahnamh-hkim-aboalkasm-frdosi-tosi-ahnameh-hakim-abu-ol-qasem-ferdowsi-tusi",
+   "n": 0,
+   "total": 851,
+   "ratio": 0.647
+  },
+  {
+   "id": "svod-1886",
+   "c": "statistika",
+   "ia": true,
+   "az": "Zaqafqaziya diyarı əhalisinin 1886-cı il ailə siyahılarından çıxarılmış statistik məlumatları",
+   "ru": "Свод статистических данных о населении Закавказского края, извлечённых из посемейных списков 1886 г.",
+   "en": "Statistics of the population of Transcaucasia from the family lists of 1886",
+   "date": "1893",
+   "place": {
+    "az": "Tiflis",
+    "ru": "Тифлис",
+    "en": "Tiflis"
+   },
+   "lang": "ru",
+   "holder": "rgb",
+   "cipher": "01005403186",
+   "url": "https://viewer.rusneb.ru/ru/000199_000009_005403186",
+   "note": {
+    "az": "Hər kəndin əhalisi, ailə sayı, xalqlara və dinlərə görə.",
+    "ru": "Население каждого селения: дымы, мужчины и женщины, по народностям и вероисповеданиям.",
+    "en": "Every village's population, households, by people and faith."
+   },
+   "n": 0,
+   "total": 487,
+   "ratio": 1.45
+  }
+ ]
+}

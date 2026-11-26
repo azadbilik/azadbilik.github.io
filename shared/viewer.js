@@ -8,6 +8,7 @@
 //     fallback: (x) => URL to try when `full` fails (the original),
 //     info: (x, i, n) => HTML beside the picture (title, dates, links),
 //     labels: { close, prev, next, loading },
+//     onclose: () => … (optional; called when the dialog closes),
 //   })
 (() => {
   const css = `
@@ -63,6 +64,7 @@
     closeBtn.onclick = () => dlg.close();
     // A click on the backdrop lands on the dialog itself
     dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
+    dlg.addEventListener('close', () => opts.onclose?.());
     dlg.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowLeft') { e.preventDefault(); go(at - 1); }
       if (e.key === 'ArrowRight') { e.preventDefault(); go(at + 1); }

@@ -33,6 +33,7 @@ add('/atlas/', ['Atlas', 'Атлас', 'Atlas'], ['Tarixi Azərbaycan rəqəmlə
 add('/atlas/serhedler/hekaye/', ['Sərhədlər necə dəyişdi', 'Как менялись границы', 'How the borders moved'], ['Hekayə, 1800–1991', 'История, 1800–1991', 'A story, 1800–1991']);
 add('/musiqi/', ['Musiqi', 'Музыка', 'Music'], ['İlk səs yazıları, 1902-dən', 'Первые записи, с 1902 года', 'The first recordings, from 1902']);
 add('/sebeke/', ['Şəbəkələr', 'Сети', 'Networks'], ['Kim kimə bağlıdır: şairlər, alimlər, insanlar, məhsullar', 'Кто с кем связан: поэты, учёные, люди, товары', 'Who connects to whom: poets, scientists, people, products']);
+add('/arxiv/', ['Arxiv', 'Архив', 'Archive'], ['Plakatlar, xəritələr, əlyazmalar, kitablar', 'Плакаты, карты, рукописи, книги', 'Posters, maps, manuscripts, books']);
 add('/soz/', ['Söz ehtiyatı', 'Словарь поэтов', 'Poets’ vocabulary'], ['Şair neçə söz işlədir?', 'Сколько слов у поэта?', 'How many words does a poet use?']);
 add('/sebeke/elm/', ['Elm şəbəkəsi', 'Сеть науки', 'Science network'], ['Azərbaycan elmi kimlərlə birgə yazır?', 'С кем в соавторстве пишет наука Азербайджана?', 'Who Azerbaijani science writes with']);
 add('/sebeke/ixrac/', ['İxrac məhsul fəzası', 'Пространство экспорта', 'Export product space'], ['Azərbaycan nə satır, nəyi satmağa yaxındır?', 'Что Азербайджан продаёт и что мог бы', 'What Azerbaijan sells, and what it is close to selling']);
@@ -65,6 +66,9 @@ for (const m of await json(here, 'musiqi/data/musicians.json'))
 // Poets of the answer-poem network (who also have a page there)
 for (const p of (await json(here, 'sebeke/nezire/data/nezire.json')).poets)
   push('poet', [p.az, p.ru, p.en], [years(p.born, p.died)] .concat([years(p.born, p.died), years(p.born, p.died)]), `/sebeke/nezire/?poet=${p.slug}`);
+// The archive's items (posters, maps, manuscripts, books)
+for (const it of (await json(here, 'arxiv/data/items.json')).items)
+  push('doc', [it.az, it.ru, it.en], [it.date, it.date, it.date].map((d) => (typeof d === 'object' ? d?.az : d) ?? ''), `/arxiv/?i=${it.id}`);
 // Districts and shahrestans on the population map
 for (const f of (await json(here, 'atlas/ehali/data/units.geojson')).features) {
   const u = f.properties;

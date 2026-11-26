@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="/shared/theme.js"></script>
+<title>Arxiv · Azad Bilik</title>
+<meta name="description" content="Köhnə plakatlar, xəritələr, əlyazmalar və kitablar: Azərbaycanla bağlı ictimai mülkiyyətdəki skanlar, saxlandığı kitabxana və arxivlə. Old posters, maps, manuscripts and books about Azerbaijan, public domain, credited to the libraries that hold them.">
+<meta name="theme-color" content="#F4EFE6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14100D" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://azadbilik.org/arxiv/">
+<meta property="og:title" content="Arxiv · Azad Bilik">
+<meta property="og:description" content="Plakatlar, xəritələr, əlyazmalar, kitablar: 1720-ci illərdən 1920-ci illərə.">
+<meta property="og:image" content="https://azadbilik.org/arxiv/img/bakinskaya-yarmarka-1924/t.webp">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="stylesheet" href="/shared/hub.css">
+<script>
+  (() => { const L = ['az', 'ru', 'en']; let l = new URLSearchParams(location.search).get('lang'); if (!L.includes(l)) { try { l = localStorage.getItem('lang'); } catch {} } if (L.includes(l)) document.documentElement.lang = l; })();
+</script>
+<style>
+  :root {
+    --paper: #F4EFE6; --ink: #1A1410; --muted: #675E55; --rule: rgb(26 20 16 / .14); --frame: #E9E2D6; --card: #EDE6DA;
+    --accent: #A81E28;
+    --serif: 'Literata', Georgia, serif; --sans: 'Inter', system-ui, sans-serif;
+    --gutter: clamp(1rem, 4vw, 3rem);
+    color-scheme: light dark;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --paper: #14100D; --ink: #F1EBE1; --muted: #A0968B; --rule: rgb(241 235 225 / .14); --frame: #1F1914; --card: #1C1713; --accent: #DA5A61; }
+  }
+  :root[data-theme="dark"] { --paper: #14100D; --ink: #F1EBE1; --muted: #A0968B; --rule: rgb(241 235 225 / .14); --frame: #1F1914; --card: #1C1713; --accent: #DA5A61; }
+
+  * { box-sizing: border-box; margin: 0; }
+  body { background: var(--paper); color: var(--ink); font: 400 1rem/1.55 var(--sans); -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: .22em; text-decoration-color: var(--rule); }
+  a:hover { text-decoration-color: currentColor; }
+  button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+  [hidden] { display: none !important; }
+  .wrap { max-width: 80rem; margin: 0 auto; padding: 0 var(--gutter); }
+
+  .lead { padding-block: 2rem 1.5rem; max-width: 46rem; }
+  h1 { font: 400 clamp(2.25rem, 5vw, 3.25rem)/1.05 var(--serif); letter-spacing: -.01em; }
+  .sub { margin-top: .75rem; color: var(--muted); font-size: 1.0625rem; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: .5rem; padding-block: .5rem 1.75rem; }
+  .chips button { padding: .4rem .85rem; border: 1px solid var(--rule); border-radius: 999px; font-size: .875rem; color: var(--muted); }
+  .chips button:hover { color: var(--ink); border-color: var(--muted); }
+  .chips button[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+  .chips small { margin-left: .35rem; font-size: .75rem; opacity: .7; font-variant-numeric: tabular-nums; }
+
+  section.col { padding-block: 0 2.5rem; }
+  section.col h2 { font: 400 1.5rem/1.2 var(--serif); padding-bottom: .75rem; border-bottom: 1px solid var(--rule); margin-bottom: 1.25rem; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr)); gap: 1.75rem 1.25rem; align-items: start; }
+  .card { display: flex; flex-direction: column; gap: .6rem; text-align: left; width: 100%; }
+  .card .pic { position: relative; display: grid; place-items: center; aspect-ratio: 3 / 4; background: var(--card); border-radius: 3px; overflow: hidden; }
+  .card .pic.wide { aspect-ratio: 4 / 3; }
+  .card img { max-width: 100%; max-height: 100%; object-fit: contain; transition: transform .25s; }
+  .card:hover img { transform: scale(1.03); }
+  .card .n { position: absolute; right: .5rem; bottom: .5rem; padding: .1rem .45rem; border-radius: 999px; background: rgb(0 0 0 / .55); color: #fff; font-size: .75rem; font-variant-numeric: tabular-nums; }
+  .card .ia { position: absolute; left: .5rem; top: .5rem; right: .5rem; padding: .25rem .5rem; border-radius: 3px; background: var(--paper); color: var(--muted); font-size: .7rem; line-height: 1.3; text-align: center; }
+  .card h3 { font: 400 1rem/1.3 var(--serif); }
+  .card .m { color: var(--muted); font-size: .8125rem; line-height: 1.4; }
+  .card:hover h3 { color: var(--accent); }
+
+  .about { border-top: 1px solid var(--rule); padding-block: 2rem 3rem; color: var(--muted); font-size: .875rem; max-width: 46rem; }
+  .about p + p { margin-top: .75rem; }
+
+  .azv-info dl { display: grid; grid-template-columns: auto 1fr; gap: .2rem .75rem; font-size: .8125rem; }
+  .azv-info dt { color: var(--muted); }
+  .azv-info .src { display: flex; flex-direction: column; gap: .35rem; }
+  @media (prefers-reduced-motion: reduce) { .card img { transition: none; } .card:hover img { transform: none; } }
+</style>
+</head>
+<body>
+<header class="hub-header">
+  <a class="brand" href="/" data-keep-lang><svg viewBox="0 0 512 512" aria-hidden="true"><g class="star"><rect x="126" y="126" width="260" height="260"/><polygon points="256,72 440,256 256,440 72,256"/></g><polygon class="gem" points="256,196 316,256 256,316 196,256"/></svg>Azad Bilik</a>
+  <nav aria-label="Azad Bilik"><a href="https://kitabxana.az" id="kx"><span data-l="az">Kitabxana</span><span data-l="ru">Библиотека</span><span data-l="en">Library</span></a><a href="/qalereya/" data-keep-lang><span data-l="az">Qalereya</span><span data-l="ru">Галерея</span><span data-l="en">Gallery</span></a><a href="/xeriteler/" data-keep-lang><span data-l="az">Ədəbi xəritələr</span><span data-l="ru">Литературные карты</span><span data-l="en">Literary maps</span></a><a href="/atlas/" data-keep-lang><span data-l="az">Atlas</span><span data-l="ru">Атлас</span><span data-l="en">Atlas</span></a><a href="/musiqi/" data-keep-lang><span data-l="az">Musiqi</span><span data-l="ru">Музыка</span><span data-l="en">Music</span></a><a href="/sebeke/" data-keep-lang><span data-l="az">Şəbəkələr</span><span data-l="ru">Сети</span><span data-l="en">Networks</span></a><a href="/arxiv/" data-keep-lang aria-current="page"><span data-l="az">Arxiv</span><span data-l="ru">Архив</span><span data-l="en">Archive</span></a><span class="langs" role="group" aria-label="Dil · Язык · Language"><button type="button" data-lang="az">AZ</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="en">EN</button></span></nav>
+</header>
+
+<main class="wrap">
+  <div class="lead">
+    <h1 data-i18n="title">Arxiv</h1>
+    <p class="sub" data-i18n="sub"></p>
+  </div>
+  <div class="chips" role="group" id="chips"></div>
+  <div id="cols"></div>
+  <div class="about">
+    <p data-i18n="about1"></p>
+    <p data-i18n="about2"></p>
+  </div>
+</main>
+
+<script src="/shared/viewer.js"></script>
+<script>
+(() => {
+const L = ['az', 'ru', 'en'];
+let lang = document.documentElement.lang;
+if (!L.includes(lang)) lang = 'az';
+const T = {
+  az: { doc: 'Arxiv · Azad Bilik', title: 'Arxiv', all: 'Hamısı',
+    sub: 'Azərbaycanla bağlı köhnə plakatlar, xəritələr, əlyazmalar və kitablar: ictimai mülkiyyətdəki skanlar, hər biri saxlandığı kitabxana və arxivlə.',
+    about1: 'Burada yalnız müəllif hüququ bitmiş materiallar var. Hər skan onu saxlayan kitabxananın və ya arxivin adı və şifri ilə verilir; mənbəyə keçid aşağıdadır. Skanları mənbəni göstərməklə istifadə edin.',
+    about2: 'Böyük kitablar (Nizaminin «Xəmsə»si, Firdovsinin «Şahnamə»si, 1886-cı il siyahıları) Internet Archive-ə yüklənir; o vaxta qədər onların kartında mənbəyə keçid var.',
+    pages: (n) => `${n} səh.`, ia: 'Internet Archive-də tezliklə', date: 'Tarix', place: 'Yer', lng: 'Dil', holder: 'Saxlanılır', cipher: 'Şifr', open: 'Mənbədə bax', via: 'skan', pd: 'İctimai mülkiyyət', close: 'Bağla', prev: 'Əvvəlki', next: 'Növbəti', loading: 'Yüklənir…', of: 'səhifə' },
+  ru: { doc: 'Архив · Azad Bilik', title: 'Архив', all: 'Все',
+    sub: 'Старые плакаты, карты, рукописи и книги об Азербайджане: сканы общественного достояния, у каждого — библиотека или архив, где он хранится.',
+    about1: 'Здесь только материалы, вышедшие из-под авторского права. У каждого скана указаны хранящая его библиотека или архив и шифр; ссылка на источник — в карточке. Используйте сканы со ссылкой на источник.',
+    about2: 'Большие книги («Хамсе» Низами, «Шахнаме» Фирдоуси, свод 1886 года) загружаются в Internet Archive; пока в их карточке — ссылка на источник.',
+    pages: (n) => `${n} с.`, ia: 'Скоро в Internet Archive', date: 'Дата', place: 'Место', lng: 'Язык', holder: 'Хранение', cipher: 'Шифр', open: 'Смотреть в источнике', via: 'скан', pd: 'Общественное достояние', close: 'Закрыть', prev: 'Назад', next: 'Вперёд', loading: 'Загрузка…', of: 'страница' },
+  en: { doc: 'Archive · Azad Bilik', title: 'Archive', all: 'All',
+    sub: 'Old posters, maps, manuscripts and books about Azerbaijan: public-domain scans, each credited to the library or archive that holds it.',
+    about1: 'Only material out of copyright is here. Every scan names the library or archive that holds it and its call number, with a link to the source. Please credit the source when you reuse a scan.',
+    about2: "The big books (Nizami's «Khamsa», Ferdowsi's «Shahnameh», the 1886 tables) are going up on the Internet Archive; until then their cards link to the source.",
+    pages: (n) => `${n} pp.`, ia: 'Coming to the Internet Archive', date: 'Date', place: 'Place', lng: 'Language', holder: 'Held by', cipher: 'Call no.', open: 'View at the source', via: 'scan', pd: 'Public domain', close: 'Close', prev: 'Previous', next: 'Next', loading: 'Loading…', of: 'page' },
+};
+const LANGS = {
+  ru: { az: 'rus', ru: 'русский', en: 'Russian' }, fa: { az: 'fars', ru: 'персидский', en: 'Persian' }, az: { az: 'Azərbaycan', ru: 'азербайджанский', en: 'Azerbaijani' },
+  'az (ərəb əlifbası)': { az: 'Azərbaycan (ərəb əlifbası)', ru: 'азербайджанский (арабское письмо)', en: 'Azerbaijani (Arabic script)' },
+  'az (latın əlifbası)': { az: 'Azərbaycan (latın əlifbası)', ru: 'азербайджанский (латиница)', en: 'Azerbaijani (Latin script)' },
+};
+const t = (k) => T[lang][k];
+const loc = (v) => v == null ? '' : typeof v === 'string' ? v : (v[lang] ?? v.az ?? '');
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+const KX = () => lang === 'az' ? 'https://kitabxana.az' : `https://kitabxana.az/${lang}`;
+let data, col = new URLSearchParams(location.search).get('c') || 'all';
+
+const meta = (it) => [loc(it.date), loc(it.place)].filter(Boolean).join(' · ');
+const holderLine = (it) => { const h = data.holders[it.holder]; let s = h ? loc(h) : ''; if (it.via && data.holders[it.via]) s += ` · ${t('via')}: ${loc(data.holders[it.via])}`; return s; };
+const langLine = (it) => (it.lang || '').split(', ').map((x) => LANGS[x] ? LANGS[x][lang] : x).join(', ');
+
+function info(it, i, n) {
+  const rows = [[t('date'), loc(it.date)], [t('place'), loc(it.place)], [t('lng'), langLine(it)], [t('holder'), holderLine(it)], [t('cipher'), it.cipher]].filter((r) => r[1]);
+  return `<h2>${esc(it[lang] || it.az)}</h2>` +
+    (lang !== 'ru' && it.ru ? `<p class="m">${esc(it.ru)}</p>` : '') +
+    (it.note ? `<p>${esc(loc(it.note))}</p>` : '') +
+    `<dl>${rows.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl>` +
+    `<p class="src"><a href="${esc(it.url)}" target="_blank" rel="noopener">${t('open')} ↗</a>` +
+    (it.also ? `<a href="${esc(it.also.href)}">${esc(loc(it.also))} →</a>` : '') + `</p>` +
+    `<p class="m">${t('pd')}</p>`;
+}
+
+function openItem(it, page = 0) {
+  if (!it.n) { window.open(it.url, '_blank', 'noopener'); return; }
+  const list = Array.from({ length: it.n }, (_, k) => ({ it, k }));
+  const q = new URLSearchParams(location.search); q.set('i', it.id); history.replaceState(null, '', `?${q}`);
+  AzadViewer.open(list, Math.min(page, it.n - 1), {
+    src: (x) => x.k === 0 ? `img/${it.id}/t.webp` : `img/${it.id}/${x.k + 1}.webp`,
+    full: (x) => `img/${it.id}/${x.k + 1}.webp`,
+    alt: () => it[lang] || it.az,
+    info: (x, i, n) => info(it, i, n),
+    labels: { close: t('close'), prev: t('prev'), next: t('next'), loading: t('loading') },
+    onclose: () => { const q = new URLSearchParams(location.search); q.delete('i'); history.replaceState(null, '', q.size ? `?${q}` : location.pathname); },
+  });
+}
+
+function draw() {
+  const items = data.items;
+  const count = (c) => items.filter((x) => x.c === c).length;
+  document.getElementById('chips').innerHTML = [['all', t('all'), items.length]].concat(data.collections.map((c) => [c.id, c[lang], count(c.id)]))
+    .map(([id, name, n]) => `<button type="button" data-c="${id}" aria-pressed="${col === id}">${esc(name)}<small>${n}</small></button>`).join('');
+  document.getElementById('cols').innerHTML = data.collections.filter((c) => col === 'all' || c.id === col).map((c) =>
+    `<section class="col" aria-labelledby="h-${c.id}"><h2 id="h-${c.id}">${esc(c[lang])}</h2><div class="grid">` +
+    items.filter((x) => x.c === c.id).map((it) =>
+      `<button type="button" class="card" data-id="${it.id}"><span class="pic${it.ratio > 1.15 ? ' wide' : ''}"><img src="img/${it.id}/t.webp" alt="" loading="lazy" decoding="async">` +
+      (it.n > 1 ? `<span class="n">${t('pages')(it.n)}</span>` : '') + (it.ia ? `<span class="ia">${t('ia')}</span>` : '') +
+      `</span><h3>${esc(it[lang] || it.az)}</h3><span class="m">${esc(meta(it))}<br>${esc(loc(data.holders[it.holder]))}</span></button>`).join('') +
+    `</div></section>`).join('');
+}
+
+function applyLang() {
+  document.documentElement.lang = lang;
+  document.title = t('doc');
+  document.querySelectorAll('[data-i18n]').forEach((el) => { const v = t(el.dataset.i18n); if (typeof v === 'string') el.textContent = v; });
+  document.querySelectorAll('[data-lang]').forEach((b) => b.setAttribute('aria-pressed', b.dataset.lang === lang));
+  document.querySelectorAll('[data-keep-lang]').forEach((a) => { const u = new URL(a.getAttribute('href'), location.href); if (lang === 'az') u.searchParams.delete('lang'); else u.searchParams.set('lang', lang); a.href = u.pathname + u.search; });
+  document.getElementById('kx').href = KX();
+  if (data) draw();
+}
+document.querySelectorAll('[data-lang]').forEach((b) => b.onclick = () => {
+  lang = b.dataset.lang;
+  try { localStorage.setItem('lang', lang); } catch {}
+  const q = new URLSearchParams(location.search); if (lang === 'az') q.delete('lang'); else q.set('lang', lang); history.replaceState(null, '', q.size ? `?${q}` : location.pathname);
+  applyLang();
+});
+document.getElementById('chips').onclick = (e) => {
+  const b = e.target.closest('[data-c]'); if (!b) return;
+  col = b.dataset.c;
+  const q = new URLSearchParams(location.search); if (col === 'all') q.delete('c'); else q.set('c', col); history.replaceState(null, '', q.size ? `?${q}` : location.pathname);
+  draw();
+};
+document.getElementById('cols').onclick = (e) => {
+  const b = e.target.closest('.card'); if (!b) return;
+  openItem(data.items.find((x) => x.id === b.dataset.id));
+};
+applyLang();
+fetch('data/items.json').then((r) => r.json()).then((d) => {
+  data = d; draw();
+  const want = new URLSearchParams(location.search).get('i');
+  const it = want && data.items.find((x) => x.id === want);
+  if (it) openItem(it, (+new URLSearchParams(location.search).get('p') || 1) - 1);
+});
+})();
+</script>
+</body>
+</html>
