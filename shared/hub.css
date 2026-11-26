@@ -1,7 +1,8 @@
 /* The hub's header: one bar, the same on every page of azadbilik.org that is not a map's panel
    (home, the indexes, the gallery and art catalogue, music, Söz, the Şəbəkə pages). Full width,
    the brand at the gutter, so it never jumps between sections; Kitabxana · Qalereya · Ədəbi
-   xəritələr · Atlas · Musiqi, then the theme switch and the languages. On a phone the switch and
+   xəritələr · Atlas · Musiqi · Şəbəkələr · Arxiv, then the theme switch and the languages. Its markup is
+   written by /shared/header.js (pages carry an empty <header class="hub-header"> and the script). On a phone the switch and
    languages share the brand's line and the sections take the line below. Pages set --ink, --muted
    and --accent; the selectors are specific enough to win over a page's own header rules. */
 header.hub-header {
