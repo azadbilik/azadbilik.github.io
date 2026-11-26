@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="/shared/theme.js"></script>
+<title>Ədəbiyyat qalaktikası · Azad Bilik</title>
+<meta name="description" content="Kitabxana.az-dakı 50 000 əsərin hamısı bir nöqtə kimi: mətni oxşar olanlar yan-yana. All 50,000 works of the library as one point each, neighbours read alike.">
+<meta name="theme-color" content="#F4EFE6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14100D" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://azadbilik.org/sebeke/qalaktika/">
+<meta property="og:title" content="Ədəbiyyat qalaktikası · The literature galaxy">
+<meta property="og:description" content="Kitabxana.az-dakı 50 000 əsər mətnin oxşarlığına görə bir səmada.">
+<meta property="og:image" content="https://azadbilik.org/sebeke/qalaktika/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="stylesheet" href="/shared/story-map.css">
+<style>
+  :root { --bar: 3.25rem; --sky: #FBF8F2; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --sky: #0B0907; } }
+  :root[data-theme="dark"] { --sky: #0B0907; }
+  .bar { position: fixed; z-index: 5; top: 0; left: 0; right: 0; height: var(--bar); display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0 1rem; background: var(--panel); border-bottom: 1px solid var(--rule); backdrop-filter: blur(8px); }
+  .bar .top { flex: 1; min-width: 0; justify-content: flex-start; gap: .9rem; }
+  .bar h1 { font: 400 1.125rem/1.35 var(--serif); letter-spacing: -.01em; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .bar .brand { margin-right: .25rem; }
+  .bar nav { display: flex; align-items: center; gap: 1rem; font-size: .8125rem; color: var(--muted); }
+  .bar nav a { text-decoration: none; }
+  #cg { position: fixed; top: var(--bar); left: 22rem; right: 0; bottom: 0; background: var(--sky); touch-action: none; }
+  #cg canvas { display: block; width: 100%; height: 100%; }
+  #loading { position: fixed; z-index: 4; top: calc(var(--bar) + 40%); left: 0; right: 0; text-align: center; color: var(--muted); font: italic 300 1rem var(--serif); pointer-events: none; }
+
+  .panel { position: fixed; z-index: 4; top: calc(var(--bar) + .75rem); bottom: auto; left: .75rem; width: 21rem; max-height: calc(100% - var(--bar) - 5.5rem); display: flex; flex-direction: column; background: var(--panel); backdrop-filter: blur(8px); border: 1px solid var(--rule); border-radius: 4px; box-shadow: 0 1px 2px rgb(0 0 0 / .04), 0 8px 32px rgb(0 0 0 / .08); }
+  .panel .in { overflow-y: auto; overscroll-behavior: contain; padding: .9rem 1rem; display: grid; gap: .85rem; }
+  .lede { font: 400 .875rem/1.5 var(--serif); }
+  .lbl { font: 500 .6875rem var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: .3rem; }
+  .search { position: relative; }
+  .search input { width: 100%; font: inherit; font-size: .875rem; color: var(--ink); background: transparent; border: 1px solid var(--rule); border-radius: 3px; padding: .45rem .6rem; }
+  .hits { position: absolute; z-index: 6; left: 0; right: 0; top: calc(100% + 2px); background: var(--paper); border: 1px solid var(--rule); border-radius: 3px; box-shadow: 0 6px 24px rgb(0 0 0 / .18); max-height: 18rem; overflow-y: auto; list-style: none; padding: .2rem 0; }
+  .hits li button { display: grid; grid-template-columns: 1fr auto; gap: .6rem; width: 100%; text-align: left; padding: .35rem .7rem; font-size: .8125rem; }
+  .hits li button:hover, .hits li button.cur { background: var(--rule); }
+  .hits small { color: var(--muted); font-variant-numeric: tabular-nums; }
+  .hits .grp { padding: .3rem .7rem .1rem; font: 500 .625rem var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .seg { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; border: 1px solid var(--rule); border-radius: 3px; padding: 2px; }
+  .seg button { padding: .35rem .25rem; border-radius: 2px; font-size: .75rem; color: var(--muted); }
+  .seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+  .keyl { display: flex; flex-wrap: wrap; gap: .25rem; }
+  .keyl button { display: inline-flex; align-items: center; gap: .35rem; font-size: .75rem; padding: .15rem .5rem; border: 1px solid var(--rule); border-radius: 999px; }
+  .keyl button i { width: .6rem; height: .6rem; border-radius: 50%; background: var(--c); flex: none; }
+  .keyl button small { color: var(--muted); font-variant-numeric: tabular-nums; }
+  .keyl button[aria-pressed="false"] { color: var(--muted); } .keyl button[aria-pressed="false"] i { background: transparent; box-shadow: inset 0 0 0 1.5px var(--c); }
+  .keyl.solo button[aria-pressed="true"] { border-color: var(--ink); }
+  .time { display: grid; gap: .3rem; }
+  .time .row { display: flex; align-items: center; gap: .6rem; }
+  .time input[type=range] { flex: 1; min-width: 0; accent-color: var(--accent); }
+  .time output { font: 400 1.25rem/1 var(--serif); font-variant-numeric: tabular-nums; min-width: 3.2rem; text-align: right; }
+  .time .play { width: 1.9rem; height: 1.9rem; border: 1px solid var(--rule); border-radius: 50%; font-size: .7rem; flex: none; }
+  .time .play:hover { border-color: var(--ink); }
+  .fine { font-size: .75rem; color: var(--muted); line-height: 1.45; }
+  .tip { position: fixed; z-index: 7; pointer-events: none; max-width: 17rem; padding: .35rem .6rem; background: var(--paper); border: 1px solid var(--rule); border-radius: 3px; box-shadow: 0 2px 12px rgb(0 0 0 / .18); font-size: .8125rem; line-height: 1.3; }
+  .tip b { font: 400 .9375rem/1.25 var(--serif); display: block; } .tip span { color: var(--muted); font-size: .75rem; }
+
+  .card { position: fixed; z-index: 4; top: calc(var(--bar) + .75rem); right: .75rem; width: 22rem; max-height: calc(100% - var(--bar) - 1.5rem); overflow-y: auto; background: var(--panel); backdrop-filter: blur(8px); border: 1px solid var(--rule); border-radius: 4px; box-shadow: 0 1px 2px rgb(0 0 0 / .04), 0 8px 32px rgb(0 0 0 / .1); padding: 1rem 1.1rem 1.1rem; display: grid; gap: .6rem; }
+  .card .nm { font: 400 1.375rem/1.2 var(--serif); padding-right: 1.5rem; }
+  .card .by { font-size: .875rem; } .card .by a { color: inherit; }
+  .card .meta { display: flex; flex-wrap: wrap; gap: .2rem .9rem; font-size: .75rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .card .meta i { display: inline-block; width: .55rem; height: .55rem; border-radius: 50%; margin-right: .3rem; }
+  .card .first { font: italic 400 .9375rem/1.5 var(--serif); border-left: 2px solid var(--rule); padding-left: .7rem; min-height: 1.5em; }
+  .card .first[lang="fa"] { border-left: 0; border-right: 2px solid var(--rule); padding: 0 .7rem 0 0; font-style: normal; }
+  .card .go { display: inline-block; font-weight: 500; font-size: .875rem; color: var(--accent); text-decoration: none; }
+  .card .go:hover { text-decoration: underline; }
+  .card .x { position: absolute; top: .45rem; right: .5rem; width: 1.75rem; height: 1.75rem; color: var(--muted); font-size: 1.125rem; }
+  .card .acts { display: flex; flex-wrap: wrap; gap: .4rem .9rem; align-items: center; }
+  .card .acts button { font-size: .8125rem; text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: .2em; }
+  .card ol { list-style: none; padding: 0; display: grid; margin-top: .4rem; }
+  .card .seg { margin-top: .1rem; }
+  .card ol button { display: grid; grid-template-columns: 1.1rem 1fr auto; gap: .45rem; align-items: baseline; width: 100%; text-align: left; padding: .28rem .3rem; border-radius: 2px; font-size: .8125rem; }
+  .card ol button:hover { background: var(--rule); }
+  .card ol i { width: .55rem; height: .55rem; border-radius: 50%; background: var(--c); align-self: center; }
+  .card ol .w { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .card ol .w small { color: var(--muted); margin-left: .4rem; }
+  .card ol .s { color: var(--muted); font-size: .6875rem; font-variant-numeric: tabular-nums; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .foot { position: fixed; z-index: 3; left: .75rem; bottom: .5rem; font-size: .6875rem; color: var(--muted); }
+  .foot a { color: inherit; }
+  #toggle { display: none; }
+
+  @media (max-width: 48rem) {
+    .bar { padding: 0 .75rem; gap: .5rem; } .bar nav a#kx-nav { display: none; }
+    .bar .brand { font-size: 0; gap: 0; } .bar h1 { font-size: 1rem; }
+    .panel { top: auto; left: 0; right: 0; bottom: 0; width: auto; max-height: 42vh; border-radius: 10px 10px 0 0; border-width: 1px 0 0; }
+    #cg { left: 0; }
+    .panel.shut .in > :not(.keep) { display: none; }
+    .panel.shut #lede { display: none; }
+    .panel.shut { max-height: none; }
+    .panel .in { padding: .7rem .9rem .9rem; gap: .7rem; }
+    #toggle { display: block; width: 100%; padding: .15rem 0 0; color: var(--muted); font-size: .75rem; text-align: center; }
+    #toggle::before { content: ''; display: block; width: 2.2rem; height: 3px; background: var(--rule); border-radius: 2px; margin: .35rem auto .1rem; }
+    body.card-open #cg { bottom: 50vh; }
+    .card { top: auto; left: 0; right: 0; bottom: 0; width: auto; max-height: 50vh; border-radius: 10px 10px 0 0; border-width: 1px 0 0; z-index: 5; }
+    .foot { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+</style>
+</head>
+<body>
+<header class="bar">
+  <div class="top"><a class="brand" href="/" data-keep-lang><svg viewBox="0 0 512 512" aria-hidden="true"><g class="star"><rect x="126" y="126" width="260" height="260"/><polygon points="256,72 440,256 256,440 72,256"/></g><polygon class="gem" points="256,196 316,256 256,316 196,256"/></svg>Azad Bilik</a><h1 data-i18n="title">Ədəbiyyat qalaktikası</h1></div>
+  <nav><a href="https://kitabxana.az" id="kx-nav" data-i18n="library">Kitabxana</a><span class="langs" role="group" aria-label="Dil · Язык · Language"><button type="button" data-lang="az">AZ</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="en">EN</button></span></nav>
+</header>
+
+<main>
+<div id="cg" role="img" aria-labelledby="alt"></div>
+<p class="sr" id="alt"></p>
+<p id="loading" data-i18n="loading">Qalaktika yüklənir…</p>
+
+<aside class="panel" id="panel">
+  <button type="button" id="toggle" aria-expanded="true"></button>
+  <div class="in">
+    <p class="lede keep" id="lede"></p>
+    <div class="search keep"><input type="search" id="find" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="hits" aria-autocomplete="list"><ul class="hits" id="hits" role="listbox" hidden></ul></div>
+    <div><p class="lbl" data-i18n="colour">Rəng</p><div class="seg" role="group" id="modes"><button type="button" data-mode="century" data-i18n="mCentury">Əsr</button><button type="button" data-mode="author" data-i18n="mAuthor">Müəllif</button><button type="button" data-mode="genre" data-i18n="mGenre">Janr</button><button type="button" data-mode="lang" data-i18n="mLang">Dil</button></div></div>
+    <div class="keyl" id="legend"></div>
+    <div class="time keep"><p class="lbl" id="timeLbl"></p><div class="row"><button type="button" class="play" id="play" aria-label="Play">▶</button><input type="range" id="year" aria-labelledby="timeLbl"><output id="yearOut" for="year"></output></div></div>
+    <p class="fine" id="hint"></p>
+  </div>
+</aside>
+
+<section class="card" id="card" hidden aria-live="polite"></section>
+<div class="tip" id="tip" hidden></div>
+<p class="foot" id="foot"></p>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@cosmos.gl/graph@3.6.0/dist/index.min.js"></script>
+<script>
+(() => {
+const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+const $ = (id) => document.getElementById(id);
+const still = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+const phone = () => matchMedia('(max-width: 48rem)').matches;
+const LANGS = ['az', 'ru', 'en'];
+let lang = (() => {
+  const q = new URLSearchParams(location.search).get('lang');
+  if (LANGS.includes(q)) return q;
+  try { const s = localStorage.getItem('lang'); if (LANGS.includes(s)) return s; } catch {}
+  return 'az';
+})();
+const nf = (v) => { const s = new Intl.NumberFormat(lang === 'ru' ? 'ru-RU' : 'en-GB').format(v); return lang === 'az' ? s.replace(/[,.]/g, (c) => (c === ',' ? ' ' : ',')) : s; };
+
+const T = {
+  az: { doc: 'Ədəbiyyat qalaktikası · Azad Bilik', title: 'Ədəbiyyat qalaktikası', library: 'Kitabxana', loading: 'Qalaktika yüklənir…',
+    lede: (n) => `Kitabxana.az-dakı ${n} əsərin hər biri bir nöqtədir. Mətni oxşar olanlar bir-birinin yanındadır: şeir şeirin, tərcümə öz orijinalının, nəsr nəsrin.`,
+    find: 'Müəllif və ya əsər axtar…', colour: 'Rəng', mCentury: 'Əsr', mAuthor: 'Müəllif', mGenre: 'Janr', mLang: 'Dil',
+    timeLbl: 'Zaman: bu ilə qədər yazılanlar', timeAll: 'hamısı', play: 'Oynat', pause: 'Dayandır',
+    hint: 'Sürüşdürün, yaxınlaşdırın, nöqtəyə toxunun. Əsrin tarixi yoxdursa müəllifin doğum ili + 30 götürülür (təxmini).',
+    undated: (n) => `${nf(n)} əsərin tarixi yoxdur, yalnız «hamısı» rejimində görünür.`,
+    hidden: 'gizlə / göstər', solo: 'yalnız bu',
+    authors: 'Müəllif', works: 'Əsər', nw: (n) => `${nf(n)} əsər`,
+    years: 'il', approx: 'təxminən', words: 'söz', origLang: 'orijinal dili', open: 'kitabxana.az-da oxu →', byAuthor: 'bu müəllifin əsərləri', like: 'Ən yaxın 10 əsər', nbAll: 'hamısı', nbOther: 'başqa müəlliflər', close: 'Bağla', noText: '',
+    centuries: ['XII-dən əvvəl', 'XIII', 'XIV', 'XV', 'XVI', 'XVII', 'XVIII', 'XIX', 'XX', 'XXI'], others: 'digərləri', unk: 'tarixsiz',
+    genres: ['Qəzəl', 'Məsnəvi', 'Rübai', 'Qəsidə', 'Digər şeir', 'Nəsr', 'Pyes', 'Esse', 'Məktub', 'Xatirə'],
+    langs: ['Azərbaycan (latın)', 'Fars', 'Azərbaycan (ərəb əlifbası)', 'Rus', 'Alman', 'Ərəb', 'İngilis', 'Türk', 'Azərbaycan (kiril)'],
+    controls: 'Parametrlər', collapse: 'Parametrlər', alt: (n) => `${n} əsərin oxşarlığa görə düzülmüş nöqtə buludu; müəllif və ya əsər axtarmaq üçün sahədən istifadə edin.`,
+    foot: (d) => `Oxşarlıq: BAAI/bge-m3 · UMAP · ${d}`, srcNote: 'tərcümə' },
+  ru: { doc: 'Литературная галактика · Azad Bilik', title: 'Литературная галактика', library: 'Библиотека', loading: 'Галактика загружается…',
+    lede: (n) => `Каждое из ${n} произведений Китабханы: одна точка. Тексты, похожие друг на друга, лежат рядом: стихи к стихам, перевод у своего оригинала, проза к прозе.`,
+    find: 'Автор или произведение…', colour: 'Цвет', mCentury: 'Век', mAuthor: 'Автор', mGenre: 'Жанр', mLang: 'Язык',
+    timeLbl: 'Время: написанное до этого года', timeAll: 'всё', play: 'Играть', pause: 'Пауза',
+    hint: 'Двигайте, приближайте, касайтесь точек. Если у произведения нет даты, берётся год рождения автора + 30 (приблизительно).',
+    undated: (n) => `У ${nf(n)} произведений нет даты: видны только при «всё».`,
+    hidden: 'скрыть / показать', solo: 'только это',
+    authors: 'Авторы', works: 'Произведения', nw: (n) => `${nf(n)} произв.`,
+    years: 'год', approx: 'прибл.', words: 'слов', origLang: 'язык оригинала', open: 'читать на kitabxana.az →', byAuthor: 'другие вещи автора', like: '10 ближайших произведений', nbAll: 'все', nbOther: 'другие авторы', close: 'Закрыть', noText: '',
+    centuries: ['до XII', 'XIII', 'XIV', 'XV', 'XVI', 'XVII', 'XVIII', 'XIX', 'XX', 'XXI'], others: 'прочие', unk: 'без даты',
+    genres: ['Газель', 'Маснави', 'Рубаи', 'Касыда', 'Другие стихи', 'Проза', 'Пьеса', 'Эссе', 'Письмо', 'Мемуары'],
+    langs: ['Азербайджанский (латиница)', 'Персидский', 'Азербайджанский (арабица)', 'Русский', 'Немецкий', 'Арабский', 'Английский', 'Турецкий', 'Азербайджанский (кириллица)'],
+    controls: 'Настройки', collapse: 'Настройки', alt: (n) => `Облако из ${n} точек-произведений, расставленных по сходству текстов; используйте поиск по автору или названию.`,
+    foot: (d) => `Сходство: BAAI/bge-m3 · UMAP · ${d}`, srcNote: 'перевод' },
+  en: { doc: 'The literature galaxy · Azad Bilik', title: 'The literature galaxy', library: 'Library', loading: 'Loading the galaxy…',
+    lede: (n) => `Each of the library's ${n} works is a point. Texts that read alike sit together: verse beside verse, a translation by its original, prose with prose.`,
+    find: 'Search an author or a title…', colour: 'Colour', mCentury: 'Century', mAuthor: 'Author', mGenre: 'Genre', mLang: 'Language',
+    timeLbl: 'Time: works written up to this year', timeAll: 'all', play: 'Play', pause: 'Pause',
+    hint: 'Drag, zoom, tap a point. A work with no date takes its author\'s birth year + 30 (approximate).',
+    undated: (n) => `${nf(n)} works have no date and show only at “all”.`,
+    hidden: 'hide / show', solo: 'only this',
+    authors: 'Authors', works: 'Works', nw: (n) => `${nf(n)} works`,
+    years: 'year', approx: 'c.', words: 'words', origLang: 'original language', open: 'Read on kitabxana.az →', byAuthor: 'more by this author', like: '10 nearest works', nbAll: 'all', nbOther: 'other authors', close: 'Close', noText: '',
+    centuries: ['before 12th', '13th', '14th', '15th', '16th', '17th', '18th', '19th', '20th', '21st'], others: 'others', unk: 'undated',
+    genres: ['Ghazal', 'Masnavi', 'Rubai', 'Qasida', 'Other verse', 'Prose', 'Play', 'Essay', 'Letter', 'Memoir'],
+    langs: ['Azerbaijani (Latin)', 'Persian', 'Azerbaijani (Arabic script)', 'Russian', 'German', 'Arabic', 'English', 'Turkish', 'Azerbaijani (Cyrillic)'],
+    controls: 'Controls', collapse: 'Controls', alt: (n) => `A cloud of ${n} points, one per work, arranged by text similarity; use the search box to find an author or a title.`,
+    foot: (d) => `Similarity: BAAI/bge-m3 · UMAP · ${d}`, srcNote: 'translation' },
+};
+const t = (k) => T[lang][k];
+const KX = () => `https://kitabxana.az${lang === 'az' ? '' : '/' + lang}`;
+
+// Colours: one list for light, one for dark (the sky is near-white or near-black)
+const PAL = {
+  light: ['#4B2C82', '#2F4BA0', '#1F78A8', '#12968A', '#4C9A2A', '#A3A81A', '#D69A1A', '#D9631E', '#C42E2E', '#8E1B4C', '#7A5C8E', '#8A6D3B'],
+  dark: ['#A58AE8', '#6C8CF0', '#4FB3E0', '#3FD0B8', '#82CF55', '#D3DD4B', '#F5BD3A', '#F58A4A', '#EF5B5B', '#D95A93', '#B596C9', '#C9A66B'],
+};
+const isDark = () => (window.abTheme ? abTheme.dark() : matchMedia('(prefers-color-scheme: dark)').matches);
+const pal = () => (isDark() ? PAL.dark : PAL.light);
+const hex = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16) / 255);
+const GREY = () => (isDark() ? '#6F675E' : '#9A9086');
+
+let M = null, pos = null, N = 0, graph = null, knn = null, sims = null, knnx = null, simsx = null, nbMode = 'all';
+let mode = 'century', hiddenKeys = new Set(), yearMax = 0, selected = -1, focus = null, hover = -1;
+let cat = null, keys = [];            // per work: its key in the current mode; the list of keys
+let aWorks = null;                    // author index -> work indices
+let normTitles = null;
+const lines = new Map();
+
+// ---- data
+const fetchJSON = (u) => fetch(u).then((r) => { if (!r.ok) throw new Error(u); return r.json(); });
+const fetchBin = (u) => fetch(u).then((r) => { if (!r.ok) throw new Error(u); return r.arrayBuffer(); });
+
+function century(y) { return y ? Math.min(9, Math.max(0, Math.floor((y - 1) / 100) - 11)) : -1; }   // 0 = before 1200, 9 = 21st
+const authorName = (a) => { const A = M.authors[a]; return (lang === 'az' ? A.az : A[lang] || A.az) || A.az; };
+const title = (i) => M.works.t[i];
+
+function buildCats() {
+  const W = M.works, n = N;
+  cat = new Int16Array(n);
+  if (mode === 'century') { keys = T.az.centuries.map((_, i) => i); for (let i = 0; i < n; i++) cat[i] = W.y[i] ? century(W.y[i]) : -1; }
+  else if (mode === 'genre') { keys = M.genres.map((_, i) => i); for (let i = 0; i < n; i++) cat[i] = W.g[i]; }
+  else if (mode === 'lang') { keys = M.langs.map((_, i) => i); for (let i = 0; i < n; i++) cat[i] = W.l[i]; }
+  else {
+    const cnt = new Map(); for (let i = 0; i < n; i++) cnt.set(W.a[i], (cnt.get(W.a[i]) || 0) + 1);
+    const top = [...cnt].sort((a, b) => b[1] - a[1]).slice(0, 12).map((x) => x[0]);
+    keys = top; const at = new Map(top.map((a, i) => [a, i]));
+    for (let i = 0; i < n; i++) cat[i] = at.has(W.a[i]) ? at.get(W.a[i]) : -1;
+  }
+}
+const nColours = () => pal().length;
+function keyColour(k) { return k < 0 ? GREY() : pal()[k % nColours()]; }
+function keyLabel(k) {
+  if (k < 0) return mode === 'century' ? t('unk') : t('others');
+  return mode === 'century' ? t('centuries')[k] : mode === 'genre' ? t('genres')[k] : mode === 'lang' ? t('langs')[k] : authorName(keys[k]);
+}
+
+// ---- drawing
+let colors, sizes;
+const BASE = () => (phone() ? 2.6 : 2.2);
+function recolor() {
+  const n = N, W = M.works, rgb = new Map();
+  const pc = (k) => { let c = rgb.get(k); if (!c) { c = hex(keyColour(k)); rgb.set(k, c); } return c; };
+  const showAll = yearMax >= M.ymax;
+  for (let i = 0; i < n; i++) {
+    const k = cat[i], c = pc(k);
+    const dated = W.y[i] > 0;
+    const timeOk = showAll || (dated && W.y[i] <= yearMax);
+    const legOk = !hiddenKeys.has(k);
+    let a, s = BASE();
+    if (!timeOk || !legOk) { a = 0.025; s = BASE() * .8; }
+    else if (focus) { if (focus[i]) { a = 1; s = BASE() * 2; } else a = 0.1; }
+    else a = 0.8;
+    if (i === selected) { a = 1; s = BASE() * 5; }
+    colors[i * 4] = c[0]; colors[i * 4 + 1] = c[1]; colors[i * 4 + 2] = c[2]; colors[i * 4 + 3] = a; sizes[i] = s;
+  }
+  graph.setPointColors(colors); graph.setPointSizes(sizes);
+  graph.setConfigPartial({ backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--sky').trim() || '#FBF8F2' });
+  graph.render(0);
+}
+function legend() {
+  const cnt = new Map(); for (let i = 0; i < N; i++) cnt.set(cat[i], (cnt.get(cat[i]) || 0) + 1);
+  const ks = (mode === 'author' ? [...keys.map((_, i) => i), -1] : [...keys.map((_, i) => i), -1]).filter((k) => cnt.get(k));
+  const L = $('legend'); L.className = 'keyl';
+  L.innerHTML = ks.map((k) => `<button type="button" data-k="${k}" aria-pressed="${!hiddenKeys.has(k)}" title="${esc(t('hidden'))}" style="--c:${keyColour(k)}"><i></i>${esc(keyLabel(k))} <small>${nf(cnt.get(k))}</small></button>`).join('');
+  L.querySelectorAll('button').forEach((b) => {
+    b.onclick = () => { const k = +b.dataset.k; hiddenKeys.has(k) ? hiddenKeys.delete(k) : hiddenKeys.add(k); legend(); recolor(); };
+    b.ondblclick = () => { const k = +b.dataset.k; hiddenKeys = new Set(ks.filter((x) => x !== k)); legend(); recolor(); };
+  });
+}
+function setMode(m) { mode = m; hiddenKeys = new Set(); buildCats(); document.querySelectorAll('[data-mode]').forEach((b) => b.setAttribute('aria-pressed', b.dataset.mode === m)); legend(); recolor(); if (selected >= 0) card(selected); urlState(); }
+
+// ---- selection
+async function loadKnn() {
+  if (knn) return;
+  const [a, b, c, d] = await Promise.all(['knn', 'sims', 'knnx', 'simsx'].map((f) => fetchBin(`data/${f}.bin`).catch(() => null)));
+  knn = new Uint16Array(a); sims = b && new Uint8Array(b); knnx = c ? new Uint16Array(c) : knn; simsx = d ? new Uint8Array(d) : sims;
+}
+async function firstLines(i) {
+  const sh = Math.floor(i / 5000);
+  if (!lines.has(sh)) lines.set(sh, fetchJSON(`data/lines-${sh}.json`).catch(() => []));
+  return (await lines.get(sh))[i - sh * 5000] || '';
+}
+async function select(i, opts = {}) {
+  if (i < 0) { selected = -1; focus = null; graph.setLinks(new Float32Array(0)); cardShow(false); recolor(); setTimeout(() => graph.fitView(still() ? 0 : 500, 0.06), phone() ? 150 : 0); urlState(); return; }
+  await loadKnn();
+  selected = i; focus = new Uint8Array(N); focus[i] = 1;
+  const nb = neighbours(i); nb.forEach((j) => { focus[j] = 1; });
+  const L = new Float32Array(20), LC = new Float32Array(40), LW = new Float32Array(10);
+  const lc = hex(isDark() ? '#F1EBE1' : '#1A1410');
+  nb.forEach((j, k) => { L[2 * k] = i; L[2 * k + 1] = j; LC.set([lc[0], lc[1], lc[2], 0.45], 4 * k); LW[k] = 1; });
+  graph.setLinks(L); graph.setLinkColors(LC); graph.setLinkWidths(LW);
+  recolor(); card(i);
+  if (opts.fly !== false) setTimeout(() => graph.fitViewByPointIndices([i, ...nb], still() ? 0 : 700, phone() ? 0.3 : 0.35), phone() ? 150 : 0);
+  urlState();
+}
+const neighbours = (i) => { const K = nbMode === 'all' ? knn : knnx, o = []; for (let k = 0; k < 10; k++) o.push(K[i * 10 + k]); return o; };
+function focusAuthor(a, fly = true) {
+  const ws = aWorks[a]; selected = -1; cardShow(false); graph.setLinks(new Float32Array(0));
+  focus = new Uint8Array(N); ws.forEach((i) => focus[i] = 1); recolor();
+  if (fly && ws.length) setTimeout(() => { if (ws.length < 6) graph.zoomToPointByIndex(ws[0], still() ? 0 : 700, 6, true); else graph.fitViewByPointIndices(ws, still() ? 0 : 700, 0.25); }, phone() ? 150 : 0);
+  const c = $('card'); cardShow(true);
+  c.innerHTML = `<button type="button" class="x" aria-label="${esc(t('close'))}">×</button><div class="nm">${esc(authorName(a))}</div><div class="meta"><span>${esc(t('nw')(ws.length))}</span></div><a class="go" href="${KX()}/authors/${encodeURIComponent(M.authors[a].s)}" target="_blank" rel="noopener">${esc(t('open'))}</a>`;
+  c.querySelector('.x').onclick = () => { focus = null; cardShow(false); recolor(); };
+}
+function cardShow(on) { $('card').hidden = !on; document.body.classList.toggle('card-open', on); }
+function genreRow(i) { return `<span><i style="background:${keyColour(mode === 'genre' ? M.works.g[i] : -1)}"></i>${esc(t('genres')[M.works.g[i]])}</span>`; }
+async function card(i) {
+  const W = M.works, c = $('card'), a = W.a[i];
+  const yr = W.y[i] ? `${W.e[i] ? t('approx') + ' ' : ''}${W.y[i]}` : '';
+  const fa = W.l[i] === 1;
+  const dir = (j) => W.l[j] === 1 ? ' dir="auto"' : '';
+  const nb = neighbours(i), SM = nbMode === 'all' ? sims : simsx;
+  cardShow(true);
+  c.innerHTML = `<button type="button" class="x" aria-label="${esc(t('close'))}">×</button>
+    <div class="nm"${dir(i)}>${esc(title(i))}</div>
+    <div class="by"><a href="#" data-auth="${a}">${esc(authorName(a))}</a></div>
+    <div class="meta">${yr ? `<span>${esc(yr)}</span>` : ''}<span>${esc(t('genres')[W.g[i]])}</span><span>${esc(t('langs')[W.l[i]])}</span><span>${nf(W.w[i])} ${esc(t('words'))}</span></div>
+    <div class="first" id="first" ${fa ? 'lang="fa" dir="rtl"' : ''}>…</div>
+    <div class="acts"><a class="go" href="${KX()}/works/${encodeURIComponent(W.s[i])}" target="_blank" rel="noopener">${esc(t('open'))}</a><button type="button" data-auth="${a}">${esc(t('byAuthor'))}</button></div>
+    <div><p class="lbl">${esc(t('like'))}</p><div class="seg" role="group" id="nbm"><button type="button" data-nb="all" aria-pressed="${nbMode === 'all'}">${esc(t('nbAll'))}</button><button type="button" data-nb="other" aria-pressed="${nbMode === 'other'}">${esc(t('nbOther'))}</button></div><ol>${nb.map((j, k) => `<li><button type="button" data-w="${j}" style="--c:${keyColour(cat[j])}"><i></i><span class="w"${dir(j)}>${esc(title(j))}<small>${esc(authorName(W.a[j]))}</small></span><span class="s">${SM ? (SM[i * 10 + k] / 255).toFixed(2) : ''}</span></button></li>`).join('')}</ol></div>`;
+  c.querySelector('.x').onclick = () => select(-1);
+  c.querySelectorAll('[data-auth]').forEach((e) => e.onclick = (ev) => { ev.preventDefault(); focusAuthor(+e.dataset.auth); });
+  c.querySelectorAll('[data-w]').forEach((e) => e.onclick = () => select(+e.dataset.w));
+  c.querySelectorAll('[data-nb]').forEach((e) => e.onclick = () => { nbMode = e.dataset.nb; select(i, { fly: false }); });
+  c.scrollTop = 0;
+  const f = await firstLines(i);
+  if (selected === i && $('first')) $('first').textContent = f;
+}
+
+// ---- hover tooltip
+function tip(i, ev) {
+  const el = $('tip');
+  if (i < 0 || phone()) { el.hidden = true; return; }
+  el.hidden = false;
+  el.innerHTML = `<b>${esc(title(i))}</b><span>${esc(authorName(M.works.a[i]))}${M.works.y[i] ? ' · ' + (M.works.e[i] ? t('approx') + ' ' : '') + M.works.y[i] : ''}</span>`;
+  const r = el.getBoundingClientRect(), x = ev.clientX + 14, y = ev.clientY + 14;
+  el.style.left = Math.min(x, innerWidth - r.width - 8) + 'px'; el.style.top = Math.min(y, innerHeight - r.height - 8) + 'px';
+}
+
+// ---- search
+const fold = (s) => (s || '').toLowerCase().replace(/ə/g, 'e').replace(/ı/g, 'i').replace(/ö/g, 'o').replace(/ü/g, 'u').replace(/ş/g, 's').replace(/ç/g, 'c').replace(/ğ/g, 'g').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[’'`]/g, '');
+let authFold = null, curHit = -1;
+function search(q) {
+  q = fold(q.trim()); const ul = $('hits');
+  if (q.length < 2) { ul.hidden = true; $('find').setAttribute('aria-expanded', 'false'); return; }
+  if (!authFold) { authFold = M.authors.map((a) => fold([a.az, a.ru, a.en].join(' | '))); normTitles = M.works.t.map(fold); }
+  const as = []; authFold.forEach((s, i) => { const p = s.indexOf(q); if (p >= 0) as.push([i, p === 0 || s[p - 1] === ' ' || s[p - 1] === '|' ? 0 : 1]); });
+  as.sort((x, y) => x[1] - y[1] || aWorks[y[0]].length - aWorks[x[0]].length);
+  const ws = []; for (let i = 0; i < N && ws.length < 400; i++) { const p = normTitles[i].indexOf(q); if (p >= 0) ws.push([i, p === 0 ? 0 : 1]); }
+  ws.sort((x, y) => x[1] - y[1] || M.works.w[y[0]] - M.works.w[x[0]]);
+  const hits = [...as.slice(0, 5).map((x) => ({ a: x[0] })), ...ws.slice(0, 7).map((x) => ({ w: x[0] }))];
+  curHit = -1;
+  ul.innerHTML = hits.length ? hits.map((h, k) => h.a != null
+    ? `<li role="option"><button type="button" data-h="${k}"><span>${esc(authorName(h.a))}</span><small>${esc(t('nw')(aWorks[h.a].length))}</small></button></li>`
+    : `<li role="option"><button type="button" data-h="${k}"><span>${esc(title(h.w))}</span><small>${esc(authorName(M.works.a[h.w]))}</small></button></li>`).join('') : '';
+  ul.hidden = !hits.length; $('find').setAttribute('aria-expanded', String(!!hits.length));
+  ul._hits = hits;
+  ul.querySelectorAll('button').forEach((b) => b.onclick = () => pick(hits[+b.dataset.h]));
+}
+function pick(h) {
+  $('hits').hidden = true; $('find').setAttribute('aria-expanded', 'false'); $('find').blur();
+  if (h.a != null) { focusAuthor(h.a); if (phone()) $('panel').classList.add('shut'); } else select(h.w);
+}
+$('find').addEventListener('input', (e) => search(e.target.value));
+$('find').addEventListener('keydown', (e) => {
+  const ul = $('hits'), bs = [...ul.querySelectorAll('button')];
+  if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); curHit = (curHit + (e.key === 'ArrowDown' ? 1 : -1) + bs.length) % Math.max(bs.length, 1); bs.forEach((b, k) => b.classList.toggle('cur', k === curHit)); }
+  else if (e.key === 'Enter') { const h = ul._hits?.[curHit < 0 ? 0 : curHit]; if (h) pick(h); }
+  else if (e.key === 'Escape') { ul.hidden = true; }
+});
+document.addEventListener('click', (e) => { if (!e.target.closest('.search')) $('hits').hidden = true; });
+
+// ---- time
+let timer = null;
+function setYear(y, fromUser) {
+  yearMax = y; $('year').value = y;
+  $('yearOut').textContent = y >= M.ymax ? t('timeAll') : y;
+  recolor(); if (fromUser) stop();
+}
+function stop() { if (timer) { clearInterval(timer); timer = null; } $('play').textContent = '▶'; $('play').setAttribute('aria-label', t('play')); }
+$('play').onclick = () => {
+  if (timer) return stop();
+  $('play').textContent = '❚❚'; $('play').setAttribute('aria-label', t('pause'));
+  if (yearMax >= M.ymax - 1) yearMax = M.ymin;
+  timer = setInterval(() => { const y = yearMax + 4; if (y >= M.ymax) { setYear(M.ymax); stop(); } else setYear(y); }, 90);
+};
+$('year').oninput = (e) => setYear(+e.target.value, true);
+
+// ---- url, language, panel
+function urlState() {
+  const u = new URLSearchParams();
+  if (lang !== 'az') u.set('lang', lang);
+  if (mode !== 'century') u.set('c', mode);
+  if (selected >= 0) u.set('w', M.works.s[selected]);
+  history.replaceState(null, '', `${location.pathname}${u.size ? '?' + u : ''}`);
+}
+function applyLang() {
+  document.documentElement.lang = lang; document.title = t('doc');
+  document.querySelectorAll('[data-i18n]').forEach((el) => el.textContent = t(el.dataset.i18n));
+  document.querySelectorAll('[data-lang]').forEach((b) => b.setAttribute('aria-pressed', b.dataset.lang === lang));
+  document.querySelectorAll('[data-keep-lang]').forEach((a) => { const u = new URL(a.getAttribute('href'), location.href); if (lang === 'az') u.searchParams.delete('lang'); else u.searchParams.set('lang', lang); a.href = u.pathname + u.search; });
+  $('find').placeholder = t('find'); $('find').setAttribute('aria-label', t('find'));
+  $('timeLbl').textContent = t('timeLbl'); $('play').setAttribute('aria-label', timer ? t('pause') : t('play'));
+  $('toggle').textContent = t('collapse'); $('foot').textContent = M ? t('foot')(M.built) : '';
+  if (M) {
+    $('lede').textContent = t('lede')(nf(N)); $('hint').textContent = t('hint') + ' ' + t('undated')(M.works.y.filter((y) => !y).length);
+    $('alt').textContent = t('alt')(nf(N)); $('yearOut').textContent = yearMax >= M.ymax ? t('timeAll') : yearMax;
+    legend(); if (selected >= 0) card(selected);
+  }
+}
+document.querySelectorAll('[data-lang]').forEach((b) => b.onclick = () => { lang = b.dataset.lang; try { localStorage.setItem('lang', lang); } catch {} applyLang(); urlState(); });
+document.querySelectorAll('[data-mode]').forEach((b) => b.onclick = () => setMode(b.dataset.mode));
+$('toggle').onclick = () => { const s = $('panel').classList.toggle('shut'); $('toggle').setAttribute('aria-expanded', String(!s)); };
+addEventListener('themechange', () => { if (graph) { legend(); recolor(); } });
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => { if (graph) { legend(); recolor(); } });
+applyLang();
+if (phone()) { $('panel').classList.add('shut'); $('toggle').setAttribute('aria-expanded', 'false'); }
+
+// ---- go
+(async () => {
+  try {
+    const [m, bin] = await Promise.all([fetchJSON('data/galaxy.json'), fetchBin('data/pos.bin')]);
+    M = m; N = M.n;
+    const ys = M.works.y.filter((y) => y > 0); M.ymin = Math.min(...ys); M.ymax = Math.max(...ys) + 1;
+    const q = new Uint16Array(bin), S = 4096, P = new Float32Array(N * 2);
+    // the page's y runs down, the data's up; flip so that later UMAP views read naturally
+    for (let i = 0; i < N; i++) { P[2 * i] = q[2 * i] / 65535 * S; P[2 * i + 1] = (1 - q[2 * i + 1] / 65535) * S; }
+    aWorks = M.authors.map(() => []); M.works.a.forEach((a, i) => aWorks[a].push(i));
+    colors = new Float32Array(N * 4); sizes = new Float32Array(N).fill(BASE());
+    const Cosmos = window.Cosmos;
+    graph = new Cosmos.Graph($('cg'), {
+      backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--sky').trim() || '#FBF8F2',
+      enableSimulation: false, pointDefaultSize: BASE(), scalePointsOnZoom: false, pointSizeScale: 1, renderHoveredPointRing: true, hoveredPointRingColor: '#A81E28',
+      fitViewOnInit: true, fitViewPadding: 0.08, enableDrag: false, curvedLinks: false, linkDefaultWidth: 1, linkOpacity: 0.5, showFPSMonitor: false, attribution: '',
+      onPointMouseOver: (i, _p, ev) => { hover = i; $('cg').style.cursor = 'pointer'; if (ev) tip(i, ev); },
+      onPointMouseOut: () => { hover = -1; $('cg').style.cursor = ''; tip(-1); },
+      onPointClick: (i) => select(i),
+      onClick: (i) => { if (i === undefined && selected >= 0) select(-1); },
+    });
+    graph.setPointPositions(P, true);
+    $('cg').addEventListener('mousemove', (ev) => { if (hover >= 0) tip(hover, ev); });
+    $('loading').hidden = true;
+    const url = new URLSearchParams(location.search);
+    const cm = url.get('c'); if (['century', 'author', 'genre', 'lang'].includes(cm)) mode = cm;
+    document.querySelectorAll('[data-mode]').forEach((b) => b.setAttribute('aria-pressed', b.dataset.mode === mode));
+    buildCats(); legend();
+    $('year').min = M.ymin; $('year').max = M.ymax; $('year').step = 1; yearMax = M.ymax; $('year').value = yearMax;
+    applyLang(); recolor(); setTimeout(() => graph.fitView(0, 0.06), 150);
+    const w = url.get('w'); if (w) { const i = M.works.s.indexOf(w); if (i >= 0) select(i); }
+    window.__galaxy = { graph, M, select, setMode, focusAuthor, get selected() { return selected; } };
+  } catch (e) { console.error(e); $('loading').textContent = 'Error: ' + e.message; }
+})();
+})();
+</script>
+</body>
+</html>
