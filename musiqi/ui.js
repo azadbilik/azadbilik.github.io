@@ -54,7 +54,7 @@ MQ.timeline = (el, o) => {
     const its = o.items.filter((i) => i.lane === lane.id).sort((a, b) => a.x0 - b.x0 || String(a.label).localeCompare(String(b.label)));
     const ends = []; // end x of each track
     const placed = its.map((i) => {
-      const w = (i.label.length + (i.sub ? i.sub.length + 1 : 0)) * 5.6 + 12, x0 = X(i.x0), x1 = i.x1 != null ? X(i.x1) : x0, end = x1 + 6 + w;
+      const w = i.bare ? 6 : (i.label.length + (i.sub ? i.sub.length + 1 : 0)) * 5.6 + 12, x0 = X(i.x0), x1 = i.x1 != null ? X(i.x1) : x0, end = x1 + 6 + w;
       let tr = ends.findIndex((e) => e + 6 < x0 - 6);
       if (tr < 0) { tr = ends.length; ends.push(0); }
       ends[tr] = end; return { i, tr, x0, x1 };
@@ -64,7 +64,7 @@ MQ.timeline = (el, o) => {
     for (const p of placed) {
       const cy = y + PAD + 14 + p.tr * TR + 6, i = p.i, on = o.selected === i.id;
       const shape = i.x1 != null ? `<rect class="shape span${i.dead ? ' dead' : ''}" x="${p.x0}" y="${cy - 3.5}" width="${Math.max(3, p.x1 - p.x0)}" height="7" rx="3.5"/>` : `<circle class="shape" cx="${p.x0}" cy="${cy}" r="4.6"/>`;
-      body.push(`<g class="ev${on ? ' on' : ''}${i.dim ? ' dim' : ''}" data-id="${esc(i.id)}" tabindex="0" role="button" aria-label="${esc(i.label)}" style="--c:${i.color}">${shape}<text class="lab" x="${(i.x1 != null ? p.x0 + 6 : p.x1 + 8)}" y="${cy + 3.5}">${esc(i.label)}${i.sub ? `<tspan class="lab s" dx="4">${esc(i.sub)}</tspan>` : ''}</text><rect x="${p.x0 - 5}" y="${cy - 8}" width="${p.x1 - p.x0 + 10 + 24 + (i.label.length * 5.6)}" height="16" fill="transparent"/></g>`);
+      body.push(`<g class="ev${on ? ' on' : ''}${i.dim ? ' dim' : ''}" data-id="${esc(i.id)}" tabindex="0" role="button" aria-label="${esc(i.label)}" style="--c:${i.color}">${shape}${i.bare ? `<title>${esc(i.label)}</title>` : `<text class="lab" x="${(i.x1 != null ? p.x0 + 6 : p.x1 + 8)}" y="${cy + 3.5}">${esc(i.label)}${i.sub ? `<tspan class="lab s" dx="4">${esc(i.sub)}</tspan>` : ''}</text>`}<rect x="${p.x0 - 5}" y="${cy - 8}" width="${p.x1 - p.x0 + 10 + (i.bare ? 0 : 24 + (i.label.length * 5.6))}" height="16" fill="transparent"/></g>`);
     }
     y += h;
   }

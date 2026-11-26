@@ -22,3 +22,5 @@
 Rebuild: `node scripts/composers.mjs` (Wikidata, kitabxana.az authors), `node scripts/people-text.mjs <people.json> <out.json> teach` (the candidates were made from the composers with a stage work or a link), then `node scripts/composers-build.mjs`.
 
 Data: Wikidata CC0; quoted sentences are short quotations from Wikipedia (CC BY-SA).
+
+Listening links (Apple Music previews, Spotify, YouTube) and their terms: see [`../README.md`](../README.md).

@@ -66,6 +66,7 @@
 </div>
 <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
 <script src="../ui.js"></script>
+<script src="../listen.js"></script>
 <script>
 (() => {
 const { esc, nm, yrs } = MQ;
@@ -77,7 +78,7 @@ const T = {
     c1: '1900-dək', c2: '1900–1925', c3: '1926–1945', c4: '1945-dən sonra',
     pickW: 'Əsəri seçin.', composer: 'Bəstəkar', year: 'İl', premiere: 'Premyera', basedOn: 'Əsasında', libretto: 'Libretto', kind: 'Növ', read: 'Vikipediya', wd: 'Wikidata', place: 'Yer', born: 'Doğulub', teachers: 'Ustadları', students: 'Şagirdləri', kx: 'Kitabxana',
     noRef: 'Wikidata-da istinadsız', otherDate: 'tarix premyera deyil', viaWd: 'Wikidata', viaTx: 'mətndən', sWd: 'Wikidata', sTx: 'Mətndən',
-    listenH: 'Dinləyin', listenNote: 'Yalnız ictimai mülkiyyətdə olan yazılar: Hacıbəyli 1948-ci ildə vəfat edib (əsərləri 2018-dən azaddır), yazılar 1976-dan əvvəldir və ya ABŞ hökumətinindir. Qarayev, Əmirov, Niyazi və başqalarının heç bir azad yazısını tapmadım; onları rəsmi kanallarda axtarın.',
+    listenH: 'Dinləyin', listenNote: 'Yalnız ictimai mülkiyyətdə olan yazılar: Hacıbəyli 1948-ci ildə vəfat edib (əsərləri 2018-dən azaddır), yazılar 1976-dan əvvəldir və ya ABŞ hökumətinindir. Qarayev, Əmirov, Niyazi və başqalarının heç bir azad yazısını tapmadım; onları rəsmi kanallarda axtarın. Apple Music dinləmələri ayrıdır: şəxsin kartında Apple Music-dən birbaşa ötürülən üç ədədə qədər 30 saniyəlik fraqment, Apple Music və Spotify keçidləri var; bunlar azad yazı deyil, yalnız tanış olmaq üçündür.',
     kxH: 'Kitabdan səhnəyə', kxNote: (n) => `${n} əsərin librettosu və ya əsas mətni kitabxana.az-dadır. Əlaqə əl ilə quraşdırılıb; hər keçid yoxlanıb.`,
     lLibretto: 'Libretto', lSource: 'Mənbə mətn', lEssay: 'Bəstəkarın yazısı',
     netH: 'Ustad–şagird şəbəkəsi', netHint: 'Sütunlar nəsillərdir. Düyünü seçin: ustadları, şagirdləri və bütün silsiləsi işıqlanır. Oxlar ustaddan şagirdə gedir; qırıq xətt mətndən çıxarılan əlaqədir. Boş dairə: xəritədən kənar ustad (Şostakoviç, Zeydman...).',
@@ -98,7 +99,7 @@ const T = {
     c1: 'до 1900', c2: '1900–1925', c3: '1926–1945', c4: 'после 1945',
     pickW: 'Выберите произведение.', composer: 'Композитор', year: 'Год', premiere: 'Премьера', basedOn: 'По мотивам', libretto: 'Либретто', kind: 'Жанр', read: 'Википедия', wd: 'Wikidata', place: 'Место', born: 'Родился', teachers: 'Учителя', students: 'Ученики', kx: 'Библиотека',
     noRef: 'в Wikidata без источника', otherDate: 'дата не премьеры', viaWd: 'Wikidata', viaTx: 'из текста', sWd: 'Wikidata', sTx: 'Из текста',
-    listenH: 'Послушать', listenNote: 'Только записи в общественном достоянии: Гаджибеков умер в 1948 году (произведения свободны с 2018), записи сделаны до 1976 года или принадлежат правительству США. Свободных записей Караева, Амирова, Ниязи и других я не нашёл; их стоит искать на официальных каналах.',
+    listenH: 'Послушать', listenNote: 'Только записи в общественном достоянии: Гаджибеков умер в 1948 году (произведения свободны с 2018), записи сделаны до 1976 года или принадлежат правительству США. Свободных записей Караева, Амирова, Ниязи и других я не нашёл; их стоит искать на официальных каналах. Фрагменты Apple Music — отдельно: в карточке человека до трёх 30-секундных отрывков, идущих напрямую с Apple Music, и ссылки на Apple Music и Spotify; это не свободные записи, а лишь возможность познакомиться.',
     kxH: 'От книги к сцене', kxNote: (n) => `У ${n} произведений либретто или первоисточник есть на kitabxana.az. Связи подобраны вручную; каждая ссылка проверена.`,
     lLibretto: 'Либретто', lSource: 'Первоисточник', lEssay: 'Статья композитора',
     netH: 'Сеть «учитель — ученик»', netHint: 'Столбцы — поколения. Выберите узел: подсветятся учителя, ученики и вся линия. Стрелки идут от учителя к ученику; пунктир — связь из текста. Пустой кружок — учитель вне списка (Шостакович, Зейдман...).',
@@ -119,7 +120,7 @@ const T = {
     c1: 'before 1900', c2: '1900–1925', c3: '1926–1945', c4: 'after 1945',
     pickW: 'Pick a work.', composer: 'Composer', year: 'Year', premiere: 'Premiere', basedOn: 'Based on', libretto: 'Libretto', kind: 'Kind', read: 'Wikipedia', wd: 'Wikidata', place: 'Place', born: 'Born', teachers: 'Teachers', students: 'Students', kx: 'Library',
     noRef: 'no reference on Wikidata', otherDate: 'date is not the premiere', viaWd: 'Wikidata', viaTx: 'from text', sWd: 'Wikidata', sTx: 'From text',
-    listenH: 'Listen', listenNote: 'Public-domain recordings only: Hajibeyov died in 1948 (his works are free since 2018) and the recordings are from before 1976 or by the US government. I found no free recording of Garayev, Amirov, Niyazi or the others; look for them on official channels.',
+    listenH: 'Listen', listenNote: 'Public-domain recordings only: Hajibeyov died in 1948 (his works are free since 2018) and the recordings are from before 1976 or by the US government. I found no free recording of Garayev, Amirov, Niyazi or the others; look for them on official channels. Apple Music previews are separate: a person\'s card carries up to three 30-second previews streamed straight from Apple Music, with links to Apple Music and Spotify; they are not free recordings, only a way to hear a little.',
     kxH: 'From book to stage', kxNote: (n) => `For ${n} works the libretto or source text is at kitabxana.az. The matches are made by hand; every link was checked.`,
     lLibretto: 'Libretto', lSource: 'Source text', lEssay: 'Composer\'s essay',
     netH: 'Teacher–student network', netHint: 'Columns are generations. Pick a node: its teachers, students and whole line light up. Arrows run from teacher to student; dashed is a link read from a text. A hollow circle is a teacher outside the list (Shostakovich, Zeidman...).',
@@ -193,7 +194,7 @@ function describeP() {
   el.innerHTML = `<h3>${esc(nm(p))}</h3><dl>${row('born', esc(yrs(p)))}${row('place', esc(p.place ?? ''))}
     ${row('teachers', ts.length ? `<ul>${ts.map((l) => line(l, l.t)).join('')}</ul>` : '')}${row('students', ss.length ? `<ul>${ss.map((l) => line(l, l.s)).join('')}</ul>` : '')}
     ${row('premiere', works.map((w) => `${w.year} ${esc(wtitle(w))}`).join('<br>'))}
-    ${row('read', MQ.wikiLinks(p.wiki))}${MQ.ytRow(p.qid)}${/^Q\d/.test(p.qid) ? row('wd', `<a href="https://www.wikidata.org/wiki/${p.qid}">${p.qid}</a>`) : ''}${p.kitabxana ? row('kx', `<a href="${MQ.kxBase()}/authors/${esc(p.kitabxana)}">${esc(nm(p))}</a>`) : ''}</dl>`;
+    ${row('read', MQ.wikiLinks(p.wiki))}${MQ.ytRow(p.qid)}${/^Q\d/.test(p.qid) ? row('wd', `<a href="https://www.wikidata.org/wiki/${p.qid}">${p.qid}</a>`) : ''}${p.kitabxana ? row('kx', `<a href="${MQ.kxBase()}/authors/${esc(p.kitabxana)}">${esc(nm(p))}</a>`) : ''}</dl>${MQL.block(p.qid)}`;
   el.querySelectorAll('a[data-q]').forEach((a) => a.onclick = (e) => { e.preventDefault(); net?.select(a.dataset.q); });
 }
 function chips() {
@@ -215,7 +216,7 @@ function render() {
   types(); timeline(); describeW(); cards(); chips(); network(); table(); document.getElementById('listen').innerHTML = MQ.audio(REC);
 }
 const apply = MQ.boot(T, render);
-Promise.all([fetch('data/composers.json').then((r) => r.json()), fetch('data/recordings.json').then((r) => r.json()), MQ.loadYT()]).then(([d, r]) => { D = d; REC = r; apply(); });
+Promise.all([fetch('data/composers.json').then((r) => r.json()), fetch('data/recordings.json').then((r) => r.json()), MQ.loadYT(), MQL.load()]).then(([d, r]) => { D = d; REC = r; apply(); });
 let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { if (D) { timeline(); network(); } }, 150); });
 })();
 </script>

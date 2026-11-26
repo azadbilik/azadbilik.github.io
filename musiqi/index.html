@@ -304,6 +304,7 @@
 <div class="wrap"><footer><p data-i18n="note"></p><span><a href="/" data-keep-lang>Azad Bilik</a> · <a href="https://github.com/azadbilik">GitHub</a></span></footer></div>
 
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script src="listen.js"></script>
 <script>
 (() => {
 let dark = window.abTheme ? abTheme.dark() : matchMedia('(prefers-color-scheme: dark)').matches;
@@ -414,7 +415,7 @@ const miniPulse = pulseOn(), bigPulse = pulseOn();
 const tip = new maplibregl.Popup({ closeButton: false, closeOnClick: false, offset: 10 });
 
 const ready = (m) => new Promise((ok) => m.loaded() ? ok() : m.once('load', ok));
-Promise.all([...['recordings.json', 'musicians.json', 'mugham.json'].map((f) => fetch(`data/${f}`).then((r) => r.json())), ready(mini), ready(map)]).then(([r, p, m]) => {
+Promise.all([...['recordings.json', 'musicians.json', 'mugham.json'].map((f) => fetch(`data/${f}`).then((r) => r.json())), ready(mini), ready(map), MQL.load()]).then(([r, p, m]) => {
   recs = r; people = p; mugham = m;
   byQid = new Map(people.map((x) => [x.qid, x]));
   for (const x of people) {
@@ -620,8 +621,9 @@ function drawPeople(qid) {
   back.onclick = () => { place = null; mark(); drawPeople(); map.fitBounds(BOUNDS, { padding: 40, duration: still() ? 0 : 700 }); };
   document.getElementById('plist').innerHTML = list.map((p) => {
     const n = recsOf(p.qid).length;
-    const more = [n ? `<button type="button" data-listen="${p.qid}">${t('listen')(n)}</button>` : '', p.kitabxana ? `<a href="${KX()}/authors/${p.kitabxana}">${t('poems')}</a>` : '', litSlug.has(p.qid) ? `<a href="/xerite/?author=${litSlug.get(p.qid)}${lang === 'az' ? '' : '&lang=' + lang}">${t('alsoLit')}</a>` : ''].filter(Boolean).join('');
-    return `<li${p.qid === qid ? ' class="on"' : ''}><button type="button" class="p" data-p="${p.qid}"><span class="n">${esc(L(p))}</span><span class="y">${years(p)}</span><span class="r">${p.roles.map((x) => t(x)).join(', ')}${pl ? '' : ` · ${esc(L(p.place))}`}${p.byHand ? ` (${t('byHand')})` : ''}</span></button>${more ? `<div class="more">${more}</div>` : ''}</li>`;
+    const more = [n ? `<button type="button" data-listen="${p.qid}">${t('listen')(n)}</button>` : '', p.kitabxana ? `<a href="${KX()}/authors/${p.kitabxana}">${t('poems')}</a>` : '', litSlug.has(p.qid) ? `<a href="/xerite/?author=${litSlug.get(p.qid)}${lang === 'az' ? '' : '&lang=' + lang}">${t('alsoLit')}</a>` : '', MQL.links(p.qid)].filter(Boolean).join('');
+    const pv = MQL.A[p.qid]?.pv?.length ? `<details class="lsn-rec"><summary>${MQL.T[lang].listen} <span class="lsn-mark">Apple Music</span></summary>${MQL.previews(p.qid)}</details>` : '';
+    return `<li${p.qid === qid ? ' class="on"' : ''}><button type="button" class="p" data-p="${p.qid}"><span class="n">${esc(L(p))}</span><span class="y">${years(p)}</span><span class="r">${p.roles.map((x) => t(x)).join(', ')}${pl ? '' : ` · ${esc(L(p.place))}`}${p.byHand ? ` (${t('byHand')})` : ''}</span></button>${more ? `<div class="more">${more}</div>` : ''}${pv}</li>`;
   }).join('');
   document.querySelectorAll('#plist [data-p]').forEach((b) => b.onclick = () => { const p = byQid.get(b.dataset.p); showPlace(p.place.id, p.qid); });
   document.querySelectorAll('#plist [data-listen]').forEach((b) => b.onclick = () => load(recsOf(b.dataset.listen)[0], true));

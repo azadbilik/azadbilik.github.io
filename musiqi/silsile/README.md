@@ -24,3 +24,5 @@
 - Rebuild: `node scripts/lineage.mjs` (network; slow, caches article texts), then re-read the candidates and update `lineage.text.json` by hand, then `node scripts/lineage-build.mjs`.
 
 Data: Wikidata CC0; quoted sentences are short quotations from Wikipedia (CC BY-SA).
+
+Listening links (Apple Music previews, Spotify, YouTube) and their terms: see [`../README.md`](../README.md).

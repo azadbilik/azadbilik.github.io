@@ -19,3 +19,5 @@
 Rebuild: `node scripts/jazz.mjs`, `node scripts/people-text.mjs caz/data/people.json caz/data/jazz.candidates.json both`, `node scripts/jazz-build.mjs`.
 
 Data: Wikidata CC0; sentences are short quotations from Wikipedia (CC BY-SA).
+
+Listening links (Apple Music previews, Spotify, YouTube) and their terms: see [`../README.md`](../README.md).

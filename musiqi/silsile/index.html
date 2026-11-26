@@ -117,6 +117,7 @@
   <footer id="foot"></footer>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+<script src="../listen.js"></script>
 <script>
 (() => {
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
@@ -269,7 +270,7 @@ function describe() {
     ${row('teachers', ts.length ? `<ul>${ts.map((l) => linkLine(l, l.t)).join('')}</ul>` : '')}
     ${row('students', ss.length ? `<ul>${ss.map((l) => linkLine(l, l.s)).join('')}</ul>` : '')}
     ${row('read', LANGS.map((l) => wikiLink(p, l)).filter(Boolean).join(' · '))}
-    ${/^Q\d/.test(p.qid) ? row('wdLink', `<a href="https://www.wikidata.org/wiki/${p.qid}">${p.qid}</a>`) : ''}${p.offmap ? row('place', esc(t('offNote'))) : ''}${p.kitabxana ? row('kx', `<a href="${kxBase()}/authors/${encodeURIComponent(p.kitabxana)}">kitabxana.az</a>`) : ''}</dl>`;
+    ${/^Q\d/.test(p.qid) ? row('wdLink', `<a href="https://www.wikidata.org/wiki/${p.qid}">${p.qid}</a>`) : ''}${p.offmap ? row('place', esc(t('offNote'))) : ''}${p.kitabxana ? row('kx', `<a href="${kxBase()}/authors/${encodeURIComponent(p.kitabxana)}">kitabxana.az</a>`) : ''}</dl>${MQL.block(p.qid)}`;
   info.querySelectorAll('a[data-q]').forEach((a) => a.onclick = (e) => { e.preventDefault(); sel = a.dataset.q; mark(); describe(); });
 }
 
@@ -310,7 +311,7 @@ document.querySelectorAll('[data-lang]').forEach((b) => b.onclick = () => {
 });
 let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(draw, 150); });
 applyLang();
-fetch('data/lineage.json').then((r) => r.json()).then((d) => { D = d; applyLang(); });
+Promise.all([fetch('data/lineage.json').then((r) => r.json()), MQL.load()]).then(([d]) => { D = d; applyLang(); });
 })();
 </script>
 </body>
