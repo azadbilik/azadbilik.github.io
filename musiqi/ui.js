@@ -37,6 +37,10 @@ MQ.wikiLinks = (wiki) => Object.entries(wiki ?? {}).filter(([l]) => LANGS.includ
 MQ.yrs = (p) => p.born || p.died ? `${p.born ?? '?'}–${p.died ?? ''}` : '';
 // Audio items { title, performer, composer, year, commons, ogg, licence }; only freely licensed or public-domain files ever go in these lists
 MQ.audio = (items, tt) => items.map((r) => `<div class="card"><h3>${esc(r.title[MQ.lang] || r.title.az)}</h3><div class="muted">${esc(r.performer)}${r.composer ? ' · ' + esc(r.composer) : ''}${r.year ? ' · ' + esc(r.year) : ''}</div><audio controls preload="none" src="${esc(r.ogg)}"></audio><div><span class="tag ok">${esc(r.licence)}</span> <a href="${esc(r.commons)}">Commons</a></div></div>`).join('');
+// YouTube link-out for a person (data/youtube.json, scripts/youtube.mjs): a plain «YouTube» link, never an embed; the tag says where the channel comes from
+MQ.YT = {};
+MQ.ytRow = (q) => { const y = MQ.YT[q]; return y ? `<dt>YouTube</dt><dd><a href="${esc(y.url)}" rel="noopener">YouTube</a><span class="tag">${y.src === 'wikidata' ? 'Wikidata P2397' : '?'}</span></dd>` : ''; };
+MQ.loadYT = () => fetch('/musiqi/data/youtube.json').then((r) => r.json()).then((d) => { MQ.YT = d; }).catch(() => {});
 MQ.top = (here) => `<div class="top"><a class="brand" href="/" data-keep-lang><svg viewBox="0 0 512 512" aria-hidden="true"><g class="star"><rect x="126" y="126" width="260" height="260"/><polygon points="256,72 440,256 256,440 72,256"/></g><polygon class="gem" points="256,196 316,256 256,316 196,256"/></svg>Azad Bilik</a><nav><a href="/musiqi/" data-keep-lang data-i18n="music">Musiqi</a><span class="langs" role="group" aria-label="Dil · Язык · Language"><button type="button" data-lang="az">AZ</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="en">EN</button></span></nav></div>`;
 
 // Timeline: items on lanes along a year axis. item = { id, lane, x0, x1?, label, sub?, color, dim? }; x1 makes a bar. Labels are packed into tracks so they do not overlap.

@@ -122,7 +122,7 @@ function describeT() {
   const el = document.getElementById('tinfo');
   if (!selT) { el.innerHTML = `<p class="empty">${esc(t('pickT'))}</p>`; return; }
   const [k, q] = [selT.slice(0, 1), selT.slice(2)], row = (a, v) => v ? `<dt>${esc(t(a))}</dt><dd>${v}</dd>` : '';
-  if (k === 'p') { const p = byQ.get(q); el.innerHTML = `<h3>${esc(nm(p))}</h3><dl>${row('born', esc(yrs(p)))}${row('place', esc(p.place ?? ''))}${row('read', MQ.wikiLinks(p.wiki))}${row('wd', `<a href="https://www.wikidata.org/wiki/${q}">${q}</a>`)}</dl>`; }
+  if (k === 'p') { const p = byQ.get(q); el.innerHTML = `<h3>${esc(nm(p))}</h3><dl>${row('born', esc(yrs(p)))}${row('place', esc(p.place ?? ''))}${row('read', MQ.wikiLinks(p.wiki))}${MQ.ytRow(q)}${row('wd', `<a href="https://www.wikidata.org/wiki/${q}">${q}</a>`)}</dl>`; }
   else if (k === 'a') { const a = D.albums.find((x) => x.qid === q); el.innerHTML = `<h3>${esc(a[MQ.lang] || a.az || a.en)}</h3><dl>${row('year', a.year)}${row('performers', a.performers.map((x) => esc(pname(x))).join(', '))}${row('wd', `<a href="https://www.wikidata.org/wiki/${q}">${q}</a>`)}</dl>`; }
   else { const e = D.events.find((x) => x.qid === q); el.innerHTML = `<h3>${esc(e[MQ.lang] || e.az)}</h3><dl>${row('year', e.year)}${row('note', esc(e.note))}${row('wd', `<a href="https://www.wikidata.org/wiki/${q}">${q}</a>`)}</dl>`; }
 }
@@ -136,7 +136,7 @@ function describeP(q) {
   const row = (a, v) => v ? `<dt>${esc(t(a))}</dt><dd>${v}</dd>` : '';
   const line = (l, o) => `<li><a href="#" data-q="${o}">${esc(pname(o))}</a> <span class="muted">${yrs(byQ.get(o))}</span><span class="tag">${esc(t(KK[l.kind]))}</span><span class="tag">${esc(t(l.src === 'text' ? 'viaTx' : 'viaWd'))}</span>${l.sentence ? `<blockquote>${esc(l.sentence)} <a href="${esc(l.article)}">${esc(l.lang)}</a></blockquote>` : ''}</li>`;
   const ts = D.links.filter((l) => l.s === q), ss = D.links.filter((l) => l.t === q);
-  el.innerHTML = `<h3>${esc(nm(p))}</h3><dl>${row('born', esc(yrs(p)))}${row('place', esc(p.place ?? ''))}${row('teachers', ts.length ? `<ul>${ts.map((l) => line(l, l.t)).join('')}</ul>` : '')}${row('students', ss.length ? `<ul>${ss.map((l) => line(l, l.s)).join('')}</ul>` : '')}${row('read', MQ.wikiLinks(p.wiki))}${/^Q\d/.test(q) ? row('wd', `<a href="https://www.wikidata.org/wiki/${q}">${q}</a>`) : ''}</dl>`;
+  el.innerHTML = `<h3>${esc(nm(p))}</h3><dl>${row('born', esc(yrs(p)))}${row('place', esc(p.place ?? ''))}${row('teachers', ts.length ? `<ul>${ts.map((l) => line(l, l.t)).join('')}</ul>` : '')}${row('students', ss.length ? `<ul>${ss.map((l) => line(l, l.s)).join('')}</ul>` : '')}${row('read', MQ.wikiLinks(p.wiki))}${MQ.ytRow(q)}${/^Q\d/.test(q) ? row('wd', `<a href="https://www.wikidata.org/wiki/${q}">${q}</a>`) : ''}</dl>`;
   el.querySelectorAll('a[data-q]').forEach((a) => a.onclick = (e) => { e.preventDefault(); net.select(a.dataset.q); });
 }
 function render() {
@@ -149,7 +149,7 @@ function render() {
   legend(); timeline(); describeT(); network();
 }
 const apply = MQ.boot(T, render);
-fetch('data/jazz.json').then((r) => r.json()).then((d) => { D = d; apply(); });
+Promise.all([fetch('data/jazz.json').then((r) => r.json()), MQ.loadYT()]).then(([d]) => { D = d; apply(); });
 let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { if (D) { timeline(); network(); } }, 150); });
 })();
 </script>

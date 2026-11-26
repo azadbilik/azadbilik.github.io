@@ -193,7 +193,7 @@ function describeP() {
   el.innerHTML = `<h3>${esc(nm(p))}</h3><dl>${row('born', esc(yrs(p)))}${row('place', esc(p.place ?? ''))}
     ${row('teachers', ts.length ? `<ul>${ts.map((l) => line(l, l.t)).join('')}</ul>` : '')}${row('students', ss.length ? `<ul>${ss.map((l) => line(l, l.s)).join('')}</ul>` : '')}
     ${row('premiere', works.map((w) => `${w.year} ${esc(wtitle(w))}`).join('<br>'))}
-    ${row('read', MQ.wikiLinks(p.wiki))}${/^Q\d/.test(p.qid) ? row('wd', `<a href="https://www.wikidata.org/wiki/${p.qid}">${p.qid}</a>`) : ''}${p.kitabxana ? row('kx', `<a href="${MQ.kxBase()}/authors/${esc(p.kitabxana)}">${esc(nm(p))}</a>`) : ''}</dl>`;
+    ${row('read', MQ.wikiLinks(p.wiki))}${MQ.ytRow(p.qid)}${/^Q\d/.test(p.qid) ? row('wd', `<a href="https://www.wikidata.org/wiki/${p.qid}">${p.qid}</a>`) : ''}${p.kitabxana ? row('kx', `<a href="${MQ.kxBase()}/authors/${esc(p.kitabxana)}">${esc(nm(p))}</a>`) : ''}</dl>`;
   el.querySelectorAll('a[data-q]').forEach((a) => a.onclick = (e) => { e.preventDefault(); net?.select(a.dataset.q); });
 }
 function chips() {
@@ -215,7 +215,7 @@ function render() {
   types(); timeline(); describeW(); cards(); chips(); network(); table(); document.getElementById('listen').innerHTML = MQ.audio(REC);
 }
 const apply = MQ.boot(T, render);
-Promise.all([fetch('data/composers.json').then((r) => r.json()), fetch('data/recordings.json').then((r) => r.json())]).then(([d, r]) => { D = d; REC = r; apply(); });
+Promise.all([fetch('data/composers.json').then((r) => r.json()), fetch('data/recordings.json').then((r) => r.json()), MQ.loadYT()]).then(([d, r]) => { D = d; REC = r; apply(); });
 let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { if (D) { timeline(); network(); } }, 150); });
 })();
 </script>

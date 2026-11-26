@@ -97,7 +97,7 @@ function timeline() {
   MQ.timeline(document.getElementById('tl'), { items, lanes: ['singer', 'ensemble', 'composer'].map((k) => ({ id: k, label: t(KL[k]) })), from: 1895, to: 2026, px: 7.5, selected: sel, onPick: (id) => { sel = sel === id ? null : id; timeline(); describe(); } });
 }
 const row = (k, v) => v ? `<dt>${esc(t(k))}</dt><dd>${v}</dd>` : '';
-const body = (p) => `<dl>${row('born', esc(p.kind === 'ensemble' ? (p.born ?? t('none')) : yrs(p) || t('none')))}${row('place', esc(p.place?.[MQ.lang] || p.place?.az || p.place?.en || ''))}${row('genres', esc(p.genres.join(', ')))}${row('awards', esc(p.awards.join('; ')))}${row('read', MQ.wikiLinks(p.wiki))}${row('wd', `<a href="https://www.wikidata.org/wiki/${p.qid}">${p.qid}</a>`)}</dl>`;
+const body = (p) => `<dl>${row('born', esc(p.kind === 'ensemble' ? (p.born ?? t('none')) : yrs(p) || t('none')))}${row('place', esc(p.place?.[MQ.lang] || p.place?.az || p.place?.en || ''))}${row('genres', esc(p.genres.join(', ')))}${row('awards', esc(p.awards.join('; ')))}${row('read', MQ.wikiLinks(p.wiki))}${MQ.ytRow(p.qid)}${row('wd', `<a href="https://www.wikidata.org/wiki/${p.qid}">${p.qid}</a>`)}</dl>`;
 function describe() {
   const p = D.people.find((x) => x.qid === sel), el = document.getElementById('info');
   el.innerHTML = p ? `<div class="k">${esc(t(KL[p.kind]))}</div><h3>${esc(nm(p))}</h3>${body(p)}<p class="hint">${esc(t('enNote'))}</p>` : `<p class="empty">${esc(t('pick'))}</p>`;
@@ -113,7 +113,7 @@ function render() {
   timeline(); describe();
 }
 const apply = MQ.boot(T, render);
-Promise.all([fetch('data/estrada.raw.json').then((r) => r.json()), fetch('data/recordings.json').then((r) => r.json())]).then(([d, r]) => { D = d; REC = r; apply(); });
+Promise.all([fetch('data/estrada.raw.json').then((r) => r.json()), fetch('data/recordings.json').then((r) => r.json()), MQ.loadYT()]).then(([d, r]) => { D = d; REC = r; apply(); });
 let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => D && timeline(), 150); });
 })();
 </script>
