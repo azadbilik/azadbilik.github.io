@@ -61,8 +61,8 @@ for year, plan in G.items():
         keep &= ~((sx >= ex0) & (sx < ex1) & (sy >= ey0) & (sy < ey1))
     out[..., 3] = np.where(keep, 255, 0)
     Image.fromarray(out, 'RGBA').save(DATA / f'plan-{year}.webp', quality=74, method=6)
-    meta[year] = {'title': plan['title'], 'source': plan['source'], 'fit': how, 'points': len(pts), 'meanErrorM': round(float(np.mean(err)), 1),
-                  'coordinates': [[W, N], [E, N], [E, S], [W, S]]}
+    meta.setdefault(year, {}).update({'title': plan['title'], 'source': plan['source'], 'fit': how, 'points': len(pts), 'meanErrorM': round(float(np.mean(err)), 1),
+                  'coordinates': [[W, N], [E, N], [E, S], [W, S]]})   # update, not replace: tiles.py's keys stay
     print(year, how, len(pts), 'points, mean', round(float(np.mean(err))), 'm, worst', round(max(err)), 'm', ' '.join(f'{k}:{e:.0f}' for k, e in zip(plan['points'], err)),
           (DATA / f'plan-{year}.webp').stat().st_size // 1024, 'KB')
 json.dump(meta, open(DATA / 'plans.json', 'w'), ensure_ascii=False, indent=1)

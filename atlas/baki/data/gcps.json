@@ -450,7 +450,7 @@
    1350,
    1320
   ],
-  "zmax": 16,
+  "zmax": 17,
   "auto": {
    "streets": "ink",
    "blur": 2,
@@ -642,6 +642,7 @@
    40.64,
    40.72
   ],
-  "width": 2400
+  "width": 2400,
+  "restore": true
  }
 }
