@@ -31,6 +31,7 @@
   .eras .step button { flex: 1; padding: .35rem; border: 1px solid var(--rule); border-radius: 3px; font-size: .8125rem; color: var(--muted); }
   .eras .step button:hover:not([disabled]) { color: var(--ink); border-color: var(--ink); }
   .eras .step button[disabled] { opacity: .4; cursor: default; }
+  .eras .step #play[aria-pressed="true"] { color: var(--paper); background: var(--ink); border-color: var(--ink); }
   .check { display: flex; align-items: center; gap: .5rem; font-size: .8125rem; color: var(--muted); cursor: pointer; }
   .check input { accent-color: var(--accent); }
   .scan { display: grid; grid-template-columns: auto 1fr; gap: .6rem; align-items: center; font-size: .8125rem; color: var(--muted); }
@@ -66,7 +67,7 @@
       <div class="now"><b id="era-year"></b><span id="era-name"></span></div>
       <input type="range" id="era" min="0" max="5" step="1" value="0" aria-describedby="era-name">
       <div class="ticks" id="ticks"></div>
-      <div class="step"><button type="button" id="prev">←</button><button type="button" id="next">→</button></div>
+      <div class="step"><button type="button" id="prev">←</button><button type="button" id="play" aria-pressed="false">▶</button><button type="button" id="next">→</button></div>
       <label class="scan" id="scan-row" hidden><span data-i18n="scan">1901-ci il xəritəsi</span><input type="range" id="scan" min="0" max="100" value="0"></label>
       <label class="check"><input type="checkbox" id="today"> <span data-i18n="todayLines">Bugünkü rayon sərhədləri üstündə</span></label>
     </div>
@@ -141,9 +142,9 @@ const ERAS = [
     open: { az: 'Əhali xəritəsi', ru: 'Карта населения', en: 'The population map' } },
 ];
 const T = {
-  az: { doc: 'Sərhədlər · Azad Bilik', title: 'Sərhədlər', sub: 'Xanlıqlardan bugünkü rayonlara', todayLines: 'Bugünkü rayon sərhədləri üstündə', scan: 'Tomkeyevin xəritəsi (1901)', open: 'Ayrıca xəritədə aç', unitOpen: 'Bu vahidi öz xəritəsində aç', pop: 'Əhali', capital: 'Paytaxtı', annexed: (y) => `Rusiyaya keçib: ${y}`, gov: 'Quberniya', today: 'Bugünkü rayonlar', legendUnit: 'vahid', legendGap: 'aydın deyil', legendToday: 'bugünkü rayonlar', prev: 'Əvvəlki dövr', next: 'Sonrakı dövr', hint: 'Xəritədə bir vahidə toxunun.' },
-  ru: { doc: 'Границы · Azad Bilik', title: 'Границы', sub: 'От ханств до нынешних районов', todayLines: 'Поверх — границы нынешних районов', scan: 'Карта Томкеева (1901)', open: 'Открыть отдельную карту', unitOpen: 'Открыть на своей карте', pop: 'Население', capital: 'Столица', annexed: (y) => `Отошло России: ${y}`, gov: 'Губерния', today: 'Нынешние районы', legendUnit: 'единица', legendGap: 'не установлено', legendToday: 'нынешние районы', prev: 'Предыдущая эпоха', next: 'Следующая эпоха', hint: 'Нажмите на единицу на карте.' },
-  en: { doc: 'Borders · Azad Bilik', title: 'Borders', sub: "From the khanates to today's districts", todayLines: "Today's district borders on top", scan: "Tomkeev's map (1901)", open: 'Open its own map', unitOpen: 'Open on its own map', pop: 'Population', capital: 'Capital', annexed: (y) => `Passed to Russia: ${y}`, gov: 'Governorate', today: "Today's districts", legendUnit: 'unit', legendGap: 'not established', legendToday: "today's districts", prev: 'Earlier', next: 'Later', hint: 'Tap a unit on the map.' },
+  az: { doc: 'Sərhədlər · Azad Bilik', title: 'Sərhədlər', sub: 'Xanlıqlardan bugünkü rayonlara', todayLines: 'Bugünkü rayon sərhədləri üstündə', scan: 'Tomkeyevin xəritəsi (1901)', open: 'Ayrıca xəritədə aç', unitOpen: 'Bu vahidi öz xəritəsində aç', pop: 'Əhali', capital: 'Paytaxtı', annexed: (y) => `Rusiyaya keçib: ${y}`, gov: 'Quberniya', today: 'Bugünkü rayonlar', legendUnit: 'vahid', legendGap: 'aydın deyil', legendToday: 'bugünkü rayonlar', prev: 'Əvvəlki dövr', next: 'Sonrakı dövr', play: 'Dövrləri bir-bir göstər', pause: 'Dayandır', hint: 'Xəritədə bir vahidə toxunun.' },
+  ru: { doc: 'Границы · Azad Bilik', title: 'Границы', sub: 'От ханств до нынешних районов', todayLines: 'Поверх — границы нынешних районов', scan: 'Карта Томкеева (1901)', open: 'Открыть отдельную карту', unitOpen: 'Открыть на своей карте', pop: 'Население', capital: 'Столица', annexed: (y) => `Отошло России: ${y}`, gov: 'Губерния', today: 'Нынешние районы', legendUnit: 'единица', legendGap: 'не установлено', legendToday: 'нынешние районы', prev: 'Предыдущая эпоха', next: 'Следующая эпоха', play: 'Показать эпохи по очереди', pause: 'Остановить', hint: 'Нажмите на единицу на карте.' },
+  en: { doc: 'Borders · Azad Bilik', title: 'Borders', sub: "From the khanates to today's districts", todayLines: "Today's district borders on top", scan: "Tomkeev's map (1901)", open: 'Open its own map', unitOpen: 'Open on its own map', pop: 'Population', capital: 'Capital', annexed: (y) => `Passed to Russia: ${y}`, gov: 'Governorate', today: "Today's districts", legendUnit: 'unit', legendGap: 'not established', legendToday: "today's districts", prev: 'Earlier', next: 'Later', play: 'Play through the eras', pause: 'Pause', hint: 'Tap a unit on the map.' },
 };
 const t = (k) => T[lang][k];
 const L = (o) => o?.[lang] ?? o?.az ?? o;
@@ -280,7 +281,7 @@ function draw() {
   document.getElementById('era-year').textContent = L(e.year);
   document.getElementById('era-name').textContent = L(e.name);
   document.getElementById('ticks').innerHTML = ERAS.map((x, i) => `<button type="button" data-i="${i}" style="--at:${i / (ERAS.length - 1)}" aria-current="${i === era}">${esc(L(x.tick))}</button>`).join('');
-  document.querySelectorAll('#ticks button').forEach((b) => b.onclick = () => setEra(+b.dataset.i));
+  document.querySelectorAll('#ticks button').forEach((b) => b.onclick = () => { clearInterval(timer); timer = null; drawPlay(); setEra(+b.dataset.i); });
   document.getElementById('prev').disabled = era === 0; document.getElementById('next').disabled = era === ERAS.length - 1;
   document.getElementById('prev').setAttribute('aria-label', t('prev')); document.getElementById('next').setAttribute('aria-label', t('next'));
   const page = (() => { const u = new URL(e.page, location.href); if (lang !== 'az') u.searchParams.set('lang', lang); return u.pathname + u.search; })();
@@ -299,9 +300,20 @@ function keepUrl() {
   if (selected && data[selected.src]) q.set('u', data[selected.src].features[selected.id].properties.id);
   history.replaceState(null, '', `${location.pathname}${q.size ? '?' + q : ''}`);
 }
-document.getElementById('era').oninput = (e) => setEra(+e.target.value);
-document.getElementById('prev').onclick = () => setEra(era - 1);
-document.getElementById('next').onclick = () => setEra(era + 1);
+// ▶ steps through the eras, from the first again if at the last; any other move stops it
+let timer = null;
+function stop() { clearInterval(timer); timer = null; drawPlay(); }
+function drawPlay() { const b = document.getElementById('play'); b.setAttribute('aria-pressed', !!timer); b.textContent = timer ? '❚❚' : '▶'; b.setAttribute('aria-label', t(timer ? 'pause' : 'play')); }
+document.getElementById('play').onclick = () => {
+  if (timer) return stop();
+  if (era === ERAS.length - 1) setEra(0);
+  timer = setInterval(() => { if (era >= ERAS.length - 1) return stop(); setEra(era + 1); }, still() ? 4000 : 2600);
+  drawPlay();
+};
+drawPlay();
+document.getElementById('era').oninput = (e) => { stop(); setEra(+e.target.value); };
+document.getElementById('prev').onclick = () => { stop(); setEra(era - 1); };
+document.getElementById('next').onclick = () => { stop(); setEra(era + 1); };
 document.getElementById('scan').value = scan;
 document.getElementById('scan').oninput = (e) => { scan = +e.target.value; applyScan(); keepUrl(); };
 document.getElementById('today').checked = showToday;
@@ -324,7 +336,7 @@ draw();
 document.querySelectorAll('[data-lang]').forEach((b) => b.onclick = () => {
   lang = b.dataset.lang;
   try { localStorage.setItem('lang', lang); } catch {}
-  applyLang(); draw();
+  applyLang(); draw(); drawPlay();
   if (map.getStyle()) for (const l of map.getStyle().layers) if (l.type === 'symbol' && l.layout?.['text-field']) map.setLayoutProperty(l.id, 'text-field', labelExpr());
 });
 })();
