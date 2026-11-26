@@ -51,6 +51,24 @@
   .legend .sw { width: 1.4rem; height: .7rem; border: 1px solid var(--ink); border-radius: 2px; background: color-mix(in srgb, var(--accent) 25%, transparent); }
   .legend .ln { width: 1.4rem; border-top: 1.5px dashed var(--ink); opacity: .7; }
   .legend .gap { background: color-mix(in srgb, var(--muted) 30%, transparent); }
+  .play-game { padding: .45rem; border: 1px solid var(--accent); color: var(--accent); border-radius: 3px; font-size: .8125rem; font-weight: 500; }
+  .play-game:hover, .play-game[aria-pressed="true"] { background: var(--accent); color: var(--paper); }
+  .game { padding: 1rem 1.5rem 0; display: grid; gap: .7rem; }
+  .game .ask { font-size: .8125rem; color: var(--muted); }
+  .game .target { font: 400 1.75rem/1.15 var(--serif); }
+  .game .target.pop { animation: pop .45s ease-out; }
+  @keyframes pop { from { transform: scale(.9); opacity: 0; } to { transform: none; opacity: 1; } }
+  .game .bar { height: 4px; background: var(--rule); border-radius: 2px; overflow: hidden; }
+  .game .bar i { display: block; height: 100%; background: var(--accent); transition: width .4s ease; }
+  .game .stats { display: flex; gap: 1.25rem; font-size: .8125rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .game .stats b { color: var(--ink); font-size: 1rem; }
+  .game .verdict { min-height: 1.3rem; font-weight: 500; }
+  .game .verdict.ok { color: #2F7D3B; } .game .verdict.no { color: var(--accent); }
+  .game .row { display: flex; gap: .5rem; }
+  .game .row button { flex: 1; padding: .4rem; border: 1px solid var(--rule); border-radius: 3px; font-size: .8125rem; }
+  .game .row button:hover { border-color: var(--ink); }
+  .game .final { font: 400 2.5rem/1 var(--serif); }
+  @media (prefers-reduced-motion: reduce) { .game .target.pop { animation: none; } .game .bar i { transition: none; } }
 </style>
 </head>
 <body>
@@ -69,6 +87,7 @@
       <div class="ticks" id="ticks"></div>
       <div class="step"><button type="button" id="prev">←</button><button type="button" id="play" aria-pressed="false">▶</button><button type="button" id="next">→</button></div>
       <label class="scan" id="scan-row" hidden><span data-i18n="scan">1901-ci il xəritəsi</span><input type="range" id="scan" min="0" max="100" value="0"></label>
+      <button type="button" class="play-game" id="game" aria-pressed="false" data-i18n="gameBtn">Oyun: xəritədə tap</button>
       <label class="check"><input type="checkbox" id="today"> <span data-i18n="todayLines">Bugünkü rayon sərhədləri üstündə</span></label>
     </div>
     <div id="side" aria-live="polite"></div>
@@ -142,15 +161,17 @@ const ERAS = [
     open: { az: 'Əhali xəritəsi', ru: 'Карта населения', en: 'The population map' } },
 ];
 const T = {
-  az: { doc: 'Sərhədlər · Azad Bilik', title: 'Sərhədlər', sub: 'Xanlıqlardan bugünkü rayonlara', todayLines: 'Bugünkü rayon sərhədləri üstündə', scan: 'Tomkeyevin xəritəsi (1901)', open: 'Ayrıca xəritədə aç', unitOpen: 'Bu vahidi öz xəritəsində aç', pop: 'Əhali', capital: 'Paytaxtı', annexed: (y) => `Rusiyaya keçib: ${y}`, gov: 'Quberniya', today: 'Bugünkü rayonlar', legendUnit: 'vahid', legendGap: 'aydın deyil', legendToday: 'bugünkü rayonlar', prev: 'Əvvəlki dövr', next: 'Sonrakı dövr', play: 'Dövrləri bir-bir göstər', pause: 'Dayandır', hint: 'Xəritədə bir vahidə toxunun.' },
-  ru: { doc: 'Границы · Azad Bilik', title: 'Границы', sub: 'От ханств до нынешних районов', todayLines: 'Поверх — границы нынешних районов', scan: 'Карта Томкеева (1901)', open: 'Открыть отдельную карту', unitOpen: 'Открыть на своей карте', pop: 'Население', capital: 'Столица', annexed: (y) => `Отошло России: ${y}`, gov: 'Губерния', today: 'Нынешние районы', legendUnit: 'единица', legendGap: 'не установлено', legendToday: 'нынешние районы', prev: 'Предыдущая эпоха', next: 'Следующая эпоха', play: 'Показать эпохи по очереди', pause: 'Остановить', hint: 'Нажмите на единицу на карте.' },
-  en: { doc: 'Borders · Azad Bilik', title: 'Borders', sub: "From the khanates to today's districts", todayLines: "Today's district borders on top", scan: "Tomkeev's map (1901)", open: 'Open its own map', unitOpen: 'Open on its own map', pop: 'Population', capital: 'Capital', annexed: (y) => `Passed to Russia: ${y}`, gov: 'Governorate', today: "Today's districts", legendUnit: 'unit', legendGap: 'not established', legendToday: "today's districts", prev: 'Earlier', next: 'Later', play: 'Play through the eras', pause: 'Pause', hint: 'Tap a unit on the map.' },
+  az: { doc: 'Sərhədlər · Azad Bilik', title: 'Sərhədlər', sub: 'Xanlıqlardan bugünkü rayonlara', todayLines: 'Bugünkü rayon sərhədləri üstündə', scan: 'Tomkeyevin xəritəsi (1901)', open: 'Ayrıca xəritədə aç', unitOpen: 'Bu vahidi öz xəritəsində aç', pop: 'Əhali', capital: 'Paytaxtı', annexed: (y) => `Rusiyaya keçib: ${y}`, gov: 'Quberniya', today: 'Bugünkü rayonlar', legendUnit: 'vahid', legendGap: 'aydın deyil', legendToday: 'bugünkü rayonlar', prev: 'Əvvəlki dövr', next: 'Sonrakı dövr', play: 'Dövrləri bir-bir göstər', pause: 'Dayandır', hint: 'Xəritədə bir vahidə toxunun.', gameBtn: 'Oyun: xəritədə tap', gameEnd: 'Oyunu bitir', ask: 'Xəritədə tapın:', ok: 'Düzdür!', no: (x) => `Yox, bu ${x} idi`, skip: 'Keç', score: 'Xal', streak: 'Ardıcıl', best: 'Rekord', again: 'Yenidən', done: (a, b) => `${b} sualdan ${a} düz`, noBest: '—' },
+  ru: { doc: 'Границы · Azad Bilik', title: 'Границы', sub: 'От ханств до нынешних районов', todayLines: 'Поверх — границы нынешних районов', scan: 'Карта Томкеева (1901)', open: 'Открыть отдельную карту', unitOpen: 'Открыть на своей карте', pop: 'Население', capital: 'Столица', annexed: (y) => `Отошло России: ${y}`, gov: 'Губерния', today: 'Нынешние районы', legendUnit: 'единица', legendGap: 'не установлено', legendToday: 'нынешние районы', prev: 'Предыдущая эпоха', next: 'Следующая эпоха', play: 'Показать эпохи по очереди', pause: 'Остановить', hint: 'Нажмите на единицу на карте.', gameBtn: 'Игра: найди на карте', gameEnd: 'Закончить игру', ask: 'Найдите на карте:', ok: 'Верно!', no: (x) => `Нет, это ${x}`, skip: 'Пропустить', score: 'Очки', streak: 'Подряд', best: 'Рекорд', again: 'Ещё раз', done: (a, b) => `${a} из ${b} верно`, noBest: '—' },
+  en: { doc: 'Borders · Azad Bilik', title: 'Borders', sub: "From the khanates to today's districts", todayLines: "Today's district borders on top", scan: "Tomkeev's map (1901)", open: 'Open its own map', unitOpen: 'Open on its own map', pop: 'Population', capital: 'Capital', annexed: (y) => `Passed to Russia: ${y}`, gov: 'Governorate', today: "Today's districts", legendUnit: 'unit', legendGap: 'not established', legendToday: "today's districts", prev: 'Earlier', next: 'Later', play: 'Play through the eras', pause: 'Pause', hint: 'Tap a unit on the map.', gameBtn: 'Game: find it on the map', gameEnd: 'End the game', ask: 'Find on the map:', ok: 'Right!', no: (x) => `No, that was ${x}`, skip: 'Skip', score: 'Score', streak: 'Streak', best: 'Best', again: 'Play again', done: (a, b) => `${a} of ${b} right`, noBest: '—' },
 };
 const t = (k) => T[lang][k];
 const L = (o) => o?.[lang] ?? o?.az ?? o;
 const params = new URLSearchParams(location.search);
 let era = Math.max(0, ERAS.findIndex((e) => e.id === params.get('e'))), selected = null, showToday = params.get('t') === '1', scan = Math.min(100, Math.max(0, +params.get('s') || 0));
 const data = {};
+// the game: a name from the era on show, the reader taps where it is (ten rounds)
+let game = null, gameLock = false;
 const BOUNDS = [[43.3, 37.2], [50.6, 42.6]];
 const FILL = ['case', ['boolean', ['feature-state', 'sel'], false], .75, ['boolean', ['feature-state', 'hover'], false], .62, ['==', ['get', 'kind'], 'gap'], .22, .45];
 
@@ -209,7 +230,10 @@ map.on('load', async () => {
   const sc = await fetch('../xanliqlar/data/tomkeev-1901.json').then((r) => r.json());
   map.addSource('scan', { type: 'image', url: '../xanliqlar/data/tomkeev-1901.webp', coordinates: sc.coordinates });
   map.addLayer({ id: 'scan', type: 'raster', source: 'scan', paint: { 'raster-opacity': 0, 'raster-opacity-transition': { duration: 0 } } }, firstSymbol);
+  map.addSource('hl', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
   await add(era);
+  map.addLayer({ id: 'hl-fill', type: 'fill', source: 'hl', paint: { 'fill-color': ['get', 'c'], 'fill-opacity': 0 } }, firstSymbol);
+  map.addLayer({ id: 'hl-line', type: 'line', source: 'hl', paint: { 'line-color': ['get', 'c'], 'line-width': 3, 'line-opacity': 0 } }, firstSymbol);
   await Promise.all(ERAS.map((_, i) => i !== era ? add(i) : null));
   map.addLayer({ id: 'today-over', type: 'line', source: 'today', layout: { visibility: showToday ? 'visible' : 'none' }, paint: { 'line-color': ink, 'line-width': .7, 'line-opacity': .5, 'line-dasharray': [2, 2] } }, firstSymbol);
   let hovered = null;
@@ -221,11 +245,13 @@ map.on('load', async () => {
     if (!f) { map.getCanvas().style.cursor = ''; tip.remove(); return; }
     map.getCanvas().style.cursor = 'pointer';
     hovered = { src, id: f.id }; map.setFeatureState({ source: src, id: f.id }, { hover: true });
+    if (game) { tip.remove(); map.getCanvas().style.cursor = 'crosshair'; return; } // no names while playing
     tip.setLngLat(e.lngLat).setHTML(`<strong>${esc(f.properties[lang] ?? f.properties.az)}</strong>`).addTo(map);
   });
   map.on('mouseout', () => { tip.remove(); });
   map.on('click', (e) => {
     const f = map.queryRenderedFeatures(e.point, { layers: [fillOf()] })[0];
+    if (game) return guess(f);
     select(f ? f.id : null);
   });
   applyScan();
@@ -241,10 +267,58 @@ function applyScan() {
   map.setPaintProperty('scan', 'raster-opacity', on);
   if (map.getLayer('1800-fill') && ERAS[era].id === '1800') map.setPaintProperty('1800-fill', 'fill-opacity', on ? ['*', FILL, 1 - on * .85] : FILL);
 }
+// a unit flashes: green where it is, red where the reader tapped; two soft pulses
+function flash(items) {
+  const src = map.getSource('hl'); if (!src) return;
+  src.setData({ type: 'FeatureCollection', features: items.map(([f, c]) => ({ type: 'Feature', geometry: f.geometry, properties: { c } })) });
+  const t0 = performance.now(), dur = still() ? 0 : 1300;
+  const step = (now) => {
+    const k = dur ? Math.min(1, (now - t0) / dur) : 1;
+    const a = still() ? .7 : .75 * Math.abs(Math.sin(k * Math.PI * 2));
+    map.setPaintProperty('hl-fill', 'fill-opacity', k < 1 ? a : (still() ? .5 : 0));
+    map.setPaintProperty('hl-line', 'line-opacity', k < 1 ? 1 : (still() ? 1 : 0));
+    if (k < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+function units() { return (data[ERAS[era].id]?.features ?? []).filter((f) => f.properties.kind !== 'gap'); }
+function startGame() {
+  const pool = units(); if (!pool.length) return;
+  const order = pool.map((f) => f.id).sort(() => Math.random() - .5).slice(0, Math.min(10, pool.length));
+  game = { era: ERAS[era].id, order, i: 0, score: 0, streak: 0, verdict: null };
+  select(null, false); stopPlay(); map.fitBounds(BOUNDS, { padding: pad(), duration: still() ? 0 : 600 });
+  draw();
+}
+function endGame() { game = null; gameLock = false; draw(); }
+function best() { try { return +localStorage.getItem(`serhedler-best-${ERAS[era].id}`) || 0; } catch { return 0; } }
+function guess(f) {
+  if (gameLock || game.i >= game.order.length) return;
+  const target = data[game.era].features[game.order[game.i]], ok = f && f.id === target.id;
+  const name = (p) => p[lang] ?? p.az;
+  gameLock = true;
+  if (ok) { game.score++; game.streak++; game.verdict = { ok: true }; flash([[target, '#2F7D3B']]); }
+  else { game.streak = 0; game.verdict = { ok: false, was: f ? name(f.properties) : null }; flash([...(f && f.properties.kind !== 'gap' ? [[f, css('--accent')]] : []), [target, '#2F7D3B']]); }
+  draw();
+  setTimeout(() => { gameLock = false; if (!game) return; game.i++; game.verdict = null;
+    if (game.i >= game.order.length) { try { if (game.score > best()) localStorage.setItem(`serhedler-best-${game.era}`, game.score); } catch {} }
+    draw(); }, still() ? 900 : 1400);
+}
+function gamePanel() {
+  const n = game.order.length, b = best();
+  if (game.i >= n) return `<div class="game"><p class="ask">${esc(L(ERAS[era].name))}, ${esc(L(ERAS[era].year))}</p><p class="final">${game.score}/${n}</p><p>${t('done')(game.score, n)} · ${t('best')}: ${Math.max(b, game.score)}</p><div class="row"><button type="button" id="again">${t('again')}</button><button type="button" id="end">${t('gameEnd')}</button></div></div>`;
+  const p = data[game.era].features[game.order[game.i]].properties;
+  const v = game.verdict;
+  return `<div class="game"><div class="bar"><i style="width:${game.i / n * 100}%"></i></div>
+    <p class="ask">${t('ask')} <span>${game.i + 1}/${n}</span></p><p class="target${v ? '' : ' pop'}">${esc(p[lang] ?? p.az)}</p>
+    <p class="verdict ${v ? (v.ok ? 'ok' : 'no') : ''}">${v ? (v.ok ? t('ok') : (v.was ? esc(t('no')(v.was)) : '')) : ''}</p>
+    <div class="stats"><span>${t('score')} <b>${game.score}</b></span><span>${t('streak')} <b>${game.streak}</b></span><span>${t('best')} <b>${b || t('noBest')}</b></span></div>
+    <div class="row"><button type="button" id="skip">${t('skip')}</button><button type="button" id="end">${t('gameEnd')}</button></div></div>`;
+}
 function setEra(i) {
   if (i < 0 || i >= ERAS.length || i === era) return;
   select(null, false);
   const was = ERAS[era].id; era = i; const now = ERAS[era].id;
+  if (game) { game = null; setTimeout(startGame, 500); }
   if (map.getLayer(`${was}-fill`)) { map.setPaintProperty(`${was}-fill`, 'fill-opacity', 0); map.setPaintProperty(`${was}-line`, 'line-opacity', 0); }
   if (map.getLayer(`${now}-fill`)) { map.setPaintProperty(`${now}-fill`, 'fill-opacity', FILL); map.setPaintProperty(`${now}-line`, 'line-opacity', .75); }
   applyScan();
@@ -285,7 +359,14 @@ function draw() {
   document.getElementById('prev').disabled = era === 0; document.getElementById('next').disabled = era === ERAS.length - 1;
   document.getElementById('prev').setAttribute('aria-label', t('prev')); document.getElementById('next').setAttribute('aria-label', t('next'));
   const page = (() => { const u = new URL(e.page, location.href); if (lang !== 'az') u.searchParams.set('lang', lang); return u.pathname + u.search; })();
-  document.getElementById('side').innerHTML = `<div class="about"><h2>${e.id === 'today' ? esc(L(e.name)) : `${esc(L(e.name))}, ${esc(L(e.year))}`}</h2><p>${esc(L(e.about))}</p><p><a class="open" href="${page}">${esc(L(e.open))} →</a></p></div>${unitCard()}`;
+  document.getElementById('game').setAttribute('aria-pressed', !!game);
+  document.getElementById('game').textContent = game ? t('gameEnd') : t('gameBtn');
+  if (game) {
+    document.getElementById('side').innerHTML = gamePanel();
+    document.getElementById('skip')?.addEventListener('click', () => guess(null));
+    document.getElementById('end')?.addEventListener('click', endGame);
+    document.getElementById('again')?.addEventListener('click', startGame);
+  } else document.getElementById('side').innerHTML = `<div class="about"><h2>${e.id === 'today' ? esc(L(e.name)) : `${esc(L(e.name))}, ${esc(L(e.year))}`}</h2><p>${esc(L(e.about))}</p><p><a class="open" href="${page}">${esc(L(e.open))} →</a></p></div>${unitCard()}`;
   document.getElementById('legend').innerHTML = `<div class="row"><span class="sw"></span>${t('legendUnit')}</div>`
     + (['1939', '1989'].includes(e.id) ? `<div class="row"><span class="sw gap"></span>${t('legendGap')}</div>` : '')
     + (showToday ? `<div class="row"><span class="ln"></span>${t('legendToday')}</div>` : '');
@@ -302,6 +383,7 @@ function keepUrl() {
 }
 // ▶ steps through the eras, from the first again if at the last; any other move stops it
 let timer = null;
+function stopPlay() { clearInterval(timer); timer = null; drawPlay(); }
 function stop() { clearInterval(timer); timer = null; drawPlay(); }
 function drawPlay() { const b = document.getElementById('play'); b.setAttribute('aria-pressed', !!timer); b.textContent = timer ? '❚❚' : '▶'; b.setAttribute('aria-label', t(timer ? 'pause' : 'play')); }
 document.getElementById('play').onclick = () => {
@@ -311,6 +393,7 @@ document.getElementById('play').onclick = () => {
   drawPlay();
 };
 drawPlay();
+document.getElementById('game').onclick = () => game ? endGame() : startGame();
 document.getElementById('era').oninput = (e) => { stop(); setEra(+e.target.value); };
 document.getElementById('prev').onclick = () => { stop(); setEra(era - 1); };
 document.getElementById('next').onclick = () => { stop(); setEra(era + 1); };
@@ -322,7 +405,7 @@ document.addEventListener('keydown', (e) => {
   if (e.target.closest?.('input, textarea')) return;
   if (e.key === 'ArrowRight') setEra(era + 1);
   else if (e.key === 'ArrowLeft') setEra(era - 1);
-  else if (e.key === 'Escape') select(null);
+  else if (e.key === 'Escape') { if (game) endGame(); else select(null); }
 });
 function applyLang() {
   document.documentElement.lang = lang;
