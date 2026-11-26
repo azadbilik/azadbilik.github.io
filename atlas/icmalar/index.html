@@ -120,7 +120,7 @@ let lang = (() => {
   try { const s = localStorage.getItem('lang'); if (LANGS.includes(s)) return s; } catch {}
   return 'az';
 })();
-const nf = () => new Intl.NumberFormat({ az: 'az-Latn-AZ', ru: 'ru-RU', en: 'en-GB' }[lang]);
+const nf = () => new Intl.NumberFormat({ az: 'ru-RU', ru: 'ru-RU', en: 'en-GB' }[lang]);
 const T = {
   az: { doc: 'İcmalar · Azad Bilik', title: 'İcmalar', sub: 'Respublikadan kənarda azərbaycanlılar', share: 'Payı', count: 'Sayı',
     geo: 'Gürcüstan', dag: 'Dağıstan', arm: 'Ermənistan', of: (a, t) => `${a} azərbaycanlı · əhalinin ${t}`, ofTotal: 'əhalinin',

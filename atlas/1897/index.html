@@ -99,7 +99,7 @@ let lang = (() => {
   return 'az';
 })();
 const LI = { az: 0, ru: 1, en: 2 };
-const nf = () => new Intl.NumberFormat({ az: 'az-Latn-AZ', ru: 'ru-RU', en: 'en-GB' }[lang]);
+const nf = () => new Intl.NumberFormat({ az: 'ru-RU', ru: 'ru-RU', en: 'en-GB' }[lang]);
 const T = {
   az: { doc: '1897: ana dilləri · Azad Bilik', title: '1897: ana dilləri', sub: 'Qafqazda ilk siyahıyaalma, qəza-qəza', top: 'Ən böyük dil', one: 'Bir dil', share: 'Payı', count: 'Sayı',
     today: 'Bugünkü rayon sərhədləri', todayLegend: 'bugünkü rayonlar', total: (n) => `${n} nəfər`, area: '36 qəza və dairə: Bakı, Yelizavetpol, İrəvan quberniyaları, Dağıstan və Qars vilayətləri, Tiflis quberniyasından Borçalı qəzası və Zaqatala dairəsi',

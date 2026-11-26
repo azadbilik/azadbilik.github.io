@@ -98,7 +98,7 @@ let lang = (() => {
   return 'az';
 })();
 const LI = { az: 0, ru: 1, en: 2 };
-const nf = () => new Intl.NumberFormat({ az: 'az-Latn-AZ', ru: 'ru-RU', en: 'en-GB' }[lang]);
+const nf = () => new Intl.NumberFormat({ az: 'ru-RU', ru: 'ru-RU', en: 'en-GB' }[lang]);
 const T = {
   az: { doc: 'Xalqlar və dillər · Azad Bilik', title: 'Xalqlar və dillər', sub: 'Azərbaycanın xalqları rayonlar üzrə', peoples: 'Xalqlar', all: 'hamısı', dot: (n) => `1 nöqtə = ${n} nəfər`, azerbaijanis: 'Azərbaycanlılar',
     language: 'Dil', family: 'Ailə', status: 'UNESCO', scripts: 'Əlifba', unesco: ['', 'təhlükəsiz', 'həssas', 'təhlükə altında', 'ciddi təhlükə altında', 'kritik təhlükə altında', 'ölü'],

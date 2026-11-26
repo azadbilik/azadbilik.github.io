@@ -87,7 +87,7 @@ let lang = (() => {
   try { const s = localStorage.getItem('lang'); if (LANGS.includes(s)) return s; } catch {}
   return 'az';
 })();
-const nf = () => new Intl.NumberFormat({ az: 'az-Latn-AZ', ru: 'ru-RU', en: 'en-GB' }[lang]);
+const nf = () => new Intl.NumberFormat({ az: 'ru-RU', ru: 'ru-RU', en: 'en-GB' }[lang]);
 const T = {
   az: { doc: 'Kür–Araz hövzəsi · Azad Bilik', title: 'Kür–Araz hövzəsi', sub: 'Çaylar və göllər', find: 'Çay axtar…', rivers: (n) => `${n} çay`, lakes: 'Göllər və su anbarları', length: 'Uzunluğu', whole: 'bütün uzunluğu, mənbədən mənsəbədək', inAz: 'Azərbaycandakı hissəsi', names: 'Adları', back: '← Bütün çaylar', km: 'km', area: 'sahəsi', wiki: 'Vikipediya',
     seasonH: 'İl boyu Kür', months: ['yan','fev','mar','apr','may','iyn','iyl','avq','sen','okt','noy','dek'], monthsLong: ['Yanvar','Fevral','Mart','Aprel','May','İyun','İyul','Avqust','Sentyabr','Oktyabr','Noyabr','Dekabr'], flowNote: (m) => m === 5 ? 'qar əriyir: ilin ən gur ayı' : m === 8 ? 'ən az su' : '', allYear: 'Bütün il', flowSrc: 'Kür, Surra məntəqəsi (Arazdan aşağı), 1930–1984-cü illərin aylıq orta axımı; zolaq — ən az və ən çox. Xəritədə bütün çaylar Kür kimi şişir — bu, sadələşdirmədir. Mənbə: GRDC.',

@@ -198,7 +198,7 @@ let lang = (() => {
   try { const s = localStorage.getItem('lang'); if (LANGS.includes(s)) return s; } catch {}
   return 'az';
 })();
-const NF = { az: 'az-Latn-AZ', ru: 'ru-RU', en: 'en-GB' };
+const NF = { az: 'ru-RU', ru: 'ru-RU', en: 'en-GB' };
 const nf = (v, d = 0) => new Intl.NumberFormat(NF[lang], { maximumFractionDigits: d, minimumFractionDigits: d }).format(v);
 const CODES = ['AZE', 'GEO', 'KAZ', 'UZB', 'TUR'];
 const CLS = { 'Agriculture': ['Kənd təsərrüfatı', 'Сельское хозяйство', 'Agriculture'], 'Construction, Building, and Home Supplies': ['Tikinti və məişət malları', 'Стройматериалы и товары для дома', 'Construction, building and home supplies'],

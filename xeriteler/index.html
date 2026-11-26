@@ -81,6 +81,10 @@
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
   /* Phones: the language switch on the brand's line, the sections on the line below */
   @media (max-width: 40rem) { header { position: relative; } header .langs { position: absolute; top: calc(1.75rem - .19rem); right: 0; margin: 0; } }
+  /* A card's cover in each theme: the map without its panel, light or dark */
+  .map .pic img.d { display: none; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .map .pic img.l { display: none; } :root:not([data-theme="light"]) .map .pic img.d { display: block; } }
+  :root[data-theme="dark"] .map .pic img.l { display: none; } :root[data-theme="dark"] .map .pic img.d { display: block; }
 </style>
 </head>
 <body>
@@ -101,7 +105,7 @@
       <ul class="maps">
         <li class="map">
           <a href="/xerite/" data-keep-lang>
-            <div class="pic"><img src="/xerite/og.png" width="1200" height="630" alt="" loading="lazy"></div>
+            <div class="pic"><img class="l" src="/xerite/card.webp" width="800" height="420" alt="" loading="lazy"><img class="d" src="/xerite/card-dark.webp" width="800" height="420" alt="" loading="lazy"></div>
             <h3><span data-l="az">Ədəbiyyat xəritəsi</span><span data-l="ru">Литературная карта</span><span data-l="en">Literary map</span></h3>
             <p><span data-l="az">Kitabxana müəlliflərinin doğulduğu və vəfat etdiyi yerlər, əsrlər üzrə; el şairləri gəldikləri kənddə.</span><span data-l="ru">Где родились и умерли авторы библиотеки, век за веком; народные поэты — там, откуда они родом.</span><span data-l="en">Where kitabxana's authors were born and died, century by century; folk poets where they came from.</span></p>
             <p class="facts"><span data-l="az">318 müəllif · 149 yer · XII–XXI əsrlər</span><span data-l="ru">318 авторов · 149 мест · XII–XXI века</span><span data-l="en">318 authors · 149 places · 12th–21st centuries</span></p>
@@ -109,15 +113,15 @@
         </li>
         <li class="map">
           <a href="/sebeke/nezire/" data-keep-lang>
-            <div class="pic"><img src="/sebeke/nezire/og.png" width="1200" height="630" alt="" loading="lazy"></div>
+            <div class="pic"><img class="l" src="/sebeke/nezire/card.webp" width="800" height="420" alt="" loading="lazy"><img class="d" src="/sebeke/nezire/card-dark.webp" width="800" height="420" alt="" loading="lazy"></div>
             <h3><span data-l="az">Nəzirə şəbəkəsi</span><span data-l="ru">Сеть назира</span><span data-l="en">Who answered whom</span></h3>
             <p><span data-l="az">Klassik şairlər bir-birinə şeirlə necə cavab verib: nəzirə, təxmis, cavab; köhnə şair solda, ona cavab yazan sağda.</span><span data-l="ru">Как классики отвечали друг другу стихами: назира, тахмис, ответ; старший поэт слева, ответивший справа.</span><span data-l="en">How classical poets answered each other in verse: nazira, takhmis, replies; the older poet on the left, the one who answered on the right.</span></p>
-            <p class="facts"><span data-l="az">79 şair · 434 əlaqə · 493 şeir</span><span data-l="ru">79 поэтов · 434 связи · 493 стихотворения</span><span data-l="en">79 poets · 434 links · 493 poems</span></p>
+            <p class="facts"><span data-l="az">59 şair · 89 əlaqə · 25 807 şeirdə</span><span data-l="ru">59 поэтов · 89 связей · в 25 807 стихотворениях</span><span data-l="en">59 poets · 89 links · in 25,807 poems</span></p>
           </a>
         </li>
         <li class="map">
           <a href="/sebeke/qalaktika/" data-keep-lang>
-            <div class="pic"><img src="/sebeke/qalaktika/og.png" width="1200" height="630" alt="" loading="lazy"></div>
+            <div class="pic"><img class="l" src="/sebeke/qalaktika/card.webp" width="800" height="420" alt="" loading="lazy"><img class="d" src="/sebeke/qalaktika/card-dark.webp" width="800" height="420" alt="" loading="lazy"></div>
             <h3><span data-l="az">Ədəbiyyat qalaktikası</span><span data-l="ru">Галактика литературы</span><span data-l="en">The literature galaxy</span></h3>
             <p><span data-l="az">Kitabxanadakı hər əsər bir nöqtədir, mətni oxşar olanlar yan-yana: əsrə, müəllifə, janra, dilə görə rənglənir.</span><span data-l="ru">Каждое произведение библиотеки — точка, похожие по тексту рядом; цвет по веку, автору, жанру, языку.</span><span data-l="en">Every work in the library as one point, those that read alike side by side, coloured by century, author, genre or language.</span></p>
             <p class="facts"><span data-l="az">49 903 əsər</span><span data-l="ru">49 903 произведения</span><span data-l="en">49,903 works</span></p>
@@ -130,7 +134,7 @@
       <ul class="maps">
         <li class="map">
           <a href="/xeriteler/iskender/" data-keep-lang>
-            <div class="pic"><img src="/xeriteler/iskender/og.png" width="1200" height="630" alt="" loading="lazy"></div>
+            <div class="pic"><img class="l" src="/xeriteler/iskender/card.webp" width="800" height="420" alt="" loading="lazy"><img class="d" src="/xeriteler/iskender/card-dark.webp" width="800" height="420" alt="" loading="lazy"></div>
             <h3><span data-l="az">İskəndərin səfərləri</span><span data-l="ru">Походы Искандера</span><span data-l="en">Iskandar's journeys</span></h3>
             <p><span data-l="az">Nizaminin «İskəndərnamə»si xəritədə: Məqduniyyədən Misirə, Bərdəyə, Çinə və Zülmət diyarına; hər dayanacaq öz fəsli və miniatürləri ilə.</span><span data-l="ru">«Искандер-наме» Низами на карте: из Македонии в Египет, Барду, Китай и Страну Мрака; каждая остановка со своей главой и миниатюрами.</span><span data-l="en">Nizami's Iskandarnama on the map: from Macedonia to Egypt, Bardaʿa, China and the Land of Darkness, each stop with its chapter and miniatures.</span></p>
             <p class="facts"><span data-l="az">28 dayanacaq · 103 miniatür · 2 poema</span><span data-l="ru">28 остановок · 103 миниатюры · 2 поэмы</span><span data-l="en">28 stops · 103 miniatures · 2 poems</span></p>
@@ -138,7 +142,7 @@
         </li>
         <li class="map">
           <a href="/xeriteler/xosrov-sirin/" data-keep-lang>
-            <div class="pic"><img src="/xeriteler/xosrov-sirin/og.png" width="1200" height="630" alt="" loading="lazy"></div>
+            <div class="pic"><img class="l" src="/xeriteler/xosrov-sirin/card.webp" width="800" height="420" alt="" loading="lazy"><img class="d" src="/xeriteler/xosrov-sirin/card-dark.webp" width="800" height="420" alt="" loading="lazy"></div>
             <h3><span data-l="az">Xosrov və Şirin</span><span data-l="ru">Хосров и Ширин</span><span data-l="en">Khusraw and Shirin</span></h3>
             <p><span data-l="az">Nizaminin poeması xəritədə: Xosrovun, Şirinin və Fərhadın yolları Mədaindən Ərmənə, Muğana, Bərdəyə, Rum qeysərinin sarayına və Bisütuna.</span><span data-l="ru">Поэма Низами на карте: пути Хосрова, Ширин и Фархада из Мадаина в Армению, Мугань, Барду, ко двору кесаря и к Бисутуну.</span><span data-l="en">Nizami's poem on the map: the roads of Khusraw, Shirin and Farhad from Madaʿin to Armenia, Mughan, Bardaʿa, Caesar's court and Bisutun.</span></p>
             <p class="facts"><span data-l="az">21 dayanacaq · 177 miniatür · 3 qəhrəman</span><span data-l="ru">21 остановка · 177 миниатюр · 3 героя</span><span data-l="en">21 stops · 177 miniatures · 3 travellers</span></p>
@@ -146,7 +150,7 @@
         </li>
         <li class="map">
           <a href="/xeriteler/yeddi-gozel/" data-keep-lang>
-            <div class="pic"><img src="/xeriteler/yeddi-gozel/og.png" width="1200" height="630" alt="" loading="lazy"></div>
+            <div class="pic"><img class="l" src="/xeriteler/yeddi-gozel/card.webp" width="800" height="420" alt="" loading="lazy"><img class="d" src="/xeriteler/yeddi-gozel/card-dark.webp" width="800" height="420" alt="" loading="lazy"></div>
             <h3><span data-l="az">Yeddi gözəl</span><span data-l="ru">Семь красавиц</span><span data-l="en">The Seven Beauties</span></h3>
             <p><span data-l="az">Bəhramın Xəvərnəqdən İran taxtına yolu və yeddi gözəlin yeddi ölkəsi: Hindistan, Rum, Xarəzm, Səqlab, Məğrib, Çin və İran, hər biri öz günbəzi və nağılı ilə.</span><span data-l="ru">Путь Бахрама из Хаварнака к трону Ирана и семь стран семи красавиц: Индия, Рум, Хорезм, славяне, Магриб, Китай и Иран — каждая со своим куполом и сказкой.</span><span data-l="en">Bahram's road from Khawarnaq to the throne of Iran, and the seven brides' lands: India, Rum, Khwarazm, the Slavs, the Maghrib, China and Iran, each with her pavilion and her tale.</span></p>
             <p class="facts"><span data-l="az">13 dayanacaq · 177 miniatür · 7 ölkə</span><span data-l="ru">13 остановок · 177 миниатюр · 7 стран</span><span data-l="en">13 stops · 177 miniatures · 7 lands</span></p>
@@ -159,7 +163,7 @@
       <ul class="maps">
         <li class="map">
           <a href="/qalereya/emalatxana/" data-keep-lang>
-            <div class="pic"><img src="/qalereya/emalatxana/og.png" width="1200" height="630" alt="" loading="lazy"></div>
+            <div class="pic"><img class="l" src="/qalereya/emalatxana/card.webp" width="800" height="420" alt="" loading="lazy"><img class="d" src="/qalereya/emalatxana/card-dark.webp" width="800" height="420" alt="" loading="lazy"></div>
             <h3><span data-l="az">Emalatxanalar</span><span data-l="ru">Мастерские</span><span data-l="en">Workshops</span></h3>
             <p><span data-l="az">Nizami və Füzulinin poemalarına miniatürlər harada çəkilib: Təbriz, Herat, Şiraz, Buxara…, hər əlyazma hamisi, rəssamları və bu günkü yeri ilə.</span><span data-l="ru">Где писали миниатюры к поэмам Низами и Физули: Тебриз, Герат, Шираз, Бухара… — каждая рукопись с заказчиком, художниками и местом хранения.</span><span data-l="en">Where the miniatures for Nizami's and Fuzuli's poems were painted: Tabriz, Herat, Shiraz, Bukhara…, each manuscript with its patron, painters and present home.</span></p>
             <p class="facts"><span data-l="az">16 şəhər · 402 miniatür · 1386–1883</span><span data-l="ru">16 городов · 402 миниатюры · 1386–1883</span><span data-l="en">16 cities · 402 miniatures · 1386–1883</span></p>

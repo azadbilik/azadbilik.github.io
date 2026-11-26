@@ -78,7 +78,7 @@ let lang = (() => {
   try { const s = localStorage.getItem('lang'); if (LANGS.includes(s)) return s; } catch {}
   return 'az';
 })();
-const nf = () => new Intl.NumberFormat({ az: 'az-Latn-AZ', ru: 'ru-RU', en: 'en-GB' }[lang]);
+const nf = () => new Intl.NumberFormat({ az: 'ru-RU', ru: 'ru-RU', en: 'en-GB' }[lang]);
 const T = {
   az: { doc: 'Işıqlar · Azad Bilik', title: 'Işıqlar', sub: 'İnsanlar harada yaşayır', v3: 'Dağlar (3D)', v2: 'Xəritə', az: 'Azərbaycan Respublikası', ir: 'İran Azərbaycanı', irNote: 'Şərqi və Qərbi Azərbaycan, Ərdəbil, Zəncan', perKm: 'nəfər/km²', people: 'nəfər', legend: 'Sıxlıq, nəfər/km²', gameBtn: 'Oyun: hansı şəhərdir?', gameEnd: 'Oyunu bitir', q: 'Bu işıqlar hansı şəhərindir?', next: 'Növbəti', score: 'Xal', of: (a, b) => `${b} sualdan ${a}`, done: 'Bitdi!',
     about: ['Hər altıbucaqlı təxminən 5 km²-dir; hündürlüyü və rəngi orada yaşayanların sıxlığıdır. Rəqəmlər Kontur Population verilənlərindəndir (2023, peyk şəkillərindən və siyahıyaalmalardan qiymətləndirilib, CC BY 4.0); rəsmi siyahıyaalma rəqəmləri «Əhali» xəritəsindədir.'] },

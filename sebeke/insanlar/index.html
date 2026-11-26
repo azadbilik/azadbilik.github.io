@@ -244,7 +244,7 @@ let lang = (() => {
   try { const s = localStorage.getItem('lang'); if (LANGS.includes(s)) return s; } catch {}
   return 'az';
 })();
-const NF = { az: 'az-Latn-AZ', ru: 'ru-RU', en: 'en-GB' };
+const NF = { az: 'ru-RU', ru: 'ru-RU', en: 'en-GB' };
 const nf = (v) => new Intl.NumberFormat(NF[lang]).format(v);
 const dark = () => (window.abTheme ? abTheme.dark() : matchMedia('(prefers-color-scheme: dark)').matches);
 const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
