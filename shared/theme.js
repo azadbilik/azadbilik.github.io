@@ -45,7 +45,9 @@
     maps.push(m);
   }
   const VARS = ['--paper', '--ink', '--muted', '--rule', '--frame', '--accent', '--second', '--third', '--fourth', '--panel', '--water', '--land'];
-  const snap = () => { const cs = getComputedStyle(root); return VARS.map((v) => cs.getPropertyValue(v).trim()); };
+  // ...and every variable the page itself defines (a page's own palette: --e0, --c3, --sky …)
+  const pageVars = () => { const set = new Set(VARS); for (const st of document.querySelectorAll('style')) for (const m of st.textContent.matchAll(/(--[a-z0-9-]+)\s*:/gi)) set.add(m[1]); return [...set]; };
+  const snap = (vars) => { const cs = getComputedStyle(root); return vars.map((v) => cs.getPropertyValue(v).trim()); };
   // `dark ? 'x' : 'y'` in the page's scripts: colours chosen once for the theme the page started in
   function scriptPairs() {
     const out = [];
@@ -123,10 +125,10 @@
     };
     b.onclick = () => {
       const next = dark() ? 'light' : 'dark';
-      const before = snap();
+      const vars = pageVars(), before = snap(vars);
       root.dataset.theme = next;
       try { localStorage.setItem('theme', next); } catch {}
-      const after = snap(), swap = new Map();
+      const after = snap(vars), swap = new Map();
       before.forEach((c, i) => { if (c && c !== after[i]) swap.set(c, after[i]); });
       for (const [d, l] of scriptPairs()) { if (next === 'dark') swap.set(l, d); else swap.set(d, l); }
       draw(); paintMeta();

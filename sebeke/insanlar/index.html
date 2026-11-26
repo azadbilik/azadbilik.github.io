@@ -689,7 +689,8 @@ document.querySelectorAll('[data-lang]').forEach((b) => (b.onclick = () => {
   const u = new URL(location.href); if (lang === 'az') u.searchParams.delete('lang'); else u.searchParams.set('lang', lang); history.replaceState(null, '', u);
   applyLang();
 }));
-addEventListener('themechange', () => { /* theme.js reloads pages with a map */ });
+// The maps change style in place (shared/theme.js); the network, the legends and the colours drawn from CSS follow
+addEventListener('themechange', () => setTimeout(() => { try { legendMap(); legendNet(); paint(); } catch {} }));
 applyLang();
 $('gload').textContent = t('gload');
 

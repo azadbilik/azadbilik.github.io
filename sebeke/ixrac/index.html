@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="/shared/theme.js"></script>
 <title>İxrac məhsul fəzası · Azad Bilik</title>
 <meta name="description" content="Azərbaycanın ixrac məhsul fəzası: 1995–2024 hansı məhsullar rəqabətqabiliyyətlidir, neft-qaz payı və mövcud istehsala yaxın imkanlar. Azerbaijan's export product space, 1995–2024, after the Harvard Growth Lab's Atlas of Economic Complexity.">
 <meta name="theme-color" content="#F4EFE6" media="(prefers-color-scheme: light)">
@@ -17,7 +18,9 @@
 <link rel="stylesheet" href="/shared/story-map.css">
 <style>
   :root { --c0: #5B6B2E; --c1: #A86B12; --c2: #1F5C73; --c3: #7A5C8E; --c4: #A81E28; --c5: #7D6A57; --c6: #B8395C; --c7: #2F8F7A; --off: #9a9087; }
-  @media (prefers-color-scheme: dark) { :root { --c0: #A9BC6A; --c1: #E0A64A; --c2: #6FB3CC; --c3: #B596C9; --c4: #DA5A61; --c5: #BFA98F; --c6: #E37A93; --c7: #5FC2A5; --off: #6d645b; } }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --c0: #A9BC6A; --c1: #E0A64A; --c2: #6FB3CC; --c3: #B596C9; --c4: #DA5A61; --c5: #BFA98F; --c6: #E37A93; --c7: #5FC2A5; --off: #6d645b; } }
+  :root[data-theme="dark"] { --c0: #A9BC6A; --c1: #E0A64A; --c2: #6FB3CC; --c3: #B596C9; --c4: #DA5A61; --c5: #BFA98F; --c6: #E37A93; --c7: #5FC2A5; --off: #6d645b; }
+
   html, body { height: auto; }
   body { overflow-x: hidden; overflow-y: auto; }
   .wrap { max-width: 64rem; margin: 0 auto; padding: 0 1.5rem; }
@@ -268,7 +271,8 @@ const t = (k) => T[lang][k];
 
 let D = null, country = CODES.includes(qs.get('c')) ? qs.get('c') : 'AZE', year = 2024, sort = 'bal', showN = 15, sel = qs.get('p') || null, hover = null, opps = [];
 const $ = (id) => document.getElementById(id);
-const dark = () => matchMedia('(prefers-color-scheme: dark)').matches;
+const dark = () => (window.abTheme ? abTheme.dark() : matchMedia('(prefers-color-scheme: dark)').matches);
+addEventListener('themechange', () => setTimeout(() => { try { refresh(); charts(); legend(); } catch {} }));
 const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
 const reduce = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 const cname = (c) => t('names')[c ?? country];
