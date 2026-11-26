@@ -1,6 +1,6 @@
 {
  "note": "Hand-read from lineage.candidates.json: t taught s, as the sentence says. Re-read before trusting a re-run.",
- "dropped": 277,
+ "dropped": 352,
  "links": [
   {
    "t": "Q4131492",
@@ -526,6 +526,272 @@
    "lang": "az",
    "article": "https://az.wikipedia.org/wiki/Ağasəlim_Abdullayev",
    "sentence": "Azərbaycan mədəniyyətini, musiqisini dünyanın dörd bir yanında təmsil edən, ən çox tanınan tarzənlər — Sahib Paşazadə, Şəhriyar İmanov, Bəhruz Zeynal və bir çox tarzənlər onun tələbələridir."
+  },
+  {
+   "t": "Q4311350",
+   "s": "Q4528165",
+   "lang": "ru",
+   "article": "https://ru.wikipedia.org/wiki/Шушинский,_Сеид",
+   "sentence": "Сеид Шушинский владел секретами вокального искусства, полученными сначала у Навваба, у которого обучался два года, а затем у Джаббара Карьягдыоглу.",
+   "offmap": true
+  },
+  {
+   "t": "Q4311350",
+   "s": "Q4054565",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/İslam_Abdullayev",
+   "sentence": "Beləliklə, o, Mir Möhsün Nəvvab, Hacı Hüsü, Məşədi İsi, Mirzə Muxtar Məmmədov, Dəli İsmayıl, Keştazlı Həşim kimi sənətkarlardan dərs almış, Sadıqcanın müşayiəti ilə ifalar etmişdir.",
+   "offmap": true
+  },
+  {
+   "t": "Q16371328",
+   "s": "Q55203819",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Xanlıq_Şükür",
+   "sentence": "Xanlıq Şükür Natəvanın yaratdığı və rəhbərlik etdiyi \"Məclisi-üns\" ədəbi məclislərində iştirak etmiş, şairlərin oxuduğu şeirləri dinləmiş və Hacı Hüsü, Məşədi İsi, Həsənçə, Sadıqcan kimi musiqiçilərdən muğamın incəliklərini öyrənmişdir.",
+   "offmap": true
+  },
+  {
+   "t": "Q16371328",
+   "s": "Q12841664",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Malıbəyli_Həmid",
+   "sentence": "O, bir müddət arabaçı işləmiş, sonralar isə Hacı Hüsünün təşkil elədiyi \"Xanəndələr məclisi\"nə daxil olmuş, burada Hacı Hüsü və Məşədi İsidən klassik Şərq və Azərbaycan muğamlarını öyrənmişdir.",
+   "offmap": true
+  },
+  {
+   "t": "Q16371328",
+   "s": "Q4054565",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/İslam_Abdullayev",
+   "sentence": "Beləliklə, o, Mir Möhsün Nəvvab, Hacı Hüsü, Məşədi İsi, Mirzə Muxtar Məmmədov, Dəli İsmayıl, Keştazlı Həşim kimi sənətkarlardan dərs almış, Sadıqcanın müşayiəti ilə ifalar etmişdir.",
+   "offmap": true
+  },
+  {
+   "t": "Q1977953",
+   "s": "Q55203819",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Xanlıq_Şükür",
+   "sentence": "Xanlıq Şükür Natəvanın yaratdığı və rəhbərlik etdiyi \"Məclisi-üns\" ədəbi məclislərində iştirak etmiş, şairlərin oxuduğu şeirləri dinləmiş və Hacı Hüsü, Məşədi İsi, Həsənçə, Sadıqcan kimi musiqiçilərdən muğamın incəliklərini öyrənmişdir.",
+   "offmap": true
+  },
+  {
+   "t": "Q603950",
+   "s": "Q6028583",
+   "lang": "en",
+   "article": "https://en.wikipedia.org/wiki/Sara_Gadimova",
+   "sentence": "Among her music mentors were Huseyngulu Sarabski, Khan Shushinski and Seyid Shushinski.",
+   "offmap": true
+  },
+  {
+   "t": "Q2074733",
+   "s": "Q61122097",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Oqtay_Quliyev",
+   "sentence": "Tələbəsinin istedadını yüksək qiymətləndirən Səid Rüstəmov ona böyük etimad göstərərək, bədii rəhbəri və baş dirijoru olduğu əməkdar kollektivə - Xalq çalğı alətləri orkestrinə solist işləməyə dəvət edir.",
+   "offmap": true
+  },
+  {
+   "t": "Q2074733",
+   "s": "Q39394656",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Adil_Bağırov_(tarzən)",
+   "sentence": "Azərbaycan Dövlət Musiqi Məktəbində tar ixtisası üzrə təhsil almış, müəllimləri Mirzə Mansur Mansurov, Səid Rüstəmov olmuşdur.",
+   "offmap": true
+  },
+  {
+   "t": "Q12841892",
+   "s": "Q12837124",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Aşıq_Məhərrəm_Hüseynli",
+   "sentence": "O, ustadı Aşıq Mikayıl Azaflı ilə yanaşı Aşıq Aydın Çobanoğlu, Aşıq Rza Qobustanlı, Aşıq Əjdər (İbrahimov), Aşıq-balabancı Sərdar Məmmədli, Aşıq Cuma ilə də Novruz və digər toplantılarda  birgə çıxışlar edib.",
+   "offmap": true
+  },
+  {
+   "t": "x:qemkes-allahverdi",
+   "s": "Q16365354",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Aşıq_Ədalət_Dəlidağlı",
+   "sentence": "Məhz bu sirlərə yiyələnmək üçün sonralar \"Bala Ədalət\" Qəmkeş Allahverdidən, 1993–1998-ci illərdə isə Azərbaycanın əməkdar incəsənət xadimi, ustad aşıq, \"Şöhrət\" ordenli, prezident təqaüdçüsü Ədalət Nəsibovdan mükkəməl dərs almışdır.",
+   "offmap": true
+  },
+  {
+   "t": "x:qemkes-allahverdi",
+   "s": "Q12836241",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Aybəniz_Laçınlı",
+   "sentence": "Dədə Şəmşirin lent yazılarından, radioda olan çıxışlarından bəhrələnən Aybəniz 1980-ci ildə Kəlbəcər rayonundan olan tanınmış ustad aşıq Qəmkeş Allahverdinin şagirdi olmuşdur.",
+   "offmap": true
+  },
+  {
+   "t": "x:xindi-mehemmed",
+   "s": "Q16365291",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Aşıq_Məhəmməd_Sadaxlı",
+   "sentence": "Məşhur Borçalı aşığı Xındı Məhəmmədin şagirdi olması, onunla məclislərə getməsi, Sadaxlı Məhəmmədin klassik və milli ənənələrə bağlı aşıq kimi yetişməsinə böyük təsir göstərmişdir.",
+   "offmap": true
+  },
+  {
+   "t": "x:veli-qaraxanli",
+   "s": "Q12837122",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Aşıq_Mahmud_Məmmədov",
+   "sentence": "Mahmud Qasım oğlu Tovuzda 7 illik təhsilini başa vurandan sonra aşıq sənətinə ciddi maraq göstərib və o vaxtlar Tovuz-Gəncəbasar bölgəsində böyük nüfuzu olan ustad aşıq Vəli Qaraxanlının yanına şəyirdliyə verilib.",
+   "offmap": true
+  },
+  {
+   "t": "x:kestazli-hesim",
+   "s": "Q4054565",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/İslam_Abdullayev",
+   "sentence": "Beləliklə, o, Mir Möhsün Nəvvab, Hacı Hüsü, Məşədi İsi, Mirzə Muxtar Məmmədov, Dəli İsmayıl, Keştazlı Həşim kimi sənətkarlardan dərs almış, Sadıqcanın müşayiəti ilə ifalar etmişdir.",
+   "offmap": true
+  },
+  {
+   "t": "x:deli-ismayil",
+   "s": "Q4054565",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/İslam_Abdullayev",
+   "sentence": "Beləliklə, o, Mir Möhsün Nəvvab, Hacı Hüsü, Məşədi İsi, Mirzə Muxtar Məmmədov, Dəli İsmayıl, Keştazlı Həşim kimi sənətkarlardan dərs almış, Sadıqcanın müşayiəti ilə ifalar etmişdir.",
+   "offmap": true
+  },
+  {
+   "t": "Q4216454",
+   "s": "Q1131312",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Cabbar_Qaryağdıoğlu",
+   "sentence": "Seyid Şuşinski, Bülbül, Davud Səfiyarov, Zülfü Adıgözəlov, Xan Şuşinski, Cahan Talışinskaya, Yavər Kələntərli, Mütəllim Mütəllimov kimi görkəmli muğam ustaları məhz Cabbar Qaryağdıoğlunun tələbələri olmuşlar.",
+   "offmap": true
+  },
+  {
+   "t": "Q4216454",
+   "s": "Q20557612",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Cabbar_Qaryağdıoğlu",
+   "sentence": "Seyid Şuşinski, Bülbül, Davud Səfiyarov, Zülfü Adıgözəlov, Xan Şuşinski, Cahan Talışinskaya, Yavər Kələntərli, Mütəllim Mütəllimov kimi görkəmli muğam ustaları məhz Cabbar Qaryağdıoğlunun tələbələri olmuşlar.",
+   "offmap": true
+  },
+  {
+   "t": "Q4216454",
+   "s": "x:mutellim-mutellimov",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Cabbar_Qaryağdıoğlu",
+   "sentence": "Seyid Şuşinski, Bülbül, Davud Səfiyarov, Zülfü Adıgözəlov, Xan Şuşinski, Cahan Talışinskaya, Yavər Kələntərli, Mütəllim Mütəllimov kimi görkəmli muğam ustaları məhz Cabbar Qaryağdıoğlunun tələbələri olmuşlar.",
+   "offmap": true
+  },
+  {
+   "t": "x:mutellim-mutellimov",
+   "s": "Q16376261",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Yaqub_Məmmədov_(xanəndə)",
+   "sentence": "Görkəmli xanəndə Seyid Şuşinskidən ve xanəndə Mütəllim Mütəllimovdan muğam dəsgahları, xanəndəlik sənətinin sirlərini öyrənmiş, həmçinin musiqi və poeziya sahəsində dərin biliklər qazanmışdır.",
+   "offmap": true
+  }
+ ],
+ "extra": [
+  {
+   "id": "Q4311350",
+   "qid": "Q4311350",
+   "az": "Mir Möhsün Nəvvab",
+   "roles": [
+    "khanende"
+   ]
+  },
+  {
+   "id": "Q16371328",
+   "qid": "Q16371328",
+   "az": "Məşədi İsi",
+   "roles": [
+    "khanende"
+   ]
+  },
+  {
+   "id": "Q603950",
+   "qid": "Q603950",
+   "az": "Hüseynqulu Sarabski",
+   "roles": [
+    "khanende"
+   ]
+  },
+  {
+   "id": "Q20557612",
+   "qid": "Q20557612",
+   "az": "Davud Səfiyarov",
+   "roles": [
+    "khanende"
+   ]
+  },
+  {
+   "id": "Q1977953",
+   "qid": "Q1977953",
+   "az": "Sadıqcan",
+   "roles": [
+    "tar"
+   ]
+  },
+  {
+   "id": "Q2074733",
+   "qid": "Q2074733",
+   "az": "Səid Rüstəmov",
+   "roles": [
+    "tar"
+   ]
+  },
+  {
+   "id": "Q12841892",
+   "qid": "Q12841892",
+   "az": "Aşıq Mikayıl Azaflı",
+   "roles": [
+    "ashik"
+   ]
+  },
+  {
+   "id": "x:mutellim-mutellimov",
+   "qid": null,
+   "az": "Mütəllim Mütəllimov",
+   "roles": [
+    "khanende"
+   ]
+  },
+  {
+   "id": "x:qemkes-allahverdi",
+   "qid": null,
+   "az": "Qəmkeş Allahverdi",
+   "roles": [
+    "ashik"
+   ]
+  },
+  {
+   "id": "x:xindi-mehemmed",
+   "qid": null,
+   "az": "Xındı Məhəmməd",
+   "roles": [
+    "ashik"
+   ]
+  },
+  {
+   "id": "x:veli-qaraxanli",
+   "qid": null,
+   "az": "Vəli Qaraxanlı",
+   "roles": [
+    "ashik"
+   ]
+  },
+  {
+   "id": "x:kestazli-hesim",
+   "qid": null,
+   "az": "Keştazlı Həşim",
+   "roles": [
+    "khanende"
+   ]
+  },
+  {
+   "id": "x:deli-ismayil",
+   "qid": null,
+   "az": "Dəli İsmayıl",
+   "roles": [
+    "khanende"
+   ]
   }
  ]
 }

@@ -14,6 +14,20 @@ const P = new Map(cand.people.map((p) => [p.qid, p]));
 const NOT_HERE = new Set(['Q2038818', 'Q4059718', 'Q4330728', 'Q3056892', 'Q2073149', 'Q136126071']);
 const named = (q) => { const p = P.get(q); return p && (p.az || p.en || p.ru); };
 
+// Teachers named in the sentences who are not on the music map: kept here only, never in musicians.json.
+// Wikidata supplies their names, years and articles where an item exists
+const extra = new Map((text.extra ?? []).map((e) => [e.id, e]));
+const qx = [...extra.values()].filter((e) => e.qid).map((e) => e.qid);
+if (qx.length) {
+  const j = await (await fetch(`https://www.wikidata.org/w/api.php?action=wbgetentities&format=json&props=labels|claims|sitelinks&languages=az|ru|en&ids=${qx.join('|')}`, { headers: { 'User-Agent': 'azadbilik-musiqi/0.1 (https://github.com/azadbilik)' } })).json();
+  const yr = (c) => c?.[0]?.mainsnak?.datavalue?.value?.time ? Number(c[0].mainsnak.datavalue.value.time.slice(1, 5)) : null;
+  for (const [q, en] of Object.entries(j.entities ?? {})) {
+    const e = extra.get(q); if (!e) continue;
+    for (const l of ['az', 'ru', 'en']) if (en.labels?.[l]) e[l] ??= en.labels[l].value;
+    e.born = yr(en.claims?.P569); e.died = yr(en.claims?.P570);
+    e.wiki = Object.fromEntries(['az', 'ru', 'en'].filter((l) => en.sitelinks?.[`${l}wiki`]).map((l) => [l, en.sitelinks[`${l}wiki`].title.replace(/ /g, '_')]));
+  }
+}
 const links = [];
 for (const l of cand.wikidata) {
   if (NOT_HERE.has(l.teacher) || NOT_HERE.has(l.student) || !named(l.teacher) || !named(l.student)) continue;
@@ -26,6 +40,8 @@ for (const l of text.links) {
 }
 const ids = new Set(links.flatMap((l) => [l.t, l.s]));
 const people = [...ids].map((q) => {
+  const x = extra.get(q);
+  if (x) return Object.fromEntries(Object.entries({ qid: x.qid ?? q, id: q, az: x.az, ru: x.ru, en: x.en, born: x.born, died: x.died, roles: x.roles, wiki: x.wiki, offmap: true }).filter(([, v]) => v != null));
   const p = P.get(q);
   const o = { qid: q, az: p.az, ru: p.ru, en: p.en, born: p.born ?? null, died: p.died ?? null, roles: p.roles ?? roleFrom(p.occ), place: p.place, kitabxana: p.kitabxana, wiki: p.wiki };
   return Object.fromEntries(Object.entries(o).filter(([, v]) => v != null && !(Array.isArray(v) && !v.length)));
@@ -38,7 +54,7 @@ function roleFrom(occ = []) {
   return r;
 }
 const wd = links.filter((l) => l.src === 'wikidata').length, tx = links.length - wd;
-const out = { built: cand.built, stats: { people: people.length, links: links.length, wd, tx, base: mus.size, candidates: cand.candidates.length }, people, links };
+const out = { built: cand.built, stats: { offmap: people.filter((p) => p.offmap).length, people: people.length, links: links.length, wd, tx, base: mus.size, candidates: cand.candidates.length }, people, links };
 await writeFile(new URL('../silsile/data/lineage.json', import.meta.url), JSON.stringify(out) + '\n');
 
 // QuickStatements (V1, tab-separated) for the text links Wikidata lacks: «student P1066 teacher», sourced
