@@ -1,0 +1,99 @@
+{
+ "source": "https://ethno-kavkaz.narod.ru/rnazerbaijan.html",
+ "note": "All-Union census of 17 December 1926, Azerbaijan SSR by uezd (without the Nagorno-Karabakh AO), total population as ethno-kavkaz.narod.ru tabulates it from the census volumes (vol. XIV); every uezd total agrees with Russian Wikipedia's uezd articles, which cite Demoscope. Baku and Ganja are counted apart from their uezds. No urban figures. Nagorno-Karabakh from Demoscope's nationality table. Copied 2026-11-25/26 while Demoscope itself was unreachable.",
+ "rows": [
+  {
+   "name": "Азербайджанская ССР",
+   "total": 2314430,
+   "urban": null,
+   "comment": "The sum of the rows below (2,314,430); the census total usually cited is 2,314,571."
+  },
+  {
+   "name": "г. Баку",
+   "total": 453333,
+   "urban": null
+  },
+  {
+   "name": "г. Ганджа",
+   "total": 57393,
+   "urban": null
+  },
+  {
+   "name": "Бакинский уезд",
+   "total": 73887,
+   "urban": null
+  },
+  {
+   "name": "Агдамский уезд",
+   "total": 123352,
+   "urban": null
+  },
+  {
+   "name": "Ганджинский уезд",
+   "total": 149294,
+   "urban": null
+  },
+  {
+   "name": "Геокчайский уезд",
+   "total": 172851,
+   "urban": null
+  },
+  {
+   "name": "Джебраильский уезд",
+   "total": 75371,
+   "urban": null
+  },
+  {
+   "name": "Закатальский уезд",
+   "total": 80204,
+   "urban": null
+  },
+  {
+   "name": "Казахский уезд",
+   "total": 121255,
+   "urban": null
+  },
+  {
+   "name": "Кубинский уезд",
+   "total": 189916,
+   "urban": null
+  },
+  {
+   "name": "Курдистанский уезд",
+   "total": 51426,
+   "urban": null
+  },
+  {
+   "name": "Ленкоранский уезд",
+   "total": 208479,
+   "urban": null
+  },
+  {
+   "name": "Нухинский уезд",
+   "total": 107049,
+   "urban": null
+  },
+  {
+   "name": "Сальянский уезд",
+   "total": 129367,
+   "urban": null
+  },
+  {
+   "name": "Шемахинский уезд",
+   "total": 91185,
+   "urban": null
+  },
+  {
+   "name": "Нахичеванская ССР",
+   "total": 104909,
+   "urban": null
+  },
+  {
+   "name": "АО Нагорного Карабаха",
+   "total": 125159,
+   "urban": null,
+   "source": "https://www.demoscope.ru/weekly/ssp/sng_nac_26.php?reg=2304",
+   "comment": "From Demoscope's nationality table for the oblast, as Russian Wikipedia's article on the NKAO transcribes it (its 1939 figure there, 150,837, matches Demoscope's 1939 table exactly)."
+  }
+ ]
+}

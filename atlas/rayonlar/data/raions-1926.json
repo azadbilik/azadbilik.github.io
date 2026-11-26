@@ -1,0 +1,369 @@
+{
+ "about": "The uezds of the Azerbaijan SSR at the 1926 census, each drawn roughly as the districts of today that lie mostly within it (none of them matches closely, so every one is approximate). c26 names the rows of data/raw/census-1926.json summed for it; Baku and Ganja are drawn with their uezds.",
+ "units": [
+  {
+   "id": "baku",
+   "kind": "city",
+   "az": "Bakı",
+   "ru": "г. Баку",
+   "en": "Baku",
+   "c26": [
+    "г. Баку"
+   ],
+   "shapes": [
+    "Baku City",
+    "Sumqayit City",
+    "Absheron District",
+    "Khizi District"
+   ],
+   "fit": "approx",
+   "with": "baku-uezd",
+   "note": [
+    "Şəhər, öz qəzası ilə bir yerdə çəkilib.",
+    "Город, показан вместе со своим уездом.",
+    "The city, drawn with its uezd."
+   ]
+  },
+  {
+   "id": "baku-uezd",
+   "kind": "raion",
+   "az": "Bakı qəzası",
+   "ru": "Бакинский уезд",
+   "en": "Baku uezd",
+   "c26": [
+    "Бакинский уезд"
+   ],
+   "shapes": [],
+   "fit": "approx",
+   "with": "baku",
+   "note": [
+    "Abşeron yarımadasının kəndləri və Xızı sahəsi (mərkəzi Altıağac).",
+    "Сёла Апшерона и Хизинский участок (центр — Алты-Агач).",
+    "The villages of Absheron and the Khizi section (centre Altıağac)."
+   ]
+  },
+  {
+   "id": "ganja",
+   "kind": "city",
+   "az": "Gəncə",
+   "ru": "г. Гянджа",
+   "en": "Ganja",
+   "c26": [
+    "г. Ганджа"
+   ],
+   "shapes": [
+    "Ganja City",
+    "Goygol District",
+    "Samukh District",
+    "Shamkir District",
+    "Dashkasan District",
+    "Gadabay District",
+    "Goranboy District",
+    "Naftalan City",
+    "Yevlakh District",
+    "Yevlakh City",
+    "Mingachevir City"
+   ],
+   "fit": "approx",
+   "with": "ganja-uezd",
+   "note": [
+    "Şəhər, öz qəzası ilə bir yerdə çəkilib.",
+    "Город, показан вместе со своим уездом.",
+    "The city, drawn with its uezd."
+   ]
+  },
+  {
+   "id": "ganja-uezd",
+   "kind": "raion",
+   "az": "Gəncə qəzası",
+   "ru": "Ганджинский уезд",
+   "en": "Ganja uezd",
+   "c26": [
+    "Ганджинский уезд"
+   ],
+   "shapes": [],
+   "fit": "approx",
+   "with": "ganja",
+   "note": [
+    "Yevlax və Mingəçevirin bu qəzada olduğunu yoxlamamışıq.",
+    "Что Евлах и Мингечаур входили в этот уезд, мы не проверили.",
+    "That Yevlakh and Mingachevir lay in this uezd is not checked."
+   ]
+  },
+  {
+   "id": "agdam",
+   "kind": "raion",
+   "az": "Ağdam qəzası",
+   "ru": "Агдамский уезд",
+   "en": "Agdam uezd",
+   "c26": [
+    "Агдамский уезд"
+   ],
+   "shapes": [
+    "Agdam District",
+    "Barda District",
+    "Tartar District",
+    "Aghjabadi District",
+    "Beylagan District"
+   ],
+   "fit": "approx",
+   "note": [
+    "Dairələri: Ağcabədi, Bərdə, Gindarx, Qarqar, Tərtər, Hindarx, Şirvanlı. Bugünkü Tərtərin çox hissəsi o vaxt Dağlıq Qarabağda (Mardakert) idi; Beyləqanın burada olduğunu yoxlamamışıq.",
+    "Дайры: Агджабеды, Барда, Гиндарх, Каркар, Тертер, Хиндристан, Ширванлы. Большая часть нынешнего Тертера тогда была в Нагорном Карабахе (Мардакерт); что Бейлаган входил сюда, мы не проверили.",
+    "Its dairas: Aghjabadi, Barda, Gindarkh, Qarqar, Tartar, Khindristan, Shirvanly. Most of today's Tartar was then in Nagorno-Karabakh (Mardakert); that Beylagan lay here is not checked."
+   ]
+  },
+  {
+   "id": "geokchay",
+   "kind": "raion",
+   "az": "Göyçay qəzası",
+   "ru": "Геокчайский уезд",
+   "en": "Geokchay uezd",
+   "c26": [
+    "Геокчайский уезд"
+   ],
+   "shapes": [
+    "Goychay District",
+    "Ujar District",
+    "Zardab District",
+    "Kurdamir District",
+    "Agdash District",
+    "Ismailli District"
+   ],
+   "fit": "approx",
+   "note": [
+    "Sahələri: Zərdab, Qaramaryam, Kürdəmir, Mollakənd, Müsüslü, Suraxanı (mərkəzi İsmayıllı), Ucar. Bugünkü İsmayıllının Lahıc və Basqal tərəfi Şamaxı qəzasında idi; Ağdaşın burada olduğunu yoxlamamışıq.",
+    "Участки: Зардобский, Карамарьянский, Кюрдамирский, Моллакендский, Мюсюслинский, Сураханский (центр — Исмаиллы), Уджарский. Лагич и Баскал нынешнего Исмаиллинского района были в Шемахинском уезде; что Агдаш входил сюда, мы не проверили.",
+    "Its sections: Zardab, Qaramaryam, Kurdamir, Mollakend, Müsüslü, Surakhany (centre Ismailli), Ujar. The Lahij and Basqal side of today's Ismailli was in the Shemakha uezd; that Agdash lay here is not checked."
+   ]
+  },
+  {
+   "id": "jebrail",
+   "kind": "raion",
+   "az": "Cəbrayıl qəzası",
+   "ru": "Джебраильский уезд",
+   "en": "Jebrail uezd",
+   "c26": [
+    "Джебраильский уезд"
+   ],
+   "shapes": [
+    "Jabrayil District",
+    "Fuzuli District",
+    "Zangilan District"
+   ],
+   "fit": "approx",
+   "note": [
+    "Zəngilanın bu qəzada olduğunu yoxlamamışıq (Kürdüstan qəzasının dairələri arasında yoxdur).",
+    "Что Зангелан входил в этот уезд, мы не проверили (среди дайр Курдистанского уезда его нет).",
+    "That Zangilan lay in this uezd is not checked (it is not among the Kurdistan uezd's dairas)."
+   ]
+  },
+  {
+   "id": "zakatal",
+   "kind": "raion",
+   "az": "Zaqatala qəzası",
+   "ru": "Закатальский уезд",
+   "en": "Zakatal uezd",
+   "c26": [
+    "Закатальский уезд"
+   ],
+   "shapes": [
+    "Zaqatala District",
+    "Balakan District",
+    "Qakh District"
+   ],
+   "fit": "approx"
+  },
+  {
+   "id": "kazakh",
+   "kind": "raion",
+   "az": "Qazax qəzası",
+   "ru": "Казахский уезд",
+   "en": "Kazakh uezd",
+   "c26": [
+    "Казахский уезд"
+   ],
+   "shapes": [
+    "Qazakh District",
+    "Agstafa District",
+    "Tovuz District"
+   ],
+   "fit": "approx"
+  },
+  {
+   "id": "kuba",
+   "kind": "raion",
+   "az": "Quba qəzası",
+   "ru": "Кубинский уезд",
+   "en": "Kuba uezd",
+   "c26": [
+    "Кубинский уезд"
+   ],
+   "shapes": [
+    "Quba District",
+    "Qusar District",
+    "Khachmaz District",
+    "Shabran District",
+    "Siazan District"
+   ],
+   "fit": "approx"
+  },
+  {
+   "id": "kurdistan",
+   "kind": "raion",
+   "az": "Kürdüstan qəzası",
+   "ru": "Курдистанский уезд",
+   "en": "Kurdistan uezd",
+   "c26": [
+    "Курдистанский уезд"
+   ],
+   "shapes": [
+    "Lachin District",
+    "Kalbajar District",
+    "Qubadli District"
+   ],
+   "fit": "approx",
+   "note": [
+    "Dairələri: Qaraqışlaq, Kəlbəcər, Qubadlı, Qoturlu, Kürd Hacı, Muradxanlı; mərkəzi Laçın. Bugünkü Kəlbəcər 1992-də Mardakert rayonundan 23 kənd də alıb.",
+    "Дайры: Каракишлагская, Кельбаджарская, Кубатлинская, Котурлинская, Кюрд-Гаджинская, Мурадханлинская; центр — Лачин. Нынешний Кельбаджар в 1992 г. получил и 23 села Мардакертского района.",
+    "Its dairas: Qaraqışlaq, Kalbajar, Qubadli, Qoturlu, Kürd Hacı, Muradkhanly; centre Lachin. Today's Kalbajar also took 23 villages of Mardakert in 1992."
+   ]
+  },
+  {
+   "id": "lenkoran",
+   "kind": "raion",
+   "az": "Lənkəran qəzası",
+   "ru": "Ленкоранский уезд",
+   "en": "Lenkoran uezd",
+   "c26": [
+    "Ленкоранский уезд"
+   ],
+   "shapes": [
+    "Lankaran District",
+    "Lankaran City",
+    "Astara District",
+    "Lerik District",
+    "Yardymli District",
+    "Masally District",
+    "Jalilabad District"
+   ],
+   "fit": "approx",
+   "note": [
+    "13 sahə, o cümlədən Astara, Həştərxanbazar (Cəlilabad), Lerik, Masallı, Qızılağac.",
+    "13 участков, среди них Астаринский, Астраханбазарский (Джалилабад), Лерикский, Массалинский, Кызыл-Агачский.",
+    "13 sections, among them Astara, Astrakhan-Bazar (Jalilabad), Lerik, Masally, Qızılağac."
+   ]
+  },
+  {
+   "id": "nukha",
+   "kind": "raion",
+   "az": "Nuxa qəzası",
+   "ru": "Нухинский уезд",
+   "en": "Nukha uezd",
+   "c26": [
+    "Нухинский уезд"
+   ],
+   "shapes": [
+    "Shaki District",
+    "Shaki City",
+    "Oghuz District",
+    "Qabala District"
+   ],
+   "fit": "approx"
+  },
+  {
+   "id": "salyan",
+   "kind": "raion",
+   "az": "Salyan qəzası",
+   "ru": "Сальянский уезд",
+   "en": "Salyany uezd",
+   "c26": [
+    "Сальянский уезд"
+   ],
+   "shapes": [
+    "Salyan District",
+    "Neftchala District",
+    "Sabirabad District",
+    "Saatly District",
+    "Imishli District",
+    "Bilasuvar District",
+    "Shirvan City",
+    "Hajigabul District"
+   ],
+   "fit": "approx",
+   "note": [
+    "Keçmiş Cavad qəzası. Sahələri: Əli Bayramlı, Biləsuvar, Qaradonlu (İmişli), Saatlı, Sabirabad, Xıllı, Şorsulu.",
+    "Бывший Джеватский уезд. Участки: Али-Байрамлинский, Белясуварский, Карадонлинский (Имишли), Саатлинский, Сабир-Абадский, Хиллинский, Шорсуллинский.",
+    "The former Javad uezd. Its sections: Ali-Bayramli, Bilasuvar, Qaradonlu (Imishli), Saatly, Sabirabad, Khilli, Shorsulu."
+   ]
+  },
+  {
+   "id": "shemakha",
+   "kind": "raion",
+   "az": "Şamaxı qəzası",
+   "ru": "Шемахинский уезд",
+   "en": "Shemakha uezd",
+   "c26": [
+    "Шемахинский уезд"
+   ],
+   "shapes": [
+    "Shamakhi District",
+    "Gobustan District",
+    "Agsu District"
+   ],
+   "fit": "approx",
+   "note": [
+    "10 sahə, o cümlədən Ağsu, Mərəzə (Qobustan), Lahıc və Basqal; sonuncular bugünkü İsmayıllıdadır, o isə Göyçay qəzası ilə çəkilib.",
+    "10 участков, среди них Ахсуйский, Маразинский (Гобустан), Лагичский и Баскальский; последние два — в нынешнем Исмаиллинском районе, который показан с Геокчайским уездом.",
+    "10 sections, Akhsu, Maraza (Gobustan), Lahij and Basqal among them; the last two are in today's Ismailli, drawn with the Geokchay uezd."
+   ]
+  },
+  {
+   "id": "nakhchivan",
+   "kind": "raion",
+   "az": "Naxçıvan SSR",
+   "ru": "Нахичеванская ССР",
+   "en": "Nakhichevan SSR",
+   "c26": [
+    "Нахичеванская ССР"
+   ],
+   "shapes": [
+    "Nakhchivan City",
+    "Babek District",
+    "Kangarli District",
+    "Sharur District",
+    "Sadarak District",
+    "Julfa District",
+    "Ordubad District",
+    "Shahbuz District"
+   ],
+   "fit": "approx",
+   "region": "nax"
+  },
+  {
+   "id": "nkao",
+   "kind": "raion",
+   "az": "Dağlıq Qarabağ MV",
+   "ru": "АО Нагорного Карабаха",
+   "en": "Nagorno-Karabakh AO",
+   "c26": [
+    "АО Нагорного Карабаха"
+   ],
+   "shapes": [
+    "Khankendi City",
+    "Khojaly District",
+    "Khojavend District",
+    "Shusha District",
+    "Shusha City"
+   ],
+   "fit": "approx",
+   "region": "nkao",
+   "note": [
+    "Şimal hissəsi (Mardakert) bugünkü Tərtər və Kəlbəcərdədir və onlarla çəkilib.",
+    "Северная часть (Мардакерт) — в нынешних Тертере и Кельбаджаре и показана вместе с ними.",
+    "Its northern part (Mardakert) is in today's Tartar and Kalbajar, drawn with those."
+   ]
+  }
+ ],
+ "gaps": []
+}

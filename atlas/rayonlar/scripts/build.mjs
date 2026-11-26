@@ -13,11 +13,12 @@ const json = async (u) => JSON.parse(await readFile(u, 'utf8'));
 const today = await json(here('../../ehali/data/units.geojson'));
 const c7989 = await json(here('../data/raw/demoscope-1979-1989.json'));
 const c39 = await json(here('../data/raw/demoscope-1939.json'));
-const census = { source: { ...c7989.source, 1939: c39.source }, rows: { ...c7989.rows, 1939: c39.rows } };
-const REPUBLIC = { 1939: 'Азербайджанская ССР', 1979: 'Азербайджанская ССР', 1989: 'Азербайджанская ССР' };
+const c26 = await json(here('../data/raw/census-1926.json'));
+const census = { source: { ...c7989.source, 1939: c39.source, 1926: c26.source }, rows: { ...c7989.rows, 1939: c39.rows, 1926: c26.rows } };
+const REPUBLIC = { 1926: 'Азербайджанская ССР', 1939: 'Азербайджанская ССР', 1979: 'Азербайджанская ССР', 1989: 'Азербайджанская ССР' };
 
 const AGGREGATES = /^(Азербайджанская ССР|Нахичеванская АССР|Нагорно-Карабахская (автономная область|авт\.обл)$|Горпоселения|Районы и города|Города и районы|г\. Баку$)/;
-const used = Object.fromEntries(['1939', '1979', '1989'].map((y) => [y, new Map()]));
+const used = Object.fromEntries(['1926', '1939', '1979', '1989'].map((y) => [y, new Map()]));
 const row = (y, name) => {
   const r = census.rows[y].find((x) => x.name === name);
   if (!r) throw new Error(`${y}: no census row «${name}»`);
@@ -32,7 +33,7 @@ function count(u, y, track = true) {
     const rs = name.endsWith('*') ? census.rows[y].filter((x) => x.name.startsWith(name.slice(0, -1))) : [row(y, name)];
     if (!rs.length) throw new Error(`${y}: no census rows «${name}»`);
     for (const r of rs) {
-      total += sign * r.total; urban += sign * r.urban;
+      total += sign * r.total; urban = urban == null || r.urban == null ? null : urban + sign * r.urban; // 1926 has no urban figures
       if (track && !label.startsWith('=') && !label.startsWith('-')) {
         if (used[y].has(r.name)) throw new Error(`${y}: «${r.name}» used by ${used[y].get(r.name)} and ${u.id}`);
         used[y].set(r.name, u.id);
@@ -94,7 +95,7 @@ async function era(file, YEARS, out) {
     });
     const parts = shapeFs.flatMap((f) => polys(f.geometry));
     const area = Math.round(new Set(shapeFs).size && [...new Map(shapeFs.map((f) => [f.properties.key, f.properties.area])).values()].reduce((a, b) => a + b, 0));
-    const sum = (k, y) => m.reduce((a, x) => a + x[k][y], 0);
+    const sum = (k, y) => m.reduce((a, x) => (a == null || x[k][y] == null ? null : a + x[k][y]), 0);
     const join = (l) => m.map((x) => x[l]).join(' + ');
     const nameOf = (k) => { const f = shapeFs.find((x) => x.properties.key === k); return { az: f.properties.az, ru: f.properties.ru, en: f.properties.en }; };
     const props = {
@@ -115,7 +116,7 @@ async function era(file, YEARS, out) {
     const sum = features.reduce((a, f) => a + (f.properties.pop?.[y] ?? 0), 0);
     if (sum !== total) throw new Error(`${y}: units add up to ${sum}, the republic is ${total}`);
     const urban = features.reduce((a, f) => a + (f.properties.urban?.[y] ?? 0), 0), urbanTotal = row(y, REPUBLIC[y]).urban;
-    if (urban !== urbanTotal) throw new Error(`${y}: urban people add up to ${urban}, the republic's are ${urbanTotal}`);
+    if (urbanTotal != null && urban !== urbanTotal) throw new Error(`${y}: urban people add up to ${urban}, the republic's are ${urbanTotal}`);
   }
   // today's districts whose land was shared among several Soviet raions in ways not established: grey
   for (const g of gaps) {
@@ -133,17 +134,17 @@ async function era(file, YEARS, out) {
   await writeFile(here(`../data/${out}.geojson`), JSON.stringify({ type: 'FeatureCollection', features }) + '\n');
   await writeFile(here(`../data/${out.replace('raions', 'edges')}.geojson`), JSON.stringify({ type: 'FeatureCollection', features: edges }) + '\n');
   const drawn = features.filter((f) => f.properties.kind !== 'gap');
-  console.log(`${YEARS.join(', ')}: ${drawn.length} shapes for ${units.length} Soviet units (${drawn.filter((f) => f.properties.fit === 'approx').length} approximate), ${gaps.length} of today's districts in grey; ${YEARS.map((y) => `${y} ${drawn.reduce((a, f) => a + f.properties.pop[y], 0).toLocaleString('en')}`).join(', ')}: all match the republic, urban too`);
+  console.log(`${YEARS.join(', ')}: ${drawn.length} shapes for ${units.length} Soviet units (${drawn.filter((f) => f.properties.fit === 'approx').length} approximate), ${gaps.length} of today's districts in grey; ${YEARS.map((y) => `${y} ${drawn.reduce((a, f) => a + f.properties.pop[y], 0).toLocaleString('en')}`).join(', ')}: all match the republic${YEARS.includes('1926') ? '' : ', urban too'}`);
   // one row per Soviet unit and census, as counted (merged pairs apart)
   return units.flatMap((u) => YEARS.map((y) => {
     const c = count({ ...u, id: `${u.id} (csv)` }, y, false);
     const shapes = u.shapes.length ? u.shapes : byId.get(u.with).shapes;
-    return [u.id, u.az, u.ru, u.en, u.kind, u.region ?? '', y, c.total, c.urban, u[`c${y.slice(2)}`].join(';'), shapes.join(';'), u.fit, u.with ?? '', census.source[y]];
+    return [u.id, u.az, u.ru, u.en, u.kind, u.region ?? '', y, c.total, c.urban, u[`c${y.slice(2)}`].join(';'), shapes.join(';'), u.fit, u.with ?? '', census.rows[y].find((r) => r.name === u[`c${y.slice(2)}`][0])?.source ?? census.source[y]];
   }));
 }
 
 // The table for azadbilik/data
 const q = (v) => { const x = String(v ?? ''); return /[",\n]/.test(x) ? `"${x.replace(/"/g, '""')}"` : x; };
-const rows = [...await era('raions-1939.json', ['1939'], 'raions-1939'), ...await era('raions.json', ['1979', '1989'], 'raions')];
+const rows = [...await era('raions-1926.json', ['1926'], 'raions-1926'), ...await era('raions-1939.json', ['1939'], 'raions-1939'), ...await era('raions.json', ['1979', '1989'], 'raions')];
 const header = ['soviet_unit', 'name_az', 'name_ru', 'name_en', 'kind', 'region', 'year', 'population', 'urban', 'census_rows', 'today_districts', 'fit', 'drawn_with', 'source_url'];
 await writeFile(here('../data/raions.csv'), [header, ...rows].map((r) => r.map(q).join(',')).join('\n') + '\n');
