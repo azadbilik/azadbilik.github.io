@@ -171,7 +171,7 @@ const labelExpr = () => ['coalesce', ['get', `name:${lang}`], ['get', lang === '
 for (const m of [map, old]) m.on('style.load', () => { for (const l of m.getStyle().layers) if (l.type === 'symbol' && l.layout?.['text-field']) m.setLayoutProperty(l.id, 'text-field', labelExpr()); });
 map.on('load', () => { setPad(); sync(); });
 old.on('load', async () => {
-  meta = await fetch('data/plans.json').then((r) => r.json());
+  meta = await fetch('data/plans.json', { cache: 'no-cache' })   /* revalidate: it names the tiles' version */.then((r) => r.json());
   const first = old.getStyle().layers.find((l) => l.type === 'symbol')?.id;
   for (const y of YEARS) {
     // sharp tiles at the scan's own resolution (scripts/tiles.py); the single warped image if there are none
