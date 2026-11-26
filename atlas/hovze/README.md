@@ -26,3 +26,21 @@ osmium tags-filter -R -o rel.pbf basin-water.pbf r/waterway=river r/type=waterwa
 ```
 
 A river joins the network where its mouth meets another river (a shared node, else the nearest river within 3 km: one that ends in a reservoir), or by its `destination` tag (the Hrazdan, whose lower course ends in canals). Pieces of a river with the same Wikidata id are joined. Names: OSM's Azerbaijani name, else Wikidata's, else the local name if it is in Latin letters, else English; a few Iranian rivers named only in Arabic script are given their Azerbaijani names in `AZ_FIX`.
+
+## The network, colours and the raindrop
+
+`node scripts/network.mjs` (after `basin.mjs`) writes `data/network.json`. For every river it records:
+- the river it flows into: the longer river that one of its ends touches, within 3 km;
+- where it joins;
+- its *system*: the tributary of the Kür or the Araz it belongs to, at any remove;
+- the total length of everything upstream of its mouth.
+
+On the map:
+- **Colour** is the system. Every system gets its own colour, as in Robert Szucs's (Grasshopper Geography) basin maps, and the Kür and the Araz have their own.
+- **Width** grows with everything upstream, so a river thickens as tributaries join it.
+- **Glow:** a soft glow in the same colour sits under each line.
+
+55 rivers end in a reservoir, a canal or a lake, or meet their river outside the data, so they find no river at either end. Each forms a system of its own.
+
+**The raindrop** (after Sam Learner's *River Runner*): tap «Raindrop» and then a river, or open a river and «Follow a raindrop to the sea». The drop takes the shortest way along that river to its mouth, then down each river it joins, to the Caspian. The panel counts the kilometres and lights each river in the chain as the drop reaches it.
+

@@ -28,6 +28,16 @@
   .river h2 { font: 400 1.5rem/1.15 var(--serif); }
   .river .k { color: var(--muted); }
   .river a { color: inherit; }
+  .drop-btn { display: flex; align-items: center; justify-content: center; gap: .4rem; width: 100%; padding: .45rem; border: 1px solid var(--second); color: var(--second); border-radius: 3px; font-size: .8125rem; font-weight: 500; margin-top: .6rem; }
+  .drop-btn:hover, .drop-btn[aria-pressed="true"] { background: var(--second); color: var(--paper); }
+  .journey { padding: 1rem 1.5rem; display: grid; gap: .5rem; }
+  .journey .km { font: 400 2.75rem/1 var(--serif); font-variant-numeric: tabular-nums; }
+  .journey .km small { font: 400 1rem var(--sans); color: var(--muted); margin-left: .3rem; }
+  .journey ol { list-style: none; display: flex; flex-wrap: wrap; gap: .25rem .4rem; font-size: .875rem; }
+  .journey li { opacity: .35; transition: opacity .3s; } .journey li.on { opacity: 1; } .journey li + li::before { content: '→ '; color: var(--muted); }
+  .journey .end { font-weight: 500; min-height: 1.3rem; }
+  .drop { width: 14px; height: 18px; background: var(--second); border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; transform: rotate(180deg); box-shadow: 0 0 0 2px var(--paper), 0 0 12px var(--second); }
+  .legend .sys { display: flex; gap: 2px; } .legend .sys i { width: .55rem; height: .55rem; border-radius: 50%; }
   .rank h2 { padding: .75rem 1.5rem .35rem; font: 500 .75rem var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
   .back { display: block; padding: 1rem 1.5rem 0; font-size: .8125rem; color: var(--muted); }
   .legend .row { display: flex; align-items: center; gap: .5rem; }
@@ -44,7 +54,7 @@
     <h1 data-i18n="title">Kür–Araz hövzəsi</h1>
     <p class="sub" data-i18n="sub">Azərbaycanın çayları və gölləri</p>
   </div>
-  <div class="controls"><div class="search"><input type="search" id="find" autocomplete="off"></div></div>
+  <div class="controls"><div class="search"><input type="search" id="find" autocomplete="off"></div><button type="button" class="drop-btn" id="rain" aria-pressed="false"><span aria-hidden="true">💧</span><span data-i18n="rain">Yağış damlası: çaya toxunun</span></button></div>
   <div class="body" id="body" aria-live="polite"></div>
 </aside>
 
@@ -67,13 +77,13 @@ let lang = (() => {
 const nf = () => new Intl.NumberFormat({ az: 'az-Latn-AZ', ru: 'ru-RU', en: 'en-GB' }[lang]);
 const T = {
   az: { doc: 'Kür–Araz hövzəsi · Azad Bilik', title: 'Kür–Araz hövzəsi', sub: 'Çaylar və göllər', find: 'Çay axtar…', rivers: (n) => `${n} çay`, lakes: 'Göllər və su anbarları', length: 'Uzunluğu', whole: 'bütün uzunluğu, mənbədən mənsəbədək', inAz: 'Azərbaycandakı hissəsi', names: 'Adları', back: '← Bütün çaylar', km: 'km', area: 'sahəsi', wiki: 'Vikipediya',
-    legend: 'Çay: xəttin qalınlığı uzunluğa görə, ştrixlər axın istiqamətində', legendStill: 'Çay: xəttin qalınlığı uzunluğa görə, oxlar axın istiqamətində', lake: 'göl', reservoir: 'su anbarı', lakeL: 'göl, su anbarı',
+    legend: 'Çay: qalınlıq — yuxarı axarındakı bütün çaylara görə, ştrixlər axın istiqamətində', legendStill: 'Çay: qalınlıq — yuxarı axarındakı bütün çaylara görə, oxlar axın istiqamətində', sysL: 'Rəng: Kürün və ya Arazın hansı qoluna aiddir', rain: 'Yağış damlası: çaya toxunun', rainOn: 'Damlanı buraxmaq üçün çaya toxunun', follow: 'Damlanı dənizə qədər izlə', sea: 'Xəzər dənizinə çatdı', ends: (x) => `${x} burada bitir: göl, su anbarı və ya kanal`, kmTo: 'km yol', lake: 'göl', reservoir: 'su anbarı', lakeL: 'göl, su anbarı',
     note: 'Çaylar və göllər OpenStreetMap-dəndir (ODbL). Uzunluq xəritədəki xəttə görə ölçülüb və rəsmi rəqəmlərdən bir qədər fərqlənə bilər: Kür üçün 1471 km (soraqlarda ~1515), Araz üçün 1068 km (~1072). Kür və Arazın 10 km-dən uzun bütün qolları (qolların qolları da) Gürcüstanda, Ermənistanda, Türkiyədə və İranda da, bütün uzunluğu ilə göstərilir, onların keçdiyi göllər və su anbarları ilə (Göyçə, Arpi…); Azərbaycanın başqa çayları ölkədəki hissəsi ilə.' },
   ru: { doc: 'Бассейн Куры и Аракса · Azad Bilik', title: 'Бассейн Куры и Аракса', sub: 'Реки и озёра', find: 'Найти реку…', rivers: (n) => `${n} рек`, lakes: 'Озёра и водохранилища', length: 'Длина', whole: 'вся длина, от истока до устья', inAz: 'часть в Азербайджане', names: 'Названия', back: '← Все реки', km: 'км', area: 'площадь', wiki: 'Википедия',
-    legend: 'Река: толщина линии — по длине, штрихи — по течению', legendStill: 'Река: толщина линии — по длине, стрелки — по течению', lake: 'озеро', reservoir: 'водохранилище', lakeL: 'озеро, водохранилище',
+    legend: 'Река: толщина — по всем рекам выше по течению, штрихи — по течению', legendStill: 'Река: толщина — по всем рекам выше по течению, стрелки — по течению', sysL: 'Цвет: к какому притоку Куры или Аракса относится', rain: 'Капля дождя: нажмите на реку', rainOn: 'Нажмите на реку, чтобы уронить каплю', follow: 'Проследить каплю до моря', sea: 'Дошла до Каспийского моря', ends: (x) => `${x} кончается здесь: в озере, водохранилище или канале`, kmTo: 'км пути', lake: 'озеро', reservoir: 'водохранилище', lakeL: 'озеро, водохранилище',
     note: 'Реки и озёра — из OpenStreetMap (ODbL). Длина измерена по линии на карте и может немного отличаться от официальной: Кура 1471 км (по справочникам ~1515), Аракс 1068 км (~1072). Все притоки Куры и Аракса длиннее 10 км (и притоки притоков) показаны на всём протяжении, в Грузии, Армении, Турции и Иране тоже, с озёрами и водохранилищами на них (Севан, Арпи…); остальные реки Азербайджана — их частью в стране.' },
   en: { doc: 'The Kura–Araz basin · Azad Bilik', title: 'The Kura–Araz basin', sub: 'Rivers and lakes', find: 'Find a river…', rivers: (n) => `${n} rivers`, lakes: 'Lakes and reservoirs', length: 'Length', whole: 'whole length, source to mouth', inAz: 'the part in Azerbaijan', names: 'Names', back: '← All rivers', km: 'km', area: 'area', wiki: 'Wikipedia',
-    legend: 'River: line width by length, dashes run downstream', legendStill: 'River: line width by length, arrows point downstream', lake: 'lake', reservoir: 'reservoir', lakeL: 'lake, reservoir',
+    legend: 'River: width by all the rivers upstream, dashes run downstream', legendStill: 'River: width by all the rivers upstream, arrows point downstream', sysL: 'Colour: which tributary of the Kür or the Araz it belongs to', rain: 'Raindrop: tap a river', rainOn: 'Tap a river to let the drop fall', follow: 'Follow a raindrop to the sea', sea: 'Reached the Caspian Sea', ends: (x) => `The ${x} ends here: in a lake, a reservoir or a canal`, kmTo: 'km travelled', lake: 'lake', reservoir: 'reservoir', lakeL: 'lake, reservoir',
     note: "Rivers and lakes are from OpenStreetMap (ODbL). Lengths are measured along the mapped line and may differ a little from official figures: the Kura 1,471 km (references ~1,515), the Araz 1,068 km (~1,072). Every tributary of the Kura and the Araz longer than 10 km (and theirs in turn) is shown over its whole length, in Georgia, Armenia, Turkey and Iran too, with the lakes and reservoirs on them (Sevan, Arpi…); Azerbaijan's other rivers by their part in the country." },
 };
 const t = (k) => T[lang][k];
@@ -101,7 +111,18 @@ map.on('style.load', () => {
   }
 });
 map.on('load', async () => {
-  const [rg, lg] = await Promise.all(['rivers.geojson', 'lakes.geojson'].map((f) => fetch(`data/${f}`).then((r) => r.json())));
+  const [rg, lg, nw] = await Promise.all(['rivers.geojson', 'lakes.geojson', 'network.json'].map((f) => fetch(`data/${f}`).then((r) => r.json())));
+  net = nw;
+  // after Grasshopper Geography: each tributary system its own colour, the Kür and the Araz their own
+  const size = new Map();
+  for (const f of rg.features) { const sy = nw[f.properties.id]?.system; size.set(sy, (size.get(sy) ?? 0) + (f.properties.length ?? 0)); }
+  const order = [...size].sort((a, b) => b[1] - a[1]).map(([sy]) => sy);
+  const kurId = rg.features.find((f) => f.properties.az === 'Kür').properties.id, arazId = rg.features.find((f) => f.properties.az === 'Araz').properties.id;
+  const SYS = dark ? ['#6FB3CC', '#E08A5E', '#A9BC6A', '#C98BD6', '#E6C15C', '#5FC2A5', '#E37A93', '#8E9FE8', '#D6A06B', '#7FCF6F', '#B9A2E6', '#E0B0A0']
+                   : ['#2B7FA0', '#C0582E', '#6B8E23', '#8E4FA6', '#B8901C', '#1F8C6E', '#B8395C', '#4D63B8', '#9C6A30', '#3E8E41', '#7A5BB0', '#A8644E'];
+  const sysColour = new Map(order.filter((x) => x !== kurId && x !== arazId).map((sy, i) => [sy, SYS[i % SYS.length]]));
+  sysColour.set(kurId, dark ? '#9CC3D0' : '#1F4E66'); sysColour.set(arazId, dark ? '#7FD0C0' : '#17695E');
+  for (const f of rg.features) { const n = nw[f.properties.id] ?? {}; f.properties.color = sysColour.get(n.system) ?? css('--second'); f.properties.up = n.upstream ?? f.properties.length ?? 0; }
   geo = rg; lakeGeo = lg;
   rg.features.forEach((f, k) => { f.id = k; });
   lg.features.forEach((f, k) => { f.id = k; });
@@ -114,10 +135,12 @@ map.on('load', async () => {
   map.addLayer({ id: 'lakes', type: 'fill', source: 'lakes', paint: { 'fill-color': C, 'fill-opacity': .45 } });
   map.addSource('rivers', { type: 'geojson', data: rg });
   // Width by length: the Kür and Araz boldest, brooks hairlines; the chosen river in ink
-  const width = ['interpolate', ['linear'], ['get', 'length'], 3, .6, 50, 1.2, 200, 2.2, 1000, 3.5];
+  const width = ['interpolate', ['linear'], ['get', 'up'], 10, .6, 80, 1.1, 300, 1.8, 1200, 2.7, 6000, 3.8];
   map.addLayer({ id: 'rivers-hit', type: 'line', source: 'rivers', paint: { 'line-color': 'rgba(0,0,0,0)', 'line-width': 10 } });
+  // a soft glow under every river, in its own colour
+  map.addLayer({ id: 'rivers-glow', type: 'line', source: 'rivers', layout: { 'line-cap': 'round', 'line-join': 'round' }, paint: { 'line-color': ['get', 'color'], 'line-width': ['*', width, 3], 'line-blur': ['*', width, 2], 'line-opacity': ['case', ['boolean', ['feature-state', 'dim'], false], .03, dark ? .3 : .12] } });
   map.addLayer({ id: 'rivers', type: 'line', source: 'rivers', layout: { 'line-cap': 'round', 'line-join': 'round' }, paint: {
-    'line-color': ['case', ['boolean', ['feature-state', 'sel'], false], css('--accent'), ['boolean', ['feature-state', 'hover'], false], css('--ink'), C],
+    'line-color': ['case', ['boolean', ['feature-state', 'sel'], false], css('--accent'), ['boolean', ['feature-state', 'hover'], false], css('--ink'), ['get', 'color']],
     'line-width': ['case', ['boolean', ['feature-state', 'sel'], false], ['*', width, 1.8], width],
     'line-opacity': ['case', ['boolean', ['feature-state', 'dim'], false], .3, .9],
   } });
@@ -138,7 +161,9 @@ map.on('load', async () => {
   matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change', () => { map.setLayoutProperty('rivers-flow', 'visibility', still() ? 'none' : 'visible'); map.setLayoutProperty('rivers-arrows', 'visibility', still() ? 'visible' : 'none'); flow(); drawLegend(); });
   map.addLayer({ id: 'river-names', type: 'symbol', source: 'rivers', filter: ['>=', ['get', 'length'], 40], layout: {
     'symbol-placement': 'line', 'text-field': ['get', lang], 'text-font': ['Noto Sans Italic'], 'text-size': 11, 'symbol-spacing': 400,
-  }, paint: { 'text-color': C, 'text-halo-color': css('--paper'), 'text-halo-width': 1.5 } });
+  }, paint: { 'text-color': ['get', 'color'], 'text-halo-color': css('--paper'), 'text-halo-width': 1.5 } });
+  map.addSource('drop', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
+  map.addLayer({ id: 'drop-trail', type: 'line', source: 'drop', layout: { 'line-cap': 'round', 'line-join': 'round' }, paint: { 'line-color': css('--second'), 'line-width': 5, 'line-opacity': .85, 'line-blur': 1 } });
   map.on('mousemove', 'rivers-hit', (e) => {
     map.getCanvas().style.cursor = 'pointer';
     const r = rivers[e.features[0].id];
@@ -146,7 +171,7 @@ map.on('load', async () => {
     tip.setLngLat(e.lngLat).setHTML(`<strong>${esc(L(r))}</strong> · ${nf().format(r.length)} ${t('km')}`).addTo(map);
   });
   map.on('mouseleave', 'rivers-hit', () => { map.getCanvas().style.cursor = ''; tip.remove(); if (hovered != null) map.setFeatureState({ source: 'rivers', id: hovered }, { hover: false }); hovered = null; });
-  map.on('click', 'rivers-hit', (e) => select(e.features[0].id));
+  map.on('click', 'rivers-hit', (e) => { if (rainMode) { rainMode = false; drawRain(); return rain(e.features[0].id, [e.lngLat.lng, e.lngLat.lat]); } select(e.features[0].id); });
   map.on('click', 'lakes', (e) => { if (!map.queryRenderedFeatures(e.point, { layers: ['rivers-hit'] }).length) zoomLake(e.features[0].id); });
   map.on('mouseenter', 'lakes', () => { map.getCanvas().style.cursor = 'pointer'; });
   map.on('mousemove', 'lakes', (e) => { const l = lakes[e.features[0].id]; tip.setLngLat(e.lngLat).setHTML(`<strong>${esc(L(l))}</strong>`).addTo(map); });
@@ -155,6 +180,76 @@ map.on('load', async () => {
   draw();
   if (start) select(start.fid);
 });
+// River Runner, after Sam Learner: a drop runs down its river, into the one it joins, and on to the sea.
+// Each river is a little graph of its own vertices (OSM pieces share their ends); the drop takes the
+// shortest way along it from where it fell to the river's mouth, then from the junction on the next.
+let net = {}, rainMode = false, dropAnim = null;
+const dropMarker = new maplibregl.Marker({ element: Object.assign(document.createElement('div'), { className: 'drop' }) });
+const kmBetween = ([x0, y0], [x, y]) => { const r = Math.PI / 180, a = Math.sin((y - y0) * r / 2) ** 2 + Math.cos(y0 * r) * Math.cos(y * r) * Math.sin((x - x0) * r / 2) ** 2; return 12742 * Math.asin(Math.sqrt(a)); };
+function graphOf(fid) {
+  const g = geo.features[fid].geometry, lines = g.type === 'LineString' ? [g.coordinates] : g.coordinates, nodes = new Map(), key = (p) => p[0].toFixed(5) + ',' + p[1].toFixed(5);
+  for (const l of lines) for (let i = 0; i < l.length; i++) {
+    const k = key(l[i]); if (!nodes.has(k)) nodes.set(k, { p: l[i], n: new Set() });
+    if (i) { const a = key(l[i - 1]); nodes.get(k).n.add(a); nodes.get(a).n.add(k); }
+  }
+  // pieces that almost touch are joined, so the drop is never stranded on a gap
+  const ends = [...nodes].filter(([, v]) => v.n.size <= 1);
+  for (const [a, va] of ends) { let best = null; for (const [b, vb] of nodes) { if (b === a || va.n.has(b)) continue; const d = kmBetween(va.p, vb.p); if (d < .4 && (!best || d < best.d)) best = { b, d }; } if (best) { va.n.add(best.b); nodes.get(best.b).n.add(a); } }
+  return nodes;
+}
+function nearestNode(nodes, p) { let best = null; for (const [k, v] of nodes) { const d = kmBetween(v.p, p); if (!best || d < best.d) best = { k, d }; } return best.k; }
+function farthest(nodes, from) { const seen = new Map([[from, 0]]), q = [from]; while (q.length) { const k = q.shift(); for (const n of nodes.get(k).n) if (!seen.has(n)) { seen.set(n, seen.get(k) + 1); q.push(n); } } return [...seen].sort((a, b) => b[1] - a[1])[0][0]; }
+function route(nodes, from, to) {
+  const dist = new Map([[from, 0]]), prev = new Map(), todo = new Set([from]);
+  while (todo.size) {
+    let k = null; for (const x of todo) if (k == null || dist.get(x) < dist.get(k)) k = x;
+    todo.delete(k); if (k === to) break;
+    for (const n of nodes.get(k).n) { const d = dist.get(k) + kmBetween(nodes.get(k).p, nodes.get(n).p); if (d < (dist.get(n) ?? Infinity)) { dist.set(n, d); prev.set(n, k); todo.add(n); } }
+  }
+  if (!dist.has(to)) return [nodes.get(from).p];
+  const path = [to]; while (path[0] !== from) path.unshift(prev.get(path[0]));
+  return path.map((k) => nodes.get(k).p);
+}
+function rain(fid, at) {
+  const legs = [], seen = new Set();
+  let cur = fid, p = at, toSea = false;
+  while (cur != null && !seen.has(cur)) {
+    seen.add(cur);
+    const r = rivers[cur], n = net[r.id] ?? {}, nodes = graphOf(cur);
+    const mouth = n.mouth ? nearestNode(nodes, n.mouth) : null;
+    const start = p ? nearestNode(nodes, p) : farthest(nodes, mouth ?? nodes.keys().next().value);
+    const path = mouth ? route(nodes, start, mouth) : route(nodes, start, farthest(nodes, start));
+    legs.push({ fid: cur, path });
+    if (!n.parent) { toSea = r.az === 'Kür'; break; }
+    cur = rivers.findIndex((x) => x.id === n.parent); p = n.at;
+  }
+  const coords = legs.flatMap((l) => l.path), cum = [0];
+  for (let i = 1; i < coords.length; i++) cum.push(cum[i - 1] + kmBetween(coords[i - 1], coords[i]));
+  const total = cum.at(-1), firstRiver = rivers[fid];
+  // the panel: the chain of rivers, lit as the drop reaches each; the kilometres counting up
+  const el = document.getElementById('journey') ?? document.getElementById('body');
+  el.innerHTML = `<div class="journey"><p class="km"><span id="jkm">0</span><small>${t('kmTo')}</small></p><ol>${legs.map((l, i) => `<li data-i="${i}">${esc(L(rivers[l.fid]))}</li>`).join('')}${toSea ? `<li data-i="${legs.length}">${lang === 'ru' ? 'Каспий' : lang === 'en' ? 'Caspian' : 'Xəzər'}</li>` : ''}</ol><p class="end" id="jend"></p></div>`;
+  const bounds = coords.reduce((b, [x, y]) => [Math.min(b[0], x), Math.min(b[1], y), Math.max(b[2], x), Math.max(b[3], y)], [180, 90, -180, -90]);
+  map.fitBounds([[bounds[0], bounds[1]], [bounds[2], bounds[3]]], { padding: pad(), maxZoom: 9, duration: still() ? 0 : 900 });
+  const legStart = legs.map((l, i) => legs.slice(0, i).reduce((s, x) => s + x.path.length, 0));
+  cancelAnimationFrame(dropAnim);
+  const dur = still() ? 0 : Math.min(14000, 2500 + total * 9), t0 = performance.now() + (still() ? 0 : 900);
+  const step = (now) => {
+    const k = dur ? Math.max(0, Math.min(1, (now - t0) / dur)) : 1, d = k * total;
+    let i = cum.findIndex((c) => c >= d); if (i < 1) i = 1;
+    const f = (d - cum[i - 1]) / ((cum[i] - cum[i - 1]) || 1), pt = [coords[i - 1][0] + (coords[i][0] - coords[i - 1][0]) * f, coords[i - 1][1] + (coords[i][1] - coords[i - 1][1]) * f];
+    map.getSource('drop').setData({ type: 'Feature', geometry: { type: 'LineString', coordinates: [...coords.slice(0, i), pt] } });
+    dropMarker.setLngLat(pt).addTo(map);
+    const km = document.getElementById('jkm'); if (km) km.textContent = nf().format(Math.round(d));
+    const leg = legStart.filter((s) => s <= i).length - 1;
+    document.querySelectorAll('.journey li').forEach((li) => li.classList.toggle('on', +li.dataset.i <= leg || (k === 1 && toSea)));
+    if (k < 1) dropAnim = requestAnimationFrame(step);
+    else { const e = document.getElementById('jend'); if (e) e.textContent = toSea ? `${t('sea')} · ${nf().format(Math.round(total))} km` : t('ends')(L(rivers[legs.at(-1).fid])); }
+  };
+  dropAnim = requestAnimationFrame(step);
+}
+function drawRain() { const b = document.getElementById('rain'); b.setAttribute('aria-pressed', rainMode); b.lastChild.textContent = t(rainMode ? 'rainOn' : 'rain'); map.getCanvas().style.cursor = rainMode ? 'crosshair' : ''; }
+document.getElementById('rain').onclick = () => { rainMode = !rainMode; drawRain(); };
 function zoomLake(i) { const f = lakeGeo.features[i]; let bb = [180, 90, -180, -90]; for (const poly of f.geometry.coordinates) for (const [x, y] of poly[0]) bb = [Math.min(bb[0], x), Math.min(bb[1], y), Math.max(bb[2], x), Math.max(bb[3], y)]; map.fitBounds([[bb[0], bb[1]], [bb[2], bb[3]]], { padding: pad(), maxZoom: 11, duration: still() ? 0 : 700 }); }
 // The marching-dash steps (MapLibre's line animation): each step moves the gap a little downstream
 const DASH = [[0, 4, 3], [0.5, 4, 2.5], [1, 4, 2], [1.5, 4, 1.5], [2, 4, 1], [2.5, 4, 0.5], [3, 4, 0], [0, 0.5, 3, 3.5], [0, 1, 3, 3], [0, 1.5, 3, 2.5], [0, 2, 3, 2], [0, 2.5, 3, 1.5], [0, 3, 3, 1], [0, 3.5, 3, 0.5]].map((d) => d.map((x) => x * 3));
@@ -187,7 +282,7 @@ function select(fid, fly = true) {
   draw();
 }
 function drawLegend() {
-  document.getElementById('legend').innerHTML = `<div class="row"><b style="height:3px"></b>${t(still() ? 'legendStill' : 'legend')}</div>${lakes.length ? `<div class="row"><b style="height:.6rem;opacity:.45"></b>${t('lakeL')}</div>` : ''}`;
+  document.getElementById('legend').innerHTML = `<div class="row"><b style="height:3px"></b>${t(still() ? 'legendStill' : 'legend')}</div><div class="row"><span class="sys">${['#1F4E66', '#17695E', '#2B7FA0', '#C0582E', '#6B8E23', '#8E4FA6', '#B8901C'].map((c) => `<i style="background:${c}"></i>`).join('')}</span>${t('sysL')}</div>${lakes.length ? `<div class="row"><b style="height:.6rem;opacity:.45"></b>${t('lakeL')}</div>` : ''}`;
 }
 function draw() {
   const el = document.getElementById('body');
@@ -199,8 +294,9 @@ function draw() {
     el.innerHTML = `<button type="button" class="back" id="back">${t('back')}</button><div class="river"><h2>${esc(L(r))}</h2>
       <p><span class="k">${t('length')}:</span> ${nf().format(r.length)} ${t('km')} <span class="k">(${r.whole ? t('whole') : t('inAz')})</span></p>
       <p><span class="k">${t('names')}:</span> ${[...new Set([r.az, r.ru, r.en])].map(esc).join(' · ')}</p>
-      ${wiki ? `<p><a href="${wiki}" target="_blank" rel="noopener">${t('wiki')} ↗</a></p>` : ''}</div>`;
+      ${wiki ? `<p><a href="${wiki}" target="_blank" rel="noopener">${t('wiki')} ↗</a></p>` : ''}<button type="button" class="drop-btn" id="follow"><span aria-hidden="true">💧</span>${t('follow')}</button></div><div id="journey"></div>`;
     document.getElementById('back').onclick = () => select(null);
+    document.getElementById('follow').onclick = () => rain(selected, null);
   } else {
     const q = query.trim().toLowerCase();
     const list = rivers.filter((r) => !q || [r.az, r.ru, r.en].some((n) => n?.toLowerCase().includes(q)));
