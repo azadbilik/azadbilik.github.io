@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="/shared/theme.js"></script>
 <title>Bakı necə böyüdü · Azad Bilik</title>
 <meta name="description" content="Bakının köhnə planları bugünkü xəritənin üstündə: 1806-cı ilin qala şəhəri, 1894-cü və 1898-ci illərin neft şəhəri. Böyüdücü şüşə, pərdə, qaşıma. Old plans of Baku over today's city, 1806, 1894 and 1898: a spyglass, a swipe, a scratch-off.">
 <meta name="theme-color" content="#F4EFE6" media="(prefers-color-scheme: light)">
@@ -82,7 +83,8 @@
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <script>
 (() => {
-const dark = matchMedia('(prefers-color-scheme: dark)').matches;
+let dark = window.abTheme ? abTheme.dark() : matchMedia('(prefers-color-scheme: dark)').matches;
+addEventListener('themechange', (e) => { dark = e.detail === 'dark'; });
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
 const still = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 const coarse = () => matchMedia('(pointer: coarse)').matches;

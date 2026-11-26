@@ -3,9 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="/shared/theme.js"></script>
 <title>Işıqlar · Azad Bilik</title>
 <meta name="description" content="İki Azərbaycanda insanlar harada yaşayır: hər 5 km²-lik altıbucaqlı öz əhalisi qədər işıqlanır. Where people live in both Azerbaijans, each hexagon lit by its people.">
-<meta name="theme-color" content="#0B0A12">
+<meta name="theme-color" content="#F4EFE6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B0A12" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="canonical" href="https://azadbilik.org/atlas/isiqlar/">
 <meta property="og:title" content="Işıqlar · Where people live">
@@ -16,8 +18,10 @@
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
 <link rel="stylesheet" href="/shared/story-map.css">
 <style>
-  /* Always night: lights read on the dark */
+  /* Dark: a night map, people as lights. Light: a day map, people as ink, denser darker */
   #map { background: #0B0A12; }
+  @media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) #map { background: var(--land); } }
+  :root[data-theme="light"] #map { background: var(--land); }
   .controls { padding: 1rem 1.5rem; border-bottom: 1px solid var(--rule); display: grid; gap: .6rem; }
   .seg { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--rule); border-radius: 3px; padding: 2px; }
   .seg button { padding: .35rem; border-radius: 2px; font-size: .8125rem; color: var(--muted); }
@@ -77,18 +81,23 @@ let lang = (() => {
 const nf = () => new Intl.NumberFormat({ az: 'az-Latn-AZ', ru: 'ru-RU', en: 'en-GB' }[lang]);
 const T = {
   az: { doc: 'Işıqlar · Azad Bilik', title: 'Işıqlar', sub: 'İnsanlar harada yaşayır', v3: 'Dağlar (3D)', v2: 'Xəritə', az: 'Azərbaycan Respublikası', ir: 'İran Azərbaycanı', irNote: 'Şərqi və Qərbi Azərbaycan, Ərdəbil, Zəncan', perKm: 'nəfər/km²', people: 'nəfər', legend: 'Sıxlıq, nəfər/km²', gameBtn: 'Oyun: hansı şəhərdir?', gameEnd: 'Oyunu bitir', q: 'Bu işıqlar hansı şəhərindir?', next: 'Növbəti', score: 'Xal', of: (a, b) => `${b} sualdan ${a}`, done: 'Bitdi!',
-    about: ['Hər altıbucaqlı təxminən 5 km²-dir; hündürlüyü və parlaqlığı orada yaşayanların sıxlığıdır. Rəqəmlər Kontur Population verilənlərindəndir (2023, peyk şəkillərindən və siyahıyaalmalardan qiymətləndirilib, CC BY 4.0); rəsmi siyahıyaalma rəqəmləri «Əhali» xəritəsindədir.'] },
+    about: ['Hər altıbucaqlı təxminən 5 km²-dir; hündürlüyü və rəngi orada yaşayanların sıxlığıdır. Rəqəmlər Kontur Population verilənlərindəndir (2023, peyk şəkillərindən və siyahıyaalmalardan qiymətləndirilib, CC BY 4.0); rəsmi siyahıyaalma rəqəmləri «Əhali» xəritəsindədir.'] },
   ru: { doc: 'Огни · Azad Bilik', title: 'Огни', sub: 'Где живут люди', v3: 'Горы (3D)', v2: 'Карта', az: 'Азербайджанская Республика', ir: 'Иранский Азербайджан', irNote: 'Восточный и Западный Азербайджан, Ардебиль, Зенджан', perKm: 'чел./км²', people: 'чел.', legend: 'Плотность, чел./км²', gameBtn: 'Игра: что это за город?', gameEnd: 'Закончить игру', q: 'Чьи это огни?', next: 'Дальше', score: 'Очки', of: (a, b) => `${a} из ${b}`, done: 'Готово!',
-    about: ['Каждый шестиугольник — около 5 км²; его высота и яркость — плотность живущих в нём людей. Данные Kontur Population (2023, оценка по спутниковым снимкам и переписям, CC BY 4.0); официальные итоги переписей — на карте «Население».'] },
+    about: ['Каждый шестиугольник — около 5 км²; его высота и цвет — плотность живущих в нём людей. Данные Kontur Population (2023, оценка по спутниковым снимкам и переписям, CC BY 4.0); официальные итоги переписей — на карте «Население».'] },
   en: { doc: 'Lights · Azad Bilik', title: 'Lights', sub: 'Where people live', v3: 'Mountains (3D)', v2: 'Map', az: 'Republic of Azerbaijan', ir: 'Iranian Azerbaijan', irNote: 'East and West Azerbaijan, Ardabil, Zanjan', perKm: 'people/km²', people: 'people', legend: 'Density, people/km²', gameBtn: 'Game: which city is it?', gameEnd: 'End the game', q: 'Whose lights are these?', next: 'Next', score: 'Score', of: (a, b) => `${a} of ${b}`, done: 'Done!',
-    about: ["Each hexagon is about 5 km²; its height and brightness are the density of the people living in it. Figures from Kontur Population (2023, estimated from satellite imagery and censuses, CC BY 4.0); the official census results are on the «Population» map."] },
+    about: ["Each hexagon is about 5 km²; its height and colour are the density of the people living in it. Figures from Kontur Population (2023, estimated from satellite imagery and censuses, CC BY 4.0); the official census results are on the «Population» map."] },
 };
 const t = (k) => T[lang][k];
 const params = new URLSearchParams(location.search);
 let view = params.get('v') === '2d' ? '2d' : '3d', names = [], totals = { az: 0, ir: 0 }, game = null;
-// night palette: deep violet → ember → gold → white for the brightest
-const RAMP = [[5, '#2A1B4D'], [30, '#5B2A6E'], [100, '#9C3B6B'], [300, '#D2604F'], [1000, '#F09A3E'], [3000, '#FAD26B'], [10000, '#FFF6D8']];
-const colour = ['interpolate', ['linear'], ['log10', ['max', ['get', 'd'], 1]], ...RAMP.flatMap(([v, c]) => [Math.log10(v), c])];
+let dark = window.abTheme ? abTheme.dark() : matchMedia('(prefers-color-scheme: dark)').matches;
+// night: deep violet → ember → gold → white for the brightest; day: paper → terracotta → pomegranate → ink
+const NIGHT = [[5, '#2A1B4D'], [30, '#5B2A6E'], [100, '#9C3B6B'], [300, '#D2604F'], [1000, '#F09A3E'], [3000, '#FAD26B'], [10000, '#FFF6D8']];
+const DAY = [[5, '#EDE2D1'], [30, '#E0C2A3'], [100, '#D29A77'], [300, '#C0674F'], [1000, '#A6362E'], [3000, '#7A1B1E'], [10000, '#3A0F12']];
+let RAMP = dark ? NIGHT : DAY;
+const colourOf = () => ['interpolate', ['linear'], ['log10', ['max', ['get', 'd'], 1]], ...RAMP.flatMap(([v, c]) => [Math.log10(v), c])];
+let colour = colourOf();
+addEventListener('themechange', (e) => { dark = e.detail === 'dark'; RAMP = dark ? NIGHT : DAY; colour = colourOf(); setTimeout(() => { try { drawLegend(); } catch {} }); });
 const height = ['*', ['^', ['max', ['get', 'd'], 1], .6], 260];
 const BOUNDS = [[44.0, 35.4], [50.6, 42.0]];
 // the game's cities (Wikidata coordinates)
@@ -102,7 +111,7 @@ const CITIES = [
 ];
 
 const map = new maplibregl.Map({
-  container: 'map', style: 'https://tiles.openfreemap.org/styles/dark',
+  container: 'map', style: `https://tiles.openfreemap.org/styles/${dark ? 'dark' : 'positron'}`,
   bounds: BOUNDS, minZoom: 4.5, maxZoom: 12, maxPitch: 70,
   attributionControl: { compact: true, customAttribution: '<a href="https://www.kontur.io/portfolio/population-dataset/">Kontur Population</a> (CC BY 4.0) · <a href="https://www.geoboundaries.org">geoBoundaries</a>' },
 });
@@ -115,11 +124,13 @@ let labelsOn = true;
 function labels(on) { labelsOn = on; for (const l of map.getStyle().layers) if (l.type === 'symbol') map.setLayoutProperty(l.id, 'visibility', on ? 'visible' : 'none'); }
 map.on('style.load', () => {
   for (const l of map.getStyle().layers) {
-    if (l.type === 'background') map.setPaintProperty(l.id, 'background-color', '#0B0A12');
-    if (l.type === 'fill' && /water|ocean|lake/.test(l.id)) map.setPaintProperty(l.id, 'fill-color', '#05050A');
+    if (l.type === 'background') map.setPaintProperty(l.id, 'background-color', dark ? '#0B0A12' : css('--land'));
+    if (l.type === 'fill' && /water|ocean|lake/.test(l.id)) map.setPaintProperty(l.id, 'fill-color', dark ? '#05050A' : css('--water'));
     if (l.type === 'line' && /road|rail|transport/.test(l.id)) map.setLayoutProperty(l.id, 'visibility', 'none');   // only people's light, not the roads
     if (l.type === 'symbol' && l.layout?.['text-field']) map.setLayoutProperty(l.id, 'text-field', labelExpr());
   }
+  if (map.getLayer('hex-2d')) { map.setPaintProperty('hex-2d', 'fill-color', colour); map.setPaintProperty('hex-3d', 'fill-extrusion-color', colour); }
+  if (!labelsOn) labels(false);
 });
 map.on('load', async () => {
   const [hex, nm] = await Promise.all(['data/hex.geojson', 'data/names.json'].map((f) => fetch(f).then((r) => r.json())));
