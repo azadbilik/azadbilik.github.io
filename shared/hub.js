@@ -13,7 +13,7 @@
     en: { open: 'Search', ph: 'Author, musician, place, river, scene…', sections: 'Sections', maps: 'Maps and pages', none: 'Nothing found.', kx: (q) => `“${q}” on kitabxana.az`, close: 'Close', page: 'Pages', author: 'Authors', musician: 'Musicians', poet: 'Poets of the nəzirə network', place: 'Districts and shahrestans', river: 'Rivers', khanate: 'Khanates', scene: 'Miniature scenes', data: 'Data', cite: 'Cite', copy: 'copy', copied: 'copied', hint: '↑↓ choose · Enter open · Esc close' },
   };
   const t = (k) => T[lang()][k];
-  const SECTIONS = ['https://kitabxana.az', '/qalereya/', '/qalereya/tarix/', '/xeriteler/', '/atlas/', '/musiqi/', 'https://github.com/azadbilik/data'];
+  const SECTIONS = ['https://kitabxana.az', '/qalereya/', '/qalereya/tarix/', '/xeriteler/', '/atlas/', '/musiqi/', '/sebeke/', 'https://github.com/azadbilik/data'];
   const KINDS = ['page', 'author', 'musician', 'poet', 'place', 'river', 'khanate', 'scene'];
   const DOI = '10.5281/zenodo.24543369';
   const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
