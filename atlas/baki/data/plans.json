@@ -1,0 +1,77 @@
+{
+ "1898": {
+  "title": "План существующего и проектированного расположения губернского города Баку, 1898–1900 (полк. фон-дер Нонне)",
+  "source": "https://commons.wikimedia.org/wiki/File:Map_of_Baku_in_1898.jpg",
+  "fit": "thin-plate spline",
+  "points": 25,
+  "meanErrorM": 0.0,
+  "coordinates": [
+   [
+    49.79,
+    40.41
+   ],
+   [
+    49.93,
+    40.41
+   ],
+   [
+    49.93,
+    40.335
+   ],
+   [
+    49.79,
+    40.335
+   ]
+  ]
+ },
+ "1894": {
+  "title": "План города Баку, 1894",
+  "source": "https://commons.wikimedia.org/wiki/File:Map_of_Baku_in_1894.jpg",
+  "fit": "thin-plate spline",
+  "points": 25,
+  "meanErrorM": 0.0,
+  "coordinates": [
+   [
+    49.79,
+    40.41
+   ],
+   [
+    49.93,
+    40.41
+   ],
+   [
+    49.93,
+    40.335
+   ],
+   [
+    49.79,
+    40.335
+   ]
+  ]
+ },
+ "1806": {
+  "title": "План города Баку с показанием округ лежащей ситуации, октябрь 1806",
+  "source": "https://commons.wikimedia.org/wiki/File:Map_of_Baku_in_1806.jpg",
+  "fit": "similarity",
+  "points": 2,
+  "meanErrorM": 0.0,
+  "coordinates": [
+   [
+    49.79,
+    40.41
+   ],
+   [
+    49.93,
+    40.41
+   ],
+   [
+    49.93,
+    40.335
+   ],
+   [
+    49.79,
+    40.335
+   ]
+  ]
+ }
+}

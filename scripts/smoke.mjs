@@ -46,6 +46,7 @@ for (const [path, musts] of [
   ['/atlas/hovze/', ['maplibre-gl', 'rivers.geojson']],
   ['/atlas/yollar/', ['maplibre-gl', 'routes.geojson', 'reach.geojson']],
   ['/atlas/isiqlar/', ['maplibre-gl', 'hex.geojson']],
+  ['/atlas/baki/', ['maplibre-gl', 'plans.json']],
   ['/soz/', ['vocab.json']],
   ['/atlas/caylar/', ['/atlas/hovze/']],
   ['/atlas/1897/', ['maplibre-gl', 'census.out.json']],
