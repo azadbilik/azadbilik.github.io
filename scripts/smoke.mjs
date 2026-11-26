@@ -48,6 +48,7 @@ for (const [path, musts] of [
   ['/atlas/isiqlar/', ['maplibre-gl', 'hex.geojson']],
   ['/atlas/baki/', ['maplibre-gl', 'plans.json']],
   ['/soz/', ['vocab.json']],
+  ['/sebeke/', ['href="/sebeke/nezire/"', 'href="/sebeke/elm/"']],
   ['/musiqi/silsile/', ['d3@7.9.0', 'data/lineage.json']],
   ['/musiqi/bestekarlar/', ['d3@7.9.0', 'data/composers.json']],
   ['/musiqi/caz/', ['d3@7.9.0', 'data/jazz.json']],

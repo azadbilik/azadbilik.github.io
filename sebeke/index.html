@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="/shared/theme.js"></script>
+<title>Şəbəkələr · Azad Bilik</title>
+<meta name="description" content="Azərbaycan haqqında şəbəkələr: ədəbiyyat, insanlar, elm, ixrac. Networks of Azerbaijan: literature, people, science, trade.">
+<meta name="theme-color" content="#F4EFE6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14100D" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://azadbilik.org/sebeke/">
+<meta property="og:title" content="Şəbəkələr · Networks · Azad Bilik">
+<meta property="og:description" content="Kim kimə bağlıdır: şairlər, alimlər, insanlar, məhsullar · Who connects to whom: poets, scientists, people, products">
+<meta property="og:image" content="https://azadbilik.org/sebeke/qalaktika/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="stylesheet" href="/shared/hub.css">
+<script>
+  // ?lang=, else the visitor's last choice on azadbilik.org, else Azerbaijani; set before paint
+  (() => { const L = ['az', 'ru', 'en']; let l = new URLSearchParams(location.search).get('lang'); if (!L.includes(l)) { try { l = localStorage.getItem('lang'); } catch {} } if (L.includes(l)) document.documentElement.lang = l; })();
+</script>
+<style>
+  :root {
+    --paper: #F4EFE6; --ink: #1A1410; --muted: #675E55; --rule: rgb(26 20 16 / .16); --frame: #E9E2D6;
+    --accent: #A81E28; --serif: 'Literata', Georgia, serif; --sans: 'Inter', system-ui, sans-serif;
+    --gutter: clamp(1rem, 4vw, 3rem);
+    color-scheme: light dark;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --paper: #14100D; --ink: #F1EBE1; --muted: #A0968B; --rule: rgb(241 235 225 / .16); --frame: #1F1914; --accent: #DA5A61; }
+  }
+  :root[data-theme="dark"] { --paper: #14100D; --ink: #F1EBE1; --muted: #A0968B; --rule: rgb(241 235 225 / .16); --frame: #1F1914; --accent: #DA5A61; }
+
+  html:not([lang="az"]) [data-l="az"], html:not([lang="ru"]) [data-l="ru"], html:not([lang="en"]) [data-l="en"] { display: none !important; }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: var(--paper); color: var(--ink); font: 400 1rem/1.6 var(--sans); -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: .22em; text-decoration-color: var(--rule); }
+  a:hover { text-decoration-color: currentColor; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+  .wrap { max-width: 76rem; margin: 0 auto; padding: 0 var(--gutter); }
+
+  header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .75rem 1.5rem; padding-block: 1.75rem; }
+  .brand { display: inline-flex; align-items: center; gap: .6rem; font-weight: 600; font-size: .9375rem; text-decoration: none; white-space: nowrap; }
+  .brand svg { width: 1.375rem; height: 1.375rem; }
+  .star { fill: currentColor; } .gem { fill: var(--accent); }
+  nav { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: .25rem 1.25rem; }
+  nav a { font-size: .875rem; color: var(--muted); text-decoration: none; }
+  nav a:hover, nav a[aria-current] { color: var(--ink); }
+  nav a[aria-current] { box-shadow: inset 0 -1px currentColor; }
+  @media (max-width: 40rem) { nav { gap: .25rem .9rem; } nav a { font-size: .8125rem; } }
+  .langs { margin-left: .25rem; }
+  .langs button { min-height: 1.75rem; min-width: 1.75rem; }
+  .langs { display: inline-flex; gap: .15rem; }
+  .langs button { font: inherit; font-size: .75rem; letter-spacing: .04em; padding: .1rem .3rem; border: 0; border-radius: 2px; background: none; color: var(--muted); cursor: pointer; }
+  .langs button[aria-pressed="true"] { color: var(--ink); box-shadow: inset 0 -1px currentColor; }
+
+  .hero { padding-block: clamp(3rem, 9vw, 6rem) clamp(2.5rem, 6vw, 4rem); }
+  h1 { font: 300 clamp(2.25rem, 1.2rem + 4.6vw, 4.5rem)/1.04 var(--serif); letter-spacing: -.025em; }
+  .hero p { margin-top: 1.25rem; font: italic 300 clamp(1.125rem, 1rem + .6vw, 1.375rem)/1.4 var(--serif); max-width: 36ch; }
+
+  /* Sections: the group's name in the margin, its maps beside it */
+  .group { display: grid; grid-template-columns: minmax(11rem, 1fr) 3fr; gap: 1.5rem 3rem; border-top: 1px solid var(--rule); padding-block: 2.25rem 3.5rem; }
+  .group-head { align-self: start; position: sticky; top: 1.5rem; }
+  .group-head h2 { font: 400 1.375rem/1.2 var(--serif); letter-spacing: -.01em; text-wrap: balance; }
+  .group-head p { margin-top: .5rem; font-size: .875rem; color: var(--muted); max-width: 24ch; }
+  .maps { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr)); gap: 2.5rem 2rem; }
+  @media (max-width: 52rem) { .group { grid-template-columns: 1fr; gap: 1.25rem; padding-block: 1.75rem 2.75rem; } .group-head { position: static; } .group-head p { max-width: 40rem; } }
+  .map a { display: block; text-decoration: none; }
+  .map .pic { aspect-ratio: 1200 / 630; background: var(--frame); border-radius: 3px; overflow: hidden; }
+  .map img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s; }
+  .map a:hover img { transform: scale(1.015); }
+  .map h3 { margin-top: 1rem; font: 400 1.75rem/1.15 var(--serif); letter-spacing: -.015em; }
+  .map h3::after { content: ' →'; font: 300 .6em var(--sans); color: var(--muted); vertical-align: .2em; }
+  .map a:hover h2::after { color: var(--accent); }
+  .map p { margin-top: .5rem; max-width: 34rem; }
+  .map .facts { margin-top: .5rem; font-size: .8125rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .note { margin-top: 3.5rem; padding-top: 1.25rem; border-top: 1px solid var(--rule); font-size: .875rem; color: var(--muted); max-width: 40rem; }
+
+  footer { margin-top: 4rem; border-top: 1px solid var(--rule); padding-block: 1.75rem 2.5rem; font-size: .8125rem; color: var(--muted); }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  /* Phones: the language switch on the brand's line, the sections on the line below */
+  @media (max-width: 40rem) { header { position: relative; } header .langs { position: absolute; top: calc(1.75rem - .19rem); right: 0; margin: 0; } }
+  /* A card's cover in each theme: the map without its panel, light or dark */
+  .map .pic img.d { display: none; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .map .pic img.l { display: none; } :root:not([data-theme="light"]) .map .pic img.d { display: block; } }
+  :root[data-theme="dark"] .map .pic img.l { display: none; } :root[data-theme="dark"] .map .pic img.d { display: block; }
+</style>
+</head>
+<body>
+<header class="hub-header">
+  <a class="brand" href="/" data-keep-lang><svg viewBox="0 0 512 512" aria-hidden="true"><g class="star"><rect x="126" y="126" width="260" height="260"/><polygon points="256,72 440,256 256,440 72,256"/></g><polygon class="gem" points="256,196 316,256 256,316 196,256"/></svg>Azad Bilik</a>
+  <nav aria-label="Azad Bilik"><a href="https://kitabxana.az" data-kx><span data-l="az">Kitabxana</span><span data-l="ru">Библиотека</span><span data-l="en">Library</span></a><a href="/qalereya/" data-keep-lang><span data-l="az">Qalereya</span><span data-l="ru">Галерея</span><span data-l="en">Gallery</span></a><a href="/xeriteler/" data-keep-lang><span data-l="az">Ədəbi xəritələr</span><span data-l="ru">Литературные карты</span><span data-l="en">Literary maps</span></a><a href="/atlas/" data-keep-lang><span data-l="az">Atlas</span><span data-l="ru">Атлас</span><span data-l="en">Atlas</span></a><a href="/musiqi/" data-keep-lang><span data-l="az">Musiqi</span><span data-l="ru">Музыка</span><span data-l="en">Music</span></a><span class="langs" role="group" aria-label="Dil · Язык · Language"><button type="button" data-lang="az">AZ</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="en">EN</button></span></nav>
+</header>
+<div class="wrap">
+
+  <main>
+    <div class="hero">
+      <h1><span data-l="az">Şəbəkələr</span><span data-l="ru">Сети</span><span data-l="en">Networks</span></h1>
+      <p><span data-l="az">Kim kimə bağlıdır: bir-birinə şeirlə cavab verən şairlər, birgə yazan alimlər, doğulduğu yerdən uzaqlara gedən insanlar, ölkənin satdığı mallar.</span><span data-l="ru">Кто с кем связан: поэты, отвечавшие друг другу стихами, учёные, пишущие вместе, люди, уехавшие далеко от родных мест, товары, которые страна продаёт.</span><span data-l="en">Who connects to whom: poets who answered each other in verse, scientists who write together, people who went far from where they were born, the goods the country sells.</span></p>
+    </div>
+
+    <section class="group" aria-labelledby="g-lit">
+      <div class="group-head"><h2 id="g-lit"><span data-l="az">Ədəbiyyat</span><span data-l="ru">Литература</span><span data-l="en">Literature</span></h2><p><span data-l="az">Kitabxana.az-dakı əsərlər bir-birinə necə bağlıdır.</span><span data-l="ru">Как связаны произведения библиотеки kitabxana.az.</span><span data-l="en">How the works in kitabxana.az connect.</span></p></div>
+      <ul class="maps">
+        <li class="map">
+          <a href="/sebeke/nezire/" data-keep-lang>
+            <div class="pic"><img class="l" src="/sebeke/nezire/card.webp" width="800" height="420" alt="" loading="lazy"><img class="d" src="/sebeke/nezire/card-dark.webp" width="800" height="420" alt="" loading="lazy"></div>
+            <h3><span data-l="az">Nəzirə şəbəkəsi</span><span data-l="ru">Сеть назира</span><span data-l="en">Who answered whom</span></h3>
+            <p><span data-l="az">Klassik şairlər bir-birinə şeirlə necə cavab verib: nəzirə, təxmis, cavab; hər əlaqənin sübutu ilə.</span><span data-l="ru">Как классики отвечали друг другу стихами: назира, тахмис, ответ; у каждой связи её доказательство.</span><span data-l="en">How classical poets answered each other in verse: nazira, takhmis, replies, each link with its evidence.</span></p>
+            <p class="facts"><span data-l="az">59 şair · 25 920 şeir</span><span data-l="ru">59 поэтов · 25 920 стихотворений</span><span data-l="en">59 poets · 25,920 poems</span></p>
+          </a>
+        </li>
+        <li class="map">
+          <a href="/sebeke/qalaktika/" data-keep-lang>
+            <div class="pic"><img class="l" src="/sebeke/qalaktika/card.webp" width="800" height="420" alt="" loading="lazy"><img class="d" src="/sebeke/qalaktika/card-dark.webp" width="800" height="420" alt="" loading="lazy"></div>
+            <h3><span data-l="az">Ədəbiyyat qalaktikası</span><span data-l="ru">Галактика литературы</span><span data-l="en">The literature galaxy</span></h3>
+            <p><span data-l="az">Hər əsər bir nöqtədir, mətni oxşar olanlar yan-yana; hər əsərin ən yaxın on qonşusu.</span><span data-l="ru">Каждое произведение — точка, похожие по тексту рядом; у каждого десять ближайших соседей.</span><span data-l="en">Every work as one point, those that read alike side by side; each with its ten nearest neighbours.</span></p>
+            <p class="facts"><span data-l="az">49 903 əsər</span><span data-l="ru">49 903 произведения</span><span data-l="en">49,903 works</span></p>
+          </a>
+        </li>
+      </ul>
+    </section>
+    <section class="group" aria-labelledby="g-people">
+      <div class="group-head"><h2 id="g-people"><span data-l="az">İnsanlar</span><span data-l="ru">Люди</span><span data-l="en">People</span></h2><p><span data-l="az">Tarixi Azərbaycanda doğulanlar: haradan haraya gediblər.</span><span data-l="ru">Родившиеся в историческом Азербайджане: откуда и куда они уезжали.</span><span data-l="en">People born in historical Azerbaijan: where they went.</span></p></div>
+      <ul class="maps">
+        <li class="map">
+          <a href="/sebeke/insanlar/" data-keep-lang>
+            <div class="pic"><img class="l" src="/sebeke/insanlar/card.webp" width="800" height="420" alt="" loading="lazy"><img class="d" src="/sebeke/insanlar/card-dark.webp" width="800" height="420" alt="" loading="lazy"></div>
+            <h3><span data-l="az">İnsanlar</span><span data-l="ru">Люди</span><span data-l="en">People of historical Azerbaijan</span></h3>
+            <p><span data-l="az">Doğulduğu və vəfat etdiyi yer, dövrlər üzrə: Bakıdan Moskvaya, Təbrizdən Tehrana, Şuşadan Bakıya.</span><span data-l="ru">Места рождения и смерти по эпохам: из Баку в Москву, из Тебриза в Тегеран, из Шуши в Баку.</span><span data-l="en">Where they were born and died, era by era: Baku to Moscow, Tabriz to Tehran, Shusha to Baku.</span></p>
+            <p class="facts"><span data-l="az">15 496 nəfər · Wikidata</span><span data-l="ru">15 496 человек · Wikidata</span><span data-l="en">15,496 people · Wikidata</span></p>
+          </a>
+        </li>
+      </ul>
+    </section>
+    <section class="group" aria-labelledby="g-econ">
+      <div class="group-head"><h2 id="g-econ"><span data-l="az">Elm və iqtisadiyyat</span><span data-l="ru">Наука и экономика</span><span data-l="en">Science and the economy</span></h2><p><span data-l="az">Açıq məlumatlardan: kim kimlə yazır, ölkə nə satır.</span><span data-l="ru">По открытым данным: кто с кем пишет, что страна продаёт.</span><span data-l="en">From open data: who writes with whom, what the country sells.</span></p></div>
+      <ul class="maps">
+        <li class="map">
+          <a href="/sebeke/elm/" data-keep-lang>
+            <div class="pic"><img class="l" src="/sebeke/elm/card.webp" width="800" height="420" alt="" loading="lazy"><img class="d" src="/sebeke/elm/card-dark.webp" width="800" height="420" alt="" loading="lazy"></div>
+            <h3><span data-l="az">Elm şəbəkəsi</span><span data-l="ru">Сеть науки</span><span data-l="en">Science network</span></h3>
+            <p><span data-l="az">Azərbaycan elmi kimlərlə birgə yazır: ölkələr, institutlar, tədqiqatçılar, sahələr, 1970-dən bu günə.</span><span data-l="ru">С кем пишет азербайджанская наука: страны, институты, исследователи, области, с 1970 года.</span><span data-l="en">Who Azerbaijani research co-authors with: countries, institutions, researchers and fields, 1970 to today.</span></p>
+            <p class="facts"><span data-l="az">74 708 iş · OpenAlex</span><span data-l="ru">74 708 работ · OpenAlex</span><span data-l="en">74,708 works · OpenAlex</span></p>
+          </a>
+        </li>
+        <li class="map">
+          <a href="/sebeke/ixrac/" data-keep-lang>
+            <div class="pic"><img class="l" src="/sebeke/ixrac/card.webp" width="800" height="420" alt="" loading="lazy"><img class="d" src="/sebeke/ixrac/card-dark.webp" width="800" height="420" alt="" loading="lazy"></div>
+            <h3><span data-l="az">İxrac məhsul fəzası</span><span data-l="ru">Продуктовое пространство экспорта</span><span data-l="en">Export product space</span></h3>
+            <p><span data-l="az">Azərbaycan nəyi rəqabətli satır və hansı məhsullara yaxındır; neft-qazın payı illər üzrə.</span><span data-l="ru">Что Азербайджан экспортирует конкурентно и к каким товарам он близок; доля нефти и газа по годам.</span><span data-l="en">What Azerbaijan exports competitively and which products are close to it; the share of oil and gas over time.</span></p>
+            <p class="facts"><span data-l="az">865 məhsul · 1995–2024</span><span data-l="ru">865 товаров · 1995–2024</span><span data-l="en">865 products · 1995–2024</span></p>
+          </a>
+        </li>
+      </ul>
+    </section>
+    <p class="note"><span data-l="az">Başqa şəbəkələr: musiqidə <a href="/musiqi/silsile/" data-keep-lang>ustad–şagird silsiləsi</a>, <a href="/musiqi/bestekarlar/" data-keep-lang>bəstəkarlar</a>, <a href="/musiqi/caz/" data-keep-lang>caz</a>; qalereyada <a href="/qalereya/rassamlar/" data-keep-lang>miniatür rəssamları</a>.</span><span data-l="ru">Другие сети: в музыке — <a href="/musiqi/silsile/" data-keep-lang>линии учителей и учеников</a>, <a href="/musiqi/bestekarlar/" data-keep-lang>композиторы</a>, <a href="/musiqi/caz/" data-keep-lang>джаз</a>; в галерее — <a href="/qalereya/rassamlar/" data-keep-lang>художники-миниатюристы</a>.</span><span data-l="en">More networks: in music, <a href="/musiqi/silsile/" data-keep-lang>master–student lineages</a>, <a href="/musiqi/bestekarlar/" data-keep-lang>composers</a> and <a href="/musiqi/caz/" data-keep-lang>jazz</a>; in the gallery, <a href="/qalereya/rassamlar/" data-keep-lang>miniature painters</a>.</span></p>
+  </main>
+
+  <footer><a href="/" data-keep-lang>Azad Bilik</a> · <a href="https://github.com/azadbilik">GitHub</a></footer>
+</div>
+<script>
+  function apply(l) {
+    document.documentElement.lang = l;
+    document.title = { az: 'Şəbəkələr', ru: 'Сети', en: 'Networks' }[l] + ' · Azad Bilik';
+    document.querySelectorAll('[data-lang]').forEach((b) => b.setAttribute('aria-pressed', b.dataset.lang === l));
+    document.querySelectorAll('[data-kx]').forEach((a) => a.href = `https://kitabxana.az${l === 'az' ? '' : '/' + l}`);
+    document.querySelectorAll('[data-keep-lang]').forEach((a) => { const u = new URL(a.getAttribute('href'), location.href); if (l === 'az') u.searchParams.delete('lang'); else u.searchParams.set('lang', l); a.href = u.pathname + u.search; });
+  }
+  apply(document.documentElement.lang);
+  document.querySelectorAll('[data-lang]').forEach((b) => b.onclick = () => {
+    const l = b.dataset.lang;
+    try { localStorage.setItem('lang', l); } catch {}
+    const u = new URL(location.href);
+    if (l === 'az') u.searchParams.delete('lang'); else u.searchParams.set('lang', l);
+    history.replaceState(null, '', u);
+    apply(l);
+  });
+</script>
+</body>
+</html>
