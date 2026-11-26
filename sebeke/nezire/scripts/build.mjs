@@ -194,7 +194,9 @@ for (let i = 0; i < sigPoems.length; i++) for (let j = i + 1; j < sigPoems.lengt
   if (m < 0.8 * Math.min(A.sig.S.length, B.sig.S.length) && m < 7) continue;
   const r = Math.min(A.sig.r, B.sig.r, m);
   const q = m - r;                                         // letters of the qafiyə that agree
-  if (r > 0 ? q < 2 : m < 6) continue;
+  // An answer repeats the model's radif, its last word(s) whole, and rhymes before it. Endings that only share
+  // letters inside the last word (no radif) are rhymes, not answers: not linked
+  if (r === 0 || q < 2) continue;
   if (Math.abs(A.sig.syl - B.sig.syl) > 2) continue;       // not the same line length: not the same metre
   const c = suffixCount.get(A.sig.S.slice(-m)) ?? 0;       // poems that end this way: the rarer, the likelier an answer
   const sh = [...A.sig.stems].filter((x) => B.sig.stems.has(x)).length;

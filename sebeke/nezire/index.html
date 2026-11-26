@@ -448,9 +448,30 @@ function draw() {
     .on('keydown', (ev, n) => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); select({ k: mode === 'poets' ? 'poet' : 'poem', id: n.id }); } })
     .on('pointerenter', (ev, n) => tipNode(ev, n)).on('pointerleave', () => { tip.hidden = true; });
   // labels: the most answered always; the rest when there is room
-  const labelled = nodes.filter((n) => (mode === 'poets' ? n.in >= 2 || n.out >= 6 : n.in >= 2));
-  svg.append('g').selectAll('text').data(labelled).join('text').attr('class', 'lab').attr('x', (n) => n.x).attr('y', (n) => n.y - n.r - 3).attr('text-anchor', 'middle')
-    .text((n) => (n.label.length > 26 ? `${n.label.slice(0, 25)}…` : n.label));
+  // each label tries above, below, right, left of its node, inside the picture; one that would cover another
+  // label (or another labelled node) is left to the tooltip. The most answered are placed first.
+  const want = nodes.filter((n) => (mode === 'poets' ? n.in >= 2 || n.out >= 6 : n.in >= 2)).sort((a, b) => b.in - a.in || b.r - a.r);
+  const text = (n) => (n.label.length > 26 ? `${n.label.slice(0, 25)}…` : n.label);
+  const boxes = want.map((n) => ({ x0: n.x - n.r, x1: n.x + n.r, y0: n.y - n.r, y1: n.y + n.r }));
+  const hit = (b, o) => b.x0 < o.x1 + 3 && b.x1 + 3 > o.x0 && b.y0 < o.y1 + 1 && b.y1 + 1 > o.y0;
+  const placed = [];
+  for (const n of want) {
+    const w = text(n).length * 6.1, h = 11;
+    const tries = [[n.x, n.y - n.r - 3, 'middle'], [n.x, n.y + n.r + h + 1, 'middle'], [n.x + n.r + 4, n.y + 4, 'start'], [n.x - n.r - 4, n.y + 4, 'end']];
+    for (const [tx0, ty, anchor] of tries) {
+      let tx = tx0;
+      const left = () => (anchor === 'middle' ? tx - w / 2 : anchor === 'start' ? tx : tx - w);
+      if (left() < 2) tx += 2 - left();
+      if (left() + w > W - 2) tx -= left() + w - (W - 2);
+      const b = { x0: left(), x1: left() + w, y0: ty - h + 2, y1: ty + 2 };
+      if (b.y0 < 0 || b.y1 > H - 18) continue;
+      if (placed.some((p) => hit(b, p.b)) || boxes.some((o, i) => want[i] !== n && hit(b, o))) continue;
+      placed.push({ n, x: tx, y: ty, anchor, b }); break;
+    }
+  }
+  svg.append('g').selectAll('text').data(placed).join('text').attr('class', 'lab').attr('x', (p) => p.x).attr('y', (p) => p.y).attr('text-anchor', (p) => p.anchor)
+    .text((p) => text(p.n));
+  const labelled = placed.map((p) => p.n);
   svg.on('click', () => select(null));
   paintSel();
 }
@@ -487,7 +508,7 @@ function paintSel() {
   svg.classed('dim', !!sel && ids.size > 0);
   svg.selectAll('.n').classed('hi', (n) => ids.has(n.id)).classed('sel', (n) => !!sel && sel.id === n.id);
   svg.selectAll('path.e').classed('hi', (e) => eks.has(edgeKey(e))).classed('sel', (e) => sel?.k === 'edge' && sel.id === edgeKey(e));
-  svg.selectAll('.lab').classed('hi', (n) => ids.has(n.id));
+  svg.selectAll('.lab').classed('hi', (p) => ids.has(p.n.id));
 }
 function select(s) {
   sel = s;
