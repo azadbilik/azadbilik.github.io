@@ -26,6 +26,9 @@
   .bar .brand { margin-right: .25rem; }
   .bar nav { display: flex; align-items: center; gap: 1rem; font-size: .8125rem; color: var(--muted); }
   .bar nav a { text-decoration: none; }
+  .bar nav a:hover { color: var(--ink); }
+  html:not([lang="az"]) [data-l="az"], html:not([lang="ru"]) [data-l="ru"], html:not([lang="en"]) [data-l="en"] { display: none !important; }
+  @media (max-width: 72rem) { .bar nav .hub-link { display: none; } }
   #cg { position: fixed; top: var(--bar); left: 22rem; right: 0; bottom: 0; background: var(--sky); touch-action: none; }
   #cg canvas { display: block; width: 100%; height: 100%; }
   #loading { position: fixed; z-index: 4; top: calc(var(--bar) + 40%); left: 0; right: 0; text-align: center; color: var(--muted); font: italic 300 1rem var(--serif); pointer-events: none; }
@@ -106,7 +109,7 @@
 <body>
 <header class="bar">
   <div class="top"><a class="brand" href="/" data-keep-lang><svg viewBox="0 0 512 512" aria-hidden="true"><g class="star"><rect x="126" y="126" width="260" height="260"/><polygon points="256,72 440,256 256,440 72,256"/></g><polygon class="gem" points="256,196 316,256 256,316 196,256"/></svg>Azad Bilik</a><h1 data-i18n="title">Ədəbiyyat qalaktikası</h1></div>
-  <nav><a href="https://kitabxana.az" id="kx-nav" data-i18n="library">Kitabxana</a><span class="langs" role="group" aria-label="Dil · Язык · Language"><button type="button" data-lang="az">AZ</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="en">EN</button></span></nav>
+  <nav><a href="https://kitabxana.az" id="kx-nav" class="hub-link"><span data-l="az">Kitabxana</span><span data-l="ru">Библиотека</span><span data-l="en">Library</span></a><a href="/qalereya/" class="hub-link" data-keep-lang><span data-l="az">Qalereya</span><span data-l="ru">Галерея</span><span data-l="en">Gallery</span></a><a href="/xeriteler/" class="hub-link" data-keep-lang><span data-l="az">Ədəbi xəritələr</span><span data-l="ru">Литературные карты</span><span data-l="en">Literary maps</span></a><a href="/atlas/" class="hub-link" data-keep-lang><span data-l="az">Atlas</span><span data-l="ru">Атлас</span><span data-l="en">Atlas</span></a><a href="/musiqi/" class="hub-link" data-keep-lang><span data-l="az">Musiqi</span><span data-l="ru">Музыка</span><span data-l="en">Music</span></a><span class="langs" role="group" aria-label="Dil · Язык · Language"><button type="button" data-lang="az">AZ</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="en">EN</button></span></nav>
 </header>
 
 <main>
@@ -404,6 +407,7 @@ function applyLang() {
   document.querySelectorAll('[data-i18n]').forEach((el) => el.textContent = t(el.dataset.i18n));
   document.querySelectorAll('[data-lang]').forEach((b) => b.setAttribute('aria-pressed', b.dataset.lang === lang));
   document.querySelectorAll('[data-keep-lang]').forEach((a) => { const u = new URL(a.getAttribute('href'), location.href); if (lang === 'az') u.searchParams.delete('lang'); else u.searchParams.set('lang', lang); a.href = u.pathname + u.search; });
+  document.getElementById('kx-nav').href = `https://kitabxana.az${lang === 'az' ? '' : '/' + lang}/`;
   $('find').placeholder = t('find'); $('find').setAttribute('aria-label', t('find'));
   $('timeLbl').textContent = t('timeLbl'); $('play').setAttribute('aria-label', timer ? t('pause') : t('play'));
   $('toggle').textContent = t('collapse'); $('foot').textContent = M ? t('foot')(M.built) : '';
