@@ -75,6 +75,8 @@
 
   footer { margin-top: 4rem; border-top: 1px solid var(--rule); padding-block: 1.75rem 2.5rem; font-size: .8125rem; color: var(--muted); }
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  /* Phones: the language switch on the brand's line, the sections on the line below */
+  @media (max-width: 40rem) { header { position: relative; } header .langs { position: absolute; top: calc(1.75rem - .19rem); right: 0; margin: 0; } }
 </style>
 </head>
 <body>
@@ -122,6 +124,14 @@
     <section class="group" aria-labelledby="g-people">
       <div class="group-head"><h2 id="g-people"><span data-l="az">Əhali və dillər</span><span data-l="ru">Население и языки</span><span data-l="en">People and languages</span></h2><p><span data-l="az">Siyahıyaalmalar üzrə: neçə nəfər, harada, hansı dildə.</span><span data-l="ru">По переписям: сколько людей, где и на каком языке.</span><span data-l="en">Census by census: how many people, where, speaking what.</span></p></div>
       <ul class="maps">
+        <li class="map">
+          <a href="/atlas/isiqlar/" data-keep-lang>
+            <div class="pic"><img src="/atlas/isiqlar/og.png" width="1200" height="630" alt="" loading="lazy"></div>
+            <h2><span data-l="az">Işıqlar</span><span data-l="ru">Огни</span><span data-l="en">Lights</span></h2>
+            <p><span data-l="az">İki Azərbaycanda insanlar harada yaşayır: hər 5 km²-lik altıbucaqlı öz sıxlığı qədər yüksəlir və işıqlanır. «Hansı şəhərdir?» oyunu ilə.</span><span data-l="ru">Где живут люди в обоих Азербайджанах: каждый шестиугольник в 5 км² поднимается и светится по плотности. С игрой «что это за город?».</span><span data-l="en">Where people live in both Azerbaijans: every 5 km² hexagon rises and glows with its density. With a «which city is it?» game.</span></p>
+            <p class="facts"><span data-l="az">13 140 altıbucaqlı · 19,6 mln nəfər</span><span data-l="ru">13 140 шестиугольников · 19,6 млн чел.</span><span data-l="en">13,140 hexagons · 19.6 million people</span></p>
+          </a>
+        </li>
         <li class="map">
           <a href="/atlas/ehali/" data-keep-lang>
             <div class="pic"><img src="/atlas/ehali/og.png" width="1200" height="630" alt="" loading="lazy"></div>

@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Işıqlar · Azad Bilik</title>
+<meta name="description" content="İki Azərbaycanda insanlar harada yaşayır: hər 5 km²-lik altıbucaqlı öz əhalisi qədər işıqlanır. Where people live in both Azerbaijans, each hexagon lit by its people.">
+<meta name="theme-color" content="#0B0A12">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://azadbilik.org/atlas/isiqlar/">
+<meta property="og:title" content="Işıqlar · Where people live">
+<meta property="og:description" content="İki Azərbaycanın əhalisi, altıbucaqlılarla, gecə xəritəsində.">
+<meta property="og:image" content="https://azadbilik.org/atlas/isiqlar/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+<link rel="stylesheet" href="/shared/story-map.css">
+<style>
+  /* Always night: lights read on the dark */
+  #map { background: #0B0A12; }
+  .controls { padding: 1rem 1.5rem; border-bottom: 1px solid var(--rule); display: grid; gap: .6rem; }
+  .seg { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--rule); border-radius: 3px; padding: 2px; }
+  .seg button { padding: .35rem; border-radius: 2px; font-size: .8125rem; color: var(--muted); }
+  .seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+  .totals { padding: 1rem 1.5rem 0; display: grid; gap: .6rem; }
+  .total { display: grid; grid-template-columns: 1fr auto; align-items: baseline; }
+  .total b { font: 400 1.5rem/1.1 var(--serif); font-variant-numeric: tabular-nums; }
+  .total span { font-size: .875rem; font-weight: 500; } .total small { font-size: .75rem; color: var(--muted); grid-column: 1 / -1; }
+  .about { padding: 1rem 1.5rem; font-size: .8125rem; color: var(--muted); display: grid; gap: .5rem; }
+  .play-game { padding: .45rem; border: 1px solid var(--accent); color: var(--accent); border-radius: 3px; font-size: .8125rem; font-weight: 500; }
+  .play-game:hover, .play-game[aria-pressed="true"] { background: var(--accent); color: var(--paper); }
+  .game { padding: 1rem 1.5rem 0; display: grid; gap: .7rem; }
+  .game .q { font: 400 1.375rem/1.25 var(--serif); }
+  .game .opts { display: grid; gap: .4rem; }
+  .game .opts button { padding: .55rem .7rem; border: 1px solid var(--rule); border-radius: 4px; text-align: left; font-size: .9375rem; }
+  .game .opts button:hover:not([disabled]) { border-color: var(--ink); }
+  .game .opts button.ok { border-color: #2F7D3B; background: color-mix(in srgb, #2F7D3B 15%, transparent); }
+  .game .opts button.no { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, transparent); }
+  .game .stats { display: flex; gap: 1.25rem; font-size: .8125rem; color: var(--muted); } .game .stats b { color: var(--ink); font-size: 1rem; }
+  .game .next { padding: .45rem; border-radius: 3px; background: var(--ink); color: var(--paper); font-size: .875rem; }
+  .legend .ramp { display: flex; height: .6rem; } .legend .ramp span { flex: 1; height: 100%; display: block; }
+  .legend .ticks { display: flex; justify-content: space-between; font-size: .625rem; color: var(--muted); }
+  .legend { min-width: 13rem; }
+</style>
+</head>
+<body>
+<div id="map" role="region" aria-label="Xəritə"></div>
+<aside class="panel">
+  <div class="head">
+    <div class="top"><a class="brand" href="/" data-keep-lang><svg viewBox="0 0 512 512" aria-hidden="true"><g class="star"><rect x="126" y="126" width="260" height="260"/><polygon points="256,72 440,256 256,440 72,256"/></g><polygon class="gem" points="256,196 316,256 256,316 196,256"/></svg>Azad Bilik</a><nav><a href="/atlas/" data-keep-lang>Atlas</a><span class="langs" role="group" aria-label="Dil · Язык · Language"><button type="button" data-lang="az">AZ</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="en">EN</button></span></nav></div>
+    <h1 data-i18n="title">Işıqlar</h1>
+    <p class="sub" data-i18n="sub">İnsanlar harada yaşayır</p>
+  </div>
+  <div class="body" id="body">
+    <div class="controls">
+      <div class="seg" role="group" id="views"></div>
+      <button type="button" class="play-game" id="game" aria-pressed="false"></button>
+    </div>
+    <div id="side" aria-live="polite"></div>
+  </div>
+</aside>
+<div class="legend" id="legend"></div>
+
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script>
+(() => {
+const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+const still = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+const LANGS = ['az', 'ru', 'en'], LI = { az: 0, ru: 1, en: 2 };
+let lang = (() => {
+  const q = new URLSearchParams(location.search).get('lang');
+  if (LANGS.includes(q)) return q;
+  try { const s = localStorage.getItem('lang'); if (LANGS.includes(s)) return s; } catch {}
+  return 'az';
+})();
+const nf = () => new Intl.NumberFormat({ az: 'az-Latn-AZ', ru: 'ru-RU', en: 'en-GB' }[lang]);
+const T = {
+  az: { doc: 'Işıqlar · Azad Bilik', title: 'Işıqlar', sub: 'İnsanlar harada yaşayır', v3: 'Dağlar (3D)', v2: 'Xəritə', az: 'Azərbaycan Respublikası', ir: 'İran Azərbaycanı', irNote: 'Şərqi və Qərbi Azərbaycan, Ərdəbil, Zəncan', perKm: 'nəfər/km²', people: 'nəfər', legend: 'Sıxlıq, nəfər/km²', gameBtn: 'Oyun: hansı şəhərdir?', gameEnd: 'Oyunu bitir', q: 'Bu işıqlar hansı şəhərindir?', next: 'Növbəti', score: 'Xal', of: (a, b) => `${b} sualdan ${a}`, done: 'Bitdi!',
+    about: ['Hər altıbucaqlı təxminən 5 km²-dir; hündürlüyü və parlaqlığı orada yaşayanların sıxlığıdır. Rəqəmlər Kontur Population verilənlərindəndir (2023, peyk şəkillərindən və siyahıyaalmalardan qiymətləndirilib, CC BY 4.0); rəsmi siyahıyaalma rəqəmləri «Əhali» xəritəsindədir.'] },
+  ru: { doc: 'Огни · Azad Bilik', title: 'Огни', sub: 'Где живут люди', v3: 'Горы (3D)', v2: 'Карта', az: 'Азербайджанская Республика', ir: 'Иранский Азербайджан', irNote: 'Восточный и Западный Азербайджан, Ардебиль, Зенджан', perKm: 'чел./км²', people: 'чел.', legend: 'Плотность, чел./км²', gameBtn: 'Игра: что это за город?', gameEnd: 'Закончить игру', q: 'Чьи это огни?', next: 'Дальше', score: 'Очки', of: (a, b) => `${a} из ${b}`, done: 'Готово!',
+    about: ['Каждый шестиугольник — около 5 км²; его высота и яркость — плотность живущих в нём людей. Данные Kontur Population (2023, оценка по спутниковым снимкам и переписям, CC BY 4.0); официальные итоги переписей — на карте «Население».'] },
+  en: { doc: 'Lights · Azad Bilik', title: 'Lights', sub: 'Where people live', v3: 'Mountains (3D)', v2: 'Map', az: 'Republic of Azerbaijan', ir: 'Iranian Azerbaijan', irNote: 'East and West Azerbaijan, Ardabil, Zanjan', perKm: 'people/km²', people: 'people', legend: 'Density, people/km²', gameBtn: 'Game: which city is it?', gameEnd: 'End the game', q: 'Whose lights are these?', next: 'Next', score: 'Score', of: (a, b) => `${a} of ${b}`, done: 'Done!',
+    about: ["Each hexagon is about 5 km²; its height and brightness are the density of the people living in it. Figures from Kontur Population (2023, estimated from satellite imagery and censuses, CC BY 4.0); the official census results are on the «Population» map."] },
+};
+const t = (k) => T[lang][k];
+const params = new URLSearchParams(location.search);
+let view = params.get('v') === '2d' ? '2d' : '3d', names = [], totals = { az: 0, ir: 0 }, game = null;
+// night palette: deep violet → ember → gold → white for the brightest
+const RAMP = [[5, '#2A1B4D'], [30, '#5B2A6E'], [100, '#9C3B6B'], [300, '#D2604F'], [1000, '#F09A3E'], [3000, '#FAD26B'], [10000, '#FFF6D8']];
+const colour = ['interpolate', ['linear'], ['log10', ['max', ['get', 'd'], 1]], ...RAMP.flatMap(([v, c]) => [Math.log10(v), c])];
+const height = ['*', ['^', ['max', ['get', 'd'], 1], .6], 260];
+const BOUNDS = [[44.0, 35.4], [50.6, 42.0]];
+// the game's cities (Wikidata coordinates)
+const CITIES = [
+  ['Bakı', 'Баку', 'Baku', 49.867, 40.409], ['Gəncə', 'Гянджа', 'Ganja', 46.361, 40.683], ['Sumqayıt', 'Сумгайыт', 'Sumgait', 49.668, 40.589],
+  ['Mingəçevir', 'Мингечевир', 'Mingachevir', 47.059, 40.770], ['Naxçıvan', 'Нахичевань', 'Nakhchivan', 45.412, 39.209], ['Lənkəran', 'Ленкорань', 'Lankaran', 48.851, 38.754],
+  ['Şəki', 'Шеки', 'Shaki', 47.170, 41.198], ['Şirvan', 'Ширван', 'Shirvan', 48.929, 39.932], ['Təbriz', 'Тебриз', 'Tabriz', 46.292, 38.080],
+  ['Urmiya', 'Урмия', 'Urmia', 45.076, 37.552], ['Ərdəbil', 'Ардебиль', 'Ardabil', 48.293, 38.249], ['Zəncan', 'Зенджан', 'Zanjan', 48.478, 36.676],
+  ['Xoy', 'Хой', 'Khoy', 44.952, 38.550], ['Marağa', 'Мараге', 'Maragheh', 46.242, 37.390], ['Miyandoab', 'Миандоаб', 'Miandoab', 46.103, 36.970],
+  ['Mərənd', 'Меренд', 'Marand', 45.768, 38.433], ['Mahabad', 'Мехабад', 'Mahabad', 45.722, 36.765], ['Quba', 'Губа', 'Quba', 48.513, 41.361],
+];
+
+const map = new maplibregl.Map({
+  container: 'map', style: 'https://tiles.openfreemap.org/styles/dark',
+  bounds: BOUNDS, minZoom: 4.5, maxZoom: 12, maxPitch: 70,
+  attributionControl: { compact: true, customAttribution: '<a href="https://www.kontur.io/portfolio/population-dataset/">Kontur Population</a> (CC BY 4.0) · <a href="https://www.geoboundaries.org">geoBoundaries</a>' },
+});
+map.addControl(new maplibregl.NavigationControl({ showCompass: true, visualizePitch: true }), 'bottom-right');
+const tip = new maplibregl.Popup({ closeButton: false, closeOnClick: false, offset: 8 });
+const phone = () => matchMedia('(max-width: 48rem)').matches;
+const pad = () => phone() ? { top: 60, right: 16, left: 16, bottom: document.querySelector('.panel').offsetHeight + 16 } : { top: 32, right: 32, bottom: 32, left: 27 * 16 + 32 };
+const labelExpr = () => ['coalesce', ['get', `name:${lang}`], ['get', lang === 'ru' ? 'name' : 'name:latin'], ['get', 'name']];
+let labelsOn = true;
+function labels(on) { labelsOn = on; for (const l of map.getStyle().layers) if (l.type === 'symbol') map.setLayoutProperty(l.id, 'visibility', on ? 'visible' : 'none'); }
+map.on('style.load', () => {
+  for (const l of map.getStyle().layers) {
+    if (l.type === 'background') map.setPaintProperty(l.id, 'background-color', '#0B0A12');
+    if (l.type === 'fill' && /water|ocean|lake/.test(l.id)) map.setPaintProperty(l.id, 'fill-color', '#05050A');
+    if (l.type === 'line' && /road|rail|transport/.test(l.id)) map.setLayoutProperty(l.id, 'visibility', 'none');   // only people's light, not the roads
+    if (l.type === 'symbol' && l.layout?.['text-field']) map.setLayoutProperty(l.id, 'text-field', labelExpr());
+  }
+});
+map.on('load', async () => {
+  const [hex, nm] = await Promise.all(['data/hex.geojson', 'data/names.json'].map((f) => fetch(f).then((r) => r.json())));
+  names = nm;
+  for (const f of hex.features) totals[f.properties.c] += f.properties.p;
+  map.fitBounds(BOUNDS, { padding: pad(), duration: 0 });
+  document.querySelector('.maplibregl-ctrl-attrib')?.classList.remove('maplibregl-compact-show');
+  const firstSymbol = map.getStyle().layers.find((l) => l.type === 'symbol')?.id;
+  map.addSource('hex', { type: 'geojson', data: hex });
+  map.addLayer({ id: 'hex-2d', type: 'fill', source: 'hex', layout: { visibility: 'none' }, paint: { 'fill-color': colour, 'fill-opacity': .9 } }, firstSymbol);
+  // the 3D hexagons rise from the ground when the page opens
+  map.addLayer({ id: 'hex-3d', type: 'fill-extrusion', source: 'hex', layout: { visibility: 'none' }, paint: {
+    'fill-extrusion-color': colour, 'fill-extrusion-height': 0, 'fill-extrusion-opacity': .92, 'fill-extrusion-vertical-gradient': true,
+    'fill-extrusion-height-transition': { duration: still() ? 0 : 2200 } } });
+  setView(view, true);
+  map.on('mousemove', (e) => {
+    if (game) return;
+    const f = map.queryRenderedFeatures(e.point, { layers: [view === '3d' ? 'hex-3d' : 'hex-2d'] })[0];
+    if (!f) { tip.remove(); return; }
+    const p = f.properties, n = names[p.u];
+    tip.setLngLat(e.lngLat).setHTML(`${n ? `<strong>${esc(n[LI[lang]])}</strong><br>` : ''}${nf().format(p.d)} ${t('perKm')} · ${nf().format(p.p)} ${t('people')}`).addTo(map);
+  });
+  map.on('mouseout', () => tip.remove());
+  draw();
+});
+function setView(v, first = false) {
+  view = v;
+  if (!map.getLayer('hex-3d')) return draw();
+  map.setLayoutProperty('hex-3d', 'visibility', v === '3d' ? 'visible' : 'none');
+  map.setLayoutProperty('hex-2d', 'visibility', v === '2d' ? 'visible' : 'none');
+  if (v === '3d') requestAnimationFrame(() => map.setPaintProperty('hex-3d', 'fill-extrusion-height', height));
+  else map.setPaintProperty('hex-3d', 'fill-extrusion-height', 0);
+  map.easeTo({ pitch: v === '3d' ? 55 : 0, bearing: v === '3d' ? -15 : 0, duration: first || still() ? 0 : 900 });
+  draw();
+}
+function drawLegend() {
+  document.getElementById('legend').innerHTML = `<span>${t('legend')}</span><div class="ramp">${RAMP.map(([, c]) => `<span style="background:${c}"></span>`).join('')}</div><div class="ticks">${RAMP.map(([v]) => `<span>${v >= 1000 ? v / 1000 + 'k' : v}</span>`).join('')}</div>`;
+}
+function draw() {
+  document.getElementById('views').innerHTML = [['3d', t('v3')], ['2d', t('v2')]].map(([k, n]) => `<button type="button" data-v="${k}" aria-pressed="${k === view}">${n}</button>`).join('');
+  document.querySelectorAll('#views button').forEach((b) => b.onclick = () => setView(b.dataset.v));
+  document.getElementById('game').textContent = game ? t('gameEnd') : t('gameBtn');
+  document.getElementById('game').setAttribute('aria-pressed', !!game);
+  drawLegend();
+  const side = document.getElementById('side');
+  if (game) return drawGame(side);
+  side.innerHTML = `<div class="totals"><div class="total"><span>${t('az')}</span><b>${nf().format(Math.round(totals.az / 1000) * 1000)}</b></div><div class="total"><span>${t('ir')}</span><b>${nf().format(Math.round(totals.ir / 1000) * 1000)}</b><small>${t('irNote')}</small></div></div><div class="about">${t('about').map((p) => `<p>${esc(p)}</p>`).join('')}</div>`;
+  const q = new URLSearchParams(); if (lang !== 'az') q.set('lang', lang); if (view !== '3d') q.set('v', view);
+  history.replaceState(null, '', `${location.pathname}${q.size ? '?' + q : ''}`);
+}
+
+// the game: the camera drops over a city with every name hidden; three choices
+function newRound() {
+  const pool = CITIES.filter((c) => !game.used.has(c[2]));
+  const c = pool[Math.floor(Math.random() * pool.length)]; game.used.add(c[2]);
+  const others = CITIES.filter((x) => x !== c).sort(() => Math.random() - .5).slice(0, 2);
+  game.city = c; game.opts = [c, ...others].sort(() => Math.random() - .5); game.answer = null; game.n++;
+  labels(false); tip.remove();
+  map.flyTo({ center: [c[3], c[4]], zoom: 8.6, pitch: view === '3d' ? 60 : 0, bearing: Math.random() * 60 - 30, duration: still() ? 0 : 2200, essential: true });
+  draw();
+}
+function drawGame(el) {
+  const g = game;
+  if (g.n > 6) { el.innerHTML = `<div class="game"><p class="q">${t('done')} ${t('of')(g.score, 6)}</p><button type="button" class="next" id="again">${t('gameEnd')}</button></div>`; document.getElementById('again').onclick = endGame; return; }
+  el.innerHTML = `<div class="game"><p class="q">${t('q')}</p><div class="opts">${g.opts.map((c, i) => `<button type="button" data-i="${i}" ${g.answer != null ? 'disabled' : ''} class="${g.answer == null ? '' : c === g.city ? 'ok' : i === g.answer ? 'no' : ''}">${esc(c[LI[lang]])}</button>`).join('')}</div>
+    <div class="stats"><span>${t('score')} <b>${g.score}</b></span><span>${g.n}/6</span></div>${g.answer != null ? `<button type="button" class="next" id="nextq">${t('next')}</button>` : ''}</div>`;
+  el.querySelectorAll('[data-i]').forEach((b) => b.onclick = () => { g.answer = +b.dataset.i; if (g.opts[g.answer] === g.city) g.score++; labels(true); draw(); });
+  document.getElementById('nextq')?.addEventListener('click', () => { if (g.n >= 6) { g.n++; draw(); } else newRound(); });
+}
+function endGame() { game = null; labels(true); map.fitBounds(BOUNDS, { padding: pad(), pitch: view === '3d' ? 55 : 0, bearing: view === '3d' ? -15 : 0, duration: still() ? 0 : 1200 }); draw(); }
+document.getElementById('game').onclick = () => { if (game) endGame(); else { game = { n: 0, score: 0, used: new Set() }; newRound(); } };
+
+function applyLang() {
+  document.documentElement.lang = lang;
+  document.title = t('doc');
+  document.querySelectorAll('[data-i18n]').forEach((el) => el.textContent = t(el.dataset.i18n));
+  document.querySelectorAll('[data-lang]').forEach((b) => b.setAttribute('aria-pressed', b.dataset.lang === lang));
+  document.querySelectorAll('[data-keep-lang]').forEach((a) => { const u = new URL(a.getAttribute('href'), location.href); if (lang === 'az') u.searchParams.delete('lang'); else u.searchParams.set('lang', lang); a.href = u.pathname + u.search; });
+}
+applyLang(); draw();
+document.querySelectorAll('[data-lang]').forEach((b) => b.onclick = () => {
+  lang = b.dataset.lang;
+  try { localStorage.setItem('lang', lang); } catch {}
+  applyLang(); draw();
+  if (map.getStyle()) for (const l of map.getStyle().layers) if (l.type === 'symbol' && l.layout?.['text-field']) map.setLayoutProperty(l.id, 'text-field', labelExpr());
+});
+})();
+</script>
+</body>
+</html>
