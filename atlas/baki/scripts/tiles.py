@@ -6,6 +6,7 @@
 #    the one below, so nothing shimmers;
 #  - a plan with "restore" (a small, soft photo of a faded drawing) is cleaned harder: the wash evened
 #    out, the JPEG grain removed (non-local means), the ink set on cream, no sharpening;
+#  - "seams" (a sheet mounted on linen in sections): the seams found along their length and painted out;
 #  - tiles outside the plan are written too (tiny, transparent), so the map never asks for a missing one.
 # Writes data/tiles/<year>/<z>/<x>/<y>.webp and the bounds and zooms into data/plans.json.
 #   python scripts/tiles.py [year]      (numpy, scipy, Pillow)
@@ -31,6 +32,35 @@ def tile_ll(z, x, y, n=256):
     lon = px / N * 360 - 180
     lat = np.degrees(np.arctan(np.sinh(np.pi * (1 - 2 * py / N))))
     return np.meshgrid(lon, lat)
+def unseam(a, cols, rows, win=45, pad=3):
+    """paints out the linen seams of a plan mounted in sections: each seam (greyish-brown, smoothed
+    along its length) is fitted with a straight line and a width, and that band is filled by blending
+    the two sides across it"""
+    from scipy.ndimage import uniform_filter1d
+    R, G, B = a[..., 0], a[..., 1], a[..., 2]
+    m = (((R - B) > 15) & ((R - B) < 60) & (R < 200) & (R > 110) & (np.abs(R - G) < 25)).astype(np.float32)
+    def fill(a, m, c0):   # a vertical seam near column c0 (transposed views for a horizontal one)
+        h, w = m.shape; lo_c, hi_c = max(c0 - win, 1), min(c0 + win, w - 2)
+        sm = uniform_filter1d(m[:, lo_c:hi_c], 301, axis=0)
+        ys, cs, ws = [], [], []
+        for y in range(0, h, 25):
+            i = np.where(sm[y] > .3)[0]
+            if len(i): ys.append(y); cs.append((i.min() + i.max()) / 2 + lo_c); ws.append(i.max() - i.min() + 1)
+        if len(ys) < 10: return
+        k, b = np.polyfit(ys, cs, 1)                        # the seam's line
+        half = np.median(ws) / 2 + pad
+        yy = np.arange(h); cc = k * yy + b
+        L = np.clip(np.round(cc - half).astype(int), 2, w - 3); Rr = np.clip(np.round(cc + half).astype(int), 2, w - 3)
+        for y in yy:
+            l, r = L[y], Rr[y]
+            if r - l < 2: continue
+            left, right = a[y, l - 2:l + 1].mean(0), a[y, r:r + 3].mean(0)
+            t = np.linspace(0, 1, r - l + 1)[:, None]
+            a[y, l:r + 1] = left * (1 - t) + right * t
+    for c in cols: fill(a, m, c)
+    at, mt = a.transpose(1, 0, 2), m.T          # views: filling them fills a
+    for r in rows: fill(at, mt, r)
+    return a
 PAPER, INK = np.array([250, 247, 240], np.float32), np.array([30, 26, 24], np.float32)
 def ll_tile(lon, lat, z):
     n = 2 ** z
@@ -52,6 +82,8 @@ for year, plan in G.items():
     # the scan, cleaned
     im = Image.open(RAW / plan['file']).convert('RGB')
     restore = plan.get('restore')
+    if plan.get('seams'):   # a sheet mounted on linen in sections
+        im = Image.fromarray(np.clip(unseam(np.asarray(im, np.float32).copy(), plan['seams']['cols'], plan['seams']['rows']), 0, 255).astype(np.uint8))
     if restore:   # a small, soft photo of a faded drawing: the wash evened out (each pixel over the paper's
         # level across ~40 px, so shaded blocks stay), JPEG grain removed (non-local means), ink on cream
         from skimage.restoration import denoise_nl_means
