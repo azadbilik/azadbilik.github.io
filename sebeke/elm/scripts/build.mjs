@@ -210,3 +210,6 @@ console.log('per-year totals', [...tot.all].map((v, i) => (Y0 + i) + ':' + v).sl
 console.log('fields', fieldsSorted.slice(0, 26).map(([i, n]) => { const f = fieldOut[i]; return f.name + ' ' + n + ' intl ' + (100 * sum(f.intl) / n).toFixed(0) + '%'; }).join('\n'));
 console.log('venues', JSON.stringify(venues.recentTop.slice(0, 15)));
 for (const y of [2000, 2010, 2020, 2023, 2024, 2025, 2026]) console.log(y, 'none-listed%', (100 * venues.none[y - Y0] / tot.all[y - Y0]).toFixed(1), 'core%', (100 * venues.core[y - Y0] / tot.all[y - Y0]).toFixed(1));
+
+// the networks' positions (ForceAtlas2 at build time, see layout.mjs)
+await import('./layout.mjs');

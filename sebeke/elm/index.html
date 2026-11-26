@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="/shared/theme.js"></script>
+<link rel="stylesheet" href="/shared/graph.css">
 <title>Elm şəbəkəsi · Azad Bilik</title>
 <meta name="description" content="Azərbaycan elminin əməkdaşlıq şəbəkəsi: OpenAlex-də Azərbaycan təşkilatı göstərilən işlər, tərəfdaş ölkələr, təşkilatlar, tədqiqatçılar, sahələr. Azerbaijan's science network from OpenAlex (CC0).">
 <meta name="theme-color" content="#F4EFE6" media="(prefers-color-scheme: light)">
@@ -122,7 +123,17 @@
 
   .stage { position: relative; border: 1px solid var(--rule); border-radius: 3px; background: var(--frame); overflow: hidden; height: min(72vh, 44rem); min-height: 22rem; }
   .stage canvas { display: block; width: 100%; height: 100%; touch-action: none; }
-  .stage .cosmos { position: absolute; inset: 0; }
+  /* the two networks (shared/graph.js); their cards open in the graph's side panel (a bottom sheet on a phone) */
+  .gstage { height: min(74vh, 46rem); min-height: 24rem; margin-top: .4rem; }
+  .gstage .gt b { font: 400 .9375rem/1.25 var(--serif); display: block; margin-bottom: .15rem; }
+  .gstage .gt .row { display: flex; justify-content: space-between; gap: 1rem; } .gstage .gt .row span:last-child { font-variant-numeric: tabular-nums; }
+  .gcard { font-size: .8125rem; }
+  .gcard h4 { font: 400 1.125rem/1.25 var(--serif); padding-right: 1.75rem; }
+  .gcard p { margin-top: .35rem; color: var(--muted); } .gcard ul { list-style: none; padding: 0; margin: .4rem 0 0; } .gcard li { display: flex; justify-content: space-between; gap: .8rem; padding: .15rem 0; } .gcard li span:last-child { font-variant-numeric: tabular-nums; color: var(--muted); }
+  .gcard svg { width: 100%; height: 3rem; display: block; margin-top: .5rem; }
+  .gcard a { color: var(--ink); }
+  .gcard .lk { text-align: left; text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: .2em; } .gcard .lk:hover { text-decoration-color: var(--ink); }
+  .stage + .gcard, .gstage + .gcard { display: none; }
   .stage .hint { position: absolute; left: .8rem; bottom: .6rem; font-size: .75rem; color: var(--muted); pointer-events: none; text-shadow: 0 0 4px var(--frame), 0 0 4px var(--frame); }
   .card { position: absolute; top: .75rem; right: .75rem; width: min(19rem, calc(100% - 1.5rem)); max-height: calc(100% - 1.5rem); overflow: auto; background: var(--panel); border: 1px solid var(--rule); border-radius: 4px; padding: .8rem 1rem; font-size: .8125rem; box-shadow: 0 2px 14px rgb(0 0 0 / .14); z-index: 5; }
   .card h4 { font: 400 1.0625rem/1.25 var(--serif); padding-right: 1.5rem; } .card .x { position: absolute; top: .4rem; right: .5rem; width: 1.75rem; height: 1.75rem; font-size: 1.1rem; color: var(--muted); }
@@ -223,7 +234,7 @@
       <label><input type="checkbox" id="iforeign" checked> <span data-i18n="showForeign">Xarici tərəfdaşları göstər</span></label>
     </div>
     <div class="legend" id="ilegend"></div>
-    <div class="stage" id="istage"><canvas id="icanvas" aria-label="Institutions network"></canvas><div class="card" id="icard" hidden></div><div class="tip" id="tip-inst" hidden></div><div class="hint" data-i18n="iHint"></div></div>
+    <div class="gstage gx-wide" id="istage" role="region" aria-label="Institutions network"></div><div class="gcard" id="icard"></div>
     <p class="note" id="inote"></p>
   </section>
 
@@ -231,13 +242,12 @@
     <h2 data-i18n="pplH">Tədqiqatçı şəbəkəsi</h2>
     <p class="what" id="pwhat"></p>
     <div class="ctl">
-      <div class="search"><label><span class="sr" data-i18n="search">Axtar</span><input type="search" id="psearch" autocomplete="off" aria-label="Search"></label><div class="results" id="presults" hidden></div></div>
-      <label><span data-i18n="colorBy">Rəng</span> <select id="pcolor"><option value="domain" data-i18n="byDomain">istiqamət (4)</option><option value="field" data-i18n="byField">sahə</option></select></label>
+            <label><span data-i18n="colorBy">Rəng</span> <select id="pcolor"><option value="domain" data-i18n="byDomain">istiqamət (4)</option><option value="field" data-i18n="byField">sahə</option></select></label>
       <label><span data-i18n="field">Sahə</span> <select id="pfield"></select></label>
       <span id="pcount"></span>
     </div>
     <div class="legend" id="plegend"></div>
-    <div class="stage" id="pstage"><div class="cosmos" id="cosmos"></div><div class="card" id="pcard" hidden></div><div class="tip" id="tip-ppl" hidden></div><div class="hint" data-i18n="pHint"></div></div>
+    <div class="gstage gx-wide" id="pstage" role="region" aria-label="Researchers network"></div><div class="gcard" id="pcard"></div>
     <p class="note" id="pnote"></p>
   </section>
 
@@ -264,7 +274,6 @@
 <footer class="wrap foot" id="foot"></footer>
 
 <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@cosmos.gl/graph@3.6.0/dist/index.min.js"></script>
 <script>
 (() => {
 'use strict';
@@ -505,196 +514,119 @@ function drawTiles() {
   if (S.small) $('tiles').children[2].querySelector('b').textContent = pc(big / (rng(D.totals.all) || 1));
 }
 
-// ---------------------------------------------------------------- institutions (canvas + d3-force)
-const I = { nodes: [], links: [], tf: d3.zoomIdentity, hover: null, sel: null, ready: false, raf: 0 };
+// ---------------------------------------------------------------- the two networks (shared/graph.js: sigma.js over graphology)
+// Both are laid out at build time (scripts/layout.mjs, ForceAtlas2): the page passes the positions and shows them settled.
+// The year slider, the minimum and the field only hide and show (setFilter), they never move a node.
+let GX = null; const gx = () => (GX ??= import('/shared/graph.js'));
+const posFrom = (q, n) => { const p = {}; for (let i = 0; i < n; i++) p[i] = { x: q[2 * i], y: -q[2 * i + 1] }; return p; };
+const gstrings = () => ({ search: t('searchPh') });
+// a phone's stage is narrow: its nodes are drawn smaller (down to 60 %)
+const zk = (el) => Math.min(1, Math.max(0.6, el.clientWidth / 1000));
+
+// ---- institutions
+const I = { g: null, nodes: [], links: [], W: null, sel: null, ready: false };
 function initInstitutions() {
-  I.nodes = D.institutions.map((r, i) => ({ i, r, az: r.cc === 'AZ', x: (Math.random() - .5) * 600, y: (Math.random() - .5) * 600 }));
-  I.links = D.edges.map(([a, b, y]) => ({ source: a, target: b, y, tot: sum(y) }));
-  const tw = new Float64Array(I.nodes.length);
-  I.nodes.forEach((n) => { if (n.az) tw[n.i] = sum(n.r.w); });
-  I.links.forEach((l) => { const a = I.nodes[l.source], b = I.nodes[l.target]; if (!a.az) tw[a.i] += l.tot; if (!b.az) tw[b.i] += l.tot; });
-  const sim = d3.forceSimulation(I.nodes)
-    .force('link', d3.forceLink(I.links).distance((l) => 40 + 90 / (1 + Math.log10(l.tot))).strength((l) => Math.min(0.35, 0.03 + Math.log10(l.tot) * 0.05)))
-    .force('charge', d3.forceManyBody().strength(-160).distanceMax(500))
-    .force('x', d3.forceX(0).strength(0.05)).force('y', d3.forceY(0).strength(0.05))
-    .force('collide', d3.forceCollide((n) => rad(n, tw[n.i]) + 3)).stop();
-  for (let k = 0; k < 400; k++) sim.tick();
-  I.nodes.forEach((n) => { n.vx = n.vy = 0; });
-  // links keep their endpoints as node objects now
-  const cv = $('icanvas');
-  I.zoom = d3.zoom().scaleExtent([.3, 12]).on('zoom', (e) => { I.tf = e.transform; drawInst(); });
-  d3.select(cv).call(I.zoom);
-  cv.addEventListener('pointermove', (ev) => { const n = pickInst(ev); if (n !== I.hover) { I.hover = n; drawInst(); } if (n) tipInst(n, ev); else $('tip-inst').hidden = true; });
-  cv.addEventListener('pointerleave', () => { I.hover = null; $('tip-inst').hidden = true; drawInst(); });
-  cv.addEventListener('click', (ev) => { const n = pickInst(ev); I.sel = n; drawInst(); cardInst(n); });
-  I.ready = true; sizeInst(); fitInst();
-}
-function sizeInst() { const cv = $('icanvas'), r = cv.parentNode.getBoundingClientRect(), d = devicePixelRatio || 1; cv.width = Math.round(r.width * d); cv.height = Math.round(r.height * d); I.w = r.width; I.h = r.height; I.d = d; }
-function fitInst() {
-  // fit on the central 94% of the nodes: a few far-off partners must not shrink the picture
-  const q = (a, p) => { const s = [...a].sort((x, y) => x - y); return s[Math.min(s.length - 1, Math.max(0, Math.round(p * (s.length - 1))))]; };
-  const xs = I.nodes.map((n) => n.x), ys = I.nodes.map((n) => n.y), x0 = q(xs, .03), x1 = q(xs, .97), y0 = q(ys, .03), y1 = q(ys, .97);
-  const k = Math.min(I.w / (x1 - x0 + 60), I.h / (y1 - y0 + 60), 4);
-  d3.select($('icanvas')).call(I.zoom.transform, d3.zoomIdentity.translate(I.w / 2 - k * (x0 + x1) / 2, I.h / 2 - k * (y0 + y1) / 2).scale(k));
+  I.nodes = D.institutions.map((r, i) => ({ id: i, i, r, az: r.cc === 'AZ' }));
+  I.links = D.edges.map(([a, b, y], k) => ({ id: 'e' + k, source: a, target: b, y, tot: sum(y), v: 0 }));
+  instStats();
+  return gx().then(({ createGraph }) => {
+    I.g = createGraph($('istage'), {
+      nodes: I.nodes, edges: I.links, positions: posFrom(D.ipos, I.nodes.length),
+      label: (n) => n.r.name, color: instColor, hollow: (n) => !n.az, size: (n) => instRad(n, I.W[n.i]) * zk($('istage')),
+      edgeColor: () => 'var(--muted)', edgeWidth: (l) => Math.min(3, 0.5 + Math.round(Math.sqrt(l.v) * 2) / 10), edgeAlpha: 0.22,
+      arrows: false, curve: 0.1, edgeClick: false, keepIsolated: true, labelSize: 11.5, reshape: true, stretch: 1.4, strings: gstrings(),
+      tooltip: (n) => tipInst(n), panel: $('icard'),
+      onSelect: (f) => { I.sel = f?.type === 'node' ? I.nodes[+f.id] : null; cardInst(I.sel); },
+    });
+    I.ready = true; drawInst();
+    return I.g.ready;
+  });
 }
 function instStats() {
   // works per node in range; foreign nodes sized by joint works with Azerbaijani nodes
   const w = new Float64Array(I.nodes.length);
   I.nodes.forEach((n) => { if (n.az) w[n.i] = rng(n.r.w); });
-  I.links.forEach((l) => { l.v = rng(l.y); const a = l.source, b = l.target; if (!a.az) w[a.i] += l.v; if (!b.az) w[b.i] += l.v; });
-  return w;
+  I.links.forEach((l) => { l.v = rng(l.y); const a = I.nodes[l.source], b = I.nodes[l.target]; if (!a.az) w[a.i] += l.v; if (!b.az) w[b.i] += l.v; });
+  I.W = w; return w;
 }
 function instColor(n) { return n.az ? colorFor(S.icolor, n.r.f[0]?.[0] ?? -1) : css('--muted'); }
-const rad = (n, w) => n.az ? 2.5 + Math.sqrt(w) * 0.3 : 2 + Math.sqrt(w) * 0.3;
-function visibleInst(l) { return l.v >= S.iminw && (S.iforeign || (l.source.az && l.target.az)); }
+const instRad = (n, w) => (n.az ? 2.5 : 2) + Math.min(20, Math.sqrt(w) * 0.2);
+const instOn = (n) => (n.az ? I.W[n.i] > 0 : S.iforeign && I.W[n.i] >= S.iminw);
 function drawInst() {
   if (!I.ready) return;
-  const cv = $('icanvas'), c = cv.getContext('2d'); const w = I.w_ = instStats(); I.W = w;
-  c.setTransform(I.d, 0, 0, I.d, 0, 0); c.clearRect(0, 0, I.w, I.h);
-  c.translate(I.tf.x, I.tf.y); c.scale(I.tf.k, I.tf.k);
-  const focus = I.sel || I.hover; const near = new Set(); if (focus) { near.add(focus.i); I.links.forEach((l) => { if (l.v && (l.source === focus || l.target === focus)) { near.add(l.source.i); near.add(l.target.i); } }); }
-  const ink = rgbOf(css('--ink'));
-  for (const l of I.links) {
-    if (!visibleInst(l)) continue;
-    const hot = focus && (l.source === focus || l.target === focus);
-    c.globalAlpha = focus ? (hot ? .75 : .05) : .22; c.lineWidth = (0.4 + Math.sqrt(l.v) * 0.3) / Math.sqrt(I.tf.k);
-    c.strokeStyle = `rgb(${ink[0]} ${ink[1]} ${ink[2]})`; c.beginPath(); c.moveTo(l.source.x, l.source.y); c.lineTo(l.target.x, l.target.y); c.stroke();
-  }
-  const labels = [];
-  for (const n of I.nodes) {
-    if (!n.az && !S.iforeign) continue;
-    const wv = w[n.i]; if (!n.az && wv < S.iminw) continue; if (n.az && wv <= 0) continue;
-    const r = rad(n, wv), dim = focus && !near.has(n.i);
-    c.globalAlpha = dim ? .15 : 1; c.beginPath(); c.arc(n.x, n.y, r, 0, 6.2832);
-    if (n.az) { c.fillStyle = instColor(n); c.fill(); c.lineWidth = 1 / Math.sqrt(I.tf.k); c.strokeStyle = css('--paper'); c.stroke(); }
-    else { c.lineWidth = 1.4 / Math.sqrt(I.tf.k); c.strokeStyle = css('--muted'); c.stroke(); }
-    if (!dim && ((n.az && r * I.tf.k > 14) || n === focus || (near.has(n.i) && focus && I.tf.k > 1.2) || (I.tf.k > 3 && r > 4))) labels.push([n, r]);
-  }
-  c.globalAlpha = 1; c.font = `${11 / Math.sqrt(I.tf.k)}px Inter, sans-serif`; c.textAlign = 'center'; c.fillStyle = css('--ink'); c.strokeStyle = css('--frame'); c.lineWidth = 3 / Math.sqrt(I.tf.k); c.lineJoin = 'round';
-  for (const [n, r] of labels) { const s = n.r.name.length > 34 ? n.r.name.slice(0, 32) + '…' : n.r.name; c.strokeText(s, n.x, n.y + r + 11 / Math.sqrt(I.tf.k)); c.fillText(s, n.x, n.y + r + 11 / Math.sqrt(I.tf.k)); }
+  instStats();
+  I.g.setFilter(instOn, (l) => l.v >= S.iminw && (S.iforeign || (I.nodes[l.source].az && I.nodes[l.target].az)));
+  I.g.relabel();
 }
-function pickInst(ev) {
-  const r = $('icanvas').getBoundingClientRect(), px = (ev.clientX - r.left - I.tf.x) / I.tf.k, py = (ev.clientY - r.top - I.tf.y) / I.tf.k; let best = null, bd = 1e9; const w = I.W;
-  for (const n of I.nodes) { if (!w || (!n.az && (!S.iforeign || w[n.i] < S.iminw)) || (n.az && w[n.i] <= 0)) continue; const d = Math.hypot(n.x - px, n.y - py) - rad(n, w[n.i]); if (d < bd) { bd = d; best = n; } }
-  return bd < 6 / I.tf.k ? best : null;
-}
-function tipInst(n, ev) {
+function tipInst(n) {
   const fc = n.az ? `<div class="row"><span>${t('withForeign')}</span><span>${nf(rng(n.r.fw))}</span></div>` : '';
-  showTip($('tip-inst'), `<b>${esc(n.r.name)}</b><div class="row"><span>${n.az ? t('worksIn') : t('joint')}</span><span>${nf(I.W[n.i])}</span></div>${fc}`, ev, $('istage'));
+  return `<div class="gt"><b>${esc(n.r.name)}</b><div class="row"><span>${n.az ? t('worksIn') : t('joint')}</span><span>${nf(I.W[n.i])}</span></div>${fc}</div>`;
 }
 function spark(arr, from, to, color) {
   const w = 280, h = 48, a = arr.slice(20), max = Math.max(1, d3.max(a)), bw = w / a.length;
   return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" aria-hidden="true">${a.map((v, i) => { const yr = 1990 + i; return `<rect x="${(i * bw + .5).toFixed(1)}" width="${(bw - 1).toFixed(1)}" y="${(h - h * v / max).toFixed(1)}" height="${(h * v / max).toFixed(1)}" fill="${color}" opacity="${yr >= from && yr <= to ? 1 : .3}"/>`; }).join('')}</svg>`;
 }
 function cardInst(n) {
-  const el = $('icard'); if (!n) { el.hidden = true; return; }
+  const el = $('icard'); if (!n) { el.innerHTML = ''; return; }
   const parts = [];
-  I.links.forEach((l) => { if (l.v > 0 && (l.source === n || l.target === n)) { const o = l.source === n ? l.target : l.source; parts.push([o, l.v]); } });
+  I.links.forEach((l) => { if (l.v > 0 && (l.source === n.i || l.target === n.i)) { const o = I.nodes[l.source === n.i ? l.target : l.source]; parts.push([o, l.v]); } });
   parts.sort((a, b) => b[1] - a[1]);
-  const ccn = regionName;
   const flds = n.az ? n.r.f.map(([fi]) => D.fields[fi].name).join(', ') : '';
-  el.hidden = false;
-  el.innerHTML = `<button class="x" type="button" aria-label="${t('close')}">×</button><h4>${esc(n.r.name)}</h4><p>${n.az ? 'Azerbaijan' : esc(ccn(n.r.cc))} · ${esc(n.r.type ?? '')}</p>`
+  el.innerHTML = `<h4>${esc(n.r.name)}</h4><p>${n.az ? esc(regionName('AZ')) : esc(regionName(n.r.cc))} · ${esc(n.r.type ?? '')}</p>`
     + (n.az ? spark(n.r.w, S.from, S.to, instColor(n)) + `<p>${nf(rng(n.r.w))} ${t('worksIn')} · ${nf(rng(n.r.fw))} ${t('withForeign')}</p>${flds ? `<p>${t('topFields')}: ${esc(flds)}</p>` : ''}` : '')
-    + `<p style="margin-top:.6rem">${t('topPartners')}</p><ul>${parts.slice(0, 8).map(([o, v]) => `<li><span>${esc(o.r.name)}${o.az ? '' : ' (' + esc(o.r.cc) + ')'}</span><span>${nf(v)}</span></li>`).join('')}</ul>`
+    + `<p style="margin-top:.6rem">${t('topPartners')}</p><ul>${parts.slice(0, 8).map(([o, v]) => `<li><span><button type="button" class="lk" data-i="${o.i}">${esc(o.r.name)}</button>${o.az ? '' : ' (' + esc(o.r.cc) + ')'}</span><span>${nf(v)}</span></li>`).join('')}</ul>`
     + `<p><a href="https://openalex.org/institutions/${n.r.id}" rel="noopener">${t('inOA')} ↗</a></p>`;
-  el.querySelector('.x').onclick = () => { I.sel = null; drawInst(); cardInst(null); };
+  el.querySelectorAll('[data-i]').forEach((b) => (b.onclick = () => I.g.focus(+b.dataset.i)));
 }
-function legendFor(el, mode, onClickToggle) {
+function legendFor(el, mode) {
   if (mode === 'domain') el.innerHTML = t('dom').map((d, i) => `<span><i style="--c:${domCol()[i]}"></i>${esc(d)}</span>`).join('');
   else el.innerHTML = fieldRank.slice(0, 11).map(([fi]) => `<span><i style="--c:${fieldCol(fi)}"></i>${esc(D.fields[fi].name)}</span>`).join('') + `<span><i style="--c:${css('--muted')}"></i>…</span>`;
 }
 
-// ---------------------------------------------------------------- researchers (cosmos.gl)
-const P = { g: null, ready: false, adj: null, sel: -1, hover: -1, N: 0 };
-const nameFold = [];
+// ---- researchers
+const P = { g: null, ready: false, sel: -1, N: 0 };
 async function initPeople() {
-  const stage = $('cosmos');
-  const gl = document.createElement('canvas').getContext('webgl2');
-  if (!gl || !window.Cosmos) { stage.innerHTML = `<div class="nogl">${t('noGl')}</div>`; return; }
-  const [nb, lb, mb] = await Promise.all(['authors-nodes.bin', 'authors-links.bin', 'authors-linkmeta.bin'].map((f) => fetch('data/' + f).then((r) => r.arrayBuffer())));
+  const [nb, lb, mb, pb] = await Promise.all(['authors-nodes.bin', 'authors-links.bin', 'authors-linkmeta.bin', 'authors-pos.bin'].map((f) => fetch('data/' + f).then((r) => r.arrayBuffer())));
   const N = A.n; P.N = N;
   P.w = new Uint16Array(nb, 0, N); P.inst = new Uint16Array(nb, 2 * N, N); P.first = new Uint8Array(nb, 4 * N, N); P.last = new Uint8Array(nb, 5 * N, N); P.field = new Uint8Array(nb, 6 * N, N);
   P.links = new Uint32Array(lb); P.lw = new Uint8Array(mb).filter((_, i) => i % 2 === 0); P.ly = new Uint8Array(mb).filter((_, i) => i % 2 === 1);
-  const M = P.links.length / 2;
-  // adjacency (CSR)
-  const deg = new Uint32Array(N + 1); for (let k = 0; k < P.links.length; k++) deg[P.links[k] + 1]++;
-  for (let i = 0; i < N; i++) deg[i + 1] += deg[i];
-  const fill = deg.slice(0, N), adj = new Uint32Array(P.links.length), adjL = new Uint32Array(P.links.length);
-  for (let k = 0; k < M; k++) { const a = P.links[2 * k], b = P.links[2 * k + 1]; adj[fill[a]] = b; adjL[fill[a]++] = k; adj[fill[b]] = a; adjL[fill[b]++] = k; }
-  P.off = deg; P.adj = adj; P.adjL = adjL; P.M = M;
-  A.names.forEach((n, i) => { nameFold[i] = fold(n); });
-  // initial positions: random disc, simulation does the rest
-  const pos = new Float32Array(2 * N); const R = 2048;
-  for (let i = 0; i < N; i++) { const a = Math.random() * 6.2832, r = Math.sqrt(Math.random()) * R * .6; pos[2 * i] = R + Math.cos(a) * r; pos[2 * i + 1] = R + Math.sin(a) * r; }
-  P.g = new Cosmos.Graph(stage, {
-    backgroundColor: [0, 0, 0, 0], rescalePositions: false, enableDrag: false, fitViewOnInit: false,
-    pointSizeScale: 1, scalePointsOnZoom: true, linkOpacity: 1, linkDefaultWidth: 0.4, curvedLinks: false, renderHoveredPointRing: true, hoveredPointRingColor: '#ffffff',
-    simulationGravity: 0.25, simulationRepulsion: 0.9, simulationLinkSpring: 1.2, simulationLinkDistance: 6, simulationFriction: 0.85, simulationDecay: 6000,
-    onSimulationEnd: () => { if (!P.touched) P.g.fitView(600, 0.06); },
-    onPointMouseOver: (i) => { P.hover = i; tipPeople(i, P.mouse); },
-    onPointMouseOut: () => { P.hover = -1; $('tip-ppl').hidden = true; },
-    onClick: (i) => { selectPerson(i === undefined ? -1 : i); },
+  const M = P.links.length / 2; P.M = M;
+  const nodes = Array.from({ length: N }, (_, i) => ({ id: i }));
+  const edges = Array.from({ length: M }, (_, k) => ({ id: 'l' + k, k, source: P.links[2 * k], target: P.links[2 * k + 1] }));
+  const { createGraph } = await gx();
+  P.g = createGraph($('pstage'), {
+    nodes, edges, positions: posFrom(new Int16Array(pb), N),
+    label: (n) => A.names[n.id], color: (n) => colorFor(S.pcolor, P.field[n.id] === 255 ? -1 : P.field[n.id]),
+    size: (n) => (1.4 + Math.min(9, Math.sqrt(P.w[n.id]) * 0.42)) * zk($('pstage')),
+    edgeAlpha: 0.2, lodEdgeWidth: 0.5, reshape: true, stretch: 1.4, arrows: false, curve: 0.1, keepIsolated: true, labelSize: 11, strings: gstrings(),
+    tooltip: (n) => tipPeople(n.id), panel: $('pcard'),
+    onSelect: (f) => { P.sel = f?.type === 'node' ? +f.id : -1; cardPerson(P.sel); },
   });
-  stage.addEventListener('pointermove', (e) => { P.mouse = e; });
-  stage.addEventListener('wheel', () => { P.touched = true; }, { passive: true });
-  stage.addEventListener('pointerdown', () => { P.touched = true; });
-  P.g.setPointPositions(pos);
-  setTimeout(() => { if (!P.touched) P.g.fitView(600, 0.06); }, 3500);
-  P.g.setLinks(new Float32Array(P.links));
-  paintPeople(); P.g.render(); P.ready = true;
-  try { await P.g.ready; } catch {}
-  $('pcount').textContent = '';
+  await P.g.ready;
+  P.ready = true; paintPeople(true);
 }
-function paintPeople() {
-  if (!P.g) return;
-  const N = P.N, from = S.from, to = S.to, mode = S.pcolor, ff = S.pfield, sel = P.sel;
-  const pal = new Map(); const col = (fi) => { let c = pal.get(fi); if (!c) { c = hex2rgba(colorFor(mode, fi)); pal.set(fi, c); } return c; };
-  const colors = new Float32Array(4 * N), sizes = new Float32Array(N), act = new Uint8Array(N);
-  const nb = new Set(); if (sel >= 0) { nb.add(sel); for (let k = P.off[sel]; k < P.off[sel + 1]; k++) nb.add(P.adj[k]); }
-  let active = 0;
-  for (let i = 0; i < N; i++) {
-    const on = (P.first[i] + 1950) <= to && (P.last[i] + 1950) >= from && (ff < 0 || P.field[i] === ff);
-    act[i] = on ? 1 : 0; if (on) active++;
-    const c = col(P.field[i] === 255 ? -1 : P.field[i]); let a = on ? 0.9 : 0;
-    if (sel >= 0 && !nb.has(i)) a *= .2;
-    colors[4 * i] = c[0]; colors[4 * i + 1] = c[1]; colors[4 * i + 2] = c[2]; colors[4 * i + 3] = a;
-    sizes[i] = on ? 1.5 + Math.sqrt(P.w[i]) * 0.4 : 0.01;
-  }
-  P.act = act; P.active = active;
-  const lc = new Float32Array(4 * P.M), ink = hex2rgba(css('--muted'));
-  for (let k = 0; k < P.M; k++) {
-    const a = P.links[2 * k], b = P.links[2 * k + 1]; let al = (act[a] && act[b] && (P.ly[k] + 1950) <= to) ? 0.16 : 0;
-    if (sel >= 0) al = (a === sel || b === sel) && al ? 0.8 : al ? 0.015 : 0;
-    lc[4 * k] = ink[0]; lc[4 * k + 1] = ink[1]; lc[4 * k + 2] = ink[2]; lc[4 * k + 3] = al;
-  }
-  P.g.setPointColors(colors); P.g.setPointSizes(sizes); P.g.setLinkColors(lc); P.g.render();
-  $('pcount').textContent = `${nf(active)} / ${nf(N)} ${t('active')}`;
+const personOn = (i) => (P.first[i] + 1950) <= S.to && (P.last[i] + 1950) >= S.from && (S.pfield < 0 || P.field[i] === S.pfield);
+function paintPeople(recolor) {
+  if (!P.ready) return;
+  P.g.setFilter((n) => personOn(n.id), (e) => (P.ly[e.k] + 1950) <= S.to);
+  if (recolor) P.g.relabel();
+  let active = 0; for (let i = 0; i < P.N; i++) if (personOn(i)) active++;
+  $('pcount').textContent = `${nf(active)} / ${nf(P.N)} ${t('active')}`;
 }
-let paintTimer; const paintPeopleSoon = () => { clearTimeout(paintTimer); paintTimer = setTimeout(paintPeople, 80); };
+let paintTimer; const paintPeopleSoon = () => { clearTimeout(paintTimer); paintTimer = setTimeout(() => paintPeople(false), 80); };
 function personInfo(i) {
   const inst = P.inst[i] === 65535 ? '' : D.institutions[P.inst[i]].name, fi = P.field[i] === 255 ? '' : D.fields[P.field[i]].name;
   return { inst, fi };
 }
-function tipPeople(i, ev) { if (!ev || !P.act?.[i]) { $('tip-ppl').hidden = true; return; } const { inst, fi } = personInfo(i); showTip($('tip-ppl'), `<b>${esc(A.names[i])}</b><div>${esc(inst)}</div><div class="muted">${esc(fi)} · ${P.w[i]} ${t('pcard').works} · ${P.first[i] + 1950}–${P.last[i] + 1950}</div>`, ev, $('pstage')); }
-function selectPerson(i) {
-  P.sel = i; paintPeople(); const el = $('pcard');
-  if (i < 0) { el.hidden = true; return; }
+function tipPeople(i) { const { inst, fi } = personInfo(i); return `<div class="gt"><b>${esc(A.names[i])}</b><div>${esc(inst)}</div><div class="muted">${esc(fi)} · ${P.w[i]} ${t('pcard').works} · ${P.first[i] + 1950}–${P.last[i] + 1950}</div></div>`; }
+function cardPerson(i) {
+  const el = $('pcard');
+  if (i < 0) { el.innerHTML = ''; return; }
   const { inst, fi } = personInfo(i), c = t('pcard'), co = [];
-  for (let k = P.off[i]; k < P.off[i + 1]; k++) co.push([P.adj[k], P.lw[P.adjL[k]]]);
+  P.g.graph.forEachEdge(String(i), (key, a, s2, t2) => co.push([+(s2 === String(i) ? t2 : s2), P.lw[+key.slice(1)]]));
   co.sort((a, b) => b[1] - a[1] || P.w[b[0]] - P.w[a[0]]);
-  el.hidden = false;
-  el.innerHTML = `<button class="x" type="button" aria-label="${t('close')}">×</button><h4>${esc(A.names[i])}</h4><p>${esc(inst)}</p><p>${c.field}: ${esc(fi)}<br>${nf(P.w[i])} ${c.works} · ${c.years}: ${P.first[i] + 1950}–${P.last[i] + 1950}</p><p style="margin-top:.6rem">${c.coauth}: ${co.length}</p><ul>${co.slice(0, 10).map(([j, w]) => `<li><span><button type="button" data-j="${j}" style="text-align:left;text-decoration:underline;text-decoration-color:var(--rule)">${esc(A.names[j])}</button></span><span>${w}</span></li>`).join('')}</ul>`;
-  el.querySelector('.x').onclick = () => selectPerson(-1);
-  el.querySelectorAll('[data-j]').forEach((b) => b.onclick = () => { const j = +b.dataset.j; selectPerson(j); P.g.zoomToPointByIndex(j, 600, 4, true); });
-}
-function searchPeople(q) {
-  const box = $('presults'); q = fold(q.trim());
-  if (q.length < 2 || !P.ready) { box.hidden = true; return; }
-  const out = []; for (let i = 0; i < P.N && out.length < 8; i++) if (nameFold[i].includes(q)) out.push(i);
-  box.innerHTML = out.map((i) => `<button type="button" data-i="${i}"><span>${esc(A.names[i])}</span><small>${P.w[i]} · ${esc(personInfo(i).inst.slice(0, 26))}</small></button>`).join('');
-  box.hidden = !out.length;
-  box.querySelectorAll('button').forEach((b) => b.onclick = () => { const i = +b.dataset.i; box.hidden = true; $('psearch').value = A.names[i]; P.touched = true; selectPerson(i); P.g.zoomToPointByIndex(i, 800, 4, true); });
+  el.innerHTML = `<h4>${esc(A.names[i])}</h4><p>${esc(inst)}</p><p>${c.field}: ${esc(fi)}<br>${nf(P.w[i])} ${c.works} · ${c.years}: ${P.first[i] + 1950}–${P.last[i] + 1950}</p><p style="margin-top:.6rem">${c.coauth}: ${co.length}</p><ul>${co.slice(0, 10).map(([j, w]) => `<li><span><button type="button" class="lk" data-j="${j}">${esc(A.names[j])}</button></span><span>${w}</span></li>`).join('')}</ul>`;
+  el.querySelectorAll('[data-j]').forEach((b) => (b.onclick = () => P.g.focus(+b.dataset.j)));
 }
 
 // ---------------------------------------------------------------- fields
@@ -768,7 +700,7 @@ function applyLang() {
   document.querySelectorAll('[data-lang]').forEach((b) => b.setAttribute('aria-pressed', b.dataset.lang === lang));
   document.querySelectorAll('[data-keep-lang]').forEach((a) => { const u = new URL(a.getAttribute('href'), location.href); if (lang === 'az') u.searchParams.delete('lang'); else u.searchParams.set('lang', lang); a.href = u.pathname + u.search; });
   $('kx-nav').href = `https://kitabxana.az${lang === 'az' ? '' : '/' + lang}/`;
-  $('psearch').placeholder = t('searchPh'); document.querySelectorAll('#presets button').forEach((b) => { b.textContent = b.dataset.a === '1970' && b.dataset.b === '2026' ? t('all') : b.dataset.label; });
+  document.querySelectorAll('#presets button').forEach((b) => { b.textContent = b.dataset.a === '1970' && b.dataset.b === '2026' ? t('all') : b.dataset.label; });
   if (!D) return;
   const w = words();
   $('lede').textContent = t('lede')(w);
@@ -780,7 +712,8 @@ function applyLang() {
   $('foot').innerHTML = `<p>${t('foot')(D.generated, nf(D.works))}</p>`;
   const pf = $('pfield'), cur = pf.value; pf.innerHTML = `<option value="-1">${t('anyField')}</option>` + fieldRank.map(([fi]) => `<option value="${fi}">${esc(D.fields[fi].name)}</option>`).join(''); pf.value = cur || '-1';
   legendFor($('ilegend'), S.icolor); legendFor($('plegend'), S.pcolor);
-  refresh(); if (P.sel >= 0) selectPerson(P.sel);
+  I.g?.setStrings(gstrings()); P.g?.setStrings(gstrings());
+  refresh(); if (P.sel >= 0) cardPerson(P.sel);
 }
 function buildPresets() {
   const defs = [['1991', '2026', '1991–'], ['1991', '1999', '1990s'], ['2000', '2009', '2000s'], ['2010', '2019', '2010s'], ['2020', '2026', '2020–'], ['1970', '2026', '']];
@@ -798,12 +731,10 @@ $('addc').onchange = (e) => { if (e.target.value) { S.sel.add(e.target.value); d
 $('icolor').onchange = (e) => { S.icolor = e.target.value; legendFor($('ilegend'), S.icolor); drawInst(); if (I.sel) cardInst(I.sel); };
 $('iminw').onchange = (e) => { S.iminw = +e.target.value; drawInst(); if (I.sel) cardInst(I.sel); };
 $('iforeign').onchange = (e) => { S.iforeign = e.target.checked; drawInst(); };
-$('pcolor').onchange = (e) => { S.pcolor = e.target.value; legendFor($('plegend'), S.pcolor); paintPeople(); };
-$('pfield').onchange = (e) => { S.pfield = +e.target.value; paintPeople(); };
-$('psearch').addEventListener('input', (e) => searchPeople(e.target.value));
-document.addEventListener('click', (e) => { if (!e.target.closest('.search')) $('presults').hidden = true; });
-let rz; addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(() => { if (!D) return; drawVolume(); drawPartners(); drawFields(); drawVenues(); if (I.ready) { sizeInst(); drawInst(); } }, 120); });
-addEventListener('themechange', () => { if (D) { legendFor($('ilegend'), S.icolor); legendFor($('plegend'), S.pcolor); refresh(); } });
+$('pcolor').onchange = (e) => { S.pcolor = e.target.value; legendFor($('plegend'), S.pcolor); paintPeople(true); };
+$('pfield').onchange = (e) => { S.pfield = +e.target.value; paintPeople(false); };
+let rz; addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(() => { if (!D) return; drawVolume(); drawPartners(); drawFields(); drawVenues(); }, 120); });
+addEventListener('themechange', () => { if (D) { legendFor($('ilegend'), S.icolor); legendFor($('plegend'), S.pcolor); refresh(); paintPeople(true); } });
 matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change', () => { if (D) setTimeout(() => { legendFor($('ilegend'), S.icolor); legendFor($('plegend'), S.pcolor); refresh(); }, 50); });
 
 // ---------------------------------------------------------------- boot
@@ -817,9 +748,12 @@ matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change', () => { 
   if (q.get('teams') === 'small') S.small = true;
   fieldRank = D.fields.map((f2, i) => [i, sum(f2.w)]).sort((x, y) => y[1] - x[1]); fieldRank.slice(0, 11).forEach(([fi], k) => fieldColorIdx.set(fi, k));
   applyLang();
-  initInstitutions(); drawInst();
-  initPeople().catch((e) => { console.error(e); $('cosmos').innerHTML = `<div class="nogl">${esc(String(e.message || e))}</div>`; });
-  window.__elm = { S, D, I, P, fitInst, sizeInst, ready: true };
+  const fail = (id) => (e) => { console.error(e); $(id).innerHTML = `<div class="nogl">${esc(String(e.message || e))}</div>`; };
+  initInstitutions().catch(fail('istage'));
+  // the researchers' network (12,000 people) is built when it comes near the screen
+  const go = () => { if (!P.started) { P.started = true; initPeople().catch(fail('pstage')); } };
+  if ('IntersectionObserver' in window) { const io = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting)) { go(); io.disconnect(); } }, { rootMargin: '600px' }); io.observe($('pstage')); } else go();
+  window.__elm = { S, D, I, P, ready: true };
 })();
 })();
 </script>
