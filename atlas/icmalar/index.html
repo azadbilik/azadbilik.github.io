@@ -357,7 +357,7 @@ function applyLang() {
   document.title = t('doc');
   document.querySelectorAll('[data-i18n]').forEach((el) => el.textContent = t(el.dataset.i18n));
   document.querySelectorAll('[data-lang]').forEach((b) => b.setAttribute('aria-pressed', b.dataset.lang === lang));
-  document.getElementById('find').placeholder = t('find');
+  document.getElementById('find').placeholder = t('find'); document.getElementById('find').setAttribute('aria-label', t('find'));
   if (units.length) document.getElementById('units-list').innerHTML = units.map((u) => `<option value="${esc(L(u))}">`).join('');
   document.querySelectorAll('[data-keep-lang]').forEach((a) => { const u = new URL(a.getAttribute('href'), location.href); if (lang === 'az') u.searchParams.delete('lang'); else u.searchParams.set('lang', lang); a.href = u.pathname + u.search; });
 }

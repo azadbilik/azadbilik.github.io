@@ -72,7 +72,7 @@
   .reads a { font-weight: 500; text-decoration: none; }
   .reads a:hover { color: var(--accent); }
 
-  .maplibregl-ctrl-attrib { font: .6875rem var(--sans); background: var(--panel) !important; color: var(--muted); }
+  .maplibregl-ctrl-attrib, .maplibregl-ctrl.maplibregl-ctrl-attrib { font: .6875rem var(--sans); background: var(--panel) !important; color: var(--muted); }
   .maplibregl-ctrl-attrib a { color: var(--muted); }
   .maplibregl-ctrl-group { background: var(--panel); border: 1px solid var(--rule); box-shadow: none !important; }
   @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .maplibregl-ctrl-group .maplibregl-ctrl-icon { filter: invert(1); } }
