@@ -23,7 +23,7 @@
     40.335
    ]
   ],
-  "tiles": "data/tiles/1898/{z}/{x}/{y}.webp",
+  "tiles": "data/tiles/1898/{z}/{x}/{y}.webp?v=b97a8563",
   "bounds": [
    49.80705,
    40.35014,
@@ -57,7 +57,7 @@
     40.335
    ]
   ],
-  "tiles": "data/tiles/1894/{z}/{x}/{y}.webp",
+  "tiles": "data/tiles/1894/{z}/{x}/{y}.webp?v=dcd047a6",
   "bounds": [
    49.8144,
    40.34984,
@@ -91,7 +91,7 @@
     40.335
    ]
   ],
-  "tiles": "data/tiles/1806/{z}/{x}/{y}.webp",
+  "tiles": "data/tiles/1806/{z}/{x}/{y}.webp?v=19a575cd",
   "bounds": [
    49.8189,
    40.35553,
@@ -125,7 +125,7 @@
     40.64
    ]
   ],
-  "tiles": "data/tiles/ganja-1873/{z}/{x}/{y}.webp",
+  "tiles": "data/tiles/ganja-1873/{z}/{x}/{y}.webp?v=2a207aec",
   "bounds": [
    46.35383,
    40.67623,

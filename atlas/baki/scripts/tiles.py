@@ -112,6 +112,8 @@ for year, plan in G.items():
                 Image.fromarray(t, 'RGBA').save(d / f'{ty}.webp', quality=80, method=5)
                 count += 1
     size = sum(f.stat().st_size for f in out.rglob('*.webp'))
-    meta.setdefault(year, {}).update({'tiles': f'data/tiles/{year}/{{z}}/{{x}}/{{y}}.webp', 'bounds': [round(W_, 5), round(S_, 5), round(E_, 5), round(N_, 5)], 'minzoom': ZMIN, 'maxzoom': zmax})
+    import hashlib   # a version in the URL, so browsers and caches fetch rebuilt tiles instead of keeping old ones
+    ver = hashlib.sha1(b''.join(f.read_bytes() for f in sorted((out / str(zmax)).rglob('*.webp')))).hexdigest()[:8]
+    meta.setdefault(year, {}).update({'tiles': f'data/tiles/{year}/{{z}}/{{x}}/{{y}}.webp?v={ver}', 'bounds': [round(W_, 5), round(S_, 5), round(E_, 5), round(N_, 5)], 'minzoom': ZMIN, 'maxzoom': zmax})
     print(f'{year}: {count} tiles, z{ZMIN}–{zmax}, {size // 1024 // 1024} MB')
 json.dump(meta, open(DATA / 'plans.json', 'w'), ensure_ascii=False, indent=1)
