@@ -83,62 +83,54 @@
   .langs { margin-left: .25rem; }
   .langs button { min-height: 1.75rem; min-width: 1.75rem; }
 
-  /* Hero */
-  .hero { padding-block: clamp(4.5rem, 14vw, 10rem) clamp(4rem, 10vw, 7.5rem); }
-  h1 {
-    font: 300 clamp(2.25rem, 1.2rem + 4.6vw, 5rem)/1.04 var(--serif);
-    letter-spacing: -0.025em;
-    max-width: 15ch;
-    text-wrap: balance;
-  }
-  .hero p {
-    margin-top: 1.5rem;
-    font: italic 300 clamp(1.125rem, 1rem + .6vw, 1.5rem)/1.35 var(--serif);
-    max-width: 30ch;
-  }
-
-  /* Sections: a label in the margin, the content beside it */
-  section { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: 1.5rem; border-top: 1px solid var(--rule); padding-block: 2.25rem 4rem; }
-  .label { grid-column: 1 / 4; font-size: .75rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; padding-top: .35rem; }
-  .body { grid-column: 4 / 12; }
-  @media (max-width: 52rem) {
-    section { display: block; padding-block: 1.5rem 3rem; }
-    .label { margin-bottom: 1.75rem; }
-  }
-
-  /* Project */
-  .project + .project { margin-top: 3.5rem; padding-top: 2.25rem; border-top: 1px solid var(--rule); }
-  .project { display: grid; grid-template-columns: 1fr auto; gap: .25rem 2rem; }
-  .project h2 { font: 400 clamp(1.75rem, 1.4rem + 1.6vw, 2.75rem)/1.1 var(--serif); letter-spacing: -0.02em; }
-  .project h2 a { text-decoration: none; }
-  .project h2 a::after { content: ' →'; font-family: var(--sans); font-weight: 300; font-size: .55em; vertical-align: .45em; color: var(--muted); transition: color .15s; }
-  .project h2 a:hover::after { color: var(--accent); }
-  .project h2 a[data-kx]::after { content: ' ↗'; }
-  /* Under a project, its maps or pictures: a row of small covers, each its own link */
-  .thumbs { grid-column: 1 / -1; list-style: none; padding: 0; margin-top: 2rem; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 10.5rem), 1fr)); gap: 1.25rem 1rem; }
-  .thumbs a { display: block; text-decoration: none; font-size: .8125rem; line-height: 1.35; color: var(--muted); }
-  .thumbs a:hover { color: var(--ink); }
-  .thumbs img { display: block; width: 100%; height: auto; aspect-ratio: 1200 / 630; object-fit: cover; border-radius: 2px; background: var(--frame); margin-bottom: .5rem; transition: transform .4s; }
-  .thumbs a:hover img { transform: scale(1.02); }
-  .thumbs.art { grid-template-columns: repeat(auto-fill, minmax(min(100%, 8rem), 1fr)); }
-  .thumbs.art img { aspect-ratio: 3 / 4; object-position: top; }
-  @media (max-width: 40rem) { .thumbs { grid-template-columns: repeat(2, 1fr); } }
-  .project .desc { grid-column: 1 / -1; margin-top: 1rem; max-width: 40rem; font-size: 1.0625rem; }
-  .facts { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: .5rem 2.5rem; margin-top: 2rem; padding: 0; list-style: none; }
-  .facts li { font: 300 1.5rem/1.2 var(--serif); font-variant-numeric: lining-nums tabular-nums; }
-  .facts small { display: block; margin-top: .3rem; font: 400 .8125rem/1.4 var(--sans); color: var(--muted); }
-
-
-
-  footer { border-top: 1px solid var(--rule); padding-block: 1.75rem 2.5rem; display: flex; flex-wrap: wrap; justify-content: space-between; gap: .75rem 2rem; font-size: .8125rem; color: var(--muted); }
+  /* Two frames, each a screen: culture, then the atlas. Words on one side, one picture on the other */
+  html { scroll-snap-type: y proximity; }
+  body > .wrap { max-width: none; padding: 0; }
+  header { padding: 1.75rem var(--gutter); height: 5.5rem; }
+  .frame { min-height: 100svh; display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); scroll-snap-align: start; }
+  .frame:first-of-type { min-height: calc(100svh - 5.5rem); }
+  .frame + .frame { border-top: 1px solid var(--rule); }
+  .frame .words { display: flex; flex-direction: column; justify-content: center; gap: 2.5rem; padding: 3rem var(--gutter); max-width: 46rem; margin-left: auto; width: 100%; }
+  .frame.flip { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
+  .frame.flip .pic { order: -1; }
+  .frame.flip .words { margin-left: 0; margin-right: auto; }
+  .pic { position: relative; margin: 0; background: var(--frame); overflow: hidden; }
+  .pic img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .pic figcaption { position: absolute; inset: auto 0 0; padding: 3rem 1.25rem 1rem; font-size: .75rem; line-height: 1.4; color: #F1EBE1; background: linear-gradient(to top, rgb(20 16 13 / .78), rgb(20 16 13 / 0)); }
+  .pic figcaption a { color: inherit; text-decoration-color: rgb(241 235 225 / .5); }
+  h1 { font: 300 clamp(2.25rem, 1.3rem + 3.4vw, 4.25rem)/1.04 var(--serif); letter-spacing: -0.025em; max-width: 15ch; text-wrap: balance; }
+  h1 + p { margin-top: 1rem; font: italic 300 clamp(1.0625rem, 1rem + .4vw, 1.3125rem)/1.4 var(--serif); color: var(--muted); }
+  .frame h2 { font: 300 clamp(2.25rem, 1.3rem + 3.4vw, 4.25rem)/1.04 var(--serif); letter-spacing: -0.025em; }
+  .frame h2 a { text-decoration: none; }
+  .frame h2 + p { margin-top: 1rem; font: italic 300 clamp(1.0625rem, 1rem + .4vw, 1.3125rem)/1.4 var(--serif); color: var(--muted); max-width: 32ch; }
+  /* The places: a name and one line each, the whole row a link */
+  .rows { list-style: none; padding: 0; border-top: 1px solid var(--rule); }
+  .rows li { border-bottom: 1px solid var(--rule); }
+  .rows a { display: grid; grid-template-columns: minmax(9rem, 13rem) 1fr auto; align-items: baseline; gap: .25rem 1.5rem; padding: .9rem 0; text-decoration: none; }
+  .rows b { font: 400 1.375rem/1.2 var(--serif); letter-spacing: -0.01em; }
+  .rows span.l { color: var(--muted); font-size: .9375rem; }
+  .rows a::after { content: '→'; color: var(--muted); transition: transform .2s, color .2s; }
+  .rows a[data-kx]::after { content: '↗'; }
+  .rows a:hover::after { color: var(--accent); transform: translateX(.2rem); }
+  .rows a:hover b { color: var(--accent); }
+  .open { font-size: .875rem; color: var(--muted); }
+  .open a { color: var(--ink); }
+  footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem 2rem; font-size: .8125rem; color: var(--muted); padding-top: 1.25rem; border-top: 1px solid var(--rule); }
   footer a { color: var(--ink); }
 
-  @media (max-width: 40rem) {
-    .facts { display: grid; grid-template-columns: repeat(2, auto); justify-content: start; gap: 1.25rem 2.5rem; }
-    .facts li:last-child { grid-column: 1 / -1; }
-    .hero { padding-block: 3.5rem 3rem; }
+  @media (max-width: 52rem) {
+    html { scroll-snap-type: none; }
+    header { height: auto; }
+    .frame, .frame.flip { grid-template-columns: 1fr; min-height: 0; }
+    .frame.flip .pic { order: 0; }
+    .pic { height: 46svh; }
+    .frame .words { padding: 2.5rem var(--gutter) 3.5rem; gap: 2rem; }
+    .rows a { grid-template-columns: 1fr auto; }
+    .rows span.l { grid-column: 1; grid-row: 2; font-size: .875rem; }
+    .rows a::after { grid-row: 1 / 3; align-self: center; }
   }
-  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } html { scroll-snap-type: none; } }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 </style>
 </head>
 <body>
@@ -152,88 +144,39 @@
   </header>
 
   <main>
-    <div class="hero">
-      <h1><span data-l="az">Azərbaycan mədəniyyəti və tarixi haqqında açıq bilik.</span><span data-l="ru">Открытые знания об азербайджанской культуре и истории.</span><span data-l="en">Open knowledge about Azerbaijani culture and history.</span></h1>
-      <p><span data-l="az">Hamı üçün pulsuz, mənbəsi göstərilmiş, kodu açıq.</span><span data-l="ru">Бесплатно для всех, с указанием источников, с открытым кодом.</span><span data-l="en">Free for everyone, sourced, and open source.</span></p>
-    </div>
-
-    <section aria-labelledby="culture">
-      <h2 class="label" id="culture"><span data-l="az">Mədəniyyət</span><span data-l="ru">Культура</span><span data-l="en">Culture</span></h2>
-      <div class="body">
-        <article class="project">
-          <h2><a href="https://kitabxana.az" data-kx><span data-l="az">Kitabxana</span><span data-l="ru">Библиотека</span><span data-l="en">Library</span></a></h2>
-          <p class="desc"><span data-l="az">Azərbaycan ədəbiyyatının onlayn kitabxanası: klassik və müasir əsərlər, tərcümələr, mənbə nəşrlərin skanları.</span><span data-l="ru">Онлайн-библиотека азербайджанской литературы: классика и современность, переводы, сканы изданий, из которых взяты тексты.</span><span data-l="en">An online library of Azerbaijani literature: classical and modern works, translations, and scans of the editions they come from.</span></p>
-          <ul class="facts">
-            <li>48 000+<small><span data-l="az">əsər</span><span data-l="ru">произведений</span><span data-l="en">works</span></small></li>
-            <li>470+<small><span data-l="az">müəllif</span><span data-l="ru">авторов</span><span data-l="en">authors</span></small></li>
-            <li>az · ru · en · fa<small><span data-l="az">dillər</span><span data-l="ru">языки</span><span data-l="en">languages</span></small></li>
-          </ul>
-        </article>
-
-        <article class="project">
-          <h2><a href="/qalereya/" data-keep-lang><span data-l="az">Qalereya</span><span data-l="ru">Галерея</span><span data-l="en">Gallery</span></a></h2>
-          <p class="desc"><span data-l="az">Nizami və Füzulinin poemalarına beş əsr ərzində çəkilmiş miniatürlər, səhnə-səhnə, hər biri kitabxanadakı fəslinə bağlı; <a href="/qalereya/emalatxana/" data-keep-lang>emalatxanaların xəritəsi</a> ilə.</span><span data-l="ru">Пять веков миниатюр к поэмам Низами и Физули, сцена за сценой, каждая со ссылкой на свою главу в библиотеке, и <a href="/qalereya/emalatxana/" data-keep-lang>карта мастерских</a>, где они были написаны.</span><span data-l="en">Five centuries of miniatures painted for Nizami's and Fuzuli's poems, scene by scene, each linked to its chapter in the library, and <a href="/qalereya/emalatxana/" data-keep-lang>a map of the workshops</a> where they were painted.</span></p>
-          <ul class="facts">
-            <li>780<small><span data-l="az">miniatür</span><span data-l="ru">миниатюр</span><span data-l="en">miniatures</span></small></li>
-            <li>187<small><span data-l="az">səhnə</span><span data-l="ru">сцен</span><span data-l="en">scenes</span></small></li>
-            <li>CC0 · PD<small><span data-l="az">lisenziya</span><span data-l="ru">лицензия</span><span data-l="en">licence</span></small></li>
-          </ul>
-          <ul class="thumbs art"><li><a href="/qalereya/?p=nizami-xosrov-va-sirin#commons-158256681" data-keep-lang><img src="/qalereya/thumbs/commons-158256681.jpg" alt="" loading="lazy"><span><span data-l="az">Xosrov və Şirin</span><span data-l="ru">Хосров и Ширин</span><span data-l="en">Khusraw and Shirin</span></span></a></li><li><a href="/qalereya/?p=nizami-leyli-va-macnun#walters-W609-132b" data-keep-lang><img src="/qalereya/thumbs/walters-W609-132b.jpg" alt="" loading="lazy"><span><span data-l="az">Leyli və Məcnun</span><span data-l="ru">Лейли и Меджнун</span><span data-l="en">Layla and Majnun</span></span></a></li><li><a href="/qalereya/?p=nizami-heft-peyker#commons-159299294" data-keep-lang><img src="/qalereya/thumbs/commons-159299294.jpg" alt="" loading="lazy"><span><span data-l="az">Yeddi gözəl</span><span data-l="ru">Семь красавиц</span><span data-l="en">The Seven Beauties</span></span></a></li><li><a href="/qalereya/?p=nizami-serefname#commons-158980611" data-keep-lang><img src="/qalereya/thumbs/commons-158980611.jpg" alt="" loading="lazy"><span><span data-l="az">Şərəfnamə</span><span data-l="ru">Шараф-наме</span><span data-l="en">Sharafnama</span></span></a></li></ul>
-        </article>
-
-        <article class="project">
-          <h2><a href="/xeriteler/" data-keep-lang><span data-l="az">Ədəbi xəritələr</span><span data-l="ru">Литературные карты</span><span data-l="en">Literary maps</span></a></h2>
-          <p class="desc"><span data-l="az">Ədəbiyyat və sənət xəritədə: <a href="/xerite/" data-keep-lang>ədəbiyyat xəritəsi</a>, <a href="/qalereya/emalatxana/" data-keep-lang>emalatxanalar</a> və Nizaminin poemalarına görə <a href="/xeriteler/iskender/" data-keep-lang>İskəndərin</a>, <a href="/xeriteler/xosrov-sirin/" data-keep-lang>Xosrovla Şirinin</a> yolları, <a href="/xeriteler/yeddi-gozel/" data-keep-lang>yeddi gözəlin ölkələri</a>.</span><span data-l="ru">Литература и искусство на карте: <a href="/xerite/" data-keep-lang>литературная карта</a>, <a href="/qalereya/emalatxana/" data-keep-lang>мастерские</a> и по поэмам Низами — пути <a href="/xeriteler/iskender/" data-keep-lang>Искандера</a>, <a href="/xeriteler/xosrov-sirin/" data-keep-lang>Хосрова и Ширин</a>, страны <a href="/xeriteler/yeddi-gozel/" data-keep-lang>семи красавиц</a>.</span><span data-l="en">Literature and art on the map: the <a href="/xerite/" data-keep-lang>literary map</a>, the <a href="/qalereya/emalatxana/" data-keep-lang>workshops</a>, and as Nizami tells them, the roads of <a href="/xeriteler/iskender/" data-keep-lang>Iskandar</a> and of <a href="/xeriteler/xosrov-sirin/" data-keep-lang>Khusraw and Shirin</a> and the lands of <a href="/xeriteler/yeddi-gozel/" data-keep-lang>the Seven Beauties</a>.</span></p>
-          <ul class="facts"><li>5<small><span data-l="az">xəritə</span><span data-l="ru">карт</span><span data-l="en">maps</span></small></li><li>318<small><span data-l="az">müəllif</span><span data-l="ru">авторов</span><span data-l="en">authors</span></small></li><li>16<small><span data-l="az">emalatxana şəhəri</span><span data-l="ru">городов-мастерских</span><span data-l="en">workshop cities</span></small></li></ul>
-          <ul class="thumbs"><li><a href="/xerite/" data-keep-lang><img src="/xerite/og.png" width="1200" height="630" alt="" loading="lazy"><span><span data-l="az">Ədəbiyyat xəritəsi</span><span data-l="ru">Литературная карта</span><span data-l="en">Literary map</span></span></a></li><li><a href="/xeriteler/iskender/" data-keep-lang><img src="/xeriteler/iskender/og.png" width="1200" height="630" alt="" loading="lazy"><span><span data-l="az">İskəndərin səfərləri</span><span data-l="ru">Походы Искандера</span><span data-l="en">Iskandar's journeys</span></span></a></li><li><a href="/xeriteler/xosrov-sirin/" data-keep-lang><img src="/xeriteler/xosrov-sirin/og.png" width="1200" height="630" alt="" loading="lazy"><span><span data-l="az">Xosrov və Şirin</span><span data-l="ru">Хосров и Ширин</span><span data-l="en">Khusraw and Shirin</span></span></a></li><li><a href="/xeriteler/yeddi-gozel/" data-keep-lang><img src="/xeriteler/yeddi-gozel/og.png" width="1200" height="630" alt="" loading="lazy"><span><span data-l="az">Yeddi gözəl</span><span data-l="ru">Семь красавиц</span><span data-l="en">The Seven Beauties</span></span></a></li><li><a href="/qalereya/emalatxana/" data-keep-lang><img src="/qalereya/emalatxana/og.png" width="1200" height="630" alt="" loading="lazy"><span><span data-l="az">Emalatxanalar</span><span data-l="ru">Мастерские</span><span data-l="en">Workshops</span></span></a></li></ul>
-        </article>
-        <article class="project">
-          <h2><a href="/musiqi/" data-keep-lang><span data-l="az">Musiqi</span><span data-l="ru">Музыка</span><span data-l="en">Music</span></a></h2>
-          <p class="desc"><span data-l="az">Azərbaycan musiqisinin ilk səs yazıları, 1902-dən: Qədirbala, Cabbar Qaryağdıoğlu, Keçəçioğlu Məhəmməd, Bülbül, Şuşinskilər, və xanəndələrin, tarzənlərin, aşıqların doğulduğu yerlərin xəritəsi.</span><span data-l="ru">Первые записи азербайджанской музыки, с 1902 года: Гадирбала, Джаббар Карягдыоглы, Кечечиоглу Мамед, Бюльбюль, Шушинские, и карта мест, где родились ханенде, таристы и ашуги.</span><span data-l="en">The first recordings of Azerbaijani music, from 1902: Gadirbala, Jabbar Garyaghdioglu, Kechechioglu Mammad, Bulbul, the Shushinskis, and a map of where its khanendes, tar players and ashiks were born.</span></p>
-          <ul class="facts"><li>54<small><span data-l="az">səs yazısı</span><span data-l="ru">записи</span><span data-l="en">recordings</span></small></li><li>200<small><span data-l="az">musiqiçi</span><span data-l="ru">музыкантов</span><span data-l="en">musicians</span></small></li><li>PD<small><span data-l="az">lisenziya</span><span data-l="ru">лицензия</span><span data-l="en">licence</span></small></li></ul>
-        </article>
-        <article class="project">
-          <h2><a href="/soz/" data-keep-lang><span data-l="az">Söz ehtiyatı</span><span data-l="ru">Словарь поэтов</span><span data-l="en">Poets' vocabulary</span></a></h2>
-          <p class="desc"><span data-l="az">Şair neçə fərqli söz işlədir? 76 şairin ilk 10 000 sözü, bir oyunla.</span><span data-l="ru">Сколько разных слов у поэта? Первые 10 000 слов 76 поэтов — и игра.</span><span data-l="en">How many different words does a poet use? 76 poets' first 10,000 words, and a game.</span></p>
-          <ul class="facts"><li>76<small><span data-l="az">şair</span><span data-l="ru">поэтов</span><span data-l="en">poets</span></small></li><li>10 000<small><span data-l="az">söz</span><span data-l="ru">слов</span><span data-l="en">words</span></small></li></ul>
-        </article>
+    <section class="frame" aria-labelledby="culture">
+      <div class="words">
+        <div>
+          <h1><span data-l="az">Azərbaycan mədəniyyəti və tarixi haqqında açıq bilik.</span><span data-l="ru">Открытые знания об азербайджанской культуре и истории.</span><span data-l="en">Open knowledge about Azerbaijani culture and history.</span></h1>
+          <p><span data-l="az">Hamı üçün pulsuz, mənbəsi göstərilmiş, kodu açıq.</span><span data-l="ru">Бесплатно для всех, с указанием источников, с открытым кодом.</span><span data-l="en">Free for everyone, sourced, and open source.</span></p>
+        </div>
+        <div><h2 class="sr-only" id="culture"><span data-l="az">Mədəniyyət</span><span data-l="ru">Культура</span><span data-l="en">Culture</span></h2><ul class="rows"><li><a href="https://kitabxana.az" data-kx><b><span data-l="az">Kitabxana</span><span data-l="ru">Библиотека</span><span data-l="en">Library</span></b><span class="l"><span data-l="az">48 000 əsər, 470 müəllif</span><span data-l="ru">48 000 произведений, 470 авторов</span><span data-l="en">48,000 works by 470 authors</span></span></a></li><li><a href="/qalereya/" data-keep-lang><b><span data-l="az">Qalereya</span><span data-l="ru">Галерея</span><span data-l="en">Gallery</span></b><span class="l"><span data-l="az">Nizami və Füzuliyə 780 miniatür</span><span data-l="ru">780 миниатюр к Низами и Физули</span><span data-l="en">780 miniatures for Nizami and Fuzuli</span></span></a></li><li><a href="/xeriteler/" data-keep-lang><b><span data-l="az">Ədəbi xəritələr</span><span data-l="ru">Литературные карты</span><span data-l="en">Literary maps</span></b><span class="l"><span data-l="az">Şairlərin yerləri, poemaların yolları</span><span data-l="ru">Места поэтов, пути поэм</span><span data-l="en">Where poets lived, where poems travel</span></span></a></li><li><a href="/musiqi/" data-keep-lang><b><span data-l="az">Musiqi</span><span data-l="ru">Музыка</span><span data-l="en">Music</span></b><span class="l"><span data-l="az">İlk səs yazıları, 1902-dən</span><span data-l="ru">Первые записи, с 1902 года</span><span data-l="en">The first recordings, from 1902</span></span></a></li><li><a href="/soz/" data-keep-lang><b><span data-l="az">Söz ehtiyatı</span><span data-l="ru">Словарь поэтов</span><span data-l="en">Poets’ vocabulary</span></b><span class="l"><span data-l="az">Şair neçə söz işlədir?</span><span data-l="ru">Сколько слов у поэта?</span><span data-l="en">How many words does a poet use?</span></span></a></li></ul></div>
       </div>
+      <figure class="pic">
+        <img src="/qalereya/large/commons-158256681.jpg" alt="" fetchpriority="high" style="object-position: 50% 30%">
+        <figcaption><a href="/qalereya/?p=nizami-xosrov-va-sirin#commons-158256681" data-keep-lang><span data-l="az">Xosrov və Şirinin toyu</span><span data-l="ru">Свадьба Хосрова и Ширин</span><span data-l="en">The wedding of Khusraw and Shirin</span></a> · <span data-l="az">Təbriz</span><span data-l="ru">Тебриз</span><span data-l="en">Tabriz</span>, 1501–1510</figcaption>
+      </figure>
     </section>
 
-    <section aria-labelledby="atlas">
-      <h2 class="label" id="atlas"><span data-l="az">Atlas</span><span data-l="ru">Атлас</span><span data-l="en">Atlas</span></h2>
-      <div class="body">
-        <article class="project">
-          <h2><a href="/atlas/" data-keep-lang><span data-l="az">Atlas</span><span data-l="ru">Атлас</span><span data-l="en">Atlas</span></a></h2>
-          <p class="desc"><span data-l="az">Tarixi Azərbaycan rəqəmlərdə və xəritələrdə: iki əsrin sərhədləri, siyahıyaalmalar üzrə əhali, xalqlar və dillər, Kür–Araz hövzəsi. Hər rəqəm öz mənbəyi ilə.</span><span data-l="ru">Исторический Азербайджан в цифрах и картах: границы двух веков, население по переписям, народы и языки, бассейн Куры и Аракса. У каждой цифры — свой источник.</span><span data-l="en">Historical Azerbaijan in numbers and maps: two centuries of borders, population census by census, peoples and languages, the Kura–Araz basin. Every number with its source.</span></p>
-          <ul class="facts"><li>9<small><span data-l="az">xəritə</span><span data-l="ru">карт</span><span data-l="en">maps</span></small></li><li>1800–<small><span data-l="az">bu gün</span><span data-l="ru">сегодня</span><span data-l="en">today</span></small></li><li>CC0<small><span data-l="az">məlumat</span><span data-l="ru">данные</span><span data-l="en">data</span></small></li></ul>
-          <ul class="thumbs"><li><a href="/atlas/serhedler/" data-keep-lang><img src="/atlas/serhedler/og.png" width="1200" height="630" alt="" loading="lazy"><span><span data-l="az">Sərhədlər</span><span data-l="ru">Границы</span><span data-l="en">Borders</span></span></a></li><li><a href="/atlas/xanliqlar/" data-keep-lang><img src="/atlas/xanliqlar/og.png" width="1200" height="630" alt="" loading="lazy"><span><span data-l="az">Xanlıqlar</span><span data-l="ru">Ханства</span><span data-l="en">Khanates</span></span></a></li><li><a href="/atlas/rayonlar/" data-keep-lang><img src="/atlas/rayonlar/og.png" width="1200" height="630" alt="" loading="lazy"><span><span data-l="az">Sovet rayonları</span><span data-l="ru">Советские районы</span><span data-l="en">Soviet raions</span></span></a></li><li><a href="/atlas/ehali/" data-keep-lang><img src="/atlas/ehali/og.png" width="1200" height="630" alt="" loading="lazy"><span><span data-l="az">Əhali</span><span data-l="ru">Население</span><span data-l="en">Population</span></span></a></li><li><a href="/atlas/icmalar/" data-keep-lang><img src="/atlas/icmalar/og.png" width="1200" height="630" alt="" loading="lazy"><span><span data-l="az">İcmalar</span><span data-l="ru">Общины</span><span data-l="en">Communities</span></span></a></li><li><a href="/atlas/xalqlar/" data-keep-lang><img src="/atlas/xalqlar/og.png" width="1200" height="630" alt="" loading="lazy"><span><span data-l="az">Xalqlar və dillər</span><span data-l="ru">Народы и языки</span><span data-l="en">Peoples and languages</span></span></a></li><li><a href="/atlas/1897/" data-keep-lang><img src="/atlas/1897/og.png" width="1200" height="630" alt="" loading="lazy"><span><span data-l="az">1897: ana dilləri</span><span data-l="ru">1897: родные языки</span><span data-l="en">Native languages, 1897</span></span></a></li><li><a href="/atlas/yollar/" data-keep-lang><img src="/atlas/yollar/og.png" width="1200" height="630" alt="" loading="lazy"><span><span data-l="az">Karvan yolu</span><span data-l="ru">Караванный путь</span><span data-l="en">By caravan</span></span></a></li><li><a href="/atlas/hovze/" data-keep-lang><img src="/atlas/hovze/og.png" width="1200" height="630" alt="" loading="lazy"><span><span data-l="az">Kür–Araz hövzəsi</span><span data-l="ru">Бассейн Куры и Аракса</span><span data-l="en">The Kura–Araz basin</span></span></a></li></ul>
-        </article>
+    <section class="frame flip" aria-labelledby="atlas">
+      <div class="words">
+        <div>
+          <h2 id="atlas"><a href="/atlas/" data-keep-lang><span data-l="az">Atlas</span><span data-l="ru">Атлас</span><span data-l="en">Atlas</span></a></h2>
+          <p><span data-l="az">Tarixi Azərbaycan rəqəmlərdə və xəritələrdə. Hər rəqəm öz mənbəyi ilə.</span><span data-l="ru">Исторический Азербайджан в цифрах и картах. У каждой цифры — свой источник.</span><span data-l="en">Historical Azerbaijan in numbers and maps. Every number with its source.</span></p>
+        </div>
+        <ul class="rows"><li><a href="/atlas/#g-borders" data-keep-lang><b><span data-l="az">Sərhədlər</span><span data-l="ru">Границы</span><span data-l="en">Borders</span></b><span class="l"><span data-l="az">Xanlıqlardan bugünkü rayonlaradək</span><span data-l="ru">От ханств до нынешних районов</span><span data-l="en">From the khanates to today’s districts</span></span></a></li><li><a href="/atlas/#g-people" data-keep-lang><b><span data-l="az">Əhali və dillər</span><span data-l="ru">Население и языки</span><span data-l="en">People and languages</span></b><span class="l"><span data-l="az">Siyahıyaalmalar, xalqlar, dillər</span><span data-l="ru">Переписи, народы, языки</span><span data-l="en">Censuses, peoples, languages</span></span></a></li><li><a href="/atlas/#g-land" data-keep-lang><b><span data-l="az">Coğrafiya</span><span data-l="ru">География</span><span data-l="en">Geography</span></b><span class="l"><span data-l="az">Kür–Araz hövzəsi, karvan yolları</span><span data-l="ru">Бассейн Куры и Аракса, караванные пути</span><span data-l="en">The Kura–Araz basin, caravan routes</span></span></a></li></ul>
+        <p class="open"><span data-l="az">Bütün məlumatlar açıqdır: CSV, CC0, Zenodo-da DOI ilə.</span><span data-l="ru">Все данные открыты: CSV, CC0, с DOI на Zenodo.</span><span data-l="en">All the data is open: CSV, CC0, with a DOI on Zenodo.</span> <a href="https://github.com/azadbilik/data"><span data-l="az">Məlumatlar</span><span data-l="ru">Данные</span><span data-l="en">The data</span> →</a></p>
+        <footer>
+          <span><span data-l="az">Səhv tapdınız və ya mənbəniz var? <a href="https://github.com/azadbilik/kitabxana/issues">Bizə yazın</a></span><span data-l="ru">Нашли ошибку или у вас есть источник? <a href="https://github.com/azadbilik/kitabxana/issues">Напишите нам</a></span><span data-l="en">Found a mistake or have a source? <a href="https://github.com/azadbilik/kitabxana/issues">Tell us</a></span></span>
+          <span><a href="mailto:hello@azadbilik.org">hello@azadbilik.org</a> · <a href="https://github.com/azadbilik">GitHub</a></span>
+        </footer>
       </div>
+      <figure class="pic">
+        <img src="/atlas/home.webp" width="900" height="1170" alt="" loading="lazy" style="object-position: 60% 45%">
+        <figcaption><a href="/atlas/xanliqlar/" data-keep-lang><span data-l="az">Xanlıqlar</span><span data-l="ru">Ханства</span><span data-l="en">Khanates</span></a> · <span data-l="az">təx. 1800</span><span data-l="ru">ок. 1800</span><span data-l="en">c. 1800</span></figcaption>
+      </figure>
     </section>
-
-    <section aria-labelledby="data">
-      <h2 class="label" id="data"><span data-l="az">Açıq məlumat</span><span data-l="ru">Открытые данные</span><span data-l="en">Open data</span></h2>
-      <div class="body">
-        <article class="project">
-          <h2><a href="https://github.com/azadbilik/data"><span data-l="az">Məlumatlar</span><span data-l="ru">Данные</span><span data-l="en">Open data</span></a></h2>
-          <p class="desc"><span data-l="az">Mədəniyyət: kitabxananın və qalereyanın kataloqu (müəlliflər, əsərlər, tərcümələr, yerlər, səhnələr, miniatürlər). Atlas: tarixi Azərbaycanın siyahıyaalma rəqəmləri, rayon-rayon. Hamısı istənilən məqsəd üçün.</span><span data-l="ru">Культура: каталог библиотеки и галереи (авторы, произведения, переводы, места, сцены, миниатюры). Атлас: данные переписей исторического Азербайджана по районам. Всё — для любых целей.</span><span data-l="en">Culture: the library's and the gallery's catalogue (authors, works, translations, places, scenes, miniatures). Atlas: census figures for historical Azerbaijan, district by district. All free to use for anything.</span></p>
-          <ul class="facts">
-            <li>CSV<small><span data-l="az">format</span><span data-l="ru">формат</span><span data-l="en">format</span></small></li>
-            <li>19<small><span data-l="az">cədvəl</span><span data-l="ru">таблиц</span><span data-l="en">tables</span></small></li>
-            <li>CC0<small><span data-l="az">lisenziya</span><span data-l="ru">лицензия</span><span data-l="en">licence</span></small></li><li><a href="https://doi.org/10.5281/zenodo.24543369" style="text-decoration:none">DOI</a><small><span data-l="az">Zenodo, sitat üçün</span><span data-l="ru">Zenodo, для цитирования</span><span data-l="en">Zenodo, to cite</span></small></li>
-          </ul>
-        </article>
-      </div>
-    </section>
-
-
   </main>
-
-  <footer>
-    <span><span data-l="az">Səhv tapdınız və ya mənbəniz var? <a href="https://github.com/azadbilik/kitabxana/issues">Bizə yazın</a></span><span data-l="ru">Нашли ошибку или у вас есть источник? <a href="https://github.com/azadbilik/kitabxana/issues">Напишите нам</a></span><span data-l="en">Found a mistake or have a source? <a href="https://github.com/azadbilik/kitabxana/issues">Tell us</a></span></span>
-    <span><a href="mailto:hello@azadbilik.org">hello@azadbilik.org</a> · <a href="https://github.com/azadbilik">GitHub</a></span>
-  </footer>
 </div>
 <script>
   const T = { az: ['Azad Bilik', 'Azərbaycan mədəniyyəti və tarixi haqqında açıq bilik.'], ru: ['Azad Bilik', 'Открытые знания об азербайджанской культуре и истории.'], en: ['Azad Bilik', 'Open knowledge about Azerbaijani culture and history.'] };
