@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="/shared/theme.js"></script>
+<title>Hüquqi aktlar şəbəkəsi · Azad Bilik</title>
+<meta name="description" content="Azərbaycanın hüquqi aktları və aralarındakı əlaqələr: kim kimi dəyişdirib, icra edir, ləğv edib. Ədliyyə Nazirliyinin Hüquqi Aktların Dövlət Reyestri (e-qanun.az). The network of Azerbaijan's legal acts: which act amends, implements or repeals which.">
+<meta name="theme-color" content="#F4EFE6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14100D" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://azadbilik.org/sebeke/qanunlar/">
+<meta property="og:title" content="Hüquqi aktlar şəbəkəsi · Network of legal acts">
+<meta property="og:description" content="Konstitusiyadan nazir qərarlarına: aktların bir-birini dəyişdirməsi, icrası, ləğvi. e-qanun.az reyestri. / How Azerbaijan's laws, decrees and decisions amend, implement and repeal each other.">
+<meta property="og:image" content="https://azadbilik.org/sebeke/qanunlar/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="stylesheet" href="/shared/hub.css">
+<link rel="stylesheet" href="/shared/story-map.css">
+<style>
+  :root { --k0: #A81E28; --k1: #D08A1E; --k2: #1F5C73; --k3: #7A5C8E; --soft: rgb(26 20 16 / .06);
+    --c0: #7a1219; --c1: #A81E28; --c2: #1F5C73; --c3: #7A5C8E; --c4: #2F8F7A; --c5: #D08A1E; --c6: #5B6B2E; --c7: #9a9087;
+    --ka: #6b7c93; --ki: #1F8A74; --kp: #C98414; --kr: #A81E28; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --soft: rgb(241 235 225 / .07);
+    --c0: #E58A90; --c1: #DA5A61; --c2: #6FB3CC; --c3: #B596C9; --c4: #5FC2A5; --c5: #E0A64A; --c6: #A9BC6A; --c7: #8d847b;
+    --ka: #94a6bf; --ki: #5FC2A5; --kp: #E0A64A; --kr: #DA5A61; } }
+  :root[data-theme="dark"] { --soft: rgb(241 235 225 / .07);
+    --c0: #E58A90; --c1: #DA5A61; --c2: #6FB3CC; --c3: #B596C9; --c4: #5FC2A5; --c5: #E0A64A; --c6: #A9BC6A; --c7: #8d847b;
+    --ka: #94a6bf; --ki: #5FC2A5; --kp: #E0A64A; --kr: #DA5A61; }
+  html, body { height: auto; }
+  body { overflow-x: hidden; overflow-y: auto; }
+  .wrap { max-width: 72rem; margin: 0 auto; padding: 0 1.5rem; }
+  header.head { border-bottom: 1px solid var(--rule); padding: 1.25rem 0 1.5rem; }
+  header .lede { margin-top: .75rem; max-width: 46rem; font: 400 1.0625rem/1.55 var(--serif); }
+  header .sub { margin-top: .4rem; color: var(--muted); max-width: 46rem; }
+  h1 { font-size: clamp(2rem, 6vw, 3.25rem); }
+  section { padding: 1.75rem 0; border-bottom: 1px solid var(--rule); }
+  h2 { font: 400 1.5rem/1.2 var(--serif); letter-spacing: -.01em; }
+  h3 { font: 500 .9375rem var(--sans); }
+  button { cursor: pointer; font: inherit; color: inherit; background: none; border: 0; }
+  .kicker { font: 500 .75rem var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .muted { color: var(--muted); }
+  .intro { max-width: 46rem; margin-top: .5rem; font-size: .9375rem; }
+  .hint { font-size: .75rem; color: var(--muted); margin-top: .4rem; max-width: 48rem; }
+  .filters { display: grid; grid-template-columns: minmax(0, 1fr); gap: .6rem; margin: 1rem 0 .75rem; padding: .75rem .9rem; border: 1px solid var(--rule); border-radius: 4px; background: var(--paper); }
+  .frow { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: center; font-size: .8125rem; }
+  .frow label { display: inline-flex; align-items: center; gap: .4rem; color: var(--muted); }
+  .frow input[type=range] { accent-color: var(--accent); width: 9rem; }
+  .frow > * { min-width: 0; max-width: 100%; }
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; }
+  .chip { display: inline-flex; align-items: center; gap: .4rem; padding: .3rem .65rem; border: 1px solid var(--rule); border-radius: 99px; font-size: .8125rem; color: var(--muted); }
+  .chip i { width: .65rem; height: .65rem; border-radius: 50%; background: var(--c); flex: none; opacity: .35; }
+  .chip i.ln { height: 3px; border-radius: 0; width: .9rem; }
+  .chip[aria-pressed="true"] { color: var(--ink); border-color: var(--ink); }
+  .chip[aria-pressed="true"] i { opacity: 1; }
+  .seg { display: inline-flex; flex-wrap: wrap; border: 1px solid var(--rule); border-radius: 3px; padding: 2px; }
+  .seg button { padding: .3rem .7rem; border-radius: 2px; font-size: .8125rem; color: var(--muted); }
+  .seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 4px; overflow: hidden; margin: .75rem 0; }
+  .stats div { background: var(--paper); padding: .6rem .9rem; }
+  .stats b { display: block; font: 400 1.5rem/1.1 var(--serif); font-variant-numeric: tabular-nums; }
+  .stats span { font-size: .75rem; color: var(--muted); }
+  .gwrap { position: relative; border: 1px solid var(--rule); border-radius: 4px; background: var(--frame); overflow: hidden; }
+  #cg { height: min(74vh, 44rem); touch-action: none; position: relative; }
+  #cg canvas { display: block; width: 100%; height: 100%; }
+  .gtip { position: absolute; z-index: 3; pointer-events: none; background: var(--paper); border: 1px solid var(--rule); border-radius: 3px; padding: .3rem .55rem; font-size: .8125rem; box-shadow: 0 2px 12px rgb(0 0 0 / .15); max-width: 18rem; }
+  .gload { position: absolute; inset: 0; display: grid; place-items: center; color: var(--muted); font-size: .875rem; pointer-events: none; }
+  .gbar { position: absolute; right: .6rem; bottom: .6rem; display: flex; gap: .3rem; z-index: 2; }
+  .gbar button { background: var(--panel); border: 1px solid var(--rule); border-radius: 3px; padding: .3rem .6rem; font-size: .75rem; }
+  .gbar button:hover { border-color: var(--ink); }
+  .lgd { display: flex; flex-wrap: wrap; gap: .3rem 1rem; margin-top: .6rem; font-size: .75rem; color: var(--muted); }
+  .lgd span { display: inline-flex; align-items: center; gap: .35rem; }
+  .lgd i { width: .65rem; height: .65rem; border-radius: 50%; background: var(--c); display: inline-block; }
+  .lgd i.ln { height: 3px; border-radius: 0; width: 1.1rem; }
+  .search { display: flex; gap: .5rem; margin-top: .9rem; }
+  .search input { flex: 1; min-width: 0; font: inherit; font-size: 1rem; padding: .55rem .75rem; color: var(--ink); background: var(--paper); border: 1px solid var(--ink); border-radius: 3px; }
+  .sgrid { display: grid; grid-template-columns: minmax(0, 26rem) minmax(0, 1fr); gap: 1.5rem; margin-top: .75rem; align-items: start; }
+  .alist { list-style: none; padding: 0; }
+  .alist li { border-bottom: 1px solid var(--rule); }
+  .alist button { display: grid; grid-template-columns: .65rem minmax(0, 1fr) auto; gap: .1rem .6rem; align-items: baseline; width: 100%; text-align: left; padding: .5rem .25rem; font-size: .875rem; border-radius: 2px; }
+  .alist button:hover, .alist button.on { background: var(--soft); }
+  .alist i { width: .6rem; height: .6rem; border-radius: 50%; background: var(--c); align-self: center; }
+  .alist .tt { overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; line-height: 1.35; }
+  .alist .nn { font-size: .75rem; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; text-align: right; }
+  .alist .mt { grid-column: 2 / 4; font-size: .75rem; color: var(--muted); }
+  .card { border: 1px solid var(--rule); border-radius: 4px; padding: .9rem 1rem; margin-top: .9rem; background: var(--paper); }
+  .card h3 { font: 400 1.2rem/1.3 var(--serif); overflow-wrap: anywhere; }
+  .card dl { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: .25rem .8rem; margin-top: .6rem; font-size: .8125rem; }
+  .card dt { color: var(--muted); } .card dd { margin: 0; overflow-wrap: anywhere; }
+  .card .tag { display: inline-flex; align-items: center; gap: .35rem; }
+  .card .tag i { width: .6rem; height: .6rem; border-radius: 50%; background: var(--c); }
+  .badge { display: inline-block; padding: .05rem .5rem; border-radius: 99px; font-size: .75rem; border: 1px solid currentColor; }
+  .badge.ok { color: var(--ki); } .badge.off { color: var(--kr); }
+  .card .src { margin-top: .7rem; font-size: .8125rem; font-weight: 500; display: inline-block; }
+  .card h4 { font: 500 .8125rem var(--sans); margin: .9rem 0 .25rem; }
+  .card ul { list-style: none; padding: 0; font-size: .8125rem; }
+  .card ul li { padding: .2rem 0; border-top: 1px solid var(--rule); overflow-wrap: anywhere; }
+  .card ul li button { text-align: left; text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: .2em; }
+  .card ul li button:hover { text-decoration-color: var(--ink); }
+  .card ul .d { color: var(--muted); font-size: .75rem; white-space: nowrap; }
+  .card .more { font-size: .75rem; color: var(--muted); margin-top: .25rem; text-decoration: underline; }
+  .card .spark { display: block; width: 100%; max-width: 22rem; height: auto; margin-top: .3rem; }
+  .card .spark text { font: .625rem var(--sans); fill: var(--muted); }
+  .card .x { float: right; font-size: 1.1rem; line-height: 1; padding: .1rem .4rem; color: var(--muted); }
+  .rtabs { margin-top: .9rem; }
+  .rank { counter-reset: r; }
+  .rank li { counter-increment: r; }
+  .rank button::before { content: counter(r); font-size: .75rem; color: var(--muted); }
+  .rank button { grid-template-columns: 1.4rem minmax(0, 1fr) auto; }
+  .rank .tt { -webkit-line-clamp: 3; }
+  .charts { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1rem; }
+  .charts figure { margin: 0; min-width: 0; }
+  .charts figcaption { font-size: .8125rem; font-weight: 500; margin-bottom: .3rem; }
+  .charts svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .charts .axis text { font: .6875rem var(--sans); fill: var(--muted); font-variant-numeric: tabular-nums; }
+  .charts .axis line { stroke: var(--rule); }
+  .method { max-width: 48rem; display: grid; gap: .75rem; font-size: .9375rem; }
+  .method ul { padding-left: 1.25rem; display: grid; gap: .45rem; }
+  footer { padding: 1.5rem 0 2.5rem; font-size: .75rem; color: var(--muted); max-width: 52rem; line-height: 1.6; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  @media (max-width: 48rem) {
+    .wrap { padding: 0 1rem; }
+    .stats { grid-template-columns: 1fr 1fr; }
+    #cg { height: min(64vh, 30rem); }
+    .sgrid, .charts { grid-template-columns: 1fr; gap: 1.25rem; }
+    .frow input[type=range] { width: 7rem; }
+  }
+  html:not([lang="az"]) [data-l="az"], html:not([lang="ru"]) [data-l="ru"], html:not([lang="en"]) [data-l="en"] { display: none !important; }
+</style>
+</head>
+<body>
+<header class="hub-header">
+  <a class="brand" href="/" data-keep-lang><svg viewBox="0 0 512 512" aria-hidden="true"><g class="star"><rect x="126" y="126" width="260" height="260"/><polygon points="256,72 440,256 256,440 72,256"/></g><polygon class="gem" points="256,196 316,256 256,316 196,256"/></svg>Azad Bilik</a>
+  <nav aria-label="Azad Bilik"><a href="https://kitabxana.az" id="kx-nav"><span data-l="az">Kitabxana</span><span data-l="ru">Библиотека</span><span data-l="en">Library</span></a><a href="/qalereya/" data-keep-lang><span data-l="az">Qalereya</span><span data-l="ru">Галерея</span><span data-l="en">Gallery</span></a><a href="/xeriteler/" data-keep-lang><span data-l="az">Ədəbi xəritələr</span><span data-l="ru">Литературные карты</span><span data-l="en">Literary maps</span></a><a href="/atlas/" data-keep-lang><span data-l="az">Atlas</span><span data-l="ru">Атлас</span><span data-l="en">Atlas</span></a><a href="/musiqi/" data-keep-lang><span data-l="az">Musiqi</span><span data-l="ru">Музыка</span><span data-l="en">Music</span></a><a href="/sebeke/" data-keep-lang aria-current="page"><span data-l="az">Şəbəkələr</span><span data-l="ru">Сети</span><span data-l="en">Networks</span></a><span class="langs" role="group" aria-label="Dil · Язык · Language"><button type="button" data-lang="az">AZ</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="en">EN</button></span></nav>
+</header><div class="wrap">
+  <header class="head">
+    <h1 data-i18n="title"></h1>
+    <p class="sub" data-i18n="sub"></p>
+    <p class="lede" id="lede"></p>
+  </header>
+  <main>
+    <section aria-labelledby="h-net">
+      <p class="kicker" data-i18n="netK"></p>
+      <h2 id="h-net" data-i18n="netH"></h2>
+      <p class="intro" data-i18n="netP"></p>
+      <div class="filters">
+        <div class="frow"><div class="seg" role="group" id="scope" data-i18n-label="scopeL"></div><div class="seg" role="group" id="stat" data-i18n-label="statL"></div></div>
+        <div class="frow"><div class="chips" role="group" id="cats" data-i18n-label="catsL"></div></div>
+        <div class="frow"><div class="chips" role="group" id="kinds" data-i18n-label="kindsL"></div></div>
+        <div class="frow">
+          <label><span data-i18n="fromL"></span> <input type="range" id="yfrom"><output id="yfromo"></output></label>
+          <label><span data-i18n="toL"></span> <input type="range" id="yto"><output id="ytoo"></output></label>
+        </div>
+      </div>
+      <div class="stats" id="stats"></div>
+      <div class="gwrap"><div id="cg" role="img" data-i18n-label="netL"></div><div class="gtip" id="gtip" hidden></div><div class="gload" id="gload"></div>
+        <div class="gbar"><button type="button" id="gpause"></button><button type="button" id="gfit"></button></div></div>
+      <div class="lgd" id="lgd"></div>
+      <p class="hint" id="netHint"></p>
+      <div id="gcard" aria-live="polite"></div>
+    </section>
+
+    <section aria-labelledby="h-find">
+      <p class="kicker" data-i18n="findK"></p>
+      <h2 id="h-find" data-i18n="findH"></h2>
+      <p class="intro" data-i18n="findP"></p>
+      <div class="search"><input type="search" id="q" autocomplete="off" spellcheck="false" data-i18n-ph="findPh" data-i18n-label="findPh"></div>
+      <p class="hint" id="qhint"></p>
+      <div class="sgrid"><div><ul class="alist" id="results"></ul></div><div id="scard" aria-live="polite"></div></div>
+    </section>
+
+    <section aria-labelledby="h-rank">
+      <p class="kicker" data-i18n="rankK"></p>
+      <h2 id="h-rank" data-i18n="rankH"></h2>
+      <p class="intro" id="rankP"></p>
+      <div class="seg rtabs" role="group" id="rtabs" data-i18n-label="rankH"></div>
+      <div class="sgrid"><div><ul class="alist rank" id="rank"></ul></div><div id="rcard" aria-live="polite"></div></div>
+    </section>
+
+    <section aria-labelledby="h-years">
+      <p class="kicker" data-i18n="yearK"></p>
+      <h2 id="h-years" data-i18n="yearH"></h2>
+      <p class="intro" data-i18n="yearP"></p>
+      <div class="charts">
+        <figure><figcaption id="capNew"></figcaption><svg id="chNew" role="img"></svg></figure>
+        <figure><figcaption id="capAm"></figcaption><svg id="chAm" role="img"></svg></figure>
+      </div>
+      <div class="lgd" id="ylgd"></div>
+    </section>
+
+    <section aria-labelledby="h-method">
+      <h2 id="h-method" data-i18n="methodH"></h2>
+      <div class="method" id="method"></div>
+    </section>
+  </main>
+  <footer id="foot"></footer>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@cosmos.gl/graph@3.6.0/dist/index.min.js"></script>
+<script>
+(() => {
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+const LANGS = ['az', 'ru', 'en'];
+const qs = new URLSearchParams(location.search);
+let lang = (() => {
+  const q = qs.get('lang'); if (LANGS.includes(q)) return q;
+  try { const s = localStorage.getItem('lang'); if (LANGS.includes(s)) return s; } catch {}
+  return 'az';
+})();
+const NF = { az: 'ru-RU', ru: 'ru-RU', en: 'en-GB' };
+const nf = (v) => new Intl.NumberFormat(NF[lang]).format(v);
+const dark = () => (window.abTheme ? abTheme.dark() : matchMedia('(prefers-color-scheme: dark)').matches);
+const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const hex = (h) => { const m = /#([0-9a-f]{6})/i.exec(h); const n = parseInt(m ? m[1] : '888888', 16); return [(n >> 16) / 255, ((n >> 8) & 255) / 255, (n & 255) / 255]; };
+const fmtDate = (d) => `${String(d % 100).padStart(2, '0')}.${String(Math.floor(d / 100) % 100).padStart(2, '0')}.${Math.floor(d / 10000)}`;
+const link = (id) => `https://e-qanun.az/framework/${id}`;
+
+// ---- text
+const T = {
+az: {
+  title: 'Hüquqi aktlar şəbəkəsi', sub: 'Azərbaycanın hüquqi aktları: hansı akt hansını dəyişdirib, icra edir, ləğv edib',
+  lede: (a, n, e) => `Ədliyyə Nazirliyinin reyestrində ${nf(a)} akt var. Bunlardan ${nf(n)} akt reyestrin özünün “Əlaqəli sənədlər” bölməsi ilə ${nf(e)} əlaqə ilə bağlıdır: dəyişiklik, icra, tətbiq, ləğv.`,
+  netK: 'Şəbəkə', netH: 'Aktlar və aralarındakı əlaqələr',
+  netP: 'Hər nöqtə bir aktdır, rəngi növünü, ölçüsü neçə dəfə dəyişdirildiyini göstərir. Xətt rəngi əlaqənin növünü göstərir. İlkin görünüşdə normativ nüvə var: Konstitusiya, məcəllələr, qanunlar, fərmanlar və Nazirlər Kabinetinin qərarları. Nöqtəyə toxunun, akt kartı açılsın.',
+  scopeL: 'Əhatə', scopes: ['Normativ nüvə', 'Bütün aktlar'], statL: 'Status', stats: ['Hamısı', 'Qüvvədə olan', 'Ləğv olunmuş'],
+  catsL: 'Aktın növü', kindsL: 'Əlaqənin növü', fromL: 'İldən', toL: 'ilədək', netL: 'Hüquqi aktların şəbəkəsi',
+  cats: { const: 'Konstitusiya', code: 'Məcəllələr', law: 'Qanunlar', decree: 'Prezident fərmanları', order: 'Sərəncamlar', cabinet: 'Nazirlər Kabineti qərarları', court: 'Milli Məclis və məhkəmə qərarları', agency: 'Nazirlik və digər orqanlar' },
+  kinds: ['dəyişdirir', 'icra edir', 'tətbiq edir / təsdiq edir', 'ləğv edir'],
+  kindsFrom: ['dəyişdirir', 'icra edir', 'tətbiq / təsdiq edir', 'ləğv edir'],
+  stNodes: 'akt', stLinks: 'əlaqə', stAmend: 'dəyişiklik', stYears: 'illər',
+  gload: 'Şəbəkə yüklənir…', gfit: 'Hamısını göstər', gpause: 'Dayandır', gresume: 'Davam et', gnone: 'Bu süzgəclə heç bir əlaqə yoxdur.',
+  netHint: 'Status süzgəci seçilmiş statuslu aktları və onlarla bağlı digər aktları (solğun) göstərir. Xəttin istiqaməti: hərəkət edən aktdan hədəfə. Nöqtələrin yeri qüvvə modeli ilə hesablanır, mənası yalnız yaxınlıqdadır: çox əlaqəli aktlar mərkəzə yığılır.',
+  tip: (n) => `${n} dəyişiklik`,
+  findK: 'Axtarış', findH: 'Aktı tapın', findP: 'Başlığa və ya nömrəyə görə axtarın (reyestrdə əlaqəsi olan aktlar).', findPh: 'Məs.: Vergi Məcəlləsi',
+  qWait: 'Başlıqlar yüklənir…', qNone: 'Heç nə tapılmadı.', qTop: 'Ən çox dəyişdirilən aktlar:', qFound: (n, s) => `${nf(n)} nəticə${n > s ? `, ilk ${s} göstərilir` : ''}.`,
+  amended: 'dəyişdirilib', times: (n) => `${nf(n)} dəfə`, never: 'dəyişdirilməyib', nr: 'Nömrə', dt: 'Qəbul tarixi', ty: 'Növ', stt: 'Status', inForce: 'Qüvvədədir', repealed: 'Ləğv olunub',
+  amByYear: 'Dəyişikliklər illər üzrə', lastAm: 'Sonuncu dəyişiklik', open: 'e-qanun.az-da aç', close: 'Bağla', showAll: (n) => `Hamısını göstər (${nf(n)})`,
+  rel: { amendedBy: 'Bunlar tərəfindən dəyişdirilib', amends: 'Bunları dəyişdirir', implements: 'Bunları icra edir', implementedBy: 'Bunlarla icra olunur', applies: 'Bunları tətbiq / təsdiq edir', appliedBy: 'Bunlarla tətbiq / təsdiq edilib', repeals: 'Bunları ləğv edir', repealedBy: 'Bunlarla ləğv edilib' },
+  rankK: 'Reytinqlər', rankH: 'Ən çox dəyişdirilən və icra edilən aktlar', rankP: 'Bütün reyestr üzrə, süzgəclərdən asılı olmayaraq. Say: aktı dəyişdirən müxtəlif aktların sayı. Məcəllənin “təsdiq edilməsi haqqında” qanunu və köhnə redaksiyalar ayrıca akt kimi sayılır.',
+  tabs: ['Ən çox dəyişdirilən', 'Bir ildə ən çox dəyişdirilən', 'Ən çox icra edilən qanunlar'], inYear: (y) => `${y}-ci il`,
+  yearK: 'İllər', yearH: 'İllər üzrə yeni aktlar və dəyişikliklər', yearP: 'Qəbul ilinə görə, 1990-dan. Soldakı qrafik reyestrin bütün aktlarını sayır. Sağdakı qrafik yalnız əlaqələri məlum olan dəyişiklikləri sayır və dəyişdirilən aktın növünə görə bölünür.',
+  capNew: 'Yeni aktlar', capAm: 'Dəyişikliklər (dəyişdirilən aktın növünə görə)',
+  methodH: 'Metod və məhdudiyyətlər',
+  method: (s) => `<ul>
+<li>Mənbə: Azərbaycan Respublikası Ədliyyə Nazirliyi, Hüquqi Aktların Dövlət Reyestri (<a href="https://e-qanun.az/">e-qanun.az</a>), 26 noyabr 2026-da götürülüb. Hər akta səhifədən e-qanun.az-dakı rəsmi mətninə keçid verilir; mətnlər burada saxlanmır, başlıqlar rəsmi şəkildə, Azərbaycan dilində verilir.</li>
+<li>Əlaqələr reyestrin “Əlaqəli sənədlər” bölməsindəndir: “Dəyişdirilib”, “İcra edilib”, “Tətbiq edilib”, “Təsdiq edilib”, “Ləğv edilib” və əks tərəfdəki oxşar qeydlər. İki tərəfdəki qeydlər birləşdirilib və təkrarlar silinib. Ədliyyə Nazirliyi bunu rəsmi hüquqi qiymətləndirmə kimi təqdim etmir; bu, saytın göstərdiyi əlaqələrin təsviridir.</li>
+<li>Əhatə: ${nf(s.relCrawled)} aktın əlaqə siyahısı oxunub (${nf(s.relCrawledWithLinks)}-də ən azı bir əlaqə var). Hələ oxunmamış aktların əlaqələri yalnız digər tərəfdən görünə bilər, ona görə say və xronologiya yaxınlaşmadır; bu xüsusilə sərəncamlara aiddir.</li>
+<li>Dəyişiklik sayı: aktı dəyişdirən müxtəlif aktların sayı. Bir akt eyni aktı bir dəfə sayılır, maddə sayı yox.</li>
+<li>Dəyişikliyin ili dəyişdirən aktın qəbul ilidir, qüvvəyə minmə ili yox. Status reyestrin statusudur (“Qüvvədədir” / “Ləğv olunmuşdur”).</li>
+<li>Yerləşmə qüvvə modeli ilə hesablanır: məsafənin hüquqi mənası yoxdur.</li>
+<li>Reyestrdə “dəyişdirilib” əlaqələri 2008-dən başlayır: bundan əvvəlki dəyişikliklər əlaqə kimi göstərilmir, ona görə qrafiklərdə və reytinqlərdə 2008-dən əvvəl dəyişiklik yoxdur. Bu, dəyişikliyin olmaması demək deyil.</li>
+<li>e-qanun.az-da robots.txt və yayımlanmış istifadə şərtləri yoxdur. Məlumat saytın ictimai API-sindən (api.e-qanun.az) oxunub; səhifə hər aktı mənbəyinə yönləndirir.</li>
+<li>Bu səhifə hüquqi məsləhət deyil və rəsmi reyestri əvəz etmir; qüvvədə olan redaksiya üçün e-qanun.az-a baxın.</li></ul>`,
+  foot: (b) => `Mənbə: Azərbaycan Respublikası Ədliyyə Nazirliyi, <a href="https://e-qanun.az/">Hüquqi Aktların Dövlət Reyestri (e-qanun.az)</a>, 2026-11-26-da götürülüb, ${b} tarixində işlənib; şəbəkə: <a href="https://github.com/cosmosgl/graph">cosmos.gl</a> (MIT). Aktların başlıqları rəsmidir. Hub kodu və yığma skripti açıqdır.`,
+},
+ru: {
+  title: 'Сеть правовых актов', sub: 'Правовые акты Азербайджана: какой акт изменяет, исполняет или отменяет какой',
+  lede: (a, n, e) => `В реестре Министерства юстиции ${nf(a)} актов. Из них ${nf(n)} связаны ${nf(e)} связями по разделу самого реестра «Связанные документы»: изменение, исполнение, применение, отмена.`,
+  netK: 'Сеть', netH: 'Акты и связи между ними',
+  netP: 'Каждая точка — акт: цвет показывает вид, размер — сколько раз его изменяли. Цвет линии — вид связи. Сначала показано нормативное ядро: Конституция, кодексы, законы, указы и постановления Кабинета министров. Нажмите на точку, чтобы открыть карточку акта.',
+  scopeL: 'Охват', scopes: ['Нормативное ядро', 'Все акты'], statL: 'Статус', stats: ['Все', 'Действующие', 'Отменённые'],
+  catsL: 'Вид акта', kindsL: 'Вид связи', fromL: 'С года', toL: 'по год', netL: 'Сеть правовых актов',
+  cats: { const: 'Конституция', code: 'Кодексы', law: 'Законы', decree: 'Указы Президента', order: 'Распоряжения', cabinet: 'Постановления Кабинета министров', court: 'Решения парламента и судов', agency: 'Министерства и другие органы' },
+  kinds: ['изменяет', 'исполняет', 'вводит в действие / утверждает', 'отменяет'],
+  kindsFrom: ['изменяет', 'исполняет', 'вводит / утверждает', 'отменяет'],
+  stNodes: 'актов', stLinks: 'связей', stAmend: 'изменений', stYears: 'годы',
+  gload: 'Загрузка сети…', gfit: 'Показать всё', gpause: 'Остановить', gresume: 'Продолжить', gnone: 'С этим фильтром связей нет.',
+  netHint: 'Фильтр статуса показывает акты с выбранным статусом и связанные с ними (блеклые). Направление связи: от действующего акта к тому, на который он действует. Положение точек рассчитано силовой моделью и значимо только как близость: акты с многими связями собираются в центре.',
+  tip: (n) => `изменений: ${n}`,
+  findK: 'Поиск', findH: 'Найти акт', findP: 'Ищите по названию или номеру (акты, имеющие связи в реестре).', findPh: 'Напр.: Налоговый кодекс',
+  qWait: 'Названия загружаются…', qNone: 'Ничего не найдено.', qTop: 'Чаще всего изменяемые акты:', qFound: (n, s) => `Найдено: ${nf(n)}${n > s ? `, показаны первые ${s}` : ''}.`,
+  amended: 'изменён', times: (n) => `${nf(n)} раз`, never: 'не изменялся', nr: 'Номер', dt: 'Дата принятия', ty: 'Вид', stt: 'Статус', inForce: 'Действует', repealed: 'Утратил силу',
+  amByYear: 'Изменения по годам', lastAm: 'Последнее изменение', open: 'Открыть на e-qanun.az', close: 'Закрыть', showAll: (n) => `Показать все (${nf(n)})`,
+  rel: { amendedBy: 'Изменён актами', amends: 'Изменяет', implements: 'Исполняет', implementedBy: 'Исполняется актами', applies: 'Вводит в действие / утверждает', appliedBy: 'Введён в действие / утверждён актами', repeals: 'Отменяет', repealedBy: 'Отменён актами' },
+  rankK: 'Рейтинги', rankH: 'Чаще всего изменяемые и исполняемые акты', rankP: 'По всему реестру, независимо от фильтров. Число — количество разных актов, изменивших данный. Закон «об утверждении» кодекса и прежние редакции считаются отдельными актами.',
+  tabs: ['Чаще всего изменяемые', 'Больше всего изменений за год', 'Чаще всего исполняемые законы'], inYear: (y) => `${y} г.`,
+  yearK: 'Годы', yearH: 'Новые акты и изменения по годам', yearP: 'По году принятия, с 1990 года. Левый график считает все акты реестра. Правый — только изменения с известными связями, по виду изменяемого акта.',
+  capNew: 'Новые акты', capAm: 'Изменения (по виду изменяемого акта)',
+  methodH: 'Метод и ограничения',
+  method: (s) => `<ul>
+<li>Источник: Министерство юстиции Азербайджанской Республики, Государственный реестр правовых актов (<a href="https://e-qanun.az/">e-qanun.az</a>), выгрузка 26 ноября 2026 года. Каждый акт ведёт на официальный текст на e-qanun.az; тексты здесь не хранятся, названия даны официальные, на азербайджанском.</li>
+<li>Связи взяты из раздела «Связанные документы» реестра: «Изменён», «Исполнен», «Применён», «Утверждён», «Отменён» и обратные записи на другой стороне. Записи с обеих сторон объединены, повторы убраны. Министерство юстиции не выдаёт это за официальную правовую оценку; это описание связей, показанных на сайте.</li>
+<li>Охват: прочитаны списки связей ${nf(s.relCrawled)} актов (у ${nf(s.relCrawledWithLinks)} есть хотя бы одна связь). Связи ещё не прочитанных актов могут быть видны только с другой стороны, поэтому счёт и хронология приблизительны; особенно это касается распоряжений.</li>
+<li>Число изменений: количество разных актов, изменивших данный. Один акт считается один раз, статьи не считаются.</li>
+<li>Год изменения — год принятия изменяющего акта, не вступления в силу. Статус — статус реестра («Qüvvədədir» / «Ləğv olunmuşdur»).</li>
+<li>Положение точек задаёт силовая модель: расстояние юридического смысла не имеет.</li>
+<li>Связи «изменён» в реестре начинаются с 2008 года: более ранние изменения связями не показаны, поэтому до 2008 года на графиках и в рейтингах изменений нет. Это не значит, что изменений не было.</li>
+<li>У e-qanun.az нет robots.txt и опубликованных условий использования. Данные прочитаны из публичного API сайта (api.e-qanun.az); каждый акт ведёт к источнику.</li>
+<li>Страница не является юридической консультацией и не заменяет официальный реестр; действующую редакцию смотрите на e-qanun.az.</li></ul>`,
+  foot: (b) => `Источник: Министерство юстиции Азербайджанской Республики, <a href="https://e-qanun.az/">Государственный реестр правовых актов (e-qanun.az)</a>, выгрузка 2026-11-26, обработка ${b}; сеть: <a href="https://github.com/cosmosgl/graph">cosmos.gl</a> (MIT). Названия актов официальные. Код хаба и скрипт сборки открыты.`,
+},
+en: {
+  title: 'Network of legal acts', sub: "Azerbaijan's legal acts: which act amends, implements or repeals which",
+  lede: (a, n, e) => `The Ministry of Justice register holds ${nf(a)} acts. ${nf(n)} of them are joined by ${nf(e)} ties from the register's own “Related documents” section: amendment, implementation, application, repeal.`,
+  netK: 'Network', netH: 'Acts and the ties between them',
+  netP: "Each dot is an act: colour shows its type, size how often it was amended. Line colour shows the kind of tie. The first view is the normative core: the Constitution, codes, laws, presidential decrees and Cabinet of Ministers decisions. Tap a dot to open the act's card.",
+  scopeL: 'Scope', scopes: ['Normative core', 'All acts'], statL: 'Status', stats: ['All', 'In force', 'Repealed'],
+  catsL: 'Type of act', kindsL: 'Kind of tie', fromL: 'From', toL: 'to', netL: 'Network of legal acts',
+  cats: { const: 'Constitution', code: 'Codes', law: 'Laws', decree: 'Presidential decrees', order: 'Orders', cabinet: 'Cabinet of Ministers decisions', court: 'Parliament and court decisions', agency: 'Ministries and other bodies' },
+  kinds: ['amends', 'implements', 'puts into effect / approves', 'repeals'],
+  kindsFrom: ['amends', 'implements', 'puts into effect / approves', 'repeals'],
+  stNodes: 'acts', stLinks: 'ties', stAmend: 'amendments', stYears: 'years',
+  gload: 'Loading the network…', gfit: 'Show all', gpause: 'Pause', gresume: 'Resume', gnone: 'No ties with this filter.',
+  netHint: 'The status filter shows acts with the chosen status and the acts tied to them (faded). A tie points from the acting act to the act it acts on. Position comes from a force layout and means closeness only: acts with many ties gather in the middle.',
+  tip: (n) => `${n} amendments`,
+  findK: 'Search', findH: 'Find an act', findP: 'Search by title or number (acts that have ties in the register).', findPh: 'E.g. Tax Code',
+  qWait: 'Loading titles…', qNone: 'Nothing found.', qTop: 'Most amended acts:', qFound: (n, s) => `${nf(n)} found${n > s ? `, first ${s} shown` : ''}.`,
+  amended: 'amended', times: (n) => `${nf(n)} times`, never: 'not amended', nr: 'Number', dt: 'Date accepted', ty: 'Type', stt: 'Status', inForce: 'In force', repealed: 'Repealed',
+  amByYear: 'Amendments by year', lastAm: 'Last amendment', open: 'Open on e-qanun.az', close: 'Close', showAll: (n) => `Show all (${nf(n)})`,
+  rel: { amendedBy: 'Amended by', amends: 'Amends', implements: 'Implements', implementedBy: 'Implemented by', applies: 'Puts into effect / approves', appliedBy: 'Put into effect / approved by', repeals: 'Repeals', repealedBy: 'Repealed by' },
+  rankK: 'Rankings', rankH: 'Most amended and most implemented acts', rankP: 'Over the whole register, whatever the filters. The count is the number of distinct acts that amended it. A code’s “on approval” law and earlier redactions count as separate acts.',
+  tabs: ['Most amended', 'Most amended in one year', 'Most implemented laws'], inYear: (y) => String(y),
+  yearK: 'Years', yearH: 'New acts and amendments by year', yearP: 'By year of acceptance, from 1990. The left chart counts every act in the register. The right one counts only amendments with known ties, split by the type of the amended act.',
+  capNew: 'New acts', capAm: 'Amendments (by type of the amended act)',
+  methodH: 'Method and limits',
+  method: (s) => `<ul>
+<li>Source: Ministry of Justice of the Republic of Azerbaijan, State Register of Legal Acts (<a href="https://e-qanun.az/">e-qanun.az</a>), fetched 26 November 2026. Every act links to its official text on e-qanun.az; texts are not stored here, and titles are the official ones, in Azerbaijani.</li>
+<li>Ties come from the register’s “Related documents” section: “Amended”, “Implemented”, “Applied”, “Approved”, “Repealed” and the matching entries on the other act. Entries from both sides are merged and duplicates dropped. The Ministry does not present this as an official legal assessment; it describes the ties the site shows.</li>
+<li>Coverage: the relation lists of ${nf(s.relCrawled)} acts were read (${nf(s.relCrawledWithLinks)} have at least one tie). Ties of acts not yet read can only show from the other side, so counts and timelines are approximate; this matters most for presidential orders.</li>
+<li>Amendment count: the number of distinct acts that amended an act. One act counts once, articles are not counted.</li>
+<li>The year of an amendment is the year the amending act was accepted, not the year it took effect. Status is the register’s (“Qüvvədədir” / “Ləğv olunmuşdur”).</li>
+<li>Position comes from a force layout: distance has no legal meaning.</li>
+<li>The register’s “amended” ties begin in 2008: earlier amendments are not shown as ties, so charts and rankings have no amendments before 2008. That does not mean there were none.</li>
+<li>e-qanun.az has no robots.txt and no published terms of use. The data was read from the site’s public API (api.e-qanun.az); every act links back to the source.</li>
+<li>This page is not legal advice and does not replace the official register; for the redaction in force, see e-qanun.az.</li></ul>`,
+  foot: (b) => `Source: Ministry of Justice of the Republic of Azerbaijan, <a href="https://e-qanun.az/">State Register of Legal Acts (e-qanun.az)</a>, fetched 2026-11-26, processed ${b}; network: <a href="https://github.com/cosmosgl/graph">cosmos.gl</a> (MIT). Act titles are official. The hub's code and build script are open.`,
+},
+};
+const t = (k) => T[lang][k];
+
+// ---- state
+let D = null, TT = null, ttPromise = null, graph = null, vis = [], gReady = false, paused = false;
+const CORE = [0, 1, 2, 3, 5];
+const S = { cats: new Set(CORE), st: 0, kinds: new Set([0, 1, 2, 3]), from: 0, to: 9999, rank: 0, sel: -1 };
+let N = 0, TNC = [], CAT = null, DATE = null, ST = null, EDG = null, OUT = null, IN = null, AMD = null;
+const KC = ['--ka', '--ki', '--kp', '--kr'];
+const catCol = () => [0, 1, 2, 3, 4, 5, 6, 7].map((i) => css('--c' + i));
+const kindCol = () => KC.map(css);
+const yr = (i) => Math.floor(DATE[i] / 10000);
+
+function prep() {
+  const n = D.nodes; N = n.id.length; DATE = n.date; ST = n.st;
+  TNC = D.types.map((x) => x[1]); CAT = new Uint8Array(N); for (let i = 0; i < N; i++) CAT[i] = TNC[n.tn[i]];
+  EDG = D.edges; OUT = Array.from({ length: N }, () => []); IN = Array.from({ length: N }, () => []);
+  const am = Array.from({ length: N }, () => new Set());
+  for (let k = 0; k < EDG.length; k += 3) { const s = EDG[k], d = EDG[k + 1], c = EDG[k + 2]; OUT[s].push([d, c]); IN[d].push([s, c]); if (c === 0) am[d].add(s); }
+  AMD = new Uint16Array(N); for (let i = 0; i < N; i++) AMD[i] = am[i].size;
+  let lo = 9999; for (let i = 0; i < N; i++) lo = Math.min(lo, yr(i));
+  S.from = lo; S.to = D.y1; D._lo = lo;
+  for (const id of ['yfrom', 'yto']) { $(id).min = lo; $(id).max = D.y1; }
+  $('yfrom').value = lo; $('yto').value = D.y1;
+}
+
+// ---- titles (lazy: 9 MB raw)
+function loadTitles() {
+  if (!ttPromise) ttPromise = fetch('data/titles.json').then((r) => r.json()).then((d) => { TT = d; buildIndex(); return d; });
+  return ttPromise;
+}
+const titleOf = (i) => (TT ? TT.title[i] : D.rankTitles[i]?.[1] || '…');
+const citOf = (i) => (TT ? TT.cit[i] : D.rankTitles[i]?.[0] || '');
+const typeName = (i) => D.types[D.nodes.tn[i]][0];
+const pretty = (s) => s.charAt(0) + s.slice(1).toLocaleLowerCase('az').replace(/(^|\s)(respublikası|azərbaycan)/g, (m, a, b) => a + b.charAt(0).toLocaleUpperCase('az') + b.slice(1));
+const norm = (s) => s.toLowerCase().replace(/ə/g, 'e').replace(/ı/g, 'i').replace(/ö/g, 'o').replace(/ü/g, 'u').replace(/ç/g, 'c').replace(/ş/g, 's').replace(/ğ/g, 'g').replace(/ё/g, 'е').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^\p{L}\p{N} ]/gu, ' ');
+let H = null;
+function buildIndex() { H = TT.title.map((s, i) => norm(TT.cit[i] + ' ' + s)); if ($('q').value) search(); }
+
+// ---- controls
+function seg(el, labels, cur, on) {
+  el.innerHTML = labels.map((l, i) => `<button type="button" data-i="${i}" aria-pressed="${i === cur}">${esc(l)}</button>`).join('');
+  el.querySelectorAll('button').forEach((b) => (b.onclick = () => on(+b.dataset.i)));
+}
+function controls() {
+  const sameCats = (a) => a.length === S.cats.size && a.every((c) => S.cats.has(c));
+  seg($('scope'), t('scopes'), sameCats(CORE) ? 0 : sameCats([0, 1, 2, 3, 4, 5, 6, 7]) ? 1 : -1, (i) => { S.cats = new Set(i === 0 ? CORE : [0, 1, 2, 3, 4, 5, 6, 7]); controls(); rebuild(); });
+  seg($('stat'), t('stats'), S.st, (i) => { S.st = i; controls(); rebuild(); });
+  const cc = catCol(), kc = kindCol();
+  $('cats').innerHTML = [0, 1, 2, 3, 4, 5, 6, 7].map((i) => `<button type="button" class="chip" data-c="${i}" aria-pressed="${S.cats.has(i)}"><i style="--c:${cc[i]}"></i>${esc(t('cats')[D.cats[i]])}</button>`).join('');
+  $('cats').querySelectorAll('button').forEach((b) => (b.onclick = () => { const c = +b.dataset.c; S.cats.has(c) ? S.cats.delete(c) : S.cats.add(c); controls(); rebuild(); }));
+  $('kinds').innerHTML = [0, 1, 2, 3].map((i) => `<button type="button" class="chip" data-k="${i}" aria-pressed="${S.kinds.has(i)}"><i class="ln" style="--c:${kc[i]}"></i>${esc(t('kinds')[i])}</button>`).join('');
+  $('kinds').querySelectorAll('button').forEach((b) => (b.onclick = () => { const k = +b.dataset.k; S.kinds.has(k) ? S.kinds.delete(k) : S.kinds.add(k); controls(); rebuild(); }));
+  $('yfromo').textContent = S.from; $('ytoo').textContent = S.to;
+}
+$('yfrom').oninput = () => { S.from = Math.min(+$('yfrom').value, S.to); $('yfrom').value = S.from; $('yfromo').textContent = S.from; rebuildSoon(); };
+$('yto').oninput = () => { S.to = Math.max(+$('yto').value, S.from); $('yto').value = S.to; $('ytoo').textContent = S.to; rebuildSoon(); };
+let rt = 0; const rebuildSoon = () => { clearTimeout(rt); rt = setTimeout(rebuild, 120); };
+
+// ---- the network
+const pos = { x: null, y: null };
+function initPos() {
+  pos.x = new Float32Array(N); pos.y = new Float32Array(N); let s = 12345;
+  const rnd = () => ((s = (s * 1664525 + 1013904223) >>> 0) / 4294967296);
+  for (let i = 0; i < N; i++) { const a = rnd() * 6.2832, r = 700 * Math.sqrt(rnd()); pos.x[i] = 2048 + Math.cos(a) * r; pos.y[i] = 2048 + Math.sin(a) * r; }
+}
+const stOk = (i) => ST[i] === (S.st === 1 ? 1 : 0);
+function visible() {
+  const ok = new Uint8Array(N);
+  for (let i = 0; i < N; i++) { const y = yr(i); ok[i] = S.cats.has(CAT[i]) && y >= S.from && y <= S.to ? 1 : 0; }
+  const has = new Uint8Array(N), L = [];
+  for (let k = 0; k < EDG.length; k += 3) { const s = EDG[k], d = EDG[k + 1], c = EDG[k + 2]; if (ok[s] && ok[d] && S.kinds.has(c) && (S.st === 0 || stOk(s) || stOk(d))) { has[s] = has[d] = 1; L.push(s, d, c); } }
+  const idx = new Int32Array(N).fill(-1); vis = []; for (let i = 0; i < N; i++) if (has[i]) { idx[i] = vis.length; vis.push(i); }
+  return { idx, L };
+}
+let cur = null;
+const amCount = () => { let a = 0; for (let k = 2; k < cur.L.length; k += 3) if (cur.L[k] === 0) a++; return a; };
+function rebuild() {
+  if (!D) return;
+  if (graph && gReady) { try { const p = graph.getPointPositions(); vis.forEach((n, j) => { if (p[2 * j] === p[2 * j] && Math.abs(p[2 * j]) < 1e6) { pos.x[n] = p[2 * j]; pos.y[n] = p[2 * j + 1]; } }); } catch {} }
+  const { idx, L } = visible(); cur = { idx, L };
+  const nl = L.length / 3;
+  $('stats').innerHTML = [[vis.length, t('stNodes')], [nl, t('stLinks')], [amCount(), t('stAmend')], [`${S.from}–${S.to}`, t('stYears')]].map(([v, l]) => `<div><b>${typeof v === 'number' ? nf(v) : v}</b><span>${esc(l)}</span></div>`).join('');
+  $('gload').textContent = vis.length ? '' : t('gnone'); $('gload').hidden = !!vis.length;
+  if (!graph) { if (!vis.length) return; makeGraph(); }
+  const P = new Float32Array(vis.length * 2); vis.forEach((n, j) => { P[2 * j] = pos.x[n]; P[2 * j + 1] = pos.y[n]; });
+  const LK = new Float32Array(nl * 2); for (let k = 0; k < nl; k++) { LK[2 * k] = idx[L[3 * k]]; LK[2 * k + 1] = idx[L[3 * k + 1]]; }
+  graph.setPointPositions(P); graph.setLinks(LK); paint();
+  if (vis.length) { graph.start(0.9); paused = false; $('gpause').textContent = t('gpause'); }
+  if (!rebuild.fitted) { rebuild.fitted = 1; setTimeout(() => graph.fitView(600, 0.06), 3500); } else setTimeout(() => graph.fitView(500, 0.06), 2000);
+  $('netHint').textContent = t('netHint');
+}
+function makeGraph() {
+  graph = new window.Cosmos.Graph($('cg'), {
+    backgroundColor: css('--frame') || '#E9E2D6', spaceSize: 4096, enableSimulation: true, enableDrag: true, fitViewOnInit: false, scalePointsOnZoom: true,
+    curvedLinks: false, linkDefaultWidth: 0.6, pointDefaultSize: 2, renderHoveredPointRing: true, hoveredPointRingColor: css('--accent') || '#A81E28', showFPSMonitor: false, attribution: '',
+    simulationGravity: 0.12, simulationRepulsion: 1.4, simulationLinkSpring: 0.8, simulationLinkDistance: 8, simulationFriction: 0.88, simulationDecay: 6000,
+    onPointMouseOver: (j, _p, ev) => tip(j, ev), onPointMouseOut: () => { $('gtip').hidden = true; },
+    onPointClick: (j) => { const i = vis[j]; if (i !== undefined) show(i, 'gcard'); }, onClick: (j) => { if (j === undefined) $('gtip').hidden = true; },
+  });
+  gReady = true; window.__graph = graph;
+}
+function paint() {
+  if (!graph || !cur) return;
+  const cc = catCol().map(hex), kc = kindCol().map(hex), dk = dark();
+  const pc = new Float32Array(vis.length * 4), ps = new Float32Array(vis.length);
+  vis.forEach((n, j) => { const c = cc[CAT[n]]; pc.set([c[0], c[1], c[2], S.st === 0 || stOk(n) ? 1 : 0.3], 4 * j); ps[j] = 2 + Math.min(Math.sqrt(AMD[n]) * 1.1, 16); });
+  const nl = cur.L.length / 3, lc = new Float32Array(nl * 4), lw = new Float32Array(nl);
+  for (let k = 0; k < nl; k++) { const c = kc[cur.L[3 * k + 2]]; lc.set([c[0], c[1], c[2], dk ? 0.3 : 0.35], 4 * k); lw[k] = 0.6; }
+  graph.setConfigPartial({ backgroundColor: css('--frame') || '#E9E2D6' });
+  graph.setPointColors(pc); graph.setPointSizes(ps); graph.setLinkColors(lc); graph.setLinkWidths(lw); graph.render();
+  const lk = kindCol(), cs = catCol();
+  $('lgd').innerHTML = [...S.cats].sort().map((c) => `<span><i style="--c:${cs[c]}"></i>${esc(t('cats')[D.cats[c]])}</span>`).join('') + [0, 1, 2, 3].filter((k) => S.kinds.has(k)).map((k) => `<span><i class="ln" style="--c:${lk[k]}"></i>${esc(t('kindsFrom')[k])}</span>`).join('');
+}
+function tip(j, ev) {
+  const i = vis[j]; if (i === undefined) return; const tp = $('gtip'); tp.hidden = false;
+  tp.innerHTML = `<b>${esc(TT ? titleOf(i).slice(0, 140) : pretty(typeName(i)))}</b><br><span class="muted">${esc(t('cats')[D.cats[CAT[i]]])} · ${fmtDate(DATE[i])} · ${esc(t('tip')(nf(AMD[i])))}</span>`;
+  if (ev) { const r = $('cg').getBoundingClientRect(); tp.style.left = Math.max(4, Math.min(ev.clientX - r.left + 12, r.width - 200)) + 'px'; tp.style.top = ev.clientY - r.top + 12 + 'px'; }
+}
+$('gfit').onclick = () => graph && graph.fitView(300, 0.08);
+$('gpause').onclick = () => { if (!graph) return; paused = !paused; paused ? graph.pause() : graph.start(0.5); $('gpause').textContent = paused ? t('gresume') : t('gpause'); };
+
+// ---- the card
+const spark = (years) => {
+  const ys = Object.keys(years).map(Number).sort((a, b) => a - b); if (!ys.length) return '';
+  const a = ys[0], b = ys[ys.length - 1], n = b - a + 1, mx = Math.max(...Object.values(years)), W = 300, Hh = 44, bw = W / Math.max(n, 12);
+  let g = ''; for (let y = a; y <= b; y++) { const v = years[y] || 0, h = v ? Math.max(2, (Hh - 4) * v / mx) : 0; g += `<rect x="${(y - a) * bw + 0.5}" y="${Hh - h}" width="${Math.max(bw - 1, 1)}" height="${h}" fill="var(--ink)"><title>${y}: ${v}</title></rect>`; }
+  return `<svg class="spark" viewBox="0 0 ${W} ${Hh + 12}" role="img" aria-label="${esc(t('amByYear'))}">${g}<text x="0" y="${Hh + 10}">${a}</text><text x="${Math.min(n, 12) * bw}" y="${Hh + 10}" text-anchor="end">${b}</text></svg>`;
+};
+function relList(i, title, items, open) {
+  if (!items.length) return '';
+  items = [...new Set(items)].sort((a, b) => DATE[b] - DATE[a]);
+  const row = (j) => `<li><button type="button" data-a="${j}">${esc(titleOf(j))}</button> <span class="d">${citOf(j) ? '№ ' + esc(citOf(j)) + ' · ' : ''}${fmtDate(DATE[j])}</span></li>`;
+  const cut = 6, rest = items.length - cut;
+  return `<h4>${esc(title)} (${nf(items.length)})</h4><ul>${items.slice(0, cut).map(row).join('')}${rest > 0 ? `<span hidden data-rest>${items.slice(cut).map(row).join('')}</span>` : ''}</ul>${rest > 0 ? `<button type="button" class="more" data-more>${esc(t('showAll')(items.length))}</button>` : ''}`;
+}
+function show(i, target, noscroll) {
+  S.sel = i; const el = $(target); el.dataset.a = i;
+  const draw = () => {
+    const c = CAT[i], cc = catCol(), years = {}; let last = -1;
+    const by = (k, dir) => (dir ? IN[i] : OUT[i]).filter((x) => x[1] === k).map((x) => x[0]);
+    const am = by(0, true); for (const j of new Set(am)) { years[yr(j)] = (years[yr(j)] || 0) + 1; if (last < 0 || DATE[j] > DATE[last]) last = j; }
+    const R = t('rel');
+    el.innerHTML = `<div class="card"><button type="button" class="x" data-x aria-label="${esc(t('close'))}">×</button>
+      <h3>${esc(titleOf(i))}</h3>
+      <dl><dt>${esc(t('ty'))}</dt><dd><span class="tag"><i style="--c:${cc[c]}"></i>${esc(t('cats')[D.cats[c]])}</span> <span class="muted">· ${esc(pretty(typeName(i)))}</span></dd>
+      ${citOf(i) ? `<dt>${esc(t('nr'))}</dt><dd>${esc(citOf(i))}</dd>` : ''}<dt>${esc(t('dt'))}</dt><dd>${fmtDate(DATE[i])}</dd>
+      <dt>${esc(t('stt'))}</dt><dd><span class="badge ${ST[i] ? 'ok' : 'off'}">${esc(ST[i] ? t('inForce') : t('repealed'))}</span></dd>
+      <dt>${esc(t('amended'))}</dt><dd>${AMD[i] ? esc(t('times')(AMD[i])) : esc(t('never'))}${last >= 0 ? `<br><span class="muted">${esc(t('lastAm'))}: ${fmtDate(DATE[last])}</span>` : ''}</dd></dl>
+      ${AMD[i] > 1 ? spark(years) : ''}
+      <a class="src" href="${link(D.nodes.id[i])}" target="_blank" rel="noopener">${esc(t('open'))} ↗</a>
+      ${relList(i, R.implements, by(1, false)) + relList(i, R.implementedBy, by(1, true)) + relList(i, R.applies, by(2, false)) + relList(i, R.appliedBy, by(2, true)) + relList(i, R.repeals, by(3, false)) + relList(i, R.repealedBy, by(3, true)) + relList(i, R.amendedBy, am) + relList(i, R.amends, by(0, false))}
+    </div>`;
+    el.querySelector('[data-x]').onclick = () => { el.innerHTML = ''; S.sel = -1; try { const u = new URL(location.href); u.searchParams.delete('a'); history.replaceState(null, '', u); } catch {} };
+    el.querySelectorAll('[data-a]').forEach((b) => (b.onclick = () => show(+b.dataset.a, target)));
+    el.querySelectorAll('[data-more]').forEach((b) => (b.onclick = () => { b.previousElementSibling.querySelector('[data-rest]').hidden = false; b.remove(); }));
+  };
+  draw();
+  if (!TT) loadTitles().then(() => { if (+el.dataset.a === i && el.firstChild) draw(); });
+  try { const u = new URL(location.href); u.searchParams.set('a', D.nodes.id[i]); history.replaceState(null, '', u); } catch {}
+  if (!noscroll) el.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  if (graph && vis.length) { const j = cur.idx[i]; try { j >= 0 ? graph.selectPointByIndex(j) : graph.unselectPoints(); } catch {} }
+}
+
+// ---- search
+function rowHtml(i, cnt) {
+  const cc = catCol();
+  return `<li><button type="button" data-a="${i}"><i style="--c:${cc[CAT[i]]}"></i><span class="tt">${esc(titleOf(i))}</span><span class="nn">${cnt ?? ''}</span><span class="mt">${esc(t('cats')[D.cats[CAT[i]]])}${citOf(i) ? ' · № ' + esc(citOf(i)) : ''} · ${fmtDate(DATE[i])}${ST[i] ? '' : ' · ' + esc(t('repealed'))}</span></button></li>`;
+}
+function search() {
+  const q = norm($('q').value).trim().split(/\s+/).filter(Boolean), el = $('results'), SHOW = 30;
+  if (!q.length) { $('qhint').textContent = t('qTop'); el.innerHTML = D.rank.mostAmended.slice(0, 12).map(([i, n]) => rowHtml(i, nf(n))).join(''); bind(el); return; }
+  if (!H) { $('qhint').textContent = t('qWait'); el.innerHTML = ''; loadTitles(); return; }
+  const m = []; for (let i = 0; i < N; i++) { const h = H[i]; if (q.every((w) => h.includes(w))) m.push(i); }
+  m.sort((a, b) => AMD[b] - AMD[a] || DATE[b] - DATE[a]);
+  $('qhint').textContent = m.length ? t('qFound')(m.length, SHOW) : t('qNone');
+  el.innerHTML = m.slice(0, SHOW).map((i) => rowHtml(i, AMD[i] ? nf(AMD[i]) : '')).join(''); bind(el);
+}
+function bind(el) { el.querySelectorAll('[data-a]').forEach((b) => (b.onclick = () => { el.querySelectorAll('.on').forEach((x) => x.classList.remove('on')); b.classList.add('on'); show(+b.dataset.a, el.id === 'rank' ? 'rcard' : 'scard', el.id === 'rank'); })); }
+$('q').addEventListener('input', search);
+$('q').addEventListener('focus', loadTitles, { once: true });
+
+// ---- rankings
+function ranking() {
+  seg($('rtabs'), t('tabs'), S.rank, (i) => { S.rank = i; ranking(); });
+  const R = [D.rank.mostAmended, D.rank.inOneYear, D.rank.mostImplemented][S.rank], cc = catCol();
+  $('rank').innerHTML = R.map(([i, n, y]) => `<li><button type="button" data-a="${i}"><span></span><span class="tt">${esc(titleOf(i))}</span><span class="nn">${nf(n)}${y ? ' · ' + esc(t('inYear')(y)) : ''}</span><span class="mt">${esc(t('cats')[D.cats[CAT[i]]])} · ${fmtDate(DATE[i])}${ST[i] ? '' : ' · ' + esc(t('repealed'))}</span></button></li>`).join('');
+  bind($('rank'));
+  const s = D.stats; $('rankP').textContent = t('rankP');
+}
+
+// ---- yearly charts
+function stacked(svg, series) {
+  const W = 640, Hh = 230, L = 38, B = 22, y0 = D.y0, n = series[0].length, bw = (W - L) / n;
+  const tot = series[0].map((_, k) => series.reduce((a, s) => a + s[k], 0)), mx = Math.max(...tot);
+  const step = mx > 3000 ? 1000 : mx > 1500 ? 500 : mx > 600 ? 200 : mx > 300 ? 100 : mx > 120 ? 50 : 20, base = Hh - B;
+  let g = ''; for (let v = 0; v <= mx; v += step) { const y = base - (base - 6) * v / mx; g += `<g class="axis"><line x1="${L}" x2="${W}" y1="${y}" y2="${y}"/><text x="${L - 4}" y="${y + 3}" text-anchor="end">${nf(v)}</text></g>`; }
+  for (let k = 0; k < n; k++) {
+    let acc = 0;
+    series.forEach((s, c) => { const h = (base - 6) * s[k] / mx; if (h > 0) g += `<rect x="${L + k * bw + 0.4}" y="${base - acc - h}" width="${Math.max(bw - 0.8, 1)}" height="${h}" style="fill:var(--c${c})"><title>${y0 + k} · ${esc(t('cats')[D.cats[c]])}: ${nf(s[k])}</title></rect>`; acc += h; });
+    if ((y0 + k) % 5 === 0) g += `<text class="axis" x="${L + k * bw + bw / 2}" y="${Hh - 6}" text-anchor="middle" style="font:.6875rem var(--sans);fill:var(--muted)">${y0 + k}</text>`;
+  }
+  svg.setAttribute('viewBox', `0 0 ${W} ${Hh}`); svg.innerHTML = g;
+}
+function years() {
+  $('capNew').textContent = t('capNew'); $('capAm').textContent = t('capAm');
+  stacked($('chNew'), D.newByYear); stacked($('chAm'), D.amendByYear);
+  $('chNew').setAttribute('aria-label', t('capNew')); $('chAm').setAttribute('aria-label', t('capAm'));
+  const cc = catCol(); $('ylgd').innerHTML = [0, 1, 2, 3, 4, 5, 6, 7].map((c) => `<span><i style="--c:${cc[c]}"></i>${esc(t('cats')[D.cats[c]])}</span>`).join('');
+}
+
+// ---- language
+function applyLang() {
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach((e) => (e.textContent = t(e.dataset.i18n)));
+  document.querySelectorAll('[data-i18n-label]').forEach((e) => e.setAttribute('aria-label', t(e.dataset.i18nLabel)));
+  document.querySelectorAll('[data-i18n-ph]').forEach((e) => e.setAttribute('placeholder', t(e.dataset.i18nPh)));
+  document.querySelectorAll('[data-lang]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
+  document.title = { az: 'Hüquqi aktlar şəbəkəsi', ru: 'Сеть правовых актов', en: 'Network of legal acts' }[lang] + ' · Azad Bilik';
+  document.querySelectorAll('a[data-keep-lang]').forEach((a) => { const u = new URL(a.getAttribute('href'), location.origin); if (lang !== 'az') u.searchParams.set('lang', lang); a.href = u.pathname + u.search; });
+  if (!D) return;
+  const s = D.stats;
+  $('lede').textContent = t('lede')(s.actsInRegister, s.nodes, s.edges); $('method').innerHTML = t('method')(s); $('foot').innerHTML = t('foot')(D.built);
+  $('gfit').textContent = t('gfit'); $('gpause').textContent = paused ? t('gresume') : t('gpause');
+  controls(); ranking(); years(); search();
+  if (cur) { paint(); statsOnly(); }
+  $('netHint').textContent = t('netHint');
+  for (const id of ['gcard', 'scard', 'rcard']) { const e = $(id); if (e.dataset.a && e.firstChild) show(+e.dataset.a, id, true); }
+}
+function statsOnly() { const nl = cur.L.length / 3; $('stats').innerHTML = [[vis.length, t('stNodes')], [nl, t('stLinks')], [amCount(), t('stAmend')], [`${S.from}–${S.to}`, t('stYears')]].map(([v, l]) => `<div><b>${typeof v === 'number' ? nf(v) : v}</b><span>${esc(l)}</span></div>`).join(''); }
+document.querySelectorAll('[data-lang]').forEach((b) => (b.onclick = () => {
+  lang = b.dataset.lang; try { localStorage.setItem('lang', lang); } catch {}
+  const u = new URL(location.href); if (lang === 'az') u.searchParams.delete('lang'); else u.searchParams.set('lang', lang); history.replaceState(null, '', u);
+  applyLang();
+}));
+addEventListener('themechange', () => setTimeout(() => { try { controls(); paint(); years(); search(); } catch {} }));
+applyLang();
+$('gload').textContent = t('gload');
+
+fetch('data/qanunlar.json').then((r) => r.json()).then((d) => {
+  D = d; prep(); initPos(); applyLang();
+  const go = () => { if (!gReady) { rebuild(); const a = +qs.get('a'); if (a) { const i = D.nodes.id.indexOf(a); if (i >= 0) { show(i, 'gcard', true); } } } };
+  if ('IntersectionObserver' in window) { const io = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting)) { go(); io.disconnect(); } }, { rootMargin: '300px' }); io.observe($('cg')); } else go();
+  if ('requestIdleCallback' in window) requestIdleCallback(() => loadTitles(), { timeout: 4000 }); else setTimeout(loadTitles, 2500);
+  window.__q = { D, S };
+}).catch((e) => { console.error(e); $('lede').textContent = 'Error: ' + e.message; });
+})();
+</script>
+</body>
+</html>
