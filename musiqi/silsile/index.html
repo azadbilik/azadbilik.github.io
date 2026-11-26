@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="/shared/theme.js"></script>
+<title>Silsilə · Azad Bilik</title>
+<meta name="description" content="Xanəndələrin, tarzənlərin və aşıqların ustad-şagird silsilələri: Wikidata-da yazılanlar və Vikipediya mətnlərindən çıxarılanlar ayrıca. Master–student lineages of Azerbaijani singers, tar players and ashiks, Wikidata and text-derived links kept apart.">
+<meta name="theme-color" content="#F4EFE6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14100D" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://azadbilik.org/musiqi/silsile/">
+<meta property="og:title" content="Silsilə · Master–student lineages of Azerbaijani music">
+<meta property="og:description" content="Ustad-şagird silsilələri: xanəndələr, tarzənlər, aşıqlar.">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<style>
+  :root {
+    --paper: #F4EFE6; --ink: #1A1410; --muted: #675E55; --rule: rgb(26 20 16 / .14); --frame: #E9E2D6;
+    --accent: #A81E28; --second: #1F5C73; --third: #5B6B2E;
+    --serif: 'Literata', Georgia, serif; --sans: 'Inter', system-ui, sans-serif;
+    color-scheme: light dark;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --paper: #14100D; --ink: #F1EBE1; --muted: #A0968B; --rule: rgb(241 235 225 / .14); --frame: #1F1914; --accent: #DA5A61; --second: #6FB3CC; --third: #A9BC6A; }
+  }
+  :root[data-theme="dark"] { --paper: #14100D; --ink: #F1EBE1; --muted: #A0968B; --rule: rgb(241 235 225 / .14); --frame: #1F1914; --accent: #DA5A61; --second: #6FB3CC; --third: #A9BC6A; }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: var(--paper); color: var(--ink); font: 400 .9375rem/1.5 var(--sans); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  a { color: inherit; text-underline-offset: .2em; text-decoration-thickness: 1px; text-decoration-color: var(--rule); }
+  a:hover { text-decoration-color: currentColor; }
+  button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; padding: 0; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+  [hidden] { display: none !important; }
+  .wrap { max-width: 64rem; margin: 0 auto; padding: 0 1.5rem; }
+  .top { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1.25rem 0 0; }
+  .top nav { display: flex; align-items: center; gap: 1rem; font-size: .8125rem; color: var(--muted); flex-wrap: wrap; justify-content: flex-end; }
+  .brand { display: inline-flex; align-items: center; gap: .5rem; font-size: .8125rem; font-weight: 600; text-decoration: none; white-space: nowrap; }
+  .brand svg { width: 1rem; height: 1rem; } .star { fill: currentColor; } .gem { fill: var(--accent); }
+  .langs { display: inline-flex; align-items: center; gap: .15rem; }
+  .langs button[data-lang] { font-size: .6875rem; letter-spacing: .04em; padding: .1rem .3rem; border-radius: 2px; }
+  .langs button[aria-pressed="true"] { color: var(--ink); box-shadow: inset 0 -1px currentColor; }
+  header.head { padding-bottom: 1.5rem; border-bottom: 1px solid var(--rule); }
+  h1 { margin-top: 1.25rem; font: 400 clamp(2rem, 6vw, 3rem)/1.1 var(--serif); letter-spacing: -.02em; }
+  .sub { margin-top: .35rem; font: italic 300 1.0625rem/1.35 var(--serif); }
+  .lede { margin-top: .75rem; max-width: 42rem; font: 400 1.0625rem/1.55 var(--serif); }
+  section { padding: 1.5rem 0; border-bottom: 1px solid var(--rule); }
+  h2 { font: 400 1.5rem/1.2 var(--serif); letter-spacing: -.01em; }
+  .muted { color: var(--muted); } .hint { color: var(--muted); font-size: .75rem; margin-top: .4rem; max-width: 44rem; }
+  .bar { display: flex; flex-wrap: wrap; gap: .6rem 1.25rem; align-items: center; justify-content: space-between; margin: .75rem 0; }
+  .chips { display: flex; flex-wrap: wrap; gap: .3rem; }
+  .chips button { display: inline-flex; align-items: center; gap: .4rem; font-size: .75rem; padding: .25rem .6rem; border: 1px solid var(--rule); border-radius: 999px; }
+  .chips button[aria-pressed="false"] { color: var(--muted); text-decoration: line-through; text-decoration-color: var(--rule); }
+  .chips i { width: .7rem; height: 0; border-top: 2px solid var(--ink); } .chips i.dash { border-top-style: dashed; }
+  .legend { display: flex; flex-wrap: wrap; gap: .25rem 1rem; font-size: .75rem; color: var(--muted); }
+  .legend i { display: inline-block; width: .65rem; height: .65rem; border-radius: 50%; background: var(--c); margin-right: .35rem; vertical-align: -.05em; }
+  .scroller { overflow-x: auto; background: var(--frame); border-radius: 4px; overscroll-behavior-x: contain; }
+  #tree { display: block; height: auto; user-select: none; -webkit-user-select: none; touch-action: pan-x pan-y; }
+    #tree .edge { fill: none; stroke: var(--ink); stroke-opacity: .5; stroke-width: 1.5; }
+  #tree .edge.text { stroke-dasharray: 4 3; stroke-opacity: .55; }
+  #tree .edge.dim, #tree .node.dim { opacity: .1; }
+  #tree .edge.hot { stroke-opacity: 1; stroke-width: 2.25; }
+  #tree .node { cursor: pointer; } #tree .shape { fill: var(--c); stroke: var(--frame); stroke-width: 1.5; } #tree .node.on .shape { stroke: var(--ink); stroke-width: 2.5; }
+  #tree .lab { font: 500 .6875rem var(--sans); fill: var(--ink); paint-order: stroke; stroke: var(--frame); stroke-width: 3px; stroke-linejoin: round; pointer-events: none; }
+  .info { min-height: 6.5rem; margin-top: .9rem; padding: .9rem 1rem; border: 1px solid var(--rule); border-radius: 4px; font-size: .875rem; }
+  .info h3 { font: 400 1.25rem/1.25 var(--serif); } .info .k { font-size: .6875rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .info dl { display: grid; grid-template-columns: 6.5rem 1fr; gap: .25rem .75rem; margin-top: .5rem; } .info dt { color: var(--muted); } .info dd { margin: 0; }
+  .info ul { padding-left: 1rem; display: grid; gap: .25rem; }
+  .info blockquote { margin: .15rem 0 0; padding-left: .6rem; border-left: 2px solid var(--rule); color: var(--muted); font: italic 400 .8125rem/1.45 var(--serif); }
+  .info .empty { color: var(--muted); }
+  .tag { display: inline-block; font-size: .6875rem; padding: 0 .4rem; border: 1px solid var(--rule); border-radius: 999px; color: var(--muted); margin-left: .25rem; vertical-align: .05em; }
+  .lin { margin-top: .75rem; display: grid; gap: 1.25rem; }
+  .lin h3 { font: 500 .75rem var(--sans); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-bottom: .25rem; }
+  .lin ul { list-style: none; padding-left: 1.1rem; border-left: 1px solid var(--rule); }
+  .lin > div > ul { padding-left: 0; border: 0; }
+  .lin li { padding: .15rem 0; } .lin li > span.who { display: inline-flex; align-items: center; gap: .4rem; flex-wrap: wrap; }
+  .lin .dot { width: .6rem; height: .6rem; border-radius: 50%; background: var(--c); flex: none; }
+  .lin .yr { color: var(--muted); font-size: .8125rem; font-variant-numeric: tabular-nums; }
+  .lin .link { font-size: .6875rem; color: var(--muted); }
+  .method { max-width: 44rem; display: grid; gap: .6rem; font-size: .9375rem; margin-top: .75rem; } .method ul { padding-left: 1.25rem; display: grid; gap: .35rem; }
+  footer { padding: 1.5rem 0 2.5rem; font-size: .75rem; color: var(--muted); }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  @media (max-width: 48rem) { .wrap { padding: 0 1rem; } .info dl { grid-template-columns: 5.5rem 1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="head">
+    <div class="top"><a class="brand" href="/" data-keep-lang><svg viewBox="0 0 512 512" aria-hidden="true"><g class="star"><rect x="126" y="126" width="260" height="260"/><polygon points="256,72 440,256 256,440 72,256"/></g><polygon class="gem" points="256,196 316,256 256,316 196,256"/></svg>Azad Bilik</a><nav><a href="../" data-keep-lang data-i18n="music">Musiqi</a><span class="langs" role="group" aria-label="Dil · Язык · Language"><button type="button" data-lang="az">AZ</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="en">EN</button></span></nav></div>
+    <h1 data-i18n="title">Silsilə</h1>
+    <p class="sub" data-i18n="sub">Ustaddan şagirdə</p>
+    <p class="lede" id="lede"></p>
+  </header>
+  <main>
+    <section aria-labelledby="h-tree">
+      <h2 id="h-tree" class="sr" data-i18n="title">Silsilə</h2>
+      <div class="bar">
+        <div class="chips" id="src" role="group"></div>
+        <div class="legend" id="legend"></div>
+      </div>
+      <div class="scroller" id="scroller"><svg id="tree" role="img"></svg></div>
+      <p class="hint" id="hint"></p>
+      <div class="info" id="info" aria-live="polite"></div>
+    </section>
+    <section aria-labelledby="h-lin">
+      <h2 id="h-lin" data-i18n="linH">Silsilələr siyahı ilə</h2>
+      <p class="hint" data-i18n="linNote"></p>
+      <div class="lin" id="lin"></div>
+    </section>
+    <section aria-labelledby="h-method">
+      <h2 id="h-method" data-i18n="methodH">Necə yığılıb</h2>
+      <div class="method" id="method"></div>
+    </section>
+  </main>
+  <footer id="foot"></footer>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+<script>
+(() => {
+const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+const LANGS = ['az', 'ru', 'en'];
+let lang = (() => {
+  const q = new URLSearchParams(location.search).get('lang');
+  if (LANGS.includes(q)) return q;
+  try { const s = localStorage.getItem('lang'); if (LANGS.includes(s)) return s; } catch {}
+  return 'az';
+})();
+const T = {
+  az: { doc: 'Silsilə · Azad Bilik', title: 'Silsilə', sub: 'Ustaddan şagirdə', music: 'Musiqi',
+    lede: (s) => `${s.people} xanəndə, tarzən və aşıq arasında ${s.links} ustad-şagird əlaqəsi: ${s.wd}-i Wikidata-da yazılıb, ${s.tx}-i Vikipediya məqalələrindəki cümlələrdən çıxarılıb (cümlə hər əlaqənin yanındadır). Bu iki növ ayrı göstərilir: qırıq xətt mətndən çıxarılan əlaqədir.`,
+    sWd: 'Wikidata', sTx: 'Mətndən', rKhanende: 'Xanəndə', rTar: 'Tarzən', rAshik: 'Aşıq', rOther: 'Başqa',
+    hint: 'Sütunlar nəsillərdir (sol: ustadı bilinməyənlər). Düyünü seçin: ustadları, şagirdləri və bütün silsiləsi işıqlanır. Oxlar ustaddan şagirdə gedir. Telefonda diaqramı yana sürüşdürün; aşağıda eyni silsilələr siyahı ilə də var.',
+    pick: 'Musiqiçi seçin.', born: 'Doğulub', place: 'Yer', teachers: 'Ustadları', students: 'Şagirdləri', read: 'Vikipediya', kx: 'Kitabxana', wdLink: 'Wikidata',
+    viaWd: 'Wikidata', viaTx: 'mətndən', none: '—', years: 'illər',
+    linH: 'Silsilələr siyahı ilə', linNote: 'Hər silsilənin kökü: ustadı bilinməyən musiqiçi; altında şagirdləri. ● Wikidata, ◦ mətndən.',
+    methodH: 'Necə yığılıb',
+    method: (s) => `<ul><li><b>Adamlar:</b> <a href="../">Musiqi</a> səhifəsinin xəritəsindəki ${s.base} xanəndə, tarzən və aşıq (Wikidata Q2493398, Q12846426, Q7097633) və onların ustad-şagird əlaqəsində olub xəritədə olmayanlar. Yalnız əlaqəsi olanlar göstərilir.</li>
+<li><b>Wikidata:</b> «şagirdi» (P1066) və «şagirdləri» (P802) xassələri; ${s.wd} əlaqə. Wikidata-da bu xassələr çox seyrəkdir.</li>
+<li><b>Mətndən:</b> az, ru və en Vikipediya məqalələrində «şagird», «ustad», «ученик», «учился у», «student of» kimi sözlə yanaşı başqa musiqiçinin adı olan cümlələr. Cümlələri əl ilə oxuyub istiqaməti (kim kimin şagirdi) yalnız cümlənin dediyi qədər qoymuşam; ${s.candidates} namizəd cümlədən yalnız aydın olanlar götürülüb (qalanı başqa adla qarışıb, istiqamətsiz ya şübhəlidir). Bu əlaqələr Vikipediyanın iddiasıdır, Wikidata-nın yox; <a href="data/lineage.quickstatements.txt">QuickStatements faylı</a> onların Wikidata-ya əlavə edilməsi üçün siyahıdır.</li>
+<li><b>Düzülüş:</b> sütun = nəsil (ən uzun ustad zəncirinə görə). Silsilənin yaşı «ustad–şagird» əlaqələrinin sayından asılıdır, tarixi tamlıqdan yox: məsələn, Qaryağdıoğlu və Hacı Hüsü silsilələri Wikidata-da və Vikipediyada tam yazılmayıb.</li></ul>`,
+    foot: (d) => `Mənbə: Wikidata (CC0) və az/ru/en Vikipediya (CC BY-SA, cümlələr qısa sitatdır), ${d}. Fayl: <a href="data/lineage.json">lineage.json</a>.` },
+  ru: { doc: 'Школы · Azad Bilik', title: 'Школы', sub: 'От учителя к ученику', music: 'Музыка',
+    lede: (s) => `Среди ${s.people} ханенде, тарзенов и ашугов — ${s.links} связей «учитель — ученик»: ${s.wd} записаны в Wikidata, ${s.tx} выделены из предложений статей Википедии (предложение приведено рядом со связью). Два вида показаны отдельно: пунктир — связь из текста.`,
+    sWd: 'Wikidata', sTx: 'Из текста', rKhanende: 'Ханенде', rTar: 'Тарзен', rAshik: 'Ашуг', rOther: 'Другое',
+    hint: 'Столбцы — поколения (слева — те, чей учитель неизвестен). Выберите узел: подсветятся его учителя, ученики и вся линия. Стрелки идут от учителя к ученику. На телефоне диаграмму можно листать вбок; ниже те же линии списком.',
+    pick: 'Выберите музыканта.', born: 'Родился', place: 'Место', teachers: 'Учителя', students: 'Ученики', read: 'Википедия', kx: 'Библиотека', wdLink: 'Wikidata',
+    viaWd: 'Wikidata', viaTx: 'из текста', none: '—', years: 'годы',
+    linH: 'Линии списком', linNote: 'Корень каждой линии — музыкант без известного учителя, под ним его ученики. ● Wikidata, ◦ из текста.',
+    methodH: 'Как собрано',
+    method: (s) => `<ul><li><b>Люди:</b> ${s.base} ханенде, тарзенов и ашугов с карты на странице «<a href="../">Музыка</a>» (Wikidata Q2493398, Q12846426, Q7097633) и те, кто связан с ними как учитель или ученик, но не на карте. Показаны только имеющие связи.</li>
+<li><b>Wikidata:</b> свойства «ученик» (P802) и «учитель» (P1066); ${s.wd} связей. В Wikidata эти свойства заполнены редко.</li>
+<li><b>Из текста:</b> предложения статей az, ru и en Википедии, где рядом со словом вроде «şagird», «ученик», «учился у», «student of» названо другое имя из списка. Я прочитал предложения и поставил направление (кто чей ученик) лишь настолько, насколько оно сказано; из ${s.candidates} предложений-кандидатов оставлены только ясные (остальные — совпадение имён, без направления или сомнительные). Это утверждения Википедии, не Wikidata; <a href="data/lineage.quickstatements.txt">файл QuickStatements</a> — список для добавления их в Wikidata.</li>
+<li><b>Раскладка:</b> столбец — поколение (по самой длинной цепочке учителей). Размер линии зависит от числа записанных связей, а не от исторической полноты: линии Карьягдыоглу и Хаджи Хюсю в Wikidata и Википедии записаны неполно.</li></ul>`,
+    foot: (d) => `Источники: Wikidata (CC0) и az/ru/en Википедия (CC BY-SA, предложения — короткие цитаты), ${d}. Файл: <a href="data/lineage.json">lineage.json</a>.` },
+  en: { doc: 'Lineages · Azad Bilik', title: 'Lineages', sub: 'From master to student', music: 'Music',
+    lede: (s) => `Among ${s.people} khanendes, tar players and ashiks, ${s.links} master–student links: ${s.wd} are stated on Wikidata, ${s.tx} are read from sentences in Wikipedia articles (the sentence sits beside each link). The two kinds are shown apart: a dashed line is a link from text.`,
+    sWd: 'Wikidata', sTx: 'From text', rKhanende: 'Khanende', rTar: 'Tar player', rAshik: 'Ashik', rOther: 'Other',
+    hint: 'Columns are generations (left: those with no known master). Pick a node: its masters, students and whole line light up. Arrows run from master to student. On a phone, swipe the chart sideways; the same lineages are listed below.',
+    pick: 'Pick a musician.', born: 'Born', place: 'Place', teachers: 'Masters', students: 'Students', read: 'Wikipedia', kx: 'Library', wdLink: 'Wikidata',
+    viaWd: 'Wikidata', viaTx: 'from text', none: '—', years: 'years',
+    linH: 'Lineages as lists', linNote: 'The root of each lineage is a musician with no known master, their students beneath. ● Wikidata, ◦ from text.',
+    methodH: 'How it was gathered',
+    method: (s) => `<ul><li><b>People:</b> the ${s.base} khanendes, tar players and ashiks on the map of <a href="../">Music</a> (Wikidata Q2493398, Q12846426, Q7097633) plus anyone tied to them as master or student who is not on the map. Only those with a link are shown.</li>
+<li><b>Wikidata:</b> the properties student of (P1066) and student (P802); ${s.wd} links. These are sparsely filled on Wikidata.</li>
+<li><b>From text:</b> sentences of az, ru and en Wikipedia articles with a word such as «şagird», «ученик», «учился у», «student of» beside another musician's name from the list. I read the sentences and set the direction (who was whose student) only as far as the sentence says; of ${s.candidates} candidate sentences only the clear ones were kept (the rest were name mix-ups, had no direction, or were doubtful). These are Wikipedia's claims, not Wikidata's; the <a href="data/lineage.quickstatements.txt">QuickStatements file</a> lists them for adding to Wikidata.</li>
+<li><b>Layout:</b> a column is a generation (by the longest chain of masters). A lineage's size reflects how many links are written down, not history: the Qaryağdıoğlu and Hacı Hüsü lines are thinly recorded on Wikidata and Wikipedia.</li></ul>`,
+    foot: (d) => `Sources: Wikidata (CC0) and az/ru/en Wikipedia (CC BY-SA; the sentences are short quotations), ${d}. File: <a href="data/lineage.json">lineage.json</a>.` },
+};
+const t = (k) => T[lang][k];
+const COL = { khanende: 'var(--accent)', tar: 'var(--second)', ashik: 'var(--third)', other: 'var(--muted)' };
+const ROLEK = { khanende: 'rKhanende', tar: 'rTar', ashik: 'rAshik', other: 'rOther' };
+let D = null, sel = null, show = { wikidata: true, text: true };
+const svg = d3.select('#tree'), info = document.getElementById('info');
+const nm = (p) => p[lang] || p.az || p.en || p.ru || p.qid;
+const role = (p) => (p.roles?.[0] ?? 'other');
+const kxBase = () => `https://kitabxana.az${lang === 'az' ? '' : '/' + lang}`;
+const yrs = (p) => p.born || p.died ? `${p.born ?? '?'}–${p.died ?? ''}` : '';
+
+let byQ, links, kids, parents;
+function index() {
+  byQ = new Map(D.people.map((p) => [p.qid, p]));
+  links = D.links.filter((l) => show[l.src]);
+  kids = new Map(); parents = new Map();
+  for (const l of links) { (kids.get(l.t) ?? kids.set(l.t, []).get(l.t)).push(l); (parents.get(l.s) ?? parents.set(l.s, []).get(l.s)).push(l); }
+}
+const closure = (q, map, key) => { const out = new Set([q]), st = [q]; while (st.length) for (const l of map.get(st.pop()) ?? []) if (!out.has(l[key])) { out.add(l[key]); st.push(l[key]); } return out; };
+
+function components() {
+  const ids = new Set(links.flatMap((l) => [l.t, l.s])), seen = new Set(), out = [];
+  for (const q of ids) {
+    if (seen.has(q)) continue;
+    const comp = [], st = [q]; seen.add(q);
+    while (st.length) { const x = st.pop(); comp.push(x); for (const l of [...(kids.get(x) ?? []), ...(parents.get(x) ?? [])]) for (const y of [l.t, l.s]) if (!seen.has(y)) { seen.add(y); st.push(y); } }
+    out.push(comp);
+  }
+  return out.sort((a, b) => b.length - a.length);
+}
+
+function draw() {
+  if (!D) return;
+  const comps = components();
+  const COLW = 190, ROW = 21;
+  const nodes = [], by = new Map();
+  // Columns are generations: a musician stands one column right of their furthest master
+  const layer = new Map();
+  const lay = (q, d = 0) => { if (layer.has(q)) return layer.get(q); if (d > 12) return 0; const v = Math.max(-1, ...(parents.get(q) ?? []).map((l) => lay(l.t, d + 1))) + 1; layer.set(q, v); return v; };
+  let y0 = 8, maxL = 0;
+  for (const [ci, comp] of comps.entries()) {
+    const cols = new Map();
+    for (const q of comp) { const L = lay(q); maxL = Math.max(maxL, L); (cols.get(L) ?? cols.set(L, []).get(L)).push(q); }
+    const keys = [...cols.keys()].sort((p, q) => p - q);
+    for (const k of keys) cols.get(k).sort((p, q) => (byQ.get(p).born ?? 9999) - (byQ.get(q).born ?? 9999));
+    const pos = new Map();
+    const setPos = () => keys.forEach((k) => cols.get(k).forEach((q, i) => pos.set(q, i)));
+    setPos();
+    // A few sweeps ordering each column by the mean row of its neighbours (fewer crossings)
+    for (let it = 0; it < 4; it++) for (const k of (it % 2 ? [...keys].reverse() : keys)) {
+      const nb = (q) => (it % 2 ? (kids.get(q) ?? []).map((l) => l.s) : (parents.get(q) ?? []).map((l) => l.t));
+      const bc = (q) => { const r = nb(q).map((x) => pos.get(x)).filter((v) => v != null); return r.length ? r.reduce((p, v) => p + v, 0) / r.length : pos.get(q); };
+      cols.get(k).sort((p, q) => bc(p) - bc(q)); setPos();
+    }
+    const rows = Math.max(...keys.map((k) => cols.get(k).length));
+    for (const k of keys) { const col = cols.get(k), off = (rows - col.length) / 2; col.forEach((q, i) => { const n = { id: q, p: byQ.get(q), x: 16 + k * COLW, y: y0 + 10 + (off + i) * ROW, comp: ci }; nodes.push(n); by.set(q, n); }); }
+    y0 += rows * ROW + 22;
+  }
+  if (!nodes.length) { svg.selectAll('*').remove(); return; }
+  const W = Math.max(document.getElementById('scroller').clientWidth, 16 + (maxL + 1) * COLW + 40), H = y0;
+  svg.attr('viewBox', `0 0 ${W} ${H}`).attr('width', W).attr('height', H).selectAll('*').remove();
+  svg.attr('aria-label', t('title'));
+  const edges = links.map((l) => ({ ...l, source: by.get(l.t), target: by.get(l.s) }));
+  const defs = svg.append('defs');
+  defs.append('marker').attr('id', 'arr').attr('viewBox', '0 0 8 8').attr('refX', 8).attr('refY', 4).attr('markerWidth', 6).attr('markerHeight', 6).attr('orient', 'auto')
+    .append('path').attr('d', 'M0,0L8,4L0,8z').attr('fill', 'currentColor').attr('style', 'color:var(--muted)');
+  const path = (e) => { const x1 = e.source.x + 6, y1 = e.source.y, x2 = e.target.x, y2 = e.target.y, mx = (x1 + x2) / 2; return `M${x1},${y1}C${mx},${y1} ${mx},${y2} ${x2 - 7},${y2}`; };
+  const edge = svg.append('g').selectAll('path').data(edges).join('path').attr('class', (e) => `edge ${e.src}`).attr('d', path).attr('marker-end', 'url(#arr)');
+  const node = svg.append('g').selectAll('g').data(nodes).join('g').attr('class', 'node').attr('transform', (n) => `translate(${n.x},${n.y})`)
+    .attr('tabindex', 0).attr('role', 'button').attr('aria-label', (n) => nm(n.p)).style('--c', (n) => COL[role(n.p)]);
+  node.append('circle').attr('class', 'shape').attr('r', 5.5);
+  node.append('text').attr('class', 'lab').attr('x', 9).attr('y', 4).text((n) => nm(n.p) + (n.p.born ? ` ${n.p.born}` : ''));
+  const pick = (n) => { sel = sel === n.id ? null : n.id; mark(); describe(); };
+  node.on('click', (e, n) => pick(n)).on('keydown', (e, n) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(n); } });
+  svg.on('click', (e) => { if (e.target === svg.node()) { sel = null; mark(); describe(); } });
+  svg.node().__d = { node, edge };
+  mark(); describe();
+}
+function mark() {
+  const { node, edge } = svg.node().__d ?? {};
+  if (!node) return;
+  const up = sel ? closure(sel, parents, 't') : null, down = sel ? closure(sel, kids, 's') : null;
+  const inn = (q) => !sel || up.has(q) || down.has(q);
+  node.classed('dim', (n) => !inn(n.id)).classed('on', (n) => n.id === sel);
+  edge.classed('dim', (e) => !!sel && !((up.has(e.t) && up.has(e.s)) || (down.has(e.t) && down.has(e.s)))).classed('hot', (e) => !!sel && ((up.has(e.t) && up.has(e.s)) || (down.has(e.t) && down.has(e.s))));
+}
+
+const wikiLink = (p, l) => p.wiki?.[l] ? `<a href="https://${l}.wikipedia.org/wiki/${encodeURI(p.wiki[l])}">${l}</a>` : '';
+function linkLine(l, other) {
+  const q = byQ.get(other);
+  return `<li><a href="#" data-q="${other}">${esc(nm(q))}</a> <span class="muted">${yrs(q)}</span>${l.src === 'text' ? `<span class="tag">${esc(t('viaTx'))}</span>` : `<span class="tag">${esc(t('viaWd'))}</span>`}${l.src === 'text' && l.sentence ? `<blockquote>${esc(l.sentence)} <a href="${esc(l.article)}">${esc(l.lang)}.wikipedia</a></blockquote>` : ''}</li>`;
+}
+function describe() {
+  const p = sel && byQ.get(sel);
+  if (!p) { info.innerHTML = `<p class="empty">${esc(t('pick'))}</p>`; return; }
+  const ts = parents.get(sel) ?? [], ss = kids.get(sel) ?? [];
+  const row = (k, v) => v ? `<dt>${esc(t(k))}</dt><dd>${v}</dd>` : '';
+  info.innerHTML = `<div class="k">${esc(t(ROLEK[role(p)]))}</div><h3>${esc(nm(p))}</h3><dl>
+    ${row('born', esc(yrs(p)))}${row('place', esc(p.place ?? ''))}
+    ${row('teachers', ts.length ? `<ul>${ts.map((l) => linkLine(l, l.t)).join('')}</ul>` : '')}
+    ${row('students', ss.length ? `<ul>${ss.map((l) => linkLine(l, l.s)).join('')}</ul>` : '')}
+    ${row('read', LANGS.map((l) => wikiLink(p, l)).filter(Boolean).join(' · '))}
+    ${row('wdLink', `<a href="https://www.wikidata.org/wiki/${p.qid}">${p.qid}</a>`)}${p.kitabxana ? row('kx', `<a href="${kxBase()}/authors/${encodeURIComponent(p.kitabxana)}">kitabxana.az</a>`) : ''}</dl>`;
+  info.querySelectorAll('a[data-q]').forEach((a) => a.onclick = (e) => { e.preventDefault(); sel = a.dataset.q; mark(); describe(); });
+}
+
+function tree() {
+  // Every musician with no known master is a root; their students beneath, once per path (no cycles)
+  const roots = [...new Set(links.flatMap((l) => [l.t, l.s]))].filter((q) => !(parents.get(q) ?? []).length).sort((a, b) => (byQ.get(a).born ?? 9999) - (byQ.get(b).born ?? 9999));
+  const item = (q, l, path) => {
+    const p = byQ.get(q), c = (kids.get(q) ?? []).filter((x) => !path.has(x.s));
+    return `<li><span class="who"><i class="dot" style="--c:${COL[role(p)]}"></i><b>${esc(nm(p))}</b> <span class="yr">${yrs(p)}</span>${l ? `<span class="link">${l.src === 'wikidata' ? '●' : '◦'}</span>` : ''}</span>${c.length ? `<ul>${c.map((x) => item(x.s, x, new Set([...path, q]))).join('')}</ul>` : ''}</li>`;
+  };
+  document.getElementById('lin').innerHTML = roots.map((q) => `<div><ul>${item(q, null, new Set())}</ul></div>`).join('');
+}
+
+function chips() {
+  const n = (s) => D.links.filter((l) => l.src === s).length;
+  document.getElementById('src').innerHTML = ['wikidata', 'text'].map((s) => `<button type="button" data-s="${s}" aria-pressed="${show[s]}"><i class="${s === 'text' ? 'dash' : ''}"></i>${esc(t(s === 'text' ? 'sTx' : 'sWd'))} · ${n(s)}</button>`).join('');
+  document.querySelectorAll('[data-s]').forEach((b) => b.onclick = () => { show[b.dataset.s] = !show[b.dataset.s]; if (!show.wikidata && !show.text) show[b.dataset.s] = true; sel = null; render(); });
+  document.getElementById('legend').innerHTML = ['khanende', 'tar', 'ashik'].map((r) => `<span><i style="--c:${COL[r]}"></i>${esc(t(ROLEK[r]))}</span>`).join('');
+}
+function render() { index(); chips(); draw(); tree(); }
+function applyLang() {
+  document.documentElement.lang = lang; document.title = t('doc');
+  document.querySelectorAll('[data-i18n]').forEach((e) => e.textContent = t(e.dataset.i18n));
+  document.querySelectorAll('[data-lang]').forEach((b) => b.setAttribute('aria-pressed', b.dataset.lang === lang));
+  document.querySelectorAll('[data-keep-lang]').forEach((a) => { const u = new URL(a.getAttribute('href'), location.href); if (lang === 'az') u.searchParams.delete('lang'); else u.searchParams.set('lang', lang); a.href = u.pathname + u.search; });
+  if (!D) return;
+  const s = { ...D.stats };
+  document.getElementById('lede').textContent = t('lede')(s);
+  document.getElementById('hint').textContent = t('hint');
+  document.getElementById('method').innerHTML = t('method')(s);
+  document.getElementById('foot').innerHTML = t('foot')(D.built);
+  render();
+}
+document.querySelectorAll('[data-lang]').forEach((b) => b.onclick = () => {
+  lang = b.dataset.lang; try { localStorage.setItem('lang', lang); } catch {}
+  const u = new URL(location.href); if (lang === 'az') u.searchParams.delete('lang'); else u.searchParams.set('lang', lang); history.replaceState(null, '', u);
+  applyLang();
+});
+let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(draw, 150); });
+applyLang();
+fetch('data/lineage.json').then((r) => r.json()).then((d) => { D = d; applyLang(); });
+})();
+</script>
+</body>
+</html>

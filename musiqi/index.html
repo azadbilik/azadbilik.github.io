@@ -273,6 +273,7 @@
     <div class="block-head">
       <h2 id="h-people" data-i18n="people">Musiqiçilər</h2>
       <p id="people-lead"></p>
+      <p><a href="silsile/" data-keep-lang id="lin-link"></a></p>
     </div>
     <div class="people-grid">
       <div class="bigmap"><div id="map" role="region" data-i18n-label="mapLabel"></div><div class="legend" id="legend"></div></div>
@@ -627,6 +628,7 @@ function keepUrl() {
   history.replaceState(null, '', `${location.pathname}${q.size ? '?' + q : ''}${location.hash}`);
 }
 function applyLang() {
+  { const a = document.getElementById('lin-link'); if (a) a.textContent = { az: 'Ustad-şagird silsilələri →', ru: 'Линии «учитель — ученик» →', en: 'Master–student lineages →' }[lang] ?? ''; }
   document.documentElement.lang = lang;
   document.title = t('doc');
   document.querySelectorAll('[data-i18n]').forEach((el) => { const v = t(el.dataset.i18n); if (typeof v === 'string') el.textContent = v; });

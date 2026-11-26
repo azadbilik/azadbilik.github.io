@@ -1,0 +1,531 @@
+{
+ "note": "Hand-read from lineage.candidates.json: t taught s, as the sentence says. Re-read before trusting a re-run.",
+ "dropped": 277,
+ "links": [
+  {
+   "t": "Q4131492",
+   "s": "Q55203819",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Xanlıq_Şükür",
+   "sentence": "Xanlıq Şükürün ilk müəllimi Hacı Hüsü olmuşdur."
+  },
+  {
+   "t": "Q4073558",
+   "s": "Q91083301",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Aşıq_Seyid_İbrahim",
+   "sentence": "Məşhur ustad Aşıq Əsəd Rzayev və onun qardaşı Aşıq Məhəmməd Rzayevdən aşıq sənətini mənimsəmiş, onların dastan və şeir yaradıcılığını öyrənmişdir."
+  },
+  {
+   "t": "Q4528165",
+   "s": "Q16376261",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Yaqub_Məmmədov_(xanəndə)",
+   "sentence": "Görkəmli xanəndə Seyid Şuşinskidən ve xanəndə Mütəllim Mütəllimovdan muğam dəsgahları, xanəndəlik sənətinin sirlərini öyrənmiş, həmçinin musiqi və poeziya sahəsində dərin biliklər qazanmışdır."
+  },
+  {
+   "t": "Q4528165",
+   "s": "Q16365956",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Canəli_Əkbərov",
+   "sentence": "O, 1963–1964-cü illərdə Seyid Şuşinskinin, 1969–1972-ci illərdə isə Xan Şuşinskinin tələbəsi olmuşdur."
+  },
+  {
+   "t": "Q2427251",
+   "s": "Q16365956",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Canəli_Əkbərov",
+   "sentence": "O, 1963–1964-cü illərdə Seyid Şuşinskinin, 1969–1972-ci illərdə isə Xan Şuşinskinin tələbəsi olmuşdur."
+  },
+  {
+   "t": "Q91236774",
+   "s": "Q16374539",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Səfa_Qəhrəmanov",
+   "sentence": "Muğam ustası Nəriman Əliyevin tələbəsi olmuşdur."
+  },
+  {
+   "t": "Q373520",
+   "s": "Q136657345",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Aqil_Məlikov",
+   "sentence": "Zeynallı adına orta ixtisas musiqi məktəbinin xanəndəlik sinfində Xalq artisti Hacıbaba Hüseynovun tələbəsi olmuşdur."
+  },
+  {
+   "t": "Q16378524",
+   "s": "Q16365354",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Aşıq_Ədalət_Dəlidağlı",
+   "sentence": "Daha sonra ustadı aşıq Ədalət Nəsibovla birlikdə İraqda keçirilən \"Ozan-folklor\" müsabiqəsində iştirak edərək, bu müsabiqənin qalibi olur."
+  },
+  {
+   "t": "Q1189603",
+   "s": "Q22583114",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Elnarə_Abdullayeva",
+   "sentence": "Daha sonra Ağaxan Abdullayevin tələbəsi olaraq ondan muğamın sirrlərini öyrənir."
+  },
+  {
+   "t": "Q6394333",
+   "s": "Q12838311",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Cəfər_Xakipur",
+   "sentence": "Onun ustadı Çingiz Mehdipurdu."
+  },
+  {
+   "t": "Q12850086",
+   "s": "Q110952356",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Vaqif_Şıxəliyev",
+   "sentence": "1994–1997-ci illərdə Bakı şəhəri Bülbül adına orta ixtisas Musiqi Məktəbinin Xanəndəlik sinfində Əlibaba Məmmədovdan dərs almışdır."
+  },
+  {
+   "t": "Q936538",
+   "s": "Q118142274",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Mirələm_Mirələmov",
+   "sentence": "Alim Qasımovdan dərs alıb."
+  },
+  {
+   "t": "Q2636522",
+   "s": "Q4073558",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Aşıq_Əsəd",
+   "sentence": "Aşıq Ələsgərdən mukəmməl dərs aldıqdan sonra özu şəyird göturub məclislər keçirir."
+  },
+  {
+   "t": "Q4216454",
+   "s": "Q4528165",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Seyid_Şuşinski",
+   "sentence": "Sonrakı müəllimi Cabbar Qaryağdıoğlu olmuşdu."
+  },
+  {
+   "t": "Q4528165",
+   "s": "Q5391050",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Ağabala_Abdullayev",
+   "sentence": "Haşımlıdan öyrənmişdisə, muğam ifaçılığının sirlərini Seyid Şuşinskidən öyrənmişdi."
+  },
+  {
+   "t": "Q4528165",
+   "s": "Q134286966",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Bakir_Haşımov",
+   "sentence": "Seyid Şuşinskinin sinfində bütün muğam dəstgahlarını öyrənmişdir."
+  },
+  {
+   "t": "Q373520",
+   "s": "Q6404572",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Qədir_Rüstəmov",
+   "sentence": "Əvvəlcə, Azərbaycan Dövlət Musiqi Məktəbində ustad-xanəndə Hacıbaba Hüseynovdan muğam dərsləri almış, sonradan Ağdamda təhsilini davam etdirmişdir."
+  },
+  {
+   "t": "Q4695282",
+   "s": "Q61122097",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Oqtay_Quliyev",
+   "sentence": "Vallara Əhməd Bakıxanovla yanaşı, onun istedadlı tələbəsi Oqtay Quliyevin ifasında \"Şur\", \"Segah\", \"Çahargah\", \"Şahnaz\", \"Bayatı-kürd\", \"Heyratı\" muğamları yazılmışdır."
+  },
+  {
+   "t": "Q4695282",
+   "s": "Q16375043",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Teymur_Mustafayev",
+   "sentence": "Sənət müəllimləri Seyid Şuşinski, Əhməd Bakıxanov olmuşdur."
+  },
+  {
+   "t": "Q4528165",
+   "s": "Q16375043",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Teymur_Mustafayev",
+   "sentence": "Sənət müəllimləri Seyid Şuşinski, Əhməd Bakıxanov olmuşdur."
+  },
+  {
+   "t": "Q4528165",
+   "s": "Q20563594",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Süleyman_Abdullayev_(xanəndə)",
+   "sentence": "Abdullayev ADMM-də Seyid Şuşinskinin sinfində bütün muğam dəsgahlarını tam şəkildə öyrənmişdir."
+  },
+  {
+   "t": "Q4057575",
+   "s": "Q12845363",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Sabir_Novruzov_(xanəndə)",
+   "sentence": "Xan Şuşinskini, Seyid Şuşinskini, Yaqub Məmmədovu, Zülfü Adıgözəlovu özünün müəllimləri sayırdı."
+  },
+  {
+   "t": "Q4528165",
+   "s": "Q12845363",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Sabir_Novruzov_(xanəndə)",
+   "sentence": "Xan Şuşinskini, Seyid Şuşinskini, Yaqub Məmmədovu, Zülfü Adıgözəlovu özünün müəllimləri sayırdı."
+  },
+  {
+   "t": "Q2427251",
+   "s": "Q12845363",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Sabir_Novruzov_(xanəndə)",
+   "sentence": "Xan Şuşinskini, Seyid Şuşinskini, Yaqub Məmmədovu, Zülfü Adıgözəlovu özünün müəllimləri sayırdı."
+  },
+  {
+   "t": "Q4216454",
+   "s": "Q12845363",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Sabir_Novruzov_(xanəndə)",
+   "sentence": "Xan Şuşinskini, Seyid Şuşinskini, Cabbar Qaryağdıoğlunu, Yaqub Məmmədovu, Zülfü Adıgözəlovu müəllimlərim hesab edirəm."
+  },
+  {
+   "t": "Q4695282",
+   "s": "Q16371283",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Məzahir_Məmmədov_(tarzən)",
+   "sentence": "XX əsrin 60-cı illərində Asəf Zeynallı adına Musiqi exnikumunda təhsil alan zaman Bəhram Mansurov, Əhməd Bakıxanovdan tar sənətinin bir çox sirlərini öyrənib."
+  },
+  {
+   "t": "Q4280612",
+   "s": "Q16371283",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Məzahir_Məmmədov_(tarzən)",
+   "sentence": "XX əsrin 60-cı illərində Asəf Zeynallı adına Musiqi exnikumunda təhsil alan zaman Bəhram Mansurov, Əhməd Bakıxanovdan tar sənətinin bir çox sirlərini öyrənib."
+  },
+  {
+   "t": "Q373520",
+   "s": "Q936538",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Alim_Qasımov",
+   "sentence": "Müəllimləri muğam xanəndələri Hacıbaba Hüseynov və Ağaxan Abdullayev olub."
+  },
+  {
+   "t": "Q1189603",
+   "s": "Q936538",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Alim_Qasımov",
+   "sentence": "Müəllimləri muğam xanəndələri Hacıbaba Hüseynov və Ağaxan Abdullayev olub."
+  },
+  {
+   "t": "Q96957660",
+   "s": "Q55203270",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Aşıq_Abdulla_Fətəliyev",
+   "sentence": "Sonra mən aşıqlıq sənətini həmyerlim, aşıq və şair ustad Sərraf Qasımdan öyrəndim və gənc yaşlarımdan saza bağlandım, sazımla məclislər və şənliklər yola saldım."
+  },
+  {
+   "t": "Q4101481",
+   "s": "Q4216454",
+   "lang": "ru",
+   "article": "https://ru.wikipedia.org/wiki/Карьягдыоглы,_Джаббар",
+   "sentence": "Джаббар Карягды несколько раз признавался, что искусству пения с переливами в голосе он научился у ханенде по имени Абдул-Баги, известного в то время как Бюльбюльджан."
+  },
+  {
+   "t": "Q4131492",
+   "s": "Q12840896",
+   "lang": "ru",
+   "article": "https://ru.wikipedia.org/wiki/Кечачи_оглы_Мухаммед",
+   "sentence": "В школе же ханенде Гаджи Гуси Кечачи оглы Мухаммед в совершенстве научился исполнению народных песен."
+  },
+  {
+   "t": "Q2636522",
+   "s": "Q16365302",
+   "lang": "ru",
+   "article": "https://ru.wikipedia.org/wiki/Ашуг_Наджаф",
+   "sentence": "Ашуг Наджаф был самым любимым из двенадцати учеников Ашуг Алескера."
+  },
+  {
+   "t": "Q4131492",
+   "s": "Q12841664",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Malıbəyli_Həmid",
+   "sentence": "O, bir müddət arabaçı işləmiş, sonralar isə Hacı Hüsünün təşkil elədiyi \"Xanəndələr məclisi\"nə daxil olmuş, burada Hacı Hüsü və Məşədi İsidən klassik Şərq və Azərbaycan muğamlarını öyrənmişdir."
+  },
+  {
+   "t": "Q12842081",
+   "s": "Q4054565",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/İslam_Abdullayev",
+   "sentence": "Beləliklə, o, Mir Möhsün Nəvvab, Hacı Hüsü, Məşədi İsi, Mirzə Muxtar Məmmədov, Dəli İsmayıl, Keştazlı Həşim kimi sənətkarlardan dərs almış, Sadıqcanın müşayiəti ilə ifalar etmişdir."
+  },
+  {
+   "t": "Q4131492",
+   "s": "Q4054565",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/İslam_Abdullayev",
+   "sentence": "Beləliklə, o, Mir Möhsün Nəvvab, Hacı Hüsü, Məşədi İsi, Mirzə Muxtar Məmmədov, Dəli İsmayıl, Keştazlı Həşim kimi sənətkarlardan dərs almış, Sadıqcanın müşayiəti ilə ifalar etmişdir."
+  },
+  {
+   "t": "Q4054565",
+   "s": "Q2427251",
+   "lang": "ru",
+   "article": "https://ru.wikipedia.org/wiki/Хан_Шушинский",
+   "sentence": "В возрасте 16 лет, выступая на одном из шушинских меджлисов, привлек внимание мастерским исполнением мугама Кюрд-Шахназ в сложном верхнем регистре, и учитель молодого Исфендияра Ислам Абдуллаев с гордостью присудил ему имя «Хан»."
+  },
+  {
+   "t": "Q2427251",
+   "s": "Q6028583",
+   "lang": "en",
+   "article": "https://en.wikipedia.org/wiki/Sara_Gadimova",
+   "sentence": "Among her music mentors were Huseyngulu Sarabski, Khan Shushinski and Seyid Shushinski."
+  },
+  {
+   "t": "Q16365299",
+   "s": "Q16369499",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Kərim_Paşayev",
+   "sentence": "Ustadı aşıq Niftalı ilə el şənliklərində, toylarda çıxış edib."
+  },
+  {
+   "t": "Q4695282",
+   "s": "Q111048998",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Əlikram_Hüseynov",
+   "sentence": "Oxuduğu müddətdə Əhməd Bakıxanov və Adil Gəraydan dərs almışdır."
+  },
+  {
+   "t": "Q12835418",
+   "s": "Q111048998",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Əlikram_Hüseynov",
+   "sentence": "Oxuduğu müddətdə Əhməd Bakıxanov və Adil Gəraydan dərs almışdır."
+  },
+  {
+   "t": "Q4528165",
+   "s": "Q91236774",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Nəriman_Əliyev_(xanəndə)",
+   "sentence": "Seyid Şuşinskidən muğamı öyrənərək muğam bilicisi və müəllim kimi yetişmiş, Ağaxan Abdullayev, Zümrüd Məmmədova, Canəli Əkbərov, Səkinə İsmayılova, Qaraxan Behbudov, Vahid Abdullayev, Sabir Abdullayev, Məmmədbağır Bağırzadə, Gülyanaq Məmmədova, Gülyaz Məmmədova, Teyyub Aslanov, Sahibə Əhmədova və başqa xanəndələrin ustadı olmuşdur."
+  },
+  {
+   "t": "Q16370169",
+   "s": "Q39394656",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Adil_Bağırov_(tarzən)",
+   "sentence": "Azərbaycan Dövlət Musiqi Məktəbində tar ixtisası üzrə təhsil almış, müəllimləri Mirzə Mansur Mansurov, Səid Rüstəmov olmuşdur."
+  },
+  {
+   "t": "Q91236774",
+   "s": "Q126872345",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Qəzənfər_Abbasov",
+   "sentence": "1986-cı ildə Asəf Zeynallı adına musiqi məktəbinə daxil olmuş, qocaman xanəndə böyük pedaqoq Nəriman Əliyevdən dərs almışdır."
+  },
+  {
+   "t": "Q16365956",
+   "s": "Q16368221",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Gülyaz_Məmmədova",
+   "sentence": "2002-2006-cı illərdə İncəsənət universitetinin muğam şöbəsində oxuyub və oranı uğurla başa vurub.Ustadı Canəli Əkbərovdan dərs alıb."
+  },
+  {
+   "t": "Q1189603",
+   "s": "Q12836279",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Aygün_Bəylər",
+   "sentence": "Görkəmli sənətkarlar — Arif Babayev, İslam Rzayev, Ağaxan Abdullayev, Elxan Müzəffərov, eləcə də Alim Qasımovdan muğamın incəliklərini öyrənib."
+  },
+  {
+   "t": "Q936538",
+   "s": "Q12836279",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Aygün_Bəylər",
+   "sentence": "Görkəmli sənətkarlar — Arif Babayev, İslam Rzayev, Ağaxan Abdullayev, Elxan Müzəffərov, eləcə də Alim Qasımovdan muğamın incəliklərini öyrənib."
+  },
+  {
+   "t": "Q12835981",
+   "s": "Q12836279",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Aygün_Bəylər",
+   "sentence": "Görkəmli sənətkarlar — Arif Babayev, İslam Rzayev, Ağaxan Abdullayev, Elxan Müzəffərov, eləcə də Alim Qasımovdan muğamın incəliklərini öyrənib."
+  },
+  {
+   "t": "Q16374741",
+   "s": "Q106179729",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Sahib_Paşazadə",
+   "sentence": "Sonra isə not ixtisası üzrə Akif Novruzov, muğamdan isə Sərvər İbrahimovdan dərs almışdır."
+  },
+  {
+   "t": "Q55203270",
+   "s": "Q97216783",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Aşıq_Tural_Bağırov",
+   "sentence": "Aşıq Tural gənclik yaşlarında asıqlıq sənətinə həvəs göstərmiş və bu sənətin incəliklərini Naxçıvan aşıq məktəbinin ulu ustadı Sərraf Qasımın tanınmış yetirmələrindən biri olan Aşıq Abdulla Fətəliyevdən öyrənmişdir."
+  },
+  {
+   "t": "Q12850086",
+   "s": "Q105953918",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Pərviz_Qasımov",
+   "sentence": "İlk müəllimi xalq artisti Əlibaba Məmmədov və xalq artisti Elmira Rəhimova olub."
+  },
+  {
+   "t": "Q12839110",
+   "s": "Q105953918",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Pərviz_Qasımov",
+   "sentence": "İlk müəllimi xalq artisti Əlibaba Məmmədov və xalq artisti Elmira Rəhimova olub."
+  },
+  {
+   "t": "Q4695282",
+   "s": "Q16374741",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Sərvər_İbrahimov",
+   "sentence": "Əhməd Bakıxanov, Mirzə Mansurdan dərs almışdır."
+  },
+  {
+   "t": "Q12842145",
+   "s": "Q16371325",
+   "lang": "en",
+   "article": "https://en.wikipedia.org/wiki/Mirza_Ali_Asgar_Karabaghi",
+   "sentence": "19th century Azerbaijani tarzens such as Sadigjan, Javad Bey, Alibey oghlu (Khanazayski), Shakar oghlu Karim, Artemi and Mashadi Zeynal were students of Mirza Ali Asgar."
+  },
+  {
+   "t": "Q6498967",
+   "s": "Q4073559",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Ağ_Aşıq_Allahverdi",
+   "sentence": "Ağ Aşıq Allahverdi (1754, Sulduz, Qərbi Azərbaycan ostanı – 1860, Kərkibaş, İrəvan quberniyası) — Aşıq Alının ustadı, görkəmli aşıq, şair."
+  },
+  {
+   "t": "Q4073559",
+   "s": "Q2636522",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Aşıq_Alı",
+   "sentence": "Aşıq Alı Azərbaycan aşıq şeri tarixində Aşıq Ələsgərin ustadı kimi tanınsa da, onun özü də çox azman ruhlu, coşqun təbli sənət fədaisi imiş."
+  },
+  {
+   "t": "Q16372672",
+   "s": "Q936538",
+   "lang": "ru",
+   "article": "https://ru.wikipedia.org/wiki/Аскеров,_Гулу_Рустам_оглы",
+   "sentence": "Среди учеников — народные артисты Азербайджана Алим Гасымов, Мелекханум Эюбова и другие."
+  },
+  {
+   "t": "Q61122097",
+   "s": "Q12841651",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Oqtay_Quliyev",
+   "sentence": "Oqtay Quliyevin altı tələbəsi - İlqar İmamverdiyev, Malik Mansurov, Zeynalabdın Babayev, İlham Bədəlov, Vahid Məmmədov, Fətəli Bağırov tarixə düşmüş bu müsabiqədə birinci, ikinci mükafatları qazanırlar."
+  },
+  {
+   "t": "Q16378524",
+   "s": "Q4833537",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Aşıq_Ədalət",
+   "sentence": "Şagirdi Aşıq Xanlar Məhərrəmov"
+  },
+  {
+   "t": "Q4216454",
+   "s": "Q2427251",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Cabbar_Qaryağdıoğlu",
+   "sentence": "Cabbar Qaryağdıoğlunun tələbələrindən Xan Şuşinski həmişə fərəhlə qeyd edərdi ki, xanəndə olmağım üçün unudulmaz müəllimim Cabbar Qaryağdıoğluna minnətdaram."
+  },
+  {
+   "t": "Q4216454",
+   "s": "Q6123065",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Cabbar_Qaryağdıoğlu",
+   "sentence": "Seyid Şuşinski, Bülbül, Davud Səfiyarov, Zülfü Adıgözəlov, Xan Şuşinski, Cahan Talışinskaya, Yavər Kələntərli, Mütəllim Mütəllimov kimi görkəmli muğam ustaları məhz Cabbar Qaryağdıoğlunun tələbələri olmuşlar."
+  },
+  {
+   "t": "Q4216454",
+   "s": "Q12847857",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Cabbar_Qaryağdıoğlu",
+   "sentence": "Seyid Şuşinski, Bülbül, Davud Səfiyarov, Zülfü Adıgözəlov, Xan Şuşinski, Cahan Talışinskaya, Yavər Kələntərli, Mütəllim Mütəllimov kimi görkəmli muğam ustaları məhz Cabbar Qaryağdıoğlunun tələbələri olmuşlar."
+  },
+  {
+   "t": "Q4216454",
+   "s": "Q4057575",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Cabbar_Qaryağdıoğlu",
+   "sentence": "Seyid Şuşinski, Bülbül, Davud Səfiyarov, Zülfü Adıgözəlov, Xan Şuşinski, Cahan Talışinskaya, Yavər Kələntərli, Mütəllim Mütəllimov kimi görkəmli muğam ustaları məhz Cabbar Qaryağdıoğlunun tələbələri olmuşlar."
+  },
+  {
+   "t": "Q4054565",
+   "s": "Q16376261",
+   "lang": "en",
+   "article": "https://en.wikipedia.org/wiki/Islam_Abdullayev",
+   "sentence": "He played an important role as a mentor of singers like Khan Shushinski, Yagub Mammadov and Sahib Shukurov."
+  },
+  {
+   "t": "Q12837106",
+   "s": "Q12837127",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Aşıq_Abbasəli",
+   "sentence": "Aşıq Abbasəli qardaşı Aşıq Novruzun ustadı idi."
+  },
+  {
+   "t": "Q373520",
+   "s": "Q12848212",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Hacıbaba_Hüseynov",
+   "sentence": "Nəzakət Məmmədova, Qədir Rüstəmov, Aqil Məlikov, Səxavət Məmmədov, Zaur Rzayev, Teymur Mustafayev, Sabir Əliyev, Bilal Əliyev, Zabit Nəbizadə və başqaları onun tələbələri olmuşdur."
+  },
+  {
+   "t": "Q373520",
+   "s": "Q76603817",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Hacıbaba_Hüseynov",
+   "sentence": "Nəzakət Məmmədova, Qədir Rüstəmov, Aqil Məlikov, Səxavət Məmmədov, Zaur Rzayev, Teymur Mustafayev, Sabir Əliyev, Bilal Əliyev, Zabit Nəbizadə və başqaları onun tələbələri olmuşdur."
+  },
+  {
+   "t": "Q373520",
+   "s": "Q16375043",
+   "lang": "en",
+   "article": "https://en.wikipedia.org/wiki/Hajibaba_Huseynov",
+   "sentence": "Nazakat Mammadova, Gadir Rustamov, Sakhavat Mammadov, Zaur Rzayev, Teymur Mustafayev, Sabir Aliyev, Bilal Aliyev, Zabit Nabizade and others were his students."
+  },
+  {
+   "t": "Q373520",
+   "s": "Q12846316",
+   "lang": "en",
+   "article": "https://en.wikipedia.org/wiki/Hajibaba_Huseynov",
+   "sentence": "Nazakat Mammadova, Gadir Rustamov, Sakhavat Mammadov, Zaur Rzayev, Teymur Mustafayev, Sabir Aliyev, Bilal Aliyev, Zabit Nabizade and others were his students."
+  },
+  {
+   "t": "Q91236774",
+   "s": "Q1189603",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Nəriman_Əliyev_(xanəndə)",
+   "sentence": "Seyid Şuşinskidən muğamı öyrənərək muğam bilicisi və müəllim kimi yetişmiş, Ağaxan Abdullayev, Zümrüd Məmmədova, Canəli Əkbərov, Səkinə İsmayılova, Qaraxan Behbudov, Vahid Abdullayev, Sabir Abdullayev, Məmmədbağır Bağırzadə, Gülyanaq Məmmədova, Gülyaz Məmmədova, Teyyub Aslanov, Sahibə Əhmədova və başqa xanəndələrin ustadı olmuşdur."
+  },
+  {
+   "t": "Q91236774",
+   "s": "Q19716199",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Nəriman_Əliyev_(xanəndə)",
+   "sentence": "Seyid Şuşinskidən muğamı öyrənərək muğam bilicisi və müəllim kimi yetişmiş, Ağaxan Abdullayev, Zümrüd Məmmədova, Canəli Əkbərov, Səkinə İsmayılova, Qaraxan Behbudov, Vahid Abdullayev, Sabir Abdullayev, Məmmədbağır Bağırzadə, Gülyanaq Məmmədova, Gülyaz Məmmədova, Teyyub Aslanov, Sahibə Əhmədova və başqa xanəndələrin ustadı olmuşdur."
+  },
+  {
+   "t": "Q91236774",
+   "s": "Q16365956",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Nəriman_Əliyev_(xanəndə)",
+   "sentence": "Seyid Şuşinskidən muğamı öyrənərək muğam bilicisi və müəllim kimi yetişmiş, Ağaxan Abdullayev, Zümrüd Məmmədova, Canəli Əkbərov, Səkinə İsmayılova, Qaraxan Behbudov, Vahid Abdullayev, Sabir Abdullayev, Məmmədbağır Bağırzadə, Gülyanaq Məmmədova, Gülyaz Məmmədova, Teyyub Aslanov, Sahibə Əhmədova və başqa xanəndələrin ustadı olmuşdur."
+  },
+  {
+   "t": "Q91236774",
+   "s": "Q23685213",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Nəriman_Əliyev_(xanəndə)",
+   "sentence": "Seyid Şuşinskidən muğamı öyrənərək muğam bilicisi və müəllim kimi yetişmiş, Ağaxan Abdullayev, Zümrüd Məmmədova, Canəli Əkbərov, Səkinə İsmayılova, Qaraxan Behbudov, Vahid Abdullayev, Sabir Abdullayev, Məmmədbağır Bağırzadə, Gülyanaq Məmmədova, Gülyaz Məmmədova, Teyyub Aslanov, Sahibə Əhmədova və başqa xanəndələrin ustadı olmuşdur."
+  },
+  {
+   "t": "Q16365229",
+   "s": "Q110105823",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Ağasəlim_Abdullayev",
+   "sentence": "Azərbaycan mədəniyyətini, musiqisini dünyanın dörd bir yanında təmsil edən, ən çox tanınan tarzənlər — Sahib Paşazadə, Şəhriyar İmanov, Bəhruz Zeynal və bir çox tarzənlər onun tələbələridir."
+  },
+  {
+   "t": "Q16365229",
+   "s": "Q106179729",
+   "lang": "az",
+   "article": "https://az.wikipedia.org/wiki/Ağasəlim_Abdullayev",
+   "sentence": "Azərbaycan mədəniyyətini, musiqisini dünyanın dörd bir yanında təmsil edən, ən çox tanınan tarzənlər — Sahib Paşazadə, Şəhriyar İmanov, Bəhruz Zeynal və bir çox tarzənlər onun tələbələridir."
+  }
+ ]
+}
