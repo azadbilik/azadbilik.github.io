@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="/shared/theme.js"></script>
+<title>Nəzirə şəbəkəsi · Azad Bilik</title>
+<meta name="description" content="Klassik şairlər bir-birinin şeirinə necə cavab yazıb: kitabxana.az mətnlərində nəzirə, təxmis və cavab əlaqələri. Who answered whose poem across eight centuries of Azerbaijani verse.">
+<meta name="theme-color" content="#F4EFE6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14100D" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://azadbilik.org/sebeke/nezire/">
+<meta property="og:title" content="Nəzirə şəbəkəsi · The answer-poem network">
+<meta property="og:description" content="Kim kimin şeirinə cavab yazıb? Nəsimidən Əliağa Vahidə, Füzulidən Baba Pünhana.">
+<meta property="og:image" content="https://azadbilik.org/sebeke/nezire/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="stylesheet" href="/shared/story-map.css">
+<style>
+  /* A page, not a map: it scrolls. Century colours on top of the story maps' tokens */
+  :root { --k14: #7A5C8E; --k16: #1F5C73; --k18: #5B6B2E; --k19: #A86B12; --k20: #A81E28; --k21: #5A5048; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --k14: #B596C9; --k16: #6FB3CC; --k18: #A9BC6A; --k19: #E0A64A; --k20: #DA5A61; --k21: #B7ADA1; } }
+  :root[data-theme="dark"] { --k14: #B596C9; --k16: #6FB3CC; --k18: #A9BC6A; --k19: #E0A64A; --k20: #DA5A61; --k21: #B7ADA1; }
+  html, body { height: auto; }
+  body { overflow-x: hidden; overflow-y: auto; }
+  .wrap { max-width: 64rem; margin: 0 auto; padding: 0 1.5rem; }
+  header.head { border-bottom: 1px solid var(--rule); padding: 1.25rem 0 1.5rem; }
+  header .lede { margin-top: .75rem; max-width: 42rem; font: 400 1.0625rem/1.55 var(--serif); }
+  h1 { font-size: clamp(2rem, 6vw, 3.25rem); }
+  section { padding: 1.75rem 0; border-bottom: 1px solid var(--rule); }
+  h2 { font: 400 1.5rem/1.2 var(--serif); letter-spacing: -.01em; }
+  h3 { font: 500 .75rem var(--sans); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+  .muted { color: var(--muted); }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  .bar { display: flex; flex-wrap: wrap; gap: .6rem 1.5rem; align-items: center; margin-bottom: .75rem; }
+  .seg { display: inline-grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--rule); border-radius: 3px; padding: 2px; }
+  .seg button { padding: .35rem .9rem; border-radius: 2px; font-size: .8125rem; color: var(--muted); }
+  .seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+  .tiers { display: flex; flex-wrap: wrap; gap: .3rem .5rem; }
+  .tiers label { display: inline-flex; align-items: center; gap: .4rem; font-size: .75rem; padding: .25rem .6rem; border: 1px solid var(--rule); border-radius: 999px; cursor: pointer; user-select: none; }
+  .tiers input { accent-color: var(--accent); margin: 0; }
+  .tiers label:has(input:not(:checked)) { color: var(--muted); }
+  .keys { display: flex; flex-wrap: wrap; gap: .25rem .9rem; font-size: .75rem; color: var(--muted); margin-bottom: .5rem; }
+  .keys span { display: inline-flex; align-items: center; gap: .35rem; }
+  .keys i { width: .6rem; height: .6rem; border-radius: 50%; background: var(--c); }
+
+  .stage { position: relative; border: 1px solid var(--rule); border-radius: 4px; background: var(--paper); }
+  #g { display: block; width: 100%; touch-action: manipulation; user-select: none; -webkit-user-select: none; }
+  #g .axis line { stroke: var(--rule); } #g .axis text { font: .6875rem var(--sans); fill: var(--muted); font-variant-numeric: tabular-nums; }
+  #g .grid { stroke: var(--rule); stroke-dasharray: 2 4; }
+  #g .e { fill: none; stroke: var(--c); stroke-opacity: .42; stroke-width: 1.2; pointer-events: none; transition: stroke-opacity .2s; }
+  #g .e.und { stroke-dasharray: 4 3; }
+  #g .hit { fill: none; stroke: transparent; stroke-width: 9; cursor: pointer; }
+  #g .e.weak { stroke-opacity: .22; }
+  #g .e.hi { stroke-opacity: .95; stroke-width: 2.2; }
+  #g .e.sel { stroke-opacity: 1; stroke-width: 3; }
+  #g.dim .e:not(.hi):not(.sel) { stroke-opacity: .07; }
+  #g .n { fill: var(--c); stroke: var(--paper); stroke-width: 1.2; cursor: pointer; transition: opacity .2s; }
+  #g .n.nodate { stroke: var(--c); stroke-dasharray: 2 2; fill-opacity: .4; }
+  #g.dim .n:not(.hi):not(.sel) { opacity: .18; }
+  #g .n.sel { stroke: var(--ink); stroke-width: 2.4; }
+  #g .lab { font: 500 .6875rem var(--sans); fill: var(--ink); paint-order: stroke; stroke: var(--paper); stroke-width: 3px; stroke-linejoin: round; pointer-events: none; }
+  #g.dim .lab:not(.hi) { opacity: .25; }
+  .tip { position: absolute; z-index: 3; max-width: 15rem; pointer-events: none; background: var(--paper); border: 1px solid var(--rule); border-radius: 4px; padding: .5rem .65rem; box-shadow: 0 2px 14px rgb(0 0 0 / .14); font-size: .8125rem; }
+  .tip[hidden] { display: none; }
+  .tip b { font: 400 1rem/1.2 var(--serif); display: block; }
+  .hint { font-size: .75rem; color: var(--muted); margin-top: .35rem; }
+
+  #detail { margin-top: 1rem; }
+  .dh { display: flex; flex-wrap: wrap; align-items: baseline; gap: .25rem .75rem; justify-content: space-between; }
+  .dh b { font: 400 1.5rem/1.15 var(--serif); letter-spacing: -.01em; }
+  .dh .yrs { color: var(--muted); font-size: .8125rem; margin-left: .5rem; }
+  .dh a { font-size: .8125rem; font-weight: 500; text-decoration: none; color: var(--accent); }
+  .dh a:hover { text-decoration: underline; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1rem; }
+  .cols ul { list-style: none; padding: 0; margin-top: .35rem; }
+  .cols li button { display: grid; grid-template-columns: 1fr auto; gap: .5rem; width: 100%; text-align: left; padding: .35rem .25rem; font-size: .875rem; border-bottom: 1px solid var(--rule); }
+  .cols li button:hover, .cols li button.on { background: var(--rule); }
+  .cols li small { color: var(--muted); font-variant-numeric: tabular-nums; }
+  .none { font-size: .8125rem; color: var(--muted); margin-top: .35rem; }
+  .ev { margin-top: 1rem; display: grid; gap: .9rem; }
+  .pair { border: 1px solid var(--rule); border-radius: 4px; padding: .85rem 1rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .3rem; margin-bottom: .6rem; }
+  .chip { font-size: .6875rem; letter-spacing: .03em; padding: .1rem .5rem; border-radius: 999px; border: 1px solid var(--rule); color: var(--muted); }
+  .chip.A { border-color: var(--accent); color: var(--accent); }
+  .chip.B { border-color: var(--second); color: var(--second); }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+  .side h4 { font: 500 .6875rem var(--sans); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+  .side .ti { font: 400 1.0625rem/1.3 var(--serif); margin-top: .15rem; }
+  .side .ti a { text-decoration: none; } .side .ti a:hover { text-decoration: underline; }
+  .side .by { font-size: .8125rem; color: var(--muted); }
+  .side .vs { margin-top: .45rem; font: 400 1rem/1.5 var(--serif); }
+  .side .vs div { padding-left: 1.1rem; text-indent: -1.1rem; }
+  .vs mark { background: color-mix(in srgb, var(--accent) 22%, transparent); color: inherit; border-radius: 2px; padding: 0 .05em; }
+  .nt { margin-top: .6rem; font-size: .8125rem; color: var(--muted); }
+  .nt b { color: var(--ink); font-weight: 500; }
+
+  .rks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 1rem; }
+  .rks ol { list-style: none; padding: 0; margin-top: .35rem; counter-reset: r; }
+  .rks li button { display: grid; grid-template-columns: 1.4rem 1fr auto; gap: .35rem; align-items: baseline; width: 100%; text-align: left; padding: .28rem .2rem; font-size: .875rem; border-bottom: 1px solid var(--rule); }
+  .rks li button:hover { background: var(--rule); }
+  .rks li button::before { counter-increment: r; content: counter(r); font-size: .75rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .rks li span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .rks li span i { display: inline-block; width: .5rem; height: .5rem; border-radius: 50%; background: var(--c); margin-right: .4rem; }
+  .rks li small { color: var(--muted); font-variant-numeric: tabular-nums; }
+  .rks li em { display: block; font-style: normal; font-size: .75rem; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+  .method { max-width: 44rem; display: grid; gap: .75rem; font-size: .9375rem; }
+  .method ol, .method ul { padding-left: 1.25rem; display: grid; gap: .4rem; }
+  .tbl { width: 100%; border-collapse: collapse; font-size: .8125rem; margin-top: .25rem; }
+  .tbl th, .tbl td { text-align: left; padding: .35rem .5rem .35rem 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  .tbl th { font-weight: 500; color: var(--muted); }
+  .tbl td.n { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .scroll { overflow-x: auto; }
+  footer { padding: 1.5rem 0 2.5rem; font-size: .75rem; color: var(--muted); }
+
+  @media (max-width: 48rem) {
+    .wrap { padding: 0 1rem; }
+    .cols, .two, .rks { grid-template-columns: 1fr; gap: 1rem; }
+    .tbl { min-width: 34rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { #g .e, #g .n { transition: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="head">
+    <div class="top"><a class="brand" href="/" data-keep-lang><svg viewBox="0 0 512 512" aria-hidden="true"><g class="star"><rect x="126" y="126" width="260" height="260"/><polygon points="256,72 440,256 256,440 72,256"/></g><polygon class="gem" points="256,196 316,256 256,316 196,256"/></svg>Azad Bilik</a><nav><a href="https://kitabxana.az" id="kx-nav" data-i18n="library">Kitabxana</a><span class="langs" role="group" aria-label="Dil · Язык · Language"><button type="button" data-lang="az">AZ</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="en">EN</button></span></nav></div>
+    <h1 data-i18n="title">Nəzirə şəbəkəsi</h1>
+    <p class="sub" data-i18n="sub">Kim kimin şeirinə cavab yazıb?</p>
+    <p class="lede" id="lede"></p>
+  </header>
+
+  <main>
+    <section aria-labelledby="h-net">
+      <h2 id="h-net" class="sr" data-i18n="netH">Cavab şeirlərinin şəbəkəsi</h2>
+      <div class="bar">
+        <div class="seg" role="group" aria-label="Düyünlər"><button type="button" data-mode="poets" data-i18n="poets">Şairlər</button><button type="button" data-mode="poems" data-i18n="poems">Şeirlər</button></div>
+        <div class="tiers" id="tiers" role="group"></div>
+      </div>
+      <div class="keys" id="legend"></div>
+      <div class="stage" id="stage">
+        <svg id="g" role="img" aria-labelledby="g-t"><title id="g-t"></title></svg>
+        <div class="tip" id="tip" hidden></div>
+      </div>
+      <p class="hint" id="hint"></p>
+      <div id="detail" aria-live="polite"></div>
+    </section>
+
+    <section aria-labelledby="h-rank">
+      <h2 id="h-rank" data-i18n="rankH">Ən çox cavab alanlar</h2>
+      <p class="muted" id="rankNote" style="margin-top:.35rem;max-width:42rem"></p>
+      <div class="rks">
+        <div><h3 data-i18n="rPoets">Şairlər: neçə şair cavab yazıb</h3><ol id="r1"></ol></div>
+        <div><h3 data-i18n="rPoems">Şeirlər: neçə şair cavab yazıb</h3><ol id="r2"></ol></div>
+        <div><h3 data-i18n="rAns">Ən çox cavab yazanlar: neçə şairə</h3><ol id="r3"></ol></div>
+      </div>
+    </section>
+
+    <section aria-labelledby="h-method">
+      <h2 id="h-method" data-i18n="methodH">Necə tapılıb</h2>
+      <div class="method" id="method"></div>
+    </section>
+  </main>
+  <footer id="foot"></footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+<script>
+(() => {
+const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+const still = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+const phone = () => matchMedia('(max-width: 48rem)').matches;
+const $ = (id) => document.getElementById(id);
+
+const LANGS = ['az', 'ru', 'en'];
+let lang = (() => {
+  const q = new URLSearchParams(location.search).get('lang');
+  if (LANGS.includes(q)) return q;
+  try { const s = localStorage.getItem('lang'); if (LANGS.includes(s)) return s; } catch {}
+  return 'az';
+})();
+const nf = (v) => {
+  const s = new Intl.NumberFormat(lang === 'ru' ? 'ru-RU' : 'en-GB').format(v);
+  return lang === 'az' ? s.replace(/[,.]/g, (c) => (c === ',' ? '\u202F' : ',')) : s;
+};
+
+const T = {
+  az: {
+    doc: 'Nəzirə şəbəkəsi · Azad Bilik', title: 'Nəzirə şəbəkəsi', sub: 'Kim kimin şeirinə cavab yazıb?', library: 'Kitabxana',
+    lede: (p, k, a) => `Klassik şairlər bir-birinə şeirlə cavab verib: nəzirə, təxmis, cavab. kitabxana.az-dakı ${p} şeirdə bu izləri üç yolla axtardıq: başlıqda adı çəkilən şair, sözbəsöz gətirilən sətirlər, eyni rədif və qafiyə. Burada ${a} şair arasında ${k} əlaqə var. Sol tərəfdə köhnə şair, sağda ona cavab yazan.`,
+    netH: 'Cavab şeirlərinin şəbəkəsi', poets: 'Şairlər', poems: 'Şeirlər',
+    tA: 'Adı çəkilib və ya sətirləri gətirilib', tB: 'Eyni rədif və qafiyə: güclü', tC: 'Eyni rədif və qafiyə: zəif',
+    era: ['XIV–XV əsr', 'XVI–XVII', 'XVIII', 'XIX', 'XX əsrin ilk yarısı', '1950-dən'],
+    graphT: (m, n, e) => `${m === 'poets' ? 'Şairlər' : 'Şeirlər'}: ${n} düyün, ${e} əlaqə`,
+    hint: 'Üfüqi ox: şairin doğum ili. Düyünə və ya xəttə toxunun. Qırıq xətt: şairlər eyni dövrdəndir, kimin kimə cavab verdiyi bəlli deyil. Düyünün ölçüsü: neçə şair ona cavab yazıb.',
+    tipPoet: (n, a, b) => `${n ? `${n} şair cavab yazıb` : 'cavab alınmayıb'}${b ? ` · ${b} şairə cavab yazıb` : ''}`,
+    tipPoem: (n) => (n ? `${n} şair cavab yazıb` : 'cavab alınmayıb'),
+    open: 'kitabxana.az-da', pick: 'Şəbəkədə bir şair, şeir və ya xətt seçin.',
+    answered: 'Ona cavab yazanlar', answers: 'Cavab yazdığı şairlər', answeredP: 'Bu şeirə cavab', answersP: 'Bu şeir cavab verir',
+    nobody: 'Bu səviyyədə yoxdur.', pairsH: (n) => `${n} şeir əlaqəsi`,
+    model: 'Əsas şeir (köhnə)', reply: 'Cavab şeiri', quoted: (n, of) => `Əsas şeirin ${of} sətrindən ${n}-i burada sözbəsöz gətirilib:`,
+    mA: 'adı çəkilib', mQ: 'sətirlər gətirilib', mF: 'rədif və qafiyə', mFw: 'rədif və qafiyə (zəif)',
+    nameNote: (h) => `Başlıq: <b>${esc(h)}</b>`,
+    endNote: (m, r, c, sh, und) => `Eyni son: <b>${m}</b> hərf (rədif təxminən ${r}, qafiyə ${m - r}). Kitabxanada bu cür bitən ${c} şeir var${sh ? `, ${sh} qafiyə sözü ortaqdır` : ''}.${und ? ' Şairlər eyni dövrdəndir: istiqamət bəlli deyil.' : ''}`,
+    namedOnly: 'Başlıqda adı çəkilib, hansı şeirə cavab olduğu tapılmayıb', namedFrom: (a, h) => `<b>${esc(a)}</b>: «${esc(h)}»`,
+    rankH: 'Ən çox cavab alanlar', rankNote: (t) => `Sayılan: ${t}. Eyni dövrdən olan şairlər sayılmır. Sıralama seçilmiş dəlil növlərinə görə dəyişir.`,
+    rPoets: 'Şairlər: neçə şair cavab yazıb', rPoems: 'Şeirlər: neçə şair cavab yazıb', rAns: 'Ən çox cavab yazanlar: neçə şairə',
+    methodH: 'Necə tapılıb',
+    method: (s) => `
+<p>Mətnlər: kitabxana.az-da oxucunun gördüyü, orijinalı Azərbaycan dilində (latın əlifbası) olan ${nf(s.poems)} şeir. Fars dilindəki şeirlər, nəsr və tərcümələr daxil deyil. Hər şairin tarixi: doğum ili, yoxdursa ölüm ili − 55, yoxdursa şeirlərinin illərinin ortası − 25. Cavab yazan həmişə sonrakı şairdir; fərq 8 ildən azdırsa istiqamət bəlli sayılmır.</p>
+<ol>
+<li><b>Adı çəkilib.</b> Başlıqda (və ya şeirin altındakı kursiv qeyddə) «nəzirə, təxmis, təsdis, tərbi, beştətmə, bənzətmə, tətəbbö, cavab» sözü ilə bərabər başqa şairin adı və ya təxəllüsü. Şair tapılır; şeirin özü sətir və ya qafiyə üzrə uyğun gəlirsə, şeir də tapılır.</li>
+<li><b>Sətirlər gətirilib.</b> Təxmis və müxəmməs özgə şeirin sətirlərini olduğu kimi saxlayır. Normallaşdırılmış (hərf kiçildilir, ə→e, ş→s və s.) ən azı 3 sözlük sətirlər müxtəlif şairlərin şeirlərində axtarılır; ən azı 3 ortaq sətir, əsas şeirin ən azı 30%-i. Eyni mətnin iki adda təkrarı (hər iki tərəfdə 60%-dən çox) və aşıq deyişmələri çıxarılır.</li>
+<li><b>Eyni rədif və qafiyə.</b> İkibeytlik bənd quruluşlu şeirdə (qəzəl, qəsidə) hər ikinci sətrin sonunda ən azı 70% təkrarlanan sonluq tapılır. İki şairin şeirləri eyni 4+ hərflik sonluğu paylaşırsa, rədif (təkrarlanan söz) üstəgəl ən azı 2 qafiyə hərfi uyğun gəlirsə və sətirlərin hecaları ±2 daxilindədirsə, namizəd sayılır. Güclü: 9+ hərf və kitabxanada bu cür bitən ən çox 4 şeir, ya da 7+ hərf, ən çox 6 şeir və ≥2 ortaq qafiyə sözü. Zəif: 6+ hərf, ən çox 12 şeir.</li>
+</ol>
+<p>Əlyazma ilə yoxlama (mən özüm oxudum, müstəqil ikinci oxucu yoxdur):</p>
+<div class="scroll"><table class="tbl"><thead><tr><th>Üsul</th><th>Əlaqə</th><th>Yoxlanıb</th><th>Nəticə</th></tr></thead><tbody>
+<tr><td>Adı çəkilib</td><td class="n">${s.nE}</td><td class="n">hamısı</td><td>Qayda əvvəl 20 başlıq tapdı, 3-ü səhv idi (ad cavab verilən şair deyil); ayrıca istisna kimi çıxarıldı, qalan ${s.nE} doğrudur.</td></tr>
+<tr><td>Sətirlər gətirilib</td><td class="n">${s.nQ}</td><td class="n">hamısı</td><td>İlk keçiddə 17 əlaqə, ~7-si doğru. İstiqamət (tarixə görə), deyişmə və eyni mahnının variantlarına qaydalar əlavə edildikdən sonra ${s.nQ}/${s.nQ} doğru. Qaydalar həmin nümunə üzərində qurulub, ona görə bu müstəqil dəqiqlik deyil. Üsul çox az şey tapır: sətirlər çox vaxt bir qədər dəyişir.</td></tr>
+<tr><td>Rədif və qafiyə: güclü</td><td class="n">${s.nB}</td><td class="n">40 təsadüfi</td><td>35 aydın nəzirə cütü (eyni rədif və qafiyə, eyni hecalar), 4 zəif (sonluq ortaqdır, ancaq çox yayılmış quruluşdur), 1 xəta (başlıq sətri bənd kimi oxunub). Yəni 88% aydın, 97% ən azı zəif doğru.</td></tr>
+<tr><td>Rədif və qafiyə: zəif</td><td class="n">${s.nC}</td><td class="n">40 təsadüfi</td><td>6 aydın, 33 zəif (çox yayılmış rədif, qısa qafiyə), 1 təsadüf. Çoxu bəlkə təsadüfdür, ona görə varsayılan olaraq gizlədilib.</td></tr>
+</tbody></table></div>
+<p>Nə deməli deyil: eyni rədif və qafiyə şeirin cavab olduğunu <i>sübut etmir</i>, yalnız nəzirənin formal əlamətini göstərir (vəzn yoxlanmayıb, yalnız hecaların sayı). Bir neçə şeir eyni sonluğu paylaşanda hamısı bir-birinə bağlanır, halbuki əsl nümunə bunlardan yalnız biri ola bilər. Kitabxana klassik şairlərin hamısını əhatə etmir, buna görə «ən çox cavab alan» kitabxanadakı şeirlərə görədir.</p>
+<p>Mənbələr və lisenziyalar: şeirlərin mətnləri kitabxana.az-dadır (hər mətnin mənbəyi orada göstərilib; burada yalnız başlıq və ilk iki sətir göstərilir). Cavab əlaqələri (<code>data/nezire.json</code>) CC0. Qrafik: D3 7.9.0 (ISC).</p>`,
+    foot: (d) => `Məlumat CC0, mətnlər kitabxana.az-dadır. Tikilib: ${d}. Qayda və qurma əmri: <a href="https://github.com/azadbilik/azadbilik.github.io/tree/main/sebeke/nezire">README</a>.`,
+  },
+  ru: {
+    doc: 'Сеть назира · Азад Билик', title: 'Сеть назира', sub: 'Кто кому отвечал стихами', library: 'Китабхана',
+    lede: (p, k, a) => `Классики отвечали друг другу стихами: назира, тахмис, ответ. В ${p} стихотворениях Китабханы мы искали эти следы тремя способами: имя поэта в заглавии, строки, дословно взятые из чужого стихотворения, одинаковые редиф и кафия. Здесь ${k} связей между ${a} поэтами. Слева старший поэт, справа тот, кто ему ответил.`,
+    netH: 'Сеть ответных стихотворений', poets: 'Поэты', poems: 'Стихи',
+    tA: 'Назван в заглавии или строки взяты', tB: 'Те же редиф и кафия: сильное', tC: 'Те же редиф и кафия: слабое',
+    era: ['XIV–XV вв.', 'XVI–XVII', 'XVIII', 'XIX', 'первая половина XX', 'с 1950'],
+    graphT: (m, n, e) => `${m === 'poets' ? 'Поэты' : 'Стихи'}: ${n} узлов, ${e} связей`,
+    hint: 'По горизонтали год рождения поэта. Коснитесь узла или линии. Пунктир: поэты одного времени, кто кому отвечал, неизвестно. Размер узла: сколько поэтов ему ответили.',
+    tipPoet: (n, a, b) => `${n ? `ответили: ${n}` : 'ответов нет'}${b ? ` · сам ответил ${b}` : ''}`,
+    tipPoem: (n) => (n ? `ответили: ${n}` : 'ответов нет'),
+    open: 'на kitabxana.az', pick: 'Выберите поэта, стихотворение или линию.',
+    answered: 'Ему отвечали', answers: 'Кому он отвечал', answeredP: 'Ответы на это стихотворение', answersP: 'Это стихотворение отвечает на',
+    nobody: 'На этом уровне никого.', pairsH: (n) => `Пар стихотворений: ${n}`,
+    model: 'Образец (более ранний)', reply: 'Ответ', quoted: (n, of) => `Из ${of} строк образца здесь дословно ${n}:`,
+    mA: 'назван', mQ: 'строки взяты', mF: 'редиф и кафия', mFw: 'редиф и кафия (слабо)',
+    nameNote: (h) => `Заглавие: <b>${esc(h)}</b>`,
+    endNote: (m, r, c, sh, und) => `Одинаковое окончание: <b>${m}</b> букв (редиф примерно ${r}, кафия ${m - r}). В библиотеке так оканчиваются ${c} стихотворений${sh ? `, общих рифмующихся слов: ${sh}` : ''}.${und ? ' Поэты одного времени: направление неизвестно.' : ''}`,
+    namedOnly: 'Назван в заглавии, но на какое стихотворение ответ, не найдено', namedFrom: (a, h) => `<b>${esc(a)}</b>: «${esc(h)}»`,
+    rankH: 'Кому отвечали чаще всего', rankNote: (t) => `Считается: ${t}. Поэты одного времени не считаются. Рейтинг меняется с выбранными видами доказательств.`,
+    rPoets: 'Поэты: сколько поэтов ответили', rPoems: 'Стихи: сколько поэтов ответили', rAns: 'Кто отвечал чаще: скольким поэтам',
+    methodH: 'Как найдено',
+    method: (s) => `
+<p>Тексты: ${nf(s.poems)} стихотворений на азербайджанском (латиница), которые читатель видит на kitabxana.az. Персидские стихи, проза и переводы не входят. Время поэта: год рождения, иначе год смерти − 55, иначе середина лет его стихов − 25. Отвечает всегда более поздний поэт; если разница меньше 8 лет, направление считается неизвестным.</p>
+<ol>
+<li><b>Назван.</b> В заглавии (или в курсивной пометке под ним) слово «назира, тахмис, тасдис, тарби, бештетме, бензетме, тетеббё, джаваб» и рядом имя или псевдоним другого поэта. Поэт находится; само стихотворение находится, если совпадают строки или рифма.</li>
+<li><b>Строки взяты.</b> Тахмис и мухаммас хранят чужие строки дословно. Строки из 3+ слов (нормализованные: строчные, ə→e, ş→s и т. д.) ищутся в стихах разных поэтов: не менее 3 общих строк и не менее 30% образца. Один и тот же текст под двумя именами (более 60% с обеих сторон) и ашугские состязания отбрасываются.</li>
+<li><b>Те же редиф и кафия.</b> В стихах из двустиший (газель, касыда) ищется окончание, общее для 70% и более чётных строк. Пара-кандидат: общее окончание не короче 4 букв, редиф (повторяющиеся слова) плюс не менее 2 букв кафии, число слогов в строке отличается не более чем на 2. Сильное: 9+ букв и так оканчиваются не более 4 стихотворений, либо 7+ букв, не более 6 стихотворений и 2 общих рифмующихся слова. Слабое: 6+ букв, не более 12 стихотворений.</li>
+</ol>
+<p>Проверка вручную (читал я сам, второго независимого читателя нет):</p>
+<div class="scroll"><table class="tbl"><thead><tr><th>Способ</th><th>Связей</th><th>Проверено</th><th>Итог</th></tr></thead><tbody>
+<tr><td>Назван</td><td class="n">${s.nE}</td><td class="n">все</td><td>Правило сначала нашло 20 заглавий, 3 были ошибочными (имя не того, кому отвечают); они вынесены в исключения, остальные ${s.nE} верны.</td></tr>
+<tr><td>Строки взяты</td><td class="n">${s.nQ}</td><td class="n">все</td><td>Сначала 17 связей, верных около 7. После правил (направление по датам, состязания, варианты одной песни) ${s.nQ} из ${s.nQ} верны. Правила подобраны на этой же выборке, поэтому это не независимая точность. Способ находит мало: строки часто слегка меняются.</td></tr>
+<tr><td>Редиф и кафия: сильное</td><td class="n">${s.nB}</td><td class="n">40 случайных</td><td>35 ясных пар назира (те же редиф, кафия и слоги), 4 слабых (окончание общее, но оборот очень частый), 1 ошибка (заглавная строка прочитана как строфа). 88% ясных, 97% хотя бы слабых.</td></tr>
+<tr><td>Редиф и кафия: слабое</td><td class="n">${s.nC}</td><td class="n">40 случайных</td><td>6 ясных, 33 слабых (частый редиф, короткая кафия), 1 совпадение. Многое, вероятно, случайно, поэтому по умолчанию скрыто.</td></tr>
+</tbody></table></div>
+<p>Что это не значит: одинаковые редиф и кафия <i>не доказывают</i>, что стихотворение ответ, а лишь формальный признак назира (размер не проверялся, только число слогов). Когда окончание есть у нескольких стихов, все они связаны друг с другом, хотя настоящий образец может быть один. Библиотека не охватывает всех классиков, поэтому «чаще всего отвечали» относится к стихам в ней.</p>
+<p>Источники и лицензии: тексты стихов на kitabxana.az (источник каждого указан там; здесь только заглавие и первые две строки). Данные о связях (<code>data/nezire.json</code>) CC0. Граф: D3 7.9.0 (ISC).</p>`,
+    foot: (d) => `Данные CC0, тексты на kitabxana.az. Собрано: ${d}. Правила и команда сборки: <a href="https://github.com/azadbilik/azadbilik.github.io/tree/main/sebeke/nezire">README</a>.`,
+  },
+  en: {
+    doc: 'The answer-poem network · Azad Bilik', title: 'The answer-poem network', sub: 'Who answered whose poem', library: 'Kitabxana',
+    lede: (p, k, a) => `Classical poets answered each other in verse: nazīra, takhmīs, replies. In the ${p} poems of the kitabxana.az library we looked for the traces three ways: a poet named in a title, lines quoted word for word, the same radif and qafiya. Here are ${k} links between ${a} poets. The older poet is on the left, the one who answered on the right.`,
+    netH: 'The network of answer poems', poets: 'Poets', poems: 'Poems',
+    tA: 'Named in a title or lines quoted', tB: 'Same radif and qafiya: strong', tC: 'Same radif and qafiya: weak',
+    era: ['14th–15th c.', '16th–17th', '18th', '19th', 'early 20th', 'from 1950'],
+    graphT: (m, n, e) => `${m === 'poets' ? 'Poets' : 'Poems'}: ${n} nodes, ${e} links`,
+    hint: 'Horizontal axis: the poet’s birth year. Tap a node or a line. Dashed line: poets of one time, so who answered whom is unknown. Node size: how many poets answered it.',
+    tipPoet: (n, a, b) => `${n ? `answered by ${n}` : 'no answers'}${b ? ` · answered ${b}` : ''}`,
+    tipPoem: (n) => (n ? `answered by ${n} poets` : 'no answers'),
+    open: 'on kitabxana.az', pick: 'Pick a poet, a poem or a line in the network.',
+    answered: 'Answered by', answers: 'Answered', answeredP: 'Answers to this poem', answersP: 'This poem answers',
+    nobody: 'Nobody at this level.', pairsH: (n) => `${n} poem pair${n === 1 ? '' : 's'}`,
+    model: 'The model (older)', reply: 'The answer', quoted: (n, of) => `${n} of the model’s ${of} lines are quoted here word for word:`,
+    mA: 'named', mQ: 'lines quoted', mF: 'radif and qafiya', mFw: 'radif and qafiya (weak)',
+    nameNote: (h) => `Title: <b>${esc(h)}</b>`,
+    endNote: (m, r, c, sh, und) => `Same ending: <b>${m}</b> letters (radif about ${r}, qafiya ${m - r}). ${c} poems in the library end this way${sh ? `; ${sh} rhyme words in common` : ''}.${und ? ' The poets are of one time: the direction is unknown.' : ''}`,
+    namedOnly: 'Named in a title, but the poem it answers was not found', namedFrom: (a, h) => `<b>${esc(a)}</b>: “${esc(h)}”`,
+    rankH: 'Most answered', rankNote: (t) => `Counted: ${t}. Poets of one time are not counted. The ranking follows the kinds of evidence switched on above.`,
+    rPoets: 'Poets: how many poets answered', rPoems: 'Poems: how many poets answered', rAns: 'Who answered most: how many poets',
+    methodH: 'How it was found',
+    method: (s) => `
+<p>Texts: the ${nf(s.poems)} poems readers can see on kitabxana.az whose original is Azerbaijani in the Latin script. Persian verse, prose and translations are left out. A poet’s date: the birth year, else death − 55, else the median year of their dated poems − 25. The later poet is the one who answers; within 8 years the direction counts as unknown.</p>
+<ol>
+<li><b>Named.</b> A title (or an italic note under it) with one of «nəzirə, təxmis, təsdis, tərbi, beştətmə, bənzətmə, tətəbbö, cavab» beside another poet’s name or pen name. That finds the poet; the poem itself is found when its lines or its rhyme match.</li>
+<li><b>Lines quoted.</b> A təxmis or müxəmməs keeps another poem’s lines unchanged. Lines of 3+ words (normalised: lower case, ə→e, ş→s and so on) are looked up across poems of different poets: at least 3 shared lines, at least 30% of the model. The same text under two names (over 60% on both sides) and aşıq debates are dropped.</li>
+<li><b>Same radif and qafiya.</b> In poems made of two-line stanzas (ghazal, qasida) the ending shared by 70% or more of the even lines is found. A candidate pair: a shared ending of 4+ letters, the radif (the repeated words) plus at least 2 letters of the qafiya, and syllables per line within ±2. Strong: 9+ letters and at most 4 poems end this way, or 7+ letters, at most 6 poems and 2 rhyme words in common. Weak: 6+ letters, at most 12 poems.</li>
+</ol>
+<p>Checked by hand (I read them myself; there is no independent second reader):</p>
+<div class="scroll"><table class="tbl"><thead><tr><th>Method</th><th>Links</th><th>Checked</th><th>Result</th></tr></thead><tbody>
+<tr><td>Named</td><td class="n">${s.nE}</td><td class="n">all</td><td>The rule first found 20 titles, 3 wrong (the name is not the poet answered); they are listed as exceptions, the other ${s.nE} are right.</td></tr>
+<tr><td>Lines quoted</td><td class="n">${s.nQ}</td><td class="n">all</td><td>First pass: 17 links, about 7 right. After rules for direction (by date), debates and variants of one song: ${s.nQ} of ${s.nQ} right. The rules were tuned on this very sample, so it is not an independent precision. The method finds little: quoted lines are often changed a little.</td></tr>
+<tr><td>Radif and qafiya: strong</td><td class="n">${s.nB}</td><td class="n">40 at random</td><td>35 clear nazīra pairs (same radif, qafiya and syllables), 4 weak (a shared ending, but a very common frame), 1 error (a heading line read as a stanza). 88% clear, 97% at least weak.</td></tr>
+<tr><td>Radif and qafiya: weak</td><td class="n">${s.nC}</td><td class="n">40 at random</td><td>6 clear, 33 weak (a common radif, a short qafiya), 1 coincidence. Much of it is probably chance, so it is off by default.</td></tr>
+</tbody></table></div>
+<p>What this does not say: the same radif and qafiya do <i>not prove</i> that a poem is an answer; they show the formal mark of a nazīra (the metre is not checked, only the syllable count). When several poems share an ending they are all linked to each other, though the real model may be one. The library does not hold every classical poet, so «most answered» means among the poems in it.</p>
+<p>Sources and licences: the poems’ texts are on kitabxana.az (each text’s source is given there; here only the title and the first two lines are shown). The links data (<code>data/nezire.json</code>) is CC0. Graph: D3 7.9.0 (ISC).</p>`,
+    foot: (d) => `Data CC0, texts on kitabxana.az. Built: ${d}. Rules and rebuild command: <a href="https://github.com/azadbilik/azadbilik.github.io/tree/main/sebeke/nezire">README</a>.`,
+  },
+};
+const t = (k) => T[lang][k];
+const KX = () => `https://kitabxana.az${lang === 'az' ? '' : '/' + lang}`;
+const nameOf = (p) => p[lang] || p.az;
+
+// ---- data
+let D, poets, poems, plinks, named;
+const ERA = [[1500, 'var(--k14)'], [1700, 'var(--k16)'], [1800, 'var(--k18)'], [1900, 'var(--k19)'], [1950, 'var(--k20)'], [9999, 'var(--k21)']];
+const eraOf = (d) => ERA.findIndex(([lim]) => (d ?? 1870) < lim);
+const colour = (d) => ERA[eraOf(d)][1];
+
+let mode = 'poets';
+const tiers = { A: true, B: true, C: false };
+let sel = null;          // { k: 'poet'|'poem'|'edge', id }
+let built = null;        // the drawn graph
+
+function prepare(d) {
+  D = d; poets = d.poets; poems = d.poems; named = d.named;
+  plinks = d.links.map((l, i) => ({ ...l, i, pa: poems[l.a].p, pb: poems[l.b].p, und: l.k.f?.und && !l.k.q && !l.k.e ? 1 : 0 }));
+}
+const active = () => plinks.filter((l) => tiers[l.tier]);
+const tierName = (l) => (l.tier === 'C' ? 'mFw' : 'mF');
+
+// Poet-level edges: from the answering poet to the poet answered
+function poetEdges() {
+  const m = new Map();
+  const add = (a, b, kind, extra) => {
+    const key = `${a}|${b}`;
+    const e = m.get(key) ?? m.set(key, { from: a, to: b, links: [], named: [], und: true, tiers: new Set() }).get(key);
+    if (kind === 'l') { e.links.push(extra); e.tiers.add(extra.tier); if (!extra.und) e.und = false; }
+    else { e.named.push(extra); e.tiers.add('A'); if (!extra.und) e.und = false; }
+  };
+  for (const l of active()) add(l.pa, l.pb, 'l', l);
+  if (tiers.A) for (const n of named) { const pa = poems[n.a].p; if (n.rev) add(n.to, pa, 'n', n); else add(pa, n.to, 'n', n); }
+  return [...m.values()];
+}
+
+// ---- layout
+const svg = d3.select('#g');
+const stage = $('stage');
+const tip = $('tip');
+function counts(edges, nodeOf) {
+  const ans = new Map(), by = new Map();       // answered by (distinct poets), answers (distinct poets)
+  for (const e of edges) {
+    if (e.und) continue;
+    (ans.get(e.to) ?? ans.set(e.to, new Set()).get(e.to)).add(poets_of(e.from));
+    (by.get(e.from) ?? by.set(e.from, new Set()).get(e.from)).add(poets_of(e.to));
+  }
+  return { ans, by };
+}
+let poets_of = (x) => x;
+
+function build() {
+  let nodes, edges;
+  if (mode === 'poets') {
+    poets_of = (x) => x;
+    edges = poetEdges();
+    const ids = new Set(edges.flatMap((e) => [e.from, e.to]));
+    nodes = [...ids].map((id) => ({ id, label: nameOf(poets[id]), date: poets[id].date, kind: 'poet' }));
+  } else {
+    poets_of = (x) => poems[x].p;
+    edges = active().map((l) => ({ from: l.a, to: l.b, link: l, und: l.und, tiers: new Set([l.tier]) }));
+    const ids = new Set(edges.flatMap((e) => [e.from, e.to]));
+    nodes = [...ids].map((id) => ({ id, label: poems[id].t.replace(/^Qəzəl:\s*/, ''), date: poets[poems[id].p].date, kind: 'poem', poet: poems[id].p }));
+  }
+  const { ans, by } = counts(edges);
+  nodes.forEach((n) => { n.in = ans.get(n.id)?.size ?? 0; n.out = by.get(n.id)?.size ?? 0; n.r = (mode === 'poets' ? 4.5 + 2.4 * Math.sqrt(n.in) : 3.2 + 3 * Math.sqrt(n.in)); });
+  built = { nodes, edges, byId: new Map(nodes.map((n) => [n.id, n])) };
+  layout();
+}
+
+function layout() {
+  if (!built) return;
+  const W = Math.max(300, stage.clientWidth), H = phone() ? 560 : 560;
+  const m = { l: 18, r: 18, t: 14, b: 30 };
+  const x = d3.scaleLinear([1330, 1700, 2000], [m.l, m.l + (W - m.l - m.r) * 0.3, W - m.r]);   // the old centuries squeezed: nearly all the answering is later
+  const { nodes, edges, byId } = built;
+  const rnd = d3.randomLcg(7);
+  nodes.forEach((n) => { n.x = x(n.date ?? 1870); n.y = m.t + (H - m.t - m.b) * rnd(); });
+  const links = edges.map((e) => ({ source: byId.get(e.from), target: byId.get(e.to) }));
+  const sim = d3.forceSimulation(nodes)
+    .force('x', d3.forceX((n) => x(n.date ?? 1870)).strength(0.9))
+    .force('y', d3.forceY((H - m.b + m.t) / 2).strength(0.02))
+    .force('link', d3.forceLink(links).strength(0.04).distance(60))
+    .force('charge', d3.forceManyBody().strength(mode === 'poets' ? -40 : -6))
+    .force('collide', d3.forceCollide((n) => n.r + 1.6).strength(0.9))
+    .stop();
+  for (let i = 0; i < 320; i++) {
+    sim.tick();
+    nodes.forEach((n) => { n.y = Math.max(m.t + n.r, Math.min(H - m.b - n.r, n.y)); });
+  }
+  built.W = W; built.H = H; built.x = x; built.m = m;
+  draw();
+}
+
+function curve(a, b) {
+  const dx = b.x - a.x, dy = b.y - a.y, d = Math.hypot(dx, dy) || 1;
+  const bow = Math.min(90, d * 0.22);       // always bowed upward
+  const mx = (a.x + b.x) / 2 + Math.sign(dx || 1) * (dy / d) * bow, my = (a.y + b.y) / 2 - (Math.abs(dx) / d) * bow;
+  return `M${a.x.toFixed(1)},${a.y.toFixed(1)} Q${mx.toFixed(1)},${my.toFixed(1)} ${b.x.toFixed(1)},${b.y.toFixed(1)}`;
+}
+
+const edgeKey = (e) => `${e.from}>${e.to}`;
+function draw() {
+  const { nodes, edges, byId, W, H, x, m } = built;
+  svg.attr('viewBox', `0 0 ${W} ${H}`).attr('height', H);
+  $('g-t').textContent = t('graphT')(mode, nodes.length, edges.length);
+  svg.selectAll('*:not(title)').remove();
+  const axis = svg.append('g').attr('class', 'axis');
+  for (const yr of (W < 600 ? [1400, 1700, 1800, 1900, 2000] : [1400, 1500, 1600, 1700, 1800, 1900, 2000])) {
+    axis.append('line').attr('class', 'grid').attr('x1', x(yr)).attr('x2', x(yr)).attr('y1', m.t).attr('y2', H - m.b);
+    axis.append('text').attr('x', x(yr)).attr('y', H - 10).attr('text-anchor', 'middle').text(yr);
+  }
+  const ge = svg.append('g');
+  const ordered = [...edges].sort((a, b) => (a.tiers.has('C') && a.tiers.size === 1 ? -1 : 0) - (b.tiers.has('C') && b.tiers.size === 1 ? -1 : 0));
+  const path = ge.selectAll('g').data(ordered).join('g');
+  path.append('path').attr('class', (e) => `e${e.und ? ' und' : ''}${e.tiers.size === 1 && e.tiers.has('C') ? ' weak' : ''}`)
+    .attr('d', (e) => curve(byId.get(e.from), byId.get(e.to))).style('--c', (e) => colour(poets[mode === 'poets' ? e.from : poems[e.from].p].date));
+  path.append('path').attr('class', 'hit').attr('d', (e) => curve(byId.get(e.from), byId.get(e.to)))
+    .on('click', (ev, e) => { ev.stopPropagation(); select({ k: 'edge', id: edgeKey(e) }); })
+    .on('pointerenter', (ev, e) => tipEdge(ev, e)).on('pointerleave', () => { tip.hidden = true; });
+  const gn = svg.append('g');
+  gn.selectAll('circle').data([...nodes].sort((a, b) => b.r - a.r)).join('circle')
+    .attr('class', (n) => `n${n.date == null ? ' nodate' : ''}`).attr('cx', (n) => n.x).attr('cy', (n) => n.y).attr('r', (n) => n.r)
+    .style('--c', (n) => colour(n.date)).attr('tabindex', 0).attr('role', 'button').attr('aria-label', (n) => n.label)
+    .on('click', (ev, n) => { ev.stopPropagation(); select({ k: mode === 'poets' ? 'poet' : 'poem', id: n.id }); })
+    .on('keydown', (ev, n) => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); select({ k: mode === 'poets' ? 'poet' : 'poem', id: n.id }); } })
+    .on('pointerenter', (ev, n) => tipNode(ev, n)).on('pointerleave', () => { tip.hidden = true; });
+  // labels: the most answered always; the rest when there is room
+  const labelled = nodes.filter((n) => (mode === 'poets' ? n.in >= 2 || n.out >= 6 : n.in >= 2));
+  svg.append('g').selectAll('text').data(labelled).join('text').attr('class', 'lab').attr('x', (n) => n.x).attr('y', (n) => n.y - n.r - 3).attr('text-anchor', 'middle')
+    .text((n) => (n.label.length > 26 ? `${n.label.slice(0, 25)}…` : n.label));
+  svg.on('click', () => select(null));
+  paintSel();
+}
+
+function place(ev) {
+  const r = stage.getBoundingClientRect();
+  const tx = Math.min(Math.max(ev.clientX - r.left + 12, 6), Math.max(6, r.width - 250));
+  tip.style.left = `${tx}px`; tip.style.top = `${Math.max(6, ev.clientY - r.top + 14)}px`;
+}
+function tipNode(ev, n) {
+  tip.innerHTML = `<b>${esc(n.label)}</b>${mode === 'poets' ? esc(t('tipPoet')(n.in, 0, n.out)) : `${esc(nameOf(poets[n.poet]))}<br>${esc(t('tipPoem')(n.in))}`}`;
+  tip.hidden = false; place(ev);
+}
+function tipEdge(ev, e) {
+  const a = built.byId.get(e.from), b = built.byId.get(e.to);
+  tip.innerHTML = `<b>${esc(a.label)} → ${esc(b.label)}</b>`;
+  tip.hidden = false; place(ev);
+}
+
+// ---- selection
+function neighbours() {
+  const ids = new Set(), eks = new Set();
+  if (!sel) return { ids, eks };
+  const { edges } = built;
+  if (sel.k === 'edge') { const e = edges.find((x) => edgeKey(x) === sel.id); if (e) { ids.add(e.from); ids.add(e.to); eks.add(sel.id); } return { ids, eks }; }
+  const wantMode = sel.k === 'poet' ? 'poets' : 'poems';
+  if (wantMode !== mode) return { ids, eks };
+  ids.add(sel.id);
+  for (const e of edges) if (e.from === sel.id || e.to === sel.id) { ids.add(e.from); ids.add(e.to); eks.add(edgeKey(e)); }
+  return { ids, eks };
+}
+function paintSel() {
+  const { ids, eks } = neighbours();
+  svg.classed('dim', !!sel && ids.size > 0);
+  svg.selectAll('.n').classed('hi', (n) => ids.has(n.id)).classed('sel', (n) => !!sel && sel.id === n.id);
+  svg.selectAll('path.e').classed('hi', (e) => eks.has(edgeKey(e))).classed('sel', (e) => sel?.k === 'edge' && sel.id === edgeKey(e));
+  svg.selectAll('.lab').classed('hi', (n) => ids.has(n.id));
+}
+function select(s) {
+  sel = s;
+  paintSel();
+  renderDetail();
+}
+
+// ---- evidence
+function tail(line, m) {            // the last m letters of a line, as written
+  let i = line.length, n = 0;
+  while (i > 0 && n < m) { i--; if (/\p{L}/u.test(line[i])) n++; }
+  return i;
+}
+const hl = (line, m) => { const i = tail(line, m); return `${esc(line.slice(0, i))}<mark>${esc(line.slice(i))}</mark>`; };
+const clean = (s) => s.replace(/[“”«»"]/g, '').trim();
+const kx = (slug) => `${KX()}/works/${slug}`;
+const kxa = (slug) => `${KX()}/authors/${slug}`;
+
+function side(h, p, body) {
+  const po = poets[p.p];
+  return `<div class="side"><h4>${esc(h)}</h4><div class="ti"><a href="${kx(p.slug)}" target="_blank" rel="noopener">${esc(p.t.replace(/^Qəzəl:\s*/, ''))}</a></div><div class="by"><a href="${kxa(po.slug)}" target="_blank" rel="noopener">${esc(nameOf(po))}</a>${po.born ? ` · ${po.born}${po.died ? `–${po.died}` : ''}` : ''}</div>${body}</div>`;
+}
+function pairHtml(l) {
+  const A = poems[l.a], B = poems[l.b];
+  const chips = [];
+  if (l.k.e) chips.push(`<span class="chip A">${esc(t('mA'))}</span>`);
+  if (l.k.q) chips.push(`<span class="chip A">${esc(t('mQ'))}</span>`);
+  if (l.k.f) chips.push(`<span class="chip ${l.tier === 'B' ? 'B' : ''}">${esc(t(l.tier === 'C' ? 'mFw' : 'mF'))}</span>`);
+  const f = l.k.f;
+  const matla = (p) => `<div class="vs">${p.m.map((x) => `<div>${f ? hl(clean(x), f.m) : esc(clean(x))}</div>`).join('')}</div>`;
+  let note = '';
+  if (l.k.e) note += `<p class="nt">${t('nameNote')(l.k.e.head)}</p>`;
+  if (l.k.q) note += `<p class="nt">${esc(t('quoted')(l.k.q.n, l.k.q.of))}</p><div class="vs">${l.k.q.ev.map((x) => `<div>${esc(clean(x))}</div>`).join('')}</div>`;
+  if (f) note += `<p class="nt">${t('endNote')(f.m, f.r, f.c, f.sh, f.und)}</p>`;
+  return `<div class="pair"><div class="chips">${chips.join('')}</div><div class="two">${side(t('model'), B, matla(B))}${side(t('reply'), A, matla(A))}</div>${note}</div>`;
+}
+
+// ---- detail panel
+function renderDetail() {
+  const el = $('detail');
+  if (!sel) { el.innerHTML = ''; return; }
+  const { edges } = built;
+  const row = (label, sub, n, on, k, id) => `<li><button type="button" data-k="${k}" data-id="${esc(id)}" class="${on ? 'on' : ''}"><span>${label}${sub ? ` <small>${sub}</small>` : ''}</span><small>${n}</small></button></li>`;
+  if (sel.k === 'edge') {
+    const e = edges.find((x) => edgeKey(x) === sel.id);
+    if (!e) { el.innerHTML = ''; return; }
+    el.innerHTML = edgeDetail(e);
+    return;
+  }
+  if (sel.k === 'poet') {
+    const p = poets[sel.id];
+    const inE = edges.filter((e) => e.to === sel.id), outE = edges.filter((e) => e.from === sel.id);
+    const list = (es, side2) => es.length ? `<ul>${es.map((e) => { const o = poets[side2 === 'from' ? e.from : e.to]; const n = e.links.length + e.named.length; return row(esc(nameOf(o)), e.und ? '≈' : '', n, false, 'edge', edgeKey(e)); }).join('')}</ul>` : `<p class="none">${esc(t('nobody'))}</p>`;
+    el.innerHTML = `<div class="dh"><div><b>${esc(nameOf(p))}</b><span class="yrs">${p.born ? `${p.born}${p.died ? `–${p.died}` : ''}` : ''}</span></div><a href="${kxa(p.slug)}" target="_blank" rel="noopener">${esc(t('open'))} →</a></div>
+      <div class="cols"><div><h3>${esc(t('answered'))} (${inE.length})</h3>${list(inE, 'from')}</div><div><h3>${esc(t('answers'))} (${outE.length})</h3>${list(outE, 'to')}</div></div>`;
+    return;
+  }
+  // a poem
+  const p = poems[sel.id], po = poets[p.p];
+  const inE = edges.filter((e) => e.to === sel.id), outE = edges.filter((e) => e.from === sel.id);
+  const list = (es, side2) => es.length ? `<ul>${es.map((e) => { const o = poems[side2 === 'from' ? e.from : e.to]; return row(`${esc(o.t.replace(/^Qəzəl:\s*/, '').slice(0, 60))}`, esc(nameOf(poets[o.p])), '', false, 'edge', edgeKey(e)); }).join('')}</ul>` : `<p class="none">${esc(t('nobody'))}</p>`;
+  el.innerHTML = `<div class="dh"><div><b>${esc(p.t.replace(/^Qəzəl:\s*/, ''))}</b><span class="yrs">${esc(nameOf(po))}</span></div><a href="${kx(p.slug)}" target="_blank" rel="noopener">${esc(t('open'))} →</a></div>
+    <div class="cols"><div><h3>${esc(t('answeredP'))} (${inE.length})</h3>${list(inE, 'from')}</div><div><h3>${esc(t('answersP'))} (${outE.length})</h3>${list(outE, 'to')}</div></div>`;
+}
+function edgeDetail(e) {
+  const a = built.byId.get(e.from), b = built.byId.get(e.to);
+  if (mode === 'poems') return `<div class="ev">${pairHtml(e.link)}</div>`;
+  const n = e.links.length;
+  const named1 = e.named.map((x) => `<p class="nt">${t('namedFrom')(nameOf(poets[poems[x.a].p]), x.head)}</p>`).join('');
+  return `<div class="dh"><div><b>${esc(a.label)} → ${esc(b.label)}</b></div></div>
+    ${n ? `<p class="hint">${esc(t('pairsH')(n))}</p>` : ''}
+    <div class="ev">${e.links.sort((x, y) => x.tier.localeCompare(y.tier)).map(pairHtml).join('')}${e.named.length ? `<div class="pair"><div class="chips"><span class="chip A">${esc(t('mA'))}</span></div>${n ? '' : `<p class="nt" style="margin-top:0">${esc(t('namedOnly'))}</p>`}${named1}</div>` : ''}</div>`;
+}
+$('detail').addEventListener('click', (ev) => {
+  const b = ev.target.closest('button[data-k]'); if (!b) return;
+  if (b.dataset.k === 'edge') {
+    // an edge of the other level opens in the current one
+    select({ k: 'edge', id: b.dataset.id });
+    $('detail').scrollIntoView({ block: 'nearest', behavior: still() ? 'auto' : 'smooth' });
+  }
+});
+
+// ---- ranking
+function rank() {
+  const edges = (mode === 'poets' ? poetEdges() : null);
+  const pe = edges ?? poetEdges();
+  const ans = new Map(), by = new Map();
+  for (const e of pe) { if (e.und) continue; (ans.get(e.to) ?? ans.set(e.to, new Set()).get(e.to)).add(e.from); (by.get(e.from) ?? by.set(e.from, new Set()).get(e.from)).add(e.to); }
+  const poemAns = new Map();
+  for (const l of active()) { if (l.und) continue; (poemAns.get(l.b) ?? poemAns.set(l.b, new Set()).get(l.b)).add(l.pa); }
+  const top = (m, k) => [...m].sort((x, y) => y[1].size - x[1].size || String(x[0]).localeCompare(String(y[0]))).slice(0, k);
+  const pr = (id, n, k, sub) => `<li><button type="button" data-rk="${k}" data-id="${id}"><span><i style="--c:${colour(poets[k === 'poem' ? poems[id].p : id].date)}"></i>${esc(k === 'poem' ? poems[id].t.replace(/^Qəzəl:\s*/, '') : nameOf(poets[id]))}${sub ? `<em>${esc(sub)}</em>` : ''}</span><small>${n}</small></button></li>`;
+  $('r1').innerHTML = top(ans, 10).map(([id, s]) => pr(id, s.size, 'poet')).join('');
+  $('r2').innerHTML = top(poemAns, 10).map(([id, s]) => pr(id, s.size, 'poem', nameOf(poets[poems[id].p]))).join('');
+  $('r3').innerHTML = top(by, 10).map(([id, s]) => pr(id, s.size, 'poet')).join('');
+}
+for (const id of ['r1', 'r2', 'r3']) $(id).addEventListener('click', (ev) => {
+  const b = ev.target.closest('button[data-rk]'); if (!b) return;
+  const k = b.dataset.rk, v = +b.dataset.id;
+  setMode(k === 'poem' ? 'poems' : 'poets');
+  select({ k, id: v });
+  $('g').scrollIntoView({ block: 'center', behavior: still() ? 'auto' : 'smooth' });
+});
+
+// ---- controls
+function controls() {
+  document.querySelectorAll('[data-mode]').forEach((b) => b.setAttribute('aria-pressed', b.dataset.mode === mode));
+  $('tiers').innerHTML = ['A', 'B', 'C'].map((k) => `<label><input type="checkbox" data-tier="${k}"${tiers[k] ? ' checked' : ''}>${esc(t('t' + k))}</label>`).join('');
+  $('legend').innerHTML = t('era').map((e, i) => `<span><i style="--c:${ERA[i][1]}"></i>${esc(e)}</span>`).join('');
+  $('hint').textContent = t('hint');
+}
+$('tiers').addEventListener('change', (ev) => {
+  const k = ev.target.dataset.tier; if (!k) return;
+  tiers[k] = ev.target.checked;
+  if (!Object.values(tiers).some(Boolean)) { tiers.A = true; controls(); }
+  refresh();
+});
+function setMode(m) {
+  if (m === mode) return;
+  mode = m; sel = null; controls(); refresh();
+}
+document.querySelectorAll('[data-mode]').forEach((b) => b.onclick = () => { setMode(b.dataset.mode); });
+
+function stats() {
+  const by = { A: 0, B: 0, C: 0 }; plinks.forEach((l) => by[l.tier]++);
+  const nE = named.length + plinks.filter((l) => l.k.e).length;
+  return { poems: D.stats.poems, nE, nQ: plinks.filter((l) => l.k.q).length, nB: by.B, nC: by.C };
+}
+function lists() {
+  const s = stats();
+  const pe = poetEdges();
+  const poetsIn = new Set(pe.flatMap((e) => [e.from, e.to])).size;
+  $('lede').textContent = t('lede')(nf(D.stats.poems), nf(pe.length), nf(poetsIn));
+  $('method').innerHTML = t('method')(s);
+  $('foot').innerHTML = t('foot')(D.built);
+  const act = ['A', 'B', 'C'].filter((k) => tiers[k]).map((k) => t('t' + k).toLowerCase());
+  $('rankNote').textContent = t('rankNote')(act.join('; '));
+  rank();
+}
+function refresh() {
+  if (!D) return;
+  build(); lists();
+  if (sel) { const ok = neighbours().ids.size > 0 || sel.k === 'edge'; if (!ok) sel = null; }
+  paintSel(); renderDetail();
+}
+
+function applyLang() {
+  document.documentElement.lang = lang;
+  document.title = t('doc');
+  document.querySelectorAll('[data-i18n]').forEach((e) => e.textContent = t(e.dataset.i18n));
+  document.querySelectorAll('[data-lang]').forEach((b) => b.setAttribute('aria-pressed', b.dataset.lang === lang));
+  document.querySelectorAll('[data-keep-lang]').forEach((a) => { const u = new URL(a.getAttribute('href'), location.href); if (lang === 'az') u.searchParams.delete('lang'); else u.searchParams.set('lang', lang); a.href = u.pathname + u.search; });
+  $('kx-nav').href = KX() + '/';
+  controls();
+  if (!D) return;
+  build(); lists(); paintSel(); renderDetail();
+}
+document.querySelectorAll('[data-lang]').forEach((b) => b.onclick = () => {
+  lang = b.dataset.lang;
+  try { localStorage.setItem('lang', lang); } catch {}
+  const u = new URL(location.href);
+  if (lang === 'az') u.searchParams.delete('lang'); else u.searchParams.set('lang', lang);
+  history.replaceState(null, '', u);
+  applyLang();
+});
+let rt;
+let lastW = 0;
+addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { if (stage.clientWidth !== lastW) { lastW = stage.clientWidth; layout(); paintSel(); } }, 150); });
+
+applyLang();
+if (typeof d3 === 'undefined') { $('hint').textContent = 'The graph library (d3) did not load.'; return; }
+fetch('data/nezire.json').then((r) => r.json()).then((d) => {
+  prepare(d);
+  lastW = stage.clientWidth;
+  const q = new URLSearchParams(location.search);
+  if (q.get('mode') === 'poems') mode = 'poems';
+  if (q.get('weak') === '1') tiers.C = true;
+  controls(); build(); lists();
+  const want = q.get('poet');
+  if (want) { const i = poets.findIndex((p) => p.slug === want); if (i >= 0 && mode === 'poets') select({ k: 'poet', id: i }); }
+  applyLang();
+});
+})();
+</script>
+</body>
+</html>
