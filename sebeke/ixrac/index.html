@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>İxrac məhsul fəzası · Azad Bilik</title>
+<meta name="description" content="Azərbaycanın ixrac məhsul fəzası: 1995–2024 hansı məhsullar rəqabətqabiliyyətlidir, neft-qaz payı və mövcud istehsala yaxın imkanlar. Azerbaijan's export product space, 1995–2024, after the Harvard Growth Lab's Atlas of Economic Complexity.">
+<meta name="theme-color" content="#F4EFE6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14100D" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://azadbilik.org/sebeke/ixrac/">
+<meta property="og:title" content="İxrac məhsul fəzası · Azerbaijan's export product space">
+<meta property="og:description" content="865 məhsul, 1995–2024: Azərbaycan nə ixrac edir, nəyə yaxındır. Harvard Growth Lab-ın açıq məlumatları (CC0).">
+<meta property="og:image" content="https://azadbilik.org/sebeke/ixrac/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="stylesheet" href="/shared/story-map.css">
+<style>
+  :root { --c0: #5B6B2E; --c1: #A86B12; --c2: #1F5C73; --c3: #7A5C8E; --c4: #A81E28; --c5: #7D6A57; --c6: #B8395C; --c7: #2F8F7A; --off: #9a9087; }
+  @media (prefers-color-scheme: dark) { :root { --c0: #A9BC6A; --c1: #E0A64A; --c2: #6FB3CC; --c3: #B596C9; --c4: #DA5A61; --c5: #BFA98F; --c6: #E37A93; --c7: #5FC2A5; --off: #6d645b; } }
+  html, body { height: auto; }
+  body { overflow-x: hidden; overflow-y: auto; }
+  .wrap { max-width: 64rem; margin: 0 auto; padding: 0 1.5rem; }
+  header.head { border-bottom: 1px solid var(--rule); padding: 1.25rem 0 1.5rem; }
+  header .lede { margin-top: .75rem; max-width: 42rem; font: 400 1.0625rem/1.55 var(--serif); }
+  h1 { font-size: clamp(2rem, 6vw, 3.25rem); }
+  section { padding: 1.75rem 0; border-bottom: 1px solid var(--rule); }
+  h2 { font: 400 1.5rem/1.2 var(--serif); letter-spacing: -.01em; }
+  .kicker { font: 500 .75rem var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .muted { color: var(--muted); }
+  .intro { max-width: 42rem; margin-top: .5rem; font-size: .9375rem; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  .bar { display: flex; flex-wrap: wrap; gap: .75rem 1.5rem; align-items: center; margin: 1rem 0 .75rem; }
+  .seg { display: inline-flex; flex-wrap: wrap; border: 1px solid var(--rule); border-radius: 3px; padding: 2px; }
+  .seg button { padding: .35rem .75rem; border-radius: 2px; font-size: .8125rem; color: var(--muted); }
+  .seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+  .yearbox { display: flex; align-items: center; gap: .6rem; flex: 1 1 18rem; min-width: 0; }
+  .yearbox output { font: 400 1.75rem/1 var(--serif); font-variant-numeric: tabular-nums; min-width: 3.2ch; }
+  .yearbox input[type=range] { flex: 1; min-width: 0; accent-color: var(--accent); height: 1.75rem; }
+  .play { width: 2.25rem; height: 2.25rem; border: 1px solid var(--ink); border-radius: 50%; display: grid; place-items: center; flex: none; }
+  .play:hover { background: var(--ink); color: var(--paper); }
+  .play svg { width: .8rem; height: .8rem; fill: currentColor; }
+
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 4px; overflow: hidden; margin-bottom: .9rem; }
+  .stats div { background: var(--paper); padding: .65rem .9rem; }
+  .stats b { display: block; font: 400 1.6rem/1.1 var(--serif); font-variant-numeric: tabular-nums; }
+  .stats span { font-size: .75rem; color: var(--muted); }
+
+  .gwrap { position: relative; border: 1px solid var(--rule); border-radius: 4px; background: var(--frame); }
+  #ps { display: block; width: 100%; height: min(78vh, 44rem); cursor: grab; }
+  #ps.drag { cursor: grabbing; } #ps.pan { touch-action: none; } #ps:not(.pan) { touch-action: pan-y; }
+  .zoom { position: absolute; right: .6rem; bottom: .6rem; display: grid; gap: 2px; }
+  .zoom button { width: 2rem; height: 2rem; background: var(--paper); border: 1px solid var(--rule); border-radius: 3px; font-size: 1.1rem; line-height: 1; }
+  .zoom button:hover { border-color: var(--ink); }
+  .card { position: absolute; z-index: 3; left: .75rem; top: .75rem; width: 17.5rem; background: var(--paper); border: 1px solid var(--rule); border-radius: 4px; padding: .7rem .9rem; box-shadow: 0 2px 14px rgb(0 0 0 / .14); font-size: .8125rem; max-height: calc(100% - 1.5rem); overflow: auto; }
+  .card[hidden] { display: none; }
+  .card .nm { font: 400 1.0625rem/1.25 var(--serif); padding-right: 1rem; }
+  .card .cl { display: flex; align-items: center; gap: .4rem; color: var(--muted); font-size: .75rem; margin-top: .2rem; }
+  .card .cl i, .lgd i, .opps .nm i { width: .6rem; height: .6rem; border-radius: 50%; background: var(--c); flex: none; display: inline-block; }
+  .card dl { display: grid; grid-template-columns: auto 1fr; gap: .1rem .6rem; margin-top: .45rem; }
+  .card dt { color: var(--muted); } .card dd { margin: 0; text-align: right; font-variant-numeric: tabular-nums; }
+  .card .peers { margin-top: .15rem; padding-top: .25rem; border-top: 1px solid var(--rule); display: grid; grid-template-columns: 1fr auto; gap: .05rem .6rem; }
+  .card .peers span:nth-child(even) { text-align: right; font-variant-numeric: tabular-nums; }
+  .card .peers .yes { font-weight: 600; }
+  .card .x { position: absolute; top: .3rem; right: .4rem; width: 1.5rem; height: 1.5rem; color: var(--muted); font-size: 1rem; }
+  .lgd { display: flex; flex-wrap: wrap; gap: .3rem 1rem; margin-top: .6rem; font-size: .75rem; color: var(--muted); }
+  .lgd span { display: inline-flex; align-items: center; gap: .35rem; }
+  .hint { font-size: .75rem; color: var(--muted); margin-top: .35rem; }
+
+  .opts { display: flex; flex-wrap: wrap; gap: .6rem 1.25rem; align-items: center; margin: 1rem 0 .5rem; font-size: .8125rem; }
+  .opts label { display: inline-flex; align-items: center; gap: .4rem; color: var(--muted); }
+  .opts select { font: inherit; font-size: .8125rem; color: var(--ink); background: var(--paper); border: 1px solid var(--rule); border-radius: 3px; padding: .25rem .4rem; }
+  .opps { list-style: none; padding: 0; counter-reset: o; }
+  .opps li { border-bottom: 1px solid var(--rule); }
+  .opps button { display: grid; grid-template-columns: 1.75rem minmax(0, 1fr) 6.5rem 3.5rem 4rem; gap: .5rem; align-items: center; width: 100%; text-align: left; padding: .4rem .25rem; font-size: .875rem; border-radius: 2px; }
+  .opps button:hover, .opps button.on { background: var(--rule); }
+  .opps .k { font-size: .75rem; color: var(--muted); text-align: right; font-variant-numeric: tabular-nums; }
+  .opps .nm { display: flex; align-items: center; gap: .45rem; min-width: 0; }
+  .opps .nm span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .opps .num { font-variant-numeric: tabular-nums; font-size: .8125rem; text-align: right; color: var(--muted); }
+  .opps .meter-c { display: block; min-width: 0; } .opps .meter { height: .4rem; background: var(--rule); border-radius: 2px; overflow: hidden; } .opps .meter b { display: block; height: 100%; background: var(--c); }
+  .opps li.head button { cursor: default; font-size: .6875rem; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; } .opps li.head button:hover { background: none; }
+  .btn { padding: .4rem .9rem; border: 1px solid var(--ink); border-radius: 3px; font-size: .8125rem; font-weight: 500; margin-top: .75rem; }
+  .btn:hover { background: var(--ink); color: var(--paper); }
+
+  .charts { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1rem; }
+  .charts figure { margin: 0; min-width: 0; }
+  .charts figcaption { font-size: .8125rem; font-weight: 500; margin-bottom: .25rem; }
+  .charts svg { display: block; width: 100%; height: auto; overflow: visible; touch-action: manipulation; }
+  .charts .axis line, .charts .grid { stroke: var(--rule); } .charts .grid { stroke-dasharray: 2 3; }
+  .charts .axis text { font: .6875rem var(--sans); fill: var(--muted); font-variant-numeric: tabular-nums; }
+  .charts .end { font: 500 .6875rem var(--sans); paint-order: stroke; stroke: var(--paper); stroke-width: 3px; }
+  .read { min-height: 2.6em; font-size: .75rem; color: var(--muted); margin-top: .35rem; font-variant-numeric: tabular-nums; }
+  .read b { color: var(--ink); font-weight: 600; }
+
+  .method { max-width: 44rem; display: grid; gap: .75rem; font-size: .9375rem; }
+  .method ul { padding-left: 1.25rem; display: grid; gap: .45rem; }
+  .method a { text-decoration-color: currentColor; }
+  footer { padding: 1.5rem 0 2.5rem; font-size: .75rem; color: var(--muted); max-width: 46rem; line-height: 1.6; }
+
+  @media (max-width: 48rem) {
+    .wrap { padding: 0 1rem; }
+    .stats { grid-template-columns: 1fr 1fr; }
+    #ps { height: min(70vh, 30rem); }
+    .card { position: relative; left: auto; top: auto; width: auto; margin: 0; border-radius: 0 0 4px 4px; border-width: 1px 0 0; box-shadow: none; max-height: none; }
+    .gwrap { display: flex; flex-direction: column; }
+    .zoom { bottom: auto; top: .5rem; } /* stays over the canvas, which comes first */
+    .gwrap .card { order: 2; }
+    .charts { grid-template-columns: 1fr; gap: 1.5rem; }
+    .opps button { grid-template-columns: 1.5rem minmax(0, 1fr) 3.2rem 3.4rem; } .opps .meter-c { display: none; }
+    .seg button { padding: .35rem .55rem; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="head">
+    <div class="top"><a class="brand" href="/" data-keep-lang><svg viewBox="0 0 512 512" aria-hidden="true"><g class="star"><rect x="126" y="126" width="260" height="260"/><polygon points="256,72 440,256 256,440 72,256"/></g><polygon class="gem" points="256,196 316,256 256,316 196,256"/></svg>Azad Bilik</a><nav><a href="https://kitabxana.az" id="kx-nav" data-i18n="library">Kitabxana</a><span class="langs" role="group" aria-label="Dil · Язык · Language"><button type="button" data-lang="az">AZ</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="en">EN</button></span></nav></div>
+    <h1 data-i18n="title">İxrac məhsul fəzası</h1>
+    <p class="sub" data-i18n="sub"></p>
+    <p class="lede" id="lede"></p>
+  </header>
+
+  <main>
+    <section aria-labelledby="h-space">
+      <h2 id="h-space" data-i18n="spaceH"></h2>
+      <p class="intro" id="spaceP"></p>
+      <div class="bar">
+        <div class="seg" role="group" id="countries" data-i18n-label="countryL"></div>
+        <div class="yearbox"><button type="button" class="play" id="play" aria-label="Play"><svg viewBox="0 0 10 10" id="playi"><polygon points="1,0 10,5 1,10"/></svg></button><output id="yearout" for="year"></output><input type="range" id="year" min="1995" max="2024" step="1" data-i18n-label="yearL"></div>
+      </div>
+      <div class="stats" id="stats"></div>
+      <div class="gwrap" id="gwrap">
+        <canvas id="ps" role="img"></canvas>
+        <div class="zoom"><button type="button" id="zin" aria-label="+">+</button><button type="button" id="zout" aria-label="−">−</button><button type="button" id="zreset" aria-label="Reset" style="font-size:.7rem">⌂</button></div>
+        <div class="card" id="card" hidden aria-live="polite"></div>
+      </div>
+      <div class="lgd" id="legend"></div>
+      <p class="hint" id="hint"></p>
+    </section>
+
+    <section aria-labelledby="h-opps">
+      <p class="kicker" data-i18n="oppK"></p>
+      <h2 id="h-opps" data-i18n="oppH"></h2>
+      <p class="intro" id="oppP"></p>
+      <div class="opts">
+        <div class="seg" role="group" id="sorts"></div>
+        <label><input type="checkbox" id="nat"> <span data-i18n="natL"></span></label>
+        <label><span data-i18n="minL"></span> <select id="min"><option value="0">—</option><option value="1000">$1 bn</option><option value="5000">$5 bn</option></select></label>
+      </div>
+      <ol class="opps" id="opps"></ol>
+      <button type="button" class="btn" id="more"></button>
+    </section>
+
+    <section aria-labelledby="h-oil">
+      <h2 id="h-oil" data-i18n="oilH"></h2>
+      <p class="intro" id="oilP"></p>
+      <div class="charts">
+        <figure><figcaption data-i18n="oilCap"></figcaption><svg id="oil" role="img"></svg><div class="read" id="oilRead"></div></figure>
+        <figure><figcaption data-i18n="cntCap"></figcaption><svg id="cnt" role="img"></svg><div class="read" id="cntRead"></div></figure>
+      </div>
+    </section>
+
+    <section aria-labelledby="h-method">
+      <h2 id="h-method" data-i18n="methodH"></h2>
+      <div class="method" id="method"></div>
+    </section>
+  </main>
+  <footer id="foot"></footer>
+</div>
+
+<script>
+(() => {
+const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+const LANGS = ['az', 'ru', 'en'];
+const qs = new URLSearchParams(location.search);
+let lang = (() => {
+  const q = qs.get('lang'); if (LANGS.includes(q)) return q;
+  try { const s = localStorage.getItem('lang'); if (LANGS.includes(s)) return s; } catch {}
+  return 'az';
+})();
+const NF = { az: 'az-Latn-AZ', ru: 'ru-RU', en: 'en-GB' };
+const nf = (v, d = 0) => new Intl.NumberFormat(NF[lang], { maximumFractionDigits: d, minimumFractionDigits: d }).format(v);
+const CODES = ['AZE', 'GEO', 'KAZ', 'UZB', 'TUR'];
+const CLS = { 'Agriculture': ['Kənd təsərrüfatı', 'Сельское хозяйство', 'Agriculture'], 'Construction, Building, and Home Supplies': ['Tikinti və məişət malları', 'Стройматериалы и товары для дома', 'Construction, building and home supplies'],
+  'Electronic and Electrical Goods': ['Elektron və elektrik malları', 'Электроника и электротовары', 'Electronic and electrical goods'], 'Industrial Chemicals and Metals': ['Sənaye kimyası və metallar', 'Промышленная химия и металлы', 'Industrial chemicals and metals'],
+  'Metalworking and Electrical Machinery and Parts': ['Metal emalı, maşın və hissələri', 'Металлообработка, машины и детали', 'Metalworking, machinery and parts'], 'Minerals': ['Mineral xammal', 'Минеральное сырьё', 'Minerals'],
+  'Textile Apparel and Accessories': ['Geyim və aksesuar', 'Одежда и аксессуары', 'Apparel and accessories'], 'Textile and Home Goods': ['Tekstil və ev əşyaları', 'Текстиль и товары для дома', 'Textiles and home goods'] };
+const T = {
+az: { doc: 'İxrac məhsul fəzası · Azad Bilik', title: 'İxrac məhsul fəzası', sub: 'Azərbaycan nə satır, nəyi satmağa yaxındır?', library: 'Kitabxana',
+  names: { AZE: 'Azərbaycan', GEO: 'Gürcüstan', KAZ: 'Qazaxıstan', UZB: 'Özbəkistan', TUR: 'Türkiyə' }, countryL: 'Ölkə', yearL: 'İl',
+  lede: (c) => `Hər nöqtə 865 ixrac məhsulundan biridir. Işıqlananlar ${c} ölkəsinin rəqabətqabiliyyətli, yəni dünya ticarətindəki payından artıq ixrac etdiyi məhsullardır. İli sürüşdürün, ölkəni dəyişin: neft və qazdan başqa, Azərbaycanın xəritəsi çox seyrək qalır. Mənbə: Harvard Growth Lab, Atlas of Economic Complexity (CC0).`,
+  spaceH: 'Məhsul fəzası', spaceP: 'İki məhsul o zaman bağlıdır ki, ölkələr onları çox vaxt birlikdə ixrac edir: demək, oxşar bilik, avadanlıq və təcrübə tələb edirlər. Nöqtələrin yerini Growth Lab müəyyən edib. Rəngli, böyük nöqtə: ölkənin RCA ≥ 1 ilə ixrac etdiyi məhsul (ölkənin ixracında bu məhsulun payı dünya ticarətindəki payından azı bir o qədərdir). Ölçü ixrac həcmini göstərir. Qırıq xətlə çevrələnənlər aşağıdakı siyahının ən yaxın imkanlarıdır.',
+  expTot: 'İxrac, mlrd $', oilSh: 'Neft və qaz payı', nProd: 'Rəqabətqabiliyyətli məhsul (RCA ≥ 1)', eci: 'İqtisadi Mürəkkəblik İndeksi (ECI)',
+  hint: 'Nöqtənin üstünə gəlin və ya toxunun; sürüşdürüb yaxınlaşdıra bilərsiniz.', legendT: 'Rəng: məhsul klasteri', ring: 'Qırıq xətt: ən yaxın imkanlar', off: 'ixrac olunmur / RCA < 1',
+  cExp: 'İxrac', cRca: 'RCA', cPci: 'PCI', cClose: 'Yaxınlıq', cCog: 'COG', cWorld: 'Dünya ixracı', cPeers: 'RCA, bu il', mUSD: 'mln $', bUSD: 'mlrd $', na: '—',
+  oppK: 'Yaxın imkanlar', oppH: 'Hələ rəqabətqabiliyyətli olmayan, amma yaxın məhsullar', 
+  oppP: (c, y) => `${c} üçün ${y}-ci ildə RCA < 1 olan məhsullar, mövcud ixrac səbətinə nə qədər yaxın olduqlarına və nə qədər mürəkkəb olduqlarına görə sıralanıb. Bu, Hausmann və Hidalqonun metodunun sadə tətbiqidir və proqnoz deyil, modeldir: ölkələrin əvvəllər hansı məhsula keçdiyindən çıxış edir; qiymətləri, bazarları, tarifləri, investisiyanı və siyasəti nəzərə almır.`,
+  sBal: 'Balanslı', sClose: 'Ən yaxın', sPci: 'Ən mürəkkəb', sCog: 'Ən çox qazanc', natL: 'təbii ehtiyat məhsulları da', minL: 'dünya ticarəti ən azı',
+  hRank: '#', hProd: 'Məhsul', hClose: 'Yaxınlıq', hPci: 'PCI', hWorld: 'Dünya',
+  more: 'Daha çox göstər', less: 'Daha az göstər', noOpp: 'Bu seçimlə məhsul yoxdur.', showIn: 'fəzada göstər',
+  oilH: 'Neft və qazın payı', oilP: 'HS 2709 (xam neft), 2710 (emal olunmuş neft məhsulları) və 2711 (qaz) məhsullarının ölkənin bütün mal ixracında payı.', oilCap: 'Neft və qaz, ixracın %-i', cntCap: 'RCA ≥ 1 olan məhsulların sayı',
+  oilRead: (y) => `${y}:`, clickYear: 'İli seçmək üçün qrafikə toxunun.',
+  methodH: 'Necə hesablanıb',
+  method: () => `<p>Rəqəmlərin hamısı Harvard Universitetinin Growth Lab-ının <a href="https://atlas.hks.harvard.edu">Atlas of Economic Complexity</a>-dən götürülüb və biz onları yenidən hesablamırıq; yalnız seçib göstəririk. Beynəlxalq ticarət məlumatı BMT Comtrade-dən gəlir, Growth Lab onu təmizləyir.</p><ul>
+  <li><b>Məhsul:</b> HS 1992 təsnifatının 4 rəqəmli səviyyəsi, Atlasın məhsul fəzasındakı 865 mal. Xidmətlər daxil deyil. Adlar ingilis dilindədir (Growth Lab-ın təsnifatı).</li>
+  <li><b>Xəritə:</b> nöqtələrin yeri və 2 158 xətt Growth Lab-ın dərc etdiyi UMAP düzülüşü və yaxınlıq şəbəkəsidir. Məsafələr məhsulların birgə ixrac edilməsinə əsaslanır. Rənglər Growth Lab-ın 8 klasteridir.</li>
+  <li><b>RCA</b> (aşkarlanmış müqayisəli üstünlük): ölkənin ixracında məhsulun payı bölünsün dünya ticarətində həmin məhsulun payına. RCA ≥ 1 “rəqabətqabiliyyətli ixracatçı” sayılır. Kiçik ixrac dəyəri olan məhsullar da bu hədi keçə bilər, ona görə kartda ixrac dəyəri də göstərilir.</li>
+  <li><b>Yaxınlıq:</b> Atlasın “distance” göstəricisinin tərsi (1 − distance, yəni Hausmann-Hidalqo “density”). Məhsulun qonşuları (birgə ixrac olunanlar) ölkənin artıq ixrac etdiyi məhsullardandırsa, yaxınlıq böyükdür. Azərbaycanda bütün məhsullar uzaqdır (ən yaxını təxminən 0,1); bu özü nəticədir: səbət dar və xəritənin bir küncündədir. Türkiyədə eyni göstərici xeyli yüksəkdir.</li>
+  <li><b>PCI</b> (məhsulun mürəkkəbliyi) məhsulu neçə ölkənin və nə qədər mürəkkəb iqtisadiyyatların ixrac etdiyinə görə, <b>COG</b> (mürəkkəblik qazancı) yeni məhsulun başqa mürəkkəb məhsullara yol açmasına görədir. Hər ikisi Growth Lab-ındır.</li>
+  <li><b>“Balanslı” sıralama</b> yaxınlıq, PCI və COG üzrə yerlərin ortasıdır (hər biri namizədlər arasında faiz sırasına çevrilib). Bu bizim sadə seçimimizdir, Atlasın “strategiya” ölçüsü deyil; başqa meyarlarla başqa siyahı alınar, sıralamanı dəyişdirin. Dünya ticarəti seçilmiş hədd altındakı və (istəyə görə) təbii ehtiyat sayılan məhsullar siyahıdan çıxarılır, çünki təbii ehtiyat imkanı bilik yaxınlığı ilə izah olunmur.</li>
+  <li><b>Neft və qaz payı</b> = HS 2709 + 2710 + 2711 ixracı / ölkənin bütün mal ixracı (Atlasın ölkə-il cədvəlindən).</li></ul>
+  <p><b>Ehtiyatlı olun.</b> 1990-cı illərin rəqəmləri post-sovet ölkələri üçün natamamdır (Atlas Azərbaycanın 1995 ixracını cəmi 0,11 mlrd $ göstərir), ona görə erkən illər ancaq təxmini oxunmalıdır. Son ilin məlumatı sonradan dəyişə bilər. Məhsulun yaxın olması orada bazarın, tarifin, resursun və ya investorun olması demək deyil.</p>`,
+  foot: () => `Mənbə: The Growth Lab at Harvard University, <a href="https://doi.org/10.7910/DVN/T4CHWJ">International Trade Data (HS, 92)</a>, V18; <a href="https://doi.org/10.7910/DVN/FCDZBN">Product Space Networks</a>, V4; <a href="https://doi.org/10.7910/DVN/3BAL1O">Classifications Data</a>, V12; Harvard Dataverse. Lisenziya: CC0 1.0. İlkin məlumat: BMT Comtrade. Atlas: <a href="https://atlas.hks.harvard.edu">atlas.hks.harvard.edu</a>. Azad Bilik bu məlumatları yenidən təşkil edib; Growth Lab bu səhifəyə görə məsuliyyət daşımır.` },
+ru: { doc: 'Продуктовое пространство экспорта · Azad Bilik', title: 'Продуктовое пространство экспорта', sub: 'Что продаёт Азербайджан и чему он близок?', library: 'Библиотека',
+  names: { AZE: 'Азербайджан', GEO: 'Грузия', KAZ: 'Казахстан', UZB: 'Узбекистан', TUR: 'Турция' }, countryL: 'Страна', yearL: 'Год',
+  lede: (c) => `Каждая точка — один из 865 экспортных товаров. Подсвечены товары, которые ${c} экспортирует с относительным преимуществом, то есть конкурентоспособно. Двигайте год и меняйте страну: карта Азербайджана, кроме нефти и газа, остаётся очень разреженной. Источник: Harvard Growth Lab, Atlas of Economic Complexity (CC0).`,
+  spaceH: 'Продуктовое пространство', spaceP: 'Два товара связаны, если страны часто экспортируют их вместе: значит, им нужны схожие знания, оборудование и опыт. Расположение точек задаёт Growth Lab. Цветная крупная точка: товар, который страна экспортирует с RCA ≥ 1 (доля товара в её экспорте не меньше его доли в мировой торговле). Размер показывает объём экспорта. Пунктирным кольцом обведены ближайшие возможности из списка ниже.',
+  expTot: 'Экспорт, млрд $', oilSh: 'Доля нефти и газа', nProd: 'Конкурентные товары (RCA ≥ 1)', eci: 'Индекс экономической сложности (ECI)',
+  hint: 'Наведите курсор или коснитесь точки; карту можно двигать и приближать.', legendT: 'Цвет: кластер товаров', ring: 'Пунктир: ближайшие возможности', off: 'не экспортируется / RCA < 1',
+  cExp: 'Экспорт', cRca: 'RCA', cPci: 'PCI', cClose: 'Близость', cCog: 'COG', cWorld: 'Мировой экспорт', cPeers: 'RCA в этом году', mUSD: 'млн $', bUSD: 'млрд $', na: '—',
+  oppK: 'Ближайшие возможности', oppH: 'Товары, где страна пока не конкурентна, но близка к ним',
+  oppP: (c, y) => `Товары, у которых ${c} в ${y} году RCA < 1, отсортированы по близости к уже экспортируемому набору и по сложности. Это простое применение метода Хаусмана и Идальго: модель, а не прогноз. Она опирается на то, куда раньше переходили страны, и не учитывает цены, рынки, тарифы, инвестиции и политику.`,
+  sBal: 'Сбалансированно', sClose: 'Ближайшие', sPci: 'Самые сложные', sCog: 'Больше выигрыш', natL: 'включая сырьевые товары', minL: 'мировая торговля не менее',
+  hRank: '#', hProd: 'Товар', hClose: 'Близость', hPci: 'PCI', hWorld: 'Мир',
+  more: 'Показать больше', less: 'Показать меньше', noOpp: 'С такими настройками товаров нет.', showIn: 'показать на карте',
+  oilH: 'Доля нефти и газа', oilP: 'Доля товаров HS 2709 (сырая нефть), 2710 (нефтепродукты) и 2711 (газ) во всём товарном экспорте страны.', oilCap: 'Нефть и газ, % экспорта', cntCap: 'Число товаров с RCA ≥ 1',
+  oilRead: (y) => `${y}:`, clickYear: 'Коснитесь графика, чтобы выбрать год.',
+  methodH: 'Как это посчитано',
+  method: () => `<p>Все числа взяты из <a href="https://atlas.hks.harvard.edu">Atlas of Economic Complexity</a> (Growth Lab, Гарвардский университет); мы их не пересчитываем, а только отбираем и показываем. Данные внешней торговли идут из UN Comtrade, Growth Lab их очищает.</p><ul>
+  <li><b>Товар:</b> уровень 4 знаков классификации HS 1992, 865 товаров из продуктового пространства Атласа. Услуг нет. Названия на английском (классификация Growth Lab).</li>
+  <li><b>Карта:</b> положение точек и 2 158 связей — опубликованная Growth Lab раскладка UMAP и сеть близости. Расстояния отражают то, как часто товары экспортируются вместе. Цвета — 8 кластеров Growth Lab.</li>
+  <li><b>RCA</b> (выявленное сравнительное преимущество): доля товара в экспорте страны, делённая на его долю в мировой торговле. RCA ≥ 1 считается «конкурентным экспортёром». Порог могут пройти и товары с малым экспортом, поэтому в карточке показан и объём.</li>
+  <li><b>Близость:</b> обратная величина показателя «distance» Атласа (1 − distance, то есть «плотность» Хаусмана и Идальго). Близость велика, если соседи товара (то, что экспортируют вместе с ним) уже есть в экспорте страны. У Азербайджана далеки все товары (самый близкий около 0,1); это и есть вывод: корзина узкая и сидит в одном углу карты. У Турции показатель заметно выше.</li>
+  <li><b>PCI</b> (сложность товара) зависит от того, сколько стран и насколько сложных экономик его экспортируют; <b>COG</b> (выигрыш в сложности) показывает, насколько новый товар открывает путь к другим сложным товарам. Оба показателя Growth Lab.</li>
+  <li><b>«Сбалансированный» рейтинг</b> — среднее мест по близости, PCI и COG (каждый переведён в процентный ранг среди кандидатов). Это наш простой выбор, а не «стратегический» показатель Атласа; другие критерии дадут другой список, поэтому сортировку можно менять. Товары ниже выбранного порога мировой торговли и (по желанию) сырьевые исключены: сырьевые возможности не объясняются близостью знаний.</li>
+  <li><b>Доля нефти и газа</b> = экспорт HS 2709 + 2710 + 2711 / весь товарный экспорт страны (по таблице «страна-год» Атласа).</li></ul>
+  <p><b>Осторожно.</b> Данные 1990-х по постсоветским странам неполны (Атлас показывает экспорт Азербайджана в 1995 году всего 0,11 млрд $), поэтому ранние годы можно читать лишь приблизительно. Данные последнего года могут быть пересмотрены. Близость к товару не означает, что есть рынок, тариф, ресурс или инвестор.</p>`,
+  foot: () => `Источник: The Growth Lab at Harvard University, <a href="https://doi.org/10.7910/DVN/T4CHWJ">International Trade Data (HS, 92)</a>, V18; <a href="https://doi.org/10.7910/DVN/FCDZBN">Product Space Networks</a>, V4; <a href="https://doi.org/10.7910/DVN/3BAL1O">Classifications Data</a>, V12; Harvard Dataverse. Лицензия: CC0 1.0. Первичные данные: UN Comtrade. Атлас: <a href="https://atlas.hks.harvard.edu">atlas.hks.harvard.edu</a>. Данные переупорядочил Azad Bilik; Growth Lab за эту страницу не отвечает.` },
+en: { doc: "Export product space · Azad Bilik", title: 'Export product space', sub: 'What does Azerbaijan sell, and what is it close to selling?', library: 'Library',
+  names: { AZE: 'Azerbaijan', GEO: 'Georgia', KAZ: 'Kazakhstan', UZB: 'Uzbekistan', TUR: 'Türkiye' }, countryL: 'Country', yearL: 'Year',
+  lede: (c) => `Each dot is one of 865 export products. The lit ones are the products ${c} exports competitively, with more than its fair share of world trade. Move the year and switch the country: apart from oil and gas, Azerbaijan's map stays very sparse. Data: Harvard Growth Lab, Atlas of Economic Complexity (CC0).`,
+  spaceH: 'The product space', spaceP: 'Two products are linked when countries tend to export them together, a sign that they need similar know-how, equipment and experience. The Growth Lab fixes where the dots sit. A large coloured dot is a product the country exports with RCA ≥ 1 (its share in the country\'s exports is at least its share in world trade); size shows export value. Dashed rings mark the closest opportunities from the list below.',
+  expTot: 'Exports, US$ bn', oilSh: 'Oil and gas share', nProd: 'Competitive products (RCA ≥ 1)', eci: 'Economic Complexity Index (ECI)',
+  hint: 'Hover or tap a dot; drag and zoom the map.', legendT: 'Colour: product cluster', ring: 'Dashed: closest opportunities', off: 'not exported / RCA < 1',
+  cExp: 'Exports', cRca: 'RCA', cPci: 'PCI', cClose: 'Closeness', cCog: 'COG', cWorld: 'World exports', cPeers: 'RCA this year', mUSD: 'US$ m', bUSD: 'US$ bn', na: '—',
+  oppK: 'Nearby opportunities', oppH: 'Products not yet exported competitively, but close',
+  oppP: (c, y) => `Products with RCA < 1 for ${c} in ${y}, ranked by how close they are to the existing export basket and how complex they are. This is a plain application of Hausmann and Hidalgo's method: a model, not a forecast. It rests on where countries moved before and ignores prices, markets, tariffs, investment and policy.`,
+  sBal: 'Balanced', sClose: 'Closest', sPci: 'Most complex', sCog: 'Biggest gain', natL: 'include natural-resource goods', minL: 'world trade at least',
+  hRank: '#', hProd: 'Product', hClose: 'Closeness', hPci: 'PCI', hWorld: 'World',
+  more: 'Show more', less: 'Show fewer', noOpp: 'No products with these settings.', showIn: 'show in the map',
+  oilH: 'The oil and gas share', oilP: 'Share of HS 2709 (crude oil), 2710 (refined petroleum) and 2711 (gas) in the country\'s total goods exports.', oilCap: 'Oil and gas, % of exports', cntCap: 'Number of products with RCA ≥ 1',
+  oilRead: (y) => `${y}:`, clickYear: 'Tap the chart to pick a year.',
+  methodH: 'How it is calculated',
+  method: () => `<p>Every figure comes from the Harvard Growth Lab's <a href="https://atlas.hks.harvard.edu">Atlas of Economic Complexity</a>; we do not recompute them, only select and show them. The trade data is UN Comtrade's, cleaned by the Growth Lab.</p><ul>
+  <li><b>Product:</b> HS 1992, 4-digit level, the 865 goods in the Atlas's product space. No services. Names are in English (the Growth Lab's classification).</li>
+  <li><b>The map:</b> the dots' positions and its 2,158 links are the Growth Lab's published UMAP layout and proximity network; distances reflect how often products are exported together. Colours are the Growth Lab's 8 clusters.</li>
+  <li><b>RCA</b> (revealed comparative advantage): a product's share in the country's exports divided by its share in world trade. RCA ≥ 1 counts as a competitive exporter. Products with tiny export values can pass the threshold, so the card shows the value as well.</li>
+  <li><b>Closeness</b> is the inverse of the Atlas's "distance" (1 − distance, Hausmann–Hidalgo's "density"). It is high when the product's neighbours, the goods exported with it, are already in the country's basket. For Azerbaijan every product is far (the closest is about 0.1); that is itself the finding: the basket is narrow and sits in one corner of the map. For Türkiye the same figure is much higher.</li>
+  <li><b>PCI</b> (product complexity) rests on how many countries export a product and how complex those economies are; <b>COG</b> (complexity outlook gain) on how far a new product opens the way to other complex products. Both are the Growth Lab's.</li>
+  <li><b>The "balanced" ranking</b> is the average of the product's rank on closeness, PCI and COG (each turned into a percentile among the candidates). It is our simple choice, not the Atlas's "strategy" measure; other criteria give other lists, so change the sort. Products under the chosen world-trade floor and (optionally) natural-resource goods are left out, since a resource opportunity is not explained by know-how proximity.</li>
+  <li><b>Oil and gas share</b> = exports of HS 2709 + 2710 + 2711 / the country's total goods exports (from the Atlas's country-year table).</li></ul>
+  <p><b>Read with care.</b> Figures for the 1990s are incomplete for the post-Soviet countries (the Atlas puts Azerbaijan's 1995 exports at only US$0.11 bn), so early years are approximate. The latest year can be revised. A product being close does not mean a market, a tariff, a resource or an investor is there.</p>`,
+  foot: () => `Source: The Growth Lab at Harvard University, <a href="https://doi.org/10.7910/DVN/T4CHWJ">International Trade Data (HS, 92)</a>, V18; <a href="https://doi.org/10.7910/DVN/FCDZBN">Product Space Networks</a>, V4; <a href="https://doi.org/10.7910/DVN/3BAL1O">Classifications Data</a>, V12; Harvard Dataverse. Licence: CC0 1.0. Underlying data: UN Comtrade. Atlas: <a href="https://atlas.hks.harvard.edu">atlas.hks.harvard.edu</a>. Rearranged by Azad Bilik; the Growth Lab is not responsible for this page.` },
+};
+const t = (k) => T[lang][k];
+
+let D = null, country = CODES.includes(qs.get('c')) ? qs.get('c') : 'AZE', year = 2024, sort = 'bal', showN = 15, sel = qs.get('p') || null, hover = null, opps = [];
+const $ = (id) => document.getElementById(id);
+const dark = () => matchMedia('(prefers-color-scheme: dark)').matches;
+const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const reduce = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+const cname = (c) => t('names')[c ?? country];
+const clsName = (i) => CLS[D.clusters[i]]?.[LANGS.indexOf(lang)] ?? D.clusters[i];
+const C = () => D.countries[country];
+const rca = (i, c = country, y = year) => (D.countries[c].rca[y]?.[i] ?? 0) / 100;
+const lit = (i) => rca(i) >= 1;
+
+/* ---------- opportunities ---------- */
+function rank(vals) { const s = [...vals].sort((a, b) => a - b); return (v) => s.indexOf(v) / Math.max(1, s.length - 1); }
+function computeOpps() {
+  const c = C(), min = +$('min').value, nat = $('nat').checked, cand = [];
+  for (let i = 0; i < D.products.length; i++) {
+    if (lit(i) || c.dist[year][i] == null || c.cog[year][i] == null || D.pci[year][i] == null) continue;
+    if (!nat && D.products[i].nat) continue;
+    if (D.world[year][i] < min) continue;
+    cand.push(i);
+  }
+  const rd = rank(cand.map((i) => -c.dist[year][i])), rp = rank(cand.map((i) => D.pci[year][i])), rg = rank(cand.map((i) => c.cog[year][i]));
+  const sc = (i) => ({ bal: (rd(-c.dist[year][i]) + rp(D.pci[year][i]) + rg(c.cog[year][i])) / 3, close: -c.dist[year][i], pci: D.pci[year][i], cog: c.cog[year][i] })[sort];
+  const s = new Map(cand.map((i) => [i, sc(i)]));
+  opps = cand.sort((a, b) => s.get(b) - s.get(a));
+}
+
+/* ---------- product space canvas ---------- */
+const cv = $('ps'), ctx = cv.getContext('2d');
+let W = 0, H = 0, dpr = 1, view = { k: 1, tx: 0, ty: 0 }, base = null, anim = null;
+function fit() {
+  const r = cv.getBoundingClientRect(); dpr = Math.min(2, devicePixelRatio || 1);
+  W = r.width; H = r.height; cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+  let x0 = 1e9, x1 = -1e9, y0 = 1e9, y1 = -1e9;
+  for (const p of D.products) { x0 = Math.min(x0, p.x); x1 = Math.max(x1, p.x); y0 = Math.min(y0, p.y); y1 = Math.max(y1, p.y); }
+  const pad = 24, s = Math.min((W - 2 * pad) / (x1 - x0), (H - 2 * pad) / (y1 - y0));
+  base = { s, ox: W / 2 - ((x0 + x1) / 2) * s, oy: H / 2 + ((y0 + y1) / 2) * s };
+}
+const sx = (p) => (base.ox + p.x * base.s) * view.k + view.tx;
+const sy = (p) => (base.oy - p.y * base.s) * view.k + view.ty;
+const radius = (i) => (lit(i) ? 3.5 + 1.9 * Math.log10(1 + C().exp[year][i]) : 2.2) * Math.min(1.6, 1 + 0.15 * (view.k - 1));
+function clampView() {
+  view.tx = Math.min(W * 0.5, Math.max(-(W * view.k - W * 0.5), view.tx)); view.ty = Math.min(H * 0.5, Math.max(-(H * view.k - H * 0.5), view.ty));
+}
+function draw() {
+  if (!D || !base) return;
+  const cols = [...Array(8)].map((_, i) => css('--c' + i)), off = css('--off'), rule = css('--rule'), ink = css('--ink'), paper = css('--paper'), accent = css('--accent');
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, H);
+  ctx.lineWidth = 0.7;
+  for (const [a, b] of D.edges) {
+    const pa = D.products[a], pb = D.products[b], both = lit(a) && lit(b);
+    ctx.strokeStyle = both ? ink : rule; ctx.globalAlpha = both ? 0.45 : 0.6; ctx.lineWidth = both ? 1.1 : 0.7;
+    ctx.beginPath(); ctx.moveTo(sx(pa), sy(pa)); ctx.lineTo(sx(pb), sy(pb)); ctx.stroke();
+  }
+  ctx.globalAlpha = 1;
+  const order = D.products.map((_, i) => i).sort((a, b) => lit(a) - lit(b) || C().exp[year][a] - C().exp[year][b]);
+  const top = new Set(opps.slice(0, 20));
+  for (const i of order) {
+    const p = D.products[i], x = sx(p), y = sy(p); if (x < -20 || y < -20 || x > W + 20 || y > H + 20) continue;
+    const r = radius(i);
+    ctx.beginPath(); ctx.arc(x, y, r, 0, 7);
+    if (lit(i)) { ctx.fillStyle = cols[p.cl]; ctx.globalAlpha = 0.92; ctx.fill(); ctx.globalAlpha = 1; ctx.strokeStyle = paper; ctx.lineWidth = 1; ctx.stroke(); }
+    else { ctx.fillStyle = off; ctx.globalAlpha = 0.45; ctx.fill(); ctx.globalAlpha = 1; }
+    if (top.has(i)) { ctx.beginPath(); ctx.arc(x, y, r + 3.5, 0, 7); ctx.strokeStyle = accent; ctx.lineWidth = 1.4; ctx.setLineDash([3, 2.5]); ctx.stroke(); ctx.setLineDash([]); }
+  }
+  // labels: the largest exports, the hovered and the chosen
+  const big = D.products.map((_, i) => i).filter(lit).sort((a, b) => C().exp[year][b] - C().exp[year][a]).slice(0, view.k > 2 ? 22 : 6);
+  const lab = new Set([...big, ...(sel != null ? [idx(sel)] : []), ...(hover != null ? [hover] : [])].filter((i) => i != null && i >= 0));
+  ctx.font = '500 11px Inter, system-ui, sans-serif'; ctx.textBaseline = 'middle'; ctx.lineJoin = 'round';
+  for (const i of lab) {
+    const p = D.products[i], x = sx(p), y = sy(p), r = radius(i);
+    if (x < 0 || y < 0 || x > W || y > H) continue;
+    const s = p.name.length > 28 ? p.name.slice(0, 27) + '…' : p.name, w = ctx.measureText(s).width, left = x + r + 5 + w > W - 4;
+    ctx.textAlign = left ? 'right' : 'left';
+    ctx.strokeStyle = paper; ctx.lineWidth = 3.5; ctx.strokeText(s, left ? x - r - 5 : x + r + 5, y); ctx.fillStyle = ink; ctx.fillText(s, left ? x - r - 5 : x + r + 5, y);
+  }
+  if (sel != null && idx(sel) >= 0) { const p = D.products[idx(sel)]; ctx.beginPath(); ctx.arc(sx(p), sy(p), radius(idx(sel)) + 6, 0, 7); ctx.strokeStyle = ink; ctx.lineWidth = 2; ctx.stroke(); }
+}
+const idx = (code) => D.products.findIndex((p) => p.code === code);
+function nearest(mx, my) {
+  let best = -1, bd = 1e9;
+  for (let i = 0; i < D.products.length; i++) { const p = D.products[i], d = Math.hypot(sx(p) - mx, sy(p) - my) - radius(i); if (d < bd) { bd = d; best = i; } }
+  return bd <= 7 ? best : -1;
+}
+function zoomAt(f, cx = W / 2, cy = H / 2) {
+  const k = Math.min(8, Math.max(1, view.k * f)), r = k / view.k;
+  view = { k, tx: cx - (cx - view.tx) * r, ty: cy - (cy - view.ty) * r }; if (k === 1) { view.tx = 0; view.ty = 0; }
+  clampView(); cv.classList.toggle('pan', view.k > 1.05); draw();
+}
+function flyTo(code) {
+  const i = idx(code); if (i < 0) return;
+  const p = D.products[i], k = Math.max(view.k, 3), tx = W / 2 - (base.ox + p.x * base.s) * k, ty = H / 2 - (base.oy - p.y * base.s) * k, from = { ...view };
+  cancelAnimationFrame(anim);
+  const set = (v) => { view = v; clampView(); cv.classList.toggle('pan', view.k > 1.05); draw(); };
+  if (reduce()) return set({ k, tx, ty });
+  const t0 = performance.now(), step = (now) => { const f = Math.min(1, (now - t0) / 500), e = 1 - (1 - f) ** 3; set({ k: from.k + (k - from.k) * e, tx: from.tx + (tx - from.tx) * e, ty: from.ty + (ty - from.ty) * e }); if (f < 1) anim = requestAnimationFrame(step); };
+  anim = requestAnimationFrame(step);
+}
+// pointer: wheel zoom, drag pan (mouse; touch pans only once zoomed), tap selects
+let ptr = null, moved = false;
+cv.addEventListener('wheel', (e) => { e.preventDefault(); const r = cv.getBoundingClientRect(); zoomAt(e.deltaY < 0 ? 1.25 : 0.8, e.clientX - r.left, e.clientY - r.top); }, { passive: false });
+cv.addEventListener('pointerdown', (e) => { ptr = { x: e.clientX, y: e.clientY, tx: view.tx, ty: view.ty, touch: e.pointerType === 'touch' }; moved = false; cv.setPointerCapture(e.pointerId); });
+cv.addEventListener('pointermove', (e) => {
+  const r = cv.getBoundingClientRect(), mx = e.clientX - r.left, my = e.clientY - r.top;
+  if (ptr) {
+    const dx = e.clientX - ptr.x, dy = e.clientY - ptr.y;
+    if (Math.hypot(dx, dy) > 4) moved = true;
+    if (moved && view.k > 1) { view.tx = ptr.tx + dx; view.ty = ptr.ty + dy; clampView(); cv.classList.add('drag'); draw(); }
+  } else if (e.pointerType === 'mouse') { const h = nearest(mx, my); if (h !== (hover ?? -1)) { hover = h < 0 ? null : h; cv.style.cursor = h < 0 ? '' : 'pointer'; draw(); card(); } }
+});
+cv.addEventListener('pointerup', (e) => {
+  cv.classList.remove('drag');
+  if (ptr && !moved) { const r = cv.getBoundingClientRect(), h = nearest(e.clientX - r.left, e.clientY - r.top); sel = h < 0 ? null : D.products[h].code; hover = null; urlState(); draw(); card(); markOpps(); }
+  ptr = null;
+});
+cv.addEventListener('pointerleave', () => { if (!ptr && hover != null) { hover = null; draw(); card(); } });
+$('zin').onclick = () => zoomAt(1.5); $('zout').onclick = () => zoomAt(1 / 1.5); $('zreset').onclick = () => { view = { k: 1, tx: 0, ty: 0 }; cv.classList.remove('pan'); draw(); };
+
+/* ---------- card, stats, legend ---------- */
+const money = (m) => m >= 1000 ? `${nf(m / 1000, m >= 10000 ? 1 : 2)} ${t('bUSD')}` : `${nf(m, m >= 100 ? 0 : 1)} ${t('mUSD')}`;
+function card() {
+  const el = $('card'), i = hover ?? (sel != null ? idx(sel) : -1);
+  if (i < 0) { el.hidden = true; return; }
+  const p = D.products[i], c = C(), r = rca(i), d = c.dist[year][i], pc = D.pci[year][i];
+  el.hidden = false;
+  el.innerHTML = `${sel != null && idx(sel) === i ? '<button type="button" class="x" aria-label="×" id="cx">×</button>' : ''}<div class="nm">${esc(p.full.length > 90 ? p.name : p.full)}</div>
+  <div class="cl"><i style="--c:var(--c${p.cl})"></i>${esc(clsName(p.cl))} · HS ${p.code}</div>
+  <dl><dt>${t('cExp')} ${year}</dt><dd>${c.exp[year][i] > 0 ? money(c.exp[year][i]) : r > 0 ? '< 0.1 ' + t('mUSD') : t('na')}</dd><dt>${t('cRca')}</dt><dd>${nf(r, 2)}</dd><dt>${t('cPci')}</dt><dd>${pc == null ? t('na') : nf(pc / 1000, 2)}</dd>
+  ${r < 1 && d != null ? `<dt>${t('cClose')}</dt><dd>${nf(1 - d / 1000, 3)}</dd><dt>${t('cCog')}</dt><dd>${c.cog[year][i] == null ? t('na') : nf(c.cog[year][i] / 1000, 2)}</dd>` : ''}
+  <dt>${t('cWorld')}</dt><dd>${money(D.world[year][i])}</dd></dl>
+  <div class="muted" style="margin-top:.5rem;font-size:.6875rem">${t('cPeers')}</div><div class="peers">${CODES.map((k) => { const v = rca(i, k); return `<span class="${v >= 1 ? 'yes' : ''}">${esc(cname(k))}</span><span class="${v >= 1 ? 'yes' : ''}">${nf(v, 2)}</span>`; }).join('')}</div>`;
+  const x = $('cx'); if (x) x.onclick = () => { sel = null; urlState(); card(); draw(); markOpps(); };
+}
+function stats() {
+  const c = C(), n = D.products.filter((_, i) => lit(i)).length, e = c.eci[year];
+  $('stats').innerHTML = [[nf(c.total[year] / 1000, 1), t('expTot')], [c.oil[year] != null ? nf(c.oil[year], 1) + ' %' : t('na'), t('oilSh')], [nf(n), t('nProd')], [e == null ? t('na') : nf(e, 2), t('eci')]].map(([v, l]) => `<div><b>${v}</b><span>${l}</span></div>`).join('');
+  $('lede').textContent = t('lede')(cname());
+}
+function legend() {
+  $('legend').innerHTML = D.clusters.map((c, i) => `<span><i style="--c:var(--c${i})"></i>${esc(clsName(i))}</span>`).join('') + `<span style="gap:.35rem"><i style="--c:var(--off);opacity:.5"></i>${t('off')}</span><span><svg width="14" height="14" aria-hidden="true"><circle cx="7" cy="7" r="5.5" fill="none" stroke="var(--accent)" stroke-width="1.4" stroke-dasharray="3 2.5"/></svg>${t('ring')}</span>`;
+}
+
+/* ---------- opportunities list ---------- */
+function drawOpps() {
+  const rows = opps.slice(0, showN), mx = Math.max(...opps.map((i) => 1 - C().dist[year][i] / 1000), 0.001);
+  $('opps').innerHTML = opps.length ? `<li class="head"><button type="button" tabindex="-1"><span class="k">${t('hRank')}</span><span>${t('hProd')}</span><span class="meter-c">${t('hClose')}</span><span class="num">${t('hPci')}</span><span class="num">${t('hWorld')}</span></button></li>` + rows.map((i, n) => {
+    const p = D.products[i], cl = 1 - C().dist[year][i] / 1000;
+    return `<li><button type="button" data-p="${p.code}" title="${esc(p.full)}"><span class="k">${n + 1}</span><span class="nm"><i style="--c:var(--c${p.cl})"></i><span>${esc(p.name)} <small class="muted">${p.code}</small></span></span><span class="meter-c"><span class="meter" style="--c:var(--c${p.cl})"><b style="width:${Math.max(4, (cl / mx) * 100)}%"></b></span></span><span class="num">${nf(D.pci[year][i] / 1000, 2)}</span><span class="num">${nf(D.world[year][i] / 1000, 1)}</span></button></li>`;
+  }).join('') : `<li class="muted" style="padding:.75rem 0">${t('noOpp')}</li>`;
+  $('more').hidden = opps.length <= 15; $('more').textContent = showN > 15 ? t('less') : t('more');
+  $('opps').querySelectorAll('button[data-p]').forEach((b) => b.onclick = () => { sel = b.dataset.p; hover = null; urlState(); card(); markOpps(); flyTo(sel); $('gwrap').scrollIntoView({ behavior: reduce() ? 'auto' : 'smooth', block: 'center' }); });
+  markOpps();
+}
+function markOpps() { document.querySelectorAll('#opps button[data-p]').forEach((b) => b.classList.toggle('on', b.dataset.p === sel)); }
+$('more').onclick = () => { showN = showN > 15 ? 15 : 40; drawOpps(); };
+$('nat').onchange = $('min').onchange = () => refresh();
+function sorts() {
+  $('sorts').innerHTML = [['bal', 'sBal'], ['close', 'sClose'], ['pci', 'sPci'], ['cog', 'sCog']].map(([k, l]) => `<button type="button" data-s="${k}" aria-pressed="${sort === k}">${t(l)}</button>`).join('');
+  $('sorts').querySelectorAll('button').forEach((b) => b.onclick = () => { sort = b.dataset.s; sorts(); refresh(); });
+}
+
+/* ---------- charts ---------- */
+const PC = { AZE: 'var(--accent)', GEO: 'var(--third)', KAZ: 'var(--c1)', UZB: 'var(--c3)', TUR: 'var(--second)' };
+function chart(svgId, series, ymax, fmt, readId) {
+  const svg = $(svgId), w = 520, h = 250, m = { l: 34, r: 78, t: 8, b: 22 }, X = (y) => m.l + ((y - 1995) / 29) * (w - m.l - m.r), Y = (v) => h - m.b - (v / ymax) * (h - m.t - m.b);
+  svg.setAttribute('viewBox', `0 0 ${w} ${h}`); svg.setAttribute('aria-label', t(svgId === 'oil' ? 'oilCap' : 'cntCap') + ', ' + cname());
+  const yrs = D.years, ticks = [0, 1, 2, 3, 4].map((k) => (ymax / 4) * k);
+  let s = `<g class="axis">${ticks.map((v) => `<line class="grid" x1="${m.l}" x2="${w - m.r}" y1="${Y(v)}" y2="${Y(v)}"/><text x="${m.l - 6}" y="${Y(v) + 3}" text-anchor="end">${nf(v)}</text>`).join('')}${[1995, 2000, 2005, 2010, 2015, 2020, 2024].map((y) => `<text x="${X(y)}" y="${h - 6}" text-anchor="middle">${y}</text>`).join('')}</g>`;
+  const path = (a) => yrs.map((y, i) => `${i ? 'L' : 'M'}${X(y).toFixed(1)},${Y(a[y]).toFixed(1)}`).join('');
+  const ends = [];
+  for (const c of CODES) { if (c === country) continue; s += `<path d="${path(series[c])}" fill="none" stroke="${PC[c]}" stroke-width="1.25" opacity=".55"/>`; ends.push([c, series[c][2024]]); }
+  const a = series[country];
+  s += `<path d="${path(a)} L${X(2024)},${Y(0)} L${X(1995)},${Y(0)} Z" fill="${PC[country]}" opacity=".16"/><path d="${path(a)}" fill="none" stroke="${PC[country]}" stroke-width="2.25"/>`; ends.push([country, a[2024]]);
+  ends.sort((p, q) => q[1] - p[1]); let last = -1e9;
+  for (const [c, v] of ends) { let y = Y(v) + 3; if (y - last < 11) y = last + 11; last = y; s += `<text class="end" x="${X(2024) + 6}" y="${y}" fill="${PC[c]}">${esc(cname(c))}</text>`; }
+  s += `<line id="${svgId}-m" x1="${X(year)}" x2="${X(year)}" y1="${m.t}" y2="${h - m.b}" stroke="var(--ink)" stroke-width="1" stroke-dasharray="3 3"/><rect x="${m.l}" y="0" width="${w - m.l - m.r}" height="${h - m.b}" fill="transparent" id="${svgId}-hit"/>`;
+  svg.innerHTML = s;
+  const read = (y) => { $(readId).innerHTML = `<b>${y}</b> · ` + CODES.map((c) => `<span style="color:${PC[c]}">${esc(cname(c))}</span> <b>${fmt(series[c][y])}</b>`).join(' · '); };
+  read(year);
+  const at = (e) => { const r = svg.getBoundingClientRect(), v = Math.round(1995 + ((e.clientX - r.left) / r.width * w - m.l) / (w - m.l - m.r) * 29); return Math.max(1995, Math.min(2024, v)); };
+  const hit = $(svgId + '-hit');
+  hit.onpointermove = (e) => { const y = at(e); $(svgId + '-m').setAttribute('x1', X(y)); $(svgId + '-m').setAttribute('x2', X(y)); read(y); };
+  hit.onpointerleave = () => { $(svgId + '-m').setAttribute('x1', X(year)); $(svgId + '-m').setAttribute('x2', X(year)); read(year); };
+  hit.onclick = (e) => setYear(at(e));
+}
+function charts() {
+  const oil = {}, cnt = {};
+  for (const c of CODES) { oil[c] = {}; cnt[c] = {}; for (const y of D.years) { oil[c][y] = D.countries[c].oil[y] ?? 0; cnt[c][y] = D.countries[c].rca[y].filter((v) => v >= 100).length; } }
+  chart('oil', oil, 100, (v) => nf(v, 1) + ' %', 'oilRead');
+  const mx = Math.max(...CODES.flatMap((c) => D.years.map((y) => cnt[c][y]))), top = Math.ceil(mx / 100) * 100;
+  chart('cnt', cnt, top, (v) => nf(v), 'cntRead');
+}
+
+/* ---------- state ---------- */
+function urlState() { const u = new URL(location.href); u.searchParams.set('c', country); u.searchParams.set('y', year); sel ? u.searchParams.set('p', sel) : u.searchParams.delete('p'); if (country === 'AZE') u.searchParams.delete('c'); if (year === 2024) u.searchParams.delete('y'); history.replaceState(null, '', u); }
+function refresh() { computeOpps(); stats(); card(); drawOpps(); draw(); }
+function setYear(y) { year = y; $('year').value = y; $('yearout').textContent = y; urlState(); refresh(); charts(); }
+function setCountry(c) { country = c; urlState(); countriesBar(); refresh(); charts(); $('oppP').textContent = t('oppP')(cname(), year); }
+function countriesBar() {
+  $('countries').innerHTML = CODES.map((c) => `<button type="button" data-c="${c}" aria-pressed="${c === country}">${esc(cname(c))}</button>`).join('');
+  $('countries').querySelectorAll('button').forEach((b) => b.onclick = () => setCountry(b.dataset.c));
+}
+let timer = null;
+function play(on) {
+  clearInterval(timer); timer = null;
+  $('playi').innerHTML = on ? '<rect x="1" y="0" width="3" height="10"/><rect x="6" y="0" width="3" height="10"/>' : '<polygon points="1,0 10,5 1,10"/>';
+  if (!on) return;
+  if (year >= 2024) setYear(1995);
+  timer = setInterval(() => { if (year >= 2024) return play(false); setYear(year + 1); }, reduce() ? 250 : 420);
+}
+$('play').onclick = () => play(!timer);
+$('year').oninput = (e) => { play(false); setYear(+e.target.value); };
+
+function applyLang() {
+  document.documentElement.lang = lang; document.title = t('doc');
+  document.querySelectorAll('[data-i18n]').forEach((e) => { const v = t(e.dataset.i18n); if (typeof v === 'string') e.textContent = v; });
+  document.querySelectorAll('[data-i18n-label]').forEach((e) => e.setAttribute('aria-label', t(e.dataset.i18nLabel)));
+  document.querySelectorAll('[data-lang]').forEach((b) => b.setAttribute('aria-pressed', b.dataset.lang === lang));
+  document.querySelectorAll('[data-keep-lang]').forEach((a) => { const u = new URL(a.getAttribute('href'), location.href); if (lang === 'az') u.searchParams.delete('lang'); else u.searchParams.set('lang', lang); a.href = u.pathname + u.search; });
+  $('kx-nav').href = `https://kitabxana.az${lang === 'az' ? '' : '/' + lang}/`;
+  $('spaceP').textContent = t('spaceP'); $('hint').textContent = t('hint');
+  $('method').innerHTML = t('method')(); $('foot').innerHTML = t('foot')();
+  $('play').setAttribute('aria-label', { az: 'Oynat', ru: 'Запустить', en: 'Play' }[lang]);
+  $('yearout').textContent = year;
+  cv.setAttribute('aria-label', t('spaceH') + ': ' + cname());
+  if (!D) return;
+  $('oppP').textContent = t('oppP')(cname(), year);
+  countriesBar(); sorts(); legend(); stats(); card(); drawOpps(); charts(); draw();
+}
+document.querySelectorAll('[data-lang]').forEach((b) => b.onclick = () => {
+  lang = b.dataset.lang; try { localStorage.setItem('lang', lang); } catch {}
+  const u = new URL(location.href); if (lang === 'az') u.searchParams.delete('lang'); else u.searchParams.set('lang', lang); history.replaceState(null, '', u);
+  applyLang();
+});
+let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { if (D) { fit(); clampView(); draw(); } }, 120); });
+matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change', () => D && draw());
+
+applyLang();
+fetch('data/ixrac.json').then((r) => r.json()).then((d) => {
+  D = d; const y = +qs.get('y'); if (y >= 1995 && y <= 2024) year = y;
+  $('year').min = d.years[0]; $('year').max = d.years.at(-1); $('year').value = year; $('yearout').textContent = year;
+  if (sel && idx(sel) < 0) sel = null;
+  fit(); computeOpps(); applyLang();
+  if (sel) { requestAnimationFrame(() => flyTo(sel)); }
+});
+})();
+</script>
+</body>
+</html>
