@@ -30,3 +30,27 @@ Results:
 - 1894: rotation 1°, 1.365 m a pixel.
 
 Needs numpy, scipy and Pillow. The scans go in `data/raw/plan-<year>.jpg` (git-ignored, from the links above).
+
+## Tiles (`scripts/tiles.py`)
+
+`scripts/tiles.py` cuts each placed plan into web-map tiles at the scan's own resolution:
+- 1898 and 1894 down to zoom 17 (about 0.9 m a pixel);
+- 1806 down to zoom 16.
+
+Before cutting, the scan is cleaned:
+- its levels are stretched;
+- the paper of the line-drawn 1894 plan is whitened;
+- its lines are lightly sharpened.
+
+The deepest zoom is resampled straight from the scan (bicubic, the scan pre-filtered once). Each zoom above is the average of four tiles from the one below. Output goes to `data/tiles/<year>/<z>/<x>/<y>.webp` (about 12 MB in all), with bounds and zooms in `data/plans.json`. The single warped images (`data/plan-<year>.webp`) stay as a fallback.
+
+## The page
+
+You look at a plan in one of four ways:
+- **a lens** that follows the mouse (on a phone it stays in the middle and the map moves under it; shift and scroll resize it);
+- **a swipe line** that can be dragged anywhere along its length;
+- **a scratch-off;**
+- **a fade.**
+
+Five *then and now* places fly to their plan and open the lens on them. The camera leaves room for the side panel, which folds away.
+

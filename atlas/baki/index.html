@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Bakı necə böyüdü · Azad Bilik</title>
-<meta name="description" content="Bakının köhnə planları bugünkü xəritənin üstündə: 1806-cı ilin qala şəhəri, 1894-cü və 1898-ci illərin neft şəhəri. Sürüşdürüb müqayisə edin. Old plans of Baku over today's city, 1806, 1894 and 1898: swipe to compare.">
+<meta name="description" content="Bakının köhnə planları bugünkü xəritənin üstündə: 1806-cı ilin qala şəhəri, 1894-cü və 1898-ci illərin neft şəhəri. Böyüdücü şüşə, pərdə, qaşıma. Old plans of Baku over today's city, 1806, 1894 and 1898: a spyglass, a swipe, a scratch-off.">
 <meta name="theme-color" content="#F4EFE6" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#14100D" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -17,42 +17,63 @@
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
 <link rel="stylesheet" href="/shared/story-map.css">
 <style>
-  /* two maps, one over the other: the old plan on top, clipped at the divider */
-  #old { position: fixed; inset: 0; pointer-events: none; }
-  .divider { position: fixed; top: 0; bottom: 0; width: 0; z-index: 2; display: none; }
-  .divider::before { content: ''; position: absolute; top: 0; bottom: 0; left: -1.5px; width: 3px; background: var(--paper); box-shadow: 0 0 0 1px var(--ink); }
-  .divider button { position: absolute; top: 50%; left: -1.25rem; width: 2.5rem; height: 2.5rem; border-radius: 50%; background: var(--paper); border: 1.5px solid var(--ink); font-size: .9rem; cursor: ew-resize; transform: translateY(-50%); }
+  /* two maps, one on the other: the old plan on top, shown through a lens, a swipe, a scratch or a fade */
+  #old { position: fixed; inset: 0; pointer-events: none; -webkit-mask-size: 100% 100%; mask-size: 100% 100%; }
+  .lens { position: fixed; z-index: 2; border-radius: 50%; pointer-events: none; box-shadow: 0 0 0 2px var(--paper), 0 0 0 3.5px var(--ink), 0 6px 24px rgb(0 0 0 / .25); display: none; }
+  .lens .tag { position: absolute; left: 50%; bottom: -1.9rem; transform: translateX(-50%); background: var(--ink); color: var(--paper); font: 500 .75rem var(--sans); padding: .15rem .5rem; border-radius: 999px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .divider { position: fixed; top: 0; bottom: 0; width: 24px; margin-left: -12px; z-index: 2; display: none; cursor: ew-resize; touch-action: none; }
+  .divider::before { content: ''; position: absolute; top: 0; bottom: 0; left: 10.5px; width: 3px; background: var(--paper); box-shadow: 0 0 0 1px var(--ink); }
+  .divider span { position: absolute; top: 50%; left: -8px; width: 40px; height: 40px; border-radius: 50%; background: var(--paper); border: 1.5px solid var(--ink); display: grid; place-items: center; transform: translateY(-50%); font-size: .9rem; }
+  .divider .yl, .divider .yr { position: absolute; top: 1rem; font: 500 .75rem var(--sans); background: var(--ink); color: var(--paper); padding: .15rem .5rem; border-radius: 999px; white-space: nowrap; }
+  .divider .yl { right: 18px; } .divider .yr { left: 18px; }
   .divider.on { display: block; }
+  .panel.min .body, .panel.min .sub { display: none; }
+  .panel.min { bottom: auto; }
+  .fold { margin-left: auto; padding: .2rem .45rem; border: 1px solid var(--rule); border-radius: 3px; font-size: .75rem; color: var(--muted); }
+  .head .row { display: flex; align-items: baseline; gap: .5rem; }
   .controls { padding: 1rem 1.5rem; border-bottom: 1px solid var(--rule); display: grid; gap: .7rem; }
-  .years { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--rule); border-radius: 3px; padding: 2px; }
-  .years button { padding: .4rem .2rem; border-radius: 2px; font-size: .875rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .years { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--rule); border-radius: 3px; padding: 2px; }
+  .years button { padding: .45rem .2rem; border-radius: 2px; font-size: .9375rem; color: var(--muted); font-variant-numeric: tabular-nums; }
   .years button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
-  .seg { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--rule); border-radius: 3px; padding: 2px; }
-  .seg button { padding: .35rem; border-radius: 2px; font-size: .8125rem; color: var(--muted); }
-  .seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
-  .fade { display: grid; grid-template-columns: auto 1fr auto; gap: .6rem; align-items: center; font-size: .75rem; color: var(--muted); }
-  .fade input { accent-color: var(--accent); width: 100%; }
-  .about { padding: 1rem 1.5rem; display: grid; gap: .55rem; font-size: .875rem; }
+  .modes { display: grid; grid-template-columns: repeat(4, 1fr); gap: .35rem; }
+  .modes button { display: grid; gap: .15rem; justify-items: center; padding: .45rem .2rem; border: 1px solid var(--rule); border-radius: 4px; font-size: .75rem; color: var(--muted); }
+  .modes button i { font-style: normal; font-size: 1.05rem; }
+  .modes button[aria-pressed="true"] { border-color: var(--ink); color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+  .hint { font-size: .8125rem; color: var(--muted); min-height: 1.2rem; }
+  .row2 { display: grid; grid-template-columns: auto 1fr auto; gap: .6rem; align-items: center; font-size: .75rem; color: var(--muted); }
+  .row2 input { accent-color: var(--accent); width: 100%; }
+  .row2 button { padding: .2rem .5rem; border: 1px solid var(--rule); border-radius: 3px; }
+  .about { padding: 1rem 1.5rem 0; display: grid; gap: .5rem; font-size: .875rem; }
   .about h2 { font: 400 1.375rem/1.2 var(--serif); }
   .about .k { color: var(--muted); font-size: .8125rem; }
   .about a { color: inherit; }
+  .sec { padding: 1rem 1.5rem .35rem; font: 500 .75rem var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .pois { list-style: none; padding: 0 0 .5rem; }
+  .pois button { display: grid; grid-template-columns: 2.6rem 1fr; gap: .6rem; width: 100%; text-align: left; padding: .45rem 1.5rem; align-items: start; }
+  .pois button:hover, .pois button[aria-current="true"] { background: var(--rule); }
+  .pois .y { font: 500 .75rem var(--sans); color: var(--accent); font-variant-numeric: tabular-nums; padding-top: .15rem; }
+  .pois b { display: block; font-weight: 500; font-size: .875rem; } .pois small { font-size: .8125rem; color: var(--muted); }
+  @media (max-width: 48rem) { .controls, .about { padding-inline: 1rem; } .pois button { padding-inline: 1rem; } }
+  @media (prefers-reduced-motion: reduce) { .lens { transition: none; } }
 </style>
 </head>
 <body>
 <div id="map" role="region" aria-label="Xəritə"></div>
 <div id="old" aria-hidden="true"></div>
-<div class="divider" id="divider"><button type="button" id="handle" aria-label="⇆">⇆</button></div>
-<aside class="panel">
+<div class="lens" id="lens"><span class="tag" id="lens-tag"></span></div>
+<div class="divider" id="divider" role="slider" tabindex="0" aria-valuemin="0" aria-valuemax="100"><span aria-hidden="true">⇆</span><b class="yl" id="yl"></b><b class="yr" id="yr"></b></div>
+<aside class="panel" id="panel">
   <div class="head">
     <div class="top"><a class="brand" href="/" data-keep-lang><svg viewBox="0 0 512 512" aria-hidden="true"><g class="star"><rect x="126" y="126" width="260" height="260"/><polygon points="256,72 440,256 256,440 72,256"/></g><polygon class="gem" points="256,196 316,256 256,316 196,256"/></svg>Azad Bilik</a><nav><a href="/atlas/" data-keep-lang>Atlas</a><span class="langs" role="group" aria-label="Dil · Язык · Language"><button type="button" data-lang="az">AZ</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="en">EN</button></span></nav></div>
-    <h1 data-i18n="title">Bakı necə böyüdü</h1>
+    <div class="row"><h1 data-i18n="title">Bakı necə böyüdü</h1><button type="button" class="fold" id="fold" aria-expanded="true">‹</button></div>
     <p class="sub" data-i18n="sub">Köhnə planlar bugünkü şəhərin üstündə</p>
   </div>
   <div class="body" id="body">
     <div class="controls">
       <div class="years" role="group" id="years"></div>
-      <div class="seg" role="group" id="modes"></div>
-      <label class="fade" id="fade-row"><span data-i18n="now">indi</span><input type="range" id="fade" min="0" max="100" value="85"><span id="fade-year"></span></label>
+      <div class="modes" role="group" id="modes"></div>
+      <div class="row2" id="tool-row"></div>
+      <p class="hint" id="hint"></p>
     </div>
     <div id="side" aria-live="polite"></div>
   </div>
@@ -62,9 +83,10 @@
 <script>
 (() => {
 const dark = matchMedia('(prefers-color-scheme: dark)').matches;
-const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
 const still = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+const coarse = () => matchMedia('(pointer: coarse)').matches;
+const phone = () => matchMedia('(max-width: 48rem)').matches;
 const LANGS = ['az', 'ru', 'en'];
 let lang = (() => {
   const q = new URLSearchParams(location.search).get('lang');
@@ -74,94 +96,188 @@ let lang = (() => {
 })();
 const L = (o) => o?.[lang] ?? o?.az;
 const T = {
-  az: { doc: 'Bakı necə böyüdü · Azad Bilik', title: 'Bakı necə böyüdü', sub: 'Köhnə planlar bugünkü şəhərin üstündə', now: 'indi', today: 'Bu gün', swipe: 'Sürüşdür', fadeM: 'Şəffaflıq', source: 'Mənbə', fit: 'Yerləşdirmə',
-    fitText: { similarity: 'iki abidəyə görə (Qız qalası, Şirvanşahlar sarayı)', auto: 'küçələrin bugünkü küçələrlə avtomatik tutuşdurulması ilə' }, acc: (m) => `Dəqiqlik: təxminən ${m} m`,
-    note: 'Planlar ictimai mülkiyyətdədir (Wikimedia Commons). Bugünkü xəritə: OpenStreetMap. Köhnə planların öz xətaları və kağızın büzüşməsi qalır; dəqiqlik təxminidir.' },
-  ru: { doc: 'Как рос Баку · Azad Bilik', title: 'Как рос Баку', sub: 'Старые планы поверх нынешнего города', now: 'сейчас', today: 'Сегодня', swipe: 'Шторка', fadeM: 'Прозрачность', source: 'Источник', fit: 'Привязка',
-    fitText: { similarity: 'по двум памятникам (Девичья башня, дворец Ширваншахов)', auto: 'автоматическим совмещением улиц с нынешними' }, acc: (m) => `Точность: около ${m} м`,
-    note: 'Планы — общественное достояние (Wikimedia Commons). Нынешняя карта: OpenStreetMap. Собственные ошибки старых планов и усадка бумаги остаются; точность приблизительна.' },
-  en: { doc: 'How Baku grew · Azad Bilik', title: 'How Baku grew', sub: "Old plans over today's city", now: 'now', today: 'Today', swipe: 'Swipe', fadeM: 'Fade', source: 'Source', fit: 'Placed',
-    fitText: { similarity: 'by two landmarks (the Maiden Tower, the Shirvanshahs\' palace)', auto: "by matching its streets to today's automatically" }, acc: (m) => `Accurate to about ${m} m`,
-    note: "The plans are public domain (Wikimedia Commons). Today's map: OpenStreetMap. The old plans' own errors and the paper's shrinking remain; the accuracy is approximate." },
+  az: { doc: 'Bakı necə böyüdü · Azad Bilik', title: 'Bakı necə böyüdü', sub: 'Köhnə planlar bugünkü şəhərin üstündə', now: 'bu gün',
+    lens: 'Böyüdücü', swipe: 'Pərdə', scratch: 'Qaşı', fade: 'Şəffaf', size: 'Ölçü', clear: 'Təmizlə', opacity: 'Şəffaflıq',
+    hint: { lens: 'Siçanı xəritədə gəzdirin: şüşənin içində köhnə plan görünür.', lensTouch: 'Xəritəni barmaqla sürüşdürün: köhnə plan mərkəzdəki şüşədədir.', swipe: 'Xətti sağa-sola çəkin.', scratch: 'Bugünkü şəhəri qaşıyıb köhnəsini açın.', fade: 'Sürüşdürücü ilə iki xəritəni qarışdırın.' },
+    fit: 'Yerləşdirmə', fitText: { similarity: 'iki abidəyə görə (Qız qalası, Şirvanşahlar sarayı)', auto: 'küçələrin bugünkü küçələrlə avtomatik tutuşdurulması ilə' }, acc: (m) => `dəqiqlik təxminən ${m} m`, source: 'Mənbə', places: 'Onda və indi',
+    note: 'Planlar ictimai mülkiyyətdədir (Wikimedia Commons). Bugünkü xəritə: OpenStreetMap. Köhnə planların öz xətaları qalır.' },
+  ru: { doc: 'Как рос Баку · Azad Bilik', title: 'Как рос Баку', sub: 'Старые планы поверх нынешнего города', now: 'сейчас',
+    lens: 'Лупа', swipe: 'Шторка', scratch: 'Стереть', fade: 'Прозрачно', size: 'Размер', clear: 'Сбросить', opacity: 'Прозрачность',
+    hint: { lens: 'Водите мышью по карте: в линзе — старый план.', lensTouch: 'Двигайте карту пальцем: старый план — в линзе посередине.', swipe: 'Тяните линию влево и вправо.', scratch: 'Сотрите нынешний город, чтобы открыть старый.', fade: 'Смешайте две карты ползунком.' },
+    fit: 'Привязка', fitText: { similarity: 'по двум памятникам (Девичья башня, дворец Ширваншахов)', auto: 'автоматическим совмещением улиц с нынешними' }, acc: (m) => `точность около ${m} м`, source: 'Источник', places: 'Тогда и сейчас',
+    note: 'Планы — общественное достояние (Wikimedia Commons). Нынешняя карта: OpenStreetMap. Собственные ошибки старых планов остаются.' },
+  en: { doc: 'How Baku grew · Azad Bilik', title: 'How Baku grew', sub: "Old plans over today's city", now: 'today',
+    lens: 'Lens', swipe: 'Swipe', scratch: 'Scratch', fade: 'Fade', size: 'Size', clear: 'Clear', opacity: 'Opacity',
+    hint: { lens: 'Move the mouse over the map: the old plan shows in the glass.', lensTouch: 'Drag the map with a finger: the old plan shows in the glass in the middle.', swipe: 'Drag the line left and right.', scratch: "Scratch today's city away to uncover the old one.", fade: 'Blend the two maps with the slider.' },
+    fit: 'Placed', fitText: { similarity: "by two landmarks (the Maiden Tower, the Shirvanshahs' palace)", auto: "by matching its streets to today's automatically" }, acc: (m) => `accurate to about ${m} m`, source: 'Source', places: 'Then and now',
+    note: "The plans are public domain (Wikimedia Commons). Today's map: OpenStreetMap. The old plans' own errors remain." },
 };
 const t = (k) => T[lang][k];
 const PLANS = {
-  '1806': { fit: 'similarity', acc: 40, center: [49.8355, 40.3665], zoom: 15.2,
+  '1806': { fit: 'similarity', acc: 40, center: [49.8355, 40.3665], zoom: 15.6,
     title: { az: 'Qala şəhəri, 1806', ru: 'Город-крепость, 1806', en: 'The walled town, 1806' },
-    text: { az: 'Rusiya ordusunun Bakını aldığı il çəkilmiş plan: dənizə söykənən qala divarları, içəridə Xan sarayı və Qız qalası, qala qapısından çöldə bir neçə kənd və bağ. Şəhər hələ tamamilə divarların içindədir.', ru: 'План, снятый в год взятия Баку русскими войсками: крепостные стены у моря, внутри — Ханский дворец и Девичья башня, за воротами — несколько сёл и садов. Город ещё целиком в стенах.', en: 'A plan drawn the year Russian troops took Baku: the walls against the sea, the Khan\'s palace and the Maiden Tower inside, a few villages and gardens outside the gates. The town is still entirely within its walls.' } },
-  '1894': { fit: 'auto', acc: 80, center: [49.862, 40.373], zoom: 13.4,
+    text: { az: 'Rusiya ordusunun Bakını aldığı il çəkilmiş plan: dənizə söykənən divarlar, içəridə Xan sarayı və Qız qalası, qapılardan çöldə bir neçə kənd və bağ. Şəhər hələ tamamilə divarların içindədir.', ru: 'План, снятый в год взятия Баку русскими войсками: стены у моря, внутри — Ханский дворец и Девичья башня, за воротами — несколько сёл и садов. Город ещё целиком в стенах.', en: "A plan drawn the year Russian troops took Baku: the walls against the sea, the Khan's palace and the Maiden Tower inside, a few villages and gardens outside the gates. The town is still entirely within its walls." } },
+  '1894': { fit: 'auto', acc: 80, center: [49.862, 40.374], zoom: 13.6,
     title: { az: 'Neft şəhəri, 1894', ru: 'Нефтяной город, 1894', en: 'The oil town, 1894' },
-    text: { az: 'Neft bumu Bakını divarlardan çıxarıb: qalanın şimalında düzbucaqlı məhəllələr, dəmir yolu, şərqdə isə neft emalı zavodları ilə dolu Qara şəhər. Bu, xətt ilə çəkilmiş plandır; yeri təxminidir.', ru: 'Нефтяной бум вывел Баку за стены: к северу от крепости — прямоугольные кварталы, железная дорога, на востоке — Чёрный город с нефтеперегонными заводами. План линейный; привязка приблизительна.', en: 'The oil boom has taken Baku beyond its walls: grid quarters north of the fortress, the railway, and in the east the Black City of refineries. A line drawing; its placing is approximate.' } },
-  '1898': { fit: 'auto', acc: 30, center: [49.852, 40.374], zoom: 13.8,
+    text: { az: 'Neft bumu Bakını divarlardan çıxarıb: qalanın şimalında düzbucaqlı məhəllələr, dəmir yolu, şərqdə isə neft zavodları ilə dolu Qara şəhər. Xətlə çəkilmiş plandır; yeri təxminidir.', ru: 'Нефтяной бум вывел Баку за стены: к северу от крепости — прямоугольные кварталы, железная дорога, на востоке — Чёрный город с заводами. План линейный; привязка приблизительна.', en: 'The oil boom has taken Baku beyond its walls: grid quarters north of the fortress, the railway, and in the east the Black City of refineries. A line drawing; its placing is approximate.' } },
+  '1898': { fit: 'auto', acc: 30, center: [49.85, 40.374], zoom: 14,
     title: { az: 'Quberniya şəhəri, 1898–1900', ru: 'Губернский город, 1898–1900', en: 'The governorate town, 1898–1900' },
-    text: { az: 'Polkovnik fon der Nonnenin planı: çəhrayı — tikilmiş məhəllələr, narıncı — planlaşdırılan. Şəhər artıq bugünkü mərkəzi tutur: Nizami, Rəsul Rza küçələri, Parapet (Fəvvarələr meydanı) yerindədir.', ru: 'План полковника фон дер Нонне: розовым — застроенные кварталы, оранжевым — проектируемые. Город уже занимает нынешний центр: улицы Низами, Расула Рзы, Парапет (площадь Фонтанов) — на своих местах.', en: "Colonel von der Nonne's plan: pink for built-up blocks, orange for planned ones. The town already covers today's centre: Nizami and Rasul Rza streets and the Parapet (Fountains Square) are where they are now." } },
+    text: { az: 'Polkovnik fon der Nonnenin planı: çəhrayı — tikilmiş məhəllələr, narıncı — planlaşdırılan. Nizami, Rəsul Rza küçələri və Parapet artıq bugünkü yerindədir.', ru: 'План полковника фон дер Нонне: розовым — застроенные кварталы, оранжевым — проектируемые. Улицы Низами, Расула Рзы и Парапет уже на своих местах.', en: "Colonel von der Nonne's plan: pink for built-up blocks, orange for planned ones. Nizami and Rasul Rza streets and the Parapet are already where they are now." } },
 };
-const YEARS = ['1806', '1894', '1898', 'now'];
+const YEARS = ['1806', '1894', '1898'];
+// places to start from: each flies there, picks its plan and opens the lens on it
+const POIS = [
+  { year: '1806', at: [49.83727, 40.36615], z: 16.4, name: { az: 'Qız qalası', ru: 'Девичья башня', en: 'The Maiden Tower' },
+    text: { az: '1806-da sahildə idi; dəniz indi bulvarın o tayındadır.', ru: 'В 1806 г. стояла у самой воды; теперь море — за бульваром.', en: 'In 1806 it stood at the water; the sea is now beyond the boulevard.' } },
+  { year: '1898', at: [49.8368, 40.3709], z: 16.2, name: { az: 'Parapet', ru: 'Парапет', en: 'The Parapet' },
+    text: { az: 'Qala divarlarının önündəki meydan, bu gün Fəvvarələr meydanı.', ru: 'Площадь перед крепостной стеной, сегодня — площадь Фонтанов.', en: 'The square before the fortress walls, today Fountains Square.' } },
+  { year: '1898', at: [49.8440, 40.3666], z: 16, name: { az: 'Köhnə sahil', ru: 'Старый берег', en: 'The old shore' },
+    text: { az: 'Dəniz buraya qədər gəlirdi; bulvar 1909-dan doldurulmuş sahildə salınıb.', ru: 'Море доходило досюда; бульвар разбит с 1909 г. на отвоёванном берегу.', en: 'The sea came up to here; the boulevard was laid out from 1909 on reclaimed shore.' } },
+  { year: '1898', at: [49.8490, 40.3790], z: 16.3, name: { az: 'Vağzal', ru: 'Вокзал', en: 'The station' },
+    text: { az: 'Tiflis dəmir yolu Bakıya 1883-də çatdı; şəhər vağzala doğru böyüdü.', ru: 'Тифлисская железная дорога дошла до Баку в 1883 г.; город рос навстречу вокзалу.', en: 'The Tiflis railway reached Baku in 1883; the town grew out towards the station.' } },
+  { year: '1894', at: [49.8820, 40.3800], z: 15, name: { az: 'Qara şəhər', ru: 'Чёрный город', en: 'The Black City' },
+    text: { az: '1870-lərdə neft zavodları şəhərdən buraya köçürüldü; tüstüsündən adını aldı.', ru: 'В 1870-х нефтяные заводы вывели сюда из города; название — от копоти.', en: 'In the 1870s the refineries were moved out here from the town; it was named for the soot.' } },
+];
 const params = new URLSearchParams(location.search);
-let year = YEARS.includes(params.get('y')) ? params.get('y') : '1898', mode = params.get('m') === 'fade' ? 'fade' : 'swipe', fade = .85, meta = {};
-// the divider starts in the middle of the map the panel leaves visible
-let split = innerWidth > 768 ? (27 * 16 + 32 + (innerWidth - 27 * 16 - 32) / 2) / innerWidth : .5;
+let year = YEARS.includes(params.get('y')) ? params.get('y') : '1898';
+let mode = ['lens', 'swipe', 'scratch', 'fade'].includes(params.get('m')) ? params.get('m') : 'lens';
+let split = .5, fade = .85, R = 150, lensAt = null, meta = {}, poi = -1;
 
 const style = `https://tiles.openfreemap.org/styles/${dark ? 'dark' : 'positron'}`;
-const map = new maplibregl.Map({ container: 'map', style, center: [49.85, 40.373], zoom: 13.6, minZoom: 11, maxZoom: 18,
+const map = new maplibregl.Map({ container: 'map', style, center: [49.85, 40.373], zoom: 13.6, minZoom: 11, maxZoom: 18.5,
   attributionControl: { compact: true, customAttribution: 'Plans: Wikimedia Commons (PD) · <a href="https://www.openstreetmap.org/copyright">© OpenStreetMap</a>' } });
-const old = new maplibregl.Map({ container: 'old', style, center: map.getCenter(), zoom: map.getZoom(), interactive: false, attributionControl: false, fadeDuration: 0 });
+const old = new maplibregl.Map({ container: 'old', style, center: map.getCenter(), zoom: map.getZoom(), maxZoom: 18.5, interactive: false, attributionControl: false, fadeDuration: 0 });
 map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-right');
-const sync = () => old.jumpTo({ center: map.getCenter(), zoom: map.getZoom(), bearing: map.getBearing(), pitch: map.getPitch() });
-map.on('move', sync);
+// the camera leaves room for the panel; both maps share the padding, so they stay in step
+const panelEl = document.getElementById('panel');
+const pad = () => phone() ? { top: 20, right: 0, left: 0, bottom: panelEl.offsetHeight } : { top: 0, right: 0, bottom: 0, left: panelEl.classList.contains('min') ? 0 : panelEl.offsetWidth + 16 };
+function setPad() { const p = pad(); map.setPadding(p); old.setPadding(p); }
+const sync = () => old.jumpTo({ center: map.getCenter(), zoom: map.getZoom(), bearing: map.getBearing(), pitch: map.getPitch(), padding: map.getPadding() });
+map.on('move', () => { sync(); if (mode === 'lens' && coarse()) centreLens(); });
 const labelExpr = () => ['coalesce', ['get', `name:${lang}`], ['get', lang === 'ru' ? 'name' : 'name:latin'], ['get', 'name']];
 for (const m of [map, old]) m.on('style.load', () => { for (const l of m.getStyle().layers) if (l.type === 'symbol' && l.layout?.['text-field']) m.setLayoutProperty(l.id, 'text-field', labelExpr()); });
+map.on('load', () => { setPad(); sync(); });
 old.on('load', async () => {
   meta = await fetch('data/plans.json').then((r) => r.json());
   const first = old.getStyle().layers.find((l) => l.type === 'symbol')?.id;
-  for (const y of ['1806', '1894', '1898']) {
-    old.addSource(`p${y}`, { type: 'image', url: `data/plan-${y}.webp`, coordinates: meta[y].coordinates });
-    old.addLayer({ id: `p${y}`, type: 'raster', source: `p${y}`, paint: { 'raster-opacity': 0, 'raster-opacity-transition': { duration: still() ? 0 : 500 }, 'raster-fade-duration': 0 } }, first);
+  for (const y of YEARS) {
+    // sharp tiles at the scan's own resolution (scripts/tiles.py); the single warped image if there are none
+    const m = meta[y];
+    if (m.tiles) old.addSource(`p${y}`, { type: 'raster', tiles: [location.origin + location.pathname.replace(/[^/]*$/, '') + m.tiles]   /* not new URL(): it would escape the {z}/{x}/{y} */, tileSize: 256, minzoom: m.minzoom, maxzoom: m.maxzoom, bounds: m.bounds });
+    else old.addSource(`p${y}`, { type: 'image', url: `data/plan-${y}.webp`, coordinates: m.coordinates });
+    old.addLayer({ id: `p${y}`, type: 'raster', source: `p${y}`, paint: { 'raster-opacity': 0, 'raster-opacity-transition': { duration: still() ? 0 : 400 }, 'raster-fade-duration': 0 } }, first);
   }
-  // on the old side, the plan alone speaks: today's labels go
   for (const l of old.getStyle().layers) if (l.type === 'symbol') old.setLayoutProperty(l.id, 'visibility', 'none');
-  apply(true);
+  apply(true, true);
 });
 
-function clip() {
-  const el = document.getElementById('old'), dv = document.getElementById('divider');
-  const on = year !== 'now' && mode === 'swipe';
-  dv.classList.toggle('on', on);
-  if (year === 'now') { el.style.clipPath = 'inset(0 100% 0 0)'; return; }
-  if (mode === 'fade') { el.style.clipPath = 'none'; return; }
-  const x = Math.round(split * innerWidth);
-  el.style.clipPath = `inset(0 ${innerWidth - x}px 0 0)`; dv.style.left = `${x}px`;
+// ---- the four ways to look
+const oldEl = document.getElementById('old'), lensEl = document.getElementById('lens'), dv = document.getElementById('divider');
+const scratch = document.createElement('canvas'), sctx = scratch.getContext('2d');
+function sizeScratch() { scratch.width = Math.ceil(innerWidth / 3); scratch.height = Math.ceil(innerHeight / 3); }
+sizeScratch();
+function centreLens() { const p = map.getPadding(); lensAt = [p.left + (innerWidth - p.left - p.right) / 2, p.top + (innerHeight - p.top - p.bottom) / 2]; draw2(); }
+function draw2() {
+  // what of the old map shows
+  oldEl.style.webkitMaskImage = oldEl.style.maskImage = 'none';
+  lensEl.style.display = 'none'; dv.classList.remove('on');
+  if (mode === 'lens') {
+    if (!lensAt) centreLens();
+    const [x, y] = lensAt;
+    oldEl.style.clipPath = `circle(${R}px at ${x}px ${y}px)`;
+    Object.assign(lensEl.style, { display: 'block', left: `${x - R}px`, top: `${y - R}px`, width: `${2 * R}px`, height: `${2 * R}px` });
+    document.getElementById('lens-tag').textContent = year;
+  } else if (mode === 'swipe') {
+    const x = Math.round(split * innerWidth);
+    oldEl.style.clipPath = `inset(0 ${innerWidth - x}px 0 0)`; dv.style.left = `${x}px`; dv.classList.add('on');
+    dv.setAttribute('aria-valuenow', Math.round(split * 100));
+    document.getElementById('yl').textContent = year; document.getElementById('yr').textContent = t('now');
+  } else if (mode === 'scratch') {
+    oldEl.style.clipPath = 'none';
+    const url = `url(${scratch.toDataURL()})`; oldEl.style.webkitMaskImage = oldEl.style.maskImage = url;
+  } else oldEl.style.clipPath = 'none';
 }
-function apply(fly = false) {
-  for (const y of ['1806', '1894', '1898']) if (old.getLayer(`p${y}`)) old.setPaintProperty(`p${y}`, 'raster-opacity', y === year ? (mode === 'fade' ? fade : 1) : 0);
-  clip();
-  if (fly && PLANS[year]) map.flyTo({ center: PLANS[year].center, zoom: PLANS[year].zoom, duration: still() ? 0 : 1400, essential: true });
-  draw();
+// lens follows the mouse; on a touch screen it stays in the middle and the map moves under it
+map.getContainer().addEventListener('pointermove', (e) => { if (mode === 'lens' && e.pointerType === 'mouse') { lensAt = [e.clientX, e.clientY]; requestAnimationFrame(draw2); } });
+map.getContainer().addEventListener('wheel', (e) => { if (mode === 'lens' && e.shiftKey) { e.preventDefault(); e.stopPropagation(); R = Math.max(60, Math.min(360, R - Math.sign(e.deltaY) * 15)); draw2(); drawTool(); } }, { capture: true, passive: false });
+// scratch: paint where the pointer drags (the map does not pan meanwhile)
+let painting = false, scheduled = false;
+function paint(e) {
+  sctx.fillStyle = '#000'; sctx.beginPath(); sctx.arc(e.clientX / 3, e.clientY / 3, 16, 0, Math.PI * 2); sctx.fill();
+  if (!scheduled) { scheduled = true; requestAnimationFrame(() => { scheduled = false; draw2(); }); }
 }
-// the divider: drag it (or use ←/→ when it has focus)
-const handle = document.getElementById('handle');
+map.getContainer().addEventListener('pointerdown', (e) => { if (mode !== 'scratch') return; painting = true; map.dragPan.disable(); paint(e); });
+addEventListener('pointermove', (e) => { if (painting) paint(e); });
+addEventListener('pointerup', () => { if (painting) { painting = false; map.dragPan.enable(); } });
+// swipe: drag anywhere on the line, or arrow keys
 let dragging = false;
-handle.addEventListener('pointerdown', (e) => { dragging = true; handle.setPointerCapture(e.pointerId); });
-addEventListener('pointermove', (e) => { if (!dragging) return; split = Math.min(.97, Math.max(.03, e.clientX / innerWidth)); clip(); });
-addEventListener('pointerup', () => { dragging = false; });
-handle.addEventListener('keydown', (e) => { if (e.key === 'ArrowLeft') split = Math.max(.03, split - .03); else if (e.key === 'ArrowRight') split = Math.min(.97, split + .03); else return; e.preventDefault(); clip(); });
-addEventListener('resize', clip);
-document.getElementById('fade').oninput = (e) => { fade = +e.target.value / 100; apply(); };
+dv.addEventListener('pointerdown', (e) => { dragging = true; dv.setPointerCapture(e.pointerId); });
+dv.addEventListener('pointermove', (e) => { if (!dragging) return; split = Math.min(.98, Math.max(.02, e.clientX / innerWidth)); draw2(); });
+dv.addEventListener('pointerup', () => { dragging = false; });
+dv.addEventListener('keydown', (e) => { if (e.key === 'ArrowLeft') split = Math.max(.02, split - .03); else if (e.key === 'ArrowRight') split = Math.min(.98, split + .03); else return; e.preventDefault(); draw2(); });
+addEventListener('resize', () => { sizeScratch(); setPad(); if (mode === 'lens' && coarse()) centreLens(); draw2(); });
+// the line slides once when the swipe opens, to show it moves
+function peek() {
+  const p = map.getPadding(), mid = (p.left + (innerWidth - p.left) / 2) / innerWidth;
+  if (still()) { split = mid; return draw2(); }
+  const t0 = performance.now(), from = mid - .12;
+  const step = (now) => { const k = Math.min(1, (now - t0) / 1100); split = from + (mid - from) * (1 - Math.cos(k * Math.PI * 2.5) * (1 - k)); draw2(); if (k < 1) requestAnimationFrame(step); };
+  requestAnimationFrame(step);
+}
 
+function apply(fly = false, first = false) {
+  for (const y of YEARS) if (old.getLayer(`p${y}`)) old.setPaintProperty(`p${y}`, 'raster-opacity', y === year ? (mode === 'fade' ? fade : 1) : 0);
+  if (fly) map.flyTo({ center: PLANS[year].center, zoom: PLANS[year].zoom, duration: still() || first ? 0 : 1400, essential: true });
+  draw2(); draw();
+}
+function setMode(m) {
+  mode = m;
+  if (m === 'scratch') sctx.clearRect(0, 0, scratch.width, scratch.height);
+  if (m === 'lens' && coarse()) centreLens();
+  apply();
+  if (m === 'swipe') peek();
+}
+function drawTool() {
+  const el = document.getElementById('tool-row');
+  if (mode === 'lens') el.innerHTML = `<span>${t('size')}</span><input type="range" id="tool" min="60" max="360" value="${R}"><span></span>`;
+  else if (mode === 'fade') el.innerHTML = `<span>${t('now')}</span><input type="range" id="tool" min="0" max="100" value="${Math.round(fade * 100)}"><span>${year}</span>`;
+  else if (mode === 'scratch') el.innerHTML = `<span></span><span></span><button type="button" id="clear">${t('clear')}</button>`;
+  else el.innerHTML = '';
+  const r = document.getElementById('tool');
+  if (r) r.oninput = (e) => { if (mode === 'lens') R = +e.target.value; else { fade = +e.target.value / 100; apply(); } draw2(); };
+  document.getElementById('clear')?.addEventListener('click', () => { sctx.clearRect(0, 0, scratch.width, scratch.height); draw2(); });
+  document.getElementById('hint').textContent = t('hint')[mode === 'lens' && coarse() ? 'lensTouch' : mode];
+}
 function draw() {
-  document.getElementById('years').innerHTML = YEARS.map((y) => `<button type="button" data-y="${y}" aria-pressed="${y === year}">${y === 'now' ? t('today') : y}</button>`).join('');
-  document.querySelectorAll('#years button').forEach((b) => b.onclick = () => { year = b.dataset.y; apply(true); });
-  document.getElementById('modes').innerHTML = [['swipe', t('swipe')], ['fade', t('fadeM')]].map(([k, n]) => `<button type="button" data-m="${k}" aria-pressed="${k === mode}" ${year === 'now' ? 'disabled' : ''}>${n}</button>`).join('');
-  document.querySelectorAll('#modes button').forEach((b) => b.onclick = () => { mode = b.dataset.m; apply(); });
-  document.getElementById('fade-row').hidden = mode !== 'fade' || year === 'now';
-  document.getElementById('fade-year').textContent = year;
+  document.getElementById('years').innerHTML = YEARS.map((y) => `<button type="button" data-y="${y}" aria-pressed="${y === year}">${y}</button>`).join('');
+  document.querySelectorAll('#years button').forEach((b) => b.onclick = () => { year = b.dataset.y; poi = -1; apply(true); });
+  const ICON = { lens: '◎', swipe: '⇆', scratch: '✎', fade: '◐' };
+  document.getElementById('modes').innerHTML = ['lens', 'swipe', 'scratch', 'fade'].map((m) => `<button type="button" data-m="${m}" aria-pressed="${m === mode}"><i aria-hidden="true">${ICON[m]}</i>${t(m)}</button>`).join('');
+  document.querySelectorAll('#modes button').forEach((b) => b.onclick = () => setMode(b.dataset.m));
+  drawTool();
   const p = PLANS[year], m = meta[year];
-  document.getElementById('side').innerHTML = p ? `<div class="about"><h2>${esc(L(p.title))}</h2><p>${esc(L(p.text))}</p>
-      ${m ? `<p class="k">${t('fit')}: ${esc(t('fitText')[p.fit])}. ${esc(t('acc')(p.acc))}.</p><p class="k">${t('source')}: <a href="${m.source}" target="_blank" rel="noopener">${esc(m.title)}</a></p>` : ''}</div><p class="note">${t('note')}</p>`
-    : `<div class="about"><p>${esc(t('sub'))}.</p></div><p class="note">${t('note')}</p>`;
-  const q = new URLSearchParams(); if (lang !== 'az') q.set('lang', lang); if (year !== '1898') q.set('y', year); if (mode !== 'swipe') q.set('m', mode);
+  document.getElementById('side').innerHTML = `<div class="about"><h2>${esc(L(p.title))}</h2><p>${esc(L(p.text))}</p>
+      ${m ? `<p class="k">${t('fit')}: ${esc(t('fitText')[p.fit])}, ${esc(t('acc')(p.acc))}. ${t('source')}: <a href="${m.source}" target="_blank" rel="noopener">Wikimedia Commons ↗</a></p>` : ''}</div>
+    <h2 class="sec">${t('places')}</h2><ul class="pois">${POIS.map((q, i) => `<li><button type="button" data-p="${i}" aria-current="${i === poi}"><span class="y">${q.year}</span><span><b>${esc(L(q.name))}</b><small>${esc(L(q.text))}</small></span></button></li>`).join('')}</ul>
+    <p class="note">${t('note')}</p>`;
+  document.querySelectorAll('[data-p]').forEach((b) => b.onclick = () => goPoi(+b.dataset.p));
+  const q = new URLSearchParams(); if (lang !== 'az') q.set('lang', lang); if (year !== '1898') q.set('y', year); if (mode !== 'lens') q.set('m', mode);
   history.replaceState(null, '', `${location.pathname}${q.size ? '?' + q : ''}`);
 }
+function goPoi(i) {
+  const q = POIS[i]; poi = i; year = q.year;
+  if (mode !== 'lens' && mode !== 'swipe') mode = 'lens';
+  apply();
+  map.flyTo({ center: q.at, zoom: q.z, duration: still() ? 0 : 1600, essential: true });
+  // the lens opens on the place when the flight lands
+  map.once('moveend', () => { if (mode === 'lens') { const pt = map.project(q.at); lensAt = [pt.x, pt.y]; draw2(); } else { split = map.project(q.at).x / innerWidth; draw2(); } });
+}
+document.getElementById('fold').onclick = () => {
+  const min = panelEl.classList.toggle('min');
+  document.getElementById('fold').textContent = min ? '›' : '‹';
+  document.getElementById('fold').setAttribute('aria-expanded', !min);
+  setPad(); if (mode === 'lens' && coarse()) centreLens();
+};
 function applyLang() {
   document.documentElement.lang = lang;
   document.title = t('doc');
@@ -169,11 +285,11 @@ function applyLang() {
   document.querySelectorAll('[data-lang]').forEach((b) => b.setAttribute('aria-pressed', b.dataset.lang === lang));
   document.querySelectorAll('[data-keep-lang]').forEach((a) => { const u = new URL(a.getAttribute('href'), location.href); if (lang === 'az') u.searchParams.delete('lang'); else u.searchParams.set('lang', lang); a.href = u.pathname + u.search; });
 }
-applyLang(); draw(); clip();
+applyLang(); draw();
 document.querySelectorAll('[data-lang]').forEach((b) => b.onclick = () => {
   lang = b.dataset.lang;
   try { localStorage.setItem('lang', lang); } catch {}
-  applyLang(); draw();
+  applyLang(); draw(); draw2();
   if (map.getStyle()) for (const l of map.getStyle().layers) if (l.type === 'symbol' && l.layout?.['text-field']) map.setLayoutProperty(l.id, 'text-field', labelExpr());
 });
 })();

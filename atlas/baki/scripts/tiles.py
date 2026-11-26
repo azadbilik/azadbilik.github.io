@@ -1,0 +1,105 @@
+# Cuts each placed plan into web-map tiles at the scan's own resolution, so it stays sharp when zoomed in.
+#  - the scan is cleaned first: levels stretched (the darkest and lightest 0.5% clipped), the paper of
+#    the line-drawn plans whitened, lines sharpened lightly (unsharp mask);
+#  - the deepest zoom (zmax in data/gcps.json, near the scan's metres per pixel) is sampled straight
+#    from the scan through the same fit as warp.py; every zoom above is made by averaging four tiles of
+#    the one below, so nothing shimmers;
+#  - tiles outside the plan are written too (tiny, transparent), so the map never asks for a missing one.
+# Writes data/tiles/<year>/<z>/<x>/<y>.webp and the bounds and zooms into data/plans.json.
+#   python scripts/tiles.py [year]      (numpy, scipy, Pillow)
+import json, math, sys
+from pathlib import Path
+import numpy as np
+from PIL import Image, ImageFilter, ImageOps
+from scipy.interpolate import RBFInterpolator
+from scipy.ndimage import map_coordinates, spline_filter
+
+HERE = Path(__file__).resolve().parents[1]
+DATA, RAW = HERE / 'data', HERE / 'data' / 'raw'
+G = json.load(open(DATA / 'gcps.json'))
+meta = json.load(open(DATA / 'plans.json'))
+Image.MAX_IMAGE_PIXELS = None
+ZMIN = 12
+
+def tile_ll(z, x, y, n=256):
+    """lon, lat of every pixel centre of tile z/x/y"""
+    N = 2 ** z * 256
+    px = (x * 256 + np.arange(n) + .5)
+    py = (y * 256 + np.arange(n) + .5)
+    lon = px / N * 360 - 180
+    lat = np.degrees(np.arctan(np.sinh(np.pi * (1 - 2 * py / N))))
+    return np.meshgrid(lon, lat)
+def ll_tile(lon, lat, z):
+    n = 2 ** z
+    return int((lon + 180) / 360 * n), int((1 - math.log(math.tan(math.radians(lat)) + 1 / math.cos(math.radians(lat))) / math.pi) / 2 * n)
+
+for year, plan in G.items():
+    if len(sys.argv) > 1 and year not in sys.argv[1:]: continue
+    pts = np.array([p[:4] for p in plan['points'].values()], float)
+    px, ll = pts[:, :2], pts[:, [3, 2]]
+    if len(pts) >= 8:
+        inv = RBFInterpolator(ll, px, kernel='thin_plate_spline', smoothing=1e-9)
+        fwd = RBFInterpolator(px, ll, kernel='thin_plate_spline', smoothing=1.0)
+    else:   # two landmarks: the similarity of warp.py
+        z_ = lambda q: q[:, 0] - 1j * q[:, 1]
+        w_ = lambda q: (q[:, 0] - ll[0, 0]) * math.cos(math.radians(ll[0, 1])) + 1j * (q[:, 1] - ll[0, 1])
+        k = (w_(ll)[1] - w_(ll)[0]) / (z_(px)[1] - z_(px)[0])
+        inv = lambda q: (lambda u: np.c_[u.real, -u.imag])((w_(q) - w_(ll)[0]) / k + z_(px)[0])
+        fwd = lambda q: (lambda v: np.c_[ll[0, 0] + v.real / math.cos(math.radians(ll[0, 1])), ll[0, 1] + v.imag])(k * (z_(q) - z_(px)[0]))
+    # the scan, cleaned
+    im = Image.open(RAW / plan['file']).convert('RGB')
+    im = ImageOps.autocontrast(im, cutoff=.5)
+    if plan.get('auto', {}).get('streets') == 'ink':     # a line drawing: paper to white, ink to ink
+        g = np.asarray(im.convert('L')).astype(np.float32)
+        g = np.clip((g - 60) / (215 - 60), 0, 1) ** 1.4 * 255
+        im = Image.fromarray(g.astype(np.uint8)).convert('RGB')
+    im = im.filter(ImageFilter.UnsharpMask(radius=1.6, percent=55, threshold=2))
+    a = np.asarray(im).astype(np.float32); h, w = a.shape[:2]
+    # cubic resampling needs the scan pre-filtered; do it once, not for every tile
+    a = np.stack([spline_filter(a[..., c], order=3, output=np.float32) for c in range(3)], -1)
+    x0, y0, x1, y1 = plan.get('crop', [0, 0, w, h])
+    excl = plan.get('exclude', [])
+    # the plan's footprint on the map, from its crop's edge
+    edge = np.array([[x, y0] for x in np.linspace(x0, x1, 30)] + [[x1, y] for y in np.linspace(y0, y1, 30)] + [[x, y1] for x in np.linspace(x1, x0, 30)] + [[x0, y] for y in np.linspace(y1, y0, 30)])
+    E = fwd(edge); W_, S_, E_, N_ = E[:, 0].min(), E[:, 1].min(), E[:, 0].max(), E[:, 1].max()
+    zmax = plan.get('zmax', 17)
+    out = DATA / 'tiles' / year
+    count = 0
+    # deepest zoom from the scan
+    tx0, ty0 = ll_tile(W_, N_, zmax); tx1, ty1 = ll_tile(E_, S_, zmax)
+    for tx in range(tx0, tx1 + 1):
+        for ty in range(ty0, ty1 + 1):
+            LON, LAT = tile_ll(zmax, tx, ty)
+            P = inv(np.stack([LON.ravel(), LAT.ravel()], 1)); sx, sy = P[:, 0].reshape(LON.shape), P[:, 1].reshape(LON.shape)
+            keep = (sx >= x0) & (sx < x1) & (sy >= y0) & (sy < y1)
+            for ex0, ey0, ex1, ey1 in excl: keep &= ~((sx >= ex0) & (sx < ex1) & (sy >= ey0) & (sy < ey1))
+            t = np.zeros((256, 256, 4), np.uint8)
+            if keep.any():
+                for c in range(3): t[..., c] = np.clip(map_coordinates(a[..., c], [sy, sx], order=3, mode='nearest', prefilter=False), 0, 255)
+                t[..., 3] = np.where(keep, 255, 0)
+            f = out / str(zmax) / str(tx); f.mkdir(parents=True, exist_ok=True)
+            Image.fromarray(t, 'RGBA').save(f / f'{ty}.webp', quality=80, method=5)
+            count += 1
+    # the zooms above: four tiles averaged into one (alpha-weighted, so the plan's edge stays clean)
+    for z in range(zmax - 1, ZMIN - 1, -1):
+        tx0, ty0 = ll_tile(W_, N_, z); tx1, ty1 = ll_tile(E_, S_, z)
+        for tx in range(tx0, tx1 + 1):
+            for ty in range(ty0, ty1 + 1):
+                big = np.zeros((512, 512, 4), np.float32)
+                for dx in (0, 1):
+                    for dy in (0, 1):
+                        f = out / str(z + 1) / str(2 * tx + dx) / f'{2 * ty + dy}.webp'
+                        if f.exists(): big[dy * 256:(dy + 1) * 256, dx * 256:(dx + 1) * 256] = np.asarray(Image.open(f).convert('RGBA'), np.float32)
+                al = big[..., 3:4] / 255
+                rgb = (big[..., :3] * al).reshape(256, 2, 256, 2, 3).sum((1, 3))
+                aw = al.reshape(256, 2, 256, 2, 1).sum((1, 3))
+                t = np.zeros((256, 256, 4), np.uint8)
+                t[..., :3] = np.clip(rgb / np.maximum(aw, 1e-6), 0, 255)
+                t[..., 3] = np.clip(aw[..., 0] / 4 * 255, 0, 255)
+                d = out / str(z) / str(tx); d.mkdir(parents=True, exist_ok=True)
+                Image.fromarray(t, 'RGBA').save(d / f'{ty}.webp', quality=80, method=5)
+                count += 1
+    size = sum(f.stat().st_size for f in out.rglob('*.webp'))
+    meta.setdefault(year, {}).update({'tiles': f'data/tiles/{year}/{{z}}/{{x}}/{{y}}.webp', 'bounds': [round(W_, 5), round(S_, 5), round(E_, 5), round(N_, 5)], 'minzoom': ZMIN, 'maxzoom': zmax})
+    print(f'{year}: {count} tiles, z{ZMIN}–{zmax}, {size // 1024 // 1024} MB')
+json.dump(meta, open(DATA / 'plans.json', 'w'), ensure_ascii=False, indent=1)
