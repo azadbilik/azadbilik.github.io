@@ -30,4 +30,11 @@
       : `<a href="${href(s[0])}" id="kx">${names(s)}</a>`).join('') +
     `<span class="langs" role="group" aria-label="Dil · Язык · Language"><button type="button" data-lang="az">AZ</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="en">EN</button></span></nav>`;
   h.querySelectorAll('[data-lang]').forEach((b) => b.setAttribute('aria-pressed', b.dataset.lang === lang));
+  // A language switch: the page re-labels itself; the header keeps its own links in that language too
+  // (Kitabxana goes to kitabxana.az/<lang>), whether or not the page does
+  h.querySelectorAll('[data-lang]').forEach((b) => b.addEventListener('click', () => {
+    const l = b.dataset.lang;
+    h.querySelector('#kx').href = SECTIONS[0][0] + (l === 'az' ? '' : `/${l}`);
+    h.querySelectorAll('[data-keep-lang]').forEach((a) => { const u = new URL(a.getAttribute('href'), location.href); if (l === 'az') u.searchParams.delete('lang'); else u.searchParams.set('lang', l); a.href = u.pathname + u.search; });
+  }));
 })();
