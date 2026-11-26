@@ -36,6 +36,7 @@ add('/sebeke/', ['Şəbəkələr', 'Сети', 'Networks'], ['Kim kimə bağlıd
 add('/soz/', ['Söz ehtiyatı', 'Словарь поэтов', 'Poets’ vocabulary'], ['Şair neçə söz işlədir?', 'Сколько слов у поэта?', 'How many words does a poet use?']);
 add('/sebeke/elm/', ['Elm şəbəkəsi', 'Сеть науки', 'Science network'], ['Azərbaycan elmi kimlərlə birgə yazır?', 'С кем в соавторстве пишет наука Азербайджана?', 'Who Azerbaijani science writes with']);
 add('/sebeke/ixrac/', ['İxrac məhsul fəzası', 'Пространство экспорта', 'Export product space'], ['Azərbaycan nə satır, nəyi satmağa yaxındır?', 'Что Азербайджан продаёт и что мог бы', 'What Azerbaijan sells, and what it is close to selling']);
+add('/sebeke/qanunlar/', ['Hüquqi aktlar şəbəkəsi', 'Сеть правовых актов', 'Network of legal acts'], ['Hansı akt hansını dəyişir, icra edir, ləğv edir', 'Какой акт какой изменяет, исполняет, отменяет', 'Which act amends, implements or repeals which']);
 add('https://github.com/azadbilik/data', ['Açıq məlumat', 'Открытые данные', 'Open data'], ['CSV, CC0, Zenodo-da DOI ilə', 'CSV, CC0, DOI на Zenodo', 'CSV, CC0, with a DOI on Zenodo']);
 const dataOf = {
   '/atlas/ehali/': DATA + 'atlas/population', '/atlas/icmalar/': DATA + 'atlas/communities', '/atlas/xalqlar/': DATA + 'atlas/peoples',
