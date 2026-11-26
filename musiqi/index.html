@@ -212,6 +212,8 @@
     header nav { gap: .25rem .9rem; } header nav a { font-size: .8125rem; }
   }
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } .disc.spin .spinner, .pulse { animation: none; } }
+  /* Phones: the language switch on the brand's line, the sections on the line below */
+  @media (max-width: 40rem) { header { position: relative; } header .langs { position: absolute; top: calc(1.75rem - .19rem); right: 0; margin: 0; } }
 </style>
 </head>
 <body>

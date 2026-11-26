@@ -132,6 +132,8 @@
   }
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
   .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  /* Phones: the language switch on the brand's line, the sections on the line below */
+  @media (max-width: 40rem) { header { position: relative; } header .langs { position: absolute; top: calc(1.75rem - .19rem); right: var(--gutter); margin: 0; } }
 </style>
 </head>
 <body>
