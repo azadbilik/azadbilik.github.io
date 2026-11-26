@@ -44,3 +44,9 @@ On the map:
 
 **The raindrop** (after Sam Learner's *River Runner*): tap «Raindrop» and then a river, or open a river and «Follow a raindrop to the sea». The drop takes the shortest way along that river to its mouth, then down each river it joins, to the Caspian. The panel counts the kilometres and lights each river in the chain as the drop reaches it.
 
+## The year on the river
+
+`data/kura-flow.json` holds the Kür's mean, lowest and highest monthly flow at Surra, below the Araz confluence (catchment 178,000 km²), for 1930–1984. It comes from the Global Runoff Data Centre (station 6990700), via the [UNH/GRDC Composite Runoff Fields](https://grdc.sr.unh.edu/html/Polygons/P6990700.html), and only these station summaries are republished.
+
+The panel charts the year with each month's range shaded. A month slider and ▶ swell every river line by the square root of that month's flow against the annual mean, and speed up the flow dashes. Applying the Kür's rhythm to every river is a simplification, and the page says so. The range runs from about 314 m³/s in August to about 1,067 m³/s in May, when the snow melts.
+

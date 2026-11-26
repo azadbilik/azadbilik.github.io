@@ -1,0 +1,22 @@
+{
+ "station": "Kür at Surra (below the Araz confluence)",
+ "grdc": 6990700,
+ "catchmentKm2": 178000,
+ "period": "1930–1984",
+ "meanAnnual": 551,
+ "source": "Global Runoff Data Centre (GRDC), station 6990700, via UNH/GRDC Composite Runoff Fields: https://grdc.sr.unh.edu/html/Polygons/P6990700.html",
+ "months": [
+  {"m": 1, "mean": 467.9, "min": 206, "max": 889},
+  {"m": 2, "mean": 493.4, "min": 190, "max": 980},
+  {"m": 3, "mean": 553.0, "min": 273, "max": 1080},
+  {"m": 4, "mean": 813.3, "min": 232, "max": 1800},
+  {"m": 5, "mean": 1067.2, "min": 223, "max": 2250},
+  {"m": 6, "mean": 850.8, "min": 206, "max": 1930},
+  {"m": 7, "mean": 451.7, "min": 178, "max": 1060},
+  {"m": 8, "mean": 313.7, "min": 120, "max": 837},
+  {"m": 9, "mean": 326.7, "min": 153, "max": 727},
+  {"m": 10, "mean": 387.9, "min": 198, "max": 903},
+  {"m": 11, "mean": 423.8, "min": 232, "max": 790},
+  {"m": 12, "mean": 461.0, "min": 245, "max": 834}
+ ]
+}

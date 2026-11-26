@@ -29,6 +29,17 @@
   .river h2 { font: 400 1.5rem/1.15 var(--serif); }
   .river .k { color: var(--muted); }
   .river a { color: inherit; }
+  .season { padding: 1rem 1.5rem .5rem; border-bottom: 1px solid var(--rule); display: grid; gap: .5rem; }
+  .season h2 { font: 500 .75rem var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .season svg { width: 100%; height: auto; display: block; overflow: visible; }
+  .season svg text { font: .625rem var(--sans); fill: var(--muted); }
+  .season .now { display: flex; align-items: baseline; justify-content: space-between; gap: .5rem; }
+  .season .now b { font: 400 1.5rem/1 var(--serif); font-variant-numeric: tabular-nums; }
+  .season .now span { font-size: .8125rem; color: var(--muted); text-align: right; }
+  .season .ctl { display: grid; grid-template-columns: auto 1fr; gap: .6rem; align-items: center; }
+  .season .ctl button { width: 2rem; height: 2rem; border: 1px solid var(--rule); border-radius: 50%; font-size: .75rem; }
+  .season input { accent-color: var(--second); width: 100%; }
+  .season small { font-size: .75rem; color: var(--muted); }
   .drop-btn { display: flex; align-items: center; justify-content: center; gap: .4rem; width: 100%; padding: .45rem; border: 1px solid var(--second); color: var(--second); border-radius: 3px; font-size: .8125rem; font-weight: 500; margin-top: .6rem; }
   .drop-btn:hover, .drop-btn[aria-pressed="true"] { background: var(--second); color: var(--paper); }
   .journey { padding: 1rem 1.5rem; display: grid; gap: .5rem; }
@@ -79,12 +90,15 @@ let lang = (() => {
 const nf = () => new Intl.NumberFormat({ az: 'az-Latn-AZ', ru: 'ru-RU', en: 'en-GB' }[lang]);
 const T = {
   az: { doc: 'Kür–Araz hövzəsi · Azad Bilik', title: 'Kür–Araz hövzəsi', sub: 'Çaylar və göllər', find: 'Çay axtar…', rivers: (n) => `${n} çay`, lakes: 'Göllər və su anbarları', length: 'Uzunluğu', whole: 'bütün uzunluğu, mənbədən mənsəbədək', inAz: 'Azərbaycandakı hissəsi', names: 'Adları', back: '← Bütün çaylar', km: 'km', area: 'sahəsi', wiki: 'Vikipediya',
+    seasonH: 'İl boyu Kür', months: ['yan','fev','mar','apr','may','iyn','iyl','avq','sen','okt','noy','dek'], monthsLong: ['Yanvar','Fevral','Mart','Aprel','May','İyun','İyul','Avqust','Sentyabr','Oktyabr','Noyabr','Dekabr'], flowNote: (m) => m === 5 ? 'qar əriyir: ilin ən gur ayı' : m === 8 ? 'ən az su' : '', allYear: 'Bütün il', flowSrc: 'Kür, Surra məntəqəsi (Arazdan aşağı), 1930–1984-cü illərin aylıq orta axımı; zolaq — ən az və ən çox. Xəritədə bütün çaylar Kür kimi şişir — bu, sadələşdirmədir. Mənbə: GRDC.',
     legend: 'Çay: qalınlıq — yuxarı axarındakı bütün çaylara görə, ştrixlər axın istiqamətində', legendStill: 'Çay: qalınlıq — yuxarı axarındakı bütün çaylara görə, oxlar axın istiqamətində', sysL: 'Rəng: Kürün və ya Arazın hansı qoluna aiddir', rain: 'Yağış damlası: çaya toxunun', rainOn: 'Damlanı buraxmaq üçün çaya toxunun', follow: 'Damlanı dənizə qədər izlə', sea: 'Xəzər dənizinə çatdı', ends: (x) => `${x} burada bitir: göl, su anbarı və ya kanal`, kmTo: 'km yol', lake: 'göl', reservoir: 'su anbarı', lakeL: 'göl, su anbarı',
     note: 'Çaylar və göllər OpenStreetMap-dəndir (ODbL). Uzunluq xəritədəki xəttə görə ölçülüb və rəsmi rəqəmlərdən bir qədər fərqlənə bilər: Kür üçün 1471 km (soraqlarda ~1515), Araz üçün 1068 km (~1072). Kür və Arazın 10 km-dən uzun bütün qolları (qolların qolları da) Gürcüstanda, Ermənistanda, Türkiyədə və İranda da, bütün uzunluğu ilə göstərilir, onların keçdiyi göllər və su anbarları ilə (Göyçə, Arpi…); Azərbaycanın başqa çayları ölkədəki hissəsi ilə.' },
   ru: { doc: 'Бассейн Куры и Аракса · Azad Bilik', title: 'Бассейн Куры и Аракса', sub: 'Реки и озёра', find: 'Найти реку…', rivers: (n) => `${n} рек`, lakes: 'Озёра и водохранилища', length: 'Длина', whole: 'вся длина, от истока до устья', inAz: 'часть в Азербайджане', names: 'Названия', back: '← Все реки', km: 'км', area: 'площадь', wiki: 'Википедия',
+    seasonH: 'Кура за год', months: ['янв','фев','мар','апр','май','июн','июл','авг','сен','окт','ноя','дек'], monthsLong: ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'], flowNote: (m) => m === 5 ? 'таяние снегов: самый полноводный месяц' : m === 8 ? 'меньше всего воды' : '', allYear: 'Весь год', flowSrc: 'Кура у Сурры (ниже Аракса), средний месячный расход за 1930–1984 гг.; полоса — минимум и максимум. На карте все реки набухают как Кура — это упрощение. Источник: GRDC.',
     legend: 'Река: толщина — по всем рекам выше по течению, штрихи — по течению', legendStill: 'Река: толщина — по всем рекам выше по течению, стрелки — по течению', sysL: 'Цвет: к какому притоку Куры или Аракса относится', rain: 'Капля дождя: нажмите на реку', rainOn: 'Нажмите на реку, чтобы уронить каплю', follow: 'Проследить каплю до моря', sea: 'Дошла до Каспийского моря', ends: (x) => `${x} кончается здесь: в озере, водохранилище или канале`, kmTo: 'км пути', lake: 'озеро', reservoir: 'водохранилище', lakeL: 'озеро, водохранилище',
     note: 'Реки и озёра — из OpenStreetMap (ODbL). Длина измерена по линии на карте и может немного отличаться от официальной: Кура 1471 км (по справочникам ~1515), Аракс 1068 км (~1072). Все притоки Куры и Аракса длиннее 10 км (и притоки притоков) показаны на всём протяжении, в Грузии, Армении, Турции и Иране тоже, с озёрами и водохранилищами на них (Севан, Арпи…); остальные реки Азербайджана — их частью в стране.' },
   en: { doc: 'The Kura–Araz basin · Azad Bilik', title: 'The Kura–Araz basin', sub: 'Rivers and lakes', find: 'Find a river…', rivers: (n) => `${n} rivers`, lakes: 'Lakes and reservoirs', length: 'Length', whole: 'whole length, source to mouth', inAz: 'the part in Azerbaijan', names: 'Names', back: '← All rivers', km: 'km', area: 'area', wiki: 'Wikipedia',
+    seasonH: 'The Kür through the year', months: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'], monthsLong: ['January','February','March','April','May','June','July','August','September','October','November','December'], flowNote: (m) => m === 5 ? 'snowmelt: the fullest month' : m === 8 ? 'the least water' : '', allYear: 'All year', flowSrc: 'The Kür at Surra (below the Araz), mean monthly flow 1930–1984; the band shows the lowest and highest. On the map every river swells like the Kür, a simplification. Source: GRDC.',
     legend: 'River: width by all the rivers upstream, dashes run downstream', legendStill: 'River: width by all the rivers upstream, arrows point downstream', sysL: 'Colour: which tributary of the Kür or the Araz it belongs to', rain: 'Raindrop: tap a river', rainOn: 'Tap a river to let the drop fall', follow: 'Follow a raindrop to the sea', sea: 'Reached the Caspian Sea', ends: (x) => `The ${x} ends here: in a lake, a reservoir or a canal`, kmTo: 'km travelled', lake: 'lake', reservoir: 'reservoir', lakeL: 'lake, reservoir',
     note: "Rivers and lakes are from OpenStreetMap (ODbL). Lengths are measured along the mapped line and may differ a little from official figures: the Kura 1,471 km (references ~1,515), the Araz 1,068 km (~1,072). Every tributary of the Kura and the Araz longer than 10 km (and theirs in turn) is shown over its whole length, in Georgia, Armenia, Turkey and Iran too, with the lakes and reservoirs on them (Sevan, Arpi…); Azerbaijan's other rivers by their part in the country." },
 };
@@ -138,6 +152,8 @@ map.on('load', async () => {
   map.addSource('rivers', { type: 'geojson', data: rg });
   // Width by length: the Kür and Araz boldest, brooks hairlines; the chosen river in ink
   const width = ['interpolate', ['linear'], ['get', 'up'], 10, .6, 80, 1.1, 300, 1.8, 1200, 2.7, 6000, 3.8];
+  WIDTH = width;
+  fetch('data/kura-flow.json').then((r) => r.json()).then((f) => { FLOW = f; draw(); });
   map.addLayer({ id: 'rivers-hit', type: 'line', source: 'rivers', paint: { 'line-color': 'rgba(0,0,0,0)', 'line-width': 10 } });
   // a soft glow under every river, in its own colour
   map.addLayer({ id: 'rivers-glow', type: 'line', source: 'rivers', layout: { 'line-cap': 'round', 'line-join': 'round' }, paint: { 'line-color': ['get', 'color'], 'line-width': ['*', width, 3], 'line-blur': ['*', width, 2], 'line-opacity': ['case', ['boolean', ['feature-state', 'dim'], false], .03, dark ? .3 : .12] } });
@@ -182,6 +198,42 @@ map.on('load', async () => {
   draw();
   if (start) select(start.fid);
 });
+// The year on the river: the Kür's mean flow each month (GRDC, Surra) swells every line and quickens the dashes
+let WIDTH = null, FLOW = null, month = 0, flowK = 1, monthTimer = null;
+function setMonth(m) {
+  month = m;
+  flowK = m && FLOW ? Math.sqrt(FLOW.months[m - 1].mean / FLOW.meanAnnual) : 1;      // width by the square root of flow
+  if (map.getLayer('rivers') && WIDTH) {
+    const w = ['*', WIDTH, flowK];
+    map.setPaintProperty('rivers', 'line-width', ['case', ['boolean', ['feature-state', 'sel'], false], ['*', w, 1.8], w]);
+    map.setPaintProperty('rivers-glow', 'line-width', ['*', w, 3]);
+    map.setPaintProperty('rivers-flow', 'line-width', ['case', ['boolean', ['feature-state', 'sel'], false], ['*', w, .7], ['*', w, .55]]);
+  }
+  const box = document.getElementById('season'); if (box) box.outerHTML = seasonHTML(); wireSeason();
+}
+function seasonHTML() {
+  if (!FLOW) return '';
+  const W = 320, H = 92, P = 6, max = 2300, X = (i) => P + i * (W - 2 * P) / 11, Y = (v) => H - 14 - v / max * (H - 22);
+  const band = FLOW.months.map((d, i) => `${X(i)},${Y(d.max)}`).join(' ') + ' ' + [...FLOW.months].reverse().map((d, i) => `${X(11 - i)},${Y(d.min)}`).join(' ');
+  const line = FLOW.months.map((d, i) => `${X(i)},${Y(d.mean)}`).join(' ');
+  const cur = month ? FLOW.months[month - 1] : null;
+  return `<section class="season" id="season"><h2>${t('seasonH')}</h2>
+    <div class="now"><b>${cur ? nf().format(Math.round(cur.mean)) : nf().format(FLOW.meanAnnual)} m³/s</b><span>${month ? `${t('monthsLong')[month - 1]}${t('flowNote')(month) ? ' · ' + t('flowNote')(month) : ''}` : t('allYear')}</span></div>
+    <svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(t('seasonH'))}"><polygon points="${band}" fill="var(--second)" opacity=".15"/><polyline points="${line}" fill="none" stroke="var(--second)" stroke-width="2"/>
+      ${FLOW.months.map((d, i) => `<circle cx="${X(i)}" cy="${Y(d.mean)}" r="${month === i + 1 ? 4.5 : 2}" fill="var(--second)"/><text x="${X(i)}" y="${H}" text-anchor="middle">${t('months')[i]}</text>`).join('')}</svg>
+    <div class="ctl"><button type="button" id="mplay" aria-label="▶">${monthTimer ? '❚❚' : '▶'}</button><input type="range" id="mslider" min="0" max="12" value="${month}" aria-label="${esc(t('seasonH'))}"></div>
+    <small>${esc(t('flowSrc'))}</small></section>`;
+}
+function wireSeason() {
+  const sl = document.getElementById('mslider'); if (!sl) return;
+  sl.oninput = (e) => { stopMonths(); setMonth(+e.target.value); };
+  document.getElementById('mplay').onclick = () => {
+    if (monthTimer) return stopMonths();
+    monthTimer = setInterval(() => setMonth(month >= 12 ? 1 : month + 1), still() ? 2000 : 1100);
+    setMonth(month >= 12 || !month ? 1 : month + 1);
+  };
+}
+function stopMonths() { clearInterval(monthTimer); monthTimer = null; const b = document.getElementById('mplay'); if (b) b.textContent = '▶'; }
 // River Runner, after Sam Learner: a drop runs down its river, into the one it joins, and on to the sea.
 // Each river is a little graph of its own vertices (OSM pieces share their ends); the drop takes the
 // shortest way along it from where it fell to the river's mouth, then from the junction on the next.
@@ -261,7 +313,7 @@ function flow() {
   flowing = true;
   const tick = (ts) => {
     if (still() || !map.getLayer('rivers-flow')) { flowing = false; return; }
-    const k = Math.floor(ts / 90) % DASH.length;
+    const k = Math.floor(ts / (90 / flowK)) % DASH.length;   // faster when the river is full
     if (k !== flowStep) { flowStep = k; map.setPaintProperty('rivers-flow', 'line-dasharray', DASH[k]); }
     requestAnimationFrame(tick);
   };
@@ -302,11 +354,12 @@ function draw() {
   } else {
     const q = query.trim().toLowerCase();
     const list = rivers.filter((r) => !q || [r.az, r.ru, r.en].some((n) => n?.toLowerCase().includes(q)));
-    el.innerHTML = `<section class="rank"><h2>${t('rivers')(list.length)}</h2><ul class="riverlist">${list.map((r) => `<li><button type="button" data-r="${r.fid}"><span>${esc(L(r))}</span><span class="v">${nf().format(r.length)} ${t('km')}</span></button></li>`).join('')}</ul></section>`
+    el.innerHTML = (q ? '' : seasonHTML()) + `<section class="rank"><h2>${t('rivers')(list.length)}</h2><ul class="riverlist">${list.map((r) => `<li><button type="button" data-r="${r.fid}"><span>${esc(L(r))}</span><span class="v">${nf().format(r.length)} ${t('km')}</span></button></li>`).join('')}</ul></section>`
       + (lakes.length && !q ? `<section class="rank"><h2>${t('lakes')}</h2><ul class="riverlist">${lakes.slice(0, 20).map((l) => `<li><button type="button" data-l="${l.fid}"><span>${esc(L(l))}</span><span class="v">${l.kind === 'reservoir' ? t('reservoir') : t('lake')}</span></button></li>`).join('')}</ul></section>` : '')
       + `<p class="note">${t('note')}</p>`;
     el.querySelectorAll('[data-r]').forEach((b) => b.onclick = () => select(+b.dataset.r));
     el.querySelectorAll('[data-l]').forEach((b) => b.onclick = () => zoomLake(+b.dataset.l));
+    wireSeason();
   }
   const u = new URLSearchParams();
   if (lang !== 'az') u.set('lang', lang);
