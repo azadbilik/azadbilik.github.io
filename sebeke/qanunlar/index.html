@@ -147,7 +147,7 @@
       <h2 id="h-net" data-i18n="netH"></h2>
       <p class="intro" data-i18n="netP"></p>
       <div class="filters">
-        <div class="frow"><div class="seg" role="group" id="scope" data-i18n-label="scopeL"></div><div class="seg" role="group" id="stat" data-i18n-label="statL"></div></div>
+        <div class="frow"><div class="seg" role="group" id="scope" data-i18n-label="scopeL"></div><div class="seg" role="group" id="stat" data-i18n-label="statL"></div><label><input type="checkbox" id="smallsw"> <span data-i18n="smallL"></span></label></div>
         <div class="frow"><div class="chips" role="group" id="cats" data-i18n-label="catsL"></div></div>
         <div class="frow"><div class="chips" role="group" id="kinds" data-i18n-label="kindsL"></div></div>
         <div class="frow">
@@ -223,6 +223,7 @@ az: {
   lede: (a, n, e) => `Ədliyyə Nazirliyinin reyestrində ${nf(a)} akt var. Bunlardan ${nf(n)} akt reyestrin özünün “Əlaqəli sənədlər” bölməsi ilə ${nf(e)} əlaqə ilə bağlıdır: dəyişiklik, icra, tətbiq, ləğv.`,
   netK: 'Şəbəkə', netH: 'Aktlar və aralarındakı əlaqələr',
   netP: 'Hər nöqtə bir aktdır, rəngi növünü, ölçüsü neçə dəfə dəyişdirildiyini göstərir. Xətt rəngi əlaqənin növünü göstərir. İlkin görünüşdə normativ nüvə var: Konstitusiya, məcəllələr, qanunlar, fərmanlar və Nazirlər Kabinetinin qərarları. Nöqtəyə toxunun, akt kartı açılsın.',
+  smallL: 'Kiçik qrupları göstər', smallN: (n) => `Kiçik qruplar · ${n}`,
   scopeL: 'Əhatə', scopes: ['Normativ nüvə', 'Bütün aktlar'], statL: 'Status', stats: ['Hamısı', 'Qüvvədə olan', 'Ləğv olunmuş'],
   catsL: 'Aktın növü', kindsL: 'Əlaqənin növü', fromL: 'İldən', toL: 'ilədək', netL: 'Hüquqi aktların şəbəkəsi',
   cats: { const: 'Konstitusiya', code: 'Məcəllələr', law: 'Qanunlar', decree: 'Prezident fərmanları', order: 'Sərəncamlar', cabinet: 'Nazirlər Kabineti qərarları', court: 'Milli Məclis və məhkəmə qərarları', agency: 'Nazirlik və digər orqanlar' },
@@ -259,6 +260,7 @@ ru: {
   lede: (a, n, e) => `В реестре Министерства юстиции ${nf(a)} актов. Из них ${nf(n)} связаны ${nf(e)} связями по разделу самого реестра «Связанные документы»: изменение, исполнение, применение, отмена.`,
   netK: 'Сеть', netH: 'Акты и связи между ними',
   netP: 'Каждая точка — акт: цвет показывает вид, размер — сколько раз его изменяли. Цвет линии — вид связи. Сначала показано нормативное ядро: Конституция, кодексы, законы, указы и постановления Кабинета министров. Нажмите на точку, чтобы открыть карточку акта.',
+  smallL: 'Показать малые группы', smallN: (n) => `Малые группы · ${n}`,
   scopeL: 'Охват', scopes: ['Нормативное ядро', 'Все акты'], statL: 'Статус', stats: ['Все', 'Действующие', 'Отменённые'],
   catsL: 'Вид акта', kindsL: 'Вид связи', fromL: 'С года', toL: 'по год', netL: 'Сеть правовых актов',
   cats: { const: 'Конституция', code: 'Кодексы', law: 'Законы', decree: 'Указы Президента', order: 'Распоряжения', cabinet: 'Постановления Кабинета министров', court: 'Решения парламента и судов', agency: 'Министерства и другие органы' },
@@ -295,6 +297,7 @@ en: {
   lede: (a, n, e) => `The Ministry of Justice register holds ${nf(a)} acts. ${nf(n)} of them are joined by ${nf(e)} ties from the register's own “Related documents” section: amendment, implementation, application, repeal.`,
   netK: 'Network', netH: 'Acts and the ties between them',
   netP: "Each dot is an act: colour shows its type, size how often it was amended. Line colour shows the kind of tie. The first view is the normative core: the Constitution, codes, laws, presidential decrees and Cabinet of Ministers decisions. Tap a dot to open the act's card.",
+  smallL: 'Show small groups', smallN: (n) => `Small groups · ${n}`,
   scopeL: 'Scope', scopes: ['Normative core', 'All acts'], statL: 'Status', stats: ['All', 'In force', 'Repealed'],
   catsL: 'Type of act', kindsL: 'Kind of tie', fromL: 'From', toL: 'to', netL: 'Network of legal acts',
   cats: { const: 'Constitution', code: 'Codes', law: 'Laws', decree: 'Presidential decrees', order: 'Orders', cabinet: 'Cabinet of Ministers decisions', court: 'Parliament and court decisions', agency: 'Ministries and other bodies' },
@@ -387,11 +390,13 @@ let rt = 0; const rebuildSoon = () => { clearTimeout(rt); rt = setTimeout(rebuil
 
 // ---- the network (shared/graph.js: sigma.js over graphology). Laid out at build time (scripts/layout.mjs):
 // the positions come with the data, and every filter here only hides and shows, it never moves an act.
-let G = null, LB = {}, POS = null;
+let G = null, LB = {}, SMALL = null, smallOn = false, groups = 0, block = null;
 const shortTitle = (s) => s.replace(/\s+/g, ' ').trim().replace(/^Azərbaycan Respublikasının\s+|^Azərbaycan Respublikası\s+/u, '')
   .replace(/\s*\(QÜVVƏDƏN DÜŞÜB\)\s*$/u, ', köhnə').replace(/["“”„]/g, '«').replace(/«([^«]*)«/g, '«$1»');
 const stOk = (i) => ST[i] === (S.st === 1 ? 1 : 0);
-const nodeOk = (i) => { const y = yr(i); return S.cats.has(CAT[i]) && y >= S.from && y <= S.to; };
+const nodeOk0 = (i) => { const y = yr(i); return S.cats.has(CAT[i]) && y >= S.from && y <= S.to; };
+// the acts tied to no act of the main network are packed in a block beside it, off by default
+const nodeOk = (i) => nodeOk0(i) && (smallOn || !SMALL?.[i]);
 const edgeOk = (s, d, c) => S.kinds.has(c) && (S.st === 0 || stOk(s) || stOk(d));
 function visible() {
   // what the filters leave: the counts above the graph (the graph applies the same filters itself)
@@ -416,7 +421,8 @@ const actColor = (i) => (S.st === 0 || stOk(i) ? `var(--c${CAT[i]})` : `color-mi
 async function makeGraph() {
   gReady = true;
   const [{ createGraph }, pb, lb] = await Promise.all([import('/shared/graph.js'), fetch('data/pos.bin').then((r) => r.arrayBuffer()), fetch('data/labels.json').then((r) => r.json())]);
-  LB = lb; const q = new Int16Array(pb), positions = {};
+  LB = lb; const q = new Int16Array(pb, 0, 2 * N), positions = {}; SMALL = new Uint8Array(pb, 4 * N, N);
+  groups = smallGroups();
   const zk = Math.min(1, Math.max(0.6, $('cg').clientWidth / 1000));   // a phone's stage: smaller nodes
   for (let i = 0; i < N; i++) positions[i] = { x: q[2 * i], y: -q[2 * i + 1] };
   const nodes = Array.from({ length: N }, (_, i) => ({ id: i }));
@@ -424,7 +430,8 @@ async function makeGraph() {
   G = createGraph($('cg'), {
     nodes, edges, positions,
     label: (n) => actLabel(n.id), color: (n) => actColor(n.id), size: (n) => (1.3 + Math.min(Math.sqrt(AMD[n.id]) * 0.7, 11)) * zk,
-    edgeColor: (e) => `var(${KC[e.c]})`, edgeAlpha: 0.2, lodEdgeWidth: 0.5, reshape: true, stretch: 1.4, curve: 0.12, labelSize: 11,
+    edgeColor: (e) => `var(${KC[e.c]})`, edgeAlpha: 0.2, lodEdgeWidth: 0.5, reshape: true, stretch: 1.7, fill: true,
+    notes: () => (smallOn ? blockNote() : []), revealable: (n) => !smallOn && SMALL[n.id] && nodeOk0(n.id), onReveal: () => setSmall(true), curve: 0.12, labelSize: 11,
     strings: { search: t('gsearch') },
     tooltip: (n) => tipHtml(n.id), panel: $('gcard'),
     onSelect: (f) => {
@@ -440,6 +447,18 @@ async function makeGraph() {
   const a = +qs.get('a'); if (a) { const i = D.nodes.id.indexOf(a); if (i >= 0 && G.isVisible(i)) G.focus(i); }
   paint();
 }
+function smallGroups() {
+  const up = Int32Array.from({ length: N }, (_, i) => i), find = (i) => { while (up[i] !== i) i = up[i] = up[up[i]]; return i; };
+  for (let k = 0; k < EDG.length; k += 3) if (SMALL[EDG[k]]) { const a = find(EDG[k]), b = find(EDG[k + 1]); if (a !== b) up[a] = b; }
+  let n = 0; for (let i = 0; i < N; i++) if (SMALL[i] && find(i) === i) n++; return n;
+}
+function blockNote() {
+  if (!block) { let x0 = Infinity, y1 = -Infinity; G.graph.forEachNode((id, a) => { if (SMALL[+id]) { x0 = Math.min(x0, a.x); y1 = Math.max(y1, a.y); } }); block = { x: x0, y: y1 }; }
+  const k = G.renderer.viewportToGraph({ x: 0, y: 0 }).y - G.renderer.viewportToGraph({ x: 0, y: 14 }).y;
+  return [{ x: block.x, y: block.y + k, text: t('smallN')(nf(groups)) }];
+}
+function setSmall(on) { smallOn = on; $('smallsw').checked = on; rebuild(); G?.refit(); }
+$('smallsw').onchange = (e) => setSmall(e.target.checked);
 function paint() {
   if (!D) return;
   G?.relabel();

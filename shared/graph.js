@@ -40,6 +40,11 @@
 //                                          //   only the lit ones by us (curved, arrows); labels are tried for the
 //                                          //   labelCandidates (700) best-ranked nodes on screen; edges are picked among lit ones
 //     reshape: false,                      // positions given: widen or heighten them towards the stage's shape (up to stretch)
+//     fill: false,                         // a network opens (and the fit button frames it) filling the stage's own shape, not
+//                                          //   a square fitted to its shorter side (a phone's tall stage, a wide desktop one)
+//     notes: () => [{ x, y, text }],       // quiet captions at graph positions (a block's title), drawn on the label layer
+//     revealable: (n) => false,            // search also finds these nodes while a filter hides them; picking one calls
+//     onReveal: (n) => {},                 //   onReveal first (the page shows it, e.g. switches a group on), then flies there
 //     keepIsolated: false,                 // with an edge filter, a node the node filter keeps stays even with no line on show
 //   });
 //   g.focus(id) / g.focusEdge(id) / g.clear(); g.search('füz') → [{ id, label }]; g.setFilter(nodeFn, edgeFn);
@@ -202,7 +207,19 @@ export function createGraph(container, o) {
     graph.forEachEdge(f.id, (e, a, s, t) => { if (!edgeOn(e)) return; edges.add(e); nodes.add(s); nodes.add(t); });
     return { nodes, edges, center: f.id };
   }
-  const relight = () => { lit = focusOf(hovered ? { type: 'node', id: hovered } : pinned); renderer.refresh({ skipIndexation: true }); };
+  // A large graph fades the rest on the GPU only once the pointer rests on a node (a full re-colour costs a frame
+  // or more there): sweeping across nodes lights their lines and labels at once, without that cost
+  let gpuLit = false, fadeT = 0;
+  const relight = () => {
+    lit = focusOf(hovered ? { type: 'node', id: hovered } : pinned);
+    clearTimeout(fadeT);
+    if (lod && !pinned && (hovered || !gpuLit)) {
+      renderer.scheduleRender();
+      if (hovered) fadeT = setTimeout(() => { if (hovered) renderer.refresh({ skipIndexation: true }); }, 160);
+      return;
+    }
+    renderer.refresh({ skipIndexation: true });
+  };
 
   // ---- sigma
   sizes(); readTheme(); computeVisible();
@@ -212,6 +229,7 @@ export function createGraph(container, o) {
     zIndex: true, stagePadding: 52, minCameraRatio: lod ? 0.008 : 0.06, maxCameraRatio: 4, labelFont: C.font,
     defaultDrawNodeHover: drawRing,
     nodeReducer: (id, a) => {
+      gpuLit = !!lit;
       const r = { ...a };
       if (!visible.has(id)) { r.hidden = true; return r; }
       if (lit && !lit.nodes.has(id)) { r.color = a.faded; r.zIndex = 0; } else r.zIndex = lit ? 2 : 1;
@@ -343,6 +361,10 @@ export function createGraph(container, o) {
       else { lctx.lineWidth = 1.5; lctx.strokeStyle = rgba(C.paper); lctx.stroke(); lctx.fillStyle = col; lctx.fill(); }
     }
     labels(P, k, W, H);
+    if (opt.notes) {
+      lctx.font = `500 11.5px ${C.font}`; lctx.textBaseline = 'alphabetic'; lctx.fillStyle = rgba(C.muted);
+      for (const n of opt.notes() || []) { const v = renderer.graphToViewport({ x: n.x, y: n.y }); lctx.fillText(n.text, v.x, v.y); }
+    }
   }
   const alphaOf = (key) => +/,([\d.]+)\)\|/.exec(key)?.[1] || 0;
   function pxPerUnit() { const a = renderer.graphToViewport({ x: 0, y: 0 }), b = renderer.graphToViewport({ x: 1, y: 0 }); return Math.hypot(b.x - a.x, b.y - a.y); }
@@ -789,7 +811,7 @@ export function createGraph(container, o) {
     }
     const b = layered() ? saved.layered.box : bounds(snapshot(), visible);
     renderer.setCustomBBox({ x: [b.x0, b.x1], y: [b.y0, b.y1] });
-    if (layered() && opt.start === 'main') renderer.refresh();   // the box's mapping, which startView reads
+    if ((layered() && opt.start === 'main') || (!layered() && opt.fill)) renderer.refresh();   // the box's mapping, which startView reads
     camera.setState(startView());
     renderer.refresh();
     if (opt.panHint) showPanHint(layered() && partial);
@@ -806,7 +828,17 @@ export function createGraph(container, o) {
       const b = saved.layered.box, bw = b.x1 - b.x0, bh = b.y1 - b.y0;
       if (W / H < 0.75 * (bw / bh)) { partial = true; const r = Math.max(0.3, (W * bh) / (H * bw)); return { x: r / 2, y: 0.5, ratio: r, angle: 0 }; }
     }
+    if (!layered() && opt.fill) return fillView(W, H);
     return { x: 0.5, y: 0.5, ratio: 1, angle: 0 };
+  }
+  // the camera that frames the box (on show) in the stage's own shape, below the toolbar
+  function fillView(W, H) {
+    const one = { x: 0.5, y: 0.5, ratio: 1, angle: 0 }, bb = renderer.getCustomBBox() ?? renderer.getBBox();
+    const a = renderer.graphToViewport({ x: bb.x[0], y: bb.y[1] }, { cameraState: one }), z = renderer.graphToViewport({ x: bb.x[1], y: bb.y[0] }, { cameraState: one });
+    const top = 54, side = 18, bw = Math.abs(z.x - a.x), bh = Math.abs(z.y - a.y);
+    const r = Math.max(0.05, bw / (W - 2 * side), bh / (H - top - side));
+    const c = renderer.viewportToFramedGraph({ x: (a.x + z.x) / 2, y: (a.y + z.y) / 2 - ((top - side) / 2) * r }, { cameraState: one });
+    return { x: c.x, y: c.y, ratio: r, angle: 0 };
   }
   function mainView(W, H) {
     const b = saved.layered.main, one = { x: 0.5, y: 0.5, ratio: 1, angle: 0 };
@@ -859,7 +891,11 @@ export function createGraph(container, o) {
     outEdges: (id) => graph.outEdges(String(id)).filter(edgeOn).map((e) => edgeById.get(e)),
     edgeSource: (id) => graph.source(String(id)), edgeTarget: (id) => graph.target(String(id)),
     isVisible: (id) => visible.has(String(id)),
-    focus(id, { fly = true } = {}) { id = String(id); if (!graph.hasNode(id)) return; select({ type: 'node', id }, fly); },
+    focus(id, { fly = true } = {}) {
+      id = String(id); if (!graph.hasNode(id)) return;
+      if (!visible.has(id) && opt.onReveal) opt.onReveal(byId.get(id));
+      select({ type: 'node', id }, fly);
+    },
     focusEdge(id, { fly = true } = {}) { id = String(id); if (!graph.hasEdge(id)) return; select({ type: 'edge', id }, fly); },
     clear,
     selected: () => pinned,
@@ -867,7 +903,7 @@ export function createGraph(container, o) {
       const f = fold(text).trim(); if (!f) return [];
       const out = [];
       graph.forEachNode((id, a) => {
-        if (!visible.has(id)) return;
+        if (!visible.has(id) && !opt.revealable?.(byId.get(id))) return;
         const i = a.fold.indexOf(f), j = i < 0 ? a.alt.indexOf(f) : -1; if (i < 0 && j < 0) return;
         out.push({ id, label: a.label, rank: i === 0 ? 0 : i > 0 ? (a.fold[i - 1] === ' ' ? 1 : 2) : 3, size: a.size });
       });
@@ -879,7 +915,14 @@ export function createGraph(container, o) {
       if (pinned?.type === 'edge' && !edgeOn(pinned.id)) clear();
       lit = focusOf(pinned); renderer.refresh();
     },
-    fit() { camera.animate({ x: 0.5, y: 0.5, ratio: 1, angle: 0 }, { duration: dur(400) }); },
+    fit() { camera.animate(!layered() && opt.fill ? startView() : { x: 0.5, y: 0.5, ratio: 1, angle: 0 }, { duration: dur(400) }); },
+    // frame what is on show now (after a filter showed or hid a whole part): the box follows, the camera fits it
+    refit() {
+      if (layered()) return;
+      const b = bounds(snapshot(), visible); if (!isFinite(b.x0)) return;
+      renderer.setCustomBBox({ x: [b.x0, b.x1], y: [b.y0, b.y1] }); renderer.refresh();
+      camera.setState(startView());
+    },
     home() { camera.animate(startView(), { duration: dur(400) }); },
     zoom(dir) { if (dir > 0) camera.animatedZoom({ duration: dur(250), factor: 1.6 }); else camera.animatedUnzoom({ duration: dur(250), factor: 1.6 }); },
     async setLayout(mode) {

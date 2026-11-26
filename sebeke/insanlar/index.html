@@ -520,7 +520,7 @@ async function makeGraph() {
     size: (n) => { const x = NET.nodes.get(n.id); return (x ? 2 + Math.min(Math.sqrt(x.n + x.deg.size) * 0.45, 16) : 2) * Math.min(1, Math.max(0.6, $('cg').clientWidth / 1000)); },
     edgeColor: (e) => { const l = NET.links.get(e.id); return l ? colOf(l) : null; },
     edgeWidth: (e) => { const l = NET.links.get(e.id); return l ? Math.min(4, Math.round((0.4 + Math.sqrt(l.n) * 0.35) * 4) / 4) : 1; },
-    edgeAlpha: 0.32, curve: 0.18, labelSize: 11.5, reshape: S.lay === 'force', stretch: 1.4,
+    edgeAlpha: 0.32, curve: 0.18, labelSize: 11.5, reshape: S.lay === 'force', stretch: 1.4, fill: true,
     strings: { search: t('gsearch') },
     tooltip: (n) => hubTip(n.id), edgeTooltip: (e) => { const l = NET.links.get(e.id); return l ? `<b>${esc(plName(l.a))} → ${esc(plName(l.b))}</b><br>${nf(l.n)}` : ''; },
     panel: $('nodeList'),
