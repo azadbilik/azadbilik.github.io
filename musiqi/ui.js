@@ -1,4 +1,4 @@
-// Shared script of the music sub-pages (bestekarlar, caz, estrada): language switch, a lane timeline, a master→student / who-played-with-whom network (d3)
+// Shared script of the music sub-pages (bestekarlar, caz, estrada): language switch, a lane timeline, a master→student / who-played-with-whom network (shared/graph.js)
 (() => {
 const LANGS = ['az', 'ru', 'en'];
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
@@ -76,64 +76,38 @@ MQ.timeline = (el, o) => {
   el.querySelectorAll('.ev').forEach((g) => { g.onclick = () => pick(g); g.onkeydown = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(g); } }; });
 };
 
-// Network of people and links (t → s): columns are generations (longest chain of t's), rows are ordered by neighbours' mean row.
-// o = { svg, scroller, people, links, name(p), color(p), sub(p), off(p), onSelect(q), arrows }
-MQ.network = (o) => {
-  const svg = d3.select(o.svg), byQ = new Map(o.people.map((p) => [p.qid, p]));
-  let sel = null;
-  const kids = new Map(), parents = new Map();
+// Network of people and links (t → s), drawn by the hub's shared graph view (/shared/graph.js: sigma.js over
+// graphology, ELK layered or ForceAtlas2). Resolves to the graph's API (focus, clear, setFilter, setStrings, relabel...).
+// o = { stage, people, links, name(p), color(p), off(p), panel, onSelect(q), layout: 'layered'|'force', toggle,
+//       lineage: true (a node lights up all its masters and students, not only its neighbours), linkOn(l): the page's link filter,
+//       edge: {...more createGraph options} }
+MQ.network = async (o) => {
+  const { createGraph } = await import('/shared/graph.js');
+  const byQ = new Map(o.people.map((p) => [p.qid, p])), kids = new Map(), parents = new Map();
   for (const l of o.links) { (kids.get(l.t) ?? kids.set(l.t, []).get(l.t)).push(l); (parents.get(l.s) ?? parents.set(l.s, []).get(l.s)).push(l); }
-  const closure = (q, map, key) => { const out = new Set([q]), st = [q]; while (st.length) for (const l of map.get(st.pop()) ?? []) if (!out.has(l[key])) { out.add(l[key]); st.push(l[key]); } return out; };
-  const ids = new Set(o.links.flatMap((l) => [l.t, l.s])), seen = new Set(), comps = [];
-  for (const q of ids) {
-    if (seen.has(q)) continue;
-    const comp = [], st = [q]; seen.add(q);
-    while (st.length) { const x = st.pop(); comp.push(x); for (const l of [...(kids.get(x) ?? []), ...(parents.get(x) ?? [])]) for (const y of [l.t, l.s]) if (!seen.has(y)) { seen.add(y); st.push(y); } }
-    comps.push(comp);
-  }
-  comps.sort((a, b) => b.length - a.length);
-  const COLW = o.colw ?? 190, ROW = 21, layer = new Map();
-  const lay = (q, d = 0) => { if (layer.has(q)) return layer.get(q); if (d > 14) return 0; layer.set(q, 0); const v = Math.max(-1, ...(parents.get(q) ?? []).map((l) => lay(l.t, d + 1))) + 1; layer.set(q, v); return v; };
-  const nodes = [], by = new Map(); let y0 = 8, maxL = 0;
-  for (const [ci, comp] of comps.entries()) {
-    const cols = new Map();
-    for (const q of comp) { const L = lay(q); maxL = Math.max(maxL, L); (cols.get(L) ?? cols.set(L, []).get(L)).push(q); }
-    const keys = [...cols.keys()].sort((p, q) => p - q);
-    for (const k of keys) cols.get(k).sort((p, q) => (byQ.get(p).born ?? 9999) - (byQ.get(q).born ?? 9999));
-    const pos = new Map(), setPos = () => keys.forEach((k) => cols.get(k).forEach((q, i) => pos.set(q, i)));
-    setPos();
-    for (let it = 0; it < 4; it++) for (const k of (it % 2 ? [...keys].reverse() : keys)) {
-      const nb = (q) => (it % 2 ? (kids.get(q) ?? []).map((l) => l.s) : (parents.get(q) ?? []).map((l) => l.t));
-      const bc = (q) => { const r = nb(q).map((x) => pos.get(x)).filter((v) => v != null); return r.length ? r.reduce((p, v) => p + v, 0) / r.length : pos.get(q); };
-      cols.get(k).sort((p, q) => bc(p) - bc(q)); setPos();
-    }
-    const rows = Math.max(...keys.map((k) => cols.get(k).length));
-    for (const k of keys) { const col = cols.get(k), off = (rows - col.length) / 2; col.forEach((q, i) => { const n = { id: q, p: byQ.get(q), x: 16 + k * COLW, y: y0 + 10 + (off + i) * ROW }; nodes.push(n); by.set(q, n); }); }
-    y0 += rows * ROW + 22;
-  }
-  svg.selectAll('*').remove();
-  if (!nodes.length) return { select() {} };
-  const W = Math.max(document.querySelector(o.scroller).clientWidth, 16 + (maxL + 1) * COLW + 40), H = y0;
-  svg.attr('viewBox', `0 0 ${W} ${H}`).attr('width', W).attr('height', H);
-  const defs = svg.append('defs');
-  defs.append('marker').attr('id', 'arr' + o.svg.replace(/\W/g, '')).attr('viewBox', '0 0 8 8').attr('refX', 8).attr('refY', 4).attr('markerWidth', 6).attr('markerHeight', 6).attr('orient', 'auto').append('path').attr('d', 'M0,0L8,4L0,8z').attr('fill', 'currentColor').attr('style', 'color:var(--muted)');
-  const path = (e) => { const x1 = e.source.x + 6, y1 = e.source.y, x2 = e.target.x, y2 = e.target.y, mx = (x1 + x2) / 2; return `M${x1},${y1}C${mx},${y1} ${mx},${y2} ${x2 - 7},${y2}`; };
-  const edges = o.links.map((l) => ({ ...l, source: by.get(l.t), target: by.get(l.s) }));
-  const edge = svg.append('g').selectAll('path').data(edges).join('path').attr('class', (e) => `edge ${e.src ?? ''}`).attr('d', path).attr('marker-end', o.arrows === false ? null : `url(#arr${o.svg.replace(/\W/g, '')})`);
-  const node = svg.append('g').selectAll('g').data(nodes).join('g').attr('class', (n) => `node${o.off?.(n.p) ? ' off' : ''}`).attr('transform', (n) => `translate(${n.x},${n.y})`).attr('tabindex', 0).attr('role', 'button').attr('aria-label', (n) => o.name(n.p)).style('--c', (n) => o.color(n.p));
-  node.append('circle').attr('class', 'shape').attr('r', 5.5);
-  node.append('text').attr('class', 'lab').attr('x', 9).attr('y', 4).text((n) => o.name(n.p) + (n.p.born ? ` ${n.p.born}` : ''));
-  const mark = () => {
-    const up = sel ? closure(sel, parents, 't') : null, down = sel ? closure(sel, kids, 's') : null;
-    node.classed('dim', (n) => !!sel && !(up.has(n.id) || down.has(n.id))).classed('on', (n) => n.id === sel);
-    const hot = (e) => !!sel && ((up.has(e.t) && up.has(e.s)) || (down.has(e.t) && down.has(e.s)));
-    edge.classed('dim', (e) => !!sel && !hot(e)).classed('hot', hot);
-  };
-  const pick = (q) => { sel = sel === q ? null : q; mark(); o.onSelect(sel); };
-  node.on('click', (e, n) => pick(n.id)).on('keydown', (e, n) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(n.id); } });
-  svg.on('click', (e) => { if (e.target === svg.node()) { sel = null; mark(); o.onSelect(null); } });
-  mark();
-  return { select: (q) => { sel = q; mark(); o.onSelect(sel); } };
+  const closure = (q, map, key) => { const out = new Set([q]), st = [q]; while (st.length) for (const l of map.get(st.pop()) ?? []) if (on(l) && !out.has(l[key])) { out.add(l[key]); st.push(l[key]); } return out; };
+  const ids = [...new Set(o.links.flatMap((l) => [l.t, l.s]))].filter((q) => byQ.has(q));
+  const deg = (q) => (kids.get(q)?.length ?? 0) + (o.layout === 'force' ? parents.get(q)?.length ?? 0 : 0);
+  const eid = (l, i) => `${l.t}>${l.s}#${i}`;
+  const on = (l) => (o.linkOn ? o.linkOn(l) : true);   // the page's filter (e.g. Wikidata / text chips)
+  return createGraph(o.stage, {
+    nodes: ids.map((q) => ({ ...byQ.get(q), id: q })),
+    edges: o.links.map((l, i) => ({ ...l, id: eid(l, i), source: l.t, target: l.s })),
+    layout: o.layout ?? 'layered', direction: 'RIGHT', toggle: o.toggle ?? true, edgeClick: false,
+    label: (p) => o.name(p), searchText: (p) => [p.az, p.ru, p.en].join(' '), color: o.color, hollow: (p) => !!o.off?.(p),
+    size: (p) => (o.layout === 'force' ? 4.5 + 1.6 * Math.sqrt(deg(p.qid)) : 4.2 + 1.5 * Math.sqrt(deg(p.qid))),
+    dashed: (e) => e.src === 'text', dash: [3, 3.5], edgeWidth: (e) => (e.src === 'text' ? 1 : 1.45), edgeAlpha: 0.65, labelSize: 12,
+    edgeColor: (e) => (e.src === 'text' ? 'var(--muted)' : 'var(--ink)'), litColor: 'node', minLabel: 9.5, trimLabels: true, start: 'main', panHint: true,
+    focus: o.lineage === false ? undefined : (q) => {
+      const up = closure(q, parents, 't'), down = closure(q, kids, 's'), es = new Set();
+      o.links.forEach((l, i) => { if (on(l) && ((up.has(l.t) && up.has(l.s)) || (down.has(l.t) && down.has(l.s)))) es.add(eid(l, i)); });
+      return { nodes: new Set([...up, ...down]), edges: es };
+    },
+    tooltip: (p) => `<div class="tt"><b>${esc(o.name(p))}</b>${MQ.yrs(p) ? `<span>${esc(MQ.yrs(p))}</span>` : ''}</div>`,
+    panel: o.panel,
+    onSelect: (f) => o.onSelect?.(f?.type === 'node' ? f.id : null),
+    ...(o.edge || {}),
+  });
 };
 // Roots of the links as nested lists (each person once per path)
 MQ.treeList = (people, links, o) => {

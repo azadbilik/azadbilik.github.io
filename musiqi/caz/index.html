@@ -16,6 +16,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="/fonts/fonts.css">
 <link rel="stylesheet" href="../ui.css">
+<link rel="stylesheet" href="/shared/graph.css">
 </head>
 <body>
 <div class="wrap">
@@ -35,8 +36,8 @@
     </section>
     <section aria-labelledby="h-net">
       <h2 id="h-net" data-i18n="netH">Kim kimlə, kim kimdən</h2>
-      <div class="legend" id="nlegend"></div>
-      <div class="scroller" id="nscroll" style="margin-top:.6rem"><svg id="net" role="img" data-i18n-label="netH"></svg></div>
+      <div class="bar"><div class="chips" id="kinds" role="group"></div><div class="legend" id="nlegend"></div></div>
+      <div class="stage s gx-wide" id="nstage" role="region" aria-labelledby="h-net"></div>
       <p class="hint" data-i18n="netHint"></p>
       <div class="info" id="pinfo" aria-live="polite"></div>
     </section>
@@ -51,7 +52,6 @@
   </main>
   <footer id="foot"></footer>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
 <script src="../ui.js"></script>
 <script src="../listen.js"></script>
 <script>
@@ -63,7 +63,7 @@ const T = {
     tlH: 'Zaman xətti', tlHint: 'Zolaqlar ömür illəridir. «Albomlar» sırasındakı nöqtələr Wikidata-da tarixli albomlardır (yalnız Əzizə Mustafazadə və Eldar Mansurovunkudur), «Apple Music» sırasındakılar Apple Music kataloqundakı albomlardır: il kataloqdakı nəşrin çıxdığı ildir (çox vaxt köhnə yazının yenidən buraxılışı), yazıldığı il deyil. Festival da nöqtədir. Apple Music sırasında yalnız 2012-yə qədərki nəşrlər var, hamısı şəxsin kartındadır. Seçin.',
     lLife: 'Ömür illəri', lAlbum: 'Albomlar', lApple: 'Apple Music', lEvent: 'Festival', c1: '1930-dək doğulanlar', c2: '1930–1959', c3: '1960-dan sonra',
     pickT: 'Seçin.', born: 'Doğulub', place: 'Yer', teachers: 'Ustad / tərəfdaş', students: 'Şagird / tərəfdaş', read: 'Vikipediya', wd: 'Wikidata', performers: 'İfaçı', year: 'İl', note: 'Qeyd', appleAlb: 'Apple Music kataloqunda albom', by: 'İfaçı',
-    netH: 'Kim kimlə, kim kimdən', netHint: 'Oxlar ustaddan şagirdə, rəhbərdən iştirakçıya, təsir edəndən təsirlənənə gedir. Düz xətt Wikidata-dır, qırıq xətt Vikipediya cümləsindən çıxarılıb (cümlə düyün seçiləndə görünür). Boş dairə: siyahıdakı caz musiqiçisi olmayan ustad (bəstəkar və s.).',
+    netH: 'Kim kimlə, kim kimdən', netHint: 'Xəttin rəngi əlaqənin növüdür (yuxarıdakı düymələrlə gizlədin). Oxlar ustaddan şagirdə, rəhbərdən iştirakçıya, təsir edəndən təsirlənənə gedir. Düz xətt Wikidata-dır, qırıq xətt Vikipediya cümləsindən çıxarılıb (cümlə düyün seçiləndə görünür). Boş dairə: siyahıdakı caz musiqiçisi olmayan ustad (bəstəkar və s.).',
     offLegend: 'siyahıdan kənar', viaWd: 'Wikidata', viaTx: 'mətndən', kTeacher: 'ustad', kCollab: 'birgə iş', kInfluence: 'təsir', kFamily: 'ailə',
     listenH: 'Dinləmək üçün', listenNote: `Pulsuz və hüquqi cəhətdən azad caz yazısı tapa bilmədim: Commons-da «Azerbaijani jazz» kateqoriyası boşdur, archive.org-dakı Vaqif və Aziza Mustafazadə radio verilişləri üçüncü şəxslər tərəfindən «ictimai mülkiyyət» işarələnib, amma kommersiya materialıdır; ona görə çalmıram və keçid vermirəm. Müəllif hüququ olan yazılar yalnız rəsmi kanallardadır. Oxumaq üçün: <a href="https://en.wikipedia.org/wiki/Vagif_Mustafazadeh">Vagif Mustafazadeh (Vikipediya)</a>. Apple Music dinləmələri ayrıdır: şəxsin kartında Apple Music-dən birbaşa ötürülən üç ədədə qədər 30 saniyəlik fraqment, Apple Music və Spotify keçidləri var; bunlar azad yazı deyil, yalnız tanış olmaq üçündür.`,
     methodH: 'Necə yığılıb',
@@ -77,7 +77,7 @@ const T = {
     tlH: 'Хронология', tlHint: 'Полосы — годы жизни. Точки в ряду «Альбомы» — альбомы с датой в Wikidata (есть только у Азизы Мустафазаде и Эльдара Мансурова), в ряду «Apple Music» — альбомы каталога Apple Music: год — это год выхода издания в каталоге (часто переиздание старой записи), а не год записи. Фестиваль тоже точка. В ряду Apple Music только издания до 2012 года, все они — в карточке человека. Выберите.',
     lLife: 'Годы жизни', lAlbum: 'Альбомы', lApple: 'Apple Music', lEvent: 'Фестиваль', c1: 'родились до 1930', c2: '1930–1959', c3: 'после 1960',
     pickT: 'Выберите.', born: 'Родился', place: 'Место', teachers: 'Учитель / партнёр', students: 'Ученик / партнёр', read: 'Википедия', wd: 'Wikidata', performers: 'Исполнитель', year: 'Год', appleAlb: 'Альбом в каталоге Apple Music', by: 'Исполнитель', note: 'Примечание',
-    netH: 'Кто с кем и у кого', netHint: 'Стрелки идут от учителя к ученику, от руководителя к участнику, от повлиявшего к испытавшему влияние. Сплошная линия — Wikidata, пунктир — из предложения Википедии (оно видно при выборе узла). Пустой кружок — учитель вне списка джазменов (композитор и т. п.).',
+    netH: 'Кто с кем и у кого', netHint: 'Цвет линии — вид связи (кнопками выше их можно скрыть). Стрелки идут от учителя к ученику, от руководителя к участнику, от повлиявшего к испытавшему влияние. Сплошная линия — Wikidata, пунктир — из предложения Википедии (оно видно при выборе узла). Пустой кружок — учитель вне списка джазменов (композитор и т. п.).',
     offLegend: 'вне списка', viaWd: 'Wikidata', viaTx: 'из текста', kTeacher: 'учитель', kCollab: 'совместная работа', kInfluence: 'влияние', kFamily: 'семья',
     listenH: 'Где послушать', listenNote: `Свободных джазовых записей я не нашёл: категория Commons «Azerbaijani jazz» пуста, радиопрограммы Вагифа и Азизы Мустафазаде на archive.org помечены третьими лицами как общественное достояние, но это коммерческий материал, поэтому я их не проигрываю и не ссылаюсь. Записи под охраной — только на официальных каналах. Для чтения: <a href="https://en.wikipedia.org/wiki/Vagif_Mustafazadeh">Vagif Mustafazadeh (Википедия)</a>. Фрагменты Apple Music — отдельно: в карточке человека до трёх 30-секундных отрывков, идущих напрямую с Apple Music, и ссылки на Apple Music и Spotify; это не свободные записи, а лишь возможность познакомиться.`,
     methodH: 'Как собрано',
@@ -91,7 +91,7 @@ const T = {
     tlH: 'Timeline', tlHint: 'Bars are lifespans. Dots on the Albums row are albums dated on Wikidata (only Aziza Mustafazadeh and Eldar Mansurov have any); dots on the Apple Music row are albums of the Apple Music catalogue, dated by the release of the edition there, often a reissue of an older recording, not the year it was recorded. The festival is a dot too. The Apple Music row shows releases up to 2012 only; each person\'s card lists all of them. Pick one.',
     lLife: 'Lifespans', lAlbum: 'Albums', lApple: 'Apple Music', lEvent: 'Festival', c1: 'born before 1930', c2: '1930–1959', c3: 'after 1960',
     pickT: 'Pick one.', born: 'Born', place: 'Place', teachers: 'Teacher / partner', students: 'Student / partner', read: 'Wikipedia', wd: 'Wikidata', performers: 'Performer', year: 'Year', appleAlb: 'Album in the Apple Music catalogue', by: 'Artist', note: 'Note',
-    netH: 'Who played with and learned from whom', netHint: 'Arrows run from teacher to student, from leader to member, from the influence to the influenced. A solid line is Wikidata; dashed is read from a Wikipedia sentence (shown when you pick a node). A hollow circle is a teacher outside the list of jazz players (a composer, etc.).',
+    netH: 'Who played with and learned from whom', netHint: 'A line’s colour is the kind of link (hide kinds with the buttons above). Arrows run from teacher to student, from leader to member, from the influence to the influenced. A solid line is Wikidata; dashed is read from a Wikipedia sentence (shown when you pick a node). A hollow circle is a teacher outside the list of jazz players (a composer, etc.).',
     offLegend: 'outside the list', viaWd: 'Wikidata', viaTx: 'from text', kTeacher: 'teacher', kCollab: 'worked together', kInfluence: 'influence', kFamily: 'family',
     listenH: 'Where to listen', listenNote: `I found no freely licensed jazz recordings: the Commons category «Azerbaijani jazz» is empty, and the archive.org radio programmes of Vagif and Aziza Mustafazadeh carry a public-domain mark set by third parties on commercial material, so I neither play nor link them. Protected recordings are on the artists' official channels. To read: <a href="https://en.wikipedia.org/wiki/Vagif_Mustafazadeh">Vagif Mustafazadeh (Wikipedia)</a>. Apple Music previews are separate: a person's card carries up to three 30-second previews streamed straight from Apple Music, with links to Apple Music and Spotify; they are not free recordings, only a way to hear a little.`,
     methodH: 'How it was gathered',
@@ -103,7 +103,9 @@ const T = {
 };
 const COH = (p) => p.born == null ? 'var(--muted)' : p.born < 1930 ? 'var(--accent)' : p.born < 1960 ? 'var(--second)' : 'var(--third)';
 const KK = { teacher: 'kTeacher', collab: 'kCollab', influence: 'kInfluence', family: 'kFamily' };
-let D = null, byQ, selT = null, net = null;
+const KC = { teacher: 'var(--ink)', collab: 'var(--fourth)', influence: 'var(--fifth)', family: 'var(--sixth)' };
+let D = null, byQ, selT = null, net = null, building = null, selP = null;
+const offK = new Set();
 const t = (k, ...a) => MQ.t(k, ...a);
 const pname = (q) => nm(byQ.get(q));
 function legend() {
@@ -132,9 +134,21 @@ function describeT() {
   else if (k === 'a') { const a = D.albums.find((x) => x.qid === q); el.innerHTML = `<h3>${esc(a[MQ.lang] || a.az || a.en)}</h3><dl>${row('year', a.year)}${row('performers', a.performers.map((x) => esc(pname(x))).join(', '))}${row('wd', `<a href="https://www.wikidata.org/wiki/${q}">${q}</a>`)}${spotAlb(q)}</dl>`; }
   else { const e = D.events.find((x) => x.qid === q); el.innerHTML = `<h3>${esc(e[MQ.lang] || e.az)}</h3><dl>${row('year', e.year)}${row('note', esc(e.note))}${row('wd', `<a href="https://www.wikidata.org/wiki/${q}">${q}</a>`)}</dl>`; }
 }
+// The network (shared/graph.js through MQ.network): a force layout, the line coloured by the kind of link;
+// built once, a language switch only relabels, the kind chips only hide links
 function network() {
-  net = MQ.network({ svg: '#net', scroller: '#nscroll', people: D.people, links: D.links, name: nm, color: COH, off: (p) => !!p.offmap, colw: 200, onSelect: describeP });
-  describeP(null);
+  kinds();
+  const edge = { edgeColor: (e) => KC[e.kind] ?? 'var(--ink)', edgeAlpha: 0.8, edgeWidth: (e) => (e.src === 'text' ? 1.25 : 1.6), litColor: 'edge', start: 'all', panHint: false };
+  if (!net && !building) building = MQ.network({ stage: document.getElementById('nstage'), people: D.people, links: D.links, name: nm, color: COH, off: (p) => !!p.offmap, layout: 'force', toggle: false, lineage: false, panel: document.getElementById('pinfo'), linkOn: (l) => !offK.has(l.kind), onSelect: (q) => { selP = q; describeP(q); }, edge }).then((g) => { net = g; building = null; filter(); });
+  else if (net) { net.setStrings(); net.relabel(); }
+  describeP(selP);
+}
+const filter = () => net?.setFilter(null, (e) => !offK.has(e.kind));
+function kinds() {
+  const n = (k) => D.links.filter((l) => l.kind === k).length;
+  const el = document.getElementById('kinds');
+  el.innerHTML = Object.keys(KK).filter((k) => n(k)).map((k) => `<button type="button" data-k="${k}" aria-pressed="${!offK.has(k)}"><i class="kind" style="--c:${KC[k]}"></i>${esc(t(KK[k]))} (${n(k)})</button>`).join('');
+  el.querySelectorAll('[data-k]').forEach((b) => b.onclick = () => { const k = b.dataset.k; offK.has(k) ? offK.delete(k) : offK.add(k); if (offK.size >= Object.keys(KK).filter((x) => n(x)).length) offK.delete(k); kinds(); filter(); });
 }
 function describeP(q) {
   const p = byQ.get(q), el = document.getElementById('pinfo');
@@ -143,7 +157,7 @@ function describeP(q) {
   const line = (l, o) => `<li><a href="#" data-q="${o}">${esc(pname(o))}</a> <span class="muted">${yrs(byQ.get(o))}</span><span class="tag">${esc(t(KK[l.kind]))}</span><span class="tag">${esc(t(l.src === 'text' ? 'viaTx' : 'viaWd'))}</span>${l.sentence ? `<blockquote>${esc(l.sentence)} <a href="${esc(l.article)}">${esc(l.lang)}</a></blockquote>` : ''}</li>`;
   const ts = D.links.filter((l) => l.s === q), ss = D.links.filter((l) => l.t === q);
   el.innerHTML = `<h3>${esc(nm(p))}</h3><dl>${row('born', esc(yrs(p)))}${row('place', esc(p.place ?? ''))}${row('teachers', ts.length ? `<ul>${ts.map((l) => line(l, l.t)).join('')}</ul>` : '')}${row('students', ss.length ? `<ul>${ss.map((l) => line(l, l.s)).join('')}</ul>` : '')}${row('read', MQ.wikiLinks(p.wiki))}${MQ.ytRow(q)}${/^Q\d/.test(q) ? row('wd', `<a href="https://www.wikidata.org/wiki/${q}">${q}</a>`) : ''}</dl>${MQL.block(q)}`;
-  el.querySelectorAll('a[data-q]').forEach((a) => a.onclick = (e) => { e.preventDefault(); net.select(a.dataset.q); });
+  el.querySelectorAll('a[data-q]').forEach((a) => a.onclick = (e) => { e.preventDefault(); net?.focus(a.dataset.q); });
 }
 function render() {
   if (!D) return;
@@ -156,7 +170,7 @@ function render() {
 }
 const apply = MQ.boot(T, render);
 Promise.all([fetch('data/jazz.json').then((r) => r.json()), MQ.loadYT(), MQL.load()]).then(([d]) => { D = d; apply(); });
-let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { if (D) { timeline(); network(); } }, 150); });
+let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { if (D) timeline(); }, 150); });
 })();
 </script>
 </body>

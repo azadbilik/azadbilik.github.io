@@ -1,6 +1,6 @@
 # Caz · Jazz
 
-[azadbilik.org/musiqi/caz](https://azadbilik.org/musiqi/caz/): Azerbaijani jazz, 29 hand-chosen musicians (Vagif and Aziza Mustafazadeh, Rafig Babayev, Salman Gambarov, Shahin Novrasli, Isfar Sarabski, Amina Figarova, Tofig Guliyev, Rauf Hajiyev...), a lifespan/album/festival timeline and a network of who taught, led or worked with whom. az/ru/en; `../ui.js`, `../ui.css`, d3 7.9.0.
+[azadbilik.org/musiqi/caz](https://azadbilik.org/musiqi/caz/): Azerbaijani jazz, 29 hand-chosen musicians (Vagif and Aziza Mustafazadeh, Rafig Babayev, Salman Gambarov, Shahin Novrasli, Isfar Sarabski, Amina Figarova, Tofig Guliyev, Rauf Hajiyev...), a lifespan/album/festival timeline and a network of who taught, led or worked with whom. az/ru/en; `../ui.js`, `../ui.css`, `../listen.js`.
 
 | File | What |
 |---|---|
@@ -21,3 +21,7 @@ Rebuild: `node scripts/jazz.mjs`, `node scripts/people-text.mjs caz/data/people.
 Data: Wikidata CC0; sentences are short quotations from Wikipedia (CC BY-SA).
 
 Listening links (Apple Music previews, Spotify, YouTube) and their terms: see [`../README.md`](../README.md).
+
+## Rendering
+
+The timeline is plain SVG (`MQ.timeline` in `../ui.js`). The network is the hub's shared graph view, [`/shared/graph.js`](../../shared/graph.js) + `graph.css` (sigma.js 3.0.3 over graphology 0.26.0, MIT, jsDelivr), through `MQ.network` in `../ui.js`: ForceAtlas2, seeded, the same on every load. A line's colour is the kind of link (teacher: ink, worked together: amber, influence: purple, family: rose; chips above the graph hide a kind without relayout), solid for Wikidata, dashed for a Wikipedia sentence; node colour is the birth cohort, hollow a teacher outside the list. Hover or tap lights a musician's neighbours, a click pins them and opens the card (side panel, a bottom sheet on a phone) with the sentences and the Apple Music / Spotify block (`../listen.js`).

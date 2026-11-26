@@ -16,6 +16,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="/fonts/fonts.css">
 <link rel="stylesheet" href="../ui.css">
+<link rel="stylesheet" href="/shared/graph.css">
 </head>
 <body>
 <div class="wrap">
@@ -42,7 +43,7 @@
       <h2 id="h-net" data-i18n="netH">Ustad–şagird şəbəkəsi</h2>
       <div class="bar"><div class="chips" id="src" role="group"></div><div class="legend" id="nlegend"></div></div>
       <div class="chips" id="jump" style="margin-bottom:.5rem"></div>
-      <div class="scroller" id="nscroll"><svg id="net" role="img" data-i18n-label="netH"></svg></div>
+      <div class="stage gx-wide" id="nstage" role="region" aria-labelledby="h-net"></div>
       <p class="hint" data-i18n="netHint"></p>
       <div class="info" id="pinfo" aria-live="polite"></div>
       <h3 style="margin-top:1.25rem" data-i18n="linH"></h3>
@@ -64,7 +65,6 @@
   </main>
   <footer id="foot"></footer>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
 <script src="../ui.js"></script>
 <script src="../listen.js"></script>
 <script>
@@ -81,7 +81,7 @@ const T = {
     listenH: 'Dinləyin', listenNote: 'Yalnız ictimai mülkiyyətdə olan yazılar: Hacıbəyli 1948-ci ildə vəfat edib (əsərləri 2018-dən azaddır), yazılar 1976-dan əvvəldir və ya ABŞ hökumətinindir. Qarayev, Əmirov, Niyazi və başqalarının heç bir azad yazısını tapmadım; onları rəsmi kanallarda axtarın. Apple Music dinləmələri ayrıdır: şəxsin kartında Apple Music-dən birbaşa ötürülən üç ədədə qədər 30 saniyəlik fraqment, Apple Music və Spotify keçidləri var; bunlar azad yazı deyil, yalnız tanış olmaq üçündür.',
     kxH: 'Kitabdan səhnəyə', kxNote: (n) => `${n} əsərin librettosu və ya əsas mətni kitabxana.az-dadır. Əlaqə əl ilə quraşdırılıb; hər keçid yoxlanıb.`,
     lLibretto: 'Libretto', lSource: 'Mənbə mətn', lEssay: 'Bəstəkarın yazısı',
-    netH: 'Ustad–şagird şəbəkəsi', netHint: 'Sütunlar nəsillərdir. Düyünü seçin: ustadları, şagirdləri və bütün silsiləsi işıqlanır. Oxlar ustaddan şagirdə gedir; qırıq xətt mətndən çıxarılan əlaqədir. Boş dairə: xəritədən kənar ustad (Şostakoviç, Zeydman...).',
+    netH: 'Ustad–şagird şəbəkəsi', netHint: 'Sütunlar nəsillərdir. Düyünü seçin: ustadları, şagirdləri və bütün silsiləsi işıqlanır. Oxlar ustaddan şagirdə gedir; qırıq xətt mətndən çıxarılan əlaqədir. Boş dairə: xəritədən kənar ustad (Şostakoviç, Zeydman...). Təkərlə və ya iki barmaqla yaxınlaşdırın; «Şəbəkə» eyni əlaqələri sərbəst düzür, «Hamısı» düyməsi bütün silsilələri göstərir.',
     jHac: 'Hacıbəylinin silsiləsi', jQar: 'Qarayev məktəbi', offLegend: 'bəstəkar olmayan / kənar', pick: 'Bəstəkarı seçin.', linH: 'Silsilələr siyahı ilə',
     allH: 'Bütün əsərlər', thYear: 'İl', thTitle: 'Əsər', thComp: 'Bəstəkar', thType: 'Növ', thLib: 'Kitabxana',
     methodH: 'Necə yığılıb',
@@ -102,7 +102,7 @@ const T = {
     listenH: 'Послушать', listenNote: 'Только записи в общественном достоянии: Гаджибеков умер в 1948 году (произведения свободны с 2018), записи сделаны до 1976 года или принадлежат правительству США. Свободных записей Караева, Амирова, Ниязи и других я не нашёл; их стоит искать на официальных каналах. Фрагменты Apple Music — отдельно: в карточке человека до трёх 30-секундных отрывков, идущих напрямую с Apple Music, и ссылки на Apple Music и Spotify; это не свободные записи, а лишь возможность познакомиться.',
     kxH: 'От книги к сцене', kxNote: (n) => `У ${n} произведений либретто или первоисточник есть на kitabxana.az. Связи подобраны вручную; каждая ссылка проверена.`,
     lLibretto: 'Либретто', lSource: 'Первоисточник', lEssay: 'Статья композитора',
-    netH: 'Сеть «учитель — ученик»', netHint: 'Столбцы — поколения. Выберите узел: подсветятся учителя, ученики и вся линия. Стрелки идут от учителя к ученику; пунктир — связь из текста. Пустой кружок — учитель вне списка (Шостакович, Зейдман...).',
+    netH: 'Сеть «учитель — ученик»', netHint: 'Столбцы — поколения. Выберите узел: подсветятся учителя, ученики и вся линия. Стрелки идут от учителя к ученику; пунктир — связь из текста. Пустой кружок — учитель вне списка (Шостакович, Зейдман...). Колесо или два пальца — масштаб; «Сеть» раскладывает те же связи свободно, кнопка «Всё» показывает все линии.',
     jHac: 'Линия Гаджибекова', jQar: 'Школа Караева', offLegend: 'вне списка', pick: 'Выберите композитора.', linH: 'Линии списком',
     allH: 'Все произведения', thYear: 'Год', thTitle: 'Произведение', thComp: 'Композитор', thType: 'Жанр', thLib: 'Библиотека',
     methodH: 'Как собрано',
@@ -123,7 +123,7 @@ const T = {
     listenH: 'Listen', listenNote: 'Public-domain recordings only: Hajibeyov died in 1948 (his works are free since 2018) and the recordings are from before 1976 or by the US government. I found no free recording of Garayev, Amirov, Niyazi or the others; look for them on official channels. Apple Music previews are separate: a person\'s card carries up to three 30-second previews streamed straight from Apple Music, with links to Apple Music and Spotify; they are not free recordings, only a way to hear a little.',
     kxH: 'From book to stage', kxNote: (n) => `For ${n} works the libretto or source text is at kitabxana.az. The matches are made by hand; every link was checked.`,
     lLibretto: 'Libretto', lSource: 'Source text', lEssay: 'Composer\'s essay',
-    netH: 'Teacher–student network', netHint: 'Columns are generations. Pick a node: its teachers, students and whole line light up. Arrows run from teacher to student; dashed is a link read from a text. A hollow circle is a teacher outside the list (Shostakovich, Zeidman...).',
+    netH: 'Teacher–student network', netHint: 'Columns are generations. Pick a node: its teachers, students and whole line light up. Arrows run from teacher to student; dashed is a link read from a text. A hollow circle is a teacher outside the list (Shostakovich, Zeidman...). Wheel or pinch to zoom; «Network» lays the same links out freely, the «Fit» button shows every line.',
     jHac: 'Hajibeyov\'s line', jQar: 'Garayev\'s school', offLegend: 'outside the list', pick: 'Pick a composer.', linH: 'Lines as lists',
     allH: 'All works', thYear: 'Year', thTitle: 'Work', thComp: 'Composer', thType: 'Kind', thLib: 'Library',
     methodH: 'How it was gathered',
@@ -161,7 +161,7 @@ function describeW() {
     ${row('basedOn', (w.base ?? []).map((b) => `${esc(b[MQ.lang] || b.az || b.en || b.ru || b.qid)}${b.author ? ` <span class="muted">(${esc(b.author)})</span>` : ''}`).join(', '))}
     ${row('libretto', (w.librettists ?? []).map((b) => esc(b[MQ.lang] || b.az || b.en || b.ru)).join(', '))}
     ${row('kx', kxLinks(w))}${row('read', wk)}${row('wd', `<a href="https://www.wikidata.org/wiki/${w.qid}">${w.qid}</a>`)}</dl>`;
-  el.querySelectorAll('a[data-p]').forEach((a) => a.onclick = (e) => { e.preventDefault(); document.getElementById('h-net').scrollIntoView({ behavior: 'smooth' }); net?.select(a.dataset.p); });
+  el.querySelectorAll('a[data-p]').forEach((a) => a.onclick = (e) => { e.preventDefault(); document.getElementById('h-net').scrollIntoView({ behavior: 'smooth' }); net?.focus(a.dataset.p); });
 }
 function types() {
   document.getElementById('types').innerHTML = TYPES.map((x) => `<button type="button" data-x="${x}" aria-pressed="${!off.has(x)}">${esc(t(TK[x]))} (${D.stats.byType[x]})</button>`).join('');
@@ -174,14 +174,18 @@ function cards() {
   document.getElementById('kx').innerHTML = ws.map((w) => `<div class="card"><div class="row"><h3>${esc(wtitle(w))}</h3><span class="yr">${w.year}</span></div><div class="muted">${esc(t(TK[w.type]))} · ${w.composers.map((q) => esc(cname(q))).join(', ')}</div>${(w.base ?? []).length ? `<div class="muted">${esc(t('basedOn'))}: ${(w.base).map((b) => esc(b[MQ.lang] || b.az || b.en || '')).filter(Boolean).join(', ')}</div>` : ''}<div>${kxLinks(w)}</div></div>`).join('');
 }
 function links() { return D.links.filter((l) => show[l.src]); }
+// The network (shared/graph.js through MQ.network): built once, layered by generation with a «Network» switch;
+// the source chips only hide links, a language switch only relabels
+let building = null;
 function network() {
   const ls = links(), used = new Set(ls.flatMap((l) => [l.t, l.s]));
-  net = MQ.network({ svg: '#net', scroller: '#nscroll', people: D.people, links: ls, name: nm, color: COHORT, off: (p) => !!p.offmap, onSelect: (q) => { selP = q; describeP(); } });
+  if (!net && !building) building = MQ.network({ stage: document.getElementById('nstage'), people: D.people, links: D.links, name: nm, color: COHORT, off: (p) => !!p.offmap, panel: document.getElementById('pinfo'), linkOn: (l) => show[l.src], onSelect: (q) => { selP = q; describeP(); } }).then((g) => { net = g; building = null; net.setFilter(null, (e) => show[e.src]); });
+  else if (net) { net.setStrings(); net.relabel(); net.setFilter(null, (e) => show[e.src]); }
   document.getElementById('nlegend').innerHTML = COH.map(([k, c]) => `<span><i style="--c:${c}"></i>${esc(t(k))}</span>`).join('') + `<span><i class="off"></i>${esc(t('offLegend'))}</span>`;
   document.getElementById('lin').innerHTML = MQ.treeList(D.people, ls, { name: nm, color: COHORT });
   const jump = [['Q317397', 'jHac'], ['Q580027', 'jQar']].filter(([q]) => used.has(q));
   document.getElementById('jump').innerHTML = jump.map(([q, k]) => `<button type="button" data-j="${q}" style="border:1px solid var(--rule);border-radius:999px;padding:.25rem .6rem;font-size:.75rem">${esc(t(k))}</button>`).join('');
-  document.querySelectorAll('[data-j]').forEach((b) => b.onclick = () => net.select(b.dataset.j));
+  document.querySelectorAll('[data-j]').forEach((b) => b.onclick = () => net?.focus(b.dataset.j));
   describeP();
 }
 function describeP() {
@@ -195,12 +199,12 @@ function describeP() {
     ${row('teachers', ts.length ? `<ul>${ts.map((l) => line(l, l.t)).join('')}</ul>` : '')}${row('students', ss.length ? `<ul>${ss.map((l) => line(l, l.s)).join('')}</ul>` : '')}
     ${row('premiere', works.map((w) => `${w.year} ${esc(wtitle(w))}`).join('<br>'))}
     ${row('read', MQ.wikiLinks(p.wiki))}${MQ.ytRow(p.qid)}${/^Q\d/.test(p.qid) ? row('wd', `<a href="https://www.wikidata.org/wiki/${p.qid}">${p.qid}</a>`) : ''}${p.kitabxana ? row('kx', `<a href="${MQ.kxBase()}/authors/${esc(p.kitabxana)}">${esc(nm(p))}</a>`) : ''}</dl>${MQL.block(p.qid)}`;
-  el.querySelectorAll('a[data-q]').forEach((a) => a.onclick = (e) => { e.preventDefault(); net?.select(a.dataset.q); });
+  el.querySelectorAll('a[data-q]').forEach((a) => a.onclick = (e) => { e.preventDefault(); net?.focus(a.dataset.q); });
 }
 function chips() {
   const n = (s) => D.links.filter((l) => l.src === s).length;
   document.getElementById('src').innerHTML = ['wikidata', 'text'].map((s) => `<button type="button" data-s="${s}" aria-pressed="${show[s]}"><i class="${s === 'text' ? 'dash' : ''}"></i>${esc(t(s === 'text' ? 'sTx' : 'sWd'))} (${n(s)})</button>`).join('');
-  document.querySelectorAll('[data-s]').forEach((b) => b.onclick = () => { show[b.dataset.s] = !show[b.dataset.s]; if (!show.wikidata && !show.text) show[b.dataset.s] = true; selP = null; chips(); network(); });
+  document.querySelectorAll('[data-s]').forEach((b) => b.onclick = () => { show[b.dataset.s] = !show[b.dataset.s]; if (!show.wikidata && !show.text) show[b.dataset.s] = true; chips(); network(); describeP(); });
 }
 function table() {
   const th = ['thYear', 'thTitle', 'thComp', 'thType', 'thLib'];
@@ -217,7 +221,7 @@ function render() {
 }
 const apply = MQ.boot(T, render);
 Promise.all([fetch('data/composers.json').then((r) => r.json()), fetch('data/recordings.json').then((r) => r.json()), MQ.loadYT(), MQL.load()]).then(([d, r]) => { D = d; REC = r; apply(); });
-let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { if (D) { timeline(); network(); } }, 150); });
+let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { if (D) timeline(); }, 150); });
 })();
 </script>
 </body>
