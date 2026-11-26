@@ -30,6 +30,8 @@
   .timeline { display: grid; grid-template-columns: auto 1fr; gap: .5rem; align-items: end; }
   .play { width: 2rem; height: 2rem; border: 1px solid var(--rule); border-radius: 50%; display: grid; place-items: center; font-size: .75rem; }
   .play:hover { border-color: var(--ink); }
+  .check { display: flex; align-items: center; gap: .5rem; font-size: .8125rem; color: var(--muted); cursor: pointer; }
+  .check input { accent-color: var(--accent); }
   .search input { width: 100%; font: inherit; font-size: .875rem; color: var(--ink); background: transparent; border: 1px solid var(--rule); border-radius: 3px; padding: .4rem .6rem; }
   .search input:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
   .spark { display: block; margin-top: .25rem; }
@@ -87,6 +89,7 @@
         <div class="timeline"><button type="button" class="play" id="play">▶</button><div class="rounds" role="group" id="rounds"></div></div>
         <div class="round-note" id="round-note"></div>
       </div>
+      <label class="check"><input type="checkbox" id="terrain"> <span data-i18n="terrain">3D: hündürlük sıxlığı göstərir</span></label>
     </div>
     <div id="side" aria-live="polite"></div>
   </div>
@@ -112,18 +115,21 @@ let lang = (() => {
 const nf = () => new Intl.NumberFormat({ az: 'az-Latn-AZ', ru: 'ru-RU', en: 'en-GB' }[lang]);
 const T = {
   az: { doc: 'Əhali · Azad Bilik', title: 'Əhali', sub: 'Tarixi Azərbaycan siyahıyaalmalar üzrə', maps: 'Xəritələr',
+    terrain: '3D: hündürlük sıxlığı göstərir',
     pop: 'Əhali', density: 'Sıxlıq', change: 'Dəyişmə', perKm: 'nəfər/km²', since: (y) => `${y}-dən bəri`,
     az: 'Azərbaycan Respublikası', ir: 'İran Azərbaycanı', irNote: 'Şərqi və Qərbi Azərbaycan, Ərdəbil, Zəncan ostanları',
     onMap: (n, m) => `xəritədə ${m} bölgədən ${n}-i`, lastKnown: (y) => `son məlum rəqəm: ${y}`, carriedNote: 'son məlum rəqəm (bu il yoxdur)', find: 'Rayon və ya şəhristan axtar…', play: 'Siyahıyaalmaları ardıcıl göstər', pause: 'Dayandır', base: 'müqayisə:', rankIn: (k, n) => `${n} bölgə arasında ${k}-ci`, peak: (y) => `ən çox ${y}-də`, round: (a, i) => `Azərbaycan ${a} · İran ${i}`, top: 'Ən çox', back: '← Bütün bölgələr',
     year: 'İl', people: 'Əhali', chg: 'Dəyişmə', src: 'mənbə', area: (k) => `${k} km²`, nodata: 'məlumat yoxdur', city: 'şəhər',
     note: 'Siyahıyaalmalar iki ölkədə fərqli illərdə keçirilib; xəritə onları yaxın illər üzrə cütləşdirir. Sərhədlər bugünküdür. Siyahıyaalmada rəqəmi olmayan bölgə son məlum rəqəmlə, solğun göstərilir; hələ heç rəqəmi olmayan boş qalır. Rəqəmlər rəsmi siyahıyaalma nəticələridir, hər biri öz mənbəyi ilə.' },
   ru: { doc: 'Население · Azad Bilik', title: 'Население', sub: 'Исторический Азербайджан по переписям', maps: 'Карты',
+    terrain: '3D: высота — плотность населения',
     pop: 'Население', density: 'Плотность', change: 'Изменение', perKm: 'чел./км²', since: (y) => `с ${y} г.`,
     az: 'Азербайджанская Республика', ir: 'Иранский Азербайджан', irNote: 'останы Восточный и Западный Азербайджан, Ардебиль, Зенджан',
     onMap: (n, m) => `на карте ${n} из ${m} единиц`, lastKnown: (y) => `последняя известная цифра: ${y}`, carriedNote: 'последняя известная цифра (за этот год нет)', find: 'Найти район или шахрестан…', play: 'Показать переписи по очереди', pause: 'Пауза', base: 'сравнить с:', rankIn: (k, n) => `${k}-е место из ${n}`, peak: (y) => `больше всего в ${y}`, round: (a, i) => `Азербайджан ${a} · Иран ${i}`, top: 'Крупнейшие', back: '← Все единицы',
     year: 'Год', people: 'Население', chg: 'Изменение', src: 'источник', area: (k) => `${k} км²`, nodata: 'нет данных', city: 'город',
     note: 'Переписи в двух странах проходили в разные годы; карта соединяет их по близким годам. Границы — нынешние. Единица без цифры в этой переписи показана бледно, с последней известной цифрой; та, у которой цифр ещё нет, остаётся пустой. Цифры — официальные итоги переписей, у каждой указан источник.' },
   en: { doc: 'Population · Azad Bilik', title: 'Population', sub: 'Historical Azerbaijan, census by census', maps: 'Maps',
+    terrain: '3D: height shows people per km²',
     pop: 'Population', density: 'Density', change: 'Change', perKm: 'people/km²', since: (y) => `since ${y}`,
     az: 'Republic of Azerbaijan', ir: 'Iranian Azerbaijan', irNote: 'East and West Azerbaijan, Ardabil and Zanjan provinces',
     onMap: (n, m) => `${n} of ${m} units on the map`, lastKnown: (y) => `last known figure: ${y}`, carriedNote: 'last known figure (none this census)', find: 'Find a district or county…', play: 'Play the censuses in turn', pause: 'Pause', base: 'compared with:', rankIn: (k, n) => `${k} of ${n}`, peak: (y) => `largest in ${y}`, round: (a, i) => `Azerbaijan ${a} · Iran ${i}`, top: 'Largest', back: '← All units',
@@ -135,13 +141,14 @@ const L = (p) => p[lang] ?? p.az;
 
 // Census rounds: each country's census nearest the same decade
 const ROUNDS = [[1939, null], [1959, 1956], [1970, 1966], [1979, 1976], [1989, 1986], [1999, 1996], [2009, 2006], [2019, 2016]].map(([az, ir], i) => ({ i, az, ir }));
-let round = ROUNDS.length - 1, base = null, measure = 'pop', units = [], sources = {}, official = {}, selected = null, hovered = null, playing = null;
+let round = ROUNDS.length - 1, base = null, measure = 'pop', units = [], sources = {}, official = {}, selected = null, hovered = null, playing = null, terrain = false;
 // The view in the link (?m=density&y=1989&b=1959&u=Barda District), so a view can be shared
 const params = new URLSearchParams(location.search);
 if (['pop', 'density', 'change'].includes(params.get('m'))) measure = params.get('m');
 const atYear = (y) => ROUNDS.findIndex((r) => String(r.az) === y || String(r.ir) === y);
 if (atYear(params.get('y')) >= 0) round = atYear(params.get('y'));
 if (atYear(params.get('b')) >= 0) base = atYear(params.get('b'));
+terrain = params.get('v') === '3d';
 const baseOf = () => (base != null && base < round ? base : round - 1);
 const yearOf = (u, r = round) => ROUNDS[r]?.[u.country];
 const popAt = (u, r = round) => u.pop[yearOf(u, r)] ?? null;
@@ -203,11 +210,16 @@ map.on('load', async () => {
   const firstSymbol = map.getStyle().layers.find((l) => l.type === 'symbol')?.id;
   map.addSource('units', { type: 'geojson', data: geo });
   map.addLayer({ id: 'units', type: 'fill', source: 'units', paint: { 'fill-color': ['coalesce', ['feature-state', 'color'], 'rgba(0,0,0,0)'], 'fill-opacity': ['case', ['boolean', ['feature-state', 'carried'], false], .4, .85] } }, firstSymbol);
+  // 3D (after The Pudding's «Human Terrain»): each unit raised by its density, the census on show; colour stays the measure
+  map.addLayer({ id: 'units-3d', type: 'fill-extrusion', source: 'units', layout: { visibility: 'none' }, paint: {
+    'fill-extrusion-color': ['coalesce', ['feature-state', 'color'], 'rgba(0,0,0,0)'],
+    'fill-extrusion-height': ['coalesce', ['feature-state', 'h'], 0], 'fill-extrusion-opacity': .92,
+    'fill-extrusion-height-transition': { duration: still() ? 0 : 900 } } });
   map.addLayer({ id: 'units-line', type: 'line', source: 'units', paint: {
     'line-color': ['case', ['boolean', ['feature-state', 'sel'], false], css('--ink'), ['boolean', ['feature-state', 'hover'], false], css('--ink'), css('--paper')],
     'line-width': ['case', ['boolean', ['feature-state', 'sel'], false], 2.25, ['boolean', ['feature-state', 'hover'], false], 1.5, .6],
   } }, firstSymbol);
-  map.on('mousemove', 'units', (e) => {
+  for (const layer of ['units', 'units-3d']) map.on('mousemove', layer, (e) => {
     map.getCanvas().style.cursor = 'pointer';
     const u = units[e.features[0].id];
     if (hovered !== u.fid) {
@@ -218,20 +230,33 @@ map.on('load', async () => {
     const c = measure !== 'change' && carried(u);
     tip.setLngLat(e.lngLat).setHTML(`<strong>${esc(L(u))}</strong> · ${fmt(value(u))}${c ? ` <small>(${t('lastKnown')(c.year)})</small>` : ''}${spark(u, 120, 28)}`).addTo(map);
   });
-  map.on('mouseleave', 'units', () => {
+  for (const layer of ['units', 'units-3d']) map.on('mouseleave', layer, () => {
     map.getCanvas().style.cursor = ''; tip.remove();
     if (hovered != null) map.setFeatureState({ source: 'units', id: hovered }, { hover: false });
     hovered = null;
   });
-  map.on('click', 'units', (e) => select(e.features[0].id, false));
+  for (const layer of ['units', 'units-3d']) map.on('click', layer, (e) => select(e.features[0].id, false));
   units.forEach((u) => { u.bbox = bboxOf(geo.features[u.fid].geometry); });
   document.getElementById('units-list').innerHTML = units.map((u) => `<option value="${esc(L(u))}">`).join('');
-  map.on('click', (e) => { if (!map.queryRenderedFeatures(e.point, { layers: ['units'] }).length && selected != null) select(null); });
+  map.on('click', (e) => { if (!map.queryRenderedFeatures(e.point, { layers: [terrain ? 'units-3d' : 'units'] }).length && selected != null) select(null); });
   draw();
+  if (terrain) setTerrain(true, false);
   const start = params.get('u') && units.find((u) => u.key === params.get('u'));
   if (start) select(start.fid);
 });
 
+// height grows with the cube root of density, so the small city units do not stand up as needles; the camera tilts to see it
+function setTerrain(on, ease = true) {
+  terrain = on;
+  document.getElementById('terrain').checked = on;
+  if (!map.getLayer('units-3d')) return;
+  map.setLayoutProperty('units-3d', 'visibility', on ? 'visible' : 'none');
+  map.setLayoutProperty('units', 'visibility', on ? 'none' : 'visible');
+  map.setLayoutProperty('units-line', 'visibility', on ? 'none' : 'visible');
+  map.easeTo({ pitch: on ? 55 : 0, bearing: on ? -12 : 0, duration: ease && !still() ? 900 : 0 });
+  keepUrl();
+}
+document.getElementById('terrain').onchange = (e) => setTerrain(e.target.checked);
 function bboxOf(g) {
   let b = [180, 90, -180, -90];
   for (const poly of g.type === 'Polygon' ? [g.coordinates] : g.coordinates)
@@ -262,7 +287,8 @@ function fmt(v, m = measure) {
 function paint() {
   for (const u of units) {
     const v = value(u);
-    map.setFeatureState({ source: 'units', id: u.fid }, { color: v == null ? (dark ? 'rgba(255,255,255,.06)' : 'rgba(26,20,16,.07)') : colors()[classOf(v)], carried: v != null && measure !== 'change' && !!carried(u) });
+    const d = value(u, round, 'density');
+    map.setFeatureState({ source: 'units', id: u.fid }, { color: v == null ? (dark ? 'rgba(255,255,255,.06)' : 'rgba(26,20,16,.07)') : colors()[classOf(v)], carried: v != null && measure !== 'change' && !!carried(u), h: d ? Math.cbrt(d) * 5500 : 0 });
   }
 }
 
@@ -373,6 +399,7 @@ function keepUrl() {
   const q = new URLSearchParams();
   if (lang !== 'az') q.set('lang', lang);
   if (measure !== 'pop') q.set('m', measure);
+  if (terrain) q.set('v', '3d');
   if (round !== ROUNDS.length - 1) q.set('y', ROUNDS[round].az);
   if (measure === 'change' && base != null && base !== round - 1) q.set('b', ROUNDS[base].az);
   if (selected != null && units[selected]) q.set('u', units[selected].key);
