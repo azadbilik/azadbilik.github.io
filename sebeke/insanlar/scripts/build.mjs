@@ -139,3 +139,6 @@ writeFileSync(new URL('../data/insanlar.json', import.meta.url), JSON.stringify(
 console.log(JSON.stringify(stats));
 console.log('places', places.length, 'occs', occs.length, 'bytes', JSON.stringify(json).length);
 console.log('top unmatched occupations', [...unmatched].sort((a, b) => b[1] - a[1]).slice(0, 40).map((x) => x.join(':')).join(' | '));
+
+// the networks' positions (ForceAtlas2 at build time, see layout.mjs)
+await import('./layout.mjs');

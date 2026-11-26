@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="/shared/theme.js"></script>
+<link rel="stylesheet" href="/shared/graph.css">
 <title>Tarixi Azərbaycanın insanları · Azad Bilik</title>
 <meta name="description" content="Wikidata-da tarixi Azərbaycan torpaqlarında doğulmuş insanlar: doğulduqları və öldükləri yerlər, köç yolları, peşələr. People of historical Azerbaijan on Wikidata: where they were born and died, migration routes, occupations.">
 <meta name="theme-color" content="#F4EFE6" media="(prefers-color-scheme: light)">
@@ -81,14 +82,11 @@
   .listh { margin-top: 1rem; font-size: .875rem; }
   .listh b { font-weight: 600; }
 
-  .gwrap { position: relative; border: 1px solid var(--rule); border-radius: 4px; background: var(--frame); overflow: hidden; }
-  #cg { height: min(74vh, 44rem); touch-action: none; position: relative; }
-  #cg canvas { display: block; width: 100%; height: 100%; }
-  .gtip { position: absolute; z-index: 3; pointer-events: none; background: var(--paper); border: 1px solid var(--rule); border-radius: 3px; padding: .3rem .55rem; font-size: .8125rem; box-shadow: 0 2px 12px rgb(0 0 0 / .15); max-width: 16rem; }
-  .gload { position: absolute; inset: 0; display: grid; place-items: center; color: var(--muted); font-size: .875rem; }
-  .gbar { position: absolute; right: .6rem; bottom: .6rem; display: flex; gap: .3rem; z-index: 2; }
-  .gbar button { background: var(--panel); border: 1px solid var(--rule); border-radius: 3px; padding: .3rem .6rem; font-size: .75rem; }
-  .gbar button:hover { border-color: var(--ink); }
+  .gwrap { position: relative; }
+  #cg { height: min(74vh, 44rem); }
+  #nodeList:empty { display: none; }
+  .gload { position: absolute; inset: 0; display: grid; place-items: center; color: var(--muted); font-size: .875rem; pointer-events: none; }
+  .gload[hidden] { display: none; }
   .seg { display: inline-flex; flex-wrap: wrap; border: 1px solid var(--rule); border-radius: 3px; padding: 2px; }
   .seg button { padding: .3rem .7rem; border-radius: 2px; font-size: .8125rem; color: var(--muted); }
   .seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
@@ -193,8 +191,7 @@
         <div class="seg" role="group" id="lay" data-i18n-label="layL"></div>
         <div class="seg" role="group" id="col" data-i18n-label="colL"></div>
       </div>
-      <div class="gwrap"><div id="cg" role="img" data-i18n-label="netL"></div><div class="gtip" id="gtip" hidden></div><div class="gload" id="gload"></div>
-        <div class="gbar"><button type="button" id="gfit"></button></div></div>
+      <div class="gwrap"><div id="cg" role="region" data-i18n-label="netL"></div><div class="gload" id="gload"></div></div>
       <div class="lgd" id="netlgd"></div>
       <p class="hint" id="netHint"></p>
       <div class="hubs" id="hubs"></div>
@@ -232,7 +229,6 @@
 </div>
 
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@cosmos.gl/graph@3.6.0/dist/index.min.js"></script>
 <script>
 (() => {
 const $ = (id) => document.getElementById(id);
@@ -273,7 +269,7 @@ az: { doc: 'Tarixi Azərbaycanın insanları · Azad Bilik', title: 'Tarixi Azə
   legArc: 'Qövs: dövr', legDot: 'Dairə: orada doğulanlar',
   route: (a, b, n) => `${a} → ${b}: ${n} nəfər`, placeList: (p, b, d) => `${p}: ${b} doğulub, ${d} ölüb`, born: 'doğulub', died: 'ölüb', more: (n) => `… və daha ${n}`,
   netK: 'Şəbəkə', netH: 'Yerlər düyün, insan axını tilişdir', netP: 'Eyni süzgəc: hər düyün bir yerdir (şəhər, kənd), hər xətt oradan oraya doğulub-ölmüş insanların axınıdır. Düyünün rəngi orada doğulan və ölənlərin ən çox peşəsidir. «Coğrafiya» düzülüşündə yerlər xəritədəki yerindədir (uzaq yerlər yaxına çəkilib), «qüvvə» düzülüşündə isə qarşılıqlı bağları çox olan yerlər bir-birinə yaxınlaşır.',
-  layL: 'Düzülüş', lay: ['Coğrafiya', 'Qüvvə'], colL: 'Rəng', col: ['Peşə', 'Dövr'], netL: 'Yerlər arasında insan axını şəbəkəsi', gfit: 'Hamısı', gload: 'Şəbəkə yüklənir…',
+  layL: 'Düzülüş', lay: ['Coğrafiya', 'Qüvvə'], colL: 'Rəng', col: ['Peşə', 'Dövr'], netL: 'Yerlər arasında insan axını şəbəkəsi', gsearch: 'Yer axtar…', gfit: 'Hamısı', gload: 'Şəbəkə yüklənir…',
   netHint: 'Düyünün üstünə gəlin və ya toxunun; sürüşdürün, yaxınlaşdırın. Bağlı yerlərin sayı və axın ölçünü, rəng ən çox peşəni göstərir.', hubTitle: 'Ən çox bağlı yerlər:', netStats: (n, e) => `${nf(n)} yer, ${nf(e)} axın`,
   findK: 'Axtarış', findH: 'Bir adamın yolu', findP: 'Adı yazın (latın, kiril və ya ingilis), doğulduğu yerdən yaşadığı və öldüyü yerlərə baxın.', findPh: 'Ad: Nizami, Üzeyir, Natavan…', sugg: 'Məsələn:', none: 'Tapılmadı.', shown: (n, m) => `${nf(n)} nəfərdən ${m} göstərilir`,
   pBorn: 'Doğulub', pDied: 'Ölüb', pRes: 'Yaşayıb / işləyib', pOcc: 'Peşə', pLang: 'Dil', pGrp: 'Rayon', pSites: 'Wikimedia səhifələri', unknown: 'məlum deyil', alive: 'sağdır (Wikidata-da ölüm tarixi yoxdur)', resNote: 'tarixsiz, sıra bilinmir',
@@ -289,7 +285,7 @@ az: { doc: 'Tarixi Azərbaycanın insanları · Azad Bilik', title: 'Tarixi Azə
   <li><b>Sağ olanlar.</b> Ölüm tarixi olmayan və 1906-dan sonra doğulanlar yalnız ən azı 3 Vikimedia saytında səhifəsi varsa göstərilir; yalnız Wikidata-da onsuz da olan məlumat (ad, il, yer) göstərilir.</li>
   <li><b>Peşə rəngi.</b> Wikidata-dakı peşələr söz üzrə 11 qrupa bölünüb (skript: scripts/build.mjs); bir adamın ən çox sayılan qrupu götürülür. Qeyri-dəqiqdir.</li>
   <li><b>Yoxlanmayıb.</b> Wikidata iddiaları (doğum yeri, tarix) əksəriyyətinin mənbəsi göstərilmir; heç biri burada müstəqil yoxlanmayıb.</li></ul>`,
-  foot: (b) => `Məlumat: <a href="https://www.wikidata.org/">Wikidata</a> (CC0), ${b} tarixində çəkilib; sərhədlər hubun öz məlumatlarından (<a href="/atlas/ehali/">əhali</a>, <a href="/atlas/1897/">1897</a>); xəritə: <a href="https://openfreemap.org/">OpenFreeMap</a>, © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>; şəbəkə: <a href="https://github.com/cosmosgl/graph">cosmos.gl</a> (MIT). Hub məlumatı CC0.` },
+  foot: (b) => `Məlumat: <a href="https://www.wikidata.org/">Wikidata</a> (CC0), ${b} tarixində çəkilib; sərhədlər hubun öz məlumatlarından (<a href="/atlas/ehali/">əhali</a>, <a href="/atlas/1897/">1897</a>); xəritə: <a href="https://openfreemap.org/">OpenFreeMap</a>, © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>; şəbəkə: <a href="https://www.sigmajs.org">sigma.js</a>, <a href="https://graphology.github.io">graphology</a> (MIT). Hub məlumatı CC0.` },
 ru: { doc: 'Люди исторического Азербайджана · Azad Bilik', title: 'Люди исторического Азербайджана', sub: 'Где родились, где умерли, куда уехали', library: 'Kitabxana',
   mapK: 'Миграция', mapH: 'От места рождения к месту смерти',
   mapP: 'Каждая дуга — путь людей, родившихся в одном месте и умерших в другом; толщина — их число. Дуга относится к эпохе по году смерти (если года нет — год рождения плюс 60). Включайте и выключайте эпохи, чтобы увидеть поток из Тебриза, Шуши, Шемахи в Баку и пути в Стамбул, Тегеран, Париж и Москву. Встречные дуги изгибаются влево по ходу, чтобы не сливаться.',
@@ -301,7 +297,7 @@ ru: { doc: 'Люди исторического Азербайджана · Azad
   legArc: 'Дуга: эпоха', legDot: 'Круг: родившиеся здесь',
   route: (a, b, n) => `${a} → ${b}: ${n} чел.`, placeList: (p, b, d) => `${p}: родились ${b}, умерли ${d}`, born: 'родился', died: 'умер', more: (n) => `… и ещё ${n}`,
   netK: 'Сеть', netH: 'Места — узлы, потоки людей — рёбра', netP: 'Тот же фильтр: узел — место (город, село), ребро — поток людей, родившихся в одном месте и умерших в другом. Цвет узла — преобладающее занятие тех, кто родился или умер там. В раскладке «география» места стоят там, где на карте (далёкие подтянуты ближе); в раскладке «силы» места со многими связями сближаются.',
-  layL: 'Раскладка', lay: ['География', 'Силы'], colL: 'Цвет', col: ['Занятие', 'Эпоха'], netL: 'Сеть потоков людей между местами', gfit: 'Всё', gload: 'Загрузка сети…',
+  layL: 'Раскладка', lay: ['География', 'Силы'], colL: 'Цвет', col: ['Занятие', 'Эпоха'], netL: 'Сеть потоков людей между местами', gsearch: 'Найти место…', gfit: 'Всё', gload: 'Загрузка сети…',
   netHint: 'Наведите или коснитесь узла; двигайте и приближайте. Размер — число связей и поток, цвет — преобладающее занятие.', hubTitle: 'Самые связанные места:', netStats: (n, e) => `${nf(n)} мест, ${nf(e)} потоков`,
   findK: 'Поиск', findH: 'Путь одного человека', findP: 'Введите имя (латиницей, кириллицей или по-английски) и посмотрите путь от места рождения к местам жизни и смерти.', findPh: 'Имя: Низами, Узеир, Натаван…', sugg: 'Например:', none: 'Не найдено.', shown: (n, m) => `показано ${m} из ${nf(n)}`,
   pBorn: 'Родился', pDied: 'Умер', pRes: 'Жил / работал', pOcc: 'Занятия', pLang: 'Язык', pGrp: 'Район', pSites: 'Страниц Викимедиа', unknown: 'неизвестно', alive: 'жив (в Wikidata нет даты смерти)', resNote: 'без дат, порядок неизвестен',
@@ -317,7 +313,7 @@ ru: { doc: 'Люди исторического Азербайджана · Azad
   <li><b>Живущие.</b> Люди без даты смерти, родившиеся после 1906 года, показаны только при странице минимум в трёх проектах Викимедиа; показано лишь то, что уже есть в Wikidata (имя, год, место).</li>
   <li><b>Цвет занятия.</b> Занятия из Wikidata разнесены по 11 группам по словам (scripts/build.mjs); берётся самая частая у человека. Приблизительно.</li>
   <li><b>Не проверено.</b> У большинства утверждений Wikidata (место, дата) источник не указан; здесь они независимо не проверялись.</li></ul>`,
-  foot: (b) => `Данные: <a href="https://www.wikidata.org/">Wikidata</a> (CC0), выгрузка ${b}; границы из данных самого хаба (<a href="/atlas/ehali/">население</a>, <a href="/atlas/1897/">1897</a>); карта: <a href="https://openfreemap.org/">OpenFreeMap</a>, © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>; сеть: <a href="https://github.com/cosmosgl/graph">cosmos.gl</a> (MIT). Данные хаба — CC0.` },
+  foot: (b) => `Данные: <a href="https://www.wikidata.org/">Wikidata</a> (CC0), выгрузка ${b}; границы из данных самого хаба (<a href="/atlas/ehali/">население</a>, <a href="/atlas/1897/">1897</a>); карта: <a href="https://openfreemap.org/">OpenFreeMap</a>, © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>; сеть: <a href="https://www.sigmajs.org">sigma.js</a>, <a href="https://graphology.github.io">graphology</a> (MIT). Данные хаба — CC0.` },
 en: { doc: 'People of historical Azerbaijan · Azad Bilik', title: 'People of historical Azerbaijan', sub: 'Where they were born, where they died, where they went', library: 'Kitabxana',
   mapK: 'Migration', mapH: 'From the birthplace to the place of death',
   mapP: 'Each arc is the path of people born in one place and dead in another; its width is their number. An arc belongs to an era by the year of death (birth year + 60 where there is none). Switch eras on and off to see the flow from Tabriz, Shusha and Shamakhi to Baku, and the routes to Istanbul, Tehran, Paris and Moscow. Opposite arcs bend to the left of their direction so they do not overlap.',
@@ -329,7 +325,7 @@ en: { doc: 'People of historical Azerbaijan · Azad Bilik', title: 'People of hi
   legArc: 'Arc: era', legDot: 'Circle: born here',
   route: (a, b, n) => `${a} → ${b}: ${n} people`, placeList: (p, b, d) => `${p}: ${b} born, ${d} died`, born: 'born', died: 'died', more: (n) => `… and ${n} more`,
   netK: 'Network', netH: 'Places are nodes, flows of people are edges', netP: 'The same filter: each node is a place (town, village), each edge the flow of people born in one place and dead in another. A node\'s colour is the commonest occupation of those born or dead there. In the "geography" layout places sit where they are on the map (distant ones pulled in); in the "force" layout places with many ties draw together.',
-  layL: 'Layout', lay: ['Geography', 'Force'], colL: 'Colour', col: ['Occupation', 'Era'], netL: 'Network of people\'s flows between places', gfit: 'Fit', gload: 'Loading the network…',
+  layL: 'Layout', lay: ['Geography', 'Force'], colL: 'Colour', col: ['Occupation', 'Era'], netL: 'Network of people\'s flows between places', gsearch: 'Find a place…', gfit: 'Fit', gload: 'Loading the network…',
   netHint: 'Hover or tap a node; drag and zoom. Size is the number of ties and flow, colour the commonest occupation.', hubTitle: 'Best-connected places:', netStats: (n, e) => `${nf(n)} places, ${nf(e)} flows`,
   findK: 'Search', findH: 'One person\'s path', findP: 'Type a name (Latin, Cyrillic or English) and follow the path from birthplace to the places lived in and the place of death.', findPh: 'Name: Nizami, Uzeyir, Natavan…', sugg: 'Try:', none: 'No match.', shown: (n, m) => `showing ${m} of ${nf(n)}`,
   pBorn: 'Born', pDied: 'Died', pRes: 'Lived / worked', pOcc: 'Occupation', pLang: 'Language', pGrp: 'District', pSites: 'Wikimedia pages', unknown: 'unknown', alive: 'living (no death date on Wikidata)', resNote: 'undated, order unknown',
@@ -345,7 +341,7 @@ en: { doc: 'People of historical Azerbaijan · Azad Bilik', title: 'People of hi
   <li><b>Living people.</b> Those without a death date born after 1906 appear only with pages on at least three Wikimedia sites, and only what Wikidata already shows (name, year, place).</li>
   <li><b>Occupation colour.</b> Wikidata's occupations are sorted into 11 groups by keywords (scripts/build.mjs); a person gets the group counted most often. Rough.</li>
   <li><b>Unverified.</b> Most Wikidata claims (place, date) cite no source; none was independently checked here.</li></ul>`,
-  foot: (b) => `Data: <a href="https://www.wikidata.org/">Wikidata</a> (CC0), pulled ${b}; boundaries from the hub's own data (<a href="/atlas/ehali/">population</a>, <a href="/atlas/1897/">1897</a>); map: <a href="https://openfreemap.org/">OpenFreeMap</a>, © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>; network: <a href="https://github.com/cosmosgl/graph">cosmos.gl</a> (MIT). Hub data CC0.` },
+  foot: (b) => `Data: <a href="https://www.wikidata.org/">Wikidata</a> (CC0), pulled ${b}; boundaries from the hub's own data (<a href="/atlas/ehali/">population</a>, <a href="/atlas/1897/">1897</a>); map: <a href="https://openfreemap.org/">OpenFreeMap</a>, © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>; network: <a href="https://www.sigmajs.org">sigma.js</a>, <a href="https://graphology.github.io">graphology</a> (MIT). Hub data CC0.` },
 };
 T.ru.lede = (n, w) => `${nf(n)} человек, родившихся по обе стороны Аракса в Wikidata (нынешняя Азербайджанская Республика, иранские останы Восточный и Западный Азербайджан, Ардебиль, Зенджан, азербайджаноязычные уезды 1897 года, Борчалы, Закатала, Дербент); у ${nf(w)} известны и место рождения, и место смерти.`;
 T.az.lede = (n, w) => `Wikidata-da Araz boyunun hər iki tərəfində (bugünkü Azərbaycan Respublikası, İranın Şərqi və Qərbi Azərbaycan, Ərdəbil və Zəncan ostanları, 1897-ci ildə azərbaycanlı əhalisi çox olan qəzalar, Borçalı, Zaqatala, Dərbənd) doğulmuş ${nf(n)} insan; ${nf(w)} nəfərin həm doğulduğu, həm öldüyü yer məlumdur.`;
@@ -470,87 +466,104 @@ function legendMap() {
   $('maplgd').innerHTML = `<span>${esc(t('legArc'))}</span>` + t('eras').map((e, i) => `<span><i class="ln" style="--c:${ec[i]};opacity:${S.eras.has(i) ? 1 : .3}"></i>${esc(e)}</span>`).join('') + `<span><i style="--c:var(--ink);opacity:.35"></i>${esc(t('legDot'))}</span>`;
 }
 
-// ---- the network (cosmos.gl)
-let graph = null, G = null, gReady = false;
+// ---- the network (shared/graph.js: sigma.js over graphology). One graph of every flow, built once; the
+// filters above hide and show its places and flows and re-size and re-colour them, nothing moves. "Force"
+// positions come from the build (scripts/layout.mjs), "Geography" from the places' coordinates.
+let NG = null, NET = null, G = null, gReady = false, FPOS = null, selPl = -1;
 function geoXY(lon, lat) {
   const cx = 47.2, cy = 39.6, dx = (lon - cx) * 0.78, dy = lat - cy, r = Math.hypot(dx, dy);
   if (r < 0.001) return [0, 0];
   const f = r <= 5 ? r : 5 + 4 * Math.log(r / 5), s = f / r; return [dx * s, -dy * s];
 }
 function netData() {
+  // the current filters' share of each place and flow
   const agg = new Map(), node = new Map();
   const touch = (pl, r) => { let n = node.get(pl); if (!n) node.set(pl, (n = { pl, c: new Array(11).fill(0), e: [0, 0, 0, 0], n: 0, deg: new Set() })); n.c[r[R.cat]]++; n.e[eraOf(keyYear(r))]++; n.n++; return n; };
   for (const i of view) {
     const r = P[i]; if (r[R.bp] < 0 || r[R.dp] < 0 || r[R.bp] === r[R.dp]) continue;
     const e = eraOf(keyYear(r)); if (!S.eras.has(e)) continue;
     const a = touch(r[R.bp], r), b = touch(r[R.dp], r); a.deg.add(r[R.dp]); b.deg.add(r[R.bp]);
-    const k = r[R.bp] * 1e5 + r[R.dp]; let l = agg.get(k); if (!l) agg.set(k, (l = { a: r[R.bp], b: r[R.dp], n: 0, e: [0, 0, 0, 0], c: new Array(11).fill(0) })); l.n++; l.e[e]++; l.c[r[R.cat]]++;
+    const k = r[R.bp] + '>' + r[R.dp]; let l = agg.get(k); if (!l) agg.set(k, (l = { a: r[R.bp], b: r[R.dp], n: 0, e: [0, 0, 0, 0], c: new Array(11).fill(0) })); l.n++; l.e[e]++; l.c[r[R.cat]]++;
   }
-  const nodes = [...node.values()], idx = new Map(nodes.map((n, i) => [n.pl, i]));
-  return { nodes, links: [...agg.values()], idx };
+  return { nodes: node, links: agg };
 }
 const argmax = (a, skipLast) => { let b = -1, v = 0; for (let i = 0; i < a.length - (skipLast ? 1 : 0); i++) if (a[i] > v) { v = a[i]; b = i; } return b < 0 ? a.length - 1 : b; };
-function paint() {
-  if (!G || !graph) return;
-  const cc = catColors().map(hex), ec = eraColors().map(cssRgb).map(hex), { nodes, links } = G;
-  const col = (src, isCat) => { const k = isCat ? argmax(src, true) : argmax(src, false); return (isCat ? cc : ec)[k]; };
-  const pc = new Float32Array(nodes.length * 4), ps = new Float32Array(nodes.length);
-  nodes.forEach((n, i) => { const c = col(S.col === 'cat' ? n.c : n.e, S.col === 'cat'); pc.set([c[0], c[1], c[2], 1], i * 4); ps[i] = 2.5 + Math.min(Math.sqrt(n.n + n.deg.size) * 0.6, 20); });
-  const lc = new Float32Array(links.length * 4), lw = new Float32Array(links.length);
-  const dk = dark(); links.forEach((l, i) => { const c = col(S.col === 'cat' ? l.c : l.e, S.col === 'cat'); lc.set([c[0], c[1], c[2], dk ? .34 : .4], i * 4); lw[i] = 0.5 + Math.sqrt(l.n) * 0.6; });
-  graph.setPointColors(pc); graph.setPointSizes(ps); graph.setLinkColors(lc); graph.setLinkWidths(lw); graph.render();
-  legendNet();
+const colOf = (x) => (S.col === 'cat' ? catColors()[argmax(x.c, true)] : eraColors()[argmax(x.e, false)]);
+function allFlows() {
+  // every flow of every person, whatever the filters: the graph's fixed set of places and flows
+  const nodes = new Map(), edges = new Map();
+  for (const r of P) {
+    if (r[R.bp] < 0 || r[R.dp] < 0 || r[R.bp] === r[R.dp]) continue;
+    nodes.set(r[R.bp], { id: r[R.bp] }); nodes.set(r[R.dp], { id: r[R.dp] });
+    const k = r[R.bp] + '>' + r[R.dp]; if (!edges.has(k)) edges.set(k, { id: k, source: r[R.bp], target: r[R.dp] });
+  }
+  return { nodes: [...nodes.values()], edges: [...edges.values()] };
 }
+function positionsFor(lay) {
+  const out = {};
+  for (const n of NG.nodes) {
+    if (lay === 'force') out[n.id] = { x: FPOS[2 * n.id], y: -FPOS[2 * n.id + 1] };
+    else { const [x, y] = geoXY(PL[n.id][3], PL[n.id][4]); out[n.id] = { x: x * 100, y: -y * 100 }; }
+  }
+  return out;
+}
+async function makeGraph() {
+  gReady = true;
+  const [{ createGraph }, pb] = await Promise.all([import('/shared/graph.js'), FPOS ? null : fetch('data/net-pos.bin').then((r) => r.arrayBuffer())]);
+  if (pb) FPOS = new Int16Array(pb);
+  NG ??= allFlows(); NET = netData();
+  const keep = G?.selected();
+  G?.destroy();
+  G = createGraph($('cg'), {
+    nodes: NG.nodes, edges: NG.edges, positions: positionsFor(S.lay),
+    label: (n) => plName(n.id), color: (n) => { const x = NET.nodes.get(n.id); return x ? colOf(x) : 'var(--muted)'; },
+    size: (n) => { const x = NET.nodes.get(n.id); return (x ? 2 + Math.min(Math.sqrt(x.n + x.deg.size) * 0.45, 16) : 2) * Math.min(1, Math.max(0.6, $('cg').clientWidth / 1000)); },
+    edgeColor: (e) => { const l = NET.links.get(e.id); return l ? colOf(l) : null; },
+    edgeWidth: (e) => { const l = NET.links.get(e.id); return l ? Math.min(4, Math.round((0.4 + Math.sqrt(l.n) * 0.35) * 4) / 4) : 1; },
+    edgeAlpha: 0.32, curve: 0.18, labelSize: 11.5, reshape: S.lay === 'force', stretch: 1.4,
+    strings: { search: t('gsearch') },
+    tooltip: (n) => hubTip(n.id), edgeTooltip: (e) => { const l = NET.links.get(e.id); return l ? `<b>${esc(plName(l.a))} → ${esc(plName(l.b))}</b><br>${nf(l.n)}` : ''; },
+    panel: $('nodeList'),
+    onSelect: (f) => { selPl = f?.type === 'node' ? +f.id : -1; if (f?.type === 'edge') flowList(f.id); else nodeList(selPl); },
+  });
+  window.__graph = G;
+  refreshNet();
+  await G.ready;
+  $('gload').hidden = true;
+  if (keep?.type === 'node' && G.isVisible(keep.id)) G.focus(keep.id, { fly: false });
+}
+function refreshNet() {
+  if (!G) return;
+  NET = netData();
+  G.setFilter((n) => NET.nodes.has(n.id), (e) => NET.links.has(e.id));
+  G.relabel();
+  paint();
+  const hubs = [...NET.nodes.values()].map((n) => [n.pl, n.deg.size + n.n * 0.1]).sort((a, b) => b[1] - a[1]).slice(0, 10);
+  $('hubs').innerHTML = `<span class="hint" style="margin:0 .3rem 0 0;align-self:center">${esc(t('hubTitle'))}</span>` + hubs.map(([pl]) => `<button type="button" data-n="${pl}">${esc(plName(pl))}</button>`).join('');
+  $('hubs').querySelectorAll('[data-n]').forEach((b) => (b.onclick = () => G.focus(+b.dataset.n)));
+  $('netHint').textContent = t('netStats')(NET.nodes.size, NET.links.size) + '. ' + t('netHint');
+  if (selPl >= 0) nodeList(selPl);
+}
+function buildNet() { if (!gReady) makeGraph(); else refreshNet(); }
+function paint() { legendNet(); }
 function legendNet() {
   if (S.col === 'cat') { const cc = catColors(); $('netlgd').innerHTML = CAT_ORDER.map((k, i) => `<span><i style="--c:${cc[i]}"></i>${esc(t('cats')[k])}</span>`).join(''); }
   else { const ec = eraColors(); $('netlgd').innerHTML = t('eras').map((e, i) => `<span><i style="--c:${ec[i]}"></i>${esc(e)}</span>`).join(''); }
 }
-function layout() {
-  const n = G.nodes.length, pos = new Float32Array(n * 2);
-  G.nodes.forEach((nd, i) => { const [x, y] = geoXY(PL[nd.pl][3], PL[nd.pl][4]); pos[2 * i] = 2048 + x * 95; pos[2 * i + 1] = 2048 + y * 95; });
-  const links = new Float32Array(G.links.length * 2); G.links.forEach((l, i) => { links[2 * i] = G.idx.get(l.a); links[2 * i + 1] = G.idx.get(l.b); });
-  return { pos, links };
+function hubTip(pl) {
+  const n = NET.nodes.get(pl); if (!n) return '';
+  return `<b>${esc(plName(pl))}</b><br>${nf(n.n)} · ${nf(n.deg.size)} ${lang === 'az' ? 'bağ' : lang === 'ru' ? 'связей' : 'ties'}`;
 }
-function buildNet(keepView) {
-  G = netData();
-  $('netHint2')?.remove();
-  if (!G.nodes.length) { if (graph) { graph.setPointPositions(new Float32Array(0)); graph.setLinks(new Float32Array(0)); graph.render(); } return; }
-  const { pos, links } = layout();
-  const sim = S.lay === 'force';
-  if (!graph) {
-    graph = new window.Cosmos.Graph($('cg'), {
-      backgroundColor: css('--frame') || '#E9E2D6', spaceSize: 4096, enableSimulation: sim, enableDrag: true, fitViewOnInit: true, fitViewPadding: 0.1, scalePointsOnZoom: true,
-      curvedLinks: false, linkDefaultWidth: 1, pointDefaultSize: 4, renderHoveredPointRing: true, hoveredPointRingColor: css('--accent') || '#A81E28', showFPSMonitor: false, attribution: '',
-      simulationGravity: 0.12, simulationRepulsion: 1.6, simulationLinkSpring: 0.4, simulationLinkDistance: 14, simulationFriction: 0.88, simulationDecay: 4000,
-      onPointMouseOver: (i, _p, ev) => hubTip(i, ev), onPointMouseOut: () => { $('gtip').hidden = true; },
-      onPointClick: (i) => { selectNode(i); }, onClick: (i) => { if (i === undefined) $('gtip').hidden = true; },
-    });
-  } else {
-    graph.setConfigPartial?.({ enableSimulation: sim });
-  }
-  graph.setPointPositions(pos); graph.setLinks(links);
-  paint();
-  if (sim) graph.start(0.8); else graph.pause?.();
-  if (!keepView) setTimeout(() => graph.fitView(0, 0.08), 60);
-  $('gload').hidden = true; gReady = true; window.__graph = graph;
-  const hubs = G.nodes.map((n, i) => [i, n.deg.size + n.n * 0.1]).sort((a, b) => b[1] - a[1]).slice(0, 10);
-  $('hubs').innerHTML = `<span class="hint" style="margin:0 .3rem 0 0;align-self:center">${esc(t('hubTitle'))}</span>` + hubs.map(([i]) => `<button type="button" data-n="${i}">${esc(plName(G.nodes[i].pl))}</button>`).join('');
-  $('hubs').querySelectorAll('[data-n]').forEach((b) => (b.onclick = () => selectNode(+b.dataset.n, true)));
-  $('netHint').textContent = t('netStats')(G.nodes.length, G.links.length) + '. ' + t('netHint');
+function nodeList(pl) {
+  const el = $('nodeList'); if (pl < 0) { el.innerHTML = ''; return; }
+  const items = view.filter((k) => P[k][R.bp] === pl || P[k][R.dp] === pl);
+  const b = items.filter((k) => P[k][R.bp] === pl).length, d = items.filter((k) => P[k][R.dp] === pl).length;
+  el.innerHTML = peopleList(items, `<b>${esc(plName(pl))}</b>: ${nf(b)} ${t('born')}, ${nf(d)} ${t('died')}`); bindPeople(el);
 }
-function hubTip(i, ev) {
-  const n = G.nodes[i]; if (!n) return;
-  const tp = $('gtip'); tp.hidden = false;
-  tp.innerHTML = `<b>${esc(plName(n.pl))}</b><br>${nf(n.n)} · ${nf(n.deg.size)} ${lang === 'az' ? 'bağ' : lang === 'ru' ? 'связей' : 'ties'}`;
-  if (ev) { const r = $('cg').getBoundingClientRect(); tp.style.left = Math.min(ev.clientX - r.left + 12, r.width - 150) + 'px'; tp.style.top = ev.clientY - r.top + 12 + 'px'; }
-}
-function selectNode(i, zoom) {
-  const n = G.nodes[i]; if (!n) return;
-  if (zoom) graph.zoomToPointByIndex?.(i, 600, 6, true);
-  graph.selectPointByIndex?.(i);
-  const items = view.filter((k) => P[k][R.bp] === n.pl || P[k][R.dp] === n.pl);
-  const b = items.filter((k) => P[k][R.bp] === n.pl).length, d = items.filter((k) => P[k][R.dp] === n.pl).length;
-  const el = $('nodeList'); el.innerHTML = peopleList(items, `<b>${esc(plName(n.pl))}</b>: ${nf(b)} ${t('born')}, ${nf(d)} ${t('died')}`); bindPeople(el);
+function flowList(id) {
+  const l = NET.links.get(id), el = $('nodeList'); if (!l) { el.innerHTML = ''; return; }
+  const items = view.filter((k) => P[k][R.bp] === l.a && P[k][R.dp] === l.b && S.eras.has(eraOf(keyYear(P[k]))));
+  el.innerHTML = peopleList(items, `<b>${esc(plName(l.a))} → ${esc(plName(l.b))}</b>: ${nf(items.length)}`); bindPeople(el);
 }
 
 // ---- search and a person's path
@@ -667,19 +680,18 @@ function controls() {
   $('fcat').innerHTML = opt(-1, t('catAll'), S.cat < 0) + CAT_ORDER.map((k, i) => opt(i, t('cats')[k], S.cat === i)).join('');
   $('fgrp').innerHTML = opt(-2, t('grpDef'), S.grp === -2) + opt(-1, t('grpAll'), S.grp === -1) + t('grps').map((g, i) => opt(i, g, S.grp === i)).join('');
   $('fsex').innerHTML = opt(0, t('sexAll'), S.sex === 0) + opt(1, t('sexM'), S.sex === 1) + opt(2, t('sexF'), S.sex === 2);
-  const seg = (id, items, cur, key) => { $(id).innerHTML = items.map(([v, l]) => `<button type="button" data-v="${v}" aria-pressed="${cur === v}">${esc(l)}</button>`).join(''); $(id).querySelectorAll('button').forEach((b) => (b.onclick = () => { S[key] = b.dataset.v; controls(); if (key === 'lay') buildNet(true), setTimeout(() => graph.fitView(500, 0.08), 80); else paint(); })); };
+  const seg = (id, items, cur, key) => { $(id).innerHTML = items.map(([v, l]) => `<button type="button" data-v="${v}" aria-pressed="${cur === v}">${esc(l)}</button>`).join(''); $(id).querySelectorAll('button').forEach((b) => (b.onclick = () => { S[key] = b.dataset.v; controls(); if (key === 'lay') { if (gReady) makeGraph(); } else refreshNet(); })); };
   seg('lay', [['geo', t('lay')[0]], ['force', t('lay')[1]]], S.lay, 'lay');
   seg('col', [['cat', t('col')[0]], ['era', t('col')[1]]], S.col, 'col');
 }
 let ut = 0;
-function update() { clearTimeout(ut); ut = setTimeout(() => { refilter(); drawMap(); if (graph) buildNet(true); $('routeList').innerHTML = ''; if (mapReady) map.getSource('sel').setData({ type: 'FeatureCollection', features: [] }); }, 30); }
+function update() { clearTimeout(ut); ut = setTimeout(() => { refilter(); drawMap(); if (G) refreshNet(); $('routeList').innerHTML = ''; if (mapReady) map.getSource('sel').setData({ type: 'FeatureCollection', features: [] }); }, 30); }
 $('fcat').onchange = (e) => { S.cat = +e.target.value; update(); };
 $('fgrp').onchange = (e) => { S.grp = +e.target.value; update(); };
 $('fsex').onchange = (e) => { S.sex = +e.target.value; update(); };
 $('ftop').oninput = (e) => { S.top = +e.target.value; drawMap(); };
 $('mreg').onclick = () => map.fitBounds(regionBox, { padding: 10, duration: 600 });
 $('mwide').onclick = () => { if (!cur?.shown.length) return; const b = new maplibregl.LngLatBounds(); cur.shown.forEach((x) => { b.extend(plc(x.bp)); b.extend(plc(x.dp)); }); map.fitBounds(b, { padding: 30, duration: 600 }); };
-$('gfit').onclick = () => graph?.fitView(500, 0.08);
 let qt = 0; $('q').oninput = () => { clearTimeout(qt); qt = setTimeout(runSearch, 120); };
 
 function applyLang() {
@@ -691,12 +703,12 @@ function applyLang() {
   document.querySelectorAll('[data-keep-lang]').forEach((a) => { const u = new URL(a.getAttribute('href'), location.href); if (lang === 'az') u.searchParams.delete('lang'); else u.searchParams.set('lang', lang); a.href = u.pathname + u.search; });
   $('kx-nav').href = `https://kitabxana.az${lang === 'az' ? '' : '/' + lang}/`;
   $('mapP').textContent = t('mapP'); $('netP').textContent = t('netP'); $('findP').textContent = t('findP'); $('covP').textContent = t('covP');
-  $('grpNote').textContent = t('grpNote'); $('mreg').textContent = t('mreg'); $('mwide').textContent = t('mwide'); $('gfit').textContent = t('gfit'); $('mapHint').textContent = t('mapHint'); $('gload').textContent = t('gload');
+  $('grpNote').textContent = t('grpNote'); $('mreg').textContent = t('mreg'); $('mwide').textContent = t('mwide'); G?.setStrings({ search: t('gsearch') }); $('mapHint').textContent = t('mapHint'); $('gload').textContent = t('gload');
   $('method').innerHTML = t('method')(); $('ftop').setAttribute('aria-label', t('topL')); $('cg').setAttribute('aria-label', t('netL'));
   if (!D) return;
   $('lede').textContent = t('lede')(D.stats.total, D.stats.withDeathPlace); $('foot').innerHTML = t('foot')(D.built);
   controls(); stats(); legendMap(); legendNet(); coverage(); suggest();
-  if (G) { $('netHint').textContent = t('netStats')(G.nodes.length, G.links.length) + '. ' + t('netHint'); }
+  if (G && NET) { $('netHint').textContent = t('netStats')(NET.nodes.size, NET.links.size) + '. ' + t('netHint'); G.relabel(); }
   if (curP >= 0) selectPerson(curP, false);
 }
 document.querySelectorAll('[data-lang]').forEach((b) => (b.onclick = () => {
@@ -705,15 +717,15 @@ document.querySelectorAll('[data-lang]').forEach((b) => (b.onclick = () => {
   applyLang();
 }));
 // The maps change style in place (shared/theme.js); the network, the legends and the colours drawn from CSS follow
-addEventListener('themechange', () => setTimeout(() => { try { legendMap(); legendNet(); paint(); } catch {} }));
+addEventListener('themechange', () => setTimeout(() => { try { legendMap(); legendNet(); G?.relabel(); } catch {} }));
 applyLang();
 $('gload').textContent = t('gload');
 
 fetch('data/insanlar.json').then((r) => r.json()).then((d) => {
   D = d; P = d.people; PL = d.places; D.cats.forEach((k, i) => (catIdx[k] = i));
   refilter(); initMap(); drawMap(); buildIndex(); applyLang();
-  // the network starts when it comes into view (cosmos.gl wants the canvas sized)
-  const go = () => { if (!gReady) buildNet(false); };
+  // the network starts when it comes into view
+  const go = () => { if (!gReady) makeGraph(); };
   if ('IntersectionObserver' in window) { const io = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting)) { go(); io.disconnect(); } }, { rootMargin: '300px' }); io.observe($('cg')); } else go();
   const pq = qs.get('p'); if (pq) { const i = P.findIndex((r) => 'Q' + r[0] === pq); if (i >= 0) selectPerson(i, false); }
   window.__people = { P, PL, S };

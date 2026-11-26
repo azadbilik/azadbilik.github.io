@@ -1,31 +1,32 @@
 # İnsanlar · People of historical Azerbaijan
 
-[azadbilik.org/sebeke/insanlar](https://azadbilik.org/sebeke/insanlar/): people on Wikidata born on either side of the Araz, as (1) a migration map of arcs from birthplace to place of death by era (before 1828, 1828–1920, 1920–1991, 1991 on), (2) a network of places joined by those flows, drawn with cosmos.gl, coloured by occupation or era, in a geographic or a force layout, (3) a search that follows one person from birthplace through places lived in to place of death, and (4) a plain account of how lopsided the data is. AZ, RU, EN.
+[azadbilik.org/sebeke/insanlar](https://azadbilik.org/sebeke/insanlar/): people on Wikidata born on either side of the Araz, as (1) a migration map of arcs from birthplace to place of death by era (before 1828, 1828–1920, 1920–1991, 1991 on), (2) a network of places joined by those flows, coloured by occupation or era, in a geographic or a force layout, (3) a search that follows one person from birthplace through places lived in to place of death, and (4) a plain account of how lopsided the data is. AZ, RU, EN.
 
 | File | What |
 |---|---|
-| `index.html` | The page (MapLibre map, cosmos.gl network, search; plain JS) |
+| `index.html` | The page (MapLibre map, network, search; plain JS) |
 | `data/insanlar.json` | What the page reads, built by `scripts/build.mjs` |
 | `scripts/region.mjs` | The region as polygons, from the hub's own data (below) |
 | `scripts/fetch.mjs` | Pulls Wikidata into `data/raw/` (git-ignored cache) |
 | `scripts/build.mjs` | `data/raw/` → `data/insanlar.json` |
+| `scripts/layout.mjs` | The network's "Force" positions, `data/net-pos.bin` (ForceAtlas2, run by `build.mjs`) |
 | `og.png` | Share card |
 
 ## Sources
 
 - **People, places, occupations:** [Wikidata](https://www.wikidata.org/), CC0 1.0, through the Query Service (`query.wikidata.org/sparql`). Properties: P31 = Q5, P19 birth place, P20 death place, P569/P570 dates, P21 sex, P106 occupation, P551 residence, P937 work location, P1412 / P6886 languages, P172 ethnic group, P625 coordinates, P131 located in, sitelinks.
 - **Boundaries used to decide "historical Azerbaijan":** the hub's own [population map](../../atlas/ehali/) (78 districts of today's Republic of Azerbaijan; 55 counties of the Iranian provinces East Azerbaijan, West Azerbaijan, Ardabil, Zanjan; geoBoundaries, CC BY-SA 3.0 / ODbL) and [1897 census map](../../atlas/1897/) (RISTAT, CC0), whose uezds and okrugs where at least 25% named Azerbaijani («татарский») their native language are included: Erivan, Etchmiadzin, Surmali, Sharur-Daralayaz, Novobayazet, Zangezur, Borchali, Zaqatala, Kaitag-Tabasaran and the Baku and Elisabethpol uezds. Derbent, a seat of Kyurin okrug where Azerbaijani is only 2%, is a 25 km disc around the city.
-- **Base map:** OpenFreeMap tiles, © OpenStreetMap contributors. **Network:** [cosmos.gl](https://github.com/cosmosgl/graph) 3.6.0 (MIT) from jsDelivr.
+- **Base map:** OpenFreeMap tiles, © OpenStreetMap contributors. **Network:** [shared/graph.js](../../shared/graph.js) (sigma.js 3 on WebGL over graphology, with the hub's own edge and label layers): sigma 3.0.3, graphology 0.26.0 (MIT) from jsDelivr; at build time graphology-layout-forceatlas2 0.10.1 (MIT).
 
 ## Rebuilding
 
 ```bash
 cd sebeke/insanlar
 node scripts/fetch.mjs     # about 45 min, polite: one query at a time, cached per tile / batch in data/raw/ (66 MB, git-ignored)
-node scripts/build.mjs     # seconds
+node scripts/build.mjs     # seconds, then ~15 s of layout
 ```
 
-Delete `data/raw/` to refetch from scratch. Node 20+; no dependencies.
+Delete `data/raw/` to refetch from scratch. Node 20+. The layout uses the hub's [scripts/graph-layout.mjs](../../scripts/graph-layout.mjs), which installs graphology and its ForceAtlas2 into `scripts/.deps/` (git-ignored) on first use.
 
 ## What it holds (Wikidata pulled 2026-11-26)
 
@@ -46,7 +47,7 @@ The birthplace filter starts on «Republic + Iran» (10,696 people, 6,334 with b
 - **Places.** A place without its own coordinates takes those of its first parent unit that has some (P131); flagged in the data (a place's 7th field is 1 when its coordinates are the parent's). Birth places without any coordinates drop the person from the map but not from search. Death and residence places are not tested against the region; they can be anywhere. About 2,400 people have a death place that has no coordinates at all; they have no arc. A death place is the exact item Wikidata names (a hospital or a Paris arrondissement stays separate from its city).
 - **Occupation groups.** Eleven groups by keywords in the English labels of P106 values (`CATS` in `build.mjs`); the group a person's occupations count most in, ties by the order literature, music, art, stage, religion, science, military, politics, business, sport. Unmatched occupations fall in "other". Rough.
 - **Arcs.** Quadratic curves bending to the left of travel, so A→B and B→A separate; width grows with the number of people. The map shows the strongest N arcs (a slider).
-- **Network layout.** "Geography" places each place where it is, with distances beyond ~5° compressed logarithmically so Paris and Moscow fit; "force" starts from that and runs cosmos.gl's simulation.
+- **Network layout.** "Geography" places each place where it is, with distances beyond ~5° compressed logarithmically so Paris and Moscow fit; "force" is ForceAtlas2 over every flow (all eras, everyone), computed at build time. The graph holds every place and flow once; the filters hide and show them and re-size and re-colour them by the people they leave, never moving anything. Hover lights a place's flows, a click lists its people in the graph's side panel (a bottom sheet on a phone), a click on a lit flow lists the people on it; the search box finds a place.
 
 ## Caveats
 
