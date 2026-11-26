@@ -23,6 +23,7 @@
   // ?lang=, else the visitor's last choice on azadbilik.org (shared with the map and the gallery), else Azerbaijani; set before paint
   (() => { const L = ['az', 'ru', 'en']; let l = new URLSearchParams(location.search).get('lang'); if (!L.includes(l)) { try { l = localStorage.getItem('lang'); } catch {} } if (L.includes(l)) document.documentElement.lang = l; })();
 </script>
+<link rel="stylesheet" href="/shared/hub.css">
 <style>
   :root {
     --paper: #F4EFE6;
@@ -97,7 +98,7 @@
   body > .wrap { max-width: none; padding: 0; }
   header { padding: 1.75rem var(--gutter); height: 5.5rem; }
   .frame { min-height: 100svh; display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
-  .frame:first-of-type { min-height: calc(100svh - 5.5rem); }
+  .frame:first-of-type { min-height: calc(100svh - 5.25rem); }
   .frame + .frame { border-top: 1px solid var(--rule); }
   .frame .words { display: flex; flex-direction: column; justify-content: center; gap: 2.5rem; padding: 3rem var(--gutter); max-width: 46rem; margin-left: auto; width: 100%; }
   .frame.flip { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
@@ -147,14 +148,14 @@
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header>
-    <a class="brand" href="/" aria-label="Azad Bilik">
+<header class="hub-header">
+  <a class="brand" data-keep-lang href="/" aria-label="Azad Bilik">
       <svg viewBox="0 0 512 512" aria-hidden="true"><g class="star"><rect x="126" y="126" width="260" height="260"/><polygon points="256,72 440,256 256,440 72,256"/></g><polygon class="gem" points="256,196 316,256 256,316 196,256"/></svg>
       Azad Bilik
     </a>
-    <nav aria-label="Azad Bilik"><a href="https://kitabxana.az" data-kx><span data-l="az">Kitabxana</span><span data-l="ru">Библиотека</span><span data-l="en">Library</span></a><a href="/qalereya/" data-keep-lang><span data-l="az">Qalereya</span><span data-l="ru">Галерея</span><span data-l="en">Gallery</span></a><a href="/xeriteler/" data-keep-lang><span data-l="az">Ədəbi xəritələr</span><span data-l="ru">Литературные карты</span><span data-l="en">Literary maps</span></a><a href="/atlas/" data-keep-lang><span data-l="az">Atlas</span><span data-l="ru">Атлас</span><span data-l="en">Atlas</span></a><a href="/musiqi/" data-keep-lang><span data-l="az">Musiqi</span><span data-l="ru">Музыка</span><span data-l="en">Music</span></a><span class="langs" role="group" aria-label="Dil · Язык · Language"><button type="button" data-lang="az">AZ</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="en">EN</button></span></nav>
-  </header>
+  <nav aria-label="Azad Bilik"><a href="https://kitabxana.az" data-kx><span data-l="az">Kitabxana</span><span data-l="ru">Библиотека</span><span data-l="en">Library</span></a><a href="/qalereya/" data-keep-lang><span data-l="az">Qalereya</span><span data-l="ru">Галерея</span><span data-l="en">Gallery</span></a><a href="/xeriteler/" data-keep-lang><span data-l="az">Ədəbi xəritələr</span><span data-l="ru">Литературные карты</span><span data-l="en">Literary maps</span></a><a href="/atlas/" data-keep-lang><span data-l="az">Atlas</span><span data-l="ru">Атлас</span><span data-l="en">Atlas</span></a><a href="/musiqi/" data-keep-lang><span data-l="az">Musiqi</span><span data-l="ru">Музыка</span><span data-l="en">Music</span></a><span class="langs" role="group" aria-label="Dil · Язык · Language"><button type="button" data-lang="az">AZ</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="en">EN</button></span></nav>
+</header>
+<div class="wrap">
 
   <main>
     <section class="frame" aria-labelledby="culture">

@@ -1,0 +1,42 @@
+/* The hub's header: one bar, the same on every page of azadbilik.org that is not a map's panel
+   (home, the indexes, the gallery and art catalogue, music, Söz, the Şəbəkə pages). Full width,
+   the brand at the gutter, so it never jumps between sections; Kitabxana · Qalereya · Ədəbi
+   xəritələr · Atlas · Musiqi, then the theme switch and the languages. On a phone the switch and
+   languages share the brand's line and the sections take the line below. Pages set --ink, --muted
+   and --accent; the selectors are specific enough to win over a page's own header rules. */
+header.hub-header {
+  position: relative; z-index: 2;
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem 1.5rem;
+  max-width: none; height: auto; margin: 0; padding: 1.5rem clamp(1rem, 4vw, 3rem);
+  font-family: var(--sans, 'Inter', system-ui, sans-serif);
+}
+header.hub-header .brand {
+  display: inline-flex; align-items: center; gap: .6rem; margin: 0;
+  font-size: .9375rem; font-weight: 600; letter-spacing: -.005em; line-height: 1;
+  color: var(--ink); text-decoration: none; white-space: nowrap;
+}
+header.hub-header .brand svg { width: 1.375rem; height: 1.375rem; }
+header.hub-header .star { fill: currentColor; }
+header.hub-header .gem { fill: var(--accent); }
+header.hub-header nav { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 0 1.25rem; margin: 0; font-size: inherit; }
+header.hub-header nav > a {
+  padding: .5rem 0; font-size: .875rem; line-height: 1.4; font-weight: 400;
+  color: var(--muted); text-decoration: none; box-shadow: none;
+}
+header.hub-header nav > a:hover, header.hub-header nav > a[aria-current] { color: var(--ink); }
+header.hub-header nav > a[aria-current] { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .4em; }
+header.hub-header .langs { display: inline-flex; align-items: center; gap: .1rem; margin: 0 0 0 .25rem; position: static; }
+header.hub-header .langs button {
+  min-width: 2rem; min-height: 2rem; padding: 0 .3rem; border: 0; border-radius: 2px; background: none; cursor: pointer;
+  font: inherit; font-size: .75rem; letter-spacing: .04em; color: var(--muted);
+}
+header.hub-header .langs button[aria-pressed="true"] { color: var(--ink); box-shadow: inset 0 -1px currentColor; }
+header.hub-header .langs .theme-toggle { min-width: 2rem; min-height: 2rem; }
+html:not([lang="az"]) header.hub-header [data-l="az"], html:not([lang="ru"]) header.hub-header [data-l="ru"], html:not([lang="en"]) header.hub-header [data-l="en"] { display: none !important; }
+@media (max-width: 40rem) {
+  header.hub-header { padding: .9rem clamp(1rem, 4vw, 3rem) .25rem; row-gap: 0; }
+  header.hub-header nav { width: 100%; justify-content: flex-start; gap: 0 1rem; }
+  header.hub-header nav > a { padding: .65rem 0; font-size: .8125rem; }
+  header.hub-header .langs { position: absolute; top: .5rem; right: clamp(1rem, 4vw, 3rem); margin: 0; }
+  header.hub-header .langs button, header.hub-header .langs .theme-toggle { min-width: 2.25rem; min-height: 2.25rem; }
+}
