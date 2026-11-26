@@ -129,9 +129,10 @@ function isLoan(word) {
 // Era by birth year (before 1760 classical, to 1869 the 19th century, to 1945 the 20th, then today's), or by the century the library gives when the year is unknown
 const ROMAN = { I: 1, V: 5, X: 10, L: 50, C: 100 };
 const roman = (s) => [...s].reduce((n, c, i, a) => n + (ROMAN[c] < (ROMAN[a[i + 1]] ?? 0) ? -ROMAN[c] : ROMAN[c]), 0);
+const centuryOf = (a) => a.born ? Math.floor((a.born + 20) / 100) + 1 : roman(a.period?.match(/\b[IVXLC]+\b/)?.[0] ?? '') || null;
 function era(a) {
   if (/xalq/i.test(a.period ?? '') || a.type === 'FOLK') return 'folk';
-  const c = a.born ? Math.floor((a.born + 20) / 100) + 1 : roman(a.period?.match(/\b[IVXLC]+\b/)?.[0] ?? '') || null;
+  const c = centuryOf(a);
   const y = a.born ?? (c ? (c - 1) * 100 : null);
   if (y == null) return 'unknown';
   if (y < 1760) return 'classical';
@@ -169,7 +170,22 @@ function build(all, { loans, tokens }) {
       scanned: +(a.scanned / a.sample.length).toFixed(2),
     };
   }).sort((x, y) => (y.ranked ? 1 : 0) - (x.ranked ? 1 : 0) || (x.ranked ? y.distinct - x.distinct : y.words - x.words));
-  return { n: N, ranked: ranked.length, poets: all.length, authors };
+  return { n: N, ranked: ranked.length, poets: all.length, authors, ...(loans ? { time: timeline(all) } : {}) };
+}
+
+// Loan share by period: every poet with at least MIN_T words of verse (the first N of them are read), placed on the
+// year of birth, or, when the library only gives a century (or a poet is folk), the middle of that century, marked
+// `approx`. Verse is not dated, so the poet's birth stands for the time they wrote: about a generation off.
+const MIN_T = 2000;
+function timeline(all) {
+  return all.filter((a) => a.sample.length >= MIN_T && era(a) !== 'folk' && (a.born || centuryOf(a))).map((a) => {
+    const hits = a.sample.filter(isLoan).length;
+    return {
+      slug: a.slug, az: a.az, ru: a.ru || null, en: a.en || null, born: a.born, died: a.died, era: era(a),
+      year: a.born ?? (centuryOf(a) - 1) * 100 + 50, approx: !a.born,
+      n: a.sample.length, loan: +(hits / a.sample.length).toFixed(4), ranked: a.sample.length >= N,
+    };
+  }).sort((x, y) => x.year - y.year);
 }
 
 // Two tracks, never on one axis: verse in Azerbaijani (Latin script) and in Persian
