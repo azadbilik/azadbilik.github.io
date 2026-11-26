@@ -26,6 +26,7 @@ The borders north of the Araz come from **«Карта Кавказского к
    - **Check:** the script stops if two capitals share a piece, since that means a border is open.
    - **Needs:** numpy, shapely, pyproj, Pillow and scikit-image.
 4. `node scripts/build.mjs` writes `data/khanates.geojson`.
+5. `python scripts/trace/warp.py` warps the scan itself onto the web map: `data/tomkeev-1901.webp` and its corners in `data/tomkeev-1901.json`. The khanates and borders pages fade it in under the traced khanates.
 
 What the map shows, and so the layer:
 

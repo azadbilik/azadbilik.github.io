@@ -33,6 +33,9 @@
   .eras .step button[disabled] { opacity: .4; cursor: default; }
   .check { display: flex; align-items: center; gap: .5rem; font-size: .8125rem; color: var(--muted); cursor: pointer; }
   .check input { accent-color: var(--accent); }
+  .scan { display: grid; grid-template-columns: auto 1fr; gap: .6rem; align-items: center; font-size: .8125rem; color: var(--muted); }
+  .scan input { accent-color: var(--accent); width: 100%; }
+  .scan[hidden] { display: none; }
   .about { padding: 1rem 1.5rem 0; display: grid; gap: .6rem; font-size: .875rem; }
   .about h2 { font: 400 1.375rem/1.2 var(--serif); }
   .about .k { color: var(--muted); font-size: .8125rem; }
@@ -64,6 +67,7 @@
       <input type="range" id="era" min="0" max="5" step="1" value="0" aria-describedby="era-name">
       <div class="ticks" id="ticks"></div>
       <div class="step"><button type="button" id="prev">←</button><button type="button" id="next">→</button></div>
+      <label class="scan" id="scan-row" hidden><span data-i18n="scan">1901-ci il xəritəsi</span><input type="range" id="scan" min="0" max="100" value="0"></label>
       <label class="check"><input type="checkbox" id="today"> <span data-i18n="todayLines">Bugünkü rayon sərhədləri üstündə</span></label>
     </div>
     <div id="side" aria-live="polite"></div>
@@ -137,14 +141,14 @@ const ERAS = [
     open: { az: 'Əhali xəritəsi', ru: 'Карта населения', en: 'The population map' } },
 ];
 const T = {
-  az: { doc: 'Sərhədlər · Azad Bilik', title: 'Sərhədlər', sub: 'Xanlıqlardan bugünkü rayonlara', todayLines: 'Bugünkü rayon sərhədləri üstündə', open: 'Ayrıca xəritədə aç', unitOpen: 'Bu vahidi öz xəritəsində aç', pop: 'Əhali', capital: 'Paytaxtı', annexed: (y) => `Rusiyaya keçib: ${y}`, gov: 'Quberniya', today: 'Bugünkü rayonlar', legendUnit: 'vahid', legendGap: 'aydın deyil', legendToday: 'bugünkü rayonlar', prev: 'Əvvəlki dövr', next: 'Sonrakı dövr', hint: 'Xəritədə bir vahidə toxunun.' },
-  ru: { doc: 'Границы · Azad Bilik', title: 'Границы', sub: 'От ханств до нынешних районов', todayLines: 'Поверх — границы нынешних районов', open: 'Открыть отдельную карту', unitOpen: 'Открыть на своей карте', pop: 'Население', capital: 'Столица', annexed: (y) => `Отошло России: ${y}`, gov: 'Губерния', today: 'Нынешние районы', legendUnit: 'единица', legendGap: 'не установлено', legendToday: 'нынешние районы', prev: 'Предыдущая эпоха', next: 'Следующая эпоха', hint: 'Нажмите на единицу на карте.' },
-  en: { doc: 'Borders · Azad Bilik', title: 'Borders', sub: "From the khanates to today's districts", todayLines: "Today's district borders on top", open: 'Open its own map', unitOpen: 'Open on its own map', pop: 'Population', capital: 'Capital', annexed: (y) => `Passed to Russia: ${y}`, gov: 'Governorate', today: "Today's districts", legendUnit: 'unit', legendGap: 'not established', legendToday: "today's districts", prev: 'Earlier', next: 'Later', hint: 'Tap a unit on the map.' },
+  az: { doc: 'Sərhədlər · Azad Bilik', title: 'Sərhədlər', sub: 'Xanlıqlardan bugünkü rayonlara', todayLines: 'Bugünkü rayon sərhədləri üstündə', scan: 'Tomkeyevin xəritəsi (1901)', open: 'Ayrıca xəritədə aç', unitOpen: 'Bu vahidi öz xəritəsində aç', pop: 'Əhali', capital: 'Paytaxtı', annexed: (y) => `Rusiyaya keçib: ${y}`, gov: 'Quberniya', today: 'Bugünkü rayonlar', legendUnit: 'vahid', legendGap: 'aydın deyil', legendToday: 'bugünkü rayonlar', prev: 'Əvvəlki dövr', next: 'Sonrakı dövr', hint: 'Xəritədə bir vahidə toxunun.' },
+  ru: { doc: 'Границы · Azad Bilik', title: 'Границы', sub: 'От ханств до нынешних районов', todayLines: 'Поверх — границы нынешних районов', scan: 'Карта Томкеева (1901)', open: 'Открыть отдельную карту', unitOpen: 'Открыть на своей карте', pop: 'Население', capital: 'Столица', annexed: (y) => `Отошло России: ${y}`, gov: 'Губерния', today: 'Нынешние районы', legendUnit: 'единица', legendGap: 'не установлено', legendToday: 'нынешние районы', prev: 'Предыдущая эпоха', next: 'Следующая эпоха', hint: 'Нажмите на единицу на карте.' },
+  en: { doc: 'Borders · Azad Bilik', title: 'Borders', sub: "From the khanates to today's districts", todayLines: "Today's district borders on top", scan: "Tomkeev's map (1901)", open: 'Open its own map', unitOpen: 'Open on its own map', pop: 'Population', capital: 'Capital', annexed: (y) => `Passed to Russia: ${y}`, gov: 'Governorate', today: "Today's districts", legendUnit: 'unit', legendGap: 'not established', legendToday: "today's districts", prev: 'Earlier', next: 'Later', hint: 'Tap a unit on the map.' },
 };
 const t = (k) => T[lang][k];
 const L = (o) => o?.[lang] ?? o?.az ?? o;
 const params = new URLSearchParams(location.search);
-let era = Math.max(0, ERAS.findIndex((e) => e.id === params.get('e'))), selected = null, showToday = params.get('t') === '1';
+let era = Math.max(0, ERAS.findIndex((e) => e.id === params.get('e'))), selected = null, showToday = params.get('t') === '1', scan = Math.min(100, Math.max(0, +params.get('s') || 0));
 const data = {};
 const BOUNDS = [[43.3, 37.2], [50.6, 42.6]];
 const FILL = ['case', ['boolean', ['feature-state', 'sel'], false], .75, ['boolean', ['feature-state', 'hover'], false], .62, ['==', ['get', 'kind'], 'gap'], .22, .45];
@@ -200,6 +204,10 @@ map.on('load', async () => {
       'line-color': ink, 'line-width': ['case', ['boolean', ['feature-state', 'sel'], false], 2.2, .8],
       'line-opacity': on ? .75 : 0, 'line-opacity-transition': { duration: still() ? 0 : 450 } } }, firstSymbol);
   };
+  // Tomkeev's 1901 map, warped onto the web map (xanliqlar/scripts/trace/warp.py): faded in on the khanates
+  const sc = await fetch('../xanliqlar/data/tomkeev-1901.json').then((r) => r.json());
+  map.addSource('scan', { type: 'image', url: '../xanliqlar/data/tomkeev-1901.webp', coordinates: sc.coordinates });
+  map.addLayer({ id: 'scan', type: 'raster', source: 'scan', paint: { 'raster-opacity': 0, 'raster-opacity-transition': { duration: 0 } } }, firstSymbol);
   await add(era);
   await Promise.all(ERAS.map((_, i) => i !== era ? add(i) : null));
   map.addLayer({ id: 'today-over', type: 'line', source: 'today', layout: { visibility: showToday ? 'visible' : 'none' }, paint: { 'line-color': ink, 'line-width': .7, 'line-opacity': .5, 'line-dasharray': [2, 2] } }, firstSymbol);
@@ -219,16 +227,26 @@ map.on('load', async () => {
     const f = map.queryRenderedFeatures(e.point, { layers: [fillOf()] })[0];
     select(f ? f.id : null);
   });
+  applyScan();
   if (params.get('u')) { const i = data[ERAS[era].id].features.findIndex((f) => String(f.properties.id) === params.get('u')); if (i >= 0) select(i); }
   draw();
 });
 
+// the scan shows only on the khanates; as it comes in, their colours step back to outlines
+function applyScan() {
+  const on = ERAS[era].id === '1800' ? scan / 100 : 0;
+  document.getElementById('scan-row').hidden = ERAS[era].id !== '1800';
+  if (!map.getLayer('scan')) return;
+  map.setPaintProperty('scan', 'raster-opacity', on);
+  if (map.getLayer('1800-fill') && ERAS[era].id === '1800') map.setPaintProperty('1800-fill', 'fill-opacity', on ? ['*', FILL, 1 - on * .85] : FILL);
+}
 function setEra(i) {
   if (i < 0 || i >= ERAS.length || i === era) return;
   select(null, false);
   const was = ERAS[era].id; era = i; const now = ERAS[era].id;
   if (map.getLayer(`${was}-fill`)) { map.setPaintProperty(`${was}-fill`, 'fill-opacity', 0); map.setPaintProperty(`${was}-line`, 'line-opacity', 0); }
   if (map.getLayer(`${now}-fill`)) { map.setPaintProperty(`${now}-fill`, 'fill-opacity', FILL); map.setPaintProperty(`${now}-line`, 'line-opacity', .75); }
+  applyScan();
   draw();
 }
 function select(id, redraw = true) {
@@ -277,12 +295,15 @@ function keepUrl() {
   if (lang !== 'az') q.set('lang', lang);
   if (era !== 0) q.set('e', ERAS[era].id);
   if (showToday) q.set('t', '1');
+  if (scan && ERAS[era].id === '1800') q.set('s', scan);
   if (selected && data[selected.src]) q.set('u', data[selected.src].features[selected.id].properties.id);
   history.replaceState(null, '', `${location.pathname}${q.size ? '?' + q : ''}`);
 }
 document.getElementById('era').oninput = (e) => setEra(+e.target.value);
 document.getElementById('prev').onclick = () => setEra(era - 1);
 document.getElementById('next').onclick = () => setEra(era + 1);
+document.getElementById('scan').value = scan;
+document.getElementById('scan').oninput = (e) => { scan = +e.target.value; applyScan(); keepUrl(); };
 document.getElementById('today').checked = showToday;
 document.getElementById('today').onchange = (e) => { showToday = e.target.checked; if (map.getLayer('today-over')) map.setLayoutProperty('today-over', 'visibility', showToday ? 'visible' : 'none'); draw(); };
 document.addEventListener('keydown', (e) => {
