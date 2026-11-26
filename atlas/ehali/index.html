@@ -101,7 +101,8 @@
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <script>
 (() => {
-const dark = window.abTheme ? abTheme.dark() : matchMedia('(prefers-color-scheme: dark)').matches;
+let dark = window.abTheme ? abTheme.dark() : matchMedia('(prefers-color-scheme: dark)').matches;
+  addEventListener('themechange', (e) => { dark = e.detail === 'dark'; }); addEventListener('themechange', () => setTimeout(() => { try { drawLegend(); } catch {} }));
 const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
 const still = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -176,8 +177,10 @@ const SCALES = {
   density: { breaks: [10, 25, 50, 100, 200, 500], ticks: ['', '10', '25', '50', '100', '200', '500+'] },
   change: { breaks: [-10, -2, 2, 10, 25, 50], ticks: ['', '−10%', '−2%', '+2%', '+10%', '+25%', '+50%'] },
 };
-const SEQ = dark ? ['#2B211B', '#4A2C24', '#6B3129', '#8E3430', '#B33A37', '#D45A55', '#F08A80'] : ['#F2E6DA', '#EACAB6', '#E0A88E', '#D2836A', '#BF5C48', '#A6362E', '#7A1B1E'];
-const DIV = dark ? ['#2C5A6E', '#3F7D93', '#5E9DB0', '#3A322B', '#B5574F', '#D27063', '#F08A80'] : ['#1F5C73', '#4A8AA0', '#9CC3D0', '#EFE6DA', '#E5A58F', '#C9634E', '#9A2A25'];
+let SEQ = dark ? ['#2B211B', '#4A2C24', '#6B3129', '#8E3430', '#B33A37', '#D45A55', '#F08A80'] : ['#F2E6DA', '#EACAB6', '#E0A88E', '#D2836A', '#BF5C48', '#A6362E', '#7A1B1E'];
+addEventListener('themechange', () => { SEQ = dark ? ['#2B211B', '#4A2C24', '#6B3129', '#8E3430', '#B33A37', '#D45A55', '#F08A80'] : ['#F2E6DA', '#EACAB6', '#E0A88E', '#D2836A', '#BF5C48', '#A6362E', '#7A1B1E']; });
+let DIV = dark ? ['#2C5A6E', '#3F7D93', '#5E9DB0', '#3A322B', '#B5574F', '#D27063', '#F08A80'] : ['#1F5C73', '#4A8AA0', '#9CC3D0', '#EFE6DA', '#E5A58F', '#C9634E', '#9A2A25'];
+addEventListener('themechange', () => { DIV = dark ? ['#2C5A6E', '#3F7D93', '#5E9DB0', '#3A322B', '#B5574F', '#D27063', '#F08A80'] : ['#1F5C73', '#4A8AA0', '#9CC3D0', '#EFE6DA', '#E5A58F', '#C9634E', '#9A2A25']; });
 const colors = () => measure === 'change' ? DIV : SEQ;
 const classOf = (v) => SCALES[measure].breaks.filter((b) => v >= b).length;
 

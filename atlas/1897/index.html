@@ -86,7 +86,8 @@
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <script>
 (() => {
-const dark = window.abTheme ? abTheme.dark() : matchMedia('(prefers-color-scheme: dark)').matches;
+let dark = window.abTheme ? abTheme.dark() : matchMedia('(prefers-color-scheme: dark)').matches;
+  addEventListener('themechange', (e) => { dark = e.detail === 'dark'; }); addEventListener('themechange', () => setTimeout(() => { try { drawLegend(); } catch {} }));
 const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
 const still = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -121,7 +122,8 @@ if (params.get('l')) { language = params.get('l'); mode = 'one'; }
 if (params.get('today') === '1') today = true;
 const lname = (k) => LG[k]?.names[LI[lang]] ?? k;
 const SCALES = { share: { breaks: [1, 5, 15, 30, 50, 75], ticks: ['1%', '5%', '15%', '30%', '50%', '75%+'] }, count: { breaks: [500, 2e3, 5e3, 15e3, 40e3, 100e3], ticks: ['500', '2k', '5k', '15k', '40k', '100k+'] } };
-const SEQ = dark ? ['#2B211B', '#4A2C24', '#6B3129', '#8E3430', '#B33A37', '#D45A55', '#F08A80'] : ['#F2E6DA', '#EACAB6', '#E0A88E', '#D2836A', '#BF5C48', '#A6362E', '#7A1B1E'];
+let SEQ = dark ? ['#2B211B', '#4A2C24', '#6B3129', '#8E3430', '#B33A37', '#D45A55', '#F08A80'] : ['#F2E6DA', '#EACAB6', '#E0A88E', '#D2836A', '#BF5C48', '#A6362E', '#7A1B1E'];
+addEventListener('themechange', () => { SEQ = dark ? ['#2B211B', '#4A2C24', '#6B3129', '#8E3430', '#B33A37', '#D45A55', '#F08A80'] : ['#F2E6DA', '#EACAB6', '#E0A88E', '#D2836A', '#BF5C48', '#A6362E', '#7A1B1E']; });
 const classOf = (v) => SCALES[measure].breaks.filter((b) => v >= b).length;
 const largest = (u) => Object.entries(u.langs ?? {}).sort((a, b) => b[1] - a[1])[0];
 const value = (u, k = language) => { const n = u.langs?.[k]; if (n == null) return null; return measure === 'count' ? n : n / u.total * 100; };

@@ -108,7 +108,8 @@
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <script>
 (() => {
-const dark = window.abTheme ? abTheme.dark() : matchMedia('(prefers-color-scheme: dark)').matches;
+let dark = window.abTheme ? abTheme.dark() : matchMedia('(prefers-color-scheme: dark)').matches;
+  addEventListener('themechange', (e) => { dark = e.detail === 'dark'; }); addEventListener('themechange', () => setTimeout(() => { try { drawLegend(); } catch {} }));
 const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
 const still = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -183,7 +184,8 @@ const SCALES = {
   share: { breaks: [1, 5, 15, 30, 50, 75], ticks: ['', '1%', '5%', '15%', '30%', '50%', '75%+'] },
   count: { breaks: [100, 1e3, 5e3, 10e3, 25e3, 50e3], ticks: ['', '100', '1k', '5k', '10k', '25k', '50k+'] },
 };
-const SEQ = dark ? ['#2B211B', '#4A2C24', '#6B3129', '#8E3430', '#B33A37', '#D45A55', '#F08A80'] : ['#F2E6DA', '#EACAB6', '#E0A88E', '#D2836A', '#BF5C48', '#A6362E', '#7A1B1E'];
+let SEQ = dark ? ['#2B211B', '#4A2C24', '#6B3129', '#8E3430', '#B33A37', '#D45A55', '#F08A80'] : ['#F2E6DA', '#EACAB6', '#E0A88E', '#D2836A', '#BF5C48', '#A6362E', '#7A1B1E'];
+addEventListener('themechange', () => { SEQ = dark ? ['#2B211B', '#4A2C24', '#6B3129', '#8E3430', '#B33A37', '#D45A55', '#F08A80'] : ['#F2E6DA', '#EACAB6', '#E0A88E', '#D2836A', '#BF5C48', '#A6362E', '#7A1B1E']; });
 const classOf = (v) => SCALES[measure].breaks.filter((b) => v >= b).length;
 const fmt = (v, m = measure) => v == null ? t('nodata') : m === 'count' ? nf().format(v) : `${v < 10 ? v.toFixed(1) : Math.round(v)}%`;
 

@@ -102,7 +102,8 @@
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <script>
 (() => {
-const dark = window.abTheme ? abTheme.dark() : matchMedia('(prefers-color-scheme: dark)').matches;
+let dark = window.abTheme ? abTheme.dark() : matchMedia('(prefers-color-scheme: dark)').matches;
+  addEventListener('themechange', (e) => { dark = e.detail === 'dark'; });
 const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
 const still = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -186,7 +187,8 @@ const BOUNDS = [[43.3, 37.2], [50.6, 42.6]];
 const FILL = ['case', ['boolean', ['feature-state', 'sel'], false], .75, ['boolean', ['feature-state', 'hover'], false], .62, ['==', ['get', 'kind'], 'gap'], .22, .45];
 
 // Colour: a khanate keeps its own; other units take one of eight muted tones, so neighbours mostly differ
-const TONES = dark ? ['#8E6F3A', '#3B6EA8', '#B0563A', '#2E7D6B', '#7A3E8E', '#A23B6A', '#5B8A9E', '#C9862B'] : ['#C9A46A', '#7FA3CF', '#D58C72', '#6FB09B', '#A98BC0', '#CF7FA0', '#8FB5C6', '#E2B26B'];
+let TONES = dark ? ['#8E6F3A', '#3B6EA8', '#B0563A', '#2E7D6B', '#7A3E8E', '#A23B6A', '#5B8A9E', '#C9862B'] : ['#C9A46A', '#7FA3CF', '#D58C72', '#6FB09B', '#A98BC0', '#CF7FA0', '#8FB5C6', '#E2B26B'];
+addEventListener('themechange', () => { TONES = dark ? ['#8E6F3A', '#3B6EA8', '#B0563A', '#2E7D6B', '#7A3E8E', '#A23B6A', '#5B8A9E', '#C9862B'] : ['#C9A46A', '#7FA3CF', '#D58C72', '#6FB09B', '#A98BC0', '#CF7FA0', '#8FB5C6', '#E2B26B']; });
 function colour(gj) {
   // greedy colouring over shared vertices, so neighbouring units rarely share a tone
   const vtx = new Map(), fs = gj.features;

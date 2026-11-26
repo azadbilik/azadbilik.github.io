@@ -70,7 +70,8 @@
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <script>
 (() => {
-const dark = window.abTheme ? abTheme.dark() : matchMedia('(prefers-color-scheme: dark)').matches;
+let dark = window.abTheme ? abTheme.dark() : matchMedia('(prefers-color-scheme: dark)').matches;
+  addEventListener('themechange', (e) => { dark = e.detail === 'dark'; }); addEventListener('themechange', () => setTimeout(() => { try { drawLegend(); } catch {} }));
 const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
 const still = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -93,7 +94,8 @@ const T = {
 const t = (k) => T[lang][k];
 const params = new URLSearchParams(location.search);
 let table = null, routes = null, reach = null, from = params.get('a') || 'karabakh', to = params.get('b') || 'shirvan', mode = params.get('m') === 'rider' ? 'rider' : 'caravan', game = null;
-const RAMP = dark ? ['#7A1B1E', '#8E3430', '#B33A37', '#C9634E', '#D2836A', '#E0A88E', '#EACAB6', '#F2E6DA'] : ['#7A1B1E', '#A6362E', '#BF5C48', '#D2836A', '#E0A88E', '#EACAB6', '#F2E6DA', '#F7F0E8'];
+let RAMP = dark ? ['#7A1B1E', '#8E3430', '#B33A37', '#C9634E', '#D2836A', '#E0A88E', '#EACAB6', '#F2E6DA'] : ['#7A1B1E', '#A6362E', '#BF5C48', '#D2836A', '#E0A88E', '#EACAB6', '#F2E6DA', '#F7F0E8'];
+addEventListener('themechange', () => { RAMP = dark ? ['#7A1B1E', '#8E3430', '#B33A37', '#C9634E', '#D2836A', '#E0A88E', '#EACAB6', '#F2E6DA'] : ['#7A1B1E', '#A6362E', '#BF5C48', '#D2836A', '#E0A88E', '#EACAB6', '#F2E6DA', '#F7F0E8']; });
 const name = (p) => p.capitalName?.[LI[lang]] ?? p.names[LI[lang]];
 const place = (id) => table.places.find((p) => p.id === id);
 

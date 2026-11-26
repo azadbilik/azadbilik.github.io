@@ -85,7 +85,8 @@
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <script>
 (() => {
-const dark = window.abTheme ? abTheme.dark() : matchMedia('(prefers-color-scheme: dark)').matches;
+let dark = window.abTheme ? abTheme.dark() : matchMedia('(prefers-color-scheme: dark)').matches;
+  addEventListener('themechange', (e) => { dark = e.detail === 'dark'; }); addEventListener('themechange', () => setTimeout(() => { try { drawLegend(); } catch {} }));
 const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
 const still = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -119,7 +120,8 @@ const t = (k) => T[lang][k];
 const L = (p) => p[lang] ?? p.az;
 const ROUNDS = ['1979', '1999', '2009', '2019'];
 const COLORS = { Lezgins: '#1F6F8B', Talysh: '#3E8E41', Avars: '#8C5A2B', Tsakhurs: '#C4901E', Udi: '#7A3E8E', Tats: '#2E9D8B', Kryz: '#D2573A', Budukh: '#B0306A', Khinalug: '#5B4BA0', Khaput: '#E07B5A', Kurds: '#7FA02A', Georgians: '#A23B3B', Ingiloys: '#D07070', 'Jews (incl. Mountain Jews)': '#3B5BD2', Jews: '#3B5BD2', 'Mountain Jews': '#6F86E0', Russians: '#56708A', Ukrainians: '#8FB0C8', Tatars: '#A8963A', 'Turks (Meskhetian)': '#C4632F', Armenians: '#8A6A5A' };
-const AZ_COLOR = dark ? '#7D746A' : '#A99F92';
+let AZ_COLOR = dark ? '#7D746A' : '#A99F92';
+addEventListener('themechange', () => { AZ_COLOR = dark ? '#7D746A' : '#A99F92'; });
 const color = (p) => p === 'Azerbaijanis' ? AZ_COLOR : COLORS[p] ?? '#999';
 let info = {}, units = [], geoData = null, round = 3, people = null, selected = null, hovered = null, playing = null, dots = {};
 const params = new URLSearchParams(location.search);

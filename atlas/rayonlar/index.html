@@ -88,7 +88,8 @@
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <script>
 (() => {
-const dark = window.abTheme ? abTheme.dark() : matchMedia('(prefers-color-scheme: dark)').matches;
+let dark = window.abTheme ? abTheme.dark() : matchMedia('(prefers-color-scheme: dark)').matches;
+  addEventListener('themechange', (e) => { dark = e.detail === 'dark'; }); addEventListener('themechange', () => setTimeout(() => { try { drawLegend(); } catch {} }));
 const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
 const still = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -122,8 +123,10 @@ const L = (p) => p[lang] ?? p.az;
 const fmt = (n) => n == null ? '–' : n.toLocaleString(lang === 'en' ? 'en' : lang === 'ru' ? 'ru' : 'az');
 const pct = (n) => `${n > 0 ? '+' : n < 0 ? '−' : ''}${Math.abs(n).toFixed(1).replace('.', lang === 'en' ? '.' : ',')}%`;
 
-const SEQ = dark ? ['#2B211B', '#4A2C24', '#6B3129', '#8E3430', '#B33A37', '#D45A55', '#F08A80'] : ['#F2E6DA', '#EACAB6', '#E0A88E', '#D2836A', '#BF5C48', '#A6362E', '#7A1B1E'];
-const DIV = dark ? ['#2C5A6E', '#3F7D93', '#5E9DB0', '#3A322B', '#B5574F', '#D27063', '#F08A80'] : ['#1F5C73', '#4A8AA0', '#9CC3D0', '#EFE6DA', '#E5A58F', '#C9634E', '#9A2A25'];
+let SEQ = dark ? ['#2B211B', '#4A2C24', '#6B3129', '#8E3430', '#B33A37', '#D45A55', '#F08A80'] : ['#F2E6DA', '#EACAB6', '#E0A88E', '#D2836A', '#BF5C48', '#A6362E', '#7A1B1E'];
+addEventListener('themechange', () => { SEQ = dark ? ['#2B211B', '#4A2C24', '#6B3129', '#8E3430', '#B33A37', '#D45A55', '#F08A80'] : ['#F2E6DA', '#EACAB6', '#E0A88E', '#D2836A', '#BF5C48', '#A6362E', '#7A1B1E']; });
+let DIV = dark ? ['#2C5A6E', '#3F7D93', '#5E9DB0', '#3A322B', '#B5574F', '#D27063', '#F08A80'] : ['#1F5C73', '#4A8AA0', '#9CC3D0', '#EFE6DA', '#E5A58F', '#C9634E', '#9A2A25'];
+addEventListener('themechange', () => { DIV = dark ? ['#2C5A6E', '#3F7D93', '#5E9DB0', '#3A322B', '#B5574F', '#D27063', '#F08A80'] : ['#1F5C73', '#4A8AA0', '#9CC3D0', '#EFE6DA', '#E5A58F', '#C9634E', '#9A2A25']; });
 const SCALES = {
   pop: { breaks: [20e3, 40e3, 60e3, 80e3, 100e3, 150e3], ticks: ['', '20k', '40k', '60k', '80k', '100k', '150k+'] },
   density: { breaks: [25, 50, 75, 100, 150, 300], ticks: ['', '25', '50', '75', '100', '150', '300+'] },

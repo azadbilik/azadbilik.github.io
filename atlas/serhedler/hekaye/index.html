@@ -50,7 +50,8 @@
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <script>
 (() => {
-const dark = window.abTheme ? abTheme.dark() : matchMedia('(prefers-color-scheme: dark)').matches;
+let dark = window.abTheme ? abTheme.dark() : matchMedia('(prefers-color-scheme: dark)').matches;
+  addEventListener('themechange', (e) => { dark = e.detail === 'dark'; });
 const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
 const still = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -152,7 +153,8 @@ const LINKS = { az: [['../', 'Bütün dövrlər bir xəritədə'], ['../../xanli
   ru: [['../', 'Все эпохи на одной карте'], ['../../xanliqlar/', 'Ханства'], ['../../1897/', '1897: родные языки'], ['../../rayonlar/', 'Советские районы'], ['../../ehali/', 'Население']],
   en: [['../', 'All the eras on one map'], ['../../xanliqlar/', 'The khanates'], ['../../1897/', 'Native languages, 1897'], ['../../rayonlar/', 'Soviet raions'], ['../../ehali/', 'Population']] };
 
-const TONES = dark ? ['#8E6F3A', '#3B6EA8', '#B0563A', '#2E7D6B', '#7A3E8E', '#A23B6A', '#5B8A9E', '#C9862B'] : ['#C9A46A', '#7FA3CF', '#D58C72', '#6FB09B', '#A98BC0', '#CF7FA0', '#8FB5C6', '#E2B26B'];
+let TONES = dark ? ['#8E6F3A', '#3B6EA8', '#B0563A', '#2E7D6B', '#7A3E8E', '#A23B6A', '#5B8A9E', '#C9862B'] : ['#C9A46A', '#7FA3CF', '#D58C72', '#6FB09B', '#A98BC0', '#CF7FA0', '#8FB5C6', '#E2B26B'];
+addEventListener('themechange', () => { TONES = dark ? ['#8E6F3A', '#3B6EA8', '#B0563A', '#2E7D6B', '#7A3E8E', '#A23B6A', '#5B8A9E', '#C9862B'] : ['#C9A46A', '#7FA3CF', '#D58C72', '#6FB09B', '#A98BC0', '#CF7FA0', '#8FB5C6', '#E2B26B']; });
 function colour(gj) {
   const vtx = new Map(), fs = gj.features;
   fs.forEach((f, i) => { const g = f.geometry; const polys = g.type === 'Polygon' ? [g.coordinates] : g.coordinates;
