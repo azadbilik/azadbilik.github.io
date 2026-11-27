@@ -324,7 +324,8 @@ const collTracks = (c) => {
 // ---- player: a queue item is either a recording { x, a | w } (Apple preview or a free file, in <audio>) or a video { vid, a | w }
 // (YouTube, official channels, in the embedded player: youtube-nocookie.com, loaded only when a video is first played)
 const au = document.getElementById('au'), P = { q: [], i: -1 };
-const owner = (it) => it.a ?? it.w;
+const owner = (it) => it.a ?? it.w ?? it.m;
+const ownerHref = (it) => it.a ? `#/a/${it.a.q}` : it.w ? `#/w/${it.w.q}` : `#/m/${it.m.id}`;
 const cur = () => P.q[P.i];
 const isV = (it) => !!it?.vid;
 const playQueue = (q, i = 0) => { if (!q.length) return; P.q = q; P.i = i; load(); };
@@ -378,10 +379,10 @@ const drawNow = () => {
   const it = cur(), el = document.getElementById('np'), src = document.getElementById('src');
   document.getElementById('player').classList.toggle('idle', !it);
   if (!it) { el.innerHTML = ''; src.innerHTML = ''; return; }
-  const o = owner(it), href = it.a ? `#/a/${it.a.q}` : `#/w/${it.w.q}`;
+  const o = owner(it), href = ownerHref(it);
   const title = isV(it) ? it.vid[1] : trTitle(it.x);
   const im = isV(it) ? `https://i.ytimg.com/vi/${it.vid[0]}/default.jpg` : (it.x[2] >= 0 ? art(it.x[2], 120) : (it.a ? aImg(it.a, 120) : ''));
-  const by = it.a ? nm(it.a) : `${isV(it) ? it.vid[2] : it.x[1]} · ${nm(it.w)}`;
+  const by = it.a ? nm(it.a) : `${isV(it) ? it.vid[2] : it.x[1]} · ${nm(it.w ?? it.m)}`;
   el.innerHTML = `${im ? `<img src="${esc(im)}" alt="" loading="lazy"${isV(it) ? ' class="v"' : ''}>` : ph(nm(o), hueOf(o.q))}<div><b title="${esc(title)}">${esc(title)}</b><a class="by" href="${href}">${esc(by)}</a></div>`;
   const tw = twin(it);
   const sw = tw ? `<span class="sv" role="group" aria-label="${esc(t('songVideo'))}"><button type="button" data-swap aria-pressed="${!isV(it)}">${esc(t('song'))}</button><button type="button" data-swap aria-pressed="${isV(it)}">${esc(t('video'))}</button></span>` : '';
@@ -421,7 +422,7 @@ const mark = () => {
 // a recording's video: an official video of the same musician whose title carries the recording's title
 const VMAP = new Map();
 const vidOf = (o, x) => {
-  if (!o?.v?.length || !x) return null;
+  if (!o?.v?.length || !x || o.s) return null; // a dəstgah (o.s: its şöbələr) holds video refs, not videos
   const k = o.q + '|' + x[3]; if (VMAP.has(k)) return VMAP.get(k);
   const tt = fold(trTitle(x)).replace(/\(.*?\)|\[.*?\]|["«»“”]/g, ' ').replace(/\s+-\s+.*$/, '').replace(/[^\p{L}\p{N} ]+/gu, ' ').replace(/\s+/g, ' ').trim();
   const v = tt.length >= 4 ? o.v.find((v) => fold(v[1]).replace(/[^\p{L}\p{N} ]+/gu, ' ').replace(/\s+/g, ' ').includes(tt)) ?? null : null;
@@ -449,9 +450,9 @@ const vthumb = (o) => o.v?.length ? `https://i.ytimg.com/vi/${o.v[0][0]}/mqdefau
 const tracklist = (items, ctx = {}) => {
   const rows = items.map((it, i) => {
     const x = it.x, im = x[2] >= 0 ? art(x[2], 120) : (it.a ? aImg(it.a, 120) : '');
-    const sub = ctx.showArtist && (it.a || it.w) ? `<a href="#/${it.a ? 'a' : 'w'}/${(it.a ?? it.w).q}">${esc(it.a ? nm(it.a) : `${x[1]} · ${nm(it.w)}`)}</a>` : esc(x[1] && (!it.a || ctx.showBy) ? x[1] : '');
+    const sub = ctx.showArtist && owner(it) ? (it.m ? esc(x[1]) : `<a href="${ownerHref(it)}">${esc(it.a ? nm(it.a) : `${x[1]} · ${nm(it.w)}`)}</a>`) : esc(x[1] && (!it.a || ctx.showBy) ? x[1] : '');
     const albumName = x[2] >= 0 ? D.albums[x[2]][0] : (x[7] ?? '');
-    const third = ctx.third === 'artist' && (it.a || it.w) ? `<a href="#/${it.a ? 'a' : 'w'}/${(it.a ?? it.w).q}">${esc(nm(it.a ?? it.w))}</a>` : (x[2] >= 0 && D.albums[x[2]][2] ? `<a href="${esc(X(D.albums[x[2]][2]))}" rel="noopener">${esc(albumName)}</a>` : esc(albumName));
+    const third = ctx.third === 'artist' && owner(it) && !it.m ? `<a href="${ownerHref(it)}">${esc(nm(owner(it)))}</a>` : (x[2] >= 0 && D.albums[x[2]][2] ? `<a href="${esc(X(D.albums[x[2]][2]))}" rel="noopener">${esc(albumName)}</a>` : esc(albumName));
     return `<li class="tr" tabindex="0" role="button" data-i="${i}" data-n="${i + 1}" data-src="${esc(x[3])}" aria-label="${esc(t('play'))}: ${esc(trTitle(x))}"><div class="n"><span>${i + 1}</span>${I.play}</div><div class="ti">${im ? `<img src="${esc(im)}" alt="" loading="lazy">` : ph(trTitle(x), hueOf(owner(it)?.q ?? 'x'))}<div><b>${x[6] === 1 ? `<span class="free">${esc(t('freeMark'))}</span>` : ''}${esc(trTitle(x))}${vidOf(owner(it), x) ? `<button class="tv" type="button" data-tv="${i}" aria-label="${esc(t('playVideo'))}">▶ ${esc(t('video'))}</button>` : ''}</b><span>${sub}</span></div></div><div class="al">${third}</div><div class="du">${x[5] ? fmt(x[5]) : ''}</div></li>`;
   }).join('');
   return `<ol class="tl" data-tl>${rows}</ol>`;
@@ -465,8 +466,13 @@ const V = document.getElementById('view');
 const mOwner = (r) => r[3] ? { w: wByQ.get(r[0]) } : { a: byQ.get(r[0]) };
 // the same recording or video can come in through a musician and a work (Amirov's Şur): listed once
 const once = (k) => { const seen = new Set(); return (it) => { const v = k(it); if (!v || seen.has(v)) return false; seen.add(v); return true; }; };
-const mItems = (m, sobe) => m.t.filter((r) => !sobe || r[2] === sobe).map((r) => { const o = mOwner(r); return { x: (o.a ?? o.w).t[r[1]], ...o }; }).filter(once((it) => it.x?.[3]));
-const mVids = (m, sobe) => m.v.filter((r) => !sobe || r[2] === sobe).map((r) => { const o = mOwner(r); return { vid: (o.a ?? o.w).v[r[1]], ...o }; }).filter(once((it) => it.vid?.[0]));
+// the catalogue's own recordings first, then x: [owner or '', track, şöbə] from the album search (no owner: a performer outside the catalogue,
+// shown under the dəstgah itself). Each item carries its şöbə for the chips.
+const mItems = (m, sobe) => [
+  ...m.t.map((r) => { const o = mOwner(r); return { x: (o.a ?? o.w)?.t[r[1]], ...o, sobe: r[2] }; }),
+  ...(m.x ?? []).map((r) => ({ x: r[1], ...(r[0] && byQ.get(r[0]) ? { a: byQ.get(r[0]) } : { m }), sobe: r[2] })),
+].filter((it) => !sobe || it.sobe === sobe).filter(once((it) => it.x?.[3]));
+const mVids = (m, sobe) => m.v.filter((r) => !sobe || r[2] === sobe).map((r) => { const o = mOwner(r); return { vid: (o.a ?? o.w)?.v?.[r[1]], ...o, sobe: r[2] }; }).filter(once((it) => it.vid?.[0]));
 const mHue = (m) => 20 + D.mughams.indexOf(m) * 47;
 const mCard = (m) => card({ href: `#/m/${m.id}`, title: nm(m.n), sub: nm(m.ch) || t('sobeN', m.s.length), img: '', h: mHue(m), play: m.t.length || m.v.length ? `m:${m.id}` : '' });
 const views = {
@@ -507,7 +513,7 @@ const views = {
   },
   m(id, sobe) {
     const m = D.mughams.find((x) => x.id === id); if (!m) return views.mughams();
-    const all = mItems(m), allV = mVids(m), counts = {}; for (const it of [...all, ...allV]) { const r = [...m.t, ...m.v].find((r) => { const o = mOwner(r), own = o.a ?? o.w; return it.x ? own.t[r[1]] === it.x : own.v?.[r[1]] === it.vid; }); if (r?.[2]) counts[r[2]] = (counts[r[2]] ?? 0) + 1; }
+    const all = mItems(m), allV = mVids(m), counts = {}; for (const it of [...all, ...allV]) if (it.sobe) counts[it.sobe] = (counts[it.sobe] ?? 0) + 1;
     const items = mItems(m, sobe), vs = mVids(m, sobe);
     const chip = (label, s, n) => `<a class="chip${(sobe ?? '') === s ? ' on' : ''}${s && n === 0 ? ' off' : ''}" href="#/m/${id}${s ? '?s=' + encodeURIComponent(s) : ''}">${esc(label)}${n ? ` <small>${n}</small>` : ''}</a>`;
     return `<div class="hero" style="--h:${mHue(m)}"><div><div class="kind">${esc(t('dastgah'))}</div><h1>${esc(nm(m.n))}</h1><div class="meta">${esc([nm(m.ch), t('sobeN', m.s.length), t('tracks', all.length + allV.length)].filter(Boolean).join(' · '))}</div></div></div>
@@ -661,6 +667,7 @@ bPlay.innerHTML = I.play; applyLang();
 fetch('data/catalog.json').then((r) => r.json()).then((d) => {
   D = d;
   D.artists.forEach((a) => byQ.set(a.q, a));
+  D.mughams.forEach((m) => Object.assign(m, { q: m.id, az: m.n.az, ru: m.n.ru, en: m.n.en }));
   { const u = new URL(location.href), q = u.searchParams.get('person');
     if (q) { if (!byQ.has(q)) return location.replace('xerite/' + location.search); u.searchParams.delete('person'); history.replaceState(null, '', u.pathname + u.search + `#/a/${q}`); } } D.works.forEach((w) => wByQ.set(w.q, w)); D.schools.forEach((s) => sByK.set(s.k, s));
   route(true);
