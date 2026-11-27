@@ -40,6 +40,13 @@ CFG = {
         lon=(S(67, 28, 10), S(67, 30, 50)), lat=(S(40, 19, 10), S(40, 21, 30)), kx=32.82, ky=42.89,
         sheets=[dict(file='bibiheybat-strata-1912.tif', n=S(40, 21, 30), s=S(40, 19, 10), corners=[(691, 965), (5943, 965), (691, 6970), (5943, 6970)])],
     ),
+    # the «Гипсометрическая карта Биби-Эйбата» (heights in sazhens above the sea; 0 = the Black Sea level,
+    # −12.21 = the Caspian's), 1:16,800: its top-left frame corner is labelled 67°28′10″ / 40°21′30″ and a
+    # corner tick 67°30′40″ / 40°18′10″ (16.3 / 21.2 px a second, a quarter of the geological sheets')
+    'bibiheybat-relief-1912': dict(
+        lon=(S(67, 28, 10), S(67, 30, 40)), lat=(S(40, 18, 10), S(40, 21, 30)), kx=16.32, ky=21.23,
+        sheets=[dict(file='bibiheybat-relief-1912.tif', n=S(40, 21, 30), s=S(40, 18, 10), corners=[(810, 1055), (3258, 1055), (810, 5301), (3256, 5301)])],
+    ),
 }
 
 key = sys.argv[1] if len(sys.argv) > 1 else 'bibiheybat-1912'

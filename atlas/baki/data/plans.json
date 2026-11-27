@@ -244,5 +244,19 @@
   "title": "Пластовая карта Биби-Эйбата (Д. В. Голубятников; съёмка 1912, изд. 1914), 1:8400",
   "source": "https://www.loc.gov/resource/g7142am.gct00388/",
   "fit": "frame of sheets A–B at half scale (east of Ferro)"
+ },
+ "bibiheybat-relief-1912": {
+  "tiles": "data/tiles/bibiheybat-relief-1912/{z}/{x}/{y}.webp?v=5e1f55ca",
+  "bounds": [
+   49.80667,
+   40.30278,
+   49.84833,
+   40.35833
+  ],
+  "minzoom": 13,
+  "maxzoom": 16,
+  "title": "Гипсометрическая карта Биби-Эйбата (Д. В. Голубятников; съёмка 1912, изд. 1914), 1:16 800",
+  "source": "https://www.loc.gov/resource/g7142am.gct00388/",
+  "fit": "frame corner labels (east of Ferro)"
  }
 }

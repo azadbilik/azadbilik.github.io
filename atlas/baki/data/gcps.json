@@ -2622,5 +2622,59 @@
   ],
   "zmax": 17,
   "zmin": 13
+ },
+ "bibiheybat-relief-1912": {
+  "file": "bibiheybat-relief-1912.jpg",
+  "grid": {
+   "lonDeg": 67,
+   "latDeg": 40,
+   "ferro": 17.662777777777777,
+   "trimPx": 0,
+   "panels": [
+    {
+     "px": [
+      0,
+      0,
+      2448,
+      4246
+     ],
+     "coef": [
+      [
+       -27580.799999999854,
+       27386.7
+      ],
+      [
+       979.2,
+       0
+      ],
+      [
+       0,
+       -1273.8
+      ]
+     ],
+     "section": "sheets A–C joined"
+    }
+   ]
+  },
+  "city": "baki",
+  "title": "Гипсометрическая карта Биби-Эйбата (Д. В. Голубятников; съёмка 1912, изд. 1914), 1:16 800",
+  "source": "https://www.loc.gov/resource/g7142am.gct00388/",
+  "archive": "Library of Congress, Geography and Map Division, G7142.A6C5 s4 .G6 (sheet accompanying the geological map)",
+  "crop": [
+   0,
+   0,
+   2448,
+   4246
+  ],
+  "exclude": [
+   [
+    0,
+    3020,
+    290,
+    4246
+   ]
+  ],
+  "zmax": 16,
+  "zmin": 13
  }
 }
