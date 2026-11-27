@@ -134,5 +134,39 @@
   ],
   "minzoom": 12,
   "maxzoom": 17
+ },
+ "tabriz-1880": {
+  "title": "نقشهٔ دارالسلطنهٔ تبریز (Map of Tabriz, 1880)",
+  "source": "https://commons.wikimedia.org/wiki/File:A_printed_map_of_the_city_of_Tabriz,_commissioned_by_the_Crown_Prince,_Muzaffar_al-Din_Mirza,_Qajar_Persia,_produced_at_the_Printing_House_of_Karbala%27i_Asad_Aqa_in_Tabriz,_dated_20th_July_1880.jpg",
+  "fit": "thin-plate spline",
+  "points": 56,
+  "meanErrorM": 0.0,
+  "coordinates": [
+   [
+    46.235,
+    38.115
+   ],
+   [
+    46.36,
+    38.115
+   ],
+   [
+    46.36,
+    38.045
+   ],
+   [
+    46.235,
+    38.045
+   ]
+  ],
+  "tiles": "data/tiles/tabriz-1880/{z}/{x}/{y}.webp?v=e3e56ab7",
+  "bounds": [
+   46.24361,
+   38.04226,
+   46.35135,
+   38.10128
+  ],
+  "minzoom": 12,
+  "maxzoom": 16
  }
 }

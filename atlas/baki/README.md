@@ -62,8 +62,9 @@ Eight *then and now* places fly to their plan and open the lens on them. The cam
   - Accuracy about 30 m away from the landmarks. Tiles to zoom 17.
   - The faint 1873 photograph on [Commons](https://commons.wikimedia.org/wiki/File:General_plan_of_Ganja,_1873.jpg), used before, is a different, lighter draft; it was placed ~600 m wrong (by a misread mosque position).
   - Today's streets come from `data/raw/ganja.geojson` (osmium, bbox 46.28,40.63,46.44,40.73).
-- **Tabriz** was tried with the 1880 map printed for Crown Prince Mozaffar al-Din and left out:
-  - The match turned it 59°, and nothing but the core around the Ark could be confirmed.
-  - The old city was rebuilt too much for street matching. It needs hand-read anchors: the Ark, the Blue Mosque, the bazaar, the bends of the Mehranrud.
-  - The 1827 Russian army plans of the walled city would need the same.
+- **Tabriz, 1880:** the map of the city printed in Tabriz for Crown Prince Mozaffar al-Din Mirza (20 July 1880; Bonhams 2015, [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:A_printed_map_of_the_city_of_Tabriz,_commissioned_by_the_Crown_Prince,_Muzaffar_al-Din_Mirza,_Qajar_Persia,_produced_at_the_Printing_House_of_Karbala%27i_Asad_Aqa_in_Tabriz,_dated_20th_July_1880.jpg), public domain; `data/raw/plan-tabriz-1880.jpg`, 3780 × 2836).
+  - North is up (its compass rose); the 59° turn of the earlier street match was wrong.
+  - Placed by hand-read anchors: the Ark (the walled arsenal and barracks, «قورخانه», that enclosed it under the Qajars), the bazaar (the blue-washed block of caravanserais south of the river) and two bridges over the Mehranrud, snapped to OSM's river line. A similarity fits them within 33–57 m: 2.95 m a pixel, turned 4.25° (magnetic north). Checked against the Baghmisheh and Istanbul gates, which fall on the river crossings. `gcps.json` keeps the four anchors (`landmarks`) and writes the fit out as a grid.
+  - Accuracy about 60 m near the centre, less towards the sheet's edges. Its folds are not painted out (the seam finder smeared them). Tiles to zoom 16.
+  - The 1827 Russian army plans of the walled city (`plan-tabriz-1827.jpg`) are not placed yet.
 
