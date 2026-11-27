@@ -62,14 +62,13 @@
   /* The end */
   .card.end .body { text-align: center; align-items: center; }
   .card.end .foot { justify-content: center; }
-  .proto { margin-left: .5rem; padding: .15rem .4rem; border: 1px solid var(--rule); border-radius: 2px; font: 500 .6875rem var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .proto .wide { display: none; } @media (min-width: 40rem) { .proto .wide { display: inline; } }
+  .proto { white-space: nowrap; margin-left: .5rem; padding: .15rem .4rem; border: 1px solid var(--rule); border-radius: 2px; font: 500 .6875rem var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
 </style>
 </head>
 <body>
-<header class="hub-header">
-  <a class="brand" href="/" data-keep-lang><svg viewBox="0 0 32 32" aria-hidden="true"><path class="star" d="M16 2l3.2 9.8H29l-7.9 5.8 3 9.4L16 21.2 7.9 27l3-9.4L3 11.8h9.8z"/><circle class="gem" cx="16" cy="16" r="3"/></svg>Axın<span class="proto">prototip</span></a>
-  <nav aria-label="Azad Bilik"><span class="langs" role="group" aria-label="Dil · Язык · Language"><button type="button" data-lang="az">AZ</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="en">EN</button></span></nav>
-</header>
+<header class="hub-header"></header><script src="/shared/header.js"></script>
+<script>document.querySelector('header.hub-header .brand')?.insertAdjacentHTML('beforeend', '<span class="proto">Axın<span class="wide"> · prototip</span></span>');</script>
 <main id="feed"></main>
 <script src="/shared/hub.js" defer></script>
 <script>
