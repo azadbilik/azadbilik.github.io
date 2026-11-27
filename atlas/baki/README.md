@@ -84,3 +84,9 @@ Eight *then and now* places fly to their plan and open the lens on them. The cam
 - **Placed by its frames (`scripts/sheets.py`).** Every sheet prints its frame's coordinates, east of Ferro: 67°28′10″–67°30′50″, A 40°21′30″–20′20″, B 20′20″–19′10″, C 19′10″–18′10″. Each sheet's four frame corners were read off the scan and the sheet mapped bilinearly between them (taking out a scan's small skew); the three are joined into one image in those coordinates (`data/raw/bibiheybat-1912.jpg`, git-ignored), which `tiles.py` places as a single 'grid' panel. A's title over the sea and C's legend are left out.
 - **Checked:** Cape Shikh's tip lands within 70 m of where the corrected 1899 map puts it, so no datum shift is applied (unlike 1899). Accuracy about 70 m.
 - **Tiles:** zoom 13–18 (≈0.45 m a pixel at 18, close to the scan's 0.36 m), 21 MB.
+
+## Bibi-Heybat, 1912 (the oil stratum)
+
+- **The map:** «Пластовая карта Биби-Эйбата», Golubyatnikov, 1:8,400, from the same Library of Congress item: how deep the productive stratum lies, coloured from 100 sazhens (≈213 m, brown) to 270 (≈576 m, green). Its dome runs under the Bibi-Heybat bay.
+- **Placed by the geological sheets' frame (`scripts/sheets.py`, key `bibiheybat-strata-1912`):** its frame carries no labels, but it is the frame of sheets A + B (67°28′10″–67°30′50″, 40°21′30″–40°19′10″) at exactly half their scale (32.8 / 42.9 px a second against 65.8 / 86.0), with the same spot height (47.6) and a red mark in its top-left corner. Same accuracy as the geology, about 70 m.
+- **Tiles:** zoom 13–17, 6 MB. The page's year buttons now take per-language labels («1912 geol.», «1912 strata»).

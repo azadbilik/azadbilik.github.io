@@ -2576,5 +2576,51 @@
   ],
   "zmax": 18,
   "zmin": 13
+ },
+ "bibiheybat-strata-1912": {
+  "file": "bibiheybat-strata-1912.jpg",
+  "grid": {
+   "lonDeg": 67,
+   "latDeg": 40,
+   "ferro": 17.662777777777777,
+   "trimPx": 0,
+   "panels": [
+    {
+     "px": [
+      0,
+      0,
+      5251,
+      6005
+     ],
+     "coef": [
+      [
+       -55465.799999999705,
+       55328.1
+      ],
+      [
+       1969.2,
+       0
+      ],
+      [
+       0,
+       -2573.4
+      ]
+     ],
+     "section": "sheets A–C joined"
+    }
+   ]
+  },
+  "city": "baki",
+  "title": "Пластовая карта Биби-Эйбата (Д. В. Голубятников; съёмка 1912, изд. 1914), 1:8400",
+  "source": "https://www.loc.gov/resource/g7142am.gct00388/",
+  "archive": "Library of Congress, Geography and Map Division, G7142.A6C5 s4 .G6 (sheet accompanying the geological map)",
+  "crop": [
+   0,
+   0,
+   5251,
+   6004
+  ],
+  "zmax": 17,
+  "zmin": 13
  }
 }

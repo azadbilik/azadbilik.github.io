@@ -32,6 +32,14 @@ CFG = {
             dict(file='bibiheybat-1912-c.tif', n=S(40, 19, 10), s=S(40, 18, 10), corners=[(863, 701), (11391, 700), (861, 5846), (11389, 5845)]),
         ],
     ),
+    # the «Пластовая карта Биби-Эйбата» (structure contours of the productive strata, in sazhens below the
+    # sea), 1:8,400: its frame carries no labels, but it is sheets A + B's frame at half their scale
+    # (32.8 / 42.9 px a second against 65.8 / 86.0; the spot height 47.6 sits inside its top-left corner as
+    # on sheet A, which has a red cross)
+    'bibiheybat-strata-1912': dict(
+        lon=(S(67, 28, 10), S(67, 30, 50)), lat=(S(40, 19, 10), S(40, 21, 30)), kx=32.82, ky=42.89,
+        sheets=[dict(file='bibiheybat-strata-1912.tif', n=S(40, 21, 30), s=S(40, 19, 10), corners=[(691, 965), (5943, 965), (691, 6970), (5943, 6970)])],
+    ),
 }
 
 key = sys.argv[1] if len(sys.argv) > 1 else 'bibiheybat-1912'

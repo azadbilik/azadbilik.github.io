@@ -230,5 +230,19 @@
   "title": "Детальная геологическая карта Апшеронского полуострова. Биби-Эйбат, листы A–C (Д. В. Голубятников; съёмка 1912, изд. 1914)",
   "source": "https://www.loc.gov/resource/g7142am.gct00388/",
   "fit": "frame coordinates of sheets A–C (east of Ferro), joined"
+ },
+ "bibiheybat-strata-1912": {
+  "tiles": "data/tiles/bibiheybat-strata-1912/{z}/{x}/{y}.webp?v=2e8d5f33",
+  "bounds": [
+   49.80667,
+   40.31945,
+   49.85111,
+   40.35833
+  ],
+  "minzoom": 13,
+  "maxzoom": 17,
+  "title": "Пластовая карта Биби-Эйбата (Д. В. Голубятников; съёмка 1912, изд. 1914), 1:8400",
+  "source": "https://www.loc.gov/resource/g7142am.gct00388/",
+  "fit": "frame of sheets A–B at half scale (east of Ferro)"
  }
 }
