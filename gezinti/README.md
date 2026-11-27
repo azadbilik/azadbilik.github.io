@@ -8,6 +8,7 @@
 | [Şəki](seki/) | 29 | 3 | the khans' fortress (OSM way 272592234) |
 | [Gəncə](gence/) | 29 | 3 | none (no walls survive); the 1873 plan as underlay |
 | [Şamaxı](samaxi/) | 10 | 2 | none |
+| [Naxçıvan](naxcivan/) | 16 | 2 | none |
 
 ## A city
 

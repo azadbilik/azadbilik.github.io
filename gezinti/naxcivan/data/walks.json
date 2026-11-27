@@ -1,0 +1,48 @@
+[
+  {
+    "id": "seher",
+    "color": "accent",
+    "name": {
+      "az": "Möminə Xatundan Cavidin məqbərəsinə",
+      "ru": "От Момине-Хатун к мавзолею Джавида",
+      "en": "From Möminə Xatun to Javid's mausoleum"
+    },
+    "text": {
+      "az": "Atabəylərin XII əsr türbəsindən köhnə məhəllələrin məscidləri və hamamı ilə xanların sarayına, oradan Naxçıvanın iki böyük yazıçısı Cəlil Məmmədquluzadənin və Hüseyn Cavidin evlərinə.",
+      "ru": "От мавзолея Атабеков XII века мимо мечетей и бани старых кварталов к ханскому дворцу, а оттуда к домам двух больших писателей Нахчывана — Джалила Мамедкулизаде и Гусейна Джавида.",
+      "en": "From the Atabegs' 12th-century tomb, past the old quarters' mosques and bathhouse, to the khans' palace, and on to the houses of Nakhchivan's two great writers, Jalil Mammadguluzadeh and Huseyn Javid."
+    },
+    "stops": [
+      "momine-xatun-turbesi",
+      "cume-mescidi",
+      "came-mescidi",
+      "zeviyye-mescidi",
+      "ismayil-xan-hamami",
+      "celil-memmedquluzade-ev-muzeyi",
+      "xan-sarayi",
+      "behruz-kengerli-muzeyi",
+      "cavid-ev-muzeyi",
+      "cavid-meqberesi"
+    ]
+  },
+  {
+    "id": "kohneqala",
+    "color": "second",
+    "name": {
+      "az": "Köhnəqalaya",
+      "ru": "К Старой крепости",
+      "en": "To the Old Fortress"
+    },
+    "text": {
+      "az": "Möminə Xatundan cənuba: Əcəmi Naxçıvaninin daha əvvəlki türbəsi, sonra şəhərin ən qədim yeri olan Köhnəqala və Nuh peyğəmbər türbəsi.",
+      "ru": "От Момине-Хатун на юг: более ранний мавзолей Аджеми Нахчывани, затем древнейшее место города — Старая крепость и гробница Ноя.",
+      "en": "South from Möminə Xatun: Ajami Nakhchivani's earlier mausoleum, then the oldest place in town, the Old Fortress, and Noah's tomb."
+    },
+    "stops": [
+      "momine-xatun-turbesi",
+      "yusif-kuseyir-turbesi",
+      "yezidabad-qalasi",
+      "nuh-turbesi"
+    ]
+  }
+]

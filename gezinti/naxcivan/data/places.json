@@ -1,0 +1,18 @@
+[
+  {"id": "momine-xatun-turbesi", "qid": "Q1816972", "kind": "tomb"},
+  {"id": "yusif-kuseyir-turbesi", "qid": "Q850519", "kind": "tomb", "name": {"az": "Yusif ibn Küseyir türbəsi", "ru": "Мавзолей Юсуфа ибн Кусейира", "en": "Yusif ibn Kuseyir Mausoleum"}},
+  {"id": "nuh-turbesi", "qid": "Q2756685", "kind": "tomb"},
+  {"id": "yezidabad-qalasi", "qid": "Q8053356", "kind": "fort"},
+  {"id": "cume-mescidi", "qid": "Q11273377", "kind": "mosque", "name": {"az": "Atabəylər Cümə məscidinin yeri", "ru": "Место Джума-мечети Атабеков", "en": "Site of the Atabegs' Friday Mosque"}},
+  {"id": "came-mescidi", "qid": "Q12838098", "kind": "mosque", "name": {"az": "Came məscidi", "ru": "Мечеть Джаме", "en": "The Jame Mosque"}},
+  {"id": "zeviyye-mescidi", "qid": "Q16418664", "kind": "mosque"},
+  {"id": "ismayil-xan-hamami", "qid": "Q25540767", "kind": "bath"},
+  {"id": "xan-sarayi", "qid": "Q12843167", "kind": "palace"},
+  {"id": "cavid-meqberesi", "qid": "Q339168", "kind": "tomb"},
+  {"id": "cavid-ev-muzeyi", "qid": "Q12840427", "kind": "museum", "name": {"az": "Hüseyn Cavidin ev-muzeyi", "ru": "Дом-музей Гусейна Джавида", "en": "Huseyn Javid's house museum"}},
+  {"id": "behruz-kengerli-muzeyi", "qid": "Q25540715", "kind": "museum"},
+  {"id": "celil-memmedquluzade-ev-muzeyi", "qid": "Q16366286", "kind": "museum"},
+  {"id": "dede-qorqud-heykeli", "qid": "Q25546860", "kind": "other"},
+  {"id": "surb-gevorg-kilsesi", "qid": "Q94615349", "kind": "church", "name": {"az": "Müqəddəs Gevorq kilsəsinin yeri", "ru": "Место церкви Святого Геворга", "en": "Site of St Gevorg Church"}},
+  {"id": "surb-astvatsatsin-kilsesi", "qid": "Q116980317", "kind": "church", "name": {"az": "Müqəddəs Astvatsatsin kilsəsinin yeri", "ru": "Место церкви Святой Богородицы", "en": "Site of St Astvatsatsin Church"}}
+]
