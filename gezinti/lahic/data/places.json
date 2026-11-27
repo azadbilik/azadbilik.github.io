@@ -1,0 +1,11 @@
+[
+  {"id": "lil-korpusu", "qid": "Q140662173", "kind": "other", "name": {"az": "Lil körpüsü", "ru": "Мост Лиль", "en": "Lil bridge"}},
+  {"id": "zavaro-bulagi", "qid": "Q140662119", "kind": "other", "name": {"az": "Zəvəro bulağı", "ru": "Родник Заваро", "en": "Zəvəro spring"}},
+  {"id": "zevero-mescidi", "qid": "Q4182921", "kind": "mosque"},
+  {"id": "tarix-muzeyi", "qid": "Q4204462", "kind": "museum", "name": {"az": "Tarix-diyarşünaslıq muzeyi", "ru": "Историко-краеведческий музей", "en": "Museum of local history"}},
+  {"id": "sultanov-evi", "qid": "Q140662135", "kind": "house", "name": {"az": "Hacı Ağa Sultanovun evi", "ru": "Дом Гаджи Ага Султанова", "en": "Haji Agha Sultanov's house"}},
+  {"id": "sirinov-evi", "qid": "Q140662079", "kind": "house", "name": {"az": "Hacı Səməd Şirinovun evi", "ru": "Дом Гаджи Самеда Ширинова", "en": "Haji Samad Shirinov's house"}},
+  {"id": "bedoyun-mescidi", "qid": "Q129175814", "kind": "mosque"},
+  {"id": "molla-huseyn-hamami", "qid": "Q140662175", "kind": "bath", "name": {"az": "Hacı Molla Hüseyn hamamı", "ru": "Баня Гаджи Моллы Гусейна", "en": "Haji Molla Huseyn's bath"}},
+  {"id": "asagi-aragit-mescidi", "qid": "Q140662159", "kind": "mosque", "name": {"az": "Aşağı Aragit məscidi", "ru": "Нижняя мечеть Арагит", "en": "Lower Aragit mosque"}}
+]

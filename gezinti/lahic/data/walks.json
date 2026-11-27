@@ -1,0 +1,27 @@
+[
+  {
+    "id": "kend",
+    "color": "accent",
+    "name": {
+      "az": "Lahıcın içi ilə",
+      "ru": "Через Лагич",
+      "en": "Through Lahıc"
+    },
+    "text": {
+      "az": "XVIII–XIX əsrlərdə Lahıc Azərbaycanın misgərlik və silah istehsalı mərkəzlərindən idi; 1980-ci ildən qoruqdur. Daş döşənmiş küçələr, ağac tirlərlə hörülmüş daş evlər, məhəllə məscidləri və qədim kanalizasiya (kürəbənd) qalıb. Gəzinti Lülo çayının iki tərəfindəki məhəllələri qərbdən şərqə keçir.",
+      "ru": "В XVIII–XIX веках Лагич был одним из центров медного и оружейного ремесла Азербайджана; с 1980 года это заповедник. Здесь сохранились мощёные улицы, каменные дома, переложенные деревянными брусьями, квартальные мечети и старая канализация (кюрябенд). Прогулка проходит кварталы по обе стороны речки Луло с запада на восток.",
+      "en": "In the 18th and 19th centuries Lahıc was one of Azerbaijan's centres of copperwork and arms-making; it has been a reserve since 1980. Its cobbled streets, stone houses laced with timber beams, neighbourhood mosques and old sewers (kürəbənd) survive. The walk crosses the quarters on both sides of the Lülo stream, west to east."
+    },
+    "stops": [
+      "lil-korpusu",
+      "zavaro-bulagi",
+      "zevero-mescidi",
+      "tarix-muzeyi",
+      "sultanov-evi",
+      "sirinov-evi",
+      "bedoyun-mescidi",
+      "molla-huseyn-hamami",
+      "asagi-aragit-mescidi"
+    ]
+  }
+]
