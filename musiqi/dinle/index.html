@@ -104,6 +104,15 @@ h2.sh a:hover { color: var(--ink); text-decoration: underline; }
 .note a { color: inherit; }
 .about { margin-top: 2.5rem; padding-top: 1rem; border-top: 1px solid var(--rule); }
 .about h2 { font-size: 1rem; margin: 0 0 .4rem; }
+/* videos (YouTube, official channels; they open on YouTube) */
+.vgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr)); gap: .5rem; }
+.vc { display: block; padding: .5rem; border-radius: var(--r-2, 8px); color: var(--ink); text-decoration: none; min-width: 0; }
+.vc:hover, .vc:focus-visible { background: var(--surface-2); }
+.vc .th { position: relative; aspect-ratio: 16/9; border-radius: 6px; overflow: hidden; background: var(--surface-2); margin-bottom: .45rem; }
+.vc .th img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.vc .th em { position: absolute; right: .35rem; bottom: .35rem; background: #000c; color: #fff; font-style: normal; font-size: .6875rem; font-weight: 600; padding: .05rem .3rem; border-radius: 3px; font-variant-numeric: tabular-nums; }
+.vc b { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; font-size: .875rem; line-height: 1.3; font-weight: 600; }
+.vc span { display: block; color: var(--muted); font-size: .75rem; margin-top: .2rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 /* albums */
 .alb .im { box-shadow: 0 4px 14px #0002; }
 /* search */
@@ -214,9 +223,9 @@ const T = {
     searchPh: 'Musiqiçi, əsər, mahnı…', noHits: 'Heç nə tapılmadı.', hitsA: 'Musiqiçilər', hitsW: 'Əsərlər', hitsT: 'Mahnılar',
     pv: 'Apple Music · 30 san.', pvLong: '30 saniyəlik fraqment, Apple Music-dən', fullFree: 'Tam · azad', onApple: 'Apple Music-də dinlə', onCommons: 'Commons-da', freeMark: 'azad',
     tracks: (n) => `${n} yazı`, people: (n) => `${n} musiqiçi`, by: 'ifa', composer: 'Bəstəkar', perf: 'İfaçılar', yrs: (b, d) => b ? `${b}–${d ?? ''}` : '',
-    err: 'Yüklənmədi, növbətiyə keçirəm', page: 'Musiqi səhifələrində',
+    err: 'Yüklənmədi, növbətiyə keçirəm', videos: 'Videolar · YouTube', videosNote: 'Yalnız rəsmi kanallardan: AzTV, Mədəniyyət TV, İctimai TV və Radio, Opera və Balet Teatrı, Filarmoniya, Musiqili Teatr, Musiqi Mədəniyyəti Muzeyi, Azərbaycanfilm, Qosteleradiofond (Sovet televiziya və radio arxivi), musiqiçilərin öz rəsmi kanalları və YouTube-un «Topic» kanalları. YouTube-da açılır.', onYT: 'YouTube-da', page: 'Musiqi səhifələrində',
     aboutH: 'Necə yığılıb', about: 'Səs: Apple Music-in 30 saniyəlik fraqmentləri birbaşa Apple-dan gəlir və hər biri Apple Music-dəki yazıya aparır; heç nə saxlanmır. «Tam · azad» yazılar ictimai mülkiyyətdədir (Wikimedia Commons) və tam çalınır. Musiqiçilər: <a href="../">musiqi xəritəsi</a>, <a href="../bestekarlar/">Bəstəkarlar</a>, <a href="../caz/">Caz</a>, <a href="../estrada/">Estrada</a> (Wikidata). Dövr: musiqiçinin 18 yaşından ölümünə qədər çalışdığı illər. Məktəb: <a href="../silsile/">Silsilə</a> və bəstəkarların ustad–şagird əlaqələri. Əsərlər: Apple Music-də əsərin adı və bəstəkarın soyadı ilə axtarılıb.',
-    gaps: 'Nə yoxdur: Sovet dövrü yazılarının çoxu (Melodiya) Apple Music-də ya yoxdur, ya da ifaçının adı ilə deyil, orkestr və ya toplu adı ilə yerləşdirilib. Bülbül, Cabbar Qaryağdıoğlu, Qaya kvarteti, Dövlət Estrada Orkestri üçün kataloqda etibarlı uyğunluq tapılmadı; Bülbülün və Qaryağdıoğlunun azad qrammofon yazıları burada tam çalınır.' },
+    gaps: 'Nə yoxdur: Sovet dövrü yazılarının çoxu (Melodiya) Apple Music-də ya yoxdur, ya da ifaçının adı ilə deyil, orkestr və ya toplu adı ilə yerləşdirilib. Bülbül, Cabbar Qaryağdıoğlu, Qaya kvarteti, Dövlət Estrada Orkestri üçün kataloqda etibarlı uyğunluq tapılmadı; Bülbülün və Qaryağdıoğlunun azad qrammofon yazıları burada tam çalınır. Sovet dövrü yazılarının və opera tamaşalarının bir hissəsi rəsmi YouTube kanallarındadır (Qosteleradiofond, AzTV, Opera və Balet Teatrı…): onlar musiqiçinin və əsərin səhifəsində «Videolar» altındadır. Başqalarının yüklədikləri burada yoxdur.' },
   ru: { doc: 'Слушать · Музыка · Azad Bilik', home: 'Главная', search: 'Поиск', browse: 'Разделы', periods: 'Эпохи', genres: 'Жанры', schools: 'Школы', works: 'Опера, балет, симфония', worksShort: 'Сочинения', free: 'Свободные записи · целиком',
     p_early: 'Первые записи', p_soviet: 'Советская эпоха', p_indep: 'Независимость', pd_early: '1900–1920, граммофон', pd_soviet: '1920–1991', pd_indep: 'с 1991',
     g_mugham: 'Мугам', g_instr: 'Тар и кяманча', g_ashiq: 'Ашуги', g_classic: 'Классика', g_estrada: 'Эстрада', g_pop: 'Поп', g_jazz: 'Джаз',
@@ -228,9 +237,9 @@ const T = {
     searchPh: 'Музыкант, сочинение, песня…', noHits: 'Ничего не найдено.', hitsA: 'Музыканты', hitsW: 'Сочинения', hitsT: 'Песни',
     pv: 'Apple Music · 30 с', pvLong: '30-секундный фрагмент из Apple Music', fullFree: 'Целиком · свободно', onApple: 'Слушать в Apple Music', onCommons: 'На Commons', freeMark: 'свободно',
     tracks: (n) => `записей: ${n}`, people: (n) => `музыкантов: ${n}`, by: 'исп.', composer: 'Композитор', perf: 'Исполнители', yrs: (b, d) => b ? `${b}–${d ?? ''}` : '',
-    err: 'Не загрузилось, переключаю дальше', page: 'На страницах музыки',
+    err: 'Не загрузилось, переключаю дальше', videos: 'Видео · YouTube', videosNote: 'Только официальные каналы: АзТВ, «Медениййет», Общественное ТВ и радио, Театр оперы и балета, Филармония, Музыкальный театр, Музей музыкальной культуры, «Азербайджанфильм», Гостелерадиофонд (архив советского ТВ и радио), официальные каналы самих музыкантов и каналы YouTube «Topic». Открывается на YouTube.', onYT: 'На YouTube', page: 'На страницах музыки',
     aboutH: 'Как собрано', about: 'Звук: 30-секундные фрагменты Apple Music идут напрямую от Apple, каждый ведёт к записи в Apple Music; ничего не хранится. «Целиком · свободно» — записи в общественном достоянии (Wikimedia Commons), играют полностью. Музыканты: <a href="../">музыкальная карта</a>, <a href="../bestekarlar/">Композиторы</a>, <a href="../caz/">Джаз</a>, <a href="../estrada/">Эстрада</a> (Wikidata). Эпоха: годы работы музыканта, с 18 лет до смерти. Школа: <a href="../silsile/">Силсиле</a> и связи учитель–ученик композиторов. Сочинения: поиск в Apple Music по названию и фамилии композитора.',
-    gaps: 'Чего нет: большая часть советских записей («Мелодия») в Apple Music отсутствует или лежит под именем оркестра или сборника, а не исполнителя. Для Бюльбюля, Джаббара Карягдыоглы, квартета «Гая», Госэстрадного оркестра надёжного совпадения в каталоге не найдено; свободные граммофонные записи Бюльбюля и Карягдыоглы здесь играют целиком.' },
+    gaps: 'Чего нет: большая часть советских записей («Мелодия») в Apple Music отсутствует или лежит под именем оркестра или сборника, а не исполнителя. Для Бюльбюля, Джаббара Карягдыоглы, квартета «Гая», Госэстрадного оркестра надёжного совпадения в каталоге не найдено; свободные граммофонные записи Бюльбюля и Карягдыоглы здесь играют целиком. Часть советских записей и оперных спектаклей есть на официальных каналах YouTube (Гостелерадиофонд, АзТВ, Театр оперы и балета…): они на страницах музыканта и сочинения в разделе «Видео». Загрузки частных лиц сюда не попадают.' },
   en: { doc: 'Listen · Music · Azad Bilik', home: 'Home', search: 'Search', browse: 'Browse', periods: 'Periods', genres: 'Genres', schools: 'Schools', works: 'Opera, ballet, symphony', worksShort: 'Works', free: 'Free recordings · full length',
     p_early: 'First recordings', p_soviet: 'Soviet era', p_indep: 'Independence', pd_early: '1900–1920, gramophone', pd_soviet: '1920–1991', pd_indep: 'since 1991',
     g_mugham: 'Mugham', g_instr: 'Tar and kamancha', g_ashiq: 'Ashiq', g_classic: 'Classical', g_estrada: 'Estrada', g_pop: 'Pop', g_jazz: 'Jazz',
@@ -241,10 +250,10 @@ const T = {
     hello: 'Azerbaijani music', helloSub: 'By period, genre and school: from gramophone discs to Soviet estrada, from mugham to jazz.', quick: 'Jump to',
     searchPh: 'Musician, work, song…', noHits: 'Nothing found.', hitsA: 'Musicians', hitsW: 'Works', hitsT: 'Songs',
     pv: 'Apple Music · 30 s', pvLong: '30-second preview from Apple Music', fullFree: 'Full · free', onApple: 'Listen on Apple Music', onCommons: 'On Commons', freeMark: 'free',
-    tracks: (n) => `${n} recordings`, people: (n) => `${n} musicians`, by: 'by', composer: 'Composer', perf: 'Performers', yrs: (b, d) => b ? `${b}–${d ?? ''}` : '',
-    err: 'Did not load, skipping to the next', page: 'On the music pages',
+    tracks: (n) => `${n} recording${n === 1 ? '' : 's'}`, people: (n) => `${n} musician${n === 1 ? '' : 's'}`, by: 'by', composer: 'Composer', perf: 'Performers', yrs: (b, d) => b ? `${b}–${d ?? ''}` : '',
+    err: 'Did not load, skipping to the next', videos: 'Videos · YouTube', videosNote: 'Official channels only: AzTV, Mədəniyyət TV, İctimai TV and Radio, the Opera and Ballet Theatre, the Philharmonic, the Musical Theatre, the Museum of Musical Culture, Azərbaycanfilm, Gosteleradiofond (the Soviet TV and radio archive), the musicians’ own official channels and YouTube’s «Topic» channels. Opens on YouTube.', onYT: 'On YouTube', page: 'On the music pages',
     aboutH: 'How it is made', about: 'Sound: Apple Music’s 30-second previews stream straight from Apple and each links to the recording on Apple Music; nothing is stored. «Full · free» recordings are public domain (Wikimedia Commons) and play in full. Musicians: the <a href="../">music map</a>, <a href="../bestekarlar/">Composers</a>, <a href="../caz/">Jazz</a>, <a href="../estrada/">Estrada</a> (Wikidata). Period: the years a musician worked, from 18 to death. School: <a href="../silsile/">Silsilə</a> and the composers’ teacher–student links. Works: searched on Apple Music by title and the composer’s surname.',
-    gaps: 'What is missing: most Soviet-era recordings (Melodiya) are either not on Apple Music or filed under an orchestra or an anthology, not the performer. No reliable catalogue match was found for Bulbul, Jabbar Garyaghdioglu, the Gaya quartet or the State Estrada Orchestra; Bulbul’s and Garyaghdioglu’s free gramophone recordings play here in full.' },
+    gaps: 'What is missing: most Soviet-era recordings (Melodiya) are either not on Apple Music or filed under an orchestra or an anthology, not the performer. No reliable catalogue match was found for Bulbul, Jabbar Garyaghdioglu, the Gaya quartet or the State Estrada Orchestra; Bulbul’s and Garyaghdioglu’s free gramophone recordings play here in full. Part of the Soviet-era recordings and opera productions are on official YouTube channels (Gosteleradiofond, AzTV, the Opera and Ballet Theatre…): they are under «Videos» on the musician’s and the work’s page. Other people’s uploads are not included.' },
 };
 const t = (k, ...a) => { const v = T[lang][k] ?? T.az[k]; return typeof v === 'function' ? v(...a) : v; };
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
@@ -333,11 +342,13 @@ const mark = () => { const it = P.q[P.i]; document.querySelectorAll('.tr[data-sr
 // ---- pieces
 const card = (o) => `<div class="card${o.round ? ' round' : ''}"><a href="${o.href}" style="position:absolute;inset:0" aria-label="${esc(o.title)}"></a><div class="im">${o.img ? `<img src="${esc(o.img)}" alt="" loading="lazy">` : ph(o.title, o.h)}</div><b>${esc(o.title)}</b><span>${esc(o.sub ?? '')}</span>${o.play ? `<button class="pb" type="button" data-play="${esc(o.play)}" aria-label="${esc(t('play'))}: ${esc(o.title)}">${I.play}</button>` : ''}</div>`;
 const aSub = (a) => [t('g_' + a.g[0]), t('yrs', a.b, a.d)].filter(Boolean).join(' · ');
-const aCard = (a) => card({ href: `#/a/${a.q}`, title: nm(a), sub: aSub(a), img: aImg(a, 300), h: hueOf(a.q), round: true, play: a.t.length ? `a:${a.q}` : '' });
-const wCard = (w) => card({ href: `#/w/${w.q}`, title: nm(w), sub: `${t('work', w.ty)} · ${w.y} · ${w.c.map((q) => nm(byQ.get(q) ?? {})).filter(Boolean).join(', ')}`, img: art(w.t[0][2], 300), h: hueOf(w.q), play: `w:${w.q}` });
+const aCard = (a) => card({ href: `#/a/${a.q}`, title: nm(a), sub: aSub(a), img: aImg(a, 300) || vthumb(a), h: hueOf(a.q), round: true, play: a.t.length ? `a:${a.q}` : '' });
+const wCard = (w) => card({ href: `#/w/${w.q}`, title: nm(w), sub: `${t('work', w.ty)} · ${w.y} · ${w.c.map((q) => nm(byQ.get(q) ?? {})).filter(Boolean).join(', ')}`, img: w.t.length ? art(w.t[0][2], 300) : vthumb(w), h: hueOf(w.q), play: w.t.length ? `w:${w.q}` : '' });
 const cCard = (kind, k, c) => card({ href: `#/c/${kind}/${k}`, title: c.title, sub: c.sub, img: '', h: c.h, play: `c:${kind}/${k}` });
 const sCard = (s) => { const m = byQ.get(s.k) ?? byQ.get(s.m[0]); return card({ href: `#/c/school/${s.k}`, title: t('schoolOf', nm(s.n)), sub: t('people', s.m.length), img: m ? aImg(m, 300) : '', h: hueOf(s.k), play: `c:school/${s.k}` }); };
 const shelf = (title, more, items) => items.length ? `<h2 class="sh"><span>${esc(title)}</span>${more ? `<a href="${more}">${esc(t('showAll'))}</a>` : ''}</h2><div class="shelf">${items.join('')}</div>` : '';
+const vids = (vs) => vs?.length ? `<h2 class="sh">${esc(t('videos'))}</h2><div class="vgrid">${vs.map((v) => `<a class="vc" href="https://www.youtube.com/watch?v=${esc(v[0])}" rel="noopener" aria-label="${esc(v[1])} · ${esc(t('onYT'))}"><div class="th"><img src="https://i.ytimg.com/vi/${esc(v[0])}/mqdefault.jpg" alt="" loading="lazy"><em>${fmt(v[3]).replace(/^(\d+):(\d\d)$/, (m, a, b) => +a >= 60 ? `${Math.floor(a / 60)}:${String(a % 60).padStart(2, '0')}:${b}` : m)}</em></div><b>${esc(v[1])}</b><span>${esc(v[2])} · YouTube ↗</span></a>`).join('')}</div><p class="note">${esc(t('videosNote'))}</p>` : '';
+const vthumb = (o) => o.v?.length ? `https://i.ytimg.com/vi/${o.v[0][0]}/mqdefault.jpg` : '';
 // a track list; items = [{x, a?, w?}]; ctx decides the second column (album, or the work, or the musician)
 const tracklist = (items, ctx = {}) => {
   const rows = items.map((it, i) => {
@@ -384,8 +395,7 @@ const views = {
       <h2 class="sh">${esc(t('schools'))}</h2><div class="tiles">${S.join('')}</div></div>`;
   },
   works() {
-    const items = D.works.map((w) => ({ x: w.t[0], w }));
-    return `<div class="hero" style="--h:${hueOf('works')}"><div><div class="kind">${esc(t('collection'))}</div><h1>${esc(t('works'))}</h1><div class="meta">${esc(t('tracks', D.works.reduce((s, w) => s + w.t.length, 0)))} · 1908–2022</div></div></div>
+        return `<div class="hero" style="--h:${hueOf('works')}"><div><div class="kind">${esc(t('collection'))}</div><h1>${esc(t('works'))}</h1><div class="meta">${esc(t('tracks', D.works.reduce((s, w) => s + w.t.length, 0)))} · 1908–2022</div></div></div>
       <div class="actions"><button class="bigplay" type="button" data-play="works" aria-label="${esc(t('play'))}">${I.play}</button></div>
       <div class="pad"><div class="grid">${D.works.map(wCard).join('')}</div></div>`;
   },
@@ -399,7 +409,7 @@ const views = {
   },
   a(q) {
     const a = byQ.get(q); if (!a) return views.home();
-    const im = aImg(a, 500), items = a.t.map((x) => ({ x, a }));
+    const im = aImg(a, 500) || (a.v?.length ? `https://i.ytimg.com/vi/${a.v[0][0]}/hqdefault.jpg` : ''), items = a.t.map((x) => ({ x, a }));
     const outs = [a.am ? `<a class="out" href="${esc(X(a.am))}" rel="noopener">Apple Music ↗</a>` : '', a.sp ? `<a class="out" href="https://open.spotify.com/artist/${esc(a.sp)}" rel="noopener">Spotify ↗</a>` : '', a.yt ? `<a class="out" href="${esc(a.yt)}" rel="noopener">YouTube ↗</a>` : ''].join('');
     const chips = [...a.p.map((k) => `<a class="chip" href="#/c/period/${k}">${esc(t('p_' + k))}</a>`), ...a.g.map((k) => `<a class="chip" href="#/c/genre/${k}">${esc(t('g_' + k))}</a>`), ...a.s.map((k) => `<a class="chip" href="#/c/school/${k}">${esc(t('schoolOf', nm(sByK.get(k).n)))}</a>`)].join('');
     const wk = D.works.filter((w) => w.c.includes(q));
@@ -408,6 +418,7 @@ const views = {
       <div class="actions">${items.length ? `<button class="bigplay" type="button" data-play="a:${q}" aria-label="${esc(t('play'))}">${I.play}</button>` : ''}${outs}</div>
       <div class="pad"><div class="chips">${chips}</div>
       ${items.length ? `<h2 class="sh">${esc(t('popular'))}</h2>${tl(items, { showBy: true })}${a.note ? `<p class="note"><b>${esc(nm(a.note))}</b></p>` : ''}` : ''}
+      ${vids(a.v)}
       ${wk.length ? `<h2 class="sh">${esc(t('worksShort'))}</h2><div class="shelf">${wk.map(wCard).join('')}</div>` : ''}
       ${al.length ? `<h2 class="sh">${esc(t('albums'))}</h2><div class="grid">${al.map((x) => `<div class="card alb"><a href="${esc(X(x[2]))}" rel="noopener" style="position:absolute;inset:0" aria-label="${esc(x[0])} · Apple Music"></a><div class="im">${x[3] ? `<img src="${esc(X(x[3]).replace(/\{s\}/g, 300))}" alt="" loading="lazy">` : ph(x[0], hueOf(x[0]))}</div><b>${esc(x[0])}</b><span>${esc(x[1])} · Apple Music ↗</span></div>`).join('')}</div><p class="note">${esc(t('albumsNote'))}</p>` : ''}
       ${a.s.map((k) => { const s = sByK.get(k); return `<h2 class="sh"><span>${esc(t('schoolOf', nm(s.n)))}</span><a href="#/c/school/${k}">${esc(t('showAll'))}</a></h2><div class="shelf">${s.m.filter((x) => x !== q).map((x) => byQ.get(x)).filter(Boolean).map(aCard).join('')}</div>`; }).join('')}
@@ -416,10 +427,11 @@ const views = {
   w(q) {
     const w = wByQ.get(q); if (!w) return views.works();
     const items = w.t.map((x) => ({ x, w })), cs = w.c.map((c) => byQ.get(c)).filter(Boolean);
-    const im = art(w.t[0][2], 500);
-    return `<div class="hero" style="--h:${hueOf(q)}">${im ? `<img class="cover" src="${esc(im)}" alt="">` : ''}<div><div class="kind">${esc(t('work', w.ty))} · ${w.y}</div><h1>${esc(nm(w))}</h1><div class="meta">${cs.map((c) => `<a class="chip" href="#/a/${c.q}">${esc(nm(c))}</a>`).join(' ')} ${esc(t('tracks', items.length))}</div></div></div>
-      <div class="actions"><button class="bigplay" type="button" data-play="w:${q}" aria-label="${esc(t('play'))}">${I.play}</button></div>
-      <div class="pad">${tl(items, { showBy: true })}<p class="note">${esc(t('pvLong'))}. ${esc(t('albumsNote'))}</p>
+    const im = w.t.length ? art(w.t[0][2], 500) : '';
+    return `<div class="hero" style="--h:${hueOf(q)}">${im ? `<img class="cover" src="${esc(im)}" alt="">` : ''}<div><div class="kind">${esc(t('work', w.ty))} · ${w.y}</div><h1>${esc(nm(w))}</h1><div class="meta">${cs.map((c) => `<a class="chip" href="#/a/${c.q}">${esc(nm(c))}</a>`).join(' ')} ${items.length ? esc(t('tracks', items.length)) : ''}</div></div></div>
+      ${items.length ? `<div class="actions"><button class="bigplay" type="button" data-play="w:${q}" aria-label="${esc(t('play'))}">${I.play}</button></div>` : ''}
+      <div class="pad">${items.length ? `${tl(items, { showBy: true })}<p class="note">${esc(t('pvLong'))}. ${esc(t('albumsNote'))}</p>` : ''}
+      ${vids(w.v)}
       ${cs.length ? `<h2 class="sh">${esc(t('composer'))}</h2><div class="shelf">${cs.map(aCard).join('')}</div>` : ''}</div>`;
   },
   search(q0 = '') {
@@ -441,7 +453,7 @@ const hits = (q) => {
 
 // ---- what a play button plays
 const queueOf = (key) => {
-  if (key === 'works') return D.works.map((w) => ({ x: w.t[0], w }));
+  if (key === 'works') return D.works.filter((w) => w.t.length).map((w) => ({ x: w.t[0], w }));
   const [k, v] = [key.slice(0, key.indexOf(':')), key.slice(key.indexOf(':') + 1)];
   if (k === 'a') { const a = byQ.get(v); return a ? a.t.map((x) => ({ x, a })) : []; }
   if (k === 'w') { const w = wByQ.get(v); return w ? w.t.map((x) => ({ x, w })) : []; }
