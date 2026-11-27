@@ -46,5 +46,125 @@
   "source": "prlib.ru 768136, prlib-768136-p14.jpg",
   "points": 59,
   "looKmMedian": 2.14
+ },
+ "erivan": {
+  "image": "kondratenko-erivan.webp",
+  "coordinates": [
+   [
+    43.22039,
+    41.2026
+   ],
+   [
+    46.27768,
+    41.2026
+   ],
+   [
+    46.27768,
+    38.79876
+   ],
+   [
+    43.22039,
+    38.79876
+   ]
+  ],
+  "source": "prlib.ru 768136, prlib-768136-p18.jpg",
+  "points": 71,
+  "looKmMedian": 1.69
+ },
+ "kars": {
+  "image": "kondratenko-kars.webp",
+  "coordinates": [
+   [
+    41.76421,
+    41.64357
+   ],
+   [
+    43.89175,
+    41.64357
+   ],
+   [
+    43.89175,
+    39.90523
+   ],
+   [
+    41.76421,
+    39.90523
+   ]
+  ],
+  "source": "prlib.ru 768136, prlib-768136-p20.jpg",
+  "points": 41,
+  "looKmMedian": 1.75
+ },
+ "tiflis": {
+  "image": "kondratenko-tiflis.webp",
+  "coordinates": [
+   [
+    42.46904,
+    42.75629
+   ],
+   [
+    47.29892,
+    42.75629
+   ],
+   [
+    47.29892,
+    40.71946
+   ],
+   [
+    42.46904,
+    40.71946
+   ]
+  ],
+  "source": "prlib.ru 768136, prlib-768136-p08.jpg",
+  "points": 40,
+  "looKmMedian": 2.18
+ },
+ "kutais": {
+  "image": "kondratenko-kutais.webp",
+  "coordinates": [
+   [
+    40.16383,
+    43.48264
+   ],
+   [
+    44.00402,
+    43.48264
+   ],
+   [
+    44.00402,
+    40.89392
+   ],
+   [
+    40.16383,
+    40.89392
+   ]
+  ],
+  "source": "prlib.ru 768136, prlib-768136-p10.jpg",
+  "points": 45,
+  "looKmMedian": 2.15
+ },
+ "dagestan": {
+  "image": "kondratenko-dagestan.webp",
+  "coordinates": [
+   [
+    45.64844,
+    43.42077
+   ],
+   [
+    48.56241,
+    43.42077
+   ],
+   [
+    48.56241,
+    41.10153
+   ],
+   [
+    45.64844,
+    41.10153
+   ]
+  ],
+  "source": "prlib.ru 768136, prlib-768136-p16.jpg",
+  "points": 41,
+  "looKmMedian": 1.81
  }
 }

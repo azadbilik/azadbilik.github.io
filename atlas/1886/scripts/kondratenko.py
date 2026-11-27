@@ -24,6 +24,8 @@ SHEETS = {
     'elisavetpol': dict(file='prlib-768136-p14.jpg', gov='Елисаветпольская губерния',
                         exclude=[(0, 975, 680, 2155), (700, 1740, 1080, 2155), (2400, 0, 3115, 620), (2390, 620, 3115, 1560), (2170, 1570, 3115, 2155), (0, 0, 3115, 45), (0, 2115, 3115, 2155)]),
 }
+# the other sheets: outline drawn on the sheet (mask_px) and the blocks to leave out, in data/raw/kondratenko-sheets.json
+SHEETS.update(json.load(open(K / 'kondratenko-sheets.json')))
 BUF = 0.07   # degrees around the 1897 governorate outline
 MAXW = 2400
 merc = lambda la: math.log(math.tan(math.pi / 4 + math.radians(la) / 2))
@@ -75,8 +77,12 @@ for sheet, cfg in SHEETS.items():
                      'dropped': dropped, 'looKmMedian': round(med, 2), 'looKmMax': round(max(r.values()), 2)}
 
     # mask polygon: 1897 governorate outline, buffered, into pixel space
-    gov = unary_union([shape(f['geometry']) for f in UNITS['features'] if f['properties']['govKey'] == cfg['gov']])
-    area = gov.buffer(BUF).simplify(0.005)
+    if 'mask_px' in cfg:   # governorates the 1897 frame doesn't hold: an outline drawn on the sheet (pixels)
+        from shapely.geometry import Polygon
+        area = Polygon([tuple(q) for q in (design_px(np.array(cfg['mask_px'], float)) @ Cfwd)])
+    else:
+        gov = unary_union([shape(f['geometry']) for f in UNITS['features'] if f['properties']['govKey'] == cfg['gov']])
+        area = gov.buffer(BUF).simplify(0.005)
     W, S, E, N = area.bounds
     scan = Image.open(SCANS / cfg['file']).convert('RGB'); sw, sh = scan.size
     mask = Image.new('L', (sw, sh), 0); d = ImageDraw.Draw(mask)

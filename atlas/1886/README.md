@@ -33,9 +33,19 @@ Placements were spot-checked, not checked one by one. Where a village shares its
 
 ## Kondratenko's maps
 
-The page can show, under the dots, E. Kondratenko's ethnographic maps of the Baku and Elisabethpol governorates (supplement to the Zapiski of the Caucasus Section of the Russian Geographical Society, vol. XVIII; drawn from the same 1886 family lists; Presidential Library, [item 768136](https://www.prlib.ru/item/768136), sheets 12 and 14; public domain). Rural societies are coloured by people in the map's own colours; its legend and bar charts are left out (the full sheets are in the archive).
+The page can show, under the dots, E. Kondratenko's seven ethnographic maps of the Caucasus governorates (supplement to the Zapiski of the Caucasus Section of the Russian Geographical Society, vol. XVIII; drawn from the same 1886 family lists; Presidential Library, [item 768136](https://www.prlib.ru/item/768136); public domain). Rural societies are coloured by people in the map's own colours; legends and bar charts are left out (the full sheets are in the archive).
 
-They were placed by village dots on the sheets read against villages already placed by name (`data/raw/kondratenko-gcp-<sheet>.json`): Baku 55 points, Elisabethpol 59; a second-order polynomial; left out one at a time a point misses by 1.4 km (Baku) and 2.1 km (Elisabethpol) at the median, up to ~5 km in the eastern Elisabethpol lowland. The Baku sheet is drawn with north to the left. `python3 scripts/kondratenko.py` writes `data/kondratenko-<sheet>.webp`, `data/kondratenko.json` (corners) and `data/raw/kondratenko-gcps.json` (the fit, each point's error, the points dropped).
+| Sheet | Scan | Control points | Left out one at a time: median / worst |
+|---|---|---|---|
+| Baku (north to the left) | p12 | 55 | 1.4 / 3.7 km |
+| Elisabethpol | p14 | 59 | 2.1 / 5.3 km |
+| Erivan | p18 | 71 | 1.7 / 4.8 km |
+| Kars | p20 | 41 | 1.8 / 4.2 km |
+| Tiflis (with the Zaqatala okrug) | p08 | 40 | 2.2 / 6.1 km |
+| Kutais (with Sukhum and Batum) | p10 | 45 | 2.2 / 5.3 km |
+| Dagestan | p16 | 41 | 1.8 / 5.2 km |
+
+Control points are settlement dots read on each sheet: for Baku and Elisabethpol, villages already placed by name here; for the others, towns and villages found in GeoNames (AZ, AM, GE, RU, TR) by their old Russian names (`data/raw/kondratenko-gcp-<sheet>.json`). A second-order polynomial per sheet; points that miss by more than 3× the median are dropped. Baku and Elisabethpol are cut to their 1897 outlines; the others to an outline drawn along the map's own border (`data/raw/kondratenko-sheets.json`, with the blocks of legend and charts left out). `python3 scripts/kondratenko.py` writes `data/kondratenko-<sheet>.webp`, `data/kondratenko.json` (corners) and `data/raw/kondratenko-gcps.json` (the fit, each point's error, the points dropped).
 
 ## Licences
 
