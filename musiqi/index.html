@@ -279,7 +279,7 @@
       <h2 id="h-people" data-i18n="people">Musiqiçilər</h2>
       <p id="people-lead"></p>
       <p><a href="silsile/" data-keep-lang id="lin-link"></a></p>
-      <p class="more-links"><a href="bestekarlar/" data-keep-lang id="mq-comp"></a> · <a href="caz/" data-keep-lang id="mq-jazz"></a> · <a href="estrada/" data-keep-lang id="mq-est"></a></p>
+      <p class="more-links"><a href="dinle/" data-keep-lang id="mq-listen" style="font-weight:700"></a> · <a href="bestekarlar/" data-keep-lang id="mq-comp"></a> · <a href="caz/" data-keep-lang id="mq-jazz"></a> · <a href="estrada/" data-keep-lang id="mq-est"></a></p>
     </div>
     <div class="people-grid">
       <div class="bigmap"><div id="map" role="region" data-i18n-label="mapLabel"></div><div class="legend" id="legend"></div></div>
@@ -638,7 +638,7 @@ function keepUrl() {
 }
 function applyLang() {
   { const a = document.getElementById('lin-link'); if (a) a.textContent = { az: 'Ustad-şagird silsilələri →', ru: 'Линии «учитель — ученик» →', en: 'Master–student lineages →' }[lang] ?? ''; }
-  { const L3 = { 'mq-comp': { az: 'Bəstəkarlar →', ru: 'Композиторы →', en: 'Composers →' }, 'mq-jazz': { az: 'Caz →', ru: 'Джаз →', en: 'Jazz →' }, 'mq-est': { az: 'Estrada →', ru: 'Эстрада →', en: 'Estrada →' } }; for (const [i, v] of Object.entries(L3)) { const a = document.getElementById(i); if (a) a.textContent = v[lang] ?? ''; } }
+  { const L3 = { 'mq-listen': { az: 'Dinlə: dövr, janr, məktəb →', ru: 'Слушать: эпохи, жанры, школы →', en: 'Listen: periods, genres, schools →' }, 'mq-comp': { az: 'Bəstəkarlar →', ru: 'Композиторы →', en: 'Composers →' }, 'mq-jazz': { az: 'Caz →', ru: 'Джаз →', en: 'Jazz →' }, 'mq-est': { az: 'Estrada →', ru: 'Эстрада →', en: 'Estrada →' } }; for (const [i, v] of Object.entries(L3)) { const a = document.getElementById(i); if (a) a.textContent = v[lang] ?? ''; } }
   document.documentElement.lang = lang;
   document.title = t('doc');
   document.querySelectorAll('[data-i18n]').forEach((el) => { const v = t(el.dataset.i18n); if (typeof v === 'string') el.textContent = v; });

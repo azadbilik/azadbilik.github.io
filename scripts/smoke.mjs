@@ -57,6 +57,7 @@ for (const [path, musts] of [
   ['/musiqi/bestekarlar/', ['href="/shared/graph.css"', 'data/composers.json']],
   ['/musiqi/caz/', ['href="/shared/graph.css"', 'data/jazz.json']],
   ['/musiqi/estrada/', ['data/estrada.raw.json', 'data/recordings.json']],
+  ['/musiqi/dinle/', ['data/catalog.json', '/shared/header.js']],
   ['/atlas/caylar/', ['/atlas/hovze/']],
   ['/atlas/1897/', ['maplibre-gl', 'census.out.json']],
   ['/atlas/xanliqlar/', ['maplibre-gl', 'data/khanates.geojson']],

@@ -33,6 +33,7 @@ add('/gezinti/', ['Gəzinti', 'Прогулки', 'Walks'], ['Tarixi yerlərdə 
 add('/atlas/', ['Atlas', 'Атлас', 'Atlas'], ['Tarixi Azərbaycan rəqəmlərdə və xəritələrdə', 'Исторический Азербайджан в цифрах и картах', 'Historical Azerbaijan in numbers and maps']);
 add('/atlas/serhedler/hekaye/', ['Sərhədlər necə dəyişdi', 'Как менялись границы', 'How the borders moved'], ['Hekayə, 1800–1991', 'История, 1800–1991', 'A story, 1800–1991']);
 add('/musiqi/', ['Musiqi', 'Музыка', 'Music'], ['İlk səs yazıları, 1902-dən', 'Первые записи, с 1902 года', 'The first recordings, from 1902']);
+add('/musiqi/dinle/', ['Dinlə', 'Слушать', 'Listen'], ['Musiqi dövr, janr və məktəb üzrə: Sovet estradası, klassika, muğam, caz', 'Музыка по эпохам, жанрам и школам: советская эстрада, классика, мугам, джаз', 'Music by period, genre and school: Soviet estrada, classical, mugham, jazz']);
 add('/sebeke/', ['Şəbəkələr', 'Сети', 'Networks'], ['Kim kimə bağlıdır: şairlər, alimlər, insanlar, məhsullar', 'Кто с кем связан: поэты, учёные, люди, товары', 'Who connects to whom: poets, scientists, people, products']);
 add('/arxiv/', ['Arxiv', 'Архив', 'Archive'], ['Plakatlar, xəritələr, əlyazmalar, kitablar', 'Плакаты, карты, рукописи, книги', 'Posters, maps, manuscripts, books']);
 add('/soz/', ['Söz ehtiyatı', 'Словарь поэтов', 'Poets’ vocabulary'], ['Şair neçə söz işlədir?', 'Сколько слов у поэта?', 'How many words does a poet use?']);
