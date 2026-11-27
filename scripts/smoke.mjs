@@ -48,6 +48,8 @@ for (const [path, musts] of [
   ['/atlas/yollar/', ['maplibre-gl', 'routes.geojson', 'reach.geojson']],
   ['/atlas/isiqlar/', ['maplibre-gl', 'hex.geojson']],
   ['/atlas/baki/', ['maplibre-gl', 'plans.json']],
+  ['/gezinti/', ['href="/gezinti/icerisheher/"', '/shared/header.js']],
+  ['/gezinti/icerisheher/', ['maplibre-gl', 'data/site.json']],
   ['/soz/', ['vocab.json']],
   ['/sebeke/', ['href="/sebeke/nezire/"', 'href="/sebeke/elm/"']],
   ['/musiqi/silsile/', ['href="/shared/graph.css"', 'data/lineage.json']],

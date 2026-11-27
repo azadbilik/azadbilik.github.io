@@ -19,7 +19,7 @@ const three = (h) => ['az', 'ru', 'en'].map((l) => strip(h.match(new RegExp(`<sp
 const DATA = 'https://github.com/azadbilik/data/tree/main/';
 const SITE = 'https://github.com/azadbilik/azadbilik.github.io/tree/main/';
 const pages = [];
-for (const idx of ['xeriteler/index.html', 'atlas/index.html']) {
+for (const idx of ['xeriteler/index.html', 'atlas/index.html', 'gezinti/index.html']) {
   for (const m of (await html(idx)).matchAll(/<li class="map">\s*<a href="([^"]+)"[^>]*>.*?<h3>(.*?)<\/h3>\s*<p>(.*?)<\/p>/gs))
     pages.push({ u: m[1], n: three(m[2]), s: three(m[3]).map((x) => x.split(/[:.;]/)[0]) });
 }
@@ -29,6 +29,7 @@ add('https://kitabxana.az', ['Kitabxana', 'Библиотека', 'Library'], ['
 add('/qalereya/', ['Qalereya', 'Галерея', 'Gallery'], ['Nizami və Füzulinin poemalarına miniatürlər', 'Миниатюры к поэмам Низами и Физули', 'Miniatures for the poems of Nizami and Fuzuli']);
 add('/qalereya/tarix/', ['İncəsənət', 'Искусство', 'Art'], ['Azərbaycan incəsənəti, qədimdən bu günədək', 'Искусство Азербайджана с древности до наших дней', 'Azerbaijani art from antiquity to today']);
 add('/xeriteler/', ['Ədəbi xəritələr', 'Литературные карты', 'Literary maps'], ['Şairlərin yerləri, poemaların yolları', 'Места поэтов, пути поэм', 'Where poets lived, where poems travel']);
+add('/gezinti/', ['Gəzinti', 'Прогулки', 'Walks'], ['Tarixi yerlərdə gəzintilər', 'Прогулки по историческим местам', 'Walks through historic places']);
 add('/atlas/', ['Atlas', 'Атлас', 'Atlas'], ['Tarixi Azərbaycan rəqəmlərdə və xəritələrdə', 'Исторический Азербайджан в цифрах и картах', 'Historical Azerbaijan in numbers and maps']);
 add('/atlas/serhedler/hekaye/', ['Sərhədlər necə dəyişdi', 'Как менялись границы', 'How the borders moved'], ['Hekayə, 1800–1991', 'История, 1800–1991', 'A story, 1800–1991']);
 add('/musiqi/', ['Musiqi', 'Музыка', 'Music'], ['İlk səs yazıları, 1902-dən', 'Первые записи, с 1902 года', 'The first recordings, from 1902']);
@@ -46,7 +47,7 @@ const dataOf = {
 };
 for (const p of pages) {
   if (dataOf[p.u]) p.d = dataOf[p.u];
-  else if (p.u.startsWith('/atlas/') || p.u.startsWith('/sebeke/') || p.u.startsWith('/xeriteler/') || p.u === '/musiqi/' || p.u === '/soz/') {
+  else if (p.u.startsWith('/atlas/') || p.u.startsWith('/sebeke/') || p.u.startsWith('/xeriteler/') || p.u.startsWith('/gezinti/') || p.u === '/musiqi/' || p.u === '/soz/') {
     // the page's data folder where it has one, else the page's own folder (its route or story file lives there)
     const dir = p.u.slice(1);
     p.d = SITE + (existsSync(new URL(dir + 'data', here)) ? dir + 'data' : dir);

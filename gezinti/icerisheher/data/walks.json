@@ -1,0 +1,82 @@
+[
+  {
+    "id": "esas",
+    "color": "accent",
+    "name": {
+      "az": "Qoşa qapıdan Salyan qapısına",
+      "ru": "От Двойных ворот до Сальянских",
+      "en": "From the Double Gates to the Salyan Gate"
+    },
+    "text": {
+      "az": "Qalanın içindən bir keçid: şimal qapısından girib Qız qalasının yanından keçir, Şirvanşahlar sarayına qalxır, cənub qapısından çıxırsınız.",
+      "ru": "Сквозь крепость: войти через северные ворота, пройти мимо Девичьей башни, подняться ко дворцу Ширваншахов и выйти через южные ворота.",
+      "en": "Straight through the fortress: in by the north gate, past the Maiden Tower, up to the Shirvanshahs' palace and out by the south gate."
+    },
+    "stops": [
+      "qosa-qala-qapilari",
+      "xan-sarayi",
+      "zencirli-ev",
+      "multani-karvansarasi",
+      "buxara-karvansarasi",
+      "qiz-qalasi",
+      "haci-qayib-hamami",
+      "cume-mescidi",
+      "mehemmed-mescidi",
+      "sirvansahlar-sarayi",
+      "miniatur-kitab-muzeyi",
+      "salyan-qapisi"
+    ]
+  },
+  {
+    "id": "saray",
+    "color": "second",
+    "name": {
+      "az": "Şirvanşahlar sarayı",
+      "ru": "Дворец Ширваншахов",
+      "en": "The Shirvanshahs' palace"
+    },
+    "text": {
+      "az": "Sarayın həyətləri yuxarıdan aşağı: Divanxana, Seyid Yəhyanın türbəsi, məscid, şahların türbəsi, hamam və Murad qapısı.",
+      "ru": "Дворы дворца сверху вниз: Диван-хане, мавзолей Сеида Яхьи, мечеть, усыпальница шахов, баня и ворота Мурада.",
+      "en": "The palace courts from top to bottom: the Divankhana, Seyid Yahya's mausoleum, the mosque, the shahs' tomb, the bath and Murad's Gate."
+    },
+    "stops": [
+      "sirvansahlar-sarayi",
+      "divanxana",
+      "seyid-yehya-turbesi",
+      "keyqubad-mescidi",
+      "saray-mescidi",
+      "sirvansahlar-turbesi",
+      "saray-hamami",
+      "murad-qapisi"
+    ],
+    "direct": true
+  },
+  {
+    "id": "karvan",
+    "color": "third",
+    "name": {
+      "az": "Karvansaralar və hamamlar",
+      "ru": "Караван-сараи и бани",
+      "en": "Caravanserais and baths"
+    },
+    "text": {
+      "az": "Tacirin şəhəri: karvanların düşdüyü karvansaralar və şəhərin hamamları, şimaldan cənuba.",
+      "ru": "Город купца: караван-сараи, где останавливались караваны, и городские бани, с севера на юг.",
+      "en": "The merchant's town: the caravanserais where caravans put up and the town's bathhouses, north to south."
+    },
+    "stops": [
+      "qosa-qala-qapilari",
+      "yeralti-hamam",
+      "multani-karvansarasi",
+      "buxara-karvansarasi",
+      "aga-zeynal-hamami",
+      "haci-qayib-hamami",
+      "ikimerte-karvansaray",
+      "kicik-karvansaray",
+      "qasimbey-hamami",
+      "aga-mikayil-hamami",
+      "salyan-qapisi"
+    ]
+  }
+]

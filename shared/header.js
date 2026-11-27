@@ -10,6 +10,7 @@
     ['/qalereya/', 'Qalereya', 'Галерея', 'Gallery'],
     ['/xeriteler/', 'Ədəbi xəritələr', 'Литературные карты', 'Literary maps'],
     ['/atlas/', 'Atlas', 'Атлас', 'Atlas'],
+    ['/gezinti/', 'Gəzinti', 'Прогулки', 'Walks'],
     ['/musiqi/', 'Musiqi', 'Музыка', 'Music'],
     ['/sebeke/', 'Şəbəkələr', 'Сети', 'Networks'],
     ['/arxiv/', 'Arxiv', 'Архив', 'Archive'],
