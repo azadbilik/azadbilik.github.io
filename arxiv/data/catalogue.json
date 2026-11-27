@@ -692,6 +692,54 @@
     "ru": "Голландская карта школы Блау, раскрашена от руки: граница Сефевидов жёлтым, Ширван (Servan), Гилян, Ардебиль, Тебриз.",
     "en": "A Dutch map of the Blaeu school, hand-coloured: the Safavid frontier in yellow, Shirvan («Servan»), Gilan, Ardabil, Tabriz."
    }
+  },
+  {
+   "id": "bibiheybat-quyular-1914",
+   "c": "xerite",
+   "src": "loc/bibiheybat-wells",
+   "pages": "all",
+   "az": "Bibiheybət: əsas quyuların kəsikləri, istismar horizontları ilə (D. V. Qolubyatnikov, F–G vərəqləri)",
+   "ru": "Биби-Эйбат. Разрезы руководящих скважин с показанием эксплоатационных горизонтов (сост. Д. В. Голубятников, листы F–G)",
+   "en": "Bibi-Heybat: sections of the key wells, with their producing horizons (D. V. Golubyatnikov, sheets F–G)",
+   "note": {
+    "az": "«Abşeron yarımadasının ətraflı geoloji xəritəsi»nin Bibiheybət buraxılışından (Geologiya Komitəsi, 1914): doqquz quyunun (I–IX) lay-lay kəsiyi. Xəritələri «Bakı necə böyüdü» səhifəsindədir.",
+    "ru": "Из выпуска «Биби-Эйбат» «Детальной геологической карты Апшеронского полуострова» (Геологический комитет, 1914): пласт за пластом девяти скважин (I–IX). Карты выпуска — на странице «Как рос Баку».",
+    "en": "From the Bibi-Heybat issue of the «Detailed geological map of the Absheron peninsula» (Geological Committee, 1914): nine wells (I–IX), stratum by stratum. The issue's maps are on the «How Baku grew» page."
+   },
+   "date": "1914",
+   "place": {
+    "az": "Sankt-Peterburq",
+    "ru": "Санкт-Петербург",
+    "en": "St Petersburg"
+   },
+   "lang": "ru",
+   "holder": "loc",
+   "cipher": "G7142.A6C5 s4 .G6",
+   "url": "https://www.loc.gov/resource/g7142am.gct00388/"
+  },
+  {
+   "id": "bibiheybat-kesikler-1914",
+   "c": "xerite",
+   "src": "loc/bibiheybat-sections",
+   "pages": "all",
+   "az": "Bibiheybət: geoloji kəsiklər (D. V. Qolubyatnikov, H–I vərəqləri)",
+   "ru": "Биби-Эйбат. Геологические разрезы (сост. Д. В. Голубятников, листы H–I)",
+   "en": "Bibi-Heybat: geological cross-sections (D. V. Golubyatnikov, sheets H–I)",
+   "note": {
+    "az": "Eyni buraxılışdan: Bibiheybət antiklinalının eninə kəsikləri, layların tağı quyularla birlikdə.",
+    "ru": "Из того же выпуска: поперечные разрезы Биби-Эйбатской антиклинали, свод пластов вместе со скважинами.",
+    "en": "From the same issue: cross-sections through the Bibi-Heybat anticline, the arch of the strata with the wells."
+   },
+   "date": "1914",
+   "place": {
+    "az": "Sankt-Peterburq",
+    "ru": "Санкт-Петербург",
+    "en": "St Petersburg"
+   },
+   "lang": "ru",
+   "holder": "loc",
+   "cipher": "G7142.A6C5 s4 .G6",
+   "url": "https://www.loc.gov/resource/g7142am.gct00388/"
   }
  ]
 }
