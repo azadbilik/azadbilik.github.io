@@ -1,0 +1,44 @@
+[
+  {
+    "id": "seher",
+    "color": "accent",
+    "name": {
+      "az": "Cümə məscidindən Yeddi Gümbəzə",
+      "ru": "От Джума-мечети к Едди Гюмбез",
+      "en": "From the Friday mosque to Yeddi Gümbəz"
+    },
+    "text": {
+      "az": "Şirvanın köhnə paytaxtı zəlzələlərdən çox az şey saxlayıb; bu gəzinti qalanları birləşdirir: Cümə məscidi, Sabirin evi, Şaxəndan qəbiristanlığı və şəhərin cənubundakı xan türbələri.",
+      "ru": "Старая столица Ширвана после землетрясений сохранила немногое; эта прогулка соединяет то, что осталось: Джума-мечеть, дом Сабира, кладбище Шахандан и ханские усыпальницы к югу от города.",
+      "en": "Earthquakes left little of Shirvan's old capital; this walk links what survives: the Friday mosque, Sabir's house, the Shaxəndan cemetery and the khans' tombs south of town."
+    },
+    "stops": [
+      "cume-mescidi",
+      "sabir-ev-muzeyi",
+      "imamzade-turbesi",
+      "seyid-ezim-qebri",
+      "saxendan-gumbezi",
+      "yeddi-gumbez",
+      "sabir-qebri"
+    ]
+  },
+  {
+    "id": "gulustan",
+    "color": "second",
+    "name": {
+      "az": "Gülüstan qalasına",
+      "ru": "К крепости Гюлистан",
+      "en": "Up to Gülüstan castle"
+    },
+    "text": {
+      "az": "Şəhərdən şimal-qərbə, Xınıslı yaşayış yerinin yanından dağın başındakı Gülüstan qalasının xarabalıqlarına. Yol yoxuşdur, su götürün.",
+      "ru": "Из города на северо-запад, мимо городища Хынысли, к руинам крепости Гюлистан на вершине горы. Дорога в гору, возьмите воды.",
+      "en": "North-west out of town, past the ancient site of Xınıslı, up to the ruins of Gülüstan castle on the hilltop. It is uphill all the way; take water."
+    },
+    "stops": [
+      "imamzade-turbesi",
+      "xinisli",
+      "gulustan-qalasi"
+    ]
+  }
+]

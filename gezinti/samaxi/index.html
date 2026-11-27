@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="/shared/theme.js"></script>
+<title>Şamaxı · Azad Bilik</title>
+<meta name="description" content="Şamaxının xəritəsi: Cümə məscidi, İmamzadə, Sabirin evi və qəbri, Şaxəndan və Yeddi Gümbəz türbələri, Xınıslı və Gülüstan qalası; iki gəzinti. A walking map of Şamaxı: the Friday mosque of 743, the Imamzadeh, Sabir's house and grave, the Shirvan khans' tombs and Gülüstan castle, with two walks.">
+<meta name="theme-color" content="#F4EFE6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14100D" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://azadbilik.org/gezinti/samaxi/">
+<meta property="og:title" content="Şamaxı · Shamakhi">
+<meta property="og:description" content="10 yer və iki gəzinti: Cümə məscidindən Yeddi Gümbəzə, Gülüstan qalasına.">
+<meta property="og:image" content="https://azadbilik.org/gezinti/samaxi/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="stylesheet" href="/shared/core.css">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+<link rel="stylesheet" href="/shared/story-map.css">
+<link rel="stylesheet" href="/gezinti/shared/gezinti.css">
+</head>
+<body>
+<div id="map" role="region" aria-label="Xəritə"></div>
+
+<aside class="panel">
+  <div class="head">
+    <div class="top"><a class="brand" href="/" data-keep-lang><svg viewBox="0 0 512 512" aria-hidden="true"><g class="star"><rect x="126" y="126" width="260" height="260"/><polygon points="256,72 440,256 256,440 72,256"/></g><polygon class="gem" points="256,196 316,256 256,316 196,256"/></svg>Azad Bilik</a><nav><a href="/gezinti/" data-i18n="section" data-keep-lang>Gəzinti</a><span class="langs" role="group" aria-label="Dil · Язык · Language"><button type="button" data-lang="az">AZ</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="en">EN</button></span></nav></div>
+    <h1 data-i18n="title">Şamaxı</h1>
+    <p class="sub" data-i18n="sub">Cümə məscidi, Yeddi Gümbəz və Gülüstan qalası</p>
+    <div class="tabs" role="tablist"><button type="button" role="tab" data-tab="walks" data-i18n="walks">Gəzintilər</button><button type="button" role="tab" data-tab="places" data-i18n="places">Bütün yerlər</button></div>
+  </div>
+  <div class="body" id="body" aria-live="polite"></div>
+</aside>
+
+<div class="legend" id="legend"></div>
+
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script>
+window.CITY = {
+  title: { az: 'Şamaxı', ru: 'Шемаха', en: 'Şamaxı' },
+  sub: { az: 'Cümə məscidi, Yeddi Gümbəz və Gülüstan qalası', ru: 'Джума-мечеть, Едди Гюмбез и крепость Гюлистан', en: 'The Friday mosque, Yeddi Gümbəz and Gülüstan castle' },
+  center: [48.6370, 40.6300], zoom: 14.5,
+};
+</script>
+<script src="/gezinti/shared/gezinti.js"></script>
+</body>
+</html>

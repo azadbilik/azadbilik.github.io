@@ -1,0 +1,12 @@
+[
+  {"id": "cume-mescidi", "qid": "Q2069929", "kind": "mosque", "name": {"az": "Cümə məscidi", "ru": "Джума-мечеть", "en": "The Friday Mosque"}},
+  {"id": "sabir-ev-muzeyi", "qid": "Q54811108", "kind": "museum"},
+  {"id": "imamzade-turbesi", "qid": "Q31310872", "kind": "tomb"},
+  {"id": "saxendan", "qid": "Q18916273", "kind": "other"},
+  {"id": "seyid-ezim-qebri", "qid": "Q140663125", "kind": "tomb", "name": {"az": "Seyid Əzim Şirvaninin qəbri", "ru": "Могила Сеида Азима Ширвани", "en": "Seyid Azim Shirvani's grave"}},
+  {"id": "saxendan-gumbezi", "qid": "Q140657642", "kind": "tomb", "name": {"az": "Şaxəndan türbəsi", "ru": "Мавзолей Шахандан", "en": "The Shaxəndan mausoleum"}},
+  {"id": "yeddi-gumbez", "qid": "Q13668624", "kind": "tomb", "name": {"az": "Yeddi Gümbəz", "ru": "Едди Гюмбез", "en": "Yeddi Gümbəz"}},
+  {"id": "sabir-qebri", "qid": "Q140663126", "kind": "tomb", "name": {"az": "Sabirin qəbri", "ru": "Могила Сабира", "en": "Sabir's grave"}},
+  {"id": "xinisli", "qid": "Q12847665", "kind": "other"},
+  {"id": "gulustan-qalasi", "qid": "Q20578173", "kind": "fort"}
+]

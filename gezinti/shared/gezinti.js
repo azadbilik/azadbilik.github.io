@@ -194,7 +194,8 @@ function placeCard(p, w = null, i = null) {
   // our own text where there is one, else the opening of the Wikipedia article (another language's if need be)
   const own = p.about?.[lang];
   const textLang = own ? lang : p.text[lang] ? lang : ['az', 'en', 'ru'].find((l) => p.text[l]);
-  const wikiLang = p.wiki[lang] ? lang : textLang;
+  // the article in the reader's language, else any there is (a grave with our own text may have none)
+  const wikiLang = p.wiki[lang] ? lang : ['az', 'en', 'ru'].find((l) => p.wiki[l]);
   const nav = w
     ? `<div class="back"><button type="button" data-walk="${w.id}">← ${esc(L(w.name))}</button><span>` +
       `<button type="button" data-stop="${i - 1}" ${i === 0 ? 'disabled' : ''} aria-label="${t('prev')}">←</button> ${t('of')(i + 1, w.stops.length)} ` +
