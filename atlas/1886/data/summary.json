@@ -43,8 +43,8 @@
  "uezd": {
   "Борчалинский": {
    "villages": 284,
-   "placed": 266,
-   "approx": 81,
+   "placed": 284,
+   "approx": 88,
    "pop": 101844,
    "people": {
     "tatar": 32961,
@@ -69,8 +69,8 @@
     "catholic": 49,
     "other": 2052
    },
-   "unplaced": 18,
-   "unplacedPop": 13462
+   "unplaced": 0,
+   "unplacedPop": 0
   },
   "Елисаветпольский": {
    "villages": 166,
