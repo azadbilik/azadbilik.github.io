@@ -143,11 +143,21 @@ for _ in range(3):
             kept.append(i)
     if not moved: break
 
+# pass 3c: villages no gazetteer knows, read on Kondratenko's 1886 maps (data/raw/kondratenko-placed.csv):
+# the village's own dot ('map', within ~2 km), or its rural society's printed number ('map-society', approximate)
+onmap = {}
+kp = {(r['uezd'], r['society'], r['no'], r['name']): r for r in csv.DictReader(open(HERE / 'data' / 'raw' / 'kondratenko-placed.csv'))}
+for i, v in enumerate(vill):
+    k = kp.get((v['uezd'], v['society'], v['no'], v['name']))
+    if res[i] or not k or k['kind'] not in ('village', 'society') or not k['lat']: continue
+    onmap[i] = (float(k['lat']), float(k['lon']), 'map' if k['kind'] == 'village' else 'map-society', k['label_read'])
+
 # pass 4: what is still unplaced goes to its society's middle, marked approximate
 approx = {}
 for i, v in enumerate(vill):
-    if res[i]: continue
+    if res[i] or i in onmap: continue
     pts = [res[j][0][1][2:4] for j, w in enumerate(vill) if res[j] and (w['uezd'], w['society']) == (v['uezd'], v['society'])]
+    pts += [onmap[j][:2] for j, w in enumerate(vill) if j in onmap and onmap[j][2] == 'map' and (w['uezd'], w['society']) == (v['uezd'], v['society'])]
     if pts: approx[i] = (med(p[0] for p in pts), med(p[1] for p in pts))
 
 with open(HERE / 'data' / 'geocode-1886.csv', 'w', newline='') as fh:
@@ -158,12 +168,15 @@ with open(HERE / 'data' / 'geocode-1886.csv', 'w', newline='') as fh:
         if r:
             (s, p), how = r
             w.writerow([v['uezd'], v['society'], v['no'], v['name'], round(p[2], 5), round(p[3], 5), p[4], p[0], p[1], s, how, p[6], alt])
+        elif i in onmap:
+            la, lo, how, lab = onmap[i]
+            w.writerow([v['uezd'], v['society'], v['no'], v['name'], round(la, 5), round(lo, 5), lab, 'kondratenko', '', '', how, '', alt])
         elif i in approx:
             w.writerow([v['uezd'], v['society'], v['no'], v['name'], round(approx[i][0], 5), round(approx[i][1], 5), '', '', '', '', 'approx', '', alt])
         else:
             w.writerow([v['uezd'], v['society'], v['no'], v['name'], '', '', '', '', '', '', '', '', alt])
 n = sum(1 for r in res if r)
-print(f'{len(approx)} more approximately, at their society;', end=' ')
+print(f'{len(approx)} more approximately, at their society; on Kondratenko\'s maps {sum(1 for x in onmap.values() if x[2] == "map")} by their dot, {sum(1 for x in onmap.values() if x[2] == "map-society")} at their society;', end=' ')
 print(f'{n} of {len(vill)} placed ({sum(1 for r in res if r and r[1] == "name")} by name, {sum(1 for r in res if r and r[1] == "society")} by society)')
 per = defaultdict(lambda: [0, 0])
 for v, r in zip(vill, res): per[v['uezd']][0] += 1; per[v['uezd']][1] += bool(r)

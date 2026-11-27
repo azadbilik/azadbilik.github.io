@@ -42,8 +42,8 @@
  "uezd": {
   "Елисаветпольский": {
    "villages": 166,
-   "placed": 143,
-   "approx": 26,
+   "placed": 166,
+   "approx": 34,
    "pop": 102608,
    "people": {
     "tatar": 68684,
@@ -61,13 +61,13 @@
     "protestant": 1894,
     "sectarian": 5226
    },
-   "unplaced": 23,
-   "unplacedPop": 24260
+   "unplaced": 0,
+   "unplacedPop": 0
   },
   "Арешский": {
    "villages": 131,
-   "placed": 125,
-   "approx": 22,
+   "placed": 131,
+   "approx": 23,
    "pop": 51835,
    "people": {
     "tatar": 37577,
@@ -84,13 +84,13 @@
     "armenian": 12278,
     "orthodox": 21
    },
-   "unplaced": 6,
-   "unplacedPop": 6620
+   "unplaced": 0,
+   "unplacedPop": 0
   },
   "Джебраильский": {
    "villages": 169,
-   "placed": 157,
-   "approx": 29,
+   "placed": 169,
+   "approx": 37,
    "pop": 46911,
    "people": {
     "tatar": 33385,
@@ -105,13 +105,13 @@
     "armenian": 11669,
     "ahl-e haqq": 2815
    },
-   "unplaced": 12,
-   "unplacedPop": 4661
+   "unplaced": 0,
+   "unplacedPop": 0
   },
   "Джеванширский": {
    "villages": 216,
-   "placed": 206,
-   "approx": 73,
+   "placed": 214,
+   "approx": 77,
    "pop": 54957,
    "people": {
     "tatar": 33354,
@@ -123,13 +123,13 @@
     "sunni": 9473,
     "armenian": 16173
    },
-   "unplaced": 10,
-   "unplacedPop": 4363
+   "unplaced": 2,
+   "unplacedPop": 919
   },
   "Зангезурский": {
    "villages": 326,
-   "placed": 304,
-   "approx": 92,
+   "placed": 326,
+   "approx": 103,
    "pop": 123997,
    "people": {
     "armenian": 57425,
@@ -148,13 +148,13 @@
     "other": 78,
     "ahl-e haqq": 263
    },
-   "unplaced": 22,
-   "unplacedPop": 17227
+   "unplaced": 0,
+   "unplacedPop": 0
   },
   "Казахский": {
    "villages": 129,
-   "placed": 118,
-   "approx": 20,
+   "placed": 129,
+   "approx": 22,
    "pop": 85049,
    "people": {
     "tatar": 48693,
@@ -178,13 +178,13 @@
     "catholic": 1,
     "protestant": 2
    },
-   "unplaced": 11,
-   "unplacedPop": 13631
+   "unplaced": 0,
+   "unplacedPop": 0
   },
   "Нухинский": {
    "villages": 134,
-   "placed": 113,
-   "approx": 30,
+   "placed": 134,
+   "approx": 44,
    "pop": 91120,
    "people": {
     "tatar": 63607,
@@ -203,13 +203,13 @@
     "orthodox": 757,
     "jewish": 1744
    },
-   "unplaced": 21,
-   "unplacedPop": 13337
+   "unplaced": 0,
+   "unplacedPop": 0
   },
   "Шушинский": {
    "villages": 251,
-   "placed": 237,
-   "approx": 71,
+   "placed": 250,
+   "approx": 78,
    "pop": 99552,
    "people": {
     "tatar": 41292,
@@ -222,12 +222,12 @@
     "orthodox": 278,
     "sunni": 3066
    },
-   "unplaced": 14,
-   "unplacedPop": 13129
+   "unplaced": 1,
+   "unplacedPop": 2017
   },
   "Бакинский": {
    "villages": 46,
-   "placed": 39,
+   "placed": 46,
    "approx": 2,
    "pop": 54801,
    "people": {
@@ -237,13 +237,13 @@
    "faith": {
     "shia": 54801
    },
-   "unplaced": 7,
-   "unplacedPop": 11671
+   "unplaced": 0,
+   "unplacedPop": 0
   },
   "Геокчайский": {
    "villages": 143,
-   "placed": 111,
-   "approx": 18,
+   "placed": 130,
+   "approx": 30,
    "pop": 76002,
    "people": {
     "tatar": 45673,
@@ -263,13 +263,13 @@
     "sectarian": 1201,
     "catholic": 1
    },
-   "unplaced": 32,
-   "unplacedPop": 16459
+   "unplaced": 13,
+   "unplacedPop": 3575
   },
   "Джеватский": {
    "villages": 158,
-   "placed": 110,
-   "approx": 29,
+   "placed": 145,
+   "approx": 57,
    "pop": 82566,
    "people": {
     "tatar": 82306,
@@ -280,13 +280,13 @@
     "sectarian": 260,
     "sunni": 13775
    },
-   "unplaced": 48,
-   "unplacedPop": 35718
+   "unplaced": 13,
+   "unplacedPop": 13450
   },
   "Кубинский": {
    "villages": 325,
-   "placed": 306,
-   "approx": 68,
+   "placed": 324,
+   "approx": 79,
    "pop": 158442,
    "people": {
     "lezgin": 41664,
@@ -308,13 +308,13 @@
     "armenian": 865,
     "sectarian": 154
    },
-   "unplaced": 19,
-   "unplacedPop": 16099
+   "unplaced": 1,
+   "unplacedPop": 519
   },
   "Ленкоранский": {
    "villages": 298,
-   "placed": 284,
-   "approx": 62,
+   "placed": 296,
+   "approx": 65,
    "pop": 105118,
    "people": {
     "talysh": 47296,
@@ -328,13 +328,13 @@
     "orthodox": 495,
     "jewish": 24
    },
-   "unplaced": 14,
-   "unplacedPop": 11966
+   "unplaced": 2,
+   "unplacedPop": 1248
   },
   "Шемахинский": {
    "villages": 208,
-   "placed": 139,
-   "approx": 35,
+   "placed": 190,
+   "approx": 62,
    "pop": 94380,
    "people": {
     "tatar": 72220,
@@ -350,8 +350,8 @@
     "orthodox": 878,
     "jewish": 958
    },
-   "unplaced": 69,
-   "unplacedPop": 33528
+   "unplaced": 18,
+   "unplacedPop": 7333
   }
  },
  "towns": {

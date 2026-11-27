@@ -51,19 +51,19 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Елисаветпольский,Саровское,53,Татлы,40.7124,46.44406,Tatlı,geonames,584863,1.03,name,Татлы,Tatlı 1.03; Tatarlı 0.83; Qoşabulaq 0.83
 Елисаветпольский,Саровское,54,Фахралы (Фарахлы),40.74612,46.56232,Fakhraly,geonames,586587,1.03,name,Фаьхрали,Fakhraly 1.03; Aşralar 0.863; Mehrili 0.863
 Елисаветпольский,Сейфалинское,55,Сейфалы,40.76092,46.12745,Seyfeli,geonames,587162,1.03,name,Seyfəli,Seyfeli 1.03; Sofular 0.863; Safarly 0.833
-Елисаветпольский,Ханкендское,56,Карадаглы армянское,,,,,,,,,"Qaradağlı (40° 26' N 46° 57' E), Tartar 0.706"
-Елисаветпольский,Ханкендское,57,Саровъ армянскій,,,,,,,,,Саров (Геранбойский район) 0.736
-Елисаветпольский,Ханкендское,58,Ханкендъ (Джоргяларъ),,,,,,,,,Yenikend 0.887; Gizilgaya 0.887; Yenikend 0.887
+Елисаветпольский,Ханкендское,56,Карадаглы армянское,40.62554,46.46716,,kondratenko,,,map-society,,"Qaradağlı (40° 26' N 46° 57' E), Tartar 0.706"
+Елисаветпольский,Ханкендское,57,Саровъ армянскій,40.7237,46.62781,Саровъ,kondratenko,,,map,,Саров (Геранбойский район) 0.736
+Елисаветпольский,Ханкендское,58,Ханкендъ (Джоргяларъ),40.63822,46.56087,Ханкен[дъ],kondratenko,,,map,,Yenikend 0.887; Gizilgaya 0.887; Yenikend 0.887
 Елисаветпольский,Шадилинское,59,Казан-булагъ,40.61871,46.64922,Gazanbulag,geonames,586086,0.93,society,qazan blagh,Gazanbulag 0.93; Карабулаг 0.872; Qoşabulaq 0.767
 Елисаветпольский,Шадилинское,60,Карадаглы татар.,40.61871,46.76449,,,,,approx,,"Qaradağlı (40° 26' N 46° 57' E), Tartar 0.839; Karadagly, Kalbajar 0.774; Qaradağlı 0.757"
 Елисаветпольский,Шадилинское,61,Молла-Авазлу,40.62528,46.90806,Elvazlu,geonames,801000,0.887,name,Elvazlu,Elvazlu 0.887; Mollavələdli 0.808; Aghlavashli 0.78
 Елисаветпольский,Шадилинское,62,Шадилы,40.59819,46.76449,Shakhmetli,geonames,585074,0.863,society,Шаһмәммәдли,Şadılı 1.03; Meshadilyar 0.887; Meshadilyar 0.887
-Елисаветпольский,Еленгучское,63,Адабашъ,,,,,,,,,Aghlavashli 0.83; Gadabay 0.799; Ağbaşlar 0.744
-Елисаветпольский,Еленгучское,64,Аликендъ,,,,,,,,,Yenikend 0.887; Gizilgaya 0.887; Yenikend 0.887
-Елисаветпольский,Еленгучское,65,Караковахъ,,,,,,,,,Qaraqocalı 0.808; Qaraqullar 0.78; Garaarkh 0.78
-Елисаветпольский,Еленгучское,66,Мансурлы,,,,,,,,,Manashid 0.799; Aşağı Ayiblı 0.799; Leninabad 0.799
-Елисаветпольский,Еленгучское,67,Такламаджъ,,,,,,,,,Təklə 0.799; Təkyemişan 0.736; Tekekayasy 0.714
-Елисаветпольский,Еленгучское,68,Еленгучъ,,,,,,,,,Kolanı 0.714
+Елисаветпольский,Еленгучское,63,Адабашъ,40.84524,46.82888,,kondratenko,,,map-society,,Aghlavashli 0.83; Gadabay 0.799; Ağbaşlar 0.744
+Елисаветпольский,Еленгучское,64,Аликендъ,40.84524,46.82888,,kondratenko,,,map-society,,Yenikend 0.887; Gizilgaya 0.887; Yenikend 0.887
+Елисаветпольский,Еленгучское,65,Караковахъ,40.84524,46.82888,,kondratenko,,,map-society,,Qaraqocalı 0.808; Qaraqullar 0.78; Garaarkh 0.78
+Елисаветпольский,Еленгучское,66,Мансурлы,40.84524,46.82888,,kondratenko,,,map-society,,Manashid 0.799; Aşağı Ayiblı 0.799; Leninabad 0.799
+Елисаветпольский,Еленгучское,67,Такламаджъ,40.84524,46.82888,,kondratenko,,,map-society,,Təklə 0.799; Təkyemişan 0.736; Tekekayasy 0.714
+Елисаветпольский,Еленгучское,68,Еленгучъ,40.8785,46.8161,Эленгучъ,kondratenko,,,map,,Kolanı 0.714
 Елисаветпольский,Баянское,69,Баянъ (Бананцъ),40.55334,46.15135,Bayan,geonames,587032,1.03,name,Banants,Bayan 1.03; Gizilgaya 0.78; Tsapatagh 0.75
 Елисаветпольский,Баянское,70,Човдаръ,40.61329,46.10928,Çovdar,geonames,586828,1.03,name,Човдар,Çovdar 1.03; Çaparlı 0.744; Chiragidzor 0.736
 Елисаветпольский,Болчалинское,71,Болчалы,40.68505,46.26906,Balçılı,geonames,585042,1.03,name,Bolçalı,Balçılı 1.03; Balçılı 0.887; Boşçalı 0.83
@@ -95,13 +95,13 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Елисаветпольский,Михайловское,97,Азатъ (Сулукъ),40.49146,46.35214,Yeni Zod,geonames,586264,1.03,name,Syuluk,Yeni Zod 1.03; Zaglik 0.887; Azad 0.78
 Елисаветпольский,Михайловское,98,Аджикендъ (Аджишенъ),40.51424,46.33103,Adzhikend,geonames,587417,1.03,name,Аджикенд,Adzhikend 1.03; Yenikend 0.887; Gizilgaya 0.887
 Елисаветпольский,Михайловское,99,Михайловка,40.49659,46.35685,Dəyirmanlar,geonames,8529104,1.03,society,Михайловка,Dəyirmanlar 1.03; Mixaylovka 1.03; Yevlakh 0.73
-Елисаветпольский,Чайкендское,100,"Чайкендъ (Джарабертъ, Челябюртъ, Кеташенъ)",,,,,,,,,Ketishen 1.03; Chaykend 1.03; Barum 1.03
+Елисаветпольский,Чайкендское,100,"Чайкендъ (Джарабертъ, Челябюртъ, Кеташенъ)",40.47233,46.39184,Чайкендъ,kondratenko,,,map,,Ketishen 1.03; Chaykend 1.03; Barum 1.03
 Елисаветпольский,Агджакендское,101,Агджакендъ верхній,40.3961,46.49081,Yukhari Aghjakand,geonames,584647,1.07,name,Юхары-Агджакенд,Yukhari Aghjakand 1.07; Ashaghi Aghjakand 0.95; Ağkənd 0.857
 Елисаветпольский,Агджакендское,102,Агджакендъ нижній,40.41792,46.56478,Ashaghi Aghjakand,geonames,587201,1.07,name,Aşağı Ağcakənd,Ashaghi Aghjakand 1.07; Yukhari Aghjakand 0.95; Barum 0.87
-Елисаветпольский,Борисинское,103,Борисы русскіе (Парисъ),,,,,,,,,Rus Borisi 1.03; Borisy-Armyanskiye 1.03; Kalakend 0.863
+Елисаветпольский,Борисинское,103,Борисы русскіе (Парисъ),40.4285,46.58674,Парисы (рус.),kondratenko,,,map,,Rus Borisi 1.03; Borisy-Armyanskiye 1.03; Kalakend 0.863
 Елисаветпольский,Варваринское,104,Варвара,40.67742,47.09318,Varvara,geonames,584741,1.03,name,Варвара,Varvara 1.03; Emirvar 0.799; Dardere 0.744
 Елисаветпольский,Варваринское,105,Ейтельды,40.67742,47.09318,,,,,approx,,Yaldili 0.799; Ayıtala 0.799
-Елисаветпольский,Геран-Бой-Ахмедлинское,106,Геран-Бой-Ахмедлы,,,,,,,,,Goranboy 0.78
+Елисаветпольский,Геран-Бой-Ахмедлинское,106,Геран-Бой-Ахмедлы,40.62368,46.82541,Геранъ Бой-Ахмедлы,kondratenko,,,map,,Goranboy 0.78
 Елисаветпольский,Джинлу-Болуслинское,107,Джинлу-Болуслу,40.63257,46.85509,Boluslu,geonames,586637,1.03,name,Джинли-Болуслу,Boluslu 1.03; Chanlibel 0.767
 Елисаветпольский,Зейвинское,108,Гаджи-Алилу,40.483,46.73954,Hacallı,geonames,586569,0.808,society,Gadzhialilu,Hacıalılar 0.905; Hacalılı 0.905; Hacıalılar 0.905
 Елисаветпольский,Зейвинское,109,Зейва,40.45972,46.68306,Zeiva,geonames,584571,1.03,name,Зейва,Zeiva 1.03; Զառիվեր 0.833; Zayam 0.83
@@ -119,7 +119,7 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Елисаветпольский,Кизил-Гаджилинское,121,Кизил-Гаджилы,40.57723,46.85776,Gizilhajili,geonames,585666,1.03,name,Кызылгаджылы,Gizilhajili 1.03; Gizilgaya 0.767; Gizilgaya 0.767
 Елисаветпольский,Салаглинское,122,Болчалы,40.67887,47.04734,Balçılı,geonames,587065,0.887,society,Balçılı,Balçılı 1.03; Balçılı 0.887; Boşçalı 0.83
 Елисаветпольский,Салаглинское,123,Салаглы,40.68903,47.02286,Salahlı,geonames,585167,0.863,society,Салахлы,Alakol 0.939; Salahlı 0.863; Salahlı 0.833
-Елисаветпольский,Сафикюртское,124,Сафикюртъ (Карачайскій),,,,,,,,,Safkurt 0.963; Səfikürd 0.905; Shefek 0.83
+Елисаветпольский,Сафикюртское,124,Сафикюртъ (Карачайскій),40.55229,46.74759,Сафикюртъ,kondratenko,,,map,,Safkurt 0.963; Səfikürd 0.905; Shefek 0.83
 Елисаветпольский,Тап-Каракоюнлинское,125,Тап-Каракоюнлы,40.43119,46.77052,Tap Qaraqoyunlu,geonames,584875,1.03,name,Тапкаракоюнлу,Tap Qaraqoyunlu 1.03; Qaraqoyunlu 0.887; Goran 0.887
 Елисаветпольский,Эркечское,126,Бузлухъ,40.41636,46.43858,Buzluq,geonames,586927,1.03,name,Buzlux,Buzluq 1.03; Baş Qışlaq 0.736
 Елисаветпольский,Эркечское,127,Гюрзалиляръ,40.49634,46.55056,Gürzallar,geonames,586373,1.03,name,Gürzalılar,Gürzallar 1.03; Kyurdalilyar 0.78; Yolqullar 0.744
@@ -130,12 +130,12 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Елисаветпольский,Эркечское,132,Тоданъ,40.47181,46.45078,Todan,geonames,584833,1.03,name,Тодан,Todan 1.03; Todanalı 0.863; Tapan 0.83
 Елисаветпольский,Эркечское,133,Эркечъ,40.4646,46.47555,Erkeç,geonames,586607,1.03,name,Эркеч,Erkeç 1.03; Arabaçı 0.744; Arabaçı 0.714
 Елисаветпольский,"Аиплинское, Ашага-",134,"Аиплы, Ашага-",40.93094,45.82238,Əyyublu,wikidata,Q4833417,1.07,name,Ашага-Айплы,Əyyublu 1.07; Xoylu 0.78; Çaylı 0.78
-Елисаветпольский,"Аиплинское, Юхари-",135,"Аиплы, Юхари-",,,,,,,,,Əyyublu 0.95; Borisy-Armyanskiye 0.83; Shishtepe 0.82
-Елисаветпольский,Айрумское,136,Айрумъ (Кара-Мурад-Айрумъ),,,,,,,,,Barum 0.83; Kiçik Qaramurad 0.813; Molla Ayrım 0.799
+Елисаветпольский,"Аиплинское, Юхари-",135,"Аиплы, Юхари-",40.88064,45.89031,Айплы-юхары,kondratenko,,,map,,Əyyublu 0.95; Borisy-Armyanskiye 0.83; Shishtepe 0.82
+Елисаветпольский,Айрумское,136,Айрумъ (Кара-Мурад-Айрумъ),40.5493,45.701,Айрумъ,kondratenko,,,map,,Barum 0.83; Kiçik Qaramurad 0.813; Molla Ayrım 0.799
 Елисаветпольский,Анненфельдское,137,"Анненфельдъ, колонія",40.82975,46.0178,Shamkhir,geonames,585152,1.03,name,Annenfel’d,Shamkhir 1.03; Kolanı 0.923; Goygol 0.919
 Елисаветпольский,Бадакендское,138,Бадакендъ (Бададзоръ),40.81435,45.77126,Alasgarli,geonames,587102,1.03,name,Бадакенд,Alasgarli 1.03; Kalakend 0.905; Beriyakend 0.854
-Елисаветпольский,Байрамлинское,139,Байрамлы,,,,,,,,,Bayramlı 1.03; Bayramly 1.03; Bayramly 1.03
-Елисаветпольский,Байрамлинское,140,Чугунлы,,,,,,,,,Miskinli 0.744; Chinarli 0.744; Chugunlu 0.744
+Елисаветпольский,Байрамлинское,139,Байрамлы,40.96284,45.84448,Байрамлы,kondratenko,,,map,,Bayramlı 1.03; Bayramly 1.03; Bayramly 1.03
+Елисаветпольский,Байрамлинское,140,Чугунлы,40.95966,45.85983,,kondratenko,,,map-society,,Miskinli 0.744; Chinarli 0.744; Chugunlu 0.744
 Елисаветпольский,Барсумское,141,Барсумъ,40.64455,45.95012,Barsum,geonames,587049,1.03,name,Барсум,Barsum 1.03; Borisy-Armyanskiye 0.83; Borsunlu 0.799
 Елисаветпольский,Барсумское,142,Барумъ (Карнакеръ),40.62985,45.94997,Barum,geonames,587048,1.03,name,Барум,Barum 1.03; Barsum 0.939; Borisy-Armyanskiye 0.919
 Елисаветпольский,Барсумское,143,Джагиръ,40.70292,45.92654,Dzhagir,geonames,586806,0.83,society,Даг Җәйир,Dzhagir 0.83; Xoşbulaq 0.799; Chiragidzor 0.799
@@ -143,11 +143,11 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Елисаветпольский,Даллярское,145,Далляръ,40.86278,46.03493,Dallar,geonames,586792,1.03,name,Далляр,Dallar 1.03; Nadil 0.78; Dyukyarli 0.78
 Елисаветпольский,Даллярское,146,Тарс-Далляръ,40.94722,46.20725,Tars-Dallyar,geonames,584872,1.03,name,Тарс-Далляр,Tars-Dallyar 1.03; Chanlibel 0.744; Ataxal 0.744
 Елисаветпольский,Дюгарлинское,147,Дюгарлы,40.91655,45.84812,Dyukyarli,geonames,586701,1.03,name,Дюгерли,Dyukyarli 1.03; Chinarli 0.757; Muxtariyyat 0.744
-Елисаветпольский,"Ивановское, Ново-",148,"Ивановка, Ново-",,,,,,,,,Novoivanovka 0.854; Yevlakh 0.736; Yanşaq 0.714
+Елисаветпольский,"Ивановское, Ново-",148,"Ивановка, Ново-",40.55899,45.50613,Н. Ивановка,kondratenko,,,map,,Novoivanovka 0.854; Yevlakh 0.736; Yanşaq 0.714
 Елисаветпольский,Ирмашлинское,149,Ирмашлы,40.8431,45.89112,İrmaşlı,geonames,586328,1.03,name,Ирмашлы,İrmaşlı 1.03; Kharkoput 0.863; Shurakend 0.744
 Елисаветпольский,Ирмашлинское,150,Томахлы,40.88222,45.79778,Tomakhly,geonames,584830,1.03,name,Томахлы,Tomakhly 1.03; Shamkhalar 0.799; Almalı 0.757
 Елисаветпольский,Ирмашлинское,151,Татарлы,40.8552,45.73914,Tatarlı,geonames,584866,1.03,society,Татарлы,Tatarlı 1.03; Tatarlı 1.03; Tatlı 0.83
-Елисаветпольский,Кедабекское,152,Кедабекъ татарскій,,,,,,,,,
+Елисаветпольский,Кедабекское,152,Кедабекъ татарскій,40.57376,45.85789,Кядабекъ,kondratenko,,,map,,
 Елисаветпольский,Кечилинское,153,Кечилы,40.88147,46.13907,Keçili,geonames,585253,1.03,name,Keçili,Keçili 1.03; Balçılı 0.799; Balçılı 0.799
 Елисаветпольский,Кечилинское,154,Курулугъ,40.93333,46.13333,Kurulukh,geonames,585754,0.83,society,Kurulukh,Kurulukh 0.83; Qırıqlı 0.799; Qırıqlı 0.799
 Елисаветпольский,Кирихлинское,155,Кирихлы,40.70111,46.28139,Qırıqlı,geonames,824496,0.863,society,Кырыклы,Qırıxlı 1.03; Qırıqlı 1.03; Qırıqlı 0.863
@@ -155,20 +155,20 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Елисаветпольский,Мискинлинское,157,Калакендъ (Аикендъ),40.4879,45.75827,Kalakend,geonames,586276,1.03,name,Калакенд,Kalakend 1.03; Yenikend 0.953; Gizilgaya 0.953
 Елисаветпольский,Мискинлинское,158,Карабулагъ (Чепахчи),40.50355,45.76556,Miskinli,wikidata,Q3943258,0.919,society,Böyük Qarabulaq,Карабулаг 1.03; Qarabulaq 0.919; Miskinli 0.919
 Елисаветпольский,Мискинлинское,159,Мискинлы,40.50355,45.76556,,,,,approx,,Miskinli 1.03; Miskinli 1.03; Mizakkular 0.744
-Елисаветпольский,Морулское,160,Морулъ,,,,,,,,,Moruxlu 0.939; Mehrili 0.939; Maraq 0.919
-Елисаветпольский,"Саратовское, Ново-",161,"Саратовка, Ново- (Финтиклы)",,,,,,,,,Novosaratovka 0.848; Yanıqlı 0.799; Yanıqlı 0.799
+Елисаветпольский,Морулское,160,Морулъ,40.80563,46.00969,Морулъ,kondratenko,,,map,,Moruxlu 0.939; Mehrili 0.939; Maraq 0.919
+Елисаветпольский,"Саратовское, Ново-",161,"Саратовка, Ново- (Финтиклы)",40.59744,45.57684,Саратовка,kondratenko,,,map,,Novosaratovka 0.848; Yanıqlı 0.799; Yanıqlı 0.799
 Елисаветпольский,Славянское,162,"Горѣлое, Ново- (Артапа)",40.64558,45.89808,Novogorelovka,geonames,585349,1.03,name,Аьртаьпаь,Novogorelovka 1.03; Qaralar 0.909; Sarıtəpə 0.887
 Елисаветпольский,Славянское,163,"Спасское, Ново- (Хунушъ)",40.61139,45.90139,Pirbulaq,geonames,824419,0.83,society,Xnus,Pirbulaq 0.83; Osgyan 0.757
 Елисаветпольский,Славянское,164,Славянка,40.6566,45.81174,Slavyanka,geonames,584953,1.03,name,Славянка,Slavyanka 1.03; Sharukkar 0.78
 Елисаветпольский,Славянское,165,"Троицкое, Ново- (Гюняшъ)",40.66668,45.91837,Günəşli,osm,n3478991375,0.953,society,Günəşli,Shurakend 0.953; Günəşli 0.953; ტახის წყალი 0.8
-Елисаветпольский,Хилхиналинское,166,Ибрагим-Гаджалы,,,,,,,,,İbrahimhacılı 0.799
-Елисаветпольский,Хилхиналинское,167,Хилхина 2-я,,,,,,,,,
+Елисаветпольский,Хилхиналинское,166,Ибрагим-Гаджалы,40.7806,45.71341,,kondratenko,,,map-society,,İbrahimhacılı 0.799
+Елисаветпольский,Хилхиналинское,167,Хилхина 2-я,40.75289,45.79956,Хилхина,kondratenko,,,map,,
 Елисаветпольский,Чардахлинское,168,Кедабекъ армянскій,40.74685,45.88022,,,,,approx,,
 Елисаветпольский,Чардахлинское,169,Чардахлы,40.74685,45.88022,Chanlibel,geonames,586892,1.03,name,Чардахлы,Chanlibel 1.03; Shadakh 0.744; Qaradağlı 0.736
 Арешский,Аральское,170,Аралъ,40.6043,47.58751,Birinci Aral,geonames,587220,1.03,name,Aral,Birinci Aral 1.03; Ərəş 0.78; Arab 0.78
 Арешский,Аральское,171,Амир-Махмудъ,40.60163,47.55462,Emirmakhmud,geonames,586613,1.03,name,Эмирмахмуд,Emirmakhmud 1.03; Emirarkh 0.767
 Арешский,Аральское,172,Шамсабадъ,40.61795,47.56133,Shamsabad,geonames,585055,1.03,name,Шамсабад,Shamsabad 1.03; Yuxarı Salamabad 0.808; Samedabad 0.778
-Арешский,Алпаутское,173,Алпаутъ,,,,,,,,,Alpout 1.03; Alpout 1.03; Alpı 0.8
+Арешский,Алпаутское,173,Алпаутъ,40.41861,47.60893,Алпаутъ,kondratenko,,,map,,Alpout 1.03; Alpout 1.03; Alpı 0.8
 Арешский,Беюк-Енгиджинское,174,Беюк-Енгиджа,40.87343,47.85428,Yengidzhe,geonames,584680,1,name,Енгыдже,Yengidzhe 1; Yenidzha 0.939; Yenidzha 0.939
 Арешский,Беюк-Енгиджинское,175,Джардамъ,40.56976,47.51211,Cardam,geonames,586664,1.03,name,Джардам,Cardam 1.03; Ujar 0.727; Chardzha 0.714
 Арешский,Зейнадинское,176,Агалы,40.65274,47.46165,Ağalı,geonames,587401,1.03,name,Агалы,Ağalı 1.03; Mamedagaly 0.8; Birinci Aral 0.78
@@ -224,7 +224,7 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Арешский,Кархунское,226,Кархунъ,40.5838,47.21603,Aşağı Qarxun,geonames,587182,1.03,society,Юхары-Кархун,Yuxarı Qarxun 1.03; Aşağı Qarxun 1.03; Qaxay 0.757
 Арешский,Кархунское,227,Манджар-Караогланъ,40.659,47.1886,Qaraoğlan,geonames,586156,0.858,society,Madzhar-Karaoglan,Qaraoğlan 0.858; Qaraoğlan 0.757
 Арешский,Кариблинское,228,Карибли,40.62048,47.29044,Garibli,geonames,586514,1.03,name,Qəribli,Garibli 1.03; Vardanly 0.833; Kerimbeyli 0.8
-Арешский,Кендекское,229,Кендекъ,,,,,,,,,Aşağı Kəldək 0.833; Qulbəndə 0.744
+Арешский,Кендекское,229,Кендекъ,40.74422,47.07473,,kondratenko,,,map-society,,Aşağı Kəldək 0.833; Qulbəndə 0.744
 Арешский,Койликатинское,230,Джува,40.69035,47.42052,Cuva,geonames,586625,1.03,name,Джува,Cuva 1.03; Gürcüva 0.757
 Арешский,Койликатинское,231,Кёр-архъ,40.68469,47.44135,Korarx,geonames,585817,1.03,name,Корарх,Korarx 1.03; Emirarkh 0.799; Qarabörk 0.769
 Арешский,Койликатинское,232,Койликаты,40.676,47.47443,Yukhary Kolgaty,geonames,584632,0.905,name,Yuxarı Qolqəti,Yukhary Kolgaty 0.905; Yukhary Lyaki 0.73
@@ -235,8 +235,8 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Арешский,Мурсальское,237,Малай,40.64988,47.38275,,,,,approx,,
 Арешский,Мурсальское,238,Мурсалъ,40.62891,47.38846,Mursal,geonames,585440,1.03,name,Муьрсаьл,Mursal 1.03; Mirza-Useynly 0.8; Hacıselli 0.757
 Арешский,Мурсальское,239,Шихлы,40.6656,47.37251,Şıxlı,geonames,584976,1.03,name,Şıxlı,Şıxlı 1.03; Ərəş 0.757; Shekili 0.757
-Арешский,Намет-абадское,240,Намет-абадъ арм.,,,,,,,,,Yukhary Neymetabad 0.887; Nemətabad 0.887
-Арешский,Намет-абадское,241,Намет-абадъ тат.,,,,,,,,,Yukhary Neymetabad 0.887; Nemətabad 0.887
+Арешский,Намет-абадское,240,Намет-абадъ арм.,40.69195,47.30239,Намет абадъ,kondratenko,,,map,,Yukhary Neymetabad 0.887; Nemətabad 0.887
+Арешский,Намет-абадское,241,Намет-абадъ тат.,40.69195,47.30239,Намет абадъ,kondratenko,,,map,,Yukhary Neymetabad 0.887; Nemətabad 0.887
 Арешский,Халданское,242,Армени-базаръ,40.73554,47.23383,Ərəş,geonames,585026,1.03,name,Ermeni-bazar,Ərəş 1.03
 Арешский,Халданское,243,Лямбаты,40.7162,47.22914,,,,,approx,,
 Арешский,Халданское,244,Салам-абадъ (Саламавуръ),40.7162,47.2182,Yuxarı Salamabad,geonames,584625,1.03,name,Саламабад,Yuxarı Salamabad 1.03; Shamsabad 0.854; Elabad 0.8
@@ -286,7 +286,7 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Арешский,Мамайлинское,288,Шафи-беклы,40.84761,47.73933,,,,,approx,,Shafily 0.83
 Арешский,"Согутлинское, Бала-",289,Бала-Согутлы,40.86869,47.55973,Bala Söyüdlü,geonames,587066,0.872,society,Бала Союдлу,Bala Söyüdlü 0.872; Mollagyullar 0.706
 Арешский,"Согутлинское, Бала-",290,Хошкашинъ,40.87444,47.58008,Qarabulaq,geonames,586232,0.93,name,Хошкашен,Qarabulaq 0.93
-Арешский,"Согутлинское, Беюк-",291,Беюк-Согутлы,,,,,,,,,Segyutyu 0.863; Böyük Söyüdlü 0.82; Shekili 0.757
+Арешский,"Согутлинское, Беюк-",291,Беюк-Согутлы,40.88365,47.44903,Беюк. согутлы,kondratenko,,,map,,Segyutyu 0.863; Böyük Söyüdlü 0.82; Shekili 0.757
 Арешский,Тюркменское,292,"Тюркменъ, коч.",40.85927,47.65296,Tyurkman,geonames,800714,1.03,name,Тюркман,Tyurkman 1.03; Turan 0.863; Pirkend 0.744
 Арешский,Хосровское,293,Араб-Кюкель,40.67142,47.58924,Arab,geonames,587244,1.03,name,Arab-Kyukel’,Arab 1.03; Qarabağlar 0.75; Arabsheki 0.736
 Арешский,Хосровское,294,Гушунъ,40.67846,47.55844,Gyushyun,geonames,586372,1.03,name,Гюшун,Gyushyun 1.03
@@ -295,10 +295,10 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Арешский,Чархакинское,297,Карадигинъ горный,40.81887,47.67404,Qaradeyin,geonames,586206,0.813,society,Karadigin,Qaradeyin 0.813
 Арешский,Чархакинское,298,Шафилы,40.84051,47.694,Shafily,geonames,585091,1.03,name,Шафылы,Shafily 1.03; Shekili 0.863; Şıxlı 0.757
 Арешский,Чархакинское,299,Чархана,40.83438,47.70464,Çarxana,geonames,586888,1.03,name,Çarxana,Çarxana 1.03; Chereke 0.8; Shordekhne 0.736
-Арешский,Чанах-булагское,300,Чанах-булагъ,,,,,,,,,Çanaqbulaq 0.848; Chelyabilyar 0.737; Qarabulaq 0.73
-Джебраильский,Абдурахман-беглинское,301,Абдурахманбеглу,,,,,,,,,Yukhary Abdurakhmanly 0.91; Ashagy Abdurakhmanly 0.91; Karakhanbeyli 0.75
-Джебраильский,Абдурахман-беглинское,302,Сариларъ (Зейнал-Абдинъ),,,,,,,,,Sarıl 1; Sarıcallı 0.863; Sofulu 0.83
-Джебраильский,Абдурахман-беглинское,303,Сеид-Ахмедлу,,,,,,,,,Yukhary Seidakhmedli 1.03; Ashagy Seidakhmedli 1.03; Seyidmahmudlu 0.887
+Арешский,Чанах-булагское,300,Чанах-булагъ,40.71248,47.69769,Чанах-булагъ,kondratenko,,,map,,Çanaqbulaq 0.848; Chelyabilyar 0.737; Qarabulaq 0.73
+Джебраильский,Абдурахман-беглинское,301,Абдурахманбеглу,39.51274,47.26066,Абдурахманбеглу,kondratenko,,,map,,Yukhary Abdurakhmanly 0.91; Ashagy Abdurakhmanly 0.91; Karakhanbeyli 0.75
+Джебраильский,Абдурахман-беглинское,302,Сариларъ (Зейнал-Абдинъ),39.5397,47.29965,,kondratenko,,,map-society,,Sarıl 1; Sarıcallı 0.863; Sofulu 0.83
+Джебраильский,Абдурахман-беглинское,303,Сеид-Ахмедлу,39.5397,47.29965,,kondratenko,,,map-society,,Yukhary Seidakhmedli 1.03; Ashagy Seidakhmedli 1.03; Seyidmahmudlu 0.887
 Джебраильский,Алиханлинское,304,Алиханлу,39.60204,47.38462,Alxanlı,geonames,148553,1.03,name,Alixanlu,Alxanlı 1.03; Əlixanlı (Xudafərin) 0.933; Alıkeyxanlı 0.854
 Джебраильский,Алиханлинское,305,Кюрд-Махмудлу,39.60215,47.4507,Yuxarı Kürdmahmudlu,geonames,147645,1.03,name,Юхары-Кюрдмахмудлу,Yuxarı Kürdmahmudlu 1.03; Seyidmahmudlu 0.848; Kürd Mahruzlu 0.818
 Джебраильский,Бегманлинское,306,Араспарлу,39.51235,47.48796,,,,,approx,,Aleskerly 0.78; Qaradağlı 0.75; Orankala 0.75
@@ -322,7 +322,7 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Джебраильский,Каргабазарское,324,Халафта,39.55548,47.12077,Khalafsha,geonames,147827,0.887,society,Xalafsa,Khalafsha 0.887; Khalapyu 0.887; Aşağı Xələfbəyli 0.78
 Джебраильский,Каргабазарское,325,Яр-Пир-Ахмедлу,39.52936,47.14202,Yal Pir-Akhmedly,geonames,146965,0.939,society,Ял Пирахмедли,Yal Pir-Akhmedly 0.939; Pirakhmedly 0.93; Yarakhmedli 0.872
 Джебраильский,Кяримбеклинское,326,Кяримбеклу,39.50852,47.41672,Kerimbeyli,geonames,147843,0.919,name,Kerimbejli,Kerimbeyli 0.919; Qarakollu 0.83; Kəribli 0.83
-Джебраильский,Шахсеванское,327,Шахсеванъ,,,,,,,,,Shakhsevan Vtoroye 0.872; Shakhsevan Pervoye 0.872; Xırmancıq 0.808
+Джебраильский,Шахсеванское,327,Шахсеванъ,39.59568,47.56709,Шахсеванъ,kondratenko,,,map,,Shakhsevan Vtoroye 0.872; Shakhsevan Pervoye 0.872; Xırmancıq 0.808
 Джебраильский,Шихилинское,328,Айбасанлы,39.55,47.25,Aşağı Aybasanlı,geonames,148485,1.03,society,Aybasanlı,Yuxarı Aybasanlı 1.03; Aşağı Aybasanlı 1.03; Kochbek 0.78
 Джебраильский,Шихилинское,329,Дилагарда,39.67381,47.14361,Dilağarda,geonames,13443885,1,society,Дылагарда,Araz Dilağarda 1.03; Dilağarda 1.03; Skobelevka 1
 Джебраильский,Шихилинское,330,Джомартлу,39.59021,47.22251,,,,,approx,,Zamzur 0.799; Novoye Chemenly 0.714; خمارلو 0.714
@@ -338,7 +338,7 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Джебраильский,Эдиллинское,340,Кюгуллу,39.56223,47.08312,,,,,approx,,Hüngütlü 0.799; Quşçular 0.757; Quşçular 0.757
 Джебраильский,Эдиллинское,341,Эдиллу,39.56223,47.06801,Edilli,geonames,148129,1.03,name,Эдилли,Edilli 1.03; Mehdili 0.83; Mandılı 0.83
 Джебраильский,Эдиллинское,342,Хирманджугъ,39.5449,47.09312,Xırmancıq,geonames,147758,1.03,name,Хирманджиг,Xırmancıq 1.03; Ciraquz 0.736
-Джебраильский,Ягловендское,343,Ягловендъ,,,,,,,,,Yukhary Yaglevend 1.03; Yaglavend 0.971; Agdzhakend 0.78
+Джебраильский,Ягловендское,343,Ягловендъ,39.45833,47.38635,Ягловендъ,kondratenko,,,map-society,,Yukhary Yaglevend 1.03; Yaglavend 0.971; Agdzhakend 0.78
 Джебраильский,Агалыхское,344,Абдулла-Саркеръ,39.43037,47.33461,,,,,approx,,Aleskerly 0.73; Qobu Dilağarda 0.72
 Джебраильский,Агалыхское,345,Араятлу (Мустафа-Саркерлу),39.48143,47.37671,Arayatlı,geonames,148517,1.03,name,Араятлы,Arayatlı 1.03; Horovlu 0.83; Arakül 0.83
 Джебраильский,Агалыхское,346,Ахмед-Алиларъ (Новруз-Алиларъ),39.43037,47.33461,Akhmedalylar,geonames,148599,1.03,name,АьхӀмаьдалилар,Akhmedalylar 1.03; Akhmedbeyli 0.919; Bolsulu 0.83
@@ -447,11 +447,11 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Джебраильский,Кюрд-Мафрузлинское,448,Силалу,39.19734,46.71231,Silali,geonames,147231,1,name,Silali,Silali 1; Soltanlı 0.863; Süleymanlı 0.744
 Джебраильский,Мафрузлинское,449,Мафрузлу (Мирза-Ахвердилу),39.23465,46.72899,Mahruzlu,geonames,394043,0.887,society,Мехризли,Mafruzlu (Xudafərin) 1; Mahruzlu 0.887; Emirvarly 0.767
 Джебраильский,Мафрузлинское,450,Муганлу,39.09231,46.7753,Muğanlı,geonames,147466,1,society,Муганлы,Muğanlı 1.03; Muğanlı 1; Fuğanlı 0.863
-Джебраильский,Машанлинское,451,Ахмед-агалу,,,,,,,,,Akhmedalylar 0.854; Akhmedbeyli 0.808; Əhmədli 0.8
-Джебраильский,Машанлинское,452,Вейсаллу,,,,,,,,,Veysalli 1.03; Veysally 1; Dashveysaly 0.83
-Джебраильский,Машанлинское,453,Гафрузлу,,,,,,,,,Mafruzlu (Xudafərin) 0.857; Horadiz 0.744; Horadiz 0.744
-Джебраильский,Машанлинское,454,Машанлу,,,,,,,,,Mashanly 1.03; Maşanlı 1.03; Dağ Maşanlı 0.854
-Джебраильский,Машанлинское,455,Сириклу,,,,,,,,,Sirik 0.939; Aşağı Sirik 0.939; Sirik 0.939
+Джебраильский,Машанлинское,451,Ахмед-агалу,39.40318,46.94553,,kondratenko,,,map-society,,Akhmedalylar 0.854; Akhmedbeyli 0.808; Əhmədli 0.8
+Джебраильский,Машанлинское,452,Вейсаллу,39.40318,46.94553,,kondratenko,,,map-society,,Veysalli 1.03; Veysally 1; Dashveysaly 0.83
+Джебраильский,Машанлинское,453,Гафрузлу,39.40318,46.94553,,kondratenko,,,map-society,,Mafruzlu (Xudafərin) 0.857; Horadiz 0.744; Horadiz 0.744
+Джебраильский,Машанлинское,454,Машанлу,39.38476,46.98064,Машанлу,kondratenko,,,map,,Mashanly 1.03; Maşanlı 1.03; Dağ Maşanlı 0.854
+Джебраильский,Машанлинское,455,Сириклу,39.40318,46.94553,,kondratenko,,,map-society,,Sirik 0.939; Aşağı Sirik 0.939; Sirik 0.939
 Джебраильский,Солтанлинское,456,Алибеклу (Кёвдаръ),39.30407,47.06105,Kavdar,geonames,147869,1.03,name,Кавдар,Kavdar 1.03; Yukhary Alibeyli 0.857; Köhnə Kövsər 0.833
 Джебраильский,Солтанлинское,457,Мазралу,39.29201,47.08196,Mazraly,geonames,147540,1.03,name,Мазралы,Mazraly 1.03; Dzoragyugh 0.939; Mehrablı 0.833
 Джебраильский,Солтанлинское,458,Сариджалу,39.29424,47.09718,Sarıcallı,geonames,147249,1.03,name,Сарыджаллы,Sarıcallı 1.03; Sarıl 0.833; Əryallı 0.833
@@ -459,8 +459,8 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Джебраильский,Тумаслинское,460,Тумаслу,39.37518,46.76355,Tovmasar,osm,n7367037310,0.939,name,Tumas,Tovmasar 0.939; Ulaşlı 0.727; Qiyaslı 0.727
 Джебраильский,Тумаслинское,461,Усуб-беглу (Юсуф-беклу),39.3201,46.70333,Yusifbeyli,geonames,146911,0.875,society,Юсифбейли,Yusifbeyli 0.875; İşıqlı 0.799; İsaqlı 0.799
 Джебраильский,Тумаслинское,462,Челабиляръ,39.38611,46.82868,Çələbilər,geonames,12055327,1.03,name,Çələbilər,Çələbilər 1.03; Aşağı Xələfbəyli 0.736; Çullu 0.73
-Джебраильский,Ханлыхское,463,Ханлыхъ,,,,,,,,,Xanlıq 0.863
-Джебраильский,Ханлыхское,464,Чапикъ,,,,,,,,,Aşağı Çəmənli 0.727
+Джебраильский,Ханлыхское,463,Ханлыхъ,39.26803,46.72453,Ханлыхъ,kondratenko,,,map,,Xanlıq 0.863
+Джебраильский,Ханлыхское,464,Чапикъ,39.27335,46.78366,,kondratenko,,,map-society,,Aşağı Çəmənli 0.727
 Джебраильский,Ходжинское,465,Бала-Салтанлу,39.36115,46.68101,Balasoltanlı,geonames,148389,1,name,Бала-Солтанлы,Balasoltanlı 1; Soltanlı 0.808; Bala Bəhmənli 0.757
 Джебраильский,Ходжинское,466,Падаръ,39.3745,46.67614,Padar,geonames,147353,1,name,Падар,Padar 1; Banazur 0.863; Kavdar 0.757
 Джебраильский,Ходжинское,467,Ходжикъ 1-й,39.34464,46.68839,Xocik,geonames,147773,1,name,Ходжик,Xocik 1; Axullu 0.939; Hacılı 0.83
@@ -491,14 +491,14 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Джеванширский,Геранинское,492,Карагаджи,40.46375,47.14745,Qarağacı,geonames,586197,1.03,society,Карагаджи,Qarağacı 1.03; Qaraağacı 1.03; Qaragüney 0.854
 Джеванширский,Геранинское,493,Кущиляръ,40.43333,47.13333,Quşçular,geonames,585742,0.887,name,Quşçular,Quşçular 0.887; Kylyshly 0.799; Kiliselli 0.799
 Джеванширский,Геранинское,494,Мирза-Джафарлу,40.47205,47.16288,Mirzadzhafarli,geonames,585506,1.03,name,Мирзаьджаьфаьрли,Mirzadzhafarli 1.03; Mirasafly 0.767; Dzhafarly 0.736
-Джеванширский,Дорбатлинское,495,Дорбатлу-Караманлу,,,,,,,,,
+Джеванширский,Дорбатлинское,495,Дорбатлу-Караманлу,40.45421,46.94162,,kondratenko,,,map-society,,
 Джеванширский,Евлахское,496,Джинлы,40.54611,47.00389,Dzhinly,geonames,586635,1.03,society,Джинлы,Dzhinly 1.03; Khachindorbatli 1; Çullu 0.857
 Джеванширский,Евлахское,497,Коюн-бинаси,40.51197,47.05777,Koyunbinasi,geonames,585799,1.03,name,Коюнбинаси,Koyunbinasi 1.03; Kasymbinasi 0.887; Imambinasi 0.83
 Джеванширский,Евлахское,498,Мал-бинаси,40.5048,47.08239,Malbinesi,geonames,585597,0.83,society,Malbynesy,Malbinesi 0.83; Imambinasi 0.78; Kasymbinasi 0.736
-Джеванширский,Еддитапинское,499,Гюлабендъ (Гюлабандлу),,,,,,,,,Gyulyabatly 0.854; Qızıloba 0.78; Galaboyun 0.78
-Джеванширский,Еддитапинское,500,Кенгерлу,,,,,,,,,Kengerly 1.03; Kengerlu 1; Salakhly-Kengerli 0.887
-Джеванширский,Еддитапинское,501,Сариджалу-Еддитапа,,,,,,,,,"Sarıcalı (40° 22' N 47° 01' E), Tartar 0.804; Yuxarı Sarıcalı 0.804"
-Джеванширский,Еддитапинское,502,Сариджалу-Сарванляръ,,,,,,,,,Sarıcalı 0.789; Yuxarı Sarıcalı 0.74
+Джеванширский,Еддитапинское,499,Гюлабендъ (Гюлабандлу),40.36924,46.9989,,kondratenko,,,map-society,,Gyulyabatly 0.854; Qızıloba 0.78; Galaboyun 0.78
+Джеванширский,Еддитапинское,500,Кенгерлу,40.36924,46.9989,,kondratenko,,,map-society,,Kengerly 1.03; Kengerlu 1; Salakhly-Kengerli 0.887
+Джеванширский,Еддитапинское,501,Сариджалу-Еддитапа,40.34138,46.98803,Сариджалу Еддитапа,kondratenko,,,map,,"Sarıcalı (40° 22' N 47° 01' E), Tartar 0.804; Yuxarı Sarıcalı 0.804"
+Джеванширский,Еддитапинское,502,Сариджалу-Сарванляръ,40.36924,46.9989,,kondratenko,,,map-society,,Sarıcalı 0.789; Yuxarı Sarıcalı 0.74
 Джеванширский,Карадаглинское,503,Джамиллы 2-е,40.40013,46.91989,Dzhamilli,geonames,586673,1.03,society,Джамыллы,Dzhamilli 1.03; Dzhamilli 1.03; Çaylı 0.919
 Джеванширский,Карадаглинское,504,Карадаглу 1-е,40.43457,46.94737,Qaradağlı,geonames,586215,1.03,society,Карадаглы,Qaradağlı 1.03; Qaradağlı 1.03; Qaradağlı 1.03
 Джеванширский,Карадаглинское,505,Кевдадыхъ,40.43835,46.92217,Kövdadıq,geonames,586011,1.03,name,Кевдадых,Kövdadıq 1.03; Suqovuşan 0.75
@@ -592,7 +592,7 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Джеванширский,Калантарлинское,593,Угурлу-беглы,40.3387,47.08989,,,,,approx,,Tazakend 0.808; Yerliağalı 0.767; Gyulyabatly 0.767
 Джеванширский,Калантарлинское,594,Хойлу,40.3387,47.08989,,,,,approx,,Çaylı 0.919; Hacılı 0.919; Hacılar 0.919
 Джеванширский,Калантарлинское,595,Ширванлу 1-е,40.3387,47.08989,,,,,approx,,Şirvanlı 1.03; Aşağı Şurtan 0.83; Sarvanlar 0.83
-Джеванширский,Каракоюнлинское,596,Каракоюнлу Хана,,,,,,,,,Qaraqoyunlu 0.813; Qaraqoyunlu 0.813; Նորաբակ 0.783
+Джеванширский,Каракоюнлинское,596,Каракоюнлу Хана,40.34555,47.21716,Каракоюнлу,kondratenko,,,map,,Qaraqoyunlu 0.813; Qaraqoyunlu 0.813; Նորաբակ 0.783
 Джеванширский,Клычлинское,597,Клычлу,40.40851,47.31075,,,,,approx,,Qılınclı 0.953; Dalqılınclı 0.953; Qalayçılar 0.83
 Джеванширский,Клычлинское,598,Таракема-Тумаслу,40.40851,47.31075,,,,,approx,,Tərəkəmələr 0.783
 Джеванширский,Клычлинское,599,Челябиляръ,40.40851,47.31075,Chelyabilyar,geonames,586861,1.03,name,Çələbilər,Chelyabilyar 1.03; Çaylı 0.799; Çərəlilər 0.78
@@ -668,8 +668,8 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Джеванширский,Карабекское,669,Топашенъ,40.2969,46.6959,Tonashen,geonames,584829,0.905,name,Тонашен,Tonashen 0.905; Çobangərəhməz 0.83; Alaşan 0.83
 Джеванширский,Карабекское,670,"—Карабекъ, Улу-",40.2969,46.72039,,,,,approx,,Mokhratag 0.905; Norabak 0.857; Arabaçılar 0.854
 Джеванширский,Касапетское,671,Касапетъ,40.17542,46.74074,Çıraqlı,geonames,586121,1.03,name,Касапет,Çıraqlı 1.03; Yayıcı 0.744; Askipara 0.744
-Джеванширский,Кенгерлинское,672,Кенгерлу-Кизиллу,,,,,,,,,Kengerly 0.73; Salakhly-Kengerli 0.73; Kengerlu 0.7
-Джеванширский,Кенгерлинское,673,Кенгерлу-Салахлу,,,,,,,,,
+Джеванширский,Кенгерлинское,672,Кенгерлу-Кизиллу,40.09129,46.83506,Кен[гер]лу,kondratenko,,,map,,Kengerly 0.73; Salakhly-Kengerli 0.73; Kengerlu 0.7
+Джеванширский,Кенгерлинское,673,Кенгерлу-Салахлу,40.09129,46.83506,Кен[гер]лу,kondratenko,,,map,,
 Джеванширский,Котурлинское,674,Гатам-беглу (Зильфугарлу),40.07525,46.22639,Zülfüqarlı,geonames,584552,1.03,name,Зульфугарлы,Zülfüqarlı 1.03; Otaqlı 0.744; Qaramanlı 0.736
 Джеванширский,Котурлинское,675,Котурлы,39.96752,46.25094,Qalaboyun,geonames,147700,1.03,name,Koturly,Qalaboyun 1.03; Şatırlı 0.863; Kyabirli 0.863
 Джеванширский,Сирхавендское,676,Паправендъ,40.1548,46.84433,Papravend,geonames,585288,1.03,name,Паправенд,Papravend 1.03; Imeret-Gerevend 0.808; Yerevanly 0.78
@@ -710,8 +710,8 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Зангезурский,Тативское,711,Татевъ (Тативъ),39.38611,46.24451,Tatev,geonames,174748,1.03,name,Татев,Tatev 1.03; Tatar 0.83; Tatar 0.8
 Зангезурский,Тативское,712,Танзатапъ,39.36056,46.27139,Տանձատափ,wikidata,Q2223968,1.03,name,Tənzətap,Տանձատափ 1.03; Tanahat 0.799; Tandzaver 0.736
 Зангезурский,Тативское,713,Хотананъ,39.44355,46.33637,Хот,wikidata,Q2670432,1.03,society,Xotanan,Nerkin Khotanan 1.03; Хот 1.03; Achanan 0.887
-Зангезурский,Узское,714,Каракилиса 1,,,,,,,,,Sisian 1.03; Qarıqışlaq 0.83; Karakishlag 0.813
-Зангезурский,Узское,715,Узъ,,,,,,,,,
+Зангезурский,Узское,714,Каракилиса 1,39.53222,46.0556,,kondratenko,,,map-society,,Sisian 1.03; Qarıqışlaq 0.83; Karakishlag 0.813
+Зангезурский,Узское,715,Узъ,39.50521,46.03974,Узъ,kondratenko,,,map,,
 Зангезурский,Хотское,716,Караунджъ,39.47383,46.35963,Karahunj,geonames,174868,1.03,name,Караундж,Karahunj 1.03; Qaragöl 0.863; Kajaran 0.863
 Зангезурский,Хотское,717,Хотъ,39.47383,46.35963,,,,,approx,,Hat 1.03; Khot 1.03
 Зангезурский,Шалатское,718,Маэра,39.53332,45.90832,Mutsk,geonames,174950,0.919,society,Mazra,Mazra 0.919; Katnarat 0.919; Mutsk 0.919
@@ -743,8 +743,8 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Зангезурский,Гарарское,744,Аліанлы,39.52963,46.72961,,,,,approx,,İmanlar 0.863; Dolanlar 0.863; Xallanlı 0.833
 Зангезурский,Гарарское,745,Аліанлы (Башаратъ),39.46766,46.72961,Başarat,geonames,148372,1.03,name,Башарат,Başarat 1.03; İmanlar 0.863; Dolanlar 0.863
 Зангезурский,Гарарское,746,Гараръ (Хараль),39.52963,46.66178,Dzhafarabad,geonames,148475,0.919,society,Арар,Chereli 0.939; Dzhafarabad 0.919; Karadere 0.909
-Зангезурский,Герензурское,747,Герензуръ,,,,,,,,,Arajadzor 0.83; Ernadzor 0.83; Ağbulaq 0.8
-Зангезурский,Герусинское,748,Герусы (Зангезуръ),,,,,,,,,Kapan 1.03; Goris 1.03; Hartashen 1.03
+Зангезурский,Герензурское,747,Герензуръ,39.5488,46.53576,,kondratenko,,,map-society,,Arajadzor 0.83; Ernadzor 0.83; Ağbulaq 0.8
+Зангезурский,Герусинское,748,Герусы (Зангезуръ),39.51139,46.35583,Герусы,kondratenko,,,map,,Kapan 1.03; Goris 1.03; Hartashen 1.03
 Зангезурский,Джагазурское,749,Джагазуръ 1-й,39.59832,46.47247,Cağazur,geonames,148159,1.03,name,Джагазур,Cağazur 1.03; Kapan 0.83; Hartashen 0.83
 Зангезурский,Джагазурское,750,Забугъ,39.59115,46.54302,Zabux,geonames,146908,1.03,name,Zabug,Zabux 1.03; Sobu 0.83
 Зангезурский,Джагазурское,751,Караинъ (Караюзъ),39.61945,46.57144,Kyaravuz,geonames,147886,0.953,society,Kərəvuz,Kyaravuz 0.953; Karahunj 0.953; Qaragöl 0.939
@@ -752,17 +752,17 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Зангезурский,Джагазурское,753,Сус-Забугъ,39.61945,46.54302,,,,,approx,,Zabux 0.799; Susanlıq 0.75; Shusha 0.714
 Зангезурский,Джагазурское,754,Сюмюклы,39.61945,46.54302,,,,,approx,,İşıqlı 0.757; Syunik 0.757; Şuşulu 0.727
 Зангезурский,Джагазурское,755,Чайкендъ,39.6576,46.55767,Lachikend,geonames,11211229,0.854,society,Лачикенд,Getishen 1.03; Chaykend 1; Lachikend 0.854
-Зангезурский,Джеджимлинское,756,Джеджимлу 1-е,,,,,,,,,Cicimli 0.863; Tkhrunik 0.83; Hacılar 0.757
-Зангезурский,Джеджимлинское,757,Джеджимлу 2-е,,,,,,,,,Cicimli 0.863; Tkhrunik 0.83; Hacılar 0.757
+Зангезурский,Джеджимлинское,756,Джеджимлу 1-е,39.51498,46.50586,Джеджимлу,kondratenko,,,map,,Cicimli 0.863; Tkhrunik 0.83; Hacılar 0.757
+Зангезурский,Джеджимлинское,757,Джеджимлу 2-е,39.51498,46.50586,Джеджимлу,kondratenko,,,map,,Cicimli 0.863; Tkhrunik 0.83; Hacılar 0.757
 Зангезурский,Дыгское,758,Аравусъ,39.56547,46.4686,Aravus,geonames,174987,1.03,society,Аравус,Aravus 1.03; Arevis 1.03; Yeremis 1.03
 Зангезурский,Дыгское,759,Дыгъ,39.55826,46.48054,Tegh,geonames,174743,1.03,name,Dyg,Tegh 1.03
-Зангезурский,Казикурдалинское,760,Аличадырлу-Мазмазакъ,,,,,,,,,
-Зангезурский,Казикурдалинское,761,Казикурдалы,,,,,,,,,Qazıxanlı 0.737
-Зангезурский,Каладарасинское,762,Каладараси,,,,,,,,,Mets Shen 1.03; Qaladərəsi 1.03; Alvank 0.78
+Зангезурский,Казикурдалинское,760,Аличадырлу-Мазмазакъ,39.52472,46.56437,,kondratenko,,,map-society,,
+Зангезурский,Казикурдалинское,761,Казикурдалы,39.53044,46.55678,Казикурдалы,kondratenko,,,map,,Qazıxanlı 0.737
+Зангезурский,Каладарасинское,762,Каладараси,39.66828,46.60594,Каладараси,kondratenko,,,map,,Mets Shen 1.03; Qaladərəsi 1.03; Alvank 0.78
 Зангезурский,Каракишлагское,763,Авраянъ 2-й (Алхаслу),39.74415,46.35022,Alxaslı,geonames,148552,1.03,name,Алхаслы,Alxaslı 1.03; Ulaşlı 0.863; İşıqlı 0.863
 Зангезурский,Каракишлагское,764,Каракишлагъ,39.67116,46.38718,Qarıqışlaq,geonames,147899,0.939,society,Qaraqışlaq,Qarıqışlaq 0.939; Karakishlag 0.939; Qaralar 0.919
-Зангезурский,Малибеклинское,765,Джагазуръ 2-й,,,,,,,,,Cağazur 1.03; Kapan 0.83; Hartashen 0.83
-Зангезурский,Малибеклинское,766,Малибеглы,,,,,,,,,
+Зангезурский,Малибеклинское,765,Джагазуръ 2-й,39.61871,46.44105,,kondratenko,,,map-society,,Cağazur 1.03; Kapan 0.83; Hartashen 0.83
+Зангезурский,Малибеклинское,766,Малибеглы,39.63855,46.48594,Малибеглы,kondratenko,,,map,,
 Зангезурский,Моллаларское,767,Абдалларъ (Оруджлу),39.63742,46.54977,Laçın,geonames,147625,1.03,name,Абдаляр,Laçın 1.03; Arduşlu 0.939; Ardıclı 0.939
 Зангезурский,Моллаларское,768,Гочазъ,39.67834,46.45604,Hoçaz,geonames,148038,1.03,name,Гочаз,Hoçaz 1.03; Qalaça 0.799
 Зангезурский,Моллаларское,769,Зейва (Зейвалу),39.66487,46.41919,Zeyva,geonames,146881,1.03,society,Зейва,Zeyva 1.03; Davit Bek 1.03; Zağalar 0.909
@@ -770,8 +770,8 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Зангезурский,Моллаларское,771,Кизильджигъ (Калджа),39.64158,46.50529,Qızılca,geonames,147629,0.83,society,Кызылджа,Qalaça 0.939; Ghzljugh 0.905; Qızılca 0.83
 Зангезурский,Моллаларское,772,Моллаларъ,39.66777,46.49034,Mollalar,geonames,147479,1.03,society,Моллалар,Mollalar 1.03; Mollalı 1.03; Silali 0.83
 Зангезурский,Моллаларское,773,Уджанабасъ,39.66487,46.49034,,,,,approx,,Geyarbas 0.78; Canbar 0.744; Uzhanis 0.744
-Зангезурский,Мусульманларское,774,Дакяганъ,,,,,,,,,Andokavan 0.78; Hamletavan 0.78; Xocahan 0.744
-Зангезурский,Мусульманларское,775,Мусульманларъ,,,,,,,,,Milanlı 0.83; Şeylanlı 0.78; Myuskanly 0.78
+Зангезурский,Мусульманларское,774,Дакяганъ,39.58048,46.66392,,kondratenko,,,map-society,,Andokavan 0.78; Hamletavan 0.78; Xocahan 0.744
+Зангезурский,Мусульманларское,775,Мусульманларъ,39.60223,46.63181,Мусульманларъ,kondratenko,,,map,,Milanlı 0.83; Şeylanlı 0.78; Myuskanly 0.78
 Зангезурский,Пичанисское,776,Карабеклу,39.88097,46.3849,Karabeyli,geonames,147934,0.963,name,K’arabak,Karabeyli 0.963; Keçikli 0.83; Qaragöl 0.83
 Зангезурский,Пичанисское,777,Касум-ушаги-Кюрдгаджи,39.88097,46.44539,,,,,approx,,
 Зангезурский,Пичанисское,778,Пичанисъ (Пчанисъ),39.80356,46.44539,Pichenis,geonames,147335,1.03,name,Пичаьнис,Pichenis 1.03; Chapni 0.799; Zangilan 0.744
@@ -879,7 +879,7 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Зангезурский,Рабандское,880,Сарилъ 2-й,39.14918,46.76158,,,,,approx,,Sarıl 1.03; Şayıflı 0.83; Seyidlar 0.83
 Зангезурский,Рабандское,881,Таракема 1-е,39.14918,46.76158,,,,,approx,,Tarakema 1; Tərəkəmələr 0.941; Arakhish 0.78
 Зангезурский,Рабандское,882,Шарифанъ,39.1334,46.78975,Sharifan,geonames,147197,1.03,name,Шарифан,Sharifan 1.03; Şərikan 0.905; Shahumyan 0.83
-Зангезурский,Сараллинское,883,Сараллу,,,,,,,,,Arevis 0.863; Silali 0.83; Sarıl 0.83
+Зангезурский,Сараллинское,883,Сараллу,39.40282,46.59675,,kondratenko,,,map-society,,Arevis 0.863; Silali 0.83; Sarıl 0.83
 Зангезурский,Сары-ятагское,884,Молла-Буранъ,39.35346,46.68183,Mollabürhan,geonames,147482,1.03,name,Molla-buran,Mollabürhan 1.03; İşıqlı 0.767; Akhlatyan 0.736
 Зангезурский,Сары-ятагское,885,Сары-ятагъ,39.3786,46.65988,Sarıyataq,geonames,147243,1.03,name,Сарыятаг,Sarıyataq 1.03; Saratak 0.83; Vanek 0.83
 Зангезурский,Сафулинское,886,Агбисъ,39.20902,46.62923,Ağbiz,geonames,148624,1.03,name,Агбис,Ağbiz 1.03; Mayis 0.757; Ağanus 0.757
@@ -923,9 +923,9 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Зангезурский,Алидаринское,924,Марзагидъ,39.00564,46.32844,Marzkid,osm,n8182587030,0.83,society,Marzkid,Maragyugh 0.83; Marzkid 0.83; Meghri 0.799
 Зангезурский,Астазурское,925,Астазуръ,38.93746,46.37149,Shvanidzor,geonames,174765,1.03,name,Астазур,Shvanidzor 1.03; Dastakert 0.83; Cağazur 0.744
 Зангезурский,Астазурское,926,Тугутъ,38.93746,46.37149,,,,,approx,,Ataqut 0.8; Teghut 0.757; Nürgüt 0.727
-Зангезурский,Бартазское,927,Бартазъ,,,,,,,,,Bartaz 1.03; Bartaz 1; Gartiz 0.863
-Зангезурский,Бартазское,928,Даллаклу,,,,,,,,,Herashen 1.03; Dellyakli 1; Dolanlar 0.863
-Зангезурский,Бартазское,929,Пушанлу,,,,,,,,,Paşalar 0.769; Tsirak 0.769; Iskenderbeyli 0.757
+Зангезурский,Бартазское,927,Бартазъ,38.97529,46.58155,[Б/В]артазъ,kondratenko,,,map,,Bartaz 1.03; Bartaz 1; Gartiz 0.863
+Зангезурский,Бартазское,928,Даллаклу,38.94383,46.55333,,kondratenko,,,map-society,,Herashen 1.03; Dellyakli 1; Dolanlar 0.863
+Зангезурский,Бартазское,929,Пушанлу,38.94383,46.55333,,kondratenko,,,map-society,,Paşalar 0.769; Tsirak 0.769; Iskenderbeyli 0.757
 Зангезурский,Вартаназурское,930,Ванкъ,39.04888,46.25075,Vank,geonames,174732,1.03,name,Ванк,Vank 1.03; Vanek 0.919; Dzhakhangirbeyli 0.857
 Зангезурский,Вартаназурское,931,Вартаназуръ,38.96994,46.21563,Vardanidzor,geonames,174730,0.83,society,Vartandzor,Ernadzor 0.854; Vardanidzor 0.83; Verin Vardanidzor 0.792
 Зангезурский,Вартаназурское,932,Вартаназуръ 2-й,39.05548,46.21563,,,,,approx,,Ernadzor 0.854; Vardanidzor 0.83; Verin Vardanidzor 0.792
@@ -975,7 +975,7 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Зангезурский,Легвазское,976,Курисъ,38.93252,46.1787,Kuris,geonames,174837,1.03,name,Курис,Kuris 1.03; Kitsk 0.919; Köhnəkənd 0.919
 Зангезурский,Легвазское,977,Легвазъ,38.9385,46.2156,Lehvaz,geonames,174834,1.03,name,Legvaz,Lehvaz 1.03; Sultan 0.757; Kaghnut 0.757
 Зангезурский,Легвазское,978,Тей (Гаджилу),39.00012,46.19733,Tey,geonames,11312734,1.03,society,T’ey,Hacılar 1.03; Tey 1.03; Tkhrunik 0.919
-Зангезурский,Мигринское,979,Мигри,,,,,,,,,Mirik 0.83; Meghri 0.83; Mygydere 0.757
+Зангезурский,Мигринское,979,Мигри,38.89164,46.21451,Бол. Мигри,kondratenko,,,map,,Mirik 0.83; Meghri 0.83; Mygydere 0.757
 Зангезурский,Нювадинское,980,Нювады,38.91515,46.44355,Nrnadzor,geonames,174804,1.03,name,Нювади,Nrnadzor 1.03; Noradin 0.799
 Зангезурский,Нювадинское,981,Эйназуръ (Ерназыръ),38.95779,46.46449,Ernadzor,geonames,388496,1.03,name,Ernazir,Ernadzor 1.03; Arajadzor 0.887; Kapan 0.83
 Зангезурский,Ордаклинское,982,Багарлу 1-е,39.01926,46.67469,Baharlı,geonames,148400,1,society,Bagarly,Geghavank 1.03; Baharlı 1; Üçüncü Ağalı 0.83
@@ -991,10 +991,10 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Зангезурский,Охчинское,992,Пир-Довуданъ,39.25,46.13333,Pirdaudan,geonames,174798,0.977,name,Пирдаудан,Pirdaudan 0.977; Zangelan 0.767
 Зангезурский,Охчинское,993,Фурхутъ (Пирхудъ),39.15928,46.14861,,,,,approx,,Nürgüt 0.833; Vorotnavan 0.83; Pirdaudan 0.799
 Зангезурский,Охчинское,994,Шабадин-Охчи,39.15928,46.14861,,,,,approx,,Yegheg 0.792
-Зангезурский,Пирчеванское,995,Генлыхъ (К—),,,,,,,,,Genlik 0.953; Genlik 0.953; Xanlıq 0.769
-Зангезурский,Пирчеванское,996,Малат-кешишъ,,,,,,,,,Hacıxanlı 0.854; Shusha 0.769; Qoşasu 0.744
-Зангезурский,Пирчеванское,997,Пирчеванъ,,,,,,,,,İrçan 0.83; Zangelan 0.808; Karchevan 0.808
-Зангезурский,Пирчеванское,998,Шагарджикъ 2-й (Таглу),,,,,,,,,Tağlı 1.03; Khintaglar 1; Arevis 0.919
+Зангезурский,Пирчеванское,995,Генлыхъ (К—),39.09067,46.57964,,kondratenko,,,map-society,,Genlik 0.953; Genlik 0.953; Xanlıq 0.769
+Зангезурский,Пирчеванское,996,Малат-кешишъ,39.09067,46.57964,,kondratenko,,,map-society,,Hacıxanlı 0.854; Shusha 0.769; Qoşasu 0.744
+Зангезурский,Пирчеванское,997,Пирчеванъ,39.06962,46.6419,Перчиванъ,kondratenko,,,map,,İrçan 0.83; Zangelan 0.808; Karchevan 0.808
+Зангезурский,Пирчеванское,998,Шагарджикъ 2-й (Таглу),39.09067,46.57964,,kondratenko,,,map-society,,Tağlı 1.03; Khintaglar 1; Arevis 0.919
 Зангезурский,Тирское,999,Думбулу,39.04009,46.75553,,,,,approx,,Turabad 1; Aşağı Cibikli 0.799; Chapotik 0.799
 Зангезурский,Тирское,1000,Минджеванъ 1-й,39.04009,46.75553,,,,,approx,,Mincivan 1; Neghots 0.83; Hatsavan 0.744
 Зангезурский,Тирское,1001,Тири (Дири),39.04009,46.75553,Tiri,geonames,147049,1,name,Тири,Tiri 1; Turşsu 0.919; Turaby 0.83
@@ -1030,9 +1030,9 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Казахский,Кличкендское,1031,Кличкендъ,41.03531,45.14486,Sarigyugh,geonames,616259,0.854,society,Klicʻkʻend,Lich 0.919; Sarigyugh 0.854; Lchkadzor 0.767
 Казахский,Кличкендское,1032,Куненъ,41.04737,45.09915,Kirants,geonames,616667,1.03,name,Куннен,Kirants 1.03; Kiren 0.83; Kayan 0.83
 Казахский,Кличкендское,1033,Пиписъ,41.05571,45.14715,Berkaber,geonames,616732,1.03,name,Пипис,Berkaber 1.03
-Казахский,Краг-Кесаманское (Верхне-),1034,Краг-Кесаманъ верхній,,,,,,,,,Kyrakh Kesaman 0.939; Dag Kesaman 0.887; Karagasanly 0.792
-Казахский,Краг-Кесаманское (Нижне-),1035,Краг-Кесаманъ нижній,,,,,,,,,Kyrakh Kesaman 0.939; Dag Kesaman 0.887; Asagi Kasaman 0.853
-Казахский,Пойлинское,1036,Пойли,,,,,,,,,Poylu 1.03; Poylu 1.03; Govlar 0.78
+Казахский,Краг-Кесаманское (Верхне-),1034,Краг-Кесаманъ верхній,41.21855,45.47493,[В.] Краг-Кесаманъ,kondratenko,,,map,,Kyrakh Kesaman 0.939; Dag Kesaman 0.887; Karagasanly 0.792
+Казахский,Краг-Кесаманское (Нижне-),1035,Краг-Кесаманъ нижній,41.20464,45.50937,Н. Краг-Кесаманъ,kondratenko,,,map,,Kyrakh Kesaman 0.939; Dag Kesaman 0.887; Asagi Kasaman 0.853
+Казахский,Пойлинское,1036,Пойли,41.23312,45.46316,Пойли,kondratenko,,,map,,Poylu 1.03; Poylu 1.03; Govlar 0.78
 Казахский,Узунтальское,1037,Бархударлы,40.99359,45.22564,Barkhudarly,geonames,587051,1.03,name,Бархударлы,Barkhudarly 1.03; Berd 0.83; Beydemirli 0.808
 Казахский,Узунтальское,1038,Ляликендъ,40.99617,45.28016,Vazashen,geonames,616102,1.03,name,Lalikʻend,Vazashen 1.03; Tsaghkavan 0.905; Yenikend 0.83
 Казахский,Узунтальское,1039,Софулы,41.00131,45.21277,Sofulu,geonames,584951,1.03,society,Софулу,Sofulu 1.03; Sofular 1.03; Safarly 0.757
@@ -1076,8 +1076,8 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Казахский,Пирилинское,1077,Пирилы,41.20447,45.39328,Pirili,geonames,585263,1.03,name,Pirili,Pirili 1.03; Qırılı 0.83; Pokr Dili 0.799
 Казахский,Салаглинское (Верхне-),1078,Верхне-Салаглы,41.27524,45.35293,Saloghlu,geonames,585160,1.03,name,Saloğlu,Saloghlu 1.03; Alakol 0.909; Yuxarı Salahlı 0.903
 Казахский,Салаглинское (Нижне-),1079,Нижне-Салаглы,40.90684,45.77025,Alakol,geonames,587330,0.909,society,Alagël’,Saloghlu 1.03; Alakol 0.909; Aşağı Salahlı 0.903
-Казахский,Шихилинское 1-е,1080,Шихилы 1-е,,,,,,,,,İkinci Şıxlı 0.909; I Şıxlı 0.909; Sofulu 0.757
-Казахский,Шихилинское 2-е,1081,Шихилы 2-е,,,,,,,,,İkinci Şıxlı 0.909; I Şıxlı 0.909; Sofulu 0.757
+Казахский,Шихилинское 1-е,1080,Шихилы 1-е,41.29562,45.09647,Шихлы 1,kondratenko,,,map,,İkinci Şıxlı 0.909; I Şıxlı 0.909; Sofulu 0.757
+Казахский,Шихилинское 2-е,1081,Шихилы 2-е,41.27908,45.15245,Шихлы 2,kondratenko,,,map,,İkinci Şıxlı 0.909; I Şıxlı 0.909; Sofulu 0.757
 Казахский,Делижанское (Ново-),1082,Головино,40.71306,44.84944,Golovino,geonames,616656,1.03,name,Головино,Golovino 1.03; Berdavan 0.744; Berd 0.736
 Казахский,Делижанское (Ново-),1083,Делижанъ новый,40.74037,44.86344,Dilijan,geonames,616752,1.03,name,Delijan,Dilijan 1.03; Ijevan 0.799; Dellyakli 0.714
 Казахский,Делижанское (Старо-),1084,Делижанъ стар.,40.75048,44.96847,,,,,approx,,Dilijan 1.03; Ijevan 0.799; Dellyakli 0.714
@@ -1101,7 +1101,7 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Казахский,Башкендское,1102,Чамбаракъ,40.59655,45.35498,Chambarak,geonames,616786,1.03,name,Чамбарак,Chambarak 1.03; Çaxmaqlı 0.736; Noyemberyan 0.736
 Казахский,Бозанганлинское,1103,Бозанганлы,41.06444,45.7975,Bozalqanlı,geonames,586943,0.887,society,Boz-Bozanganly,Bozalqanlı 0.919; Bozalqanlı 0.887
 Казахский,Бозанганлинское,1104,Кирзанъ,41.06308,45.76575,Hunanlar,geonames,585881,1.03,name,Кирзан,Hunanlar 1.03; Kiren 0.939; Kirants 0.863
-Казахский,Гёгджалинское,1105,Гёгджалы,,,,,,,,,Asagi Goycali 0.939; Geyalli 0.939; Goycali 0.863
+Казахский,Гёгджалинское,1105,Гёгджалы,41.0404,45.49839,Гёджалу?,kondratenko,,,map,,Asagi Goycali 0.939; Geyalli 0.939; Goycali 0.863
 Казахский,Джирдаханское,1106,Азаплы,40.92535,45.66167,Azaplı,geonames,587117,1.03,name,Азаплы,Azaplı 1.03; Gazakh 0.78; Mazamly 0.757
 Казахский,Джирдаханское,1107,Асрик-Байрамлы,41.01843,45.66167,,,,,approx,,Ali-Bayramly 0.848; Bayramlı 0.767; Alibeyli 0.73
 Казахский,Джирдаханское,1108,Джирдаханъ,41.01843,45.60905,Düz Cırdaxan,geonames,586699,0.872,society,Дуьз Джирдахан,Düz Cırdaxan 0.872; Asrikdzhyrdakhan 0.792; Yenokavan 0.78
@@ -1115,8 +1115,8 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Казахский,Кулалинское,1116,Тазакендъ,40.87683,45.45722,Norashen,geonames,616346,1.03,society,Tʻazakʻend,Norashen 1.03; თაზაქენდი 1; Tavush 0.905
 Казахский,Кулалинское,1117,Чоратанъ,40.86185,45.48793,Choratan,geonames,616772,1.03,name,Чоратан,Choratan 1.03; Ağkilsə (Karvansaray) 0.767; Çatax 0.744
 Казахский,Кущинское,1118,Кущи,40.95549,45.67295,Aşağı Quşçu,osm,n5929444791,0.939,name,Aşağı Quşcu,Aşağı Quşçu 0.939; Pishik 0.757; Mishoyi 0.727
-Казахский,Михайловское,1119,Михайловка,,,,,,,,,Chambarak 1.03; Semyonovka 0.7
-Казахский,Оксюзлинское,1120,Оксюзлы,,,,,,,,,Yuxarı Öysüzlü 1.03; Aşağı Öysüzlü 1.03; Eklizlyar 0.833
+Казахский,Михайловское,1119,Михайловка,40.59957,45.33775,Михайловка,kondratenko,,,map,,Chambarak 1.03; Semyonovka 0.7
+Казахский,Оксюзлинское,1120,Оксюзлы,40.93802,45.53945,Оксюзлы,kondratenko,,,map,,Yuxarı Öysüzlü 1.03; Aşağı Öysüzlü 1.03; Eklizlyar 0.833
 Казахский,Самед-беглинское,1121,Али-Марданлы,41.03982,45.67297,Alimardanly,geonames,587296,1.03,name,Аьлимаьрданли,Alimardanly 1.03; Noyemberyan 0.73
 Казахский,Самед-беглинское,1122,Ахверды-беглы,41.03982,45.7,,,,,approx,,
 Казахский,Самед-беглинское,1123,Дюз-кишлаг-Абулбеглы,41.03982,45.7,,,,,approx,,
@@ -1133,15 +1133,15 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Казахский,Тоузкалинское,1134,Новуръ,40.91763,45.40528,,,,,approx,,
 Казахский,Тоузкалинское,1135,Тоузкала,40.91763,45.40528,Tavush,geonames,616162,1.03,society,Tʻouz,Tovuz 1.03; Tavush 1.03; Berd 1.03
 Казахский,Тоузкалинское,1136,Тоузкендъ,40.88066,45.38901,Berd,geonames,616802,1.03,society,T’auzk’end,Tovuz 1.03; Tavush 1.03; Berd 1.03
-Казахский,Шиних-Айрумское (Шинихское),1137,Ваетлы,,,,,,,,,Vahidli 0.919; Verin Tsaghkavan 0.887; Tatlı 0.78
-Казахский,Шиних-Айрумское (Шинихское),1138,Шиних-Айрумъ,,,,,,,,,Şınıx 0.736; Mets Ayrum 0.727
-Казахский,Шиних-Айрумское (Шинихское),1139,Ягублы,,,,,,,,,Aşağı Ayıblı 0.889; Vazashen 0.83; Khakhollar 0.757
+Казахский,Шиних-Айрумское (Шинихское),1137,Ваетлы,40.69778,45.43035,,kondratenko,,,map-society,,Vahidli 0.919; Verin Tsaghkavan 0.887; Tatlı 0.78
+Казахский,Шиних-Айрумское (Шинихское),1138,Шиних-Айрумъ,40.68321,45.44002,Шиних-Айрумъ,kondratenko,,,map,,Şınıx 0.736; Mets Ayrum 0.727
+Казахский,Шиних-Айрумское (Шинихское),1139,Ягублы,40.69778,45.43035,,kondratenko,,,map-society,,Aşağı Ayıblı 0.889; Vazashen 0.83; Khakhollar 0.757
 Нухинский,Бабаратминское,1140,Бабаратма,41.1902,47.00337,Babaratma,geonames,587105,1.03,name,Бабаратма,Babaratma 1.03
 Нухинский,Бабаратминское,1141,Карадаглы,41.17555,47.01136,Qaradağlı,geonames,586211,1.03,name,Карадаглы,Qaradağlı 1.03; Mamedagaly 0.78; Qaradeyin 0.75
 Нухинский,Бабаратминское,1142,Карачи,41.1902,47.00337,,,,,approx,,Qoçuq 0.799; коч. 0.757; коч. 0.727
 Нухинский,Бабаратминское,1143,Каратала,41.32576,46.87191,Qaratala,geonames,799307,1,name,Karatala,Qaratala 1; Qaradağlı 0.78; Xırxatala 0.767
 Нухинский,Биладжикское,1144,Биладжикъ,41.31631,46.95046,Bilyadzhik,geonames,586972,1,name,Биледжик 2-й,Bilyadzhik 1; Bılıx 0.769; Qalacıq 0.744
-Нухинский,"Гюйнюкское, Ашага-",1145,Ашага-Гюйнюкъ,,,,,,,,,Aşağı Göynük 0.979; Yeni Göynük 0.939
+Нухинский,"Гюйнюкское, Ашага-",1145,Ашага-Гюйнюкъ,41.26778,47.02009,Ашага Гюйнюкъ,kondratenko,,,map,,Aşağı Göynük 0.979; Yeni Göynük 0.939
 Нухинский,"Гюйнюкское, Баш-",1146,Баш-Гюйнюкъ,41.32582,47.11357,Baş Göynük,geonames,587045,0.977,name,Баш Гоьйнуьк,Baş Göynük 0.977; Aşağı Göynük 0.792
 Нухинский,"Гюйнюкское, Баш-",1147,Баш-Шабалутъ,41.30388,47.11909,Baş Şabalıd,geonames,587036,1.03,name,Баш-Шабалыт,Baş Şabalıd 1.03
 Нухинский,Дашбулагское,1148,Дашбулагъ,41.07691,47.04138,Daşbulaq,geonames,586774,0.941,name,Dasbulag,Daşbulaq 0.941; Daşca 0.744; Göybulaq 0.736
@@ -1170,17 +1170,17 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Нухинский,Араб-Шекинское,1171,Ширин-бейлы,40.89188,47.35038,,,,,approx,,Şirinbulaq 0.857; Sarıhacallı 0.706
 Нухинский,Ахпилакендское,1172,Ахпилакендъ,40.99399,47.28024,,,,,approx,,Beglyarkend 0.792; Fəhle 0.757; Yenikend 0.736
 Нухинский,Ахпилакендское,1173,Айдин-булагъ,40.99399,47.28024,Aydınbulaq,geonames,587128,1.03,name,Айдынбулаг,Aydınbulaq 1.03; Aydınqışlaq 0.848; Göybulaq 0.808
-Нухинский,Биналарское,1174,Биналяръ,,,,,,,,,Yeni Yol 0.78; İuna 0.78; Beyli 0.75
-Нухинский,Биналарское,1175,Беюк-Гапутлы,,,,,,,,,
-Нухинский,Биналарское,1176,Кичик-Гапутлы,,,,,,,,,
-Нухинский,Биналарское,1177,Гаджи-Алилу,,,,,,,,,Hacıalılı 1; Qudula 0.78
-Нухинский,Биналарское,1178,Мурсаллы (Мурсал-Аббасы),,,,,,,,,Yemişanlı 0.799; Yemişanlı 0.799; Kichik-Pirelli 0.757
+Нухинский,Биналарское,1174,Биналяръ,41.14318,47.41979,Биналаръ,kondratenko,,,map,,Yeni Yol 0.78; İuna 0.78; Beyli 0.75
+Нухинский,Биналарское,1175,Беюк-Гапутлы,41.13722,47.4143,,kondratenko,,,map-society,,
+Нухинский,Биналарское,1176,Кичик-Гапутлы,41.13722,47.4143,,kondratenko,,,map-society,,
+Нухинский,Биналарское,1177,Гаджи-Алилу,41.13722,47.4143,,kondratenko,,,map-society,,Hacıalılı 1; Qudula 0.78
+Нухинский,Биналарское,1178,Мурсаллы (Мурсал-Аббасы),41.13722,47.4143,,kondratenko,,,map-society,,Yemişanlı 0.799; Yemişanlı 0.799; Kichik-Pirelli 0.757
 Нухинский,Гейбулагское,1179,Гейбулагъ,41.04743,47.14818,Göybulaq,geonames,586469,1.03,name,Гоьйбулаг,Göybulaq 1.03; Aydınbulaq 0.808; Qudula 0.78
 Нухинский,Дашагильское,1180,Дашагиль,41.00559,47.32935,Aşağı Daşağıl,geonames,587187,1.07,name,Aşağı Daşağıl,Aşağı Daşağıl 1.07; Aşağı Malax 0.927; Baş Daşağıl 0.87
 Нухинский,Дашагильское,1181,Ших-Аббасы,40.99988,47.36123,Şıxoba,geonames,584966,0.905,name,Шыхоба,Şıxoba 0.905; Baş Şabalıd 0.736; Qayabaşı 0.706
-Нухинский,"Дегнинское, Беюк-",1182,Беюк-Дегне,,,,,,,,,Byuyuk-Dakhne 0.84; Mamedagaly 0.757
-Нухинский,"Дегнинское, Беюк-",1183,Сучми-Дегне,,,,,,,,,Suçma 0.706
-Нухинский,"Дегнинское, Кичик-",1184,Кичик-Дегне,,,,,,,,,Kichik-Dekhna 0.84; Mamedagaly 0.757
+Нухинский,"Дегнинское, Беюк-",1182,Беюк-Дегне,40.94927,47.11772,Беюкъ Дегне,kondratenko,,,map,,Byuyuk-Dakhne 0.84; Mamedagaly 0.757
+Нухинский,"Дегнинское, Беюк-",1183,Сучми-Дегне,40.92643,47.09581,,kondratenko,,,map-society,,Suçma 0.706
+Нухинский,"Дегнинское, Кичик-",1184,Кичик-Дегне,40.98646,47.08855,Кичик-Дегне,kondratenko,,,map,,Kichik-Dekhna 0.84; Mamedagaly 0.757
 Нухинский,Джаирлинское,1185,Джаирлы,40.93592,47.72587,Corlu,geonames,586630,0.919,name,Джорлу,Corlu 0.919; Chayly 0.8; Yaqublu 0.757
 Нухинский,Джаирлинское,1186,Мамед-Заманлы,40.93592,47.72587,,,,,approx,,Mamedagaly 0.83
 Нухинский,Джаирлинское,1187,Улабендъ,40.93592,47.72587,,,,,approx,,Şimalabad 0.736; Bayramkoxalı 0.714
@@ -1191,15 +1191,15 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Нухинский,Зекзитское,1192,Гусейнлы,41.13333,47.21162,,,,,approx,,Yemişanlı 0.744; Yemişanlı 0.744; Qaysarlı 0.714
 Нухинский,Зекзитское,1193,Зекзитъ,41.09306,47.21162,Ashaga-Zeyzit,geonames,587195,0.863,society,Ашага-Зейзыт,Orta-Zeyzit 0.863; Ashaga-Zeyzit 0.863; Oxud 0.757
 Нухинский,Зекзитское,1194,Молла-Али Нухинское,41.13333,47.21162,,,,,approx,,
-Нухинский,Каракоюнлинское,1195,Каракоюнлы,,,,,,,,,Qaradeyin 0.824; Zarağan 0.78; Qaradağlı 0.736
+Нухинский,Каракоюнлинское,1195,Каракоюнлы,40.96324,47.1692,Кара-Коюнлы,kondratenko,,,map-society,,Qaradeyin 0.824; Zarağan 0.78; Qaradağlı 0.736
 Нухинский,Кельдекское,1196,Кельдекъ,41.04863,47.28463,Aşağı Kəldək,geonames,587178,1.03,name,Aşağı Kəldək,Aşağı Kəldək 1.03; Baş Kəldək 0.83; Qalacıq 0.799
-Нухинский,Козлинское,1197,Козлы,,,,,,,,,Kazmalar 0.83; Qazmalar 0.83; Qazmalar 0.8
-Нухинский,Козлинское,1198,Сали-бейлы,,,,,,,,,Sileyli 0.857; Sarıhacallı 0.8; Qaratala 0.778
+Нухинский,Козлинское,1197,Козлы,40.92503,47.3171,,kondratenko,,,map-society,,Kazmalar 0.83; Qazmalar 0.83; Qazmalar 0.8
+Нухинский,Козлинское,1198,Сали-бейлы,40.92503,47.3171,,kondratenko,,,map-society,,Sileyli 0.857; Sarıhacallı 0.8; Qaratala 0.778
 Нухинский,Кюнгютское,1199,Кюнгютъ верхній,41.1482,47.34069,,,,,approx,,Aşağı Küngüt 0.95; Baş Küngüt 0.83; Zunud 0.757
 Нухинский,Кюнгютское,1200,Кюнгютъ нижній,41.06496,47.25455,Aşağı Küngüt,geonames,587172,1.07,name,Aşağı Küngüt,Aşağı Küngüt 1.07; Baş Küngüt 0.83; Zunud 0.757
 Нухинский,Кюнгютское,1201,Орабанъ,41.1482,47.34069,Oravan,geonames,585324,1.03,name,Орабан,Oravan 1.03; Aran 0.8; Zarağan 0.799
 Нухинский,Кюнгютское,1202,Чайкрагы,41.1482,47.34069,,,,,approx,,Chaykend 0.706
-Нухинский,Мухасское,1203,Мухасъ,,,,,,,,,Muxas 1.03; Muxas 1.03
+Нухинский,Мухасское,1203,Мухасъ,41.12374,47.40655,Мухасъ,kondratenko,,,map,,Muxas 1.03; Muxas 1.03
 Нухинский,Чолахлинское,1204,Ахмед-бейлы,41.03038,47.22789,,,,,approx,,Deymedagyly 0.767; Mamedagaly 0.736
 Нухинский,Чолахлинское,1205,Ибрагим-кендъ,41.02144,47.22789,Ibragimkend,geonames,586361,1.03,name,Ибрагымкенд,Ibragimkend 1.03; Yenikend 0.767; Beglyarkend 0.757
 Нухинский,Чолахлинское,1206,Карамарьянъ,41.03038,47.22789,,,,,approx,,Kemervan 0.854; Oravan 0.78; Qaradeyin 0.706
@@ -1218,16 +1218,16 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Нухинский,Джалутское,1219,Джалутъ,41.0748,47.42641,Calut,geonames,586676,1.03,name,Джалут,Calut 1.03
 Нухинский,Джалутское,1220,Джовланъ,41.28944,47.42641,,,,,approx,,Dzhovlan 1.03; Tovla 0.757
 Нухинский,Джалутское,1221,Отманлы,41.28944,46.84712,Amanlı,geonames,587263,0.909,name,Аманлы,Amanlı 0.909; Yemişanlı 0.799; Yemişanlı 0.799
-Нухинский,Джуджамишское,1222,Джуджамишъ,,,,,,,,,Yemişanlı 0.736; Yemişanlı 0.736
-Нухинский,Джуджамишское,1223,Енгикендъ,,,,,,,,,Yenikend 0.963; Yenikend 0.933; Oğuz 0.887
-Нухинский,Джуджамишское,1224,Меджлисъ,,,,,,,,,İlisu 0.727
-Нухинский,Джуджамишское,1225,Малыхъ,,,,,,,,,
+Нухинский,Джуджамишское,1222,Джуджамишъ,40.96887,47.37757,Джуджамишъ,kondratenko,,,map,,Yemişanlı 0.736; Yemişanlı 0.736
+Нухинский,Джуджамишское,1223,Енгикендъ,40.94757,47.39926,,kondratenko,,,map-society,,Yenikend 0.963; Yenikend 0.933; Oğuz 0.887
+Нухинский,Джуджамишское,1224,Меджлисъ,40.94757,47.39926,,kondratenko,,,map-society,,İlisu 0.727
+Нухинский,Джуджамишское,1225,Малыхъ,40.94757,47.39926,,kondratenko,,,map-society,,
 Нухинский,Зарафское,1226,Зарафъ,40.94098,47.41637,Zarrab,geonames,824854,0.83,society,Zarapʻ,Zarrab 0.83
 Нухинский,Зарафское,1227,Топъ,40.9407,47.42678,Top,geonames,8699027,1.03,name,Топ,Top 1.03; Tayıflı 0.78; Topçu 0.75
-Нухинский,Казмалярское,1228,Казмаляри Хачмасское,,,,,,,,,
-Нухинский,Казмалярское,1229,Кишлаг-кендъ,,,,,,,,,Kyshlak 0.887; Quşlar 0.833; Nohurqışlaq 0.767
-Нухинский,Казмалярское,1230,Молла-Али-Хачмасское,,,,,,,,,
-Нухинский,Корухлярское,1231,Корухляръ,,,,,,,,,Karukhler 1.03; Korukhlar 1.03; Vardanly 0.863
+Нухинский,Казмалярское,1228,Казмаляри Хачмасское,40.95808,47.6205,,kondratenko,,,map-society,,
+Нухинский,Казмалярское,1229,Кишлаг-кендъ,40.95808,47.6205,,kondratenko,,,map-society,,Kyshlak 0.887; Quşlar 0.833; Nohurqışlaq 0.767
+Нухинский,Казмалярское,1230,Молла-Али-Хачмасское,40.95808,47.6205,,kondratenko,,,map-society,,
+Нухинский,Корухлярское,1231,Корухляръ,41.0512,47.59169,Корухляръ,kondratenko,,,map,,Karukhler 1.03; Korukhlar 1.03; Vardanly 0.863
 Нухинский,Падарское,1232,Дамадара,40.95166,47.54985,Deymedere,geonames,586757,0.971,name,Dajmadere,Deymedere 0.971; Deymedagyly 0.808; Mamedagaly 0.736
 Нухинский,Падарское,1233,Падаръ,40.96316,47.51697,Padar,geonames,585296,1.03,name,Падар,Padar 1.03; Baydarlı 0.727
 Нухинский,Падарское,1234,Синджанъ,40.94276,47.58559,Sincan,geonames,584959,1.03,name,Синджан,Sincan 1.03; Indzha 0.83; Suçma 0.727
@@ -1341,8 +1341,8 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Шушинский,Арбадузское,1342,Карагунджъ (Караунджъ),39.73216,46.99501,Qarahonç,geonames,147889,1.03,name,Караундж,Qarahonç 1.03; Фузули 0.875; Qırmızıqaya 0.8
 Шушинский,Арбадузское,1343,Кузум-кендъ,39.7384,46.99465,Kert,geonames,147839,1.03,name,Quzumkənd,Kert 1.03; Avşar 0.808; Qırmızıkənd 0.8
 Шушинский,Арбадузское,1344,Сузъ (Сусъ),39.7384,46.99465,,,,,approx,,Shusha 0.887; Zarıslı 0.78; Sos 0.78
-Шушинский,Вейсаллинское,1345,Вейсаллу,,,,,,,,,Yukhary-Veysanli 1.03; Veysally 1.03; İsalar 0.83
-Шушинский,Вейсаллинское,1346,Субганвердиляръ (Диван-Алиларъ),,,,,,,,,Divanalılar 1.03; Divanallılar 1.03; Divanlılar 0.941
+Шушинский,Вейсаллинское,1345,Вейсаллу,39.72632,47.04193,Вейсалу,kondratenko,,,map,,Yukhary-Veysanli 1.03; Veysally 1.03; İsalar 0.83
+Шушинский,Вейсаллинское,1346,Субганвердиляръ (Диван-Алиларъ),39.69847,47.04531,,kondratenko,,,map-society,,Divanalılar 1.03; Divanallılar 1.03; Divanlılar 0.941
 Шушинский,Гергерское,1347,Агбулагъ (Мысмина),39.74646,46.91289,Aghbulag,wikidata,Q4833369,1.03,society,Агбулаг,Ağbulaq 1.03; Ağbulaq 1.03; Aghbulag 1.03
 Шушинский,Гергерское,1348,Бильбиланъ (Блбланъ),39.71947,46.94499,,,,,approx,,Bilbilyak 0.905; Bulutan 0.8
 Шушинский,Гергерское,1349,Гергеръ,39.70446,46.9624,Qarqar,geonames,148059,1.03,name,Гергер,Qarqar 1.03; Zargyar Pervoye 0.833; Üçbulaq 0.8
@@ -1358,8 +1358,8 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Шушинский,Гогинское,1359,Мамедазуръ (Мамедацоръ),39.57705,47.00308,Mamedazur,geonames,147569,1,name,Mamedazur,Mamedazur 1; Mamedbagyrly 0.83; Akhmedavar 0.808
 Шушинский,Гогинское,1360,Цакури (Закурлы),39.57252,46.98688,Tsakuri,geonames,147041,1,name,Цакури,Tsakuri 1; Şahyeri 0.769; Sarıhacılı 0.767
 Шушинский,Гогинское,1361,Чиракузъ (Чракусъ),39.57999,47.01381,Ciraquz,geonames,148264,1,name,Чиракуз,Ciraquz 1; Çıraq 0.857; Çıraqlı 0.83
-Шушинский,Джаміатское,1362,Джаміатъ (Нынги),,,,,,,,,Ningi 1.03; Kiçik Cəmiyyət 1.03; Khojaly 0.757
-Шушинский,Джаміатское,1363,Кагарза (Кгарце),,,,,,,,,Qağartsi 0.83; Dashushen 0.799; Kosalar 0.757
+Шушинский,Джаміатское,1362,Джаміатъ (Нынги),39.7861,46.87156,Джаміатъ,kondratenko,,,map-society,,Ningi 1.03; Kiçik Cəmiyyət 1.03; Khojaly 0.757
+Шушинский,Джаміатское,1363,Кагарза (Кгарце),39.7861,46.87156,,kondratenko,,,map-society,,Qağartsi 0.83; Dashushen 0.799; Kosalar 0.757
 Шушинский,Енгикендское,1364,Гацы,39.84122,46.96052,Gatsy,geonames,148076,1.03,name,Гаци,Gatsy 1.03; Qasımlı 0.83; Sos 0.78
 Шушинский,Енгикендское,1365,Енгикендъ (Нор-шенъ),39.84801,46.98237,Norshen,geonames,147405,1.03,name,Норшен,Norshen 1.03; Yenikənd 0.933; Spitakshen 0.905
 Шушинский,Енгикендское,1366,Такир-Мирикендъ (Мюри-шенъ),39.83997,46.92528,Mirushen,geonames,147496,1.03,name,Мюрішен,Mirushen 1.03; Muxtar 0.872; Qırmızıkənd 0.833
@@ -1367,8 +1367,8 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Шушинский,Каджарское,1368,Ковшутлу,39.61409,47.06056,Govşatlı,geonames,148030,0.905,name,Qovşatlı,Govşatlı 0.905; Keştazlı 0.78; Kovşad 0.75
 Шушинский,Каджарское,1369,Салакатинъ,39.62895,47.00061,Salaketin,geonames,147277,1.03,name,Салакаьтин,Salaketin 1.03; Kyatuk 0.919; Salatın 0.905
 Шушинский,Каджарское,1370,Шихилу,39.60095,47.05309,Şıxımlı,geonames,11980407,0.923,society,Şıxımlı,Şıxlar 0.939; Şıxımlı 0.923; Şıxlı 0.909
-Шушинский,Карадаглинское,1371,Варданлы и Ашрафлы-Варданлы,,,,,,,,,
-Шушинский,Карадаглинское,1372,Карадаглу 1-е,,,,,,,,,Qaradağlı 1.03; Qaradağlı 1.03; Qaradağlı 1.03
+Шушинский,Карадаглинское,1371,Варданлы и Ашрафлы-Варданлы,39.78818,47.02266,,kondratenko,,,map-society,,
+Шушинский,Карадаглинское,1372,Карадаглу 1-е,39.79758,47.0024,Карадаглу,kondratenko,,,map,,Qaradağlı 1.03; Qaradağlı 1.03; Qaradağlı 1.03
 Шушинский,Кендхуртское,1373,Кендхуртъ (Хгорте),39.77559,46.96651,Kendkhurd,geonames,147846,0.905,name,Кендхурд,Kendkhurd 0.905; Orta Giounepaia 0.8; Güneyxırman 0.799
 Шушинский,Кендхуртское,1374,Кеши,39.77466,47.02473,Kiş,geonames,148042,0.83,society,Qişı,Qayabaşı 0.863; Kiş 0.83; Qasımlı 0.757
 Шушинский,Кендхуртское,1375,Мушкапатъ,39.76764,46.9835,Müşkapat,geonames,147449,1.03,name,Мушкапат,Müşkapat 1.03
@@ -1377,7 +1377,7 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Шушинский,Тагавертское,1378,Карабулагъ армянск.,39.6688,46.90189,,,,,approx,,Qarabulaq 0.75; Qarabulaq 0.75
 Шушинский,Тагавертское,1379,Тагавертъ,39.66831,46.90189,Tağaverd,geonames,147093,1.03,name,Tagavart,Tağaverd 1.03; Tağaser 0.8; Ataqut 0.769
 Шушинский,Тагавертское,1380,Шихеръ (Шехер-Авшаръ),39.65113,46.98117,Shekher,geonames,147189,0.863,society,Шехер,Shekher 0.863; Aşağı Avşar 0.78; Şıxbağı 0.769
-Шушинский,Тагское,1381,Тагъ (Таглярь),,,,,,,,,Tuğ 1.03; Böyük Tağlar 1.03; Khintaglar 1
+Шушинский,Тагское,1381,Тагъ (Таглярь),39.6185,46.91861,Тагъ,kondratenko,,,map,,Tuğ 1.03; Böyük Tağlar 1.03; Khintaglar 1
 Шушинский,Тугское,1382,Атагутъ,39.57385,46.96392,Ataqut,geonames,148441,1,name,Атагут,Ataqut 1; Yatag 0.83; Tarnaut 0.744
 Шушинский,Тугское,1383,Гакаки,39.55672,46.95181,Ağdam,geonames,148606,0.909,name,Акаку,Ağdam 0.909; Gedekkobu 0.769; Ciraquz 0.714
 Шушинский,Тугское,1384,Доммы,39.58787,46.90117,Tumi,geonames,148188,1.03,name,Домы,Tumi 1.03; Aghdam 0.78; Əmillər 0.78
@@ -1413,10 +1413,10 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Шушинский,Келабединское,1414,Каравеллу,40.18555,47.2413,Karavelli,geonames,586142,1.03,society,Каравеллы,Karavelli 1.03; Karavelli 1; Yeni Qaralar 0.863
 Шушинский,Келабединское,1415,Келабединъ,40.13867,47.2514,Gelebedin,geonames,586488,1.03,name,Kələbədin,Gelebedin 1.03; Khalfaraddin 0.83; Khalfaraddin 0.83
 Шушинский,Келабединское,1416,Полад-Мамедлу,40.18555,47.2514,,,,,approx,,Alimadatly 0.83; Karamamedly 0.762; Salahsəmədlər 0.757
-Шушинский,Кенгерлинское,1417,Кенгерлу 1-е,,,,,,,,,Kengorli 1.03; Kengerlu 1.03; Salakhly-Kengerli 0.857
-Шушинский,Кенгерлинское,1418,Кенгерлу 2-е,,,,,,,,,Kengorli 1.03; Kengerlu 1.03; Salakhly-Kengerli 0.857
-Шушинский,Кенгерлинское,1419,Кенгерлу 3-е (Пир-Гасанлу),,,,,,,,,Kengorli 1.03; Kengerlu 1.03; Salakhly-Kengerli 0.857
-Шушинский,Кіамадинлинское,1420,Кіамадинлу Сафар-Али-бека,,,,,,,,,
+Шушинский,Кенгерлинское,1417,Кенгерлу 1-е,40.21384,47.38524,Кенгерлу,kondratenko,,,map,,Kengorli 1.03; Kengerlu 1.03; Salakhly-Kengerli 0.857
+Шушинский,Кенгерлинское,1418,Кенгерлу 2-е,40.21384,47.38524,Кенгерлу,kondratenko,,,map,,Kengorli 1.03; Kengerlu 1.03; Salakhly-Kengerli 0.857
+Шушинский,Кенгерлинское,1419,Кенгерлу 3-е (Пир-Гасанлу),40.21384,47.38524,Кенгерлу,kondratenko,,,map,,Kengorli 1.03; Kengerlu 1.03; Salakhly-Kengerli 0.857
+Шушинский,Кіамадинлинское,1420,Кіамадинлу Сафар-Али-бека,40.11682,47.47652,Кіамидинлу,kondratenko,,,map-society,,
 Шушинский,Кіаслинское,1421,Ат-емазлу,40.02589,46.9414,Ətyeməzli,geonames,586602,1.03,name,Этъемезли,Ətyeməzli 1.03; Chaykend 0.744
 Шушинский,Кіаслинское,1422,Кіаслу,40.01863,46.91721,Qiyaslı,geonames,585842,1.03,name,Кияслы,Qiyaslı 1.03; Kosalar 0.939; Kosalar 0.83
 Шушинский,Кіаслинское,1423,Чуллу,40.04574,46.87429,Çullu,geonames,586815,1.03,society,Чуллу,Çullu 1.03; Çullu 1.03; Laçınlar 0.757
@@ -1516,11 +1516,11 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Шушинский,Новрузлинское,1517,Пирзадлу,39.93309,47.01017,Pirzadlı,wikidata,Q55702112,1.03,name,Pirzadlı,Pirzadlı 1.03; Poladlı 0.799; Mirzalar 0.799
 Шушинский,Новрузлинское,1518,Сейбалу верхнее,39.96025,47.01953,,,,,approx,,Saybalı 1.03; Seyidshen 0.887; Qaybalı 0.863
 Шушинский,Новрузлинское,1519,Юсуф-Джаллы,39.9713,47.0518,Yusifcanlı,geonames,146910,0.963,name,Юсифджанлы,Yusifcanlı 0.963; Yusifli 0.863; İsalar 0.757
-Шушинский,Овшарское,1520,Овшаръ,,,,,,,,,Avşar 1.03; Aşağı Avşar 1.03; Köhnə Kövsər 0.863
+Шушинский,Овшарское,1520,Овшаръ,39.96252,47.53256,Овшаръ,kondratenko,,,map-society,,Avşar 1.03; Aşağı Avşar 1.03; Köhnə Kövsər 0.863
 Шушинский,Халфарадинлинское,1521,Кимбаллу,39.9216,46.57464,,,,,approx,,Qaybalı 0.863; Gasimbayli 0.83; Qiyaslı 0.757
 Шушинский,Халфарадинлинское,1522,"Таракема 9-е, Джафар-бека",39.9216,46.57464,Tərəkəmələr,osm,n12233616391,0.971,name,Tərəkəmələr,Tərəkəmələr 0.971; Dzhafarbeyli 0.808; Karakend 0.78
 Шушинский,Халфарадинлинское,1523,Халфарадинлу,39.9216,46.57464,,,,,approx,,Khalfaraddin 0.987; Khalfaraddin 0.939; Khalfalikyshlak 0.736
-Шушинский,Ходжавендское,1524,Ходжавендъ,,,,,,,,,Khojavend 1.03; Khodzhavend 1.03; Yarımca 0.933
+Шушинский,Ходжавендское,1524,Ходжавендъ,39.93423,47.51297,12 Ходжавендское,kondratenko,,,map-society,,Khojavend 1.03; Khodzhavend 1.03; Yarımca 0.933
 Бакинский,Балаханское,7,Балаханы,40.46344,49.91893,Balakhani,geonames,587071,1.03,name,Балаханы,Balakhani 1.03; Bilajari 0.808; Babadzhan 0.736
 Бакинский,Сабунчинское,8,Сабунчи (Армени-булаги),40.4425,49.94806,Sabunçu,geonames,585184,1.03,name,Сабунчи,Sabunçu 1.03
 Бакинский,Амираджанское,9,"Амираджанъ (Амир-Хаджанъ, Хиля)",40.42639,49.98361,Amirdzhan,geonames,587261,0.963,name,Əmircan,Amirdzhan 0.963; Germiyan 0.78; Agirdzha 0.744
@@ -1532,18 +1532,18 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Бакинский,Забратское,15,Забратъ,40.47746,49.94174,Zabrat,geonames,584614,1.03,name,Забрат,Zabrat 1.03; Jorat 0.799; Dere-Zorat 0.769
 Бакинский,Зыринское,16,Зиря (Зырэ),40.36613,50.29198,Zyrya,geonames,584562,1.03,name,Зіра,Zyrya 1.03
 Бакинский,Зыхское,17,Зыхъ,40.37057,49.98659,Zığ,geonames,584548,1.03,name,Зых,Zığ 1.03; Zyrya 0.887
-Бакинский,Калинское,18,Кала (Кала-Карья),,,,,,,,,Qala 1.03; İkinci Qala 1.03; Kitly 0.919
+Бакинский,Калинское,18,Кала (Кала-Карья),40.44084,50.18509,Кала,kondratenko,,,map,,Qala 1.03; İkinci Qala 1.03; Kitly 0.919
 Бакинский,Кешлинское,19,Кешля,40.39778,49.89861,Kitly,geonames,585846,1.03,name,Кешля,Kitly 1.03; Qala 0.83; İkinci Qala 0.83
-Бакинский,Кюрдаханское,20,Кюрдаханэ,,,,,,,,,Kyurdakhany 0.919; Yeni Kürdəxanı 0.919; Khirdalan 0.83
+Бакинский,Кюрдаханское,20,Кюрдаханэ,40.53756,49.92598,Кюрдиханэ,kondratenko,,,map,,Kyurdakhany 0.919; Yeni Kürdəxanı 0.919; Khirdalan 0.83
 Бакинский,Магомедлинское,21,Магомедлы (Мухаммеди),40.50472,49.90586,Mamedli,geonames,585588,1.03,name,Magomedly,Mamedli 1.03; Akhmedly 0.744
 Бакинский,Мардакянское,22,"Кюркенды-бина (Кюрд-кендъ, Аг-бина, Бина)",40.49182,50.14292,,,,,approx,,Yeni Suraxanı 0.757
 Бакинский,Мардакянское,23,Мардакянъ (Мардаханъ),40.49182,50.14292,Mardakan,geonames,585568,1.03,name,Мардакян,Mardakan 1.03; Qoşaqışlaq 0.808; Nardaran 0.78
 Бакинский,Маштагинское,24,Маштаги (Машката),40.52983,50.00616,Maştağa,geonames,585557,0.905,name,Mashtagi,Maştağa 0.905
-Бакинский,Нардаранское,25,Нардаранъ,,,,,,,,,Nardaran 1.03; Nardaran 1; Mardakan 0.78
+Бакинский,Нардаранское,25,Нардаранъ,40.57508,50.02205,Нардаранъ,kondratenko,,,map,,Nardaran 1.03; Nardaran 1; Mardakan 0.78
 Бакинский,Пиршагинское,26,Пиршаги (Пиршикакъ),40.56501,49.89,Pirşağı,geonames,585257,1.03,name,Pirşağı,Pirşağı 1.03; Pirsaat 0.78; Pirsaat 0.75
 Бакинский,Романинское,27,Романа,40.45806,49.98472,Ramana,geonames,585209,1.03,name,Рамана,Ramana 1.03
-Бакинский,Сураханское,28,Сураханы,,,,,,,,,Surakhani 1.03; Сураханы 1.03; Kyurdakhany 0.854
-Бакинский,Туркянское,29,Туркянъ (Туркендъ),,,,,,,,,Türkan 1.03; Yeni Türkan 1.03; Türkoba 0.799
+Бакинский,Сураханское,28,Сураханы,40.42376,50.03809,Сураханы,kondratenko,,,map,,Surakhani 1.03; Сураханы 1.03; Kyurdakhany 0.854
+Бакинский,Туркянское,29,Туркянъ (Туркендъ),40.36947,50.22091,Туркянъ,kondratenko,,,map,,Türkan 1.03; Yeni Türkan 1.03; Türkoba 0.799
 Бакинский,Шаганское,30,Шаганъ (Шиханъ),40.49389,50.13056,Şağan,geonames,585089,1.03,name,Шаган,Şağan 1.03; Şixandağ 0.83; Shubani 0.799
 Бакинский,Баладжарское,31,Баладжары,40.4444,49.80566,Bilajari,geonames,587078,1.03,name,Баладжары,Bilajari 1.03; Balakhani 0.854; Bilajer 0.83
 Бакинский,Баладжарское,32,Дарнагулъ,40.86056,49.37806,Donguli,geonames,586715,0.887,name,Донгулы,Donguli 0.887
@@ -1554,13 +1554,13 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Бакинский,Гендинское,37,Генды,40.74633,49.23854,Gədi,osm,n7674686282,0.919,name,Gədi,Gədi 0.919; Gasan 0.757
 Бакинский,Гендинское,38,Ханеге,40.74633,49.23854,,,,,approx,,Shongar 0.799; Şixandağ 0.744; Binagadi 0.744
 Бакинский,Горадильское,39,Горадиль,40.54861,49.82972,Goradil,geonames,586432,1.03,name,Гоьраьдил,Goradil 1.03; Garadagh 0.769; Gədi 0.757
-Бакинский,Гюзденское,40,Гюздекъ (Гоздекъ),,,,,,,,,Guzdak 1.03; Ashaghi Guzdak 1.03
+Бакинский,Гюзденское,40,Гюздекъ (Гоздекъ),40.39269,49.69459,Гюздекъ,kondratenko,,,map,,Guzdak 1.03; Ashaghi Guzdak 1.03
 Бакинский,Джоратское,41,Джоратъ,40.57176,49.70509,Jorat,geonames,586631,1.03,name,Джорат,Jorat 1.03; Alat 0.757; Zabrat 0.757
 Бакинский,Дигинское,42,Дигя (Дикягъ),40.49188,49.87557,"Digah, Absheron",wikidata,Q4120921,1.03,name,Дыгя,"Digah, Absheron 1.03"
 Бакинский,Кобынское,43,Кобы,40.40472,49.71306,Gobu,geonames,585838,1.03,name,Кобу,Gobu 1.03; Qaya 0.75
 Бакинский,Масазырское,44,Масазыръ (Мастанзиръ),40.48355,49.76077,Masazır,geonames,585561,1.03,name,Масазыр,Masazır 1.03; Maştağa 0.736
 Бакинский,Михаил-абадское,45,Михаил-абадъ (Микаил-абадъ),40.8199,49.46774,Shorabad,geonames,584991,0.982,name,Mikhailabad,Shorabad 0.982; 28 May 0.767
-Бакинский,Новханское,46,Новханы,,,,,,,,,
+Бакинский,Новханское,46,Новханы,40.5216,49.79052,Новханы,kondratenko,,,map,,
 Бакинский,Перекешкюльское,47,Перекешкюль,40.52712,49.49772,Perekeşkül,wikidata,Q4542809,1.03,name,Perekeşkül,Perekeşkül 1.03; Perekischkjul 0.939
 Бакинский,Сараинское,48,Сараи,40.53299,49.71681,Saray,geonames,585145,1.03,name,Сарай,Saray 1.03; Jorat 0.83; Zabrat 0.757
 Бакинский,Фатьмаинское,49,Фатьмаи,40.53015,49.84486,Fatmayı,geonames,586581,1.03,name,Фатмайи,Fatmayı 1.03; Şaumyan rayonu 0.757
@@ -1571,14 +1571,14 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Гёкчайский,Алпаут-Мехтибекское,54,Бевдовилъ (Бевдовулъ),40.51041,47.89245,Beydavil,geonames,587002,0.905,name,Bejdavyl,Beydavil 0.905; Burovdal 0.75
 Гёкчайский,Алхасавинское,55,Алхасава 1-й (Алхас-оба),40.57888,47.94975,Alxasava,geonames,587291,1.03,name,Алхасава,Alxasava 1.03; Shakhsevan 0.78; Elabad 0.744
 Гёкчайский,Алхасавинское,56,Алхасава 2-й (Алхас-оба),40.57888,47.94975,,,,,approx,,Alxasava 1.03; Shakhsevan 0.78; Elabad 0.744
-Гёкчайский,Араб-Джабирлинское,57,Араб-Джабирлы,,,,,,,,,Arabdzhabirli Vtoroye 0.799; Qarabörk 0.767; Geraybeyli 0.767
+Гёкчайский,Араб-Джабирлинское,57,Араб-Джабирлы,40.68421,47.76014,Араб Джабирли,kondratenko,,,map-society,,Arabdzhabirli Vtoroye 0.799; Qarabörk 0.767; Geraybeyli 0.767
 Гёкчайский,Араб-Шахвердинское,58,Араб-Шахверды,40.60444,47.64851,Arabshakhverdi,geonames,587226,1.03,name,Арабшахверды,Arabshakhverdi 1.03; Arabsarvan 0.78
 Гёкчайский,Багир-беклинское,59,Багир-беклы,40.50604,47.74834,Bagyrbeyli,geonames,587093,0.919,name,Bagirbejli,Bagyrbeyli 0.919; Bayramly 0.78; Bagali 0.744
-Гёкчайский,Баргушетское,60,Багманъ (Багбанъ),,,,,,,,,Bağban 1.03; Bağman 1.03; Akhan 0.8
-Гёкчайский,Баргушетское,61,Баргушетъ,,,,,,,,,Bargyushat 0.919; Bərgüşad 0.919; Boyat 0.744
+Гёкчайский,Баргушетское,60,Багманъ (Багбанъ),40.37153,47.82165,,kondratenko,,,map-society,,Bağban 1.03; Bağman 1.03; Akhan 0.8
+Гёкчайский,Баргушетское,61,Баргушетъ,40.38553,47.83146,Баргушетъ,kondratenko,,,map,,Bargyushat 0.919; Bərgüşad 0.919; Boyat 0.744
 Гёкчайский,Бинаслинское,62,Бинаслы,40.52141,47.76064,Yenikend,geonames,584667,1.03,name,Binasli,Yenikend 1.03; Qiyaslı 0.727
 Гёкчайский,Боят-Мелик-Умудское,63,Боят-Мелик-Умудъ,,,,,,,,,Melikumud 0.887; Mamedkasymly 0.848; Melikumudlu 0.848
-Гёкчайский,Быгирское,64,Быгиръ,,,,,,,,,Bığır 1.03; Bugur 1.03; Sygyrly 0.757
+Гёкчайский,Быгирское,64,Быгиръ,40.48089,47.69565,Быгиръ,kondratenko,,,map-society,,Bığır 1.03; Bugur 1.03; Sygyrly 0.757
 Гёкчайский,Вейсалинское,65,Вейсалы,40.54745,47.90686,Veyselli,geonames,584723,1.03,name,Вейселлы,Veyselli 1.03; Khaysalyar 0.863; Vaşa 0.83
 Гёкчайский,Гаджи-Агабеклинское,66,Гаджи-Агабекли,40.57618,47.64799,Gadzhyagabeyli,geonames,586560,0.887,name,Гаджягабейлы,Gadzhyagabeyli 0.887; Gadzhygatamli 0.792; Gey-Dellekli 0.73
 Гёкчайский,Гаджи-Агабеклинское,67,Енги-архъ,40.57129,47.66966,Yeniarx,geonames,584677,0.887,society,Yeniarx,Yeniarx 0.887; Ağarx 0.863; Yengidzhe 0.769
@@ -1601,7 +1601,7 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Гёкчайский,Карабахкальское,84,Чай-архи,40.61953,47.77459,Çayarxı,geonames,586878,1.03,name,Чайархи,Çayarxı 1.03; Üçarx 0.714
 Гёкчайский,Караджалинское,85,Караджаллы,40.44165,47.85141,Qaracallı,geonames,586201,1.03,name,Караджаллы,Qaracallı 1.03; Qaraqocalı 0.905; Karavelli 0.887
 Гёкчайский,Карамарьянское,86,Карамарьянъ (татарское),40.61396,48.00513,Qaraməryəm,geonames,586161,0.977,name,Karamar’yan,Qaraməryəm 0.977; Qaraman 0.905; Karaman 0.905
-Гёкчайский,Коюнлы-Шихлинское,87,Коюнлы-Шихлы,,,,,,,,,Mallı Şıxlı 0.83; Qubadlı Şıxlı 0.813; Kylyshly 0.778
+Гёкчайский,Коюнлы-Шихлинское,87,Коюнлы-Шихлы,40.5263,47.65741,Коюнлы-Шихлы,kondratenko,,,map-society,,Mallı Şıxlı 0.83; Qubadlı Şıxlı 0.813; Kylyshly 0.778
 Гёкчайский,Куба-Халиллинское,88,"Куба-Халиллы, коч.",,,,,,,,,Kuba-Khalilli 1.03; Qubaxəlilli 1.03; Qubaxəlilli 1.03
 Гёкчайский,Кулабендское,89,Алпы,40.48783,47.73656,Alpı,geonames,587273,1.03,name,Алпы,Alpı 1.03; Alpout 0.83; Alpout 0.8
 Гёкчайский,Кулабендское,90,Карабюркъ,40.48497,47.66266,Qarabörk,geonames,586236,0.963,name,Karabërk,Qarabörk 0.963; Qarabucaq 0.854; Qarabucaq 0.854
@@ -1609,24 +1609,24 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Гёкчайский,Кюрд-Шабанское,92,Енгикендъ 1-й,40.54808,47.75222,,,,,approx,,Yenikend 0.963; Yenikend 0.963; Yenikənd 0.963
 Гёкчайский,Кюрд-Шабанское,93,Кюрд-Шабанъ,40.53254,47.75222,Kürdşaban,geonames,585679,1.03,name,Куьрдшабан,Kürdşaban 1.03; Koshaoba 0.736; Qoşaoba 0.736
 Гёкчайский,Кюрд-Шабанское,94,Шекили (Шекилу),40.54808,47.73728,Shekili,geonames,585033,1.03,name,Шекылы,Shekili 1.03; Shebaly 0.863; Sovla 0.83
-Гёкчайский,Кючегединское,95,Кючегеды 1-е,,,,,,,,,Kyuchakend 0.808; Qağacılı 0.736
-Гёкчайский,Кючегединское,96,Кючегеды 2-е,,,,,,,,,Kyuchakend 0.808; Qağacılı 0.736
+Гёкчайский,Кючегединское,95,Кючегеды 1-е,40.48511,47.80997,Кючегеды 1-е,kondratenko,,,map,,Kyuchakend 0.808; Qağacılı 0.736
+Гёкчайский,Кючегединское,96,Кючегеды 2-е,40.48165,47.79606,,kondratenko,,,map-society,,Kyuchakend 0.808; Qağacılı 0.736
 Гёкчайский,Лякское 1-е,97,Лякъ 1-й (Лекъ),40.37586,47.66289,Lyak-Ikindzhi,geonames,585627,1.03,name,Lək,Lyak-Ikindzhi 1.03; Lyakchyplag 0.83; Teklya 0.757
-Гёкчайский,Лякское 2-е,98,Лякъ 2-й,,,,,,,,,Lyak-Ikindzhi 1.03
+Гёкчайский,Лякское 2-е,98,Лякъ 2-й,40.35898,47.67725,Лякъ 2-е,kondratenko,,,map,,Lyak-Ikindzhi 1.03
 Гёкчайский,Ляк-Чиплагское,99,Караманъ,40.60245,47.81334,Qaraman,geonames,586163,1.03,society,Караман,Qaraman 1.03; Karaman 1.03; Qaraməryəm 0.854
 Гёкчайский,Ляк-Чиплагское,100,Карахидыръ,40.57704,47.83983,Qaraxıdır,geonames,586178,1.03,name,Qaraxidir,Qaraxıdır 1.03; Karrar 0.744; Karrar 0.744
 Гёкчайский,Ляк-Чиплагское,101,Ляк-Чиплагъ,40.57661,47.81416,Lyakchyplag,geonames,585625,0.83,society,Лякчылпак,Lyakchyplag 0.83
 Гёкчайский,Ляк-Чиплагское,102,Ялманъ,40.57315,47.79661,Yalman,geonames,584707,1.03,name,Ялман,Yalman 1.03; Gəlmə 0.83; Kəlbənd 0.799
-Гёкчайский,Ляля-Ахмедлинское,103,"Каравеллы-Ханлыхъ, коч.",,,,,,,,,Karavelli 0.863; Karavelli 0.813; Velikhanly 0.757
-Гёкчайский,Ляля-Ахмедлинское,104,"Ляля-Ахмедлы, коч.",,,,,,,,,Alakhmadatli 0.842; Allahmədətli 0.842
+Гёкчайский,Ляля-Ахмедлинское,103,"Каравеллы-Ханлыхъ, коч.",40.6755,47.6679,,kondratenko,,,map-society,,Karavelli 0.863; Karavelli 0.813; Velikhanly 0.757
+Гёкчайский,Ляля-Ахмедлинское,104,"Ляля-Ахмедлы, коч.",40.6755,47.6679,Ляля-Ахмедли,kondratenko,,,map-society,,Alakhmadatli 0.842; Allahmədətli 0.842
 Гёкчайский,Мелик-кендское,105,Кюрдамичъ,40.58754,47.77374,Kyurdamish,geonames,585685,0.919,name,Куьрддаьмиш,Kyurdamish 0.919; Kyurdarmir 0.854; Kürdmaşı 0.736
 Гёкчайский,Мелик-кендское,106,Мелик-кендъ,40.53353,47.78815,Melikkend,geonames,585537,1.03,name,Мелыккенд,Melikkend 1.03; Alykend 0.963; Melikli 0.939
 Гёкчайский,Мелик-кендское,107,Молла-Гаджилы,40.5441,47.76788,Mollahacılı,geonames,585486,0.919,name,Моллахаджилы,Mollahacılı 0.919; Kalağaylı 0.854; Lyalyaagadzhy 0.824
 Гёкчайский,Мелик-кендское,108,Ших-Амиръ,40.51408,47.79084,Shykhamir,geonames,584982,1.03,name,Шихаьмир,Shykhamir 1.03; Shykhbey 0.83; Şıxbağı 0.78
 Гёкчайский,Мелик-кендское,109,Ших-бекъ,40.56311,47.78916,Shykhbey,geonames,584980,0.887,society,Шихбей,Shykhbey 0.887; Şıxbağı 0.887
-Гёкчайский,Молла-Шихлинское,110,Молла-Шихлы,,,,,,,,,Mollaşıxalı 0.947; Mallı Şıxlı 0.919; Mollaisaqlı 0.767
-Гёкчайский,Мюскюрли-Кюрлинское,111,Мюскюрли-Кюрли,,,,,,,,,Müskürlü 0.767
-Гёкчайский,Мюскюрлы-Молла-Кадымское,112,"Мюскюрли-Молла-Кадымъ, коч.",,,,,,,,,
+Гёкчайский,Молла-Шихлинское,110,Молла-Шихлы,40.67264,47.71677,Молл. Шихлы,kondratenko,,,map-society,,Mollaşıxalı 0.947; Mallı Şıxlı 0.919; Mollaisaqlı 0.767
+Гёкчайский,Мюскюрли-Кюрлинское,111,Мюскюрли-Кюрли,40.23764,47.81082,Мюскюрли-кюрли,kondratenko,,,map-society,,Müskürlü 0.767
+Гёкчайский,Мюскюрлы-Молла-Кадымское,112,"Мюскюрли-Молла-Кадымъ, коч.",40.54882,47.64423,Мискюрли-М.К.,kondratenko,,,map-society,,
 Гёкчайский,Мюсюслинское,113,"Мюсюсли, коч.",40.45401,47.90737,Myusyuslyu,geonames,585428,1.03,name,Муьсуьслуь,Myusyuslyu 1.03; Musabeyli 0.799; Müskürlü 0.799
 Гёкчайский,Потинское,114,"Ахмедлы, коч.",40.63212,47.73879,,,,,approx,,Mamedli 0.863; Məmmədli 0.833; Muradlı 0.757
 Гёкчайский,Потинское,115,Карабагляръ (Кал.),40.63272,47.69456,Qarabağlar,geonames,586246,1.03,society,Карабаглар,Qarabağlı 1.03; Qarabağlar 1.03; Khalilli 0.887
@@ -1644,12 +1644,12 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Гёкчайский,Чахирлинское,127,Пир-кендъ,40.49929,47.79609,Pirkənd,geonames,13443011,1.03,society,Пырканд,Pirkend 1.03; Pirkənd 1.03; Pirekyudzha 0.887
 Гёкчайский,Чахирлинское,128,Чахирлы,40.50494,47.83436,Caxırlı,geonames,586908,1.03,name,Чахырлы,Caxırlı 1.03; Çəyırlı 0.953; Çarlı 0.863
 Гёкчайский,Черекинское,129,Череке,40.56139,47.68722,Chereke,geonames,586856,1.03,name,Череке,Chereke 1.03; Qaraqaya 0.799; Chartayaz 0.78
-Гёкчайский,Чигнинское,130,Данабасан-Туркеджа,,,,,,,,,
-Гёкчайский,Чигнинское,131,Чигны,,,,,,,,,Çiyni 0.939; Çiyni 0.939; Çiyni 0.909
+Гёкчайский,Чигнинское,130,Данабасан-Туркеджа,40.42322,47.79238,,kondratenko,,,map-society,,
+Гёкчайский,Чигнинское,131,Чигны,40.45204,47.78653,Чигни,kondratenko,,,map,,Çiyni 0.939; Çiyni 0.939; Çiyni 0.909
 Гёкчайский,Шекерское,132,Али-кендъ,40.55016,47.8749,Alykend,geonames,587303,1.03,name,Алыкенд,Alykend 1.03; Melikkend 0.963; Yenikend 0.887
 Гёкчайский,Шекерское,133,Мурты (Кобад-кишлаги),40.56909,47.85247,Mırtı,geonames,585423,1.03,society,Мырты,Mırtı 1.03; Mırtı 1; Murtulu 0.939
 Гёкчайский,Шекерское,134,Шекеръ,40.56926,47.88098,Sheker,geonames,585035,1.03,name,Шекер,Sheker 1.03
-Гёкчайский,Шильянское,135,Шильянъ,,,,,,,,,Şilyan 1.03; Yuxarı Şilyan 1.03; Təzə Şilyan 0.887
+Гёкчайский,Шильянское,135,Шильянъ,40.33996,47.98911,Шильянъ,kondratenko,,,map,,Şilyan 1.03; Yuxarı Şilyan 1.03; Təzə Şilyan 0.887
 Гёкчайский,Аганское,136,Аганъ,40.85256,48.41604,Akhan,geonames,587357,1,name,Агьан,Akhan 1; Bağban 0.83; Bağman 0.83
 Гёкчайский,Аших-Байрамлинское,137,Аших-Байрамлы (Айшиг-Б—),40.71359,48.04655,Aşıqbayramlı,geonames,587155,0.947,name,Ашукьбайрамлы,Aşıqbayramlı 0.947; Şıxımlı 0.767; Shykhbey 0.767
 Гёкчайский,Аших-Байрамлинское,138,Нетес-Каджаръ (Гапутлы),40.69306,48.03155,Hapıtlı,geonames,586517,1.03,name,Gapytly,Hapıtlı 1.03; Soyutlar 0.757; Gadzhygatamli 0.757
@@ -1663,8 +1663,8 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Гёкчайский,Гапутлы-Молла-Исаглинское,146,Гапутлы-Куртъ,,,,,,,,,Hapıtlı 0.736
 Гёкчайский,Гапутлы-Молла-Исаглинское,147,Гапутлы-Молла-Исаглы,,,,,,,,,Mollaisaqlı 0.75
 Гёкчайский,Гензинское,148,Генза,40.67966,48.19781,Genzya,geonames,586520,1.03,name,Гензя,Genzya 1.03; Qazyan 0.83; Magerramli 0.757
-Гёкчайский,Герай-беклинское,149,Бедаллы,,,,,,,,,Beydavil 0.863; Dedeli 0.83; Bagali 0.83
-Гёкчайский,Герай-беклинское,150,Герай-беклы,,,,,,,,,Geraybeyli 0.919; Geraybeyli 0.919; Qarabaqqal 0.808
+Гёкчайский,Герай-беклинское,149,Бедаллы,40.61616,48.20072,,kondratenko,,,map-society,,Beydavil 0.863; Dedeli 0.83; Bagali 0.83
+Гёкчайский,Герай-беклинское,150,Герай-беклы,40.62349,48.17936,Герай беклы,kondratenko,,,map,,Geraybeyli 0.919; Geraybeyli 0.919; Qarabaqqal 0.808
 Гёкчайский,Дахар-Нюгединское,151,Дагмадаглы (Дегмедагильды),40.73127,48.28461,,,,,approx,,Mamedagaly 0.824; Dedeli 0.744; Agadzhaly 0.706
 Гёкчайский,Дахар-Нюгединское,152,Вели-бина,40.73127,48.28461,Vəlibinə,osm,n8565451477,1.03,name,Vəlibinə,Vəlibinə 1.03
 Гёкчайский,Дахар-Нюгединское,153,Дахар-Нюгеды,40.73127,48.28461,,,,,approx,,
@@ -1674,7 +1674,7 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Гёкчайский,Енгикендское,157,Енгикендъ (Солтанкендъ),40.70114,47.96544,Soltankend,geonames,584948,1.03,name,Солтанкенд,Soltankend 1.03; Yenikend 0.963; Yenikend 0.963
 Гёкчайский,Енгикендское,158,Енгикендъ 2-й,40.69781,48.0672,Yenikənd,geonames,585710,0.963,society,Еныканд,Yenikend 0.963; Yenikend 0.963; Yenikənd 0.963
 Гёкчайский,Ивановское,159,Ивановка,40.7467,48.03137,İvanovka,geonames,586313,1.03,name,Ивановка,İvanovka 1.03; Shaumyanovka 0.737
-Гёкчайский,Исмаиллинское,160,Исмаиллы,,,,,,,,,Ismayilli 1.03; İsmayıllı 1.03; Sovla 0.83
+Гёкчайский,Исмаиллинское,160,Исмаиллы,40.77172,48.15914,Исмаилли,kondratenko,,,map,,Ismayilli 1.03; İsmayıllı 1.03; Sovla 0.83
 Гёкчайский,Налагинское,161,Бозавендъ,40.50476,48.37449,Bozavand,geonames,586945,1.03,name,Бозаванд,Bozavand 1.03; Tazakend 0.78; Tazakend 0.75
 Гёкчайский,Налагинское,162,Калаге,40.71437,47.93636,Qalagah,geonames,586278,1.03,name,Kalage,Qalagah 1.03; Kalağaylı 0.887; Kyanagya 0.863
 Гёкчайский,Налагинское,163,Хошабадъ,40.71437,48.37449,,,,,approx,,Koshaoba 0.83; Qoşaoba 0.83; Shamsabad 0.824
@@ -1723,15 +1723,15 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Джевадский,Кочах-кендское,206,Кочах-кендъ,39.3904,48.78332,Kachakkend,geonames,147964,0.977,name,Qaçaqkənd,Kachakkend 0.977; Qoçalı 0.833; Kardashkend 0.792
 Джевадский,Марышлинское,207,Арбатанъ,39.57819,48.94876,Arbatan,geonames,148511,1.03,name,Арбатан,Arbatan 1.03; Çuxanlı 0.78; Khanlarkend 0.78
 Джевадский,Марышлинское,208,Марышлу,39.56458,48.92263,Marışlı,geonames,147555,1.03,name,Марышлы,Marışlı 1.03; Shaumyanovka 0.887; Dovruşlu 0.8
-Джевадский,Ново-Ивановское,209,Джовланы / Карабуджагъ,,,,,,,,,Xol Qarabucaq 0.744
-Джевадский,Ново-Ивановское,211,Колюбакино,,,,,,,,,Qalaqayın 0.808; Lekino 0.75; Kulibinka 0.737
-Джевадский,Ново-Ивановское,212,Ново-Ивановка,,,,,,,,,Suvorovka 0.854; Qazanbatan 0.854; Semyonovka 0.808
+Джевадский,Ново-Ивановское,209,Джовланы / Карабуджагъ,39.37182,48.7403,,kondratenko,,,map-society,,Xol Qarabucaq 0.744
+Джевадский,Ново-Ивановское,211,Колюбакино,39.37182,48.7403,,kondratenko,,,map-society,,Qalaqayın 0.808; Lekino 0.75; Kulibinka 0.737
+Джевадский,Ново-Ивановское,212,Ново-Ивановка,39.35137,48.7939,Ново-Ивановка,kondratenko,,,map,,Suvorovka 0.854; Qazanbatan 0.854; Semyonovka 0.808
 Джевадский,Сейданское,213,Пиратман-Генджали,39.7323,48.97279,,,,,approx,,Piratman 0.757
 Джевадский,Сейданское,214,Сейданъ,39.7323,48.9521,Seydan,geonames,147223,1.03,name,Сейдан,Seydan 1.03; Salyan 0.863; Seidlyar 0.799
 Джевадский,Сейданское,215,Сулейман-кендъ,39.6396,48.97279,Çuxanlı,geonames,148258,1.03,name,Suleymankend,Çuxanlı 1.03; Novodonetskoye 0.813; Narimanovka 0.813
-Джевадский,Тазакендское,216,Кизил-агачъ,,,,,,,,,Qızılağac 0.872
-Джевадский,Тазакендское,217,Ковчи-кендъ (Кувчи-кендъ),,,,,,,,,Kachakkend 0.872; Qoçulu 0.833; Semyonovka 0.767
-Джевадский,Тазакендское,218,Тазакендъ,,,,,,,,,Tazakend 1.03; Təzəkənd 1.03; Tazakend 1
+Джевадский,Тазакендское,216,Кизил-агачъ,39.51282,48.89686,,kondratenko,,,map-society,,Qızılağac 0.872
+Джевадский,Тазакендское,217,Ковчи-кендъ (Кувчи-кендъ),39.51282,48.89686,,kondratenko,,,map-society,,Kachakkend 0.872; Qoçulu 0.833; Semyonovka 0.767
+Джевадский,Тазакендское,218,Тазакендъ,39.51282,48.89686,Тазакендъ,kondratenko,,,map-society,,Tazakend 1.03; Təzəkənd 1.03; Tazakend 1
 Джевадский,Татаро-маглинское,219,Караиманлы,39.4767,49.02506,Yuxarı Qaramanlı,geonames,146930,1.03,society,Yuxarı Qaraimanlı,Yuxarı Qaramanlı 1.03; Aşağı Qaramanlı 1.03; Kagramanly 0.889
 Джевадский,Татаро-маглинское,220,"Карали-Казвинлы 2-е, съ отселкомъ Абас-Али-кендъ",39.4767,49.02506,,,,,approx,,Yuxarı Qaramanlı 0.757; Aşağı Qaramanlı 0.757; Karayevkend 0.73
 Джевадский,Татаро-маглинское,221,Пирабба,39.4997,49.00828,Pirappa,geonames,147334,1.03,name,Pirəbbə,Pirappa 1.03; Piratman 0.744; Khalfali 0.744
@@ -1745,7 +1745,7 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Джевадский,Хошчобанлинское,229,Баллуджа,39.41504,49.07663,Ballıcalı,geonames,148381,0.953,name,Баллыджалы,Ballıcalı 0.953; Beylik 0.799; Alidzhanly 0.799
 Джевадский,Хошчобанлинское,230,Караиманлы,39.42985,49.04091,Aşağı Qaramanlı,geonames,148473,1.03,society,Karaimanly,Yuxarı Qaramanlı 1.03; Aşağı Qaramanlı 1.03; Kagramanly 0.889
 Джевадский,Хошчобанлинское,231,Хош-чобанлы,39.47466,48.97398,Xoşçobanlı,geonames,147763,1.03,society,Xoşçobanlı,Xoşçobanli 1.03; Xoşçobanlı 1.03; Novoye Chemenly 0.78
-Джевадский,Шорсулинское,232,Хан-кишлагъ / Шорсулы,,,,,,,,,
+Джевадский,Шорсулинское,232,Хан-кишлагъ / Шорсулы,39.41993,48.77893,Шорсулы,kondratenko,,,map-society,,
 Джевадский,Якшикендское,234,Бешдалы (—талу),39.88657,48.87761,Yakha-Bashtali,geonames,148357,1.03,name,Beşdəli,Yakha-Bashtali 1.03; Beştalı 0.887; Meshdally 0.857
 Джевадский,Якшикендское,235,Каракашлы,39.88657,48.87761,,,,,approx,,Qaraqaşlı 1.03; Qaraqaşlı 1.03; Qaraqaşlı 1
 Джевадский,Якшикендское,236,Якши-кендъ,39.88657,48.87761,,,,,approx,,Dokshin 0.863; Yenikend 0.78; Dayykend 0.78
@@ -1755,19 +1755,19 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Джевадский,Абдульянское,240,Курузма,40.08396,48.62775,Quruzma,geonames,585753,1.03,name,Курузма,Quruzma 1.03; Mirizali 0.744
 Джевадский,Абдульянское,241,Мейниманъ,40.02727,48.76944,Meyniman,geonames,586263,1.03,name,Meyniman,Meyniman 1.03
 Джевадский,Абдульянское,242,Талышъ 2-й,40.06513,48.69072,Talış,geonames,584886,1.03,name,Talış,Talış 1.03; Telişli 0.953; Tomushlv 0.744
-Джевадский,Араб-Абдул-Керимское,243,Араб-Абдул-Керимъ 1-й,,,,,,,,,
-Джевадский,Араб-Абдул-Керимское,244,"Араб-Абдул-Керимъ 2-й, коч.",,,,,,,,,
-Джевадский,Араб-Шахвердинское,245,Абуль-Касумлы (Абюль-Касумлы),,,,,,,,,Maztaly 0.83; Hacıqasımlı 0.83; Dayıkazımlı 0.737
-Джевадский,Ахтачи-Гягялинское,246,"Ахтачи-Гегели, коч. (А—Гягяли)",,,,,,,,,Axtaçı Muğan 0.78; Axtaçı 0.767; Axtaçı 0.767
+Джевадский,Араб-Абдул-Керимское,243,Араб-Абдул-Керимъ 1-й,39.97955,48.92208,Арабъ-керимъ,kondratenko,,,map-society,,
+Джевадский,Араб-Абдул-Керимское,244,"Араб-Абдул-Керимъ 2-й, коч.",39.97955,48.92208,Арабъ-керимъ,kondratenko,,,map-society,,
+Джевадский,Араб-Шахвердинское,245,Абуль-Касумлы (Абюль-Касумлы),39.95586,49.18751,3 Араб-Шахверди,kondratenko,,,map-society,,Maztaly 0.83; Hacıqasımlı 0.83; Dayıkazımlı 0.737
+Джевадский,Ахтачи-Гягялинское,246,"Ахтачи-Гегели, коч. (А—Гягяли)",40.43124,48.50407,Ахтачи-Гегелинское 4,kondratenko,,,map-society,,Axtaçı Muğan 0.78; Axtaçı 0.767; Axtaçı 0.767
 Джевадский,Ахтачи-Солтан-бекинское,247,"Зангена, коч.",40.09528,48.40768,Zangyana,geonames,584597,1,name,Заьнгаьнаь,Zangyana 1; Dzhangyan 0.83; Dzhangyan 0.83
 Джевадский,Ахтачи-Солтан-бекинское,248,"Іолчи-беклы, коч. (Ахтачи-Солтанбеклу)",40.05797,48.38757,Yenibeyli,geonames,584689,0.9,name,Йолчубаьйли,Yenibeyli 0.9; Alçalı 0.78; İmamverdili 0.736
 Джевадский,Ахтачи-Солтан-бекинское,249,"Кубали-кендъ, сел.",39.95,48.45,Balakənd,wikidata,Q4849874,0.83,society,"Balakend, Saatly",Saatlı 0.887; Sovla 0.857; Boyukkend 0.854
 Джевадский,Ахтачи-Солтан-бекинское,250,"Мелик-баги, сел.",40.05797,48.40768,,,,,approx,,Saatlı 0.887; Sovla 0.857; Aşıqalılar 0.78
 Джевадский,Багирлинское,251,"Багирлы, коч.",40.08333,47.88333,,,,,approx,,Ağayrlı 0.863; Beylyar 0.83; Bayramlı 0.799
 Джевадский,Багирлинское,252,Овджулы (Авджулы),40.08333,47.88333,Adzhily,geonames,587416,0.889,name,Аджилы,Adzhily 0.889; Qoçulu 0.8; Kuybyshev 0.757
-Джевадский,Гаджи-Кадырлинское,253,"Араб-ушаги, коч.",,,,,,,,,Ağabağı 0.706
-Джевадский,Гаджи-Кадырлинское,254,"Гаджи-Кадырлы, коч. (Х—)",,,,,,,,,Gyukharly 0.808; Gadzhybabir 0.767; Hacıqabul 0.767
-Джевадский,Гаджи-Кадырлинское,255,"Каравелли-Вагидбекъ, коч.",,,,,,,,,İkinci Qaralı 0.744
+Джевадский,Гаджи-Кадырлинское,253,"Араб-ушаги, коч.",40.49074,48.53218,,kondratenko,,,map-society,,Ağabağı 0.706
+Джевадский,Гаджи-Кадырлинское,254,"Гаджи-Кадырлы, коч. (Х—)",40.48186,48.55686,Гаджи Кадырли,kondratenko,,,map,,Gyukharly 0.808; Gadzhybabir 0.767; Hacıqabul 0.767
+Джевадский,Гаджи-Кадырлинское,255,"Каравелли-Вагидбекъ, коч.",40.49074,48.53218,,kondratenko,,,map-society,,İkinci Qaralı 0.744
 Джевадский,Джевадское,256,Балв[?]и-Дабагларъ,40.05167,48.53177,,,,,approx,,Ballıcalı 0.73
 Джевадский,Джевадское,257,"Джевадъ, с. (отд. сел. Араб-Мамед-Агалы, состоящаго исключительно изъ бековъ)",40.02671,48.44563,Cavad,geonames,586662,1.03,name,Джавад,Cavad 1.03; Cavadxanlı 0.78; Yalavac 0.744
 Джевадский,Джевадское,258,Карали,40.05167,48.53464,Qaralar,geonames,586169,1.03,society,Каралар,Qaralar 1.03; Qaralar 1.03; Yuxarı Qaralar 1.03
@@ -1777,10 +1777,10 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Джевадский,Ковларское,262,"Ковларъ, коч.",40.0809,48.56194,Kiçik Kovlar,wikidata,Q6404146,1.03,name,Kiçik Kovlar,Kiçik Kovlar 1.03; Karavelli 0.8; Karavelli 0.757
 Джевадский,Ковларское,263,"Талышъ 1-й, сел.",40.0809,48.56194,,,,,approx,,Talış 1.03; Telişli 0.953; Saatlı 0.887
 Джевадский,Ковларское,264,"Чираглы, коч.",40.0809,48.56194,,,,,approx,,Qıraqlı 0.799; Çinarlı 0.744; Çuxanlı 0.744
-Джевадский,Мирзали-кендское,265,"Мирзали-кендъ, сел.",,,,,,,,,Saatlı 0.887; Nuraly-Kend 0.887; Sovla 0.857
-Джевадский,Навагинское,266,"Наваги-Кущи, сел.",,,,,,,,,Saatlı 0.887; Sovla 0.857; Aşıqalılar 0.78
-Джевадский,Навагинское,267,"Наваги-Муганлы, сел.",,,,,,,,,Saatlı 0.887; Sovla 0.857; Aşıqalılar 0.78
-Джевадский,Навагинское,268,Наваги отдѣл. 1-е,,,,,,,,,Novaya Teklya 0.783; Наваги (посёлок) 0.78; Navahı 0.736
+Джевадский,Мирзали-кендское,265,"Мирзали-кендъ, сел.",39.93352,48.96304,Мирзали кендъ,kondratenko,,,map-society,,Saatlı 0.887; Nuraly-Kend 0.887; Sovla 0.857
+Джевадский,Навагинское,266,"Наваги-Кущи, сел.",40.06243,49.02654,Наваги,kondratenko,,,map-society,,Saatlı 0.887; Sovla 0.857; Aşıqalılar 0.78
+Джевадский,Навагинское,267,"Наваги-Муганлы, сел.",40.06243,49.02654,Наваги,kondratenko,,,map-society,,Saatlı 0.887; Sovla 0.857; Aşıqalılar 0.78
+Джевадский,Навагинское,268,Наваги отдѣл. 1-е,40.06243,49.02654,Наваги,kondratenko,,,map-society,,Novaya Teklya 0.783; Наваги (посёлок) 0.78; Navahı 0.736
 Джевадский,Падарское,269,"Падар-Хаджи-Алимъ, коч.",,,,,,,,,
 Джевадский,Рагим-Агалинское,270,"Даштамир-беглы, коч.",,,,,,,,,
 Джевадский,Рагим-Агалинское,271,"Дегмедагильды, коч.",,,,,,,,,
@@ -1796,11 +1796,11 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Джевадский,Хиля-Джагирлинское,281,"Хиля, коч.",40.04625,48.9244,Xilə,wikidata,Q120642186,1.03,name,Хиля,Xilə 1.03; Xıllı 0.887; Ulacalı 0.78
 Джевадский,Чаловское,282,"Хидырлы, коч.",39.84321,49.32091,Xıdırlı,geonames,147745,1.03,name,Xidirli,Xıdırlı 1.03; Dzhindyrly 0.83; Xubyarlı 0.769
 Джевадский,Чаловское,283,"Чаловъ (Чаловлу), коч.",39.86667,49.3,Chalovly,wikidata,Q5069051,1.03,name,Çalovlu,Chalovly 1.03; Çöl Dəllək 0.78; Çaylı 0.757
-Джевадский,Шорбачинское,284,"Кубали-Баширбекъ, сел.",,,,,,,,,Saatlı 0.887; Sovla 0.857; Aşıqalılar 0.78
-Джевадский,Шорбачинское,285,"Пашалы, коч.",,,,,,,,,Aşıqalılar 0.863; Beştalı 0.799; Yakha-Bashtali 0.799
-Джевадский,Шорбачинское,286,"Удулы, коч.",,,,,,,,,Xıdırlı 0.83; Beydili 0.83; Beydili 0.8
-Джевадский,Шорбачинское,287,"Шорбачи, коч.",,,,,,,,,
-Джевадский,Ага-ханлинское,288,"Ага-ханлы, сел.",,,,,,,,,Bahramtepe 0.963; Ağacanlı 0.905; Saatlı 0.887
+Джевадский,Шорбачинское,284,"Кубали-Баширбекъ, сел.",40.36405,48.61748,,kondratenko,,,map-society,,Saatlı 0.887; Sovla 0.857; Aşıqalılar 0.78
+Джевадский,Шорбачинское,285,"Пашалы, коч.",40.36405,48.61748,,kondratenko,,,map-society,,Aşıqalılar 0.863; Beştalı 0.799; Yakha-Bashtali 0.799
+Джевадский,Шорбачинское,286,"Удулы, коч.",40.36405,48.61748,,kondratenko,,,map-society,,Xıdırlı 0.83; Beydili 0.83; Beydili 0.8
+Джевадский,Шорбачинское,287,"Шорбачи, коч.",40.36405,48.61748,,kondratenko,,,map-society,,
+Джевадский,Ага-ханлинское,288,"Ага-ханлы, сел.",39.80258,47.98198,Ага-ханлы,kondratenko,,,map,,Bahramtepe 0.963; Ağacanlı 0.905; Saatlı 0.887
 Джевадский,Али-Солтанлинское,289,Али-Солтанлы,39.90226,48.33909,Alisoltanly,geonames,148554,1.03,name,Алысолтанлы,Alisoltanly 1.03; Astanlı 0.78; Xocalı Salyan 0.757
 Джевадский,Али-Солтанлинское,290,Гюмущи,39.90177,48.32416,,,,,approx,,Imishli 0.799; Gomuşçu 0.78; Gomuşçu 0.78
 Джевадский,Али-Солтанлинское,291,Карагашлы,39.87671,48.22461,Qaraqaşlı,geonames,147909,0.919,society,Qaraqaşlı,Qaraqaşlı 0.919; Qaraqaşlı 0.919; Qaraqaşlı 0.889
@@ -1809,10 +1809,10 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Джевадский,Али-Солтанлинское,294,Молла-Ваизлы,39.91957,48.34515,Mollavazlı,geonames,147477,1.03,name,Mollavaizly,Mollavazlı 1.03
 Джевадский,Али-Солтанлинское,295,Мурсалы,39.86516,48.19432,Myursalli,geonames,147442,1.03,society,Мюрсаллы,Myursalli 1.03; Murğuzalılı 1.03; Myursally 1.03
 Джевадский,Али-Солтанлинское,296,Поти-беклы,39.90177,48.32416,Potubeyli,geonames,147314,0.905,name,Potubejly,Potubeyli 0.905; Kokhunly 0.706; Parya Katli 0.706
-Джевадский,Амиралилярское,297,"Текля-Амиралиляръ, коч.",,,,,,,,,Ağamalılar 0.73
-Джевадский,Араб-Бала-огланское,298,"Араб-Бала-огланъ, коч.",,,,,,,,,Qarabağlı 0.767; Beylagan 0.737; Qubalıbalaoğlan 0.72
-Джевадский,Араблинское,299,"Арабли, коч.",,,,,,,,,Arap 0.889; Aranlı 0.83; Qaralar 0.83
-Джевадский,Араблинское,300,"Халфали, коч.",,,,,,,,,Khalfali 1.03; Khalfali 1.03; Yetimlyar 0.799
+Джевадский,Амиралилярское,297,"Текля-Амиралиляръ, коч.",39.76436,47.80568,Текля-Амиралиляръ,kondratenko,,,map,,Ağamalılar 0.73
+Джевадский,Араб-Бала-огланское,298,"Араб-Бала-огланъ, коч.",39.83268,47.89358,Араб-бала-огланъ,kondratenko,,,map-society,,Qarabağlı 0.767; Beylagan 0.737; Qubalıbalaoğlan 0.72
+Джевадский,Араблинское,299,"Арабли, коч.",39.8355,48.10048,Арабли,kondratenko,,,map-society,,Arap 0.889; Aranlı 0.83; Qaralar 0.83
+Джевадский,Араблинское,300,"Халфали, коч.",39.8355,48.10048,,kondratenko,,,map-society,,Khalfali 1.03; Khalfali 1.03; Yetimlyar 0.799
 Джевадский,Калагаинское,301,Калагаины,39.98365,48.4836,Qalaqayın,geonames,147949,1.03,name,Kalagayny,Qalaqayın 1.03; Kolanı 0.83; Kolanı 0.83
 Джевадский,Калагаинское,302,Краглы,39.9449,48.39198,Qıraqlı,geonames,147667,1.03,name,Kragly,Qıraqlı 1.03; Qaralar 0.83; Qaralar 0.83
 Джевадский,Калагаинское,303,Минбашлы,39.94944,48.37722,Minbaşılı,geonames,147505,0.971,name,Minbaşılı,Minbaşılı 0.971; Minbaşı 0.905; Kirovka 0.83
@@ -1828,13 +1828,13 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Джевадский,Каракювендиклинское,313,"Каракювендиклы, коч.",39.71848,47.90526,Yukhary-Karakyuvendikly,geonames,146931,1.03,name,Karakyuvendikly,Yukhary-Karakyuvendikly 1.03; Yuxarı Qaramanlı 0.757; Karayevkend 0.757
 Джевадский,Каракювендиклинское,314,"Пир Эйватлы, коч.",39.62222,47.79583,Pirayuvatlı (Pərsabad),wikidata,Q6394723,1,name,Pirayuvatlu,Pirayuvatlı (Pərsabad) 1; Pirsaat 0.736; Pirsaat 0.736
 Джевадский,Каракювендиклинское,315,"Хаджи-Бабалы (Зейнал-Абдинбеклы), селен.",39.76161,47.95268,Hacıbabalı,osm,n5901240684,1.03,name,Hacıbabalı,Hacıbabalı 1.03; Xoşçobanli 0.808; Xoşçobanlı 0.808
-Джевадский,Каралярское,316,Караляръ нижній влд.,,,,,,,,,Qaralar 0.808; Birinci Qaralı 0.757; Karavelli 0.75
-Джевадский,Каралярское,317,Хош-чобанлы,,,,,,,,,Xoşçobanli 1.03; Xoşçobanlı 1.03; Novoye Chemenly 0.78
+Джевадский,Каралярское,316,Караляръ нижній влд.,39.87607,48.13863,Н. Караляръ,kondratenko,,,map,,Qaralar 0.808; Birinci Qaralı 0.757; Karavelli 0.75
+Джевадский,Каралярское,317,Хош-чобанлы,39.85237,48.18286,,kondratenko,,,map-society,,Xoşçobanli 1.03; Xoşçobanlı 1.03; Novoye Chemenly 0.78
 Джевадский,Ковратлинское,318,Ахтачи,40.00613,48.71827,Axtaçı Muğan,geonames,587338,1.03,society,Axtaçı,Axtaçı 1.03; Axtaçı Muğan 1.03; Axtaçı 1.03
 Джевадский,Ковратлинское,319,Гашим-ханлы верхніе,39.77847,48.94934,Kolanı,geonames,147721,0.887,society,Gashim-Khanly,Gashimkhanly 1.03; Kolanı 0.887; Bala Haşımxanlı 0.78
 Джевадский,Ковратлинское,320,Енгиджа,40.00613,48.94934,,,,,approx,,Zangyana 0.714
 Джевадский,Ковратлинское,321,Ковратлы,40.00613,48.94934,,,,,approx,,Qaralar 0.863; Qaralar 0.863; Yuxarı Qaralar 0.863
-Джевадский,Муганлинское,322,"Муганлы, коч.",,,,,,,,,Karayevkend 0.939; Muğan 0.939; Mughan 0.909
+Джевадский,Муганлинское,322,"Муганлы, коч.",39.91011,48.21214,Муганлы,kondratenko,,,map,,Karayevkend 0.939; Muğan 0.939; Mughan 0.909
 Джевадский,Нижне-Караларское,323,Булдугъ,40.0609,48.6272,Bulduq,geonames,586936,1.03,name,Булдуг,Bulduq 1.03
 Джевадский,Нижне-Караларское,324,Караляръ-нижній,40.02722,48.54511,,,,,approx,,Qaralar 1.03; Qaralar 1.03; Qaralılar 1.03
 Джевадский,Нижне-Караларское,325,Кюр-кенды,40.02615,48.48211,Kyurkendi,geonames,585676,1.03,society,Куьркаьнди,Kyurkendi 1.03; Ashagy Kyurkendi 1.03; Novovasilyevka 0.963
@@ -1859,11 +1859,11 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Джевадский,Чахирлинское,344,Мазрали верхніе,39.77396,48.03249,Mazarli,geonames,147537,1.03,society,Məzrəli,Maztaly 1.07; Mazarli 1.03; Moranlı 0.863
 Джевадский,Чахирлинское,345,Сеидляръ,39.77396,48.03249,,,,,approx,,Seyidlar 1.03; Seidlyar 1.03; Seidlyar 1.03
 Джевадский,Чахирлинское,346,Чахирлы,39.74086,48.01608,Çaxırlı,geonames,148285,1,name,Çaxırlı,Çaxırlı 1; Çadırlı 0.887; Çaylı 0.863
-Джевадский,Эгрибуджагское,347,Ахунд-Касумлы,,,,,,,,,Maztaly 0.813; Hacıqasımlı 0.813; Makhundaly 0.737
-Джевадский,Эгрибуджагское,348,Деліляръ,,,,,,,,,Dallyar 1.03; Dəlili 1; Khalilli 0.8
-Джевадский,Эгрибуджагское,349,Мусалы,,,,,,,,,Musalı 1.03; Musalı 1.03; Myursalli 0.939
-Джевадский,Эгрибуджагское,350,Эгрибуджагъ,,,,,,,,,
-Джевадский,Эгрибуджагское,351,Хаджи-Касумлы,,,,,,,,,Maztaly 1.03; Hacıqasımlı 1.03; Hacıqabul 0.872
+Джевадский,Эгрибуджагское,347,Ахунд-Касумлы,40.0169,48.35681,,kondratenko,,,map-society,,Maztaly 0.813; Hacıqasımlı 0.813; Makhundaly 0.737
+Джевадский,Эгрибуджагское,348,Деліляръ,40.0169,48.35681,,kondratenko,,,map-society,,Dallyar 1.03; Dəlili 1; Khalilli 0.8
+Джевадский,Эгрибуджагское,349,Мусалы,40.0169,48.35681,,kondratenko,,,map-society,,Musalı 1.03; Musalı 1.03; Myursalli 0.939
+Джевадский,Эгрибуджагское,350,Эгрибуджагъ,40.01729,48.31238,Эгрибуджагъ,kondratenko,,,map,,
+Джевадский,Эгрибуджагское,351,Хаджи-Касумлы,40.0169,48.35681,,kondratenko,,,map-society,,Maztaly 1.03; Hacıqasımlı 1.03; Hacıqabul 0.872
 Джевадский,Ялованджское,352,Ахмед-ушаги,39.8825,48.29806,,,,,approx,,
 Джевадский,Ялованджское,353,Отуз-ики нижніе,39.8825,48.29806,,,,,approx,,Otuziki 1.03
 Джевадский,Ялованджское,354,Эмишлы,39.8825,48.29806,Tomushlv,geonames,389068,0.887,society,Томушлв,Shaumyanovka 0.953; Tomushlv 0.887; Imishli 0.863
@@ -1880,13 +1880,13 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Кубинский,Гасан-калинское,365,Бедыр-кала (Бедым-Бедал-кала),41.47685,48.49409,Bedirkala,geonames,587017,1.03,name,bedirkala,Bedirkala 1.03; Bedishkala 0.919; Adur 0.919
 Кубинский,Гасан-калинское,366,Гасан-кала,41.58051,48.68295,Gasankala,geonames,586507,1.03,society,Гасанкала,Gasankala 1.03; Gasankala 1.03; Həsənqoca 0.808
 Кубинский,Гасан-калинское,367,Сеидляръ (Дыгях-Шихляръ),41.60647,48.6445,Seydlyar,geonames,585104,1.03,name,Сейдляр,Seydlyar 1.03; Sayadlar 0.909; Sayad 0.83
-Кубинский,Гильское,368,Гиль,,,,,,,,,Qullar 1.03; Hiloba 1.03; Hil 1.03
+Кубинский,Гильское,368,Гиль,41.4629,48.33543,Гиль,kondratenko,,,map,,Qullar 1.03; Hiloba 1.03; Hil 1.03
 Кубинский,Джибирское,369,Гирикъ (Ге—),41.53674,48.2794,Girik,geonames,586437,1,name,Гирик,Girik 1; Qrız 0.83; İqrığ 0.83
 Кубинский,Джибирское,370,Джибиръ,41.51545,48.31833,Cibir,geonames,586648,1.03,name,Джибир,Cibir 1.03; Chilegir 0.757; Çılğır 0.757
 Кубинский,Джибирское,371,Леджетъ,41.54176,48.31499,Ledzhet,geonames,585649,1.03,society,Ləcət,Ledzhet 1.03; Ledzhet 1.03; Laza 0.83
-Кубинский,Дустаирское,372,Геджанъ,,,,,,,,,Gican 0.83; Гоган 0.8; Sağlocan 0.799
-Кубинский,Дустаирское,373,Дустаиръ,,,,,,,,,Düztahir 1.03; Düztahiroba 1; Sudur 0.757
-Кубинский,Дустаирское,374,Муругъ большой,,,,,,,,,Böyük Muruq 0.87; Mucuq 0.83; İqrığ 0.83
+Кубинский,Дустаирское,372,Геджанъ,41.41295,48.17815,,kondratenko,,,map-society,,Gican 0.83; Гоган 0.8; Sağlocan 0.799
+Кубинский,Дустаирское,373,Дустаиръ,41.39486,48.15368,Дустаиръ,kondratenko,,,map,,Düztahir 1.03; Düztahiroba 1; Sudur 0.757
+Кубинский,Дустаирское,374,Муругъ большой,41.41295,48.17815,,kondratenko,,,map-society,,Böyük Muruq 0.87; Mucuq 0.83; İqrığ 0.83
 Кубинский,Зейхурское,375,Зейхуръ,41.5692,48.38173,Yuxarı Zeyxur,geonames,584620,1.03,name,Юхары-Зейхур,Yuxarı Zeyxur 1.03; Zıxır 0.939; Gedazeykhur 0.887
 Кубинский,Зейхурское,376,Кулларъ,41.6399,48.47192,Qullar,geonames,585777,1.03,society,Куллар,Qullar 1.03; Килер 1; Quba 0.78
 Кубинский,Зухульское,377,Геленхуръ,41.49252,48.12865,Yukhary-Gelenkhur,geonames,584637,1.03,name,Юхары-Геленхур,Yukhary-Gelenkhur 1.03; Allahyarlı 0.78; Kolanı 0.744
@@ -1901,8 +1901,8 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Кубинский,Кюзунское,386,Кюзунъ,41.33499,48.14141,Kuzun,geonames,585735,1.03,name,Кузун,Kuzun 1.03; Kyzylly 0.83; Khizi 0.83
 Кубинский,Кюзунское,387,Лезе,41.29913,48.11161,Laza,geonames,585653,1.03,name,Лаза,Laza 1.03; Yukhary Alyaz 0.78; Ledzhet 0.757
 Кубинский,Кюзунское,388,Четкюнъ,41.34371,48.16407,Chetgyun,geonames,586852,1.03,name,Четкюн,Chetgyun 1.03
-Кубинский,Легерское,389,Бедыш-кала,,,,,,,,,Bedishkala 1.03; Bedirkala 1.03; Baxışlı 0.799
-Кубинский,Легерское,390,Легеръ нижній,,,,,,,,,Ash-Leger 1.07; Ashaga-Leger 1.07; Yukhary Leger 0.95
+Кубинский,Легерское,389,Бедыш-кала,41.50011,48.47975,,kondratenko,,,map-society,,Bedishkala 1.03; Bedirkala 1.03; Baxışlı 0.799
+Кубинский,Легерское,390,Легеръ нижній,41.50388,48.45689,Н. Легеръ,kondratenko,,,map,,Ash-Leger 1.07; Ashaga-Leger 1.07; Yukhary Leger 0.95
 Кубинский,Неджаф-кендское,391,"Кала (Киля, Кляхъ)",41.492,48.1914,,,,,approx,,Kolanı 0.919; Kolanı 0.83; Qələgah 0.83
 Кубинский,Неджаф-кендское,392,Неджаф-кендъ,41.492,48.1914,Nadzhafkend,geonames,585403,1.03,name,Наджафкенд,Nadzhafkend 1.03; Nadzhafkendoba 0.887; Nəclə 0.83
 Кубинский,Судурское,393,Кухуръ,41.38922,48.03564,Quxur,geonames,585781,1.03,name,Кьуьхуьр,Quxur 1.03; Ikhir 0.919; Kunxırt 0.863
@@ -1938,7 +1938,7 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Кубинский,Будугское,423,Аликъ верхній,41.17481,48.23556,Alik,geonames,587305,1.03,society,Аьлик,Alik 1.03; Elik 1.03; Meliklyar 0.83
 Кубинский,Будугское,424,Будугъ,41.1836,48.36861,Buduq,geonames,586941,1.03,name,Будуг,Buduq 1.03; Şuduq 0.757
 Кубинский,Джекское,425,Джекъ,41.19376,48.2367,Cek,geonames,586654,1.03,name,Джек,Cek 1.03; Caqar 0.78
-Кубинский,Джеминское,426,Джами (Джеми),,,,,,,,,Cimi 0.78; Samurçay 0.75
+Кубинский,Джеминское,426,Джами (Джеми),41.0422,48.55051,Джами,kondratenko,,,map,,Cimi 0.78; Samurçay 0.75
 Кубинский,Енги-кендское,427,Аличъ (Алычъ),41.25407,48.48059,Alıç,geonames,587266,1.03,name,Alıç,Alıç 1.03; Talış 0.757; Ördüc 0.757
 Кубинский,Енги-кендское,428,Енги-кендъ,41.27984,48.42671,Yenikend,geonames,584659,0.971,society,Yengikend,Yenikend 0.971; Yenikend 0.963; Langi 0.919
 Кубинский,Енги-кендское,429,Сухта-кала,41.26667,48.4,Sukhtakala,geonames,584934,1.03,name,Сухтакала,Sukhtakala 1.03; Suxtaqalaqışlaq 0.78; Sağlocan 0.736
@@ -2039,8 +2039,8 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Кубинский,Кильварское,524,Кильваръ,41.2052,48.76087,Kilvar,geonames,585893,1.03,name,Кылвар,Kilvar 1.03; Quba 0.83; Килер 0.8
 Кубинский,Кильварское,525,Рычалъ,41.21667,48.76667,,,,,approx,,Arçal 0.863; Küpçal 0.799; Kyünçal 0.799
 Кубинский,Кильварское,526,Сафи-кендъ,41.21667,48.76667,Sofukend,geonames,584952,1.03,society,Софукенд,Sofukend 1.03; Sofikend 1.03; Yenikend 0.83
-Кубинский,"Кущинское, Верхне-",527,Кущи верхніе,,,,,,,,,Kogna-Kushchi 0.863; Куйсун 0.8; Усухчай 0.8
-Кубинский,"Кущинское, Верхне-",528,Муганлы,,,,,,,,,Müşkülqazma 0.757; Aygünlü 0.757; Gyandzhlyar 0.757
+Кубинский,"Кущинское, Верхне-",527,Кущи верхніе,40.98737,48.92666,В. Кущи,kondratenko,,,map,,Kogna-Kushchi 0.863; Куйсун 0.8; Усухчай 0.8
+Кубинский,"Кущинское, Верхне-",528,Муганлы,40.96809,48.9056,,kondratenko,,,map-society,,Müşkülqazma 0.757; Aygünlü 0.757; Gyandzhlyar 0.757
 Кубинский,"Кущинское, Нижне-",529,Ага-Мирза-обаси,41.34833,48.98472,Aga-Mirza-Obasi,geonames,800386,1.03,name,Ага-Мырза-Обасы,Aga-Mirza-Obasi 1.03; Mirzakasym 0.757; Agasibeyli 0.75
 Кубинский,"Кущинское, Нижне-",530,Аджи-Каракашлы,41.38015,49.03465,Çay Qaraqaşlı,geonames,800392,0.91,society,Чай Каракашлы,Hacı Qaraqaşlı 0.99; Çay Qaraqaşlı 0.91; Qaraqaşlı 0.887
 Кубинский,"Кущинское, Нижне-",531,Кущи нижніе,41.34833,49.01667,,,,,approx,,Kogna-Kushchi 0.863; Куйсун 0.8; Усухчай 0.8
@@ -2055,15 +2055,15 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Кубинский,Пиребедильское,540,Сумагова,41.20155,48.81461,Sumağava,geonames,584926,1.03,name,СумагӀава,Sumağava 1.03; Shumagir 0.744
 Кубинский,Саяданское,541,Дара-Заратъ,40.99045,49.11314,Dere-Zorat,geonames,586740,1.03,name,Дере-Зарат,Dere-Zorat 1.03; Zarat 0.744; Zarat 0.744
 Кубинский,Саяданское,542,Саяданъ,41.06516,49.03915,Siadan,geonames,585192,1.03,name,Саьдан,Siadan 1.03; Sayad 0.78; Siyazan 0.757
-Кубинский,Саяд-хизинское,543,Ангеланъ,,,,,,,,,Yukhary Angelan 1; Angelan 1; Sağlocan 0.887
-Кубинский,Саяд-хизинское,544,Гамшаръ,,,,,,,,,Amsar 0.863; Böyük Həmyə 0.757
-Кубинский,Саяд-хизинское,545,Саяд-Хизы,,,,,,,,,Khizi 0.757
-Кубинский,Саяд-хизинское,546,Теке-Шихи,,,,,,,,,Qalaşıxı 0.808; Tekeshykhy 0.767; Aşağı Xuç 0.736
-Кубинский,Саяд-хизинское,547,Тугъ,,,,,,,,,Utuq 0.887; Tuğay 0.78; Fırıq 0.78
-Кубинский,Саяд-хизинское,548,Ших-Хизы,,,,,,,,,"Chukhur-Zami 0.78; Khizi 0.757; Şıxlar, Khizi 0.737"
-Кубинский,Сіязанское,549,Заргерды,,,,,,,,,Zargarly 0.83; Caqar 0.744; Zərğov 0.744
-Кубинский,Сіязанское,550,Сіязанъ,,,,,,,,,Siyazan 1.03; Karasiyazen 1.03; Agsiazan 0.887
-Кубинский,Сіязанское,551,Ших-Аладинлу,,,,,,,,,
+Кубинский,Саяд-хизинское,543,Ангеланъ,40.9133,49.07882,,kondratenko,,,map-society,,Yukhary Angelan 1; Angelan 1; Sağlocan 0.887
+Кубинский,Саяд-хизинское,544,Гамшаръ,40.9133,49.07882,,kondratenko,,,map-society,,Amsar 0.863; Böyük Həmyə 0.757
+Кубинский,Саяд-хизинское,545,Саяд-Хизы,40.89927,49.05644,Саятъ Хизы,kondratenko,,,map,,Khizi 0.757
+Кубинский,Саяд-хизинское,546,Теке-Шихи,40.9133,49.07882,,kondratenko,,,map-society,,Qalaşıxı 0.808; Tekeshykhy 0.767; Aşağı Xuç 0.736
+Кубинский,Саяд-хизинское,547,Тугъ,40.9133,49.07882,,kondratenko,,,map-society,,Utuq 0.887; Tuğay 0.78; Fırıq 0.78
+Кубинский,Саяд-хизинское,548,Ших-Хизы,40.9133,49.07882,,kondratenko,,,map-society,,"Chukhur-Zami 0.78; Khizi 0.757; Şıxlar, Khizi 0.737"
+Кубинский,Сіязанское,549,Заргерды,40.9663,49.15305,,kondratenko,,,map-society,,Zargarly 0.83; Caqar 0.744; Zərğov 0.744
+Кубинский,Сіязанское,550,Сіязанъ,40.98595,49.16566,Сіязанъ,kondratenko,,,map,,Siyazan 1.03; Karasiyazen 1.03; Agsiazan 0.887
+Кубинский,Сіязанское,551,Ших-Аладинлу,40.9663,49.15305,,kondratenko,,,map-society,,
 Кубинский,Тагайское,552,Агаси-бек-обаси,41.13333,49.11667,Agasibeyli,geonames,587393,1.03,name,Agasi-Bek-Obasi,Agasibeyli 1.03; Aga-Mirza-Obasi 0.75; Yaquboba 0.73
 Кубинский,Тагайское,553,Араб-Гамья,41.10655,49.14444,Böyük Həmyə,geonames,586992,0.971,name,Arab Gam’ya,Böyük Həmyə 0.971; Arab-Babaly 0.78; Яраг-Казмаляр 0.778
 Кубинский,Тагайское,554,Араб-Али-Мамедъ,41.07524,49.15245,Ali-Mammet-Arab,geonames,587079,1.03,name,Arab’-Alli-Mamed’,Ali-Mammet-Arab 1.03; Arablyar 0.73
@@ -2254,13 +2254,13 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Ленкоранский,Караярское,739,Солтан-кендъ (съ отс. Фараджумали),39.16358,48.29041,Sultankend,geonames,147125,1.03,name,Солтанкаьнд,Sultankend 1.03; Shala 0.83; Selyakeran 0.824
 Ленкоранский,Караярское,740,Халилу,39.15823,48.44555,Khalilli,geonames,147819,1.03,name,Хаьлилли,Khalilli 1.03; Xolmili 0.939; Xallıcalı 0.939
 Ленкоранский,Караярское,741,Эшакчи,39.19974,48.3942,,,,,approx,,Eshakchi 0.78; Şorbaçı 0.736
-Ленкоранский,Новогольское,742,Новогольскъ (Новоголка),,,,,,,,,
+Ленкоранский,Новогольское,742,Новогольскъ (Новоголка),39.19851,48.61411,Новогол[ка],kondratenko,,,map,,
 Ленкоранский,Панавандское,743,"Дервишлы (Дервиш-беглы), коч.",39.40225,48.58046,Dərvişli,osm,n2971560197,1.03,name,Dərvişli,Dərvişli 1.03; Marushli 0.83
 Ленкоранский,Панавандское,744,"Джурали, коч.",39.41737,48.56993,Nizhniy Dzhurali,geonames,148476,1.03,society,Aşağı Cürəli,Yukhary Dzhuraly 1.03; Nizhniy Dzhurali 1.03; Asagy-Dzhurali 1.03
 Ленкоранский,Панавандское,745,Панавандъ,39.41737,48.58046,,,,,approx,,Tankivan 0.78; Parakənd 0.78; Zuvatly 0.767
 Ленкоранский,Перембельское,746,"Перембель 1, ч. коч.",38.92161,48.1289,Pirembel,geonames,393610,0.905,name,Пирембел,Pirembel 0.905; Chukash 0.799; Zarbaly 0.744
 Ленкоранский,Перембельское,747,"Перембель 2, ч. коч.",38.92161,48.1289,,,,,approx,,Pirembel 0.905; Chukash 0.799; Zarbaly 0.744
-Ленкоранский,Православенское,748,Православное,,,,,,,,,Privolnoye 0.767
+Ленкоранский,Православенское,748,Православное,39.10311,48.56533,Православное,kondratenko,,,map,,Privolnoye 0.767
 Ленкоранский,Приволенское,749,Привольное,39.12996,48.53337,Privolnoye,osm,n1493278656,1.03,name,Привольное,Privolnoye 1.03; Rıvadıla 0.78; Arvana 0.744
 Ленкоранский,Пришибское,750,Пришибъ,39.11998,48.59383,Geytepe,geonames,146862,1.03,name,Prişib,Geytepe 1.03; Pushkino 0.744
 Ленкоранский,Саград-абадское,751,Абуш-абадъ (съ отс. Шилявенга),39.25806,48.40468,Abışabad,geonames,148639,1.03,name,Абышабад,Abışabad 1.03; Asadabad 0.854; Abbasabad 0.854
@@ -2275,24 +2275,24 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Ленкоранский,Бамбашинское,760,Бамбаши,39.03972,48.62583,Banbaşı,geonames,148376,1.03,name,Bambaşı,Banbaşı 1.03; Babaser 0.83; Qumbaşı 0.78
 Ленкоранский,Бамбашинское,761,Еген-кендъ,39.02768,48.61025,Yegenkend,geonames,146954,1.03,name,Егенкенд,Yegenkend 1.03; Ashim 0.905; Armen-Keno 0.905
 Ленкоранский,Бамбашинское,762,Косакюль,39.03199,48.63665,Kosagül,geonames,8473736,1.03,name,Kosakyul’,Kosagül 1.03; Kosalar 0.863; Kosalar 0.863
-Ленкоранский,Бурадигинское,763,"Бурадига (Барад—) (съ отс. Казвин-оба, Шатр-оба, Бабасыръ, Молла-оба и Тукля)",,,,,,,,,Boradigah 0.963; Aşağı Bradi 0.939; Orand 0.83
+Ленкоранский,Бурадигинское,763,"Бурадига (Барад—) (съ отс. Казвин-оба, Шатр-оба, Бабасыръ, Молла-оба и Тукля)",38.93056,48.72553,Бурадига,kondratenko,,,map,,Boradigah 0.963; Aşağı Bradi 0.939; Orand 0.83
 Ленкоранский,Гусейн-Аджилинское,764,Гусейн-Аджилю (Х—) (съ отс. Касимлю и Ташлю),39.03632,48.75,Hüseynhacılı,geonames,148027,0.887,name,ХӀуьсейнхӀаджили,Hüseynhacılı 0.887; Güneyli 0.78; Gadzhi-Eynali 0.767
-Ленкоранский,Джерайлинское,765,Гасанлу (Х—),,,,,,,,,Gasanly 1.03; Gasanly 1.03; Kosalar 0.939
-Ленкоранский,Джерайлинское,766,Джерайлу,,,,,,,,,Yarlı 0.83; Çaylı 0.8; Yardımlı 0.799
-Ленкоранский,Джерайлинское,767,Мамед-ханлу,,,,,,,,,Mamedkhanly 1.03; Mamed-Dzhanly 0.977; Tomarkhanly 0.808
-Ленкоранский,Джерайлинское,768,Хармандалу,,,,,,,,,Xırmandalı 1.03; Xırmandalı 0.977; Heyran 0.778
+Ленкоранский,Джерайлинское,765,Гасанлу (Х—),39.12617,48.69102,,kondratenko,,,map-society,,Gasanly 1.03; Gasanly 1.03; Kosalar 0.939
+Ленкоранский,Джерайлинское,766,Джерайлу,39.12017,48.71135,Джерайлу,kondratenko,,,map,,Yarlı 0.83; Çaylı 0.8; Yardımlı 0.799
+Ленкоранский,Джерайлинское,767,Мамед-ханлу,39.12617,48.69102,,kondratenko,,,map-society,,Mamedkhanly 1.03; Mamed-Dzhanly 0.977; Tomarkhanly 0.808
+Ленкоранский,Джерайлинское,768,Хармандалу,39.12617,48.69102,,kondratenko,,,map-society,,Xırmandalı 1.03; Xırmandalı 0.977; Heyran 0.778
 Ленкоранский,Дыгинское,769,Ага-киши-беглу,39.05918,48.68123,Agakishibeyli,geonames,148634,0.947,name,АгӀакишибаьйли,Agakishibeyli 0.947
 Ленкоранский,Дыгинское,770,Гевлан-Самед-ханлу,39.05918,48.68123,,,,,approx,,
 Ленкоранский,Дыгинское,771,Дыгя,39.0434,48.66327,Digah,geonames,148197,0.919,society,Dygya,Diqo 1.03; Digah 0.919; Digah 0.919
 Ленкоранский,Дыгинское,772,Шарафа,39.06611,48.68208,Sharafa,geonames,147199,1.03,name,Шарафа,Sharafa 1.03; Şatıroba 0.78; Shagriyar 0.744
-Ленкоранский,Едды-оймагское,773,Едды-оймагъ (съ отселк. Кадилу и Шихляръ),,,,,,,,,İkinci Yeddioymaq 0.854; Badamağac 0.736; Badamağac 0.736
+Ленкоранский,Едды-оймагское,773,Едды-оймагъ (съ отселк. Кадилу и Шихляръ),39.00431,48.75666,[Е]ды-оймагъ,kondratenko,,,map,,İkinci Yeddioymaq 0.854; Badamağac 0.736; Badamağac 0.736
 Ленкоранский,Кадырлинское,774,Арабли (Арабъ),39.14228,48.73395,Arap,geonames,148525,1.03,name,Ərəb,Arap 1.03; Ḩeyrān-e Bālā 0.833; Koraoba 0.83
 Ленкоранский,Кадырлинское,775,Кадырлы-Кочаклы (съ отс. Эйнали),39.14228,48.75554,,,,,approx,,
 Ленкоранский,Кадырлинское,776,Халаджалу,39.06725,48.75554,Xallıcalı,geonames,147815,0.887,society,Халыджаллы,Xallıcalı 0.887; Velechola 0.83; Yolocaq 0.799
 Ленкоранский,Кизил-аварское,777,Кизил-аваръ,38.96469,48.67925,Qızılavar,geonames,147632,1.03,name,qyzyl awar,Qızılavar 1.03; Qızılağac 0.808; Qızılağac 0.808
 Ленкоранский,Кизил-аварское,778,Сарчеваръ,38.96513,48.74877,Sarchuvar,geonames,147260,0.919,name,Саьрчувар,Sarchuvar 0.919; Ərçivan 0.854; Horavar 0.83
 Ленкоранский,Кизил-аварское,779,Хилъ (съ отселк. Серабиль),38.974,48.72413,Xıl,geonames,147744,1.03,name,Хыл,Xıl 1.03; Hovil 0.887; Khalilli 0.887
-Ленкоранский,Кизил-агачское,780,Кизил-агачъ,,,,,,,,,Qızılağac 0.872; Qızılağac 0.872; Qızılavar 0.767
+Ленкоранский,Кизил-агачское,780,Кизил-агачъ,39.03844,48.8259,Кизилъ агачъ,kondratenko,,,map,,Qızılağac 0.872; Qızılağac 0.872; Qızılavar 0.767
 Ленкоранский,Масаллинское,781,Дадва,39.03333,48.66667,Dadva,geonames,148248,1.03,name,Дадва,Dadva 1.03
 Ленкоранский,Масаллинское,782,Масаллу,39.03417,48.67672,,,,,approx,,Masally 1.03; Meshadilyar 0.863; Mastail 0.863
 Ленкоранский,Масаллинское,783,Онджа-кала,39.03417,48.71834,Ondzhakyala,geonames,147372,1.03,name,Онджакяла,Ondzhakyala 1.03; Andzhakov 0.83; Nisya-Kyala 0.808
@@ -2370,9 +2370,9 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Ленкоранский,Мистанское,855,Разговъ,38.67389,48.45549,Razğov,geonames,147297,1.03,name,Разгов,Razğov 1.03; Rezavul 0.799; Anzov 0.757
 Ленкоранский,Мистанское,856,Татоны,38.65801,48.39976,Tatoni,geonames,147075,1.03,name,Татони,Tatoni 1.03; Haftoni 0.799; Haftonu 0.799
 Ленкоранский,Мистанское,857,Хальфа-кендъ (съ отс. Дыга-дараси),38.65263,48.41714,Xəlifəkənd,osm,n4323080685,0.977,society,Xəlifəkənd,Xəlifəkənd 0.977; Khalfalar 0.939; Mollakend 0.854
-Ленкоранский,Орандское,858,"Орандъ ч. 1-я (съ отс. Лазранъ, коч.)",,,,,,,,,Orand 0.863; Aran 0.757
-Ленкоранский,Орандское,859,"Орандъ ч. 2-я (съ отс. Лазранъ, коч.)",,,,,,,,,Orand 0.863; Aran 0.757
-Ленкоранский,Орандское,860,"Орандъ ч. 3-я (съ отс. Нуравитъ, сел.)",,,,,,,,,Orand 0.863; Aran 0.757
+Ленкоранский,Орандское,858,"Орандъ ч. 1-я (съ отс. Лазранъ, коч.)",38.73277,48.31356,Орандъ,kondratenko,,,map,,Orand 0.863; Aran 0.757
+Ленкоранский,Орандское,859,"Орандъ ч. 2-я (съ отс. Лазранъ, коч.)",38.73277,48.31356,Орандъ,kondratenko,,,map,,Orand 0.863; Aran 0.757
+Ленкоранский,Орандское,860,"Орандъ ч. 3-я (съ отс. Нуравитъ, сел.)",38.73277,48.31356,Орандъ,kondratenko,,,map,,Orand 0.863; Aran 0.757
 Ленкоранский,Ордугальское,861,Аранъ (съ отс. Мусаваръ),38.88346,48.43524,Aran,geonames,148519,1.03,name,Аран,Aran 1.03; Orand 0.919; Haran 0.919
 Ленкоранский,Ордугальское,862,Бойканилъ,38.88928,48.42327,Boykandul,geonames,388720,0.971,name,Бойкандул,Boykandul 0.971; Boyxanlı 0.905; Brkandul 0.854
 Ленкоранский,Ордугальское,863,Буругъ (съ отс. Гиль-Гиль),38.90653,48.42042,Buruq,geonames,148302,1.03,name,Buruğ,Buruq 1.03; Boradigah 0.863; Bursut 0.757
@@ -2497,23 +2497,23 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Шемахинский,Агри-обинское,982,"Калабеклы, коч.",40.50078,48.38893,Qarabağlı,geonames,586244,1,name,Kalabekly,Qarabağlı 1; Kalağaylı 0.875; Kelenly 0.744
 Шемахинский,Агри-обинское,983,Пардалы (Пардилы) коч.,40.47861,48.38893,,,,,approx,,Barmı 0.833; Şərədil 0.799
 Шемахинский,Алиджанлинское,984,"Алиджанлы, коч.",40.03578,48.43728,Alidzhanly,geonames,587309,1,name,Алыджанлы,Alidzhanly 1; Melik-Chobany 0.808; Kelenly 0.799
-Шемахинский,Алпаутское,985,Алпаутъ Мардан-бека,,,,,,,,,
-Шемахинский,Алпаутское,986,Кюлюли татарское,,,,,,,,,
-Шемахинский,Алпаутское,987,"Текля-Сафи, коч.",,,,,,,,,Leninabad 0.744; Teklya 0.714
-Шемахинский,Алпаутское,988,Ших-Насыръ,,,,,,,,,Şıxzahırlı 0.808
-Шемахинский,Альвендское,989,Альвендъ,,,,,,,,,Kalva 0.757; Keyvendi 0.744; Cavad 0.727
-Шемахинский,Альвендское,990,"Бахли-кишлагъ (Кишлаг-Бахишлы, Кара-Махмудлы)",,,,,,,,,Baxışlı 0.8; Basgal 0.757; Bakhliyan 0.757
-Шемахинский,Арабское,991,Арабъ Мехти-бека,,,,,,,,,
-Шемахинский,Арабское,992,Дадали,,,,,,,,,Adnalı 0.83; Bədəlli 0.83; Sadafli 0.757
-Шемахинский,Араб-Сарванское,993,Араб-Сарванъ,,,,,,,,,Arabshakhverdi 0.757; Arabshalbash 0.73
-Шемахинский,Араб-Сарванское,994,Сарван-Хаджи-Кадыръ,,,,,,,,,Gadzhykadirli 0.75
-Шемахинский,Араб-Сарванское,995,Шах-архи,,,,,,,,,Shamakhi 0.83; Suraxanı 0.78; Sachyarni 0.78
-Шемахинский,Араб-Ханаданское,996,"Араб-Ханаданъ, коч.",,,,,,,,,
-Шемахинский,Ахтачинское,997,"Ахтачи 1-е, коч.",,,,,,,,,Axtaçı 1.03; Axtaçı 1; Axtaçı Muğan 1
-Шемахинский,Ахтачи-Хаджи-Абдул-Керимлинское,998,Ахтачи 2-е (Хаджи-Абдул-Керимлы) коч.,,,,,,,,,Axtaçı 0.808; Axtaçı 0.778; Axtaçı Muğan 0.778
-Шемахинский,Ахтачи-Хаджи-Абдул-Керимлинское,999,"Ахтачи-Екикуршаглы, коч.",,,,,,,,,
-Шемахинский,Ахтачи-Хаджи-Абдул-Керимлинское,1000,Шихлы,,,,,,,,,Şıxlar 1.03; Şıxlar 1; Şərədil 0.757
-Шемахинский,Ахтачи-Сальянское,1001,"Ахтачи-Сальянъ, сел.",,,,,,,,,Səfalı 0.887; Axtaçı 0.815; Axtaçı Şirvan 0.799
+Шемахинский,Алпаутское,985,Алпаутъ Мардан-бека,40.50575,48.07487,Алпаутъ,kondratenko,,,map,,
+Шемахинский,Алпаутское,986,Кюлюли татарское,40.49571,48.06554,,kondratenko,,,map-society,,
+Шемахинский,Алпаутское,987,"Текля-Сафи, коч.",40.49571,48.06554,,kondratenko,,,map-society,,Leninabad 0.744; Teklya 0.714
+Шемахинский,Алпаутское,988,Ших-Насыръ,40.49571,48.06554,,kondratenko,,,map-society,,Şıxzahırlı 0.808
+Шемахинский,Альвендское,989,Альвендъ,40.07242,47.92184,Альвендъ,kondratenko,,,map,,Kalva 0.757; Keyvendi 0.744; Cavad 0.727
+Шемахинский,Альвендское,990,"Бахли-кишлагъ (Кишлаг-Бахишлы, Кара-Махмудлы)",40.08609,47.94369,,kondratenko,,,map-society,,Baxışlı 0.8; Basgal 0.757; Bakhliyan 0.757
+Шемахинский,Арабское,991,Арабъ Мехти-бека,40.52304,48.19826,Арабъ Мехти бека,kondratenko,,,map,,
+Шемахинский,Арабское,992,Дадали,40.51771,48.16905,,kondratenko,,,map-society,,Adnalı 0.83; Bədəlli 0.83; Sadafli 0.757
+Шемахинский,Араб-Сарванское,993,Араб-Сарванъ,40.48035,48.19646,Араб Сарванъ,kondratenko,,,map,,Arabshakhverdi 0.757; Arabshalbash 0.73
+Шемахинский,Араб-Сарванское,994,Сарван-Хаджи-Кадыръ,40.4773,48.20807,,kondratenko,,,map-society,,Gadzhykadirli 0.75
+Шемахинский,Араб-Сарванское,995,Шах-архи,40.4773,48.20807,,kondratenko,,,map-society,,Shamakhi 0.83; Suraxanı 0.78; Sachyarni 0.78
+Шемахинский,Араб-Ханаданское,996,"Араб-Ханаданъ, коч.",40.4765,48.26051,Араб Ханаданъ,kondratenko,,,map,,
+Шемахинский,Ахтачинское,997,"Ахтачи 1-е, коч.",40.48078,48.40638,,kondratenko,,,map-society,,Axtaçı 1.03; Axtaçı 1; Axtaçı Muğan 1
+Шемахинский,Ахтачи-Хаджи-Абдул-Керимлинское,998,Ахтачи 2-е (Хаджи-Абдул-Керимлы) коч.,40.43384,48.41458,,kondratenko,,,map-society,,Axtaçı 0.808; Axtaçı 0.778; Axtaçı Muğan 0.778
+Шемахинский,Ахтачи-Хаджи-Абдул-Керимлинское,999,"Ахтачи-Екикуршаглы, коч.",40.43384,48.41458,,kondratenko,,,map-society,,
+Шемахинский,Ахтачи-Хаджи-Абдул-Керимлинское,1000,Шихлы,40.43384,48.41458,,kondratenko,,,map-society,,Şıxlar 1.03; Şıxlar 1; Şərədil 0.757
+Шемахинский,Ахтачи-Сальянское,1001,"Ахтачи-Сальянъ, сел.",40.40545,48.41237,,kondratenko,,,map-society,,Səfalı 0.887; Axtaçı 0.815; Axtaçı Şirvan 0.799
 Шемахинский,Беинское,1002,Беи,,,,,,,,,Boyat 0.78; Bağırlı 0.78; Bozum 0.78
 Шемахинский,Беинское,1003,Каракашлы-Ага-Рзабека,,,,,,,,,Гарагашлы 0.799
 Шемахинский,Бенаджикское,1004,Аджи-дара,40.52552,48.74363,Akhzhidara,geonames,587419,1.03,name,Аджидаьраь,Akhzhidara 1.03; Göydərə 0.887; Khasidere 0.83
@@ -2527,31 +2527,31 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Шемахинский,Гек-Даллеклинское,1012,"Халиллы-Ибрагим-бека, коч",,,,,,,,,
 Шемахинский,Гярусское,1013,Арат-кендъ,40.50169,48.40752,Aratkend Vtoroy,geonames,587217,1,name,Aratkend,Aratkend Vtoroy 1; Zarat 0.919; Zarat 0.919
 Шемахинский,Гярусское,1014,"Гярусъ 1-й, коч.",40.85987,49.05585,Qars,geonames,586125,0.889,name,Гарс,Qars 0.889; Qarasu 0.757
-Шемахинский,Джаглинское,1015,Боят-Назыр-Хусейнъ,,,,,,,,,
-Шемахинский,Джаглинское,1016,Джаглы (Джегли),,,,,,,,,Dzhagirli 0.83; Gyagyali 0.78; İkinci Çaylı 0.78
-Шемахинский,Исмаилинское,1017,Исмаиллы 1-е,,,,,,,,,Zarat İsmayıllı 0.736
-Шемахинский,Исмаилинское,1018,Исмаиллы 2-е,,,,,,,,,Zarat İsmayıllı 0.736
-Шемахинский,Исмаилинское,1019,Кенгерлы,,,,,,,,,Karaganly 0.83; Kyanagya 0.769; Qəfərli 0.769
-Шемахинский,Карабуджагское,1020,Карабуджагъ,,,,,,,,,Qarabağlı 0.824; Qarabulaq 0.808; Qaradağ 0.75
-Шемахинский,Кара-Ильхичинское,1021,"Кара-Ильхичи, дер.",,,,,,,,,Padar 0.78; Padar 0.78; Padar 0.78
-Шемахинский,Киравелли-Камбайбекское,1022,"Каравелли-Камбайбекъ, коч.",,,,,,,,,
-Шемахинский,Киравелли-Камбайбекское,1023,"Шахсеванъ, коч.",,,,,,,,,Şahqaya 0.706
+Шемахинский,Джаглинское,1015,Боят-Назыр-Хусейнъ,40.44257,48.23403,,kondratenko,,,map-society,,
+Шемахинский,Джаглинское,1016,Джаглы (Джегли),40.42517,48.24786,Джаглы?,kondratenko,,,map,,Dzhagirli 0.83; Gyagyali 0.78; İkinci Çaylı 0.78
+Шемахинский,Исмаилинское,1017,Исмаиллы 1-е,40.42343,48.3545,Исмаилы,kondratenko,,,map,,Zarat İsmayıllı 0.736
+Шемахинский,Исмаилинское,1018,Исмаиллы 2-е,40.42343,48.3545,Исмаилы,kondratenko,,,map,,Zarat İsmayıllı 0.736
+Шемахинский,Исмаилинское,1019,Кенгерлы,40.42373,48.37824,,kondratenko,,,map-society,,Karaganly 0.83; Kyanagya 0.769; Qəfərli 0.769
+Шемахинский,Карабуджагское,1020,Карабуджагъ,40.44557,48.05277,Карабуджагъ,kondratenko,,,map,,Qarabağlı 0.824; Qarabulaq 0.808; Qaradağ 0.75
+Шемахинский,Кара-Ильхичинское,1021,"Кара-Ильхичи, дер.",40.4843,48.29161,Кара Ильхичи,kondratenko,,,map,,Padar 0.78; Padar 0.78; Padar 0.78
+Шемахинский,Киравелли-Камбайбекское,1022,"Каравелли-Камбайбекъ, коч.",40.61368,48.26131,,kondratenko,,,map-society,,
+Шемахинский,Киравелли-Камбайбекское,1023,"Шахсеванъ, коч.",40.61368,48.26131,,kondratenko,,,map-society,,Şahqaya 0.706
 Шемахинский,Каракоюнлинское,1024,"Каракоюнлы, дер.",,,,,,,,,Qaraqaşlı 0.854; Karaganly 0.854; Karaganly 0.854
-Шемахинский,Карасахкалинское,1025,"Карасахкаллы, дер.",,,,,,,,,Qaraqaşlı 0.808; Padar 0.78; Padar 0.78
+Шемахинский,Карасахкалинское,1025,"Карасахкаллы, дер.",40.39178,48.3045,Карасахкалы,kondratenko,,,map,,Qaraqaşlı 0.808; Padar 0.78; Padar 0.78
 Шемахинский,Куртское,1026,"Куртъ, дер.",,,,,,,,,Qırlar 0.78; Arakit 0.78; Padar 0.78
-Шемахинский,Кюрдамирское,1027,Кюрдамиръ,,,,,,,,,Keytikh 0.854; Damirli 0.744; Bağman 0.727
-Шемахинский,Молла-Али-оглинское,1028,Абдулла-беклы,,,,,,,,,Abdulabad 0.872; Qarabağlı 0.778; Atbulaq 0.706
-Шемахинский,Молла-Али-оглинское,1029,Молла-Али-оглы,,,,,,,,,Qarabağlı 0.706; Allahyarlı 0.706
-Шемахинский,Молла-Али-оглинское,1030,Новджа,,,,,,,,,
-Шемахинский,Молла-Али-оглинское,1031,Чигны 2-е,,,,,,,,,
-Шемахинский,Моллаларское,1032,Ильхичи-Кенгерлы,,,,,,,,,
-Шемахинский,Моллаларское,1033,"Керраръ, коч.",,,,,,,,,Qaralı 0.83; Kerche 0.8; Karaganly 0.799
-Шемахинский,Моллаларское,1034,"Моллалляръ, коч.",,,,,,,,,Khila Mirzali 0.8; Poladlı 0.757; Məlhəm 0.757
-Шемахинский,Моллаларское,1035,Текля-Муганлы,,,,,,,,,Muğanlı 0.736; Tağlabiyan 0.73
-Шемахинский,Моллаларское,1036,"Хинислы-Халаджъ, коч.",,,,,,,,,
-Шемахинский,Моллаларское,1037,"Чапни, коч.",,,,,,,,,İkinci Çaylı 0.757; Birinci Çaylı 0.757; Çaylı 0.757
+Шемахинский,Кюрдамирское,1027,Кюрдамиръ,40.39697,48.17257,Кюрдамиръ,kondratenko,,,map,,Keytikh 0.854; Damirli 0.744; Bağman 0.727
+Шемахинский,Молла-Али-оглинское,1028,Абдулла-беклы,40.53629,48.25516,,kondratenko,,,map-society,,Abdulabad 0.872; Qarabağlı 0.778; Atbulaq 0.706
+Шемахинский,Молла-Али-оглинское,1029,Молла-Али-оглы,40.54343,48.23883,Молла Али-оглы,kondratenko,,,map,,Qarabağlı 0.706; Allahyarlı 0.706
+Шемахинский,Молла-Али-оглинское,1030,Новджа,40.53629,48.25516,,kondratenko,,,map-society,,
+Шемахинский,Молла-Али-оглинское,1031,Чигны 2-е,40.53629,48.25516,,kondratenko,,,map-society,,
+Шемахинский,Моллаларское,1032,Ильхичи-Кенгерлы,40.50135,48.37923,,kondratenko,,,map-society,,
+Шемахинский,Моллаларское,1033,"Керраръ, коч.",40.50135,48.37923,,kondratenko,,,map-society,,Qaralı 0.83; Kerche 0.8; Karaganly 0.799
+Шемахинский,Моллаларское,1034,"Моллалляръ, коч.",40.51453,48.37349,Моллалляръ,kondratenko,,,map,,Khila Mirzali 0.8; Poladlı 0.757; Məlhəm 0.757
+Шемахинский,Моллаларское,1035,Текля-Муганлы,40.50135,48.37923,,kondratenko,,,map-society,,Muğanlı 0.736; Tağlabiyan 0.73
+Шемахинский,Моллаларское,1036,"Хинислы-Халаджъ, коч.",40.50135,48.37923,,kondratenko,,,map-society,,
+Шемахинский,Моллаларское,1037,"Чапни, коч.",40.50135,48.37923,,kondratenko,,,map-society,,İkinci Çaylı 0.757; Birinci Çaylı 0.757; Çaylı 0.757
 Шемахинский,Мурадлинское,1038,Мурадлы,40.53413,48.34321,Muradlı,geonames,585444,1,name,Мурадлы,Muradlı 1; Myursally 0.833; Mirizali 0.769
-Шемахинский,Мурад-ханское,1039,Мурад-ханъ,,,,,,,,,Tircan 0.78; Suraxanı 0.78; Mughan 0.744
+Шемахинский,Мурад-ханское,1039,Мурад-ханъ,40.22682,48.17167,Мурад ханъ,kondratenko,,,map,,Tircan 0.78; Suraxanı 0.78; Mughan 0.744
 Шемахинский,Мустафалинское,1040,Мустафали,40.6676,48.53183,,,,,approx,,Mustafaxanlı 0.842; Zarat 0.799; Myursally 0.714
 Шемахинский,Мустафалинское,1041,"Муганлы, коч.",40.6676,48.53183,Muğanlı,geonames,585458,1.03,name,Муганлы,Muğanlı 1.03; Mughan 0.939; İlanlı 0.757
 Шемахинский,Мустафалинское,1042,Сарван-Таптугъ,40.6676,48.53183,,,,,approx,,
@@ -2563,7 +2563,7 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Шемахинский,Сорсорское,1048,"Бегум-Ханумлы, коч.",,,,,,,,,Bağman 0.706; Gashimkhanly 0.7
 Шемахинский,Сорсорское,1049,"Сорсоръ, коч.",,,,,,,,,Sarsura 0.799; Shahriyar 0.799; Aleksandrovskoe 0.769
 Шемахинский,Сорсорское,1050,"Човранлы (Човріанлу), коч.",,,,,,,,,Çarhan 0.83; Çuxanlı 0.78; Çovurar 0.75
-Шемахинский,Телян-коюнлинское,1051,Телян-коюнъ,,,,,,,,,Qalaqayın 0.824
+Шемахинский,Телян-коюнлинское,1051,Телян-коюнъ,40.07907,48.15359,Телянъ коюнъ,kondratenko,,,map,,Qalaqayın 0.824
 Шемахинский,Халиллы-Касумбекское,1052,"Халиллы-Касумбека, сел.",,,,,,,,,Səfalı 0.887; Sabirli 0.78; Asatly 0.75
 Шемахинский,Ханазадское,1053,Абас-Али-беклы,40.55242,49.2325,,,,,approx,,
 Шемахинский,Ханазадское,1054,Ахундлы,40.03333,49.2325,Makhundaly,geonames,800396,0.887,name,Махундалы,Makhundaly 0.887
@@ -2586,8 +2586,8 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Шемахинский,Басхальское,1071,Басхалъ,40.7552,48.39104,Basgal,geonames,587033,0.953,name,Baskhal,Basgal 0.953; Pashaly Tretiy 0.863; Birinci Paşalı 0.863
 Шемахинский,Гаджиманское,1072,Гаджиманъ (Х—),40.73648,48.49461,Hacıman,geonames,586536,0.887,society,ХӀаджиман,Hacıman 0.887; Archiman 0.887; Qoydan 0.799
 Шемахинский,Гаджиманское,1073,Хатманъ,40.72631,48.49313,Xatman,geonames,585953,1.03,name,Xatman,Xatman 1.03; Xaltan 0.833; Şaumyanabad 0.744
-Шемахинский,Гюрдживанское,1074,Гюрдживанъ,,,,,,,,,Gürcüvan 1.03; Gyurdzhivan 1.03; Kürdüvan 0.78
-Шемахинский,Джебанинское,1075,Джебаны русскіе,,,,,,,,,
+Шемахинский,Гюрдживанское,1074,Гюрдживанъ,40.62989,48.39581,Гюрджеванъ,kondratenko,,,map,,Gürcüvan 1.03; Gyurdzhivan 1.03; Kürdüvan 0.78
+Шемахинский,Джебанинское,1075,Джебаны русскіе,40.64955,48.69168,Джебаны (русск.),kondratenko,,,map,,
 Шемахинский,Дильманское,1076,Дильманъ,40.7289,48.50389,Dilman,geonames,586730,1.03,name,Дилман,Dilman 1.03; Abdulyan 0.799; Birinci Udullu 0.757
 Шемахинский,Дмитріевское,1077,Дмитріевка (Ново-Дмитр.),40.67844,48.55604,Dimitrovka,geonames,586729,0.93,name,Дымытровка,Dimitrovka 0.93; Damirli 0.757; Nağaraxana 0.736
 Шемахинский,Заргеранское,1078,Заргеранъ,40.73559,48.36608,Zargeran,geonames,584581,1.03,name,Заргеран,Zargeran 1.03; Zargova 0.83; Nardaran 0.78
@@ -2623,7 +2623,7 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Шемахинский,Муганлинское,1108,Муганлы,40.09902,48.81886,Mughan,geonames,807231,0.939,society,Мугань,Muğanlı 1.03; Mughan 0.939; İlanlı 0.757
 Шемахинский,Муганлинское,1109,Мурты,40.59463,48.48258,Mırtı,geonames,585422,1.03,name,Мырты,Mırtı 1.03; Müdri 0.8
 Шемахинский,Муганлинское,1110,Шарадиль,40.62173,48.47388,Şərədil,geonames,585052,1.03,name,Шаьраьдил,Şərədil 1.03; Şorsulu 0.83; Suraxanı 0.78
-Шемахинский,Муджи-еврейское,1111,Муджи-еврейскіе (Мю—),,,,,,,,,
+Шемахинский,Муджи-еврейское,1111,Муджи-еврейскіе (Мю—),40.76833,48.41615,Мюджи (еврейск.),kondratenko,,,map,,
 Шемахинский,Муджи-татарское,1112,Зейва,40.75115,48.40022,Zeyva,geonames,584570,1.03,society,Зейва,Zeyva 1.03; Zeyva 1.03; Zarnova 0.757
 Шемахинский,Муджи-татарское,1113,Кюрдиванъ,40.75263,48.40886,Kürdüvan,geonames,585678,1.03,name,Курдуван,Kürdüvan 1.03; Gürcüvan 0.808; Gyurdzhivan 0.808
 Шемахинский,Муджи-татарское,1114,Муджи-татарскіе (Мю—),40.75263,48.40886,,,,,approx,,
@@ -2642,17 +2642,17 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Шемахинский,Таглабіанское,1127,Кельфараджъ,40.77333,48.3637,Kalfaradzh,geonames,586266,1.03,name,Калфарадж,Kalfaradzh 1.03; Kalağaylı 0.75; Qəfərli 0.714
 Шемахинский,Таглабіанское,1128,Сардахаръ,40.77662,48.32509,Sardakhar,geonames,585144,1.03,name,Сардахар,Sardakhar 1.03; Çandaxar 0.78; Dahar 0.769
 Шемахинский,Таглабіанское,1129,Таглабіанъ,40.77226,48.37906,Tağlabiyan,geonames,584896,1.03,name,ТагӀлабийан,Tağlabiyan 1.03; Gobustan 0.736
-Шемахинский,Талыш-Мелик-Умудское,1130,Каджаръ,,,,,,,,,Kerche 0.8; Kechallyar 0.744; Dollyar 0.727
-Шемахинский,Талыш-Мелик-Умудское,1131,Талыш-Мелик-Умудъ,,,,,,,,,
-Шемахинский,Талыш-Мелик-Умудское,1132,Фахракюшъ,,,,,,,,,Erzikyush 0.706
-Шемахинский,Талыш-Мелик-Умудское,1133,Халиль-Дуваръ,,,,,,,,,
+Шемахинский,Талыш-Мелик-Умудское,1130,Каджаръ,40.5764,48.46598,,kondratenko,,,map-society,,Kerche 0.8; Kechallyar 0.744; Dollyar 0.727
+Шемахинский,Талыш-Мелик-Умудское,1131,Талыш-Мелик-Умудъ,40.60365,48.43429,Талыш Мелик Умудъ,kondratenko,,,map,,
+Шемахинский,Талыш-Мелик-Умудское,1132,Фахракюшъ,40.5764,48.46598,,kondratenko,,,map-society,,Erzikyush 0.706
+Шемахинский,Талыш-Мелик-Умудское,1133,Халиль-Дуваръ,40.5764,48.46598,,kondratenko,,,map-society,,
 Шемахинский,Пирджанское,1134,Визнанъ,40.54066,48.49647,,,,,approx,,Bizlan 0.863
 Шемахинский,Пирджанское,1135,Пирджанъ,40.54066,48.49647,,,,,approx,,Tircan 0.863; Pirsaatçay 0.799; Nuran 0.757
 Шемахинский,Пирджанское,1136,Ходжалы (Гаджалы),40.54066,48.49647,Gyagyali,geonames,586411,0.863,society,Gjagjali,Gamyali 0.939; Gyagyali 0.863; Adzhiyely 0.863
 Шемахинский,Чаганское,1137,Мальгамъ,40.71393,48.57616,,,,,approx,,
 Шемахинский,Чаганское,1138,Чаганъ большой,40.71393,48.57616,,,,,approx,,Çarhan 0.953; Akhan 0.83; Qıçatan 0.744
 Шемахинский,Чаганское,1139,Чаган-Мамед-Салимъ (Дедагюнашъ),40.71393,48.57616,Dedegyunesh,geonames,586756,1.03,name,Дедегюнеш,Dedegyunesh 1.03; Dere Khynysly 0.93; Günəşli 0.736
-Шемахинский,Чухур-юртское,1140,Чухур-юртъ,,,,,,,,,Çuxuryurd 0.919; Çuxuryurd 0.889; Chukhur-Zami 0.8
+Шемахинский,Чухур-юртское,1140,Чухур-юртъ,40.71045,48.7092,Чухур-юртъ,kondratenko,,,map,,Çuxuryurd 0.919; Çuxuryurd 0.889; Chukhur-Zami 0.8
 Шемахинский,Шабіанское,1141,Багліанъ,40.67216,48.30166,Bakhliyan,geonames,587086,0.887,name,БаьхӀлийан,Bakhliyan 0.887; Saqiyan 0.799; Beklya 0.799
 Шемахинский,Шабіанское,1142,Билистанъ,40.66479,48.27193,Bilistan,geonames,586970,1.03,name,Билистан,Bilistan 1.03; Gobustan 0.887; Abdulyan 0.78
 Шемахинский,Шабіанское,1143,Шабіанъ,40.68691,48.28798,Shabiyan,geonames,585095,1.03,name,Шаьбийан,Shabiyan 1.03; Saqiyan 0.799; Shebaly 0.769
@@ -2675,19 +2675,19 @@ uezd,society,no,name,lat,lon,place,source,source_id,score,how,matched,alternativ
 Шемахинский,Кущинское,1160,"Кущи 2-е, сел.",,,,,,,,,Səfalı 0.887; Quşçu 0.863; Kogna-Kushchi 0.833
 Шемахинский,Ленгебизское,1161,Ленгебизъ,40.47849,48.58443,Lyangyabiz,geonames,585620,1.03,name,Лянгябиз,Lyangyabiz 1.03; Agabeyli 0.744
 Шемахинский,Маразалинское,1162,"Маразали, коч.",40.5336,48.92819,Gobustan,geonames,585570,0.953,name,Мараза,Gobustan 0.953; Merzengeli 0.78; Madrasa 0.744
-Шемахинский,Маразинское,1163,Маразы-русскіе,,,,,,,,,
+Шемахинский,Маразинское,1163,Маразы-русскіе,40.55048,48.91699,Маразы (русск.),kondratenko,,,map,,
 Шемахинский,Мелик-чобанинское,1164,"Мелик-чобаны, коч.",40.5406,48.68573,Melik-Chobany,geonames,585538,0.947,name,Меликчобанлы,Melik-Chobany 0.947; İkinci Çabanı 0.75
 Шемахинский,Набурское,1165,Бекля,40.61021,48.90101,Beklya,geonames,587012,1.03,name,Баьклаь,Beklya 1.03; Leninabad 0.83; Teklya 0.8
 Шемахинский,Набурское,1166,Набуръ,40.63161,48.91768,Nabur,geonames,585409,1.03,name,Набур,Nabur 1.03; Sabir 0.83; Sabirli 0.757
 Шемахинский,Набурское,1167,Тулуджъ,40.63161,48.91768,,,,,approx,,Ülgüc 0.8; Çisti Klyuç 0.744
 Шемахинский,Набурское,1168,Шихляръ,40.72768,48.92266,Şıxlar,geonames,584971,1.03,society,Şıxlar,Şıxlar 1.03; Şıxlar 1; Şərədil 0.757
-Шемахинский,Сундинское,1169,Сунди,,,,,,,,,Sündü 1.03; Sündü 1.03; Keyvendi 0.757
+Шемахинский,Сундинское,1169,Сунди,40.64819,48.84435,Сунди,kondratenko,,,map,,Sündü 1.03; Sündü 1.03; Keyvendi 0.757
 Шемахинский,Тасинское,1170,Коджаман-кендъ,40.49139,48.81756,,,,,approx,,Keshmaddin 0.83; Hacıman 0.799; Konakkend 0.767
 Шемахинский,Тасинское,1171,Полатлы,40.42001,48.81756,Poladlı,geonames,585247,1.03,name,Polatly,Poladlı 1.03; Khila Mirzali 0.909; Asatly 0.727
 Шемахинский,Тасинское,1172,Тасы,40.49139,48.76239,Tesi,geonames,584869,1.03,name,Таьси,Tesi 1.03; Aghsu 0.857; Madrasa 0.757
 Шемахинский,Удулинское,1173,Удулы,40.26182,48.86493,Birinci Udullu,geonames,584786,1.03,name,Uduly,Birinci Udullu 1.03; Nüydü 0.78; Nüydi 0.78
 Шемахинский,Хильмилинское,1174,Хильмили (Козлучай),40.69126,48.86654,Xilmilli,geonames,585945,1.03,name,Хильмилли,Xilmilli 1.03; Khila Mirzali 0.75; Kyulyulyu 0.727
-Шемахинский,Чайлинское,1175,Чайлы Ага-Киши-бека,,,,,,,,,
+Шемахинский,Чайлинское,1175,Чайлы Ага-Киши-бека,40.63968,48.73468,Чайлы Ага-...,kondratenko,,,map,,
 Шемахинский,Чарганское,1176,Боят-Агбулагъ,40.55463,48.65209,,,,,approx,,Atbulaq 0.824; Ağbulaq 0.824
 Шемахинский,Чарганское,1177,Нюгды 2-е,40.53062,48.63723,Nüydi,geonames,585338,1.03,society,Nyugdy,Nüydü 1.03; Nüydi 1.03
 Шемахинский,Чарганское,1178,Чарганъ,40.55463,48.65209,Çarhan,geonames,586890,1.03,name,Чарган,Çarhan 1.03; Akhan 0.757
