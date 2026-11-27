@@ -66,5 +66,7 @@ Eight *then and now* places fly to their plan and open the lens on them. The cam
   - North is up (its compass rose); the 59° turn of the earlier street match was wrong.
   - Placed by hand-read anchors: the Ark (the walled arsenal and barracks, «قورخانه», that enclosed it under the Qajars), the bazaar (the blue-washed block of caravanserais south of the river) and two bridges over the Mehranrud, snapped to OSM's river line. A similarity fits them within 33–57 m: 2.95 m a pixel, turned 4.25° (magnetic north). The two bridges are where the Istanbul and Baghmisheh gates stand today, which agrees, though it is not an independent check. `gcps.json` keeps the four anchors (`landmarks`) and writes the fit out as a grid.
   - Accuracy about 60 m near the centre, less towards the sheet's edges. Its folds are not painted out (the seam finder smeared them). Tiles to zoom 16.
-  - The 1827 Russian army plans of the walled city (`plan-tabriz-1827.jpg`) are not placed yet.
+- **Tabriz, 1827:** the Russian army plan of the walled city from the year Russian troops took it ([Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Sahibabad_Gardens_and_Old_City_of_Tabriz_(1827_plan).jpg), public domain; `data/raw/plan-tabriz-1827.jpg`, its upper 3134 px).
+  - Placed by the citadel (the Ark, outside the south wall) and the Mehranrud traced at 11 points along its course through the walls, fitted to OSM's river: a similarity, 0.60 m a pixel, turned −13.5°; the river points lie 3–43 m from today's river.
+  - Check: today's bazaar, not used in the fit, falls on the plan's block of caravanserai courtyards; the municipality palace (built in the 1930s where the south gate stood) on the south wall. Accuracy about 50 m. Tiles to zoom 17.
 

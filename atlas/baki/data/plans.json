@@ -168,5 +168,39 @@
   ],
   "minzoom": 12,
   "maxzoom": 16
+ },
+ "tabriz-1827": {
+  "title": "План города Тавриза (1827)",
+  "source": "https://commons.wikimedia.org/wiki/File:Sahibabad_Gardens_and_Old_City_of_Tabriz_(1827_plan).jpg",
+  "fit": "thin-plate spline",
+  "points": 42,
+  "meanErrorM": 0.0,
+  "coordinates": [
+   [
+    46.2787,
+    38.0912
+   ],
+   [
+    46.3066,
+    38.0912
+   ],
+   [
+    46.3066,
+    38.0653
+   ],
+   [
+    46.2787,
+    38.0653
+   ]
+  ],
+  "tiles": "data/tiles/tabriz-1827/{z}/{x}/{y}.webp?v=f7c8730e",
+  "bounds": [
+   46.28193,
+   38.06838,
+   46.30333,
+   38.08798
+  ],
+  "minzoom": 12,
+  "maxzoom": 17
  }
 }
