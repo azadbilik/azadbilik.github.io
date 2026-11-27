@@ -11,7 +11,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parents[1]
 UEZD = {'Джевадский': 'Джеватский', 'Гёкчайский': 'Геокчайский'}   # 1886 spelling → the 1897 frame's key
-PEOPLE = ['tatar', 'armenian', 'talysh', 'tat', 'kurd', 'lezgin', 'russian', 'jew', 'shahdag', 'persian', 'georgian', 'udi', 'german', 'polish', 'roma', 'other']
+PEOPLE = ['tatar', 'armenian', 'talysh', 'tat', 'kurd', 'lezgin', 'russian', 'jew', 'shahdag', 'persian', 'georgian', 'greek', 'udi', 'german', 'polish', 'roma', 'other']
 ESTATE = ['state', 'private', 'owners', 'noble', 'clergy', 'town', 'other']
 FAITH = ['shia', 'sunni', 'muslim', 'armenian', 'orthodox', 'sectarian', 'jewish', 'catholic', 'protestant', 'ahl-e haqq', 'other']
 TOWNS = {  # the towns of the two governorates, 1886

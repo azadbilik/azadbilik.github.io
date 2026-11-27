@@ -20,6 +20,7 @@ PEOPLE = {
     'кюринцы': 'lezgin', 'русскіе': 'russian', 'евреи': 'jew', 'гапутлинцы': 'shahdag', 'джекцы': 'shahdag',
     'крызцы': 'shahdag', 'будугцы': 'shahdag', 'персіяне': 'persian', 'грузины': 'georgian', 'удины': 'udi',
     'нѣмцы': 'german', 'поляки': 'polish', 'цыгане': 'roma',
+    'греки': 'greek', 'имеретины': 'georgian',   # Borchali (Tiflis gov.)
     'талышины и татары': 'tatar',   # the Baku towns' table counts them together; the towns' Talysh are few
 }
 FAITH = [  # first match wins; matched against the footnote meaning if any, else the heading
@@ -75,6 +76,25 @@ for f in sorted(RAW.glob('p*.jsonl'), key=lambda f: int(f.stem[1:])):
             o = json.loads(line)
             if 'header' not in o: objs.append({**o, 'spread': o.get('p') or int(f.stem[1:])})
 
+# Tiflis governorate volume (Borchali): an unmarked «Прочія …» / estate cell continues the footnote mark
+# printed nearest above it in the same column on the same page (checked against every society's totals).
+# Carry that mark down before anything else; the Baku/Elisabethpol pages keep the society rule below.
+CARRY_GOV = {'Тифлисская'}
+last_mark = {}
+for o in objs:
+    if o.get('gov') not in CARRY_GOV or o.get('kind') not in ('village', 'society', 'other'): continue
+    for grp in ('people', 'faith', 'estate'):
+        cells = o.get(grp) or {}
+        out = {}
+        for key, v in cells.items():
+            head, fn = split(key)
+            slot = (o['spread'], grp, head)
+            if fn: last_mark[slot] = key
+            elif slot in last_mark and head.lower().startswith(('проч', 'врем', 'духов', 'сектант')):
+                key = last_mark[slot]
+            out[key] = [a + b for a, b in zip(out[key], v)] if key in out else v
+        if cells: o[grp] = out
+
 # A «Прочія …» cell is often footnoted only on its society's line ("3) Удины"); the villages under it
 # print the bare heading. Such a village cell takes the society's meaning.
 marks = defaultdict(set)
@@ -119,7 +139,7 @@ for r in rows:
         r['society'] = last.get('society'); r['society_from_prev'] = True
     last = r
 
-PEOPLE_COLS = ['tatar', 'armenian', 'talysh', 'tat', 'kurd', 'lezgin', 'russian', 'jew', 'shahdag', 'persian', 'georgian', 'udi', 'german', 'polish', 'roma', 'other']
+PEOPLE_COLS = ['tatar', 'armenian', 'talysh', 'tat', 'kurd', 'lezgin', 'russian', 'jew', 'shahdag', 'persian', 'georgian', 'greek', 'udi', 'german', 'polish', 'roma', 'other']
 ESTATE_COLS = ['state', 'private', 'owners', 'noble', 'clergy', 'town', 'other']
 FAITH_COLS = ['shia', 'sunni', 'muslim', 'armenian', 'orthodox', 'sectarian', 'jewish', 'catholic', 'protestant', 'ahl-e haqq', 'other']
 out = HERE / 'data' / 'villages-1886.csv'

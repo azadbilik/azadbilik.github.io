@@ -1,10 +1,10 @@
 # 1886 · Villages in the family lists
 
-[azadbilik.org/atlas/1886](https://azadbilik.org/atlas/1886/): every village and town of the Baku and Elisabethpol governorates in the 1886 family lists (посемейные списки), with its households, men and women, by people and by faith, on a map.
+[azadbilik.org/atlas/1886](https://azadbilik.org/atlas/1886/): every village and town of the Baku and Elisabethpol governorates, and the villages of Borchali uezd (Tiflis governorate), in the 1886 family lists (посемейные списки), with its households, men and women, by people and by faith, on a map.
 
 | File | What |
 |---|---|
-| `data/raw/svod-1886/pNNN.jsonl` | The tables as transcribed, one file per spread of the book (pp. 219–337 of the scan), one JSON object per printed row; `BRIEF.md` is how they were read |
+| `data/raw/svod-1886/pNNN.jsonl` | The tables as transcribed, one file per spread of the book (pp. 219–337 of the scan: Baku and Elisabethpol; pp. 32–43: Borchali), one JSON object per printed row; `BRIEF.md` is how they were read |
 | `data/villages-1886.csv` | One row per village and town: uezd, участок, rural society, number, name as printed, distances, households, men, women, and men/women by people (`pp_*`), faith (`fa_*`) and estate (`es_*`), normalised; built by `scripts/merge.py` |
 | `data/checks-1886.txt` | Every printed society, участок and uezd total against the sum of its villages |
 | `data/raw/places.tsv` | Candidate places: GeoNames (AZ, AM, GE), OpenStreetMap place nodes, Wikidata settlements, with all their names |
@@ -22,6 +22,10 @@ The tables give, for every settlement: households (дымы), men and women, the
 ## How it was read
 
 The 116 spreads were transcribed with Claude reading the scans (each page at full resolution, uncertain digits re-read from enlarged crops). Every row was checked: men + women = total, the sum of peoples and of faiths against the row, every society against its villages, every участок and uezd against its societies. Where the book's own figures do not add up, the printed figure is kept and the row's `note` says what the sums imply; 758 of 811 printed totals match their villages exactly, the rest differ by the book's misprints, listed in `checks-1886.txt`. Estates (сословия) are grouped into seven: peasants on state land, on landowners' land, peasant owners, beys/meliks/nobility, clergy, townspeople, other (`es_*` in the CSV, a third view on the map).
+
+## Borchali uezd (added 2026-11-27)
+
+Spreads 32–43 of the same scan: 284 villages (nos. 468–751) in four участки (Борчалинский, Екатериненфельдский, Лорийский, Тріалетскій), 101,847 people. They were read from the National Library of Georgia's sharper copy of the same printing ([Iverieli 1234/604264](https://dspace.nplg.gov.ge/handle/1234/604264), pages 63–85), which lacks one page (the right half of spread 40); that page was read from the RSL scan. In this part of the book an unmarked «Прочія вѣроисп.» or estate cell continues the footnote mark printed above it in the same column; `merge.py` carries the mark down for Tiflis governorate only, and with it all 44 rural societies agree with their villages by every people and faith. The book's slips kept as printed: 555 Ходжорни (ж 71 for 74, so Опретское, участок II and the uezd are 3 women short), 670 Кдеиси (total 146 for 141), 690, 703, 616, 641 (noted in the rows). Greeks (19,000, mostly in Тріалетскій участок) are a new people on the map. Placed: 185 of 284 by name or society, 81 approximate, 18 not on the map.
 
 ## How the villages were placed
 
