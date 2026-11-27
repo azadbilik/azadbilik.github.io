@@ -95,3 +95,8 @@ Eight *then and now* places fly to their plan and open the lens on them. The cam
 
 - **The map:** «Гипсометрическая карта Биби-Эйбата», Golubyatnikov, 1:16,800, same Library of Congress item: heights in sazhens by colour, 0 = the Black Sea's level, −12.21 = the Caspian's, up to 88 sazhens (≈188 m).
 - **Placed by its frame (`scripts/sheets.py`, key `bibiheybat-relief-1912`):** the top-left corner is labelled 67°28′10″ / 40°21′30″ and a corner tick 67°30′40″ / 40°18′10″ (16.3 / 21.2 px a second, a quarter of the geological sheets'). The legend inside the frame is left out. Cape Shikh's tip lands 34 m W, 14 m S of the geological map's. Tiles zoom 13–16, 1 MB.
+
+## Bibi-Heybat, 1912 (the field plan)
+
+- **The map:** sheets D and E of the same item, «Пластовая карта Биби-Эйбатской нефтеносной площади» (Golubyatnikov, 1912), 1:4,200: oil plots by number, wells, buildings, the stratum's underground contours, the grid of sea plots, and the companies' piers (Nobel Brothers, Caspian-Black Sea Society, Mantashev, Shibaev, Kalantarov, Oleum, Shikhovo).
+- **Placed by its frames (`scripts/sheets.py`, key `bibiheybat-plan-1912`):** D and E carry the same frames as the geological map's parts I and II (A and B); each sheet's four corners were measured and the two joined. D's title over the sea is left out. Tiles zoom 13–18, 15 MB.

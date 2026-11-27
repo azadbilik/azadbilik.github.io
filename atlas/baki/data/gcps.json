@@ -2676,5 +2676,59 @@
   ],
   "zmax": 16,
   "zmin": 13
+ },
+ "bibiheybat-plan-1912": {
+  "file": "bibiheybat-plan-1912.jpg",
+  "grid": {
+   "lonDeg": 67,
+   "latDeg": 40,
+   "ferro": 17.662777777777777,
+   "trimPx": 0,
+   "panels": [
+    {
+     "px": [
+      0,
+      0,
+      10528,
+      12040
+     ],
+     "coef": [
+      [
+       -111201.9999999994,
+       110940.0
+      ],
+      [
+       3948.0,
+       0
+      ],
+      [
+       0,
+       -5160.0
+      ]
+     ],
+     "section": "sheets A–C joined"
+    }
+   ]
+  },
+  "city": "baki",
+  "title": "Пластовая карта Биби-Эйбатской нефтеносной площади, листы D–E (Д. В. Голубятников, 1912; изд. 1914), 1:4200",
+  "source": "https://www.loc.gov/resource/g7142am.gct00388/",
+  "archive": "Library of Congress, Geography and Map Division, G7142.A6C5 s4 .G6",
+  "crop": [
+   0,
+   0,
+   10528,
+   12040
+  ],
+  "exclude": [
+   [
+    7184,
+    60,
+    10528,
+    2600
+   ]
+  ],
+  "zmax": 18,
+  "zmin": 13
  }
 }

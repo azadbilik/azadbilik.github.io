@@ -47,6 +47,15 @@ CFG = {
         lon=(S(67, 28, 10), S(67, 30, 40)), lat=(S(40, 18, 10), S(40, 21, 30)), kx=16.32, ky=21.23,
         sheets=[dict(file='bibiheybat-relief-1912.tif', n=S(40, 21, 30), s=S(40, 18, 10), corners=[(810, 1055), (3258, 1055), (810, 5301), (3256, 5301)])],
     ),
+    # sheets D and E: the «Пластовая карта Биби-Эйбатской нефтеносной площади» (1912), the field plan with
+    # its numbered blocks, wells and the stratum's contours, on the frames of parts I and II (as A and B)
+    'bibiheybat-plan-1912': dict(
+        lon=(S(67, 28, 10), S(67, 30, 50)), lat=(S(40, 19, 10), S(40, 21, 30)), kx=65.8, ky=86.0,
+        sheets=[
+            dict(file='bibiheybat-plan-1912-d.tif', n=S(40, 21, 30), s=S(40, 20, 20), corners=[(823, 1149), (11365, 1150), (831, 7184), (11367, 7158)]),
+            dict(file='bibiheybat-plan-1912-e.tif', n=S(40, 20, 20), s=S(40, 19, 10), corners=[(831, 1125), (11357, 1128), (824, 7166), (11346, 7168)]),
+        ],
+    ),
 }
 
 key = sys.argv[1] if len(sys.argv) > 1 else 'bibiheybat-1912'

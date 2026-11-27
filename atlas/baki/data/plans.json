@@ -258,5 +258,19 @@
   "title": "Гипсометрическая карта Биби-Эйбата (Д. В. Голубятников; съёмка 1912, изд. 1914), 1:16 800",
   "source": "https://www.loc.gov/resource/g7142am.gct00388/",
   "fit": "frame corner labels (east of Ferro)"
+ },
+ "bibiheybat-plan-1912": {
+  "tiles": "data/tiles/bibiheybat-plan-1912/{z}/{x}/{y}.webp?v=974a2b6e",
+  "bounds": [
+   49.80667,
+   40.31944,
+   49.85111,
+   40.35833
+  ],
+  "minzoom": 13,
+  "maxzoom": 18,
+  "title": "Пластовая карта Биби-Эйбатской нефтеносной площади, листы D–E (Д. В. Голубятников, 1912; изд. 1914), 1:4200",
+  "source": "https://www.loc.gov/resource/g7142am.gct00388/",
+  "fit": "frame coordinates of sheets D–E (east of Ferro), joined"
  }
 }
