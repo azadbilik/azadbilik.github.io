@@ -138,7 +138,8 @@ for (const o of P.values()) {
   if (!ap && !pd.length && !yv.length) continue;
   const g = genresOf(o); if (!g.length) continue;
   const tracks = [...pd.map((r) => pdTrack(r, o.az)), ...(ap ? appleTracks(o.q, 10) : [])];
-  const albums = (MATCH[o.q]?.albums ?? []).filter((a) => a.url && a.date).sort((x, y) => x.date.localeCompare(y.date));
+  // albums only of a match apple.mjs kept: the raw cache also holds the namesakes it dropped (Bülbül's «Bulbul» of the 2020s)
+  const albums = (ap ? MATCH[o.q]?.albums ?? [] : []).filter((a) => a.url && a.date).sort((x, y) => x.date.localeCompare(y.date));
   const seenA = new Set(), al = [];
   for (const a of albums) { const k = norm(a.name); if (!k || seenA.has(k)) continue; seenA.add(k); al.push(alb(a.id, a.name, a.date, a.url)); }
   if (!tracks.length && !al.length && !yv.length) continue;
