@@ -14,6 +14,7 @@ const APPLE = (await J('../data/apple.json')).people, MATCH = await J('../data/.
 const SPOT = await J('../data/spotify.json'), YT = await J('../data/youtube.json');
 const WORKS = await J('../data/.cache/apple-works.json', {});
 const YTS = await J('../data/.cache/youtube-search.json', {});
+const MUG = await J('../data/mugham.json');
 const MUS = await J('../data/musicians.json'), COMP = await J('../bestekarlar/data/composers.json'), JAZZ = await J('../caz/data/jazz.json');
 const EST = await J('../estrada/data/estrada.raw.json'), LIN = await J('../silsile/data/lineage.json');
 const PD = [...await J('../data/recordings.json'), ...await J('../bestekarlar/data/recordings.json'), ...await J('../estrada/data/recordings.json')];
@@ -194,8 +195,51 @@ for (const w of COMP.works) {
   W.push({ q: w.qid, az: w.az, ru: w.ru ?? w.az, en: w.en ?? w.az, y: w.year, ty: w.type, c: w.composers.filter((q) => !ABROAD.has(q)), t, ...(wv.length ? { v: wv } : {}) });
 }
 
+// ---- mughams: the seven dəstgahs with their şöbələr (data/mugham.json, as on the map), and every recording and video of the catalogue
+// that names one. A title counts for a dəstgah when it names the dəstgah, a şöbə only it has (a şöbə shared by two, Vilayəti, Üşşaq…,
+// is left out), or a piece mugham.json assigns to it (Mənsuriyyə → Çahargah); words matched as in the Apple search (Shur = Şur, Chahargah = Çahargah).
+// Estrada and pop are left out: a song called «Segah» is not the mugham.
+// Words compared letter for letter: only the Latin spellings (sh, ch, kh, gh, ä) and ə ≈ a/e are allowed, since the Apple-search
+// folding would read «Xəzər» as «Hasar» and «Leyli» as «Feili»
+const nameT = (s) => String(s).toLowerCase().replace(/\(.*?\)/g, ' ').replace(/sh/g, 'ş').replace(/ch/g, 'ç').replace(/kh/g, 'x').replace(/gh/g, 'ğ').replace(/ä/g, 'ə').replace(/ı/g, 'i')
+  .replace(/[‌‍]/g, '').replace(/[^şçğüöə]/g, (c) => c.normalize('NFD').replace(/[̀-ͯ]/g, '')).replace(/[^\p{L}\p{N}ə]+/gu, ' ').trim().split(' ').filter(Boolean);
+const LOOSE = { ə: 'ae', ü: 'u', ö: 'o' }; // the Latin spellings drop these; ş, ç, ğ stay apart (French «sur» is not Şur)
+const tokEqM = (a, b) => a.length === b.length && [...a].every((c, i) => c === b[i] || LOOSE[c]?.includes(b[i]) || LOOSE[b[i]]?.includes(c));
+// …and «Rəşt», a song named after the city, is not Rast
+const NOT_MUGHAM = /rəşt|resht/i;
+const secOwners = new Map();
+for (const d of MUG.dastgahs) for (const x of d.sections) { const k = nameT(x.az).join(' '); (secOwners.get(k) ?? secOwners.set(k, new Set()).get(k)).add(d.id); }
+const keys = MUG.dastgahs.map((d) => {
+  const ks = [{ t: nameT(d.name.az), sobe: null }, { t: nameT(d.name.en), sobe: null }, { t: nameT(d.name.ru), sobe: null }];
+  for (const x of d.sections) { const T = nameT(x.az); if (secOwners.get(T.join(' ')).size === 1 && T.join('').length >= 4 && T.join(' ') !== ks[0].t.join(' ')) ks.push({ t: T, sobe: x.az }); }
+  // a piece that is one of the şöbələr under another spelling (Simayi-Şəms = Səmayi-Şəms) files under the şöbə's name
+  const same = (x, y) => x.length === y.length && x.every((w, i) => tokEqM(w, y[i]) || (w.length >= 5 && tokEq(w, y[i])));
+  for (const pc of MUG.pieces) if (pc.dastgah === d.id && pc.confidence === 'sourced' && pc.kind !== 'dastgah') { const T = nameT(pc.name); ks.push({ t: T, sobe: d.sections.find((x) => same(nameT(x.az), T))?.az ?? pc.name }); }
+  return { d, ks: ks.filter((k) => k.t.length) };
+});
+// dəstgahs outside the seven (Orta Mahur, Mahur-Hindi…): a title naming one is not sorted under the seven, though it shares şöbə names
+const others = MUG.pieces.filter((pc) => pc.kind === 'dastgah' && !pc.dastgah).map((pc) => nameT(pc.name));
+const mughamOf = (title) => {
+  const T = nameT(title), hits = [];
+  if (NOT_MUGHAM.test(title) || others.some((o) => o.every((w) => T.some((x) => tokEqM(x, w))))) return null;
+  for (const { d, ks } of keys) { const k = ks.find((k) => k.t.every((w) => T.some((x) => tokEqM(x, w)))); if (k) hits.push([d.id, k.sobe]); }
+  return hits.length === 1 ? hits[0] : null; // a title naming two dəstgahs («Rast–Segah») is not sorted
+};
+const M = MUG.dastgahs.map((d) => ({ id: d.id, n: d.name, ch: d.character, s: d.sections.map((x) => x.az), t: [], v: [] }));
+const Mby = new Map(M.map((m) => [m.id, m]));
+for (const a of A) {
+  if (a.g.every((g) => g === 'estrada' || g === 'pop')) continue;
+  a.t.forEach((x, i) => { const h = mughamOf(typeof x[0] === 'object' ? x[0].az : x[0]); if (h) Mby.get(h[0]).t.push([a.q, i, h[1] ?? '']); });
+  (a.v ?? []).forEach((v, i) => { const h = mughamOf(v[1]); if (h) Mby.get(h[0]).v.push([a.q, i, h[1] ?? '']); });
+}
+// the symphonic mughams of the works list (Amirov's Şur, Kürd ovşarı…): the work's own title decides, a fourth field marks the owner as a work
+for (const w of W) {
+  const h = mughamOf(w.az) ?? mughamOf(w.en ?? '') ?? mughamOf(w.ru ?? ''); if (!h) continue;
+  w.t.forEach((x, i) => Mby.get(h[0]).t.push([w.q, i, h[1] ?? '', 1])); (w.v ?? []).forEach((v, i) => Mby.get(h[0]).v.push([w.q, i, h[1] ?? '', 1]));
+}
+
 const albums = [...ALB.values()].map(([, n, y, u, a]) => [n, y, u, a]);
-const out = { built: new Date().toISOString().slice(0, 10), artists: A, works: W, schools: schools.map(({ k, n, m }) => ({ k, n, m })), albums };
+const out = { built: new Date().toISOString().slice(0, 10), artists: A, works: W, mughams: M, schools: schools.map(({ k, n, m }) => ({ k, n, m })), albums };
 // long shared URL prefixes as short tokens; the page expands them (X in index.html)
 const PRE = [[/https:\/\/audio-ssl\.itunes\.apple\.com\/itunes-assets\//g, '~a/'], [/https:\/\/is(\d)-ssl\.mzstatic\.com\/image\/thumb\//g, '~i$1/'], [/https:\/\/music\.apple\.com\//g, '~m/'], [/https:\/\/upload\.wikimedia\.org\/wikipedia\/commons\//g, '~u/'], [/https:\/\/commons\.wikimedia\.org\/wiki\//g, '~c/']];
 let json = JSON.stringify(out); for (const [re, t] of PRE) json = json.replace(re, t);
@@ -207,4 +251,5 @@ const st = (f) => A.filter(f).length;
 console.log('artists', A.length, 'tracks', A.reduce((s, a) => s + a.t.length, 0), 'free', A.reduce((s, a) => s + a.t.filter((t) => t[6] === 1).length, 0), 'albums', albums.length,
   '| works', W.length, 'tracks', W.reduce((s, w) => s + w.t.length, 0), '| schools', schools.length, schools.map((s) => s.n.az + ' ' + s.m.length).join(', '));
 console.log('youtube: artists', A.filter((a) => a.v).length, 'videos', A.reduce((s, a) => s + (a.v?.length ?? 0), 0), '| only on youtube', A.filter((a) => a.v && !a.t.length).map((a) => a.az).join(', '), '| works', W.filter((w) => w.v).length, 'videos', W.reduce((s, w) => s + (w.v?.length ?? 0), 0), '| works only on youtube', W.filter((w) => !w.t.length).length);
+console.log('mughams', M.map((m) => `${m.n.az} ${m.t.length}+${m.v.length}v`).join(', '));
 console.log('genres', Object.fromEntries(GORDER.map((g) => [g, st((a) => a.g.includes(g))])), 'periods', Object.fromEntries(PERIODS.map(([k]) => [k, st((a) => a.p.includes(k))])));

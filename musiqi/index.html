@@ -134,6 +134,10 @@ h2.sh a:hover { color: var(--ink); text-decoration: underline; }
 .vc .th .pl svg { width: 2.6rem; height: 2.6rem; color: #fff; filter: drop-shadow(0 2px 6px #0008); }
 .vc:hover .th .pl, .vc:focus-visible .th .pl, .vc.on .th .pl { opacity: 1; }
 @media (max-width: 860px) { .vbox, .vbox.big { left: .4rem; right: .4rem; width: auto; transform: none; bottom: calc(var(--bar) + var(--tabs) + env(safe-area-inset-bottom) + .6rem); } }
+.chips.sobe .chip.on { background: var(--ink); color: var(--paper); }
+.chips.sobe .chip.off { background: none; border: 1px dashed var(--rule); color: var(--muted); font-weight: 500; }
+.chips.sobe .chip small { font-weight: 600; opacity: .7; margin-left: .15rem; }
+.tr .ti b .free { display: inline-block; color: var(--ink); font-size: .6875rem; margin-right: .35rem; }
 /* albums */
 .alb .im { box-shadow: 0 4px 14px #0002; }
 /* search */
@@ -234,7 +238,7 @@ input[type="range"]:hover::-moz-range-thumb { opacity: 1; }
 const LANGS = ['az', 'ru', 'en'];
 let lang = LANGS.includes(document.documentElement.lang) ? document.documentElement.lang : 'az';
 const T = {
-  az: { doc: 'Musiqi · Azad Bilik', map: 'Xəritə', mapSub: 'Musiqiçilər haradan, ilk valların rəfi, muğamların şöbələri', pages: 'Səhifələr', lineage: 'Silsilə', composers: 'Bəstəkarlar', jazzP: 'Caz', estradaP: 'Estrada', home: 'Əsas', search: 'Axtar', browse: 'Bölmələr', periods: 'Dövrlər', genres: 'Janrlar', schools: 'Məktəblər', works: 'Opera, balet, simfoniya', worksShort: 'Əsərlər', free: 'Azad yazılar · tam',
+  az: { doc: 'Musiqi · Azad Bilik', dastgahs: 'Muğam dəstgahları', dastgahsSub: 'Yeddi əsas dəstgah və onların şöbələri', dastgah: 'Muğam dəstgahı', sobeler: 'Şöbələr', sobeN: (n) => `${n} şöbə`, sobeNote: 'Şöbələr dəstgahdakı sırası ilə. Yazısı olanlar rəqəmlə, olmayanlar qırıq xətlə; birinə basanda yalnız onun yazıları qalır.', noneYet: 'Bu şöbənin hələ yazısı yoxdur.', mNote: 'Şöbələr musiqi xəritəsindəki kimi (Vikipediya). Yazılar kataloqdan: adı dəstgahı, yalnız ona aid şöbəni və ya ona aid zərbi muğamı çəkənlər; iki dəstgahda olan şöbə (Vilayəti, Üşşaq…) adına görə ayrılmır, yeddidən kənar dəstgahlar (Orta Mahur, Mahur-Hindi) da.', map: 'Xəritə', mapSub: 'Musiqiçilər haradan, ilk valların rəfi, muğamların şöbələri', pages: 'Səhifələr', lineage: 'Silsilə', composers: 'Bəstəkarlar', jazzP: 'Caz', estradaP: 'Estrada', home: 'Əsas', search: 'Axtar', browse: 'Bölmələr', periods: 'Dövrlər', genres: 'Janrlar', schools: 'Məktəblər', works: 'Opera, balet, simfoniya', worksShort: 'Əsərlər', free: 'Azad yazılar · tam',
     p_early: 'İlk yazılar', p_soviet: 'Sovet dövrü', p_indep: 'Müstəqillik', pd_early: '1900–1920, qrammofon', pd_soviet: '1920–1991', pd_indep: '1991-dən',
     g_mugham: 'Muğam', g_instr: 'Tar və kamança', g_ashiq: 'Aşıq', g_classic: 'Klassika', g_estrada: 'Estrada', g_pop: 'Pop', g_jazz: 'Caz',
     gd_mugham: 'Xanəndələr', gd_instr: 'Ustad ifaçılar', gd_ashiq: 'Saz və dastan', gd_classic: 'Bəstəkarlar', gd_estrada: 'Mahnı və müğənnilər', gd_pop: 'Müasir', gd_jazz: 'Muğam-caz və sonrası',
@@ -248,7 +252,7 @@ const T = {
     err: 'Yüklənmədi, növbətiyə keçirəm', videos: 'Videolar · YouTube', noEmbed: 'Videoya baxmaq olmur (sahibi icazə vermir), növbətiyə keçirəm', song: 'Mahnı', bigger: 'Böyüt', closeV: 'Videonu bağla', video: 'Video', songVideo: 'Mahnı və ya video', playVideo: 'Videonu çal', videosNote: 'Yalnız rəsmi kanallardan: AzTV, Mədəniyyət TV, İctimai TV və Radio, Opera və Balet Teatrı, Filarmoniya, Musiqili Teatr, Musiqi Mədəniyyəti Muzeyi, Azərbaycanfilm, Qosteleradiofond (Sovet televiziya və radio arxivi), musiqiçilərin öz rəsmi kanalları və YouTube-un «Topic» kanalları. Burada çalınır (youtube-nocookie.com).', onYT: 'YouTube-da', page: 'Musiqi səhifələrində',
     aboutH: 'Necə yığılıb', about: 'Səs: Apple Music-in 30 saniyəlik fraqmentləri birbaşa Apple-dan gəlir və hər biri Apple Music-dəki yazıya aparır; heç nə saxlanmır. «Tam · azad» yazılar ictimai mülkiyyətdədir (Wikimedia Commons) və tam çalınır. Musiqiçilər: <a href="xerite/">musiqi xəritəsi</a>, <a href="bestekarlar/">Bəstəkarlar</a>, <a href="caz/">Caz</a>, <a href="estrada/">Estrada</a> (Wikidata). Dövr: musiqiçinin 18 yaşından ölümünə qədər çalışdığı illər. Məktəb: <a href="silsile/">Silsilə</a> və bəstəkarların ustad–şagird əlaqələri. Əsərlər: Apple Music-də əsərin adı və bəstəkarın soyadı ilə axtarılıb.',
     gaps: 'Nə yoxdur: Sovet dövrü yazılarının çoxu (Melodiya) Apple Music-də ya yoxdur, ya da ifaçının adı ilə deyil, orkestr və ya toplu adı ilə yerləşdirilib. Bülbül, Cabbar Qaryağdıoğlu, Qaya kvarteti, Dövlət Estrada Orkestri üçün kataloqda etibarlı uyğunluq tapılmadı; Bülbülün və Qaryağdıoğlunun azad qrammofon yazıları burada tam çalınır. Sovet dövrü yazılarının və opera tamaşalarının bir hissəsi rəsmi YouTube kanallarındadır (Qosteleradiofond, AzTV, Opera və Balet Teatrı…): onlar musiqiçinin və əsərin səhifəsində «Videolar» altındadır. Başqalarının yüklədikləri burada yoxdur.' },
-  ru: { doc: 'Музыка · Azad Bilik', map: 'Карта', mapSub: 'Откуда музыканты, полка первых пластинок, разделы мугамов', pages: 'Страницы', lineage: 'Силсиле', composers: 'Композиторы', jazzP: 'Джаз', estradaP: 'Эстрада', home: 'Главная', search: 'Поиск', browse: 'Разделы', periods: 'Эпохи', genres: 'Жанры', schools: 'Школы', works: 'Опера, балет, симфония', worksShort: 'Сочинения', free: 'Свободные записи · целиком',
+  ru: { doc: 'Музыка · Azad Bilik', dastgahs: 'Дастгяхи мугама', dastgahsSub: 'Семь основных дастгяхов и их шёбе', dastgah: 'Дастгях мугама', sobeler: 'Шёбе', sobeN: (n) => `шёбе: ${n}`, sobeNote: 'Шёбе в порядке исполнения. С записями — с числом, без записей — пунктиром; нажатие оставляет только записи этого шёбе.', noneYet: 'Записей этого шёбе пока нет.', mNote: 'Шёбе — как на музыкальной карте (Википедия). Записи из каталога: те, что в названии называют дастгях, шёбе только этого дастгяха или его зерби-мугам; шёбе, общие для двух дастгяхов (Вилаяти, Ушшаг…), по названию не распределяются, как и дастгяхи вне семи (Орта Махур, Махур-Хинди).', map: 'Карта', mapSub: 'Откуда музыканты, полка первых пластинок, разделы мугамов', pages: 'Страницы', lineage: 'Силсиле', composers: 'Композиторы', jazzP: 'Джаз', estradaP: 'Эстрада', home: 'Главная', search: 'Поиск', browse: 'Разделы', periods: 'Эпохи', genres: 'Жанры', schools: 'Школы', works: 'Опера, балет, симфония', worksShort: 'Сочинения', free: 'Свободные записи · целиком',
     p_early: 'Первые записи', p_soviet: 'Советская эпоха', p_indep: 'Независимость', pd_early: '1900–1920, граммофон', pd_soviet: '1920–1991', pd_indep: 'с 1991',
     g_mugham: 'Мугам', g_instr: 'Тар и кяманча', g_ashiq: 'Ашуги', g_classic: 'Классика', g_estrada: 'Эстрада', g_pop: 'Поп', g_jazz: 'Джаз',
     gd_mugham: 'Ханенде', gd_instr: 'Мастера-исполнители', gd_ashiq: 'Саз и дастан', gd_classic: 'Композиторы', gd_estrada: 'Песни и певцы', gd_pop: 'Современное', gd_jazz: 'Джаз-мугам и после',
@@ -262,7 +266,7 @@ const T = {
     err: 'Не загрузилось, переключаю дальше', videos: 'Видео · YouTube', noEmbed: 'Видео нельзя встроить (запрет владельца), переключаю дальше', song: 'Песня', bigger: 'Крупнее', closeV: 'Закрыть видео', video: 'Видео', songVideo: 'Песня или видео', playVideo: 'Смотреть видео', videosNote: 'Только официальные каналы: АзТВ, «Медениййет», Общественное ТВ и радио, Театр оперы и балета, Филармония, Музыкальный театр, Музей музыкальной культуры, «Азербайджанфильм», Гостелерадиофонд (архив советского ТВ и радио), официальные каналы самих музыкантов и каналы YouTube «Topic». Играет здесь (youtube-nocookie.com).', onYT: 'На YouTube', page: 'На страницах музыки',
     aboutH: 'Как собрано', about: 'Звук: 30-секундные фрагменты Apple Music идут напрямую от Apple, каждый ведёт к записи в Apple Music; ничего не хранится. «Целиком · свободно» — записи в общественном достоянии (Wikimedia Commons), играют полностью. Музыканты: <a href="xerite/">музыкальная карта</a>, <a href="bestekarlar/">Композиторы</a>, <a href="caz/">Джаз</a>, <a href="estrada/">Эстрада</a> (Wikidata). Эпоха: годы работы музыканта, с 18 лет до смерти. Школа: <a href="silsile/">Силсиле</a> и связи учитель–ученик композиторов. Сочинения: поиск в Apple Music по названию и фамилии композитора.',
     gaps: 'Чего нет: большая часть советских записей («Мелодия») в Apple Music отсутствует или лежит под именем оркестра или сборника, а не исполнителя. Для Бюльбюля, Джаббара Карягдыоглы, квартета «Гая», Госэстрадного оркестра надёжного совпадения в каталоге не найдено; свободные граммофонные записи Бюльбюля и Карягдыоглы здесь играют целиком. Часть советских записей и оперных спектаклей есть на официальных каналах YouTube (Гостелерадиофонд, АзТВ, Театр оперы и балета…): они на страницах музыканта и сочинения в разделе «Видео». Загрузки частных лиц сюда не попадают.' },
-  en: { doc: 'Music · Azad Bilik', map: 'Map', mapSub: 'Where the musicians came from, the shelf of first discs, the mughams’ sections', pages: 'Pages', lineage: 'Lineages', composers: 'Composers', jazzP: 'Jazz', estradaP: 'Estrada', home: 'Home', search: 'Search', browse: 'Browse', periods: 'Periods', genres: 'Genres', schools: 'Schools', works: 'Opera, ballet, symphony', worksShort: 'Works', free: 'Free recordings · full length',
+  en: { doc: 'Music · Azad Bilik', dastgahs: 'Mugham dastgahs', dastgahsSub: 'The seven main dastgahs and their şöbələr (sections)', dastgah: 'Mugham dastgah', sobeler: 'Şöbələr (sections)', sobeN: (n) => `${n} şöbə`, sobeNote: 'The şöbələr in the order they are played. Those with recordings carry a number, those without are dashed; pick one to keep only its recordings.', noneYet: 'No recording of this şöbə yet.', mNote: 'Şöbələr as on the music map (Wikipedia). Recordings from the catalogue whose title names the dastgah, a şöbə only it has, or its zərbi mugham; a şöbə shared by two dastgahs (Vilayəti, Üşşaq…) is not sorted by name, nor are dastgahs outside the seven (Orta Mahur, Mahur-Hindi).', map: 'Map', mapSub: 'Where the musicians came from, the shelf of first discs, the mughams’ sections', pages: 'Pages', lineage: 'Lineages', composers: 'Composers', jazzP: 'Jazz', estradaP: 'Estrada', home: 'Home', search: 'Search', browse: 'Browse', periods: 'Periods', genres: 'Genres', schools: 'Schools', works: 'Opera, ballet, symphony', worksShort: 'Works', free: 'Free recordings · full length',
     p_early: 'First recordings', p_soviet: 'Soviet era', p_indep: 'Independence', pd_early: '1900–1920, gramophone', pd_soviet: '1920–1991', pd_indep: 'since 1991',
     g_mugham: 'Mugham', g_instr: 'Tar and kamancha', g_ashiq: 'Ashiq', g_classic: 'Classical', g_estrada: 'Estrada', g_pop: 'Pop', g_jazz: 'Jazz',
     gd_mugham: 'Khanende singers', gd_instr: 'Master players', gd_ashiq: 'Saz and dastan', gd_classic: 'Composers', gd_estrada: 'Songs and singers', gd_pop: 'Contemporary', gd_jazz: 'Jazz-mugham and after',
@@ -432,19 +436,22 @@ const wCard = (w) => card({ href: `#/w/${w.q}`, title: nm(w), sub: `${t('work', 
 const cCard = (kind, k, c) => card({ href: `#/c/${kind}/${k}`, title: c.title, sub: c.sub, img: '', h: c.h, play: `c:${kind}/${k}` });
 const sCard = (s) => { const m = byQ.get(s.k) ?? byQ.get(s.m[0]); return card({ href: `#/c/school/${s.k}`, title: t('schoolOf', nm(s.n)), sub: t('people', s.m.length), img: m ? aImg(m, 300) : '', h: hueOf(s.k), play: `c:school/${s.k}` }); };
 const shelf = (title, more, items) => items.length ? `<h2 class="sh"><span>${esc(title)}</span>${more ? `<a href="${more}">${esc(t('showAll'))}</a>` : ''}</h2><div class="shelf">${items.join('')}</div>` : '';
-const vids = (vs, o) => {
-  if (!vs?.length) return '';
-  const items = vs.map((v) => ({ vid: v, ...(o.t ? { a: o } : { w: o }) })); LISTS.push(items); const li = LISTS.length - 1;
-  return `<h2 class="sh">${esc(t('videos'))}</h2><div class="vgrid" data-tl="${li}">${vs.map((v, i) => `<div class="vc" role="button" tabindex="0" data-i="${i}" data-vid="${esc(v[0])}" aria-label="${esc(t('playVideo'))}: ${esc(v[1])}"><div class="th"><img src="https://i.ytimg.com/vi/${esc(v[0])}/mqdefault.jpg" alt="" loading="lazy"><span class="pl">${I.play}</span><em>${fmt(v[3])}</em></div><b>${esc(v[1])}</b><span>${esc(v[2])} · <a class="yl" href="https://www.youtube.com/watch?v=${esc(v[0])}" rel="noopener">YouTube ↗</a></span></div>`).join('')}</div><p class="note">${esc(t('videosNote'))}</p>`;
+// videos as playable cards; items = [{ vid, a | w }]; withOwner names the musician or work under each (on a mugham page)
+const vidsI = (items, withOwner) => {
+  if (!items?.length) return '';
+  LISTS.push(items); const li = LISTS.length - 1;
+  return `<h2 class="sh">${esc(t('videos'))}</h2><div class="vgrid" data-tl="${li}">${items.map(({ vid: v, a, w }, i) => `<div class="vc" role="button" tabindex="0" data-i="${i}" data-vid="${esc(v[0])}" aria-label="${esc(t('playVideo'))}: ${esc(v[1])}"><div class="th"><img src="https://i.ytimg.com/vi/${esc(v[0])}/mqdefault.jpg" alt="" loading="lazy"><span class="pl">${I.play}</span><em>${fmt(v[3])}</em></div><b>${esc(v[1])}</b><span>${withOwner ? `${esc(nm(a ?? w))} · ` : ''}${esc(v[2])} · <a class="yl" href="https://www.youtube.com/watch?v=${esc(v[0])}" rel="noopener">YouTube ↗</a></span></div>`).join('')}</div><p class="note">${esc(t('videosNote'))}</p>`;
 };
+// a musician's or a work's own videos (artists have genres, works do not)
+const vids = (vs, o) => vidsI(vs?.map((v) => ({ vid: v, ...(o.g ? { a: o } : { w: o }) })));
 const vthumb = (o) => o.v?.length ? `https://i.ytimg.com/vi/${o.v[0][0]}/mqdefault.jpg` : '';
 // a track list; items = [{x, a?, w?}]; ctx decides the second column (album, or the work, or the musician)
 const tracklist = (items, ctx = {}) => {
   const rows = items.map((it, i) => {
     const x = it.x, im = x[2] >= 0 ? art(x[2], 120) : (it.a ? aImg(it.a, 120) : '');
-    const sub = ctx.showArtist && it.a ? `<a href="#/a/${it.a.q}">${esc(nm(it.a))}</a>` : esc(x[1] && (!it.a || ctx.showBy) ? x[1] : '');
+    const sub = ctx.showArtist && (it.a || it.w) ? `<a href="#/${it.a ? 'a' : 'w'}/${(it.a ?? it.w).q}">${esc(it.a ? nm(it.a) : `${x[1]} · ${nm(it.w)}`)}</a>` : esc(x[1] && (!it.a || ctx.showBy) ? x[1] : '');
     const albumName = x[2] >= 0 ? D.albums[x[2]][0] : (x[7] ?? '');
-    const third = ctx.third === 'artist' && it.a ? `<a href="#/a/${it.a.q}">${esc(nm(it.a))}</a>` : (x[2] >= 0 && D.albums[x[2]][2] ? `<a href="${esc(X(D.albums[x[2]][2]))}" rel="noopener">${esc(albumName)}</a>` : esc(albumName));
+    const third = ctx.third === 'artist' && (it.a || it.w) ? `<a href="#/${it.a ? 'a' : 'w'}/${(it.a ?? it.w).q}">${esc(nm(it.a ?? it.w))}</a>` : (x[2] >= 0 && D.albums[x[2]][2] ? `<a href="${esc(X(D.albums[x[2]][2]))}" rel="noopener">${esc(albumName)}</a>` : esc(albumName));
     return `<li class="tr" tabindex="0" role="button" data-i="${i}" data-n="${i + 1}" data-src="${esc(x[3])}" aria-label="${esc(t('play'))}: ${esc(trTitle(x))}"><div class="n"><span>${i + 1}</span>${I.play}</div><div class="ti">${im ? `<img src="${esc(im)}" alt="" loading="lazy">` : ph(trTitle(x), hueOf(owner(it)?.q ?? 'x'))}<div><b>${x[6] === 1 ? `<span class="free">${esc(t('freeMark'))}</span>` : ''}${esc(trTitle(x))}${vidOf(owner(it), x) ? `<button class="tv" type="button" data-tv="${i}" aria-label="${esc(t('playVideo'))}">▶ ${esc(t('video'))}</button>` : ''}</b><span>${sub}</span></div></div><div class="al">${third}</div><div class="du">${x[5] ? fmt(x[5]) : ''}</div></li>`;
   }).join('');
   return `<ol class="tl" data-tl>${rows}</ol>`;
@@ -454,6 +461,14 @@ const tl = (items, ctx) => { LISTS.push(items); return tracklist(items, ctx).rep
 
 // ---- views
 const V = document.getElementById('view');
+// ---- mughams: refs [owner, index, şöbə, isWork] into the musicians' (or works') recordings and videos
+const mOwner = (r) => r[3] ? { w: wByQ.get(r[0]) } : { a: byQ.get(r[0]) };
+// the same recording or video can come in through a musician and a work (Amirov's Şur): listed once
+const once = (k) => { const seen = new Set(); return (it) => { const v = k(it); if (!v || seen.has(v)) return false; seen.add(v); return true; }; };
+const mItems = (m, sobe) => m.t.filter((r) => !sobe || r[2] === sobe).map((r) => { const o = mOwner(r); return { x: (o.a ?? o.w).t[r[1]], ...o }; }).filter(once((it) => it.x?.[3]));
+const mVids = (m, sobe) => m.v.filter((r) => !sobe || r[2] === sobe).map((r) => { const o = mOwner(r); return { vid: (o.a ?? o.w).v[r[1]], ...o }; }).filter(once((it) => it.vid?.[0]));
+const mHue = (m) => 20 + D.mughams.indexOf(m) * 47;
+const mCard = (m) => card({ href: `#/m/${m.id}`, title: nm(m.n), sub: nm(m.ch) || t('sobeN', m.s.length), img: '', h: mHue(m), play: m.t.length || m.v.length ? `m:${m.id}` : '' });
 const views = {
   home() {
     const quick = [['period', 'soviet'], ['genre', 'classic'], ['genre', 'mugham'], ['genre', 'estrada'], ['genre', 'jazz'], ['period', 'early']];
@@ -465,6 +480,7 @@ const views = {
       <div class="pad"><div class="quick">${q.join('')}</div>
       ${shelf(t('p_soviet'), '#/c/period/soviet', COLL.period('soviet').artists.slice(0, 24).map(aCard))}
       ${shelf(t('works'), '#/works', D.works.slice(0, 20).map(wCard))}
+      ${shelf(t('dastgahs'), '#/mughams', D.mughams.map(mCard))}
       ${shelf(t('g_mugham'), '#/c/genre/mugham', COLL.genre('mugham').artists.slice(0, 20).map(aCard))}
       ${shelf(t('g_estrada'), '#/c/genre/estrada', COLL.genre('estrada').artists.map(aCard))}
       ${shelf(t('schools'), '#/browse', D.schools.map(sCard))}
@@ -481,8 +497,27 @@ const views = {
     const S = D.schools.map((s) => tile(`#/c/school/${s.k}`, t('schoolOf', nm(s.n)), t('people', s.m.length), hueOf(s.k)));
     return `<div class="pad"><h2 class="sh">${esc(t('periods'))}</h2><div class="tiles">${P3.join('')}</div>
       <h2 class="sh">${esc(t('genres'))}</h2><div class="tiles">${G.join('')}${tile('#/works', t('works'), t('tracks', D.works.reduce((s, w) => s + w.t.length, 0)), hueOf('works'))}${tile('#/c/free/all', t('free'), 'Commons', hueOf('free'))}</div>
+      <h2 class="sh">${esc(t('dastgahs'))}</h2><div class="tiles">${D.mughams.map((m) => tile(`#/m/${m.id}`, nm(m.n), [nm(m.ch), t('sobeN', m.s.length)].filter(Boolean).join(' · '), mHue(m))).join('')}</div>
       <h2 class="sh">${esc(t('schools'))}</h2><div class="tiles">${S.join('')}</div>
       <h2 class="sh">${esc(t('pages'))}</h2><div class="tiles">${tile('xerite/', t('map'), t('mapSub'), 90)}${tile('silsile/', t('lineage'), t('schools'), 25)}${tile('bestekarlar/', t('composers'), t('works'), 285)}${tile('caz/', t('jazzP'), '', 195)}${tile('estrada/', t('estradaP'), t('p_soviet'), 345)}</div></div>`;
+  },
+  mughams() {
+    return `<div class="hero" style="--h:${hueOf('mugham')}"><div><div class="kind">${esc(t('g_mugham'))}</div><h1>${esc(t('dastgahs'))}</h1><div class="meta">${esc(t('dastgahsSub'))}</div></div></div>
+      <div class="pad"><div class="grid">${D.mughams.map(mCard).join('')}</div><p class="note" style="margin-top:1.5rem">${esc(t('mNote'))}</p></div>`;
+  },
+  m(id, sobe) {
+    const m = D.mughams.find((x) => x.id === id); if (!m) return views.mughams();
+    const all = mItems(m), allV = mVids(m), counts = {}; for (const it of [...all, ...allV]) { const r = [...m.t, ...m.v].find((r) => { const o = mOwner(r), own = o.a ?? o.w; return it.x ? own.t[r[1]] === it.x : own.v?.[r[1]] === it.vid; }); if (r?.[2]) counts[r[2]] = (counts[r[2]] ?? 0) + 1; }
+    const items = mItems(m, sobe), vs = mVids(m, sobe);
+    const chip = (label, s, n) => `<a class="chip${(sobe ?? '') === s ? ' on' : ''}${s && n === 0 ? ' off' : ''}" href="#/m/${id}${s ? '?s=' + encodeURIComponent(s) : ''}">${esc(label)}${n ? ` <small>${n}</small>` : ''}</a>`;
+    return `<div class="hero" style="--h:${mHue(m)}"><div><div class="kind">${esc(t('dastgah'))}</div><h1>${esc(nm(m.n))}</h1><div class="meta">${esc([nm(m.ch), t('sobeN', m.s.length), t('tracks', all.length + allV.length)].filter(Boolean).join(' · '))}</div></div></div>
+      ${items.length || vs.length ? `<div class="actions"><button class="bigplay" type="button" data-play="m:${id}${sobe ? '?' + encodeURIComponent(sobe) : ''}" aria-label="${esc(t('play'))}">${I.play}</button></div>` : ''}
+      <div class="pad"><h2 class="sh">${esc(t('sobeler'))}</h2><div class="chips sobe">${chip(t('all'), '', 0)}${m.s.map((x) => chip(x, x, counts[x] ?? 0)).join('')}${Object.keys(counts).filter((k) => !m.s.includes(k)).map((k) => chip(k, k, counts[k])).join('')}</div>
+      <p class="note">${esc(t('sobeNote'))}</p>
+      ${items.length ? `<h2 class="sh">${esc(t('popular'))}</h2>${tl(items, { showArtist: true, third: 'artist' })}` : ''}
+      ${vidsI(vs, true)}
+      ${!items.length && !vs.length ? `<p class="empty">${esc(t('noneYet'))}</p>` : ''}
+      <p class="note" style="margin-top:1.5rem">${esc(t('mNote'))}</p></div>`;
   },
   works() {
         return `<div class="hero" style="--h:${hueOf('works')}"><div><div class="kind">${esc(t('collection'))}</div><h1>${esc(t('works'))}</h1><div class="meta">${esc(t('tracks', D.works.reduce((s, w) => s + w.t.length, 0)))} · 1908–2022</div></div></div>
@@ -547,6 +582,7 @@ const queueOf = (key) => {
   const [k, v] = [key.slice(0, key.indexOf(':')), key.slice(key.indexOf(':') + 1)];
   if (k === 'a') { const a = byQ.get(v); return !a ? [] : a.t.length ? a.t.map((x) => ({ x, a })) : (a.v ?? []).map((vid) => ({ vid, a })); }
   if (k === 'w') { const w = wByQ.get(v); return !w ? [] : w.t.length ? w.t.map((x) => ({ x, w })) : (w.v ?? []).map((vid) => ({ vid, w })); }
+  if (k === 'm') { const [id, so] = v.split('?'); const m = D.mughams.find((x) => x.id === id); if (!m) return []; const s0 = so ? decodeURIComponent(so) : undefined; const it = mItems(m, s0); return it.length ? it : mVids(m, s0); }
   if (k === 'c') { const [kind, kk] = v.split('/'); const c = COLL[kind]?.(kk); return c ? collTracks(c) : []; }
   return [];
 };
@@ -564,13 +600,14 @@ document.addEventListener('keydown', (e) => { const r = e.target.closest?.('.tr[
 
 // ---- navigation
 const side = () => {
-  const here = location.hash || '#/';
+  const here = (location.hash || '#/').split('?')[0];
   const a = (href, label, icon) => `<a href="${href}"${here === href ? ' aria-current="page"' : ''}>${icon}${esc(label)}</a>`;
   const sw = (href, label, h, sub) => `<a href="${href}"${here === href ? ' aria-current="page"' : ''}><span class="sw" style="background:linear-gradient(135deg,oklch(58% .14 ${h}),oklch(40% .1 ${h + 40}))">${esc(initials(label))}</span><span class="sub">${esc(label)}</span></a>`;
   const pg = (href, label) => `<a href="${href}" class="sub" style="font-weight:500">${esc(label)}</a>`;
   document.getElementById('side').innerHTML = `<div class="box">${a('#/', t('home'), I.home)}${a('#/search', t('search'), I.search)}${a('#/browse', t('browse'), I.browse)}${a('xerite/', t('map'), I.map)}</div>
     <div class="box"><h3>${esc(t('periods'))}</h3>${['early', 'soviet', 'indep'].map((k) => sw(`#/c/period/${k}`, t('p_' + k), hueOf(k))).join('')}
     <h3>${esc(t('genres'))}</h3>${['mugham', 'instr', 'ashiq', 'classic', 'estrada', 'jazz'].map((k) => sw(`#/c/genre/${k}`, t('g_' + k), hueOf(k))).join('')}${sw('#/works', t('worksShort'), hueOf('works'))}${sw('#/c/free/all', t('free'), hueOf('free'))}
+    <h3>${esc(t('dastgahs'))}</h3>${D.mughams.map((m) => sw(`#/m/${m.id}`, nm(m.n), mHue(m))).join('')}
     <h3>${esc(t('schools'))}</h3>${D.schools.map((s) => sw(`#/c/school/${s.k}`, nm(s.n), hueOf(s.k))).join('')}
     <h3>${esc(t('pages'))}</h3>${pg('silsile/', t('lineage'))}${pg('bestekarlar/', t('composers'))}${pg('caz/', t('jazzP'))}${pg('estrada/', t('estradaP'))}</div>`;
   const tab = (href, label, icon, on) => `<a href="${href}"${on ? ' aria-current="page"' : ''}>${icon}${esc(label)}</a>`;
@@ -586,13 +623,15 @@ const route = (keepScroll) => {
   else if (parts[0] === 'w') html = views.w(parts[1]);
   else if (parts[0] === 'c') html = views.c(parts[1], parts[2]);
   else if (parts[0] === 'works') html = views.works();
+  else if (parts[0] === 'mughams') html = views.mughams();
+  else if (parts[0] === 'm') html = views.m(parts[1], new URLSearchParams(location.hash.split('?')[1] ?? '').get('s') ?? undefined);
   else if (parts[0] === 'browse') html = views.browse();
   else if (parts[0] === 'search') html = views.search(sq);
   else html = views.home();
   V.innerHTML = html; side(); mark();
-  const nmView = parts[0] === 'a' ? nm(byQ.get(parts[1])) : parts[0] === 'w' ? nm(wByQ.get(parts[1])) : '';
+  const nmView = parts[0] === 'a' ? nm(byQ.get(parts[1])) : parts[0] === 'w' ? nm(wByQ.get(parts[1])) : parts[0] === 'm' ? nm(D.mughams.find((x) => x.id === parts[1])?.n) : '';
   document.title = nmView ? `${nmView} · ${t('doc')}` : t('doc');
-  if (!keepScroll && lastHash !== location.hash) { window.scrollTo(0, 0); }
+  if (!keepScroll && lastHash !== location.hash && lastHash?.split('?')[0] !== location.hash.split('?')[0]) { window.scrollTo(0, 0); }
   lastHash = location.hash;
   const sqi = document.getElementById('sq');
   if (sqi) {
