@@ -202,5 +202,19 @@
   ],
   "minzoom": 12,
   "maxzoom": 17
+ },
+ "absheron-1899": {
+  "tiles": "data/tiles/absheron-1899/{z}/{x}/{y}.webp?v=a062a968",
+  "bounds": [
+   49.48484,
+   40.18079,
+   50.36976,
+   40.66646
+  ],
+  "minzoom": 10,
+  "maxzoom": 15,
+  "title": "Карта Апшеронского полуострова Бакинской губернии и уезда, 1899 (землемер Дмитриев)",
+  "source": "https://www.loc.gov/resource/g7142a.ct003076/",
+  "fit": "graticule, 24 panels (affine each) + datum shift"
  }
 }

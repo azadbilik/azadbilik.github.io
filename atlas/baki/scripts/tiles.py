@@ -68,9 +68,30 @@ def ll_tile(lon, lat, z):
 
 for year, plan in G.items():
     if len(sys.argv) > 1 and year not in sys.argv[1:]: continue
-    pts = np.array([p[:4] for p in plan['points'].values()], float)
-    px, ll = pts[:, :2], pts[:, [3, 2]]
-    if len(pts) >= 8:
+    if 'grid' in plan:   # a map placed by its printed graticule, panel by panel (scripts/grid.py)
+        gr = plan['grid']; panels = gr['panels']; sh = np.array(gr.get('shiftPx', [0, 0]), float)
+        def minutes(q): return np.c_[np.ones(len(q)), (q[:, 0] + gr['ferro'] - gr['lonDeg']) * 60, (q[:, 1] - gr['latDeg']) * 60]
+        def inv(q, panels=panels, sh=sh):
+            M = minutes(q); out = np.full((len(q), 2), -1e9)
+            for p in panels:
+                P = M @ np.array(p['coef']) + sh; t = gr.get('trimPx', 30); xa, ya, xb, yb = p['px'][0] + t, p['px'][1] + t, p['px'][2] - t, p['px'][3] - t   # off the linen
+                inside = (P[:, 0] >= xa) & (P[:, 0] < xb) & (P[:, 1] >= ya) & (P[:, 1] < yb)
+                out[inside] = P[inside]
+            # the strips where the sheet was cut into panels stay transparent: that paper is gone
+            return out
+        def fwd(q, panels=panels, sh=sh):
+            out = np.zeros((len(q), 2))
+            for i, (x, y) in enumerate(q):
+                p = min(panels, key=lambda p: max(p['px'][0] - x, x - p['px'][2], p['px'][1] - y, y - p['px'][3]))
+                C = np.array(p['coef']); lonm, latm = np.linalg.solve(C[1:].T, np.array([x, y]) - sh - C[0])
+                out[i] = [gr['lonDeg'] + lonm / 60 - gr['ferro'], gr['latDeg'] + latm / 60]
+            return out
+        pts = None
+    else:
+        pts = np.array([p[:4] for p in plan['points'].values()], float)
+        px, ll = pts[:, :2], pts[:, [3, 2]]
+    if pts is None: pass
+    elif len(pts) >= 8:
         inv = RBFInterpolator(ll, px, kernel='thin_plate_spline', smoothing=1e-9)
         fwd = RBFInterpolator(px, ll, kernel='thin_plate_spline', smoothing=1.0)
     else:   # two landmarks: the similarity of warp.py
@@ -125,7 +146,8 @@ for year, plan in G.items():
             Image.fromarray(t, 'RGBA').save(f / f'{ty}.webp', quality=80, method=5)
             count += 1
     # the zooms above: four tiles averaged into one (alpha-weighted, so the plan's edge stays clean)
-    for z in range(zmax - 1, ZMIN - 1, -1):
+    zmin = plan.get('zmin', ZMIN)
+    for z in range(zmax - 1, zmin - 1, -1):
         tx0, ty0 = ll_tile(W_, N_, z); tx1, ty1 = ll_tile(E_, S_, z)
         for tx in range(tx0, tx1 + 1):
             for ty in range(ty0, ty1 + 1):
@@ -146,6 +168,6 @@ for year, plan in G.items():
     size = sum(f.stat().st_size for f in out.rglob('*.webp'))
     import hashlib   # a version in the URL, so browsers and caches fetch rebuilt tiles instead of keeping old ones
     ver = hashlib.sha1(b''.join(f.read_bytes() for f in sorted((out / str(zmax)).rglob('*.webp')))).hexdigest()[:8]
-    meta.setdefault(year, {}).update({'tiles': f'data/tiles/{year}/{{z}}/{{x}}/{{y}}.webp?v={ver}', 'bounds': [round(W_, 5), round(S_, 5), round(E_, 5), round(N_, 5)], 'minzoom': ZMIN, 'maxzoom': zmax})
-    print(f'{year}: {count} tiles, z{ZMIN}–{zmax}, {size // 1024 // 1024} MB')
+    meta.setdefault(year, {}).update({'tiles': f'data/tiles/{year}/{{z}}/{{x}}/{{y}}.webp?v={ver}', 'bounds': [round(W_, 5), round(S_, 5), round(E_, 5), round(N_, 5)], 'minzoom': zmin, 'maxzoom': zmax})
+    print(f'{year}: {count} tiles, z{zmin}–{zmax}, {size // 1024 // 1024} MB')
 json.dump(meta, open(DATA / 'plans.json', 'w'), ensure_ascii=False, indent=1)
