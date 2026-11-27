@@ -5,7 +5,7 @@
 | File | What |
 |---|---|
 | `data/raw/svod-1886/pNNN.jsonl` | The tables as transcribed, one file per spread of the book (pp. 219–337 of the scan), one JSON object per printed row; `BRIEF.md` is how they were read |
-| `data/villages-1886.csv` | One row per village and town: uezd, участок, rural society, number, name as printed, distances, households, men, women, and men/women by people (`pp_*`) and by faith (`fa_*`), normalised; built by `scripts/merge.py` |
+| `data/villages-1886.csv` | One row per village and town: uezd, участок, rural society, number, name as printed, distances, households, men, women, and men/women by people (`pp_*`), faith (`fa_*`) and estate (`es_*`), normalised; built by `scripts/merge.py` |
 | `data/checks-1886.txt` | Every printed society, участок and uezd total against the sum of its villages |
 | `data/raw/places.tsv` | Candidate places: GeoNames (AZ, AM, GE), OpenStreetMap place nodes, Wikidata settlements, with all their names |
 | `data/geocode-1886.csv` | Each village's place: coordinates, the place and name matched, score, how it was decided (`name`, `society`, `approx`), runners-up; built by `scripts/geocode.py` |
@@ -21,7 +21,7 @@ The tables give, for every settlement: households (дымы), men and women, the
 
 ## How it was read
 
-The 116 spreads were transcribed with Claude reading the scans (each page at full resolution, uncertain digits re-read from enlarged crops). Every row was checked: men + women = total, the sum of peoples and of faiths against the row, every society against its villages, every участок and uezd against its societies. Where the book's own figures do not add up, the printed figure is kept and the row's `note` says what the sums imply; 758 of 811 printed totals match their villages exactly, the rest differ by the book's misprints, listed in `checks-1886.txt`. Estates are kept in the raw files but not yet used.
+The 116 spreads were transcribed with Claude reading the scans (each page at full resolution, uncertain digits re-read from enlarged crops). Every row was checked: men + women = total, the sum of peoples and of faiths against the row, every society against its villages, every участок and uezd against its societies. Where the book's own figures do not add up, the printed figure is kept and the row's `note` says what the sums imply; 758 of 811 printed totals match their villages exactly, the rest differ by the book's misprints, listed in `checks-1886.txt`. Estates (сословия) are grouped into seven: peasants on state land, on landowners' land, peasant owners, beys/meliks/nobility, clergy, townspeople, other (`es_*` in the CSV, a third view on the map).
 
 ## How the villages were placed
 

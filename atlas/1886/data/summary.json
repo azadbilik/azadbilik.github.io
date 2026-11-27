@@ -30,6 +30,15 @@
   "ahl-e haqq": 3078,
   "catholic": 17
  },
+ "estate": {
+  "state": 796024,
+  "private": 339328,
+  "town": 176630,
+  "owners": 67238,
+  "noble": 38669,
+  "clergy": 15690,
+  "other": 5247
+ },
  "uezd": {
   "Елисаветпольский": {
    "villages": 166,

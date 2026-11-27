@@ -30,6 +30,20 @@ FAITH = [  # first match wins; matched against the footnote meaning if any, else
     ('али-аллах', 'ahl-e haqq'),
 ]
 
+ESTATE = [  # first match wins (footnote meaning first, then heading)
+    ('собствен', 'owners'), ('казен', 'state'), ('каз.', 'state'), ('владѣл', 'private'), ('влад', 'private'),
+    ('духов', 'clergy'), ('купц', 'town'), ('мѣщан', 'town'), ('городск', 'town'),
+    ('бек', 'noble'), ('мелик', 'noble'), ('дворян', 'noble'), ('двор.', 'noble'), ('высш', 'noble'), ('хан', 'noble'), ('агалар', 'noble'),
+]
+
+def estate_of(key):
+    head, fn = split(key)
+    for name in ((fn, head) if fn else (head,)):
+        n = name.lower()
+        for k, v in ESTATE:
+            if k in n: return v
+    return 'other'
+
 def split(key):
     m = re.match(r'(.*?)\s*\[\s*\d+\)\s*(.*?)\s*\]$', key)
     return (m.group(1), m.group(2)) if m else (key, '')
@@ -90,7 +104,11 @@ for o in objs:
                 key = explain(o, 'faith', key)
                 a = nums(v, 2); p = fth[faith_of(key)]
                 for i in range(2): p[i] += a[i]
-            rows.append({**o, 'people_n': dict(ppl), 'faith_n': dict(fth)})
+            est = defaultdict(lambda: [0, 0])
+            for key, v in (o.get('estate') or {}).items():
+                a = nums(v, 3) if isinstance(v, list) and len(v) == 3 else [0] + nums(v, 2)   # [hh, m, f] or [m, f]
+                e = est[estate_of(key)]; e[0] += a[1]; e[1] += a[2]
+            rows.append({**o, 'people_n': dict(ppl), 'faith_n': dict(fth), 'estate_n': dict(est)})
         elif k in ('society', 'uch', 'uezd'):
             totals.append(o)
 
@@ -102,18 +120,20 @@ for r in rows:
     last = r
 
 PEOPLE_COLS = ['tatar', 'armenian', 'talysh', 'tat', 'kurd', 'lezgin', 'russian', 'jew', 'shahdag', 'persian', 'georgian', 'udi', 'german', 'polish', 'roma', 'other']
+ESTATE_COLS = ['state', 'private', 'owners', 'noble', 'clergy', 'town', 'other']
 FAITH_COLS = ['shia', 'sunni', 'muslim', 'armenian', 'orthodox', 'sectarian', 'jewish', 'catholic', 'protestant', 'ahl-e haqq', 'other']
 out = HERE / 'data' / 'villages-1886.csv'
 with open(out, 'w', newline='') as fh:
     w = csv.writer(fh)
     w.writerow(['gov', 'uezd', 'uch', 'society', 'no', 'name', 'kind', 'seat', 'd_uezd', 'd_prist', 'hh', 'm', 'f', 'total']
-               + [f'pp_{p}_{x}' for p in PEOPLE_COLS for x in ('hh', 'm', 'f')] + [f'fa_{p}_{x}' for p in FAITH_COLS for x in ('m', 'f')]
+               + [f'pp_{p}_{x}' for p in PEOPLE_COLS for x in ('hh', 'm', 'f')] + [f'fa_{p}_{x}' for p in FAITH_COLS for x in ('m', 'f')] + [f'es_{p}_{x}' for p in ESTATE_COLS for x in ('m', 'f')]
                + ['spread', 'note'])
     for r in rows:
         w.writerow([r.get('gov'), r.get('uezd'), r.get('uch'), r.get('society'), r.get('no'), r.get('name'), r['kind'],
                     int(bool(r.get('seat'))), r.get('d_uezd'), r.get('d_prist'), r.get('hh'), r.get('m'), r.get('f'), r.get('total')]
                    + [r['people_n'].get(p, [0, 0, 0])[i] or '' for p in PEOPLE_COLS for i in range(3)]
                    + [r['faith_n'].get(p, [0, 0])[i] or '' for p in FAITH_COLS for i in range(2)]
+                   + [r['estate_n'].get(p, [0, 0])[i] or '' for p in ESTATE_COLS for i in range(2)]
                    + [r['spread'], r.get('note', '')])
 
 # Checks: each printed total vs the villages under it
