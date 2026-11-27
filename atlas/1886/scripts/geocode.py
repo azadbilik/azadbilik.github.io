@@ -42,6 +42,13 @@ def skel(s):
 
 GENERIC = r'[-\s]?(кенд\w*|оба|кишлаг\w*|кишлак\w*|юрт\w*|кала|dorf)$'
 
+QUALS = {'low': r'ашаг|нижн|aşağı|asagi|ashagy|ашагы', 'up': r'юхар|верхн|yuxarı|yukhary|yuxari|юхары', 'big': r'больш|беюк|böyük|boyuk|beyuk', 'small': r'мал[оы]|кичик|kiçik|kichik'}
+OPP = {'low': 'up', 'up': 'low', 'big': 'small', 'small': 'big'}
+def quals(names): return {q for q, rx in QUALS.items() for n in names if re.search(rx, n.lower())}
+def qual_adjust(vq, pnames):
+    pq = quals(pnames)
+    return sum(.04 if q in pq else -.08 if OPP[q] in pq else 0 for q in vq)
+
 def names_1886(name):
     name = re.sub(r'\((Временн|съ отс|с отс|отс)[^)]*\)', '', name)
     name = re.sub(r',\s*(коч|отд|отс|съ|хут|зимов|селен)\.?.*$', '', name).strip()
@@ -74,10 +81,11 @@ cands = []
 for v in vill:
     u = UEZD.get(v['uezd'], v['uezd'])
     vs = names_1886(v['name'])
+    vq = quals([v['name']])
     sc = []
     for p in by_uezd.get(u, []):
         best = max(((SequenceMatcher(None, a, b).ratio(), b) for a in vs for b in p[5]), default=(0, ''))
-        if best[0] >= .7: sc.append((round(min(1, best[0]) + (.03 if core[u].contains(Point(p[3], p[2])) else 0), 3), p, p[5][best[1]]))
+        if best[0] >= .7: sc.append((round(min(1, best[0]) + (.03 if core[u].contains(Point(p[3], p[2])) else 0) + (qual_adjust(vq, p[5].values()) if vq else 0), 3), p, p[5][best[1]]))
     sc.sort(key=lambda x: -x[0])
     sc = [(s, p + (m,)) for s, p, m in sc]
     merged = []
@@ -116,6 +124,25 @@ for i, (v, sc) in enumerate(zip(vill, cands)):
     if km(res[i][0][1][2:4], c) <= 25: continue
     near = [(s, p) for s, p in sc if s >= .8 and km(p[2:4], c) < 15]
     res[i] = (max(near, key=lambda x: x[0]), 'society') if near else None
+# pass 3b: one place, one village. Where several villages took the same place (within 1.5 km), the best
+# match keeps it; the others try their next candidates near their society, or let go.
+for _ in range(3):
+    taken = sorted([i for i in range(len(vill)) if res[i]], key=lambda i: (-res[i][0][0], res[i][1] != 'name'))
+    kept, moved = [], 0
+    for i in taken:
+        here = res[i][0][1][2:4]
+        if any(km(here, res[j][0][1][2:4]) < .3 for j in kept):
+            v = vill[i]
+            pts = [res[j][0][1][2:4] for j in kept if (vill[j]['uezd'], vill[j]['society']) == (v['uezd'], v['society'])]
+            c = (med(p[0] for p in pts), med(p[1] for p in pts)) if pts else None
+            alt = [(s, p) for s, p in cands[i] if s >= .85 and not any(km(p[2:4], res[j][0][1][2:4]) < .3 for j in kept) and (c is None or km(p[2:4], c) < 15)]
+            res[i] = (alt[0], 'society') if alt else None
+            moved += 1
+            if res[i]: kept.append(i)
+        else:
+            kept.append(i)
+    if not moved: break
+
 # pass 4: what is still unplaced goes to its society's middle, marked approximate
 approx = {}
 for i, v in enumerate(vill):
