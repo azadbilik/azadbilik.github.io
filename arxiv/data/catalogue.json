@@ -51,6 +51,11 @@
    "az": "Prezident kitabxanası",
    "ru": "Президентская библиотека",
    "en": "Presidential Library"
+  },
+  "loc": {
+   "az": "ABŞ Konqres Kitabxanası",
+   "ru": "Библиотека Конгресса США",
+   "en": "Library of Congress"
   }
  },
  "items": [
@@ -662,6 +667,31 @@
    "lang": "ru",
    "holder": "prlib",
    "url": "https://www.prlib.ru/item/436598"
+  },
+  {
+   "id": "persia-sophorum-regnum",
+   "c": "xerite",
+   "src": "loc/blaeu-persia",
+   "pages": [
+    1
+   ],
+   "az": "«Persia sive Sophorum Regnum» — Fars, yaxud Səfəvilər dövləti",
+   "ru": "«Persia sive Sophorum Regnum» — Персия, или Царство Софиев (Сефевидов)",
+   "en": "«Persia sive Sophorum Regnum» — Persia, or the Kingdom of the Sophis (Safavids)",
+   "date": "[c. 1640]",
+   "place": {
+    "az": "Amsterdam",
+    "ru": "Амстердам",
+    "en": "Amsterdam"
+   },
+   "lang": "la",
+   "holder": "loc",
+   "url": "https://www.wdl.org/en/item/17568/",
+   "note": {
+    "az": "Hollandiya xəritəsi (Blau məktəbi), əl ilə rənglənib: Səfəvi sərhədi sarı, Şirvan (Servan), Gilan, Ərdəbil, Təbriz.",
+    "ru": "Голландская карта школы Блау, раскрашена от руки: граница Сефевидов жёлтым, Ширван (Servan), Гилян, Ардебиль, Тебриз.",
+    "en": "A Dutch map of the Blaeu school, hand-coloured: the Safavid frontier in yellow, Shirvan («Servan»), Gilan, Ardabil, Tabriz."
+   }
   }
  ]
 }

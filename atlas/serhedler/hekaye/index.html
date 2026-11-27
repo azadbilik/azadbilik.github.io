@@ -76,6 +76,12 @@ const LAYERS = {
 const ALL = [[44.0, 38.3], [50.6, 42.2]], AZ = [[44.7, 38.35], [50.5, 41.95]];
 // The story. Each step: the layer, where the camera goes, the units it lights, the 1901 scan's opacity
 const STEPS = [
+  { layer: 'safavid', year: '~1640', bounds: [[37.5, 23.5], [71.5, 43.5]], scan3: .85,
+    when: { az: 'Təxminən 1640', ru: 'Около 1640', en: 'Around 1640' },
+    title: { az: 'Avropanın gözü ilə', ru: 'Глазами Европы', en: 'As Europe drew it' },
+    text: { az: 'Amsterdamda çap olunmuş «Persia sive Sophorum Regnum» — «Fars, yaxud Sofilərin dövləti»: Avropa Səfəvi şahını «Böyük Sofi» adlandırırdı. Dövlətin sərhədi sarı xəttlə çəkilib; Şirvan (Servan), Gilan, Təbriz (Tauris), Ərdəbil (Ardouil), Bakı (Bachu) yerindədir. Xəzər enli və yastıdır, şəhərlər bəzən yüzlərlə kilometr yerindən sürüşüb: xəritə 20 şəhərə görə bugünkü xəritəyə uyğunlaşdırılıb, onların hər biri orta hesabla 300 km kənara düşür.',
+            ru: 'Отпечатанная в Амстердаме карта «Persia sive Sophorum Regnum» — «Персия, или Царство Софиев»: в Европе сефевидского шаха звали «Великим Софи». Граница державы проведена жёлтым; Ширван (Servan), Гилян, Тебриз (Tauris), Ардебиль (Ardouil), Баку (Bachu) на своих местах. Каспий широкий и приплюснутый, города порой сдвинуты на сотни километров: карта подогнана к нынешней по 20 городам, каждый из которых в среднем ложится в 300 км от своего места.',
+            en: "«Persia sive Sophorum Regnum», printed in Amsterdam: Persia, or the Kingdom of the Sophis, as Europe called the Safavid shah, the «Great Sophy». The realm's frontier is drawn in yellow; Shirvan («Servan»), Gilan, Tabriz («Tauris»), Ardabil («Ardouil») and Baku («Bachu») are in place. The Caspian is wide and squat, and towns can be hundreds of kilometres off: the map is fitted to today's by 20 towns, each landing about 300 km from where it is." } },
   { layer: 'safavid', year: '~1700', bounds: [[37.5, 23.5], [71.5, 43.5]], scan2: .55,
     when: { az: 'Təxminən 1700', ru: 'Около 1700', en: 'Around 1700' },
     title: { az: 'Səfəvi dövləti', ru: 'Государство Сефевидов', en: 'The Safavid empire' },
@@ -181,7 +187,7 @@ function render() {
 const map = new maplibregl.Map({
   container: 'map', style: `https://tiles.openfreemap.org/styles/${dark ? 'dark' : 'positron'}`,
   bounds: [[37.5, 23.5], [71.5, 43.5]], minZoom: 2.5, maxZoom: 9, interactive: false,
-  attributionControl: { compact: true, customAttribution: 'Delisle 1724 · Tomkeev 1901 · Natural Earth · <a href="https://ristat.org/">RISTAT</a> · Demoscope · <a href="https://www.geoboundaries.org">geoBoundaries</a>' },
+  attributionControl: { compact: true, customAttribution: '<a href="https://www.wdl.org/en/item/17568/">Persia sive Sophorum Regnum, c. 1640 (LoC)</a> · Delisle 1724 · Tomkeev 1901 · Natural Earth · <a href="https://ristat.org/">RISTAT</a> · Demoscope · <a href="https://www.geoboundaries.org">geoBoundaries</a>' },
 });
 const pad = () => matchMedia('(max-width: 48rem)').matches ? { top: 80, right: 20, left: 20, bottom: innerHeight * .45 } : { top: 40, right: 40, bottom: 40, left: Math.min(26 * 16, innerWidth * .4) + 40 };
 map.on('style.load', () => {
@@ -200,6 +206,9 @@ map.on('load', async () => {
   const d2 = await fetch('../safavi/data/delisle-1724.json').then((r) => r.json());
   map.addSource('scan2', { type: 'image', url: '../safavi/data/delisle-1724.webp', coordinates: d2.coordinates });
   map.addLayer({ id: 'scan2', type: 'raster', source: 'scan2', paint: { 'raster-opacity': 0, 'raster-opacity-transition': { duration: still() ? 0 : 900 } } }, firstSymbol);
+  const d3 = await fetch('../safavi/data/blaeu-1640.json').then((r) => r.json());
+  map.addSource('scan3', { type: 'image', url: '../safavi/data/blaeu-1640.webp', coordinates: d3.coordinates });
+  map.addLayer({ id: 'scan3', type: 'raster', source: 'scan3', paint: { 'raster-opacity': 0, 'raster-opacity-transition': { duration: still() ? 0 : 900 } } }, firstSymbol);
   await Promise.all(Object.entries(LAYERS).map(async ([id, file]) => {
     const gj = await fetch(file).then((r) => r.json());
     gj.features = gj.features.filter((f) => f.geometry && f.geometry.type !== 'Point' && !f.geometry.type.includes('Line') && (id !== 'safavid' || f.properties.id === 'safavid') && (id !== 'prov' || f.properties.kind === 'province') && (id !== 'today' || f.properties.country === 'az') && (id !== '1897' || !['Дагестанская область', 'Карская область'].includes(f.properties.govKey)));
@@ -232,8 +241,10 @@ function go(i, force = false) {
   }
   map.setPaintProperty('scan', 'raster-opacity', s.scan ?? 0);
   map.setPaintProperty('scan2', 'raster-opacity', s.scan2 ?? 0);
+  map.setPaintProperty('scan3', 'raster-opacity', s.scan3 ?? 0);
   if (s.dim) map.setPaintProperty(`${s.layer}-fill`, 'fill-opacity', .12);
-  if (s.layer === 'safavid') map.setPaintProperty('safavid-fill', 'fill-opacity', s.scan2 ? .22 : .45);
+  if (s.layer === 'safavid') map.setPaintProperty('safavid-fill', 'fill-opacity', s.scan3 ? 0 : s.scan2 ? .22 : .45);
+  if (s.layer === 'safavid') map.setPaintProperty('safavid-line', 'line-opacity', s.scan3 ? 0 : .7);
   if (s.scan) map.setPaintProperty(`${s.layer}-fill`, 'fill-opacity', ids.length ? ['case', ['in', ['get', 'id'], ['literal', ids]], .35, 0] : 0);
   map.fitBounds(s.bounds, { padding: pad(), duration: still() ? 0 : 1600, essential: true });
 }

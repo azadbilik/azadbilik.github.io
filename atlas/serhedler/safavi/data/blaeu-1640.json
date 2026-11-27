@@ -1,0 +1,43 @@
+{
+ "source": "«Persia sive Sophorum Regnum», Amsterdam c. 1640 (Blaeu school; Library of Congress, World Digital Library 17568; public domain), warped by Azad Bilik",
+ "coordinates": [
+  [
+   37.0,
+   46.0
+  ],
+  [
+   76.0,
+   46.0
+  ],
+  [
+   76.0,
+   22.0
+  ],
+  [
+   37.0,
+   22.0
+  ]
+ ],
+ "looKm": {
+  "tabriz": 216,
+  "ardabil": 44,
+  "derbent": 81,
+  "baku": 156,
+  "shamakhi": 53,
+  "erzurum": 289,
+  "tiflis": 156,
+  "astrakhan": 283,
+  "kazvin": 90,
+  "isfahan": 504,
+  "yazd": 233,
+  "shiraz": 175,
+  "kerman": 408,
+  "hormuz": 285,
+  "basra": 338,
+  "mashhad": 566,
+  "kandahar": 445,
+  "kabul": 419,
+  "balkh": 338,
+  "astarabad": 257
+ }
+}
