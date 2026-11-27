@@ -36,7 +36,7 @@ async function page(url, musts) {
 
 console.log('Hub pages');
 for (const [path, musts] of [
-  ['/', ['href="/xeriteler/"', 'href="/qalereya/"', 'href="/atlas/"', 'id="culture"', 'id="atlas"', 'data-lang="ru"']],
+  ['/', ['href="/xeriteler/"', 'href="/qalereya/"', 'href="/atlas/"', 'id="culture"', 'id="atlas"', '/shared/header.js']],
   ['/atlas/', ['href="/atlas/ehali/"', 'href="/xeriteler/"']],
   ['/musiqi/', ['maplibre-gl', 'recordings.json']],
   ['/arxiv/', ['viewer.js', 'items.json']],
@@ -50,9 +50,9 @@ for (const [path, musts] of [
   ['/atlas/baki/', ['maplibre-gl', 'plans.json']],
   ['/soz/', ['vocab.json']],
   ['/sebeke/', ['href="/sebeke/nezire/"', 'href="/sebeke/elm/"']],
-  ['/musiqi/silsile/', ['d3@7.9.0', 'data/lineage.json']],
-  ['/musiqi/bestekarlar/', ['d3@7.9.0', 'data/composers.json']],
-  ['/musiqi/caz/', ['d3@7.9.0', 'data/jazz.json']],
+  ['/musiqi/silsile/', ['href="/shared/graph.css"', 'data/lineage.json']],
+  ['/musiqi/bestekarlar/', ['href="/shared/graph.css"', 'data/composers.json']],
+  ['/musiqi/caz/', ['href="/shared/graph.css"', 'data/jazz.json']],
   ['/musiqi/estrada/', ['data/estrada.raw.json', 'data/recordings.json']],
   ['/atlas/caylar/', ['/atlas/hovze/']],
   ['/atlas/1897/', ['maplibre-gl', 'census.out.json']],
@@ -63,7 +63,7 @@ for (const [path, musts] of [
   ['/xerite/', ['maplibre-gl', 'data/authors.json']],
   ['/qalereya/', ['data/gallery.json', 'id="viewer"']],
   ['/qalereya/emalatxana/', ['maplibre-gl', '../data/manuscripts.json']],
-  ['/qalereya/rassamlar/', ['d3@7.9.0', '../data/network.json']],
+  ['/qalereya/rassamlar/', ['href="/shared/graph.css"', '../data/network.json']],
   ['/xeriteler/iskender/', ['maplibre-gl', '/shared/story-map.js', '/shared/viewer.js']],
   ['/xeriteler/xosrov-sirin/', ['maplibre-gl', '/shared/story-map.js', '/shared/viewer.js']],
   ['/xeriteler/yeddi-gozel/', ['maplibre-gl', '/shared/story-map.js', '/shared/viewer.js']],
