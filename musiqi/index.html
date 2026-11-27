@@ -281,7 +281,7 @@ const t = (k, ...a) => { const v = T[lang][k] ?? T.az[k]; return typeof v === 'f
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
 const X = (s) => typeof s !== 'string' ? s : s.replace(/^~a\//, 'https://audio-ssl.itunes.apple.com/itunes-assets/').replace(/^~i(\d)\//, 'https://is$1-ssl.mzstatic.com/image/thumb/').replace(/^~m\//, 'https://music.apple.com/').replace(/^~u\//, 'https://upload.wikimedia.org/wikipedia/commons/').replace(/^~c\//, 'https://commons.wikimedia.org/wiki/');
 const fold = (s) => String(s ?? '').toLowerCase().replace(/ı/g, 'i').replace(/ə/g, 'e').normalize('NFD').replace(/[̀-ͯ]/g, '');
-const fmt = (s) => { s = Math.max(0, Math.round(s || 0)); return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`; };
+const fmt = (s) => { s = Math.max(0, Math.round(s || 0)); const h = Math.floor(s / 3600), m = Math.floor(s / 60) % 60, ss = String(s % 60).padStart(2, '0'); return h ? `${h}:${String(m).padStart(2, '0')}:${ss}` : `${m}:${ss}`; };
 const I = {
   play: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>',
   pause: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg>',
@@ -435,8 +435,7 @@ const shelf = (title, more, items) => items.length ? `<h2 class="sh"><span>${esc
 const vids = (vs, o) => {
   if (!vs?.length) return '';
   const items = vs.map((v) => ({ vid: v, ...(o.t ? { a: o } : { w: o }) })); LISTS.push(items); const li = LISTS.length - 1;
-  const dur = (sec) => fmt(sec).replace(/^(\d+):(\d\d)$/, (m, a, b) => +a >= 60 ? `${Math.floor(a / 60)}:${String(a % 60).padStart(2, '0')}:${b}` : m);
-  return `<h2 class="sh">${esc(t('videos'))}</h2><div class="vgrid" data-tl="${li}">${vs.map((v, i) => `<div class="vc" role="button" tabindex="0" data-i="${i}" data-vid="${esc(v[0])}" aria-label="${esc(t('playVideo'))}: ${esc(v[1])}"><div class="th"><img src="https://i.ytimg.com/vi/${esc(v[0])}/mqdefault.jpg" alt="" loading="lazy"><span class="pl">${I.play}</span><em>${dur(v[3])}</em></div><b>${esc(v[1])}</b><span>${esc(v[2])} · <a class="yl" href="https://www.youtube.com/watch?v=${esc(v[0])}" rel="noopener">YouTube ↗</a></span></div>`).join('')}</div><p class="note">${esc(t('videosNote'))}</p>`;
+  return `<h2 class="sh">${esc(t('videos'))}</h2><div class="vgrid" data-tl="${li}">${vs.map((v, i) => `<div class="vc" role="button" tabindex="0" data-i="${i}" data-vid="${esc(v[0])}" aria-label="${esc(t('playVideo'))}: ${esc(v[1])}"><div class="th"><img src="https://i.ytimg.com/vi/${esc(v[0])}/mqdefault.jpg" alt="" loading="lazy"><span class="pl">${I.play}</span><em>${fmt(v[3])}</em></div><b>${esc(v[1])}</b><span>${esc(v[2])} · <a class="yl" href="https://www.youtube.com/watch?v=${esc(v[0])}" rel="noopener">YouTube ↗</a></span></div>`).join('')}</div><p class="note">${esc(t('videosNote'))}</p>`;
 };
 const vthumb = (o) => o.v?.length ? `https://i.ytimg.com/vi/${o.v[0][0]}/mqdefault.jpg` : '';
 // a track list; items = [{x, a?, w?}]; ctx decides the second column (album, or the work, or the musician)
