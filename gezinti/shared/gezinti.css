@@ -1,7 +1,7 @@
 /* Gəzinti (/gezinti/<city>/): the walking-map page around gezinti.js, on top of /shared/story-map.css */
   /* What a place is, by colour: the same on the map, in the list and on its card */
   :root { --k-fort: var(--fourth); --k-palace: var(--accent); --k-mosque: var(--second); --k-bath: var(--fifth);
-    --k-caravanserai: var(--third); --k-church: var(--sixth); --k-museum: var(--ink); --k-house: var(--muted); --k-other: var(--muted); }
+    --k-caravanserai: var(--third); --k-church: var(--sixth); --k-tomb: var(--third); --k-museum: var(--ink); --k-house: var(--muted); --k-other: var(--muted); }
 
   .tabs { display: flex; gap: 1.25rem; margin-top: 1rem; font-size: .8125rem; }
   .tabs button { padding: .2rem 0; color: var(--muted); }

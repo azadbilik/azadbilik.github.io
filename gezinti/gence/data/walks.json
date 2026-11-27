@@ -1,0 +1,75 @@
+[
+  {
+    "id": "meydan",
+    "color": "accent",
+    "name": {
+      "az": "Qala bağından Şah Abbas meydanına",
+      "ru": "От крепостного сада к площади Шаха Аббаса",
+      "en": "From the fortress garden to Shah Abbas Square"
+    },
+    "text": {
+      "az": "Gəncənin köhnə mərkəzi: qala divarlarının qalıqları olan bağdan Cümhuriyyət binasının yanından keçib Şah Abbasın məscidi, hamamı və karvansarası olan meydana.",
+      "ru": "Старый центр Гянджи: от сада с остатками крепостных стен, мимо Дома Республики, к площади с мечетью, баней и караван-сараем шаха Аббаса.",
+      "en": "Old Ganja's centre: from the garden with what is left of the fortress walls, past the Republic building, to the square with Shah Abbas's mosque, bath and caravanserai."
+    },
+    "stops": [
+      "realni-mekteb",
+      "xan-bagi",
+      "gence-qalasi",
+      "xalq-cumhuriyyeti-binasi",
+      "filarmoniya",
+      "cavad-xan-turbesi",
+      "cokek-hamam",
+      "sah-abbas-mescidi",
+      "sah-abbas-meydani",
+      "sah-abbas-karvansarasi"
+    ]
+  },
+  {
+    "id": "simal",
+    "color": "second",
+    "name": {
+      "az": "Meydandan şimala",
+      "ru": "От площади на север",
+      "en": "North of the square"
+    },
+    "text": {
+      "az": "Muzeydən kilsəyə, məhəllə məscidlərinə və butulkalardan tikilmiş evə.",
+      "ru": "От музея к церкви, квартальным мечетям и дому из бутылок.",
+      "en": "From the museum to the church, the neighbourhood mosques and the house built of bottles."
+    },
+    "stops": [
+      "sah-abbas-karvansarasi",
+      "tarix-muzeyi",
+      "ziyadxanovlar-mulku",
+      "aleksandr-nevski-kilsesi",
+      "huseyniyye-mescidi",
+      "butulkali-ev",
+      "seyid-mirze-bagir-turbesi",
+      "serefxanli-mescidi"
+    ]
+  },
+  {
+    "id": "cenub",
+    "color": "third",
+    "name": {
+      "az": "Yelizavetpolun küçələri",
+      "ru": "Улицы Елизаветполя",
+      "en": "The streets of Elisabethpol"
+    },
+    "text": {
+      "az": "Meydandan cənuba, şəhərin Yelizavetpol adlandığı XIX əsrin binalarına: məktəb, kilsə, alman hamamı və Cavad xanın dəftərxanasının yeri.",
+      "ru": "От площади на юг, к зданиям XIX века, когда город звался Елизаветполем: гимназия, церковь, немецкая баня и место канцелярии Джавад-хана.",
+      "en": "South from the square to the buildings of the 19th century, when the town was called Elisabethpol: a school, a church, a German bathhouse and the site of Javad Khan's chancery."
+    },
+    "stops": [
+      "sah-abbas-mescidi",
+      "israfil-memmedov-ev-muzeyi",
+      "zerrabi-mescidi",
+      "kiril-mefodi-kilsesi",
+      "cavad-xan-defterxanasi",
+      "kisi-gimnaziyasi",
+      "avropa-hamami"
+    ]
+  }
+]

@@ -6,6 +6,7 @@
 |---|---|---|---|
 | [İçərişəhər](icerisheher/) | 57 | 3 | the walls (OSM way 152190481) |
 | [Şəki](seki/) | 29 | 3 | the khans' fortress (OSM way 272592234) |
+| [Gəncə](gence/) | 29 | 3 | none (no walls survive); the 1873 plan as underlay |
 
 ## A city
 
@@ -14,7 +15,7 @@ Each city has these hand-kept files in `<city>/data/`:
 | File | What |
 |---|---|
 | `city.json` | `bbox` (s,w,n,e) to fetch streets and OSM positions in; `outlineWay`, the OSM way drawn as the walls (optional) |
-| `places.json` | the places: `id`, Wikidata `qid`, `kind` (`fort`, `palace`, `mosque`, `bath`, `caravanserai`, `church`, `museum`, `house`, `other`); optional `at` [lng, lat] and `name` {az, ru, en} override Wikidata |
+| `places.json` | the places: `id`, Wikidata `qid`, `kind` (`fort`, `palace`, `mosque`, `bath`, `caravanserai`, `church`, `tomb`, `museum`, `house`, `other`); optional `at` [lng, lat] and `name` {az, ru, en} override Wikidata |
 | `walks.json` | the walks: names and intro in az/ru/en, ordered `stops`, `color` (accent, second, third); `direct: true` joins stops in straight lines |
 | `about.json` | our own 2–4 sentence texts in az/ru/en, written from the articles' leads; the card shows them instead of the Wikipedia opening |
 

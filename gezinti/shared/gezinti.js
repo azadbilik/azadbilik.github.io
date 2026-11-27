@@ -17,19 +17,19 @@ let lang = (() => {
   return 'az';
 })();
 const CITY = window.CITY;
-const KINDS = ['fort', 'palace', 'mosque', 'bath', 'caravanserai', 'church', 'museum', 'house', 'other'];
+const KINDS = ['fort', 'palace', 'mosque', 'bath', 'caravanserai', 'church', 'tomb', 'museum', 'house', 'other'];
 const T = {
   az: { walks: 'Gəzintilər', places: 'Bütün yerlər', section: 'Gəzinti',
-    kinds: { fort: 'Qala, qapılar, qüllələr', palace: 'Saraylar', mosque: 'Məscidlər', bath: 'Hamamlar', caravanserai: 'Karvansaralar', church: 'Kilsə, məbəd', museum: 'Muzeylər', house: 'Evlər, meydanlar', other: 'Başqa yerlər' },
-    kind1: { fort: 'Qala', palace: 'Saray', mosque: 'Məscid', bath: 'Hamam', caravanserai: 'Karvansara', church: 'Kilsə, məbəd', museum: 'Muzey', house: 'Ev, meydan', other: 'Başqa' },
+    kinds: { fort: 'Qala, qapılar, qüllələr', palace: 'Saraylar', mosque: 'Məscidlər', bath: 'Hamamlar', caravanserai: 'Karvansaralar', church: 'Kilsə, məbəd', tomb: 'Türbələr', museum: 'Muzeylər', house: 'Evlər, meydanlar', other: 'Başqa yerlər' },
+    kind1: { fort: 'Qala', palace: 'Saray', mosque: 'Məscid', bath: 'Hamam', caravanserai: 'Karvansara', church: 'Kilsə, məbəd', tomb: 'Türbə', museum: 'Muzey', house: 'Ev, meydan', other: 'Başqa' },
     stops: (n) => `${n} dayanacaq`, km: (m, min) => `${(m / 1000).toFixed(1).replace('.', ',')} km, təxminən ${min} dəq. yol`,
     start: 'Başla', back: 'Geri', all: 'Bütün gəzintilər', prev: 'Əvvəlki', next: 'Növbəti', of: (i, n) => `${i} / ${n}`,
     wiki: 'Vikipediya', wikidata: 'Vikidata', route: 'Ora necə getmək', photo: 'Foto', from: (l) => `Vikipediya, ${{ ru: 'rusca', en: 'ingiliscə', az: 'azərbaycanca' }[l]} məqalədən`, fromWiki: 'Vikipediyadan',
     walls: 'Qala divarları', me: 'Mən haradayam',
     note: 'Gəzintilərin dayanacaqları haqqında mətnləri Vikipediya məqalələri əsasında biz yazmışıq; başqa yerlərdə Vikipediya məqaləsinin girişi verilir (CC BY-SA), fotolar Wikimedia Commons-dandır, adlar Vikidatadan, küçələr və yerlər OpenStreetMap-dən. Gəzintilər küçələrlə gedir; vaxt saatda 4,5 km piyada sürətilə, dayanmadan hesablanıb.' },
   ru: { walks: 'Прогулки', places: 'Все места', section: 'Прогулки',
-    kinds: { fort: 'Крепость, ворота, башни', palace: 'Дворцы', mosque: 'Мечети', bath: 'Бани', caravanserai: 'Караван-сараи', church: 'Церкви, храмы', museum: 'Музеи', house: 'Дома, площади', other: 'Другие места' },
-    kind1: { fort: 'Крепость', palace: 'Дворец', mosque: 'Мечеть', bath: 'Баня', caravanserai: 'Караван-сарай', church: 'Церковь, храм', museum: 'Музей', house: 'Дом, площадь', other: 'Другое' },
+    kinds: { fort: 'Крепость, ворота, башни', palace: 'Дворцы', mosque: 'Мечети', bath: 'Бани', caravanserai: 'Караван-сараи', church: 'Церкви, храмы', tomb: 'Мавзолеи', museum: 'Музеи', house: 'Дома, площади', other: 'Другие места' },
+    kind1: { fort: 'Крепость', palace: 'Дворец', mosque: 'Мечеть', bath: 'Баня', caravanserai: 'Караван-сарай', church: 'Церковь, храм', tomb: 'Мавзолей', museum: 'Музей', house: 'Дом, площадь', other: 'Другое' },
     stops: (n) => `${n} ${new Intl.PluralRules('ru').select(n) === 'one' ? 'остановка' : new Intl.PluralRules('ru').select(n) === 'few' ? 'остановки' : 'остановок'}`,
     km: (m, min) => `${(m / 1000).toFixed(1).replace('.', ',')} км, около ${min} мин пешком`,
     start: 'Начать', back: 'Назад', all: 'Все прогулки', prev: 'Назад', next: 'Дальше', of: (i, n) => `${i} из ${n}`,
@@ -37,8 +37,8 @@ const T = {
     walls: 'Крепостные стены', me: 'Где я',
     note: 'Тексты об остановках прогулок написаны нами по статьям Википедии; у остальных мест — начало статьи Википедии (CC BY-SA), фото — с Wikimedia Commons, названия — из Викиданных, улицы и места — из OpenStreetMap. Прогулки идут по улицам; время — при 4,5 км/ч, без остановок.' },
   en: { walks: 'Walks', places: 'All places', section: 'Walks',
-    kinds: { fort: 'Walls, gates, towers', palace: 'Palaces', mosque: 'Mosques', bath: 'Bathhouses', caravanserai: 'Caravanserais', church: 'Churches, temples', museum: 'Museums', house: 'Houses, squares', other: 'Other places' },
-    kind1: { fort: 'Fortress', palace: 'Palace', mosque: 'Mosque', bath: 'Bathhouse', caravanserai: 'Caravanserai', church: 'Church, temple', museum: 'Museum', house: 'House, square', other: 'Other' },
+    kinds: { fort: 'Walls, gates, towers', palace: 'Palaces', mosque: 'Mosques', bath: 'Bathhouses', caravanserai: 'Caravanserais', church: 'Churches, temples', tomb: 'Mausoleums', museum: 'Museums', house: 'Houses, squares', other: 'Other places' },
+    kind1: { fort: 'Fortress', palace: 'Palace', mosque: 'Mosque', bath: 'Bathhouse', caravanserai: 'Caravanserai', church: 'Church, temple', tomb: 'Mausoleum', museum: 'Museum', house: 'House, square', other: 'Other' },
     stops: (n) => `${n} stops`, km: (m, min) => `${(m / 1000).toFixed(1)} km, about ${min} min on foot`,
     start: 'Start', back: 'Back', all: 'All walks', prev: 'Previous', next: 'Next', of: (i, n) => `${i} of ${n}`,
     wiki: 'Wikipedia', wikidata: 'Wikidata', route: 'Directions', photo: 'Photo', from: (l) => `Wikipedia, from the ${{ az: 'Azerbaijani', ru: 'Russian', en: 'English' }[l]} article`, fromWiki: 'From Wikipedia',
@@ -242,8 +242,10 @@ addEventListener('keydown', (e) => {
 // ---- Legend: the walls, and an old plan under the streets where the city has one
 function drawLegend() {
   const el = document.getElementById('legend');
-  el.innerHTML = `<div><svg viewBox="0 0 36 12"><rect x="1" y="1" width="34" height="10" fill="${css('--accent')}" fill-opacity=".08" stroke="${css('--ink')}" stroke-opacity=".55" stroke-width="1.5"/></svg><span class="k">${t('walls')}</span></div>` +
+  // the walls only where the city has an outline (Gəncə's are gone); the legend hides when it has nothing
+  el.innerHTML = (site?.outline ? `<div><svg viewBox="0 0 36 12"><rect x="1" y="1" width="34" height="10" fill="${css('--accent')}" fill-opacity=".08" stroke="${css('--ink')}" stroke-opacity=".55" stroke-width="1.5"/></svg><span class="k">${t('walls')}</span></div>` : '') +
     (plan ? `<label class="toggle"><input type="checkbox" id="plan" ${map.getLayer('ish-plan') && map.getLayoutProperty('ish-plan', 'visibility') === 'visible' ? 'checked' : ''}> ${esc(L(CITY.underlay.label))}</label>` : '');
+  el.hidden = !el.innerHTML;
   el.querySelector('#plan')?.addEventListener('change', (e) => map.setLayoutProperty('ish-plan', 'visibility', e.target.checked ? 'visible' : 'none'));
 }
 addEventListener('themechange', () => setTimeout(drawLegend, 60));
