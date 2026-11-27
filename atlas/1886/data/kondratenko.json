@@ -1,0 +1,50 @@
+{
+ "baku": {
+  "image": "kondratenko-baku.webp",
+  "coordinates": [
+   [
+    47.42841,
+    41.87555
+   ],
+   [
+    50.42877,
+    41.87555
+   ],
+   [
+    50.42877,
+    38.3447
+   ],
+   [
+    47.42841,
+    38.3447
+   ]
+  ],
+  "source": "prlib.ru 768136, prlib-768136-p12.jpg",
+  "points": 55,
+  "looKmMedian": 1.43
+ },
+ "elisavetpol": {
+  "image": "kondratenko-elisavetpol.webp",
+  "coordinates": [
+   [
+    44.67476,
+    41.54915
+   ],
+   [
+    48.3136,
+    41.54915
+   ],
+   [
+    48.3136,
+    38.78396
+   ],
+   [
+    44.67476,
+    38.78396
+   ]
+  ],
+  "source": "prlib.ru 768136, prlib-768136-p14.jpg",
+  "points": 59,
+  "looKmMedian": 2.14
+ }
+}

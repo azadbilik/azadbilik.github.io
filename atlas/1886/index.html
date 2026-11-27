@@ -20,6 +20,8 @@
   .seg { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--rule); border-radius: 3px; padding: 2px; }
   .seg button { padding: .35rem .4rem; border-radius: 2px; font-size: .8125rem; color: var(--muted); }
   .seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+  .check { display: flex; align-items: center; gap: .5rem; font-size: .8125rem; color: var(--muted); cursor: pointer; }
+  .check input { accent-color: var(--accent); }
   .find { position: relative; }
   .find input { width: 100%; padding: .45rem .6rem; border: 1px solid var(--rule); border-radius: 3px; background: transparent; color: var(--ink); font: inherit; font-size: .875rem; }
   .find ul { list-style: none; position: absolute; z-index: 3; left: 0; right: 0; top: calc(100% + 2px); background: var(--paper); border: 1px solid var(--rule); border-radius: 3px; max-height: 16rem; overflow: auto; }
@@ -68,6 +70,7 @@
   <div class="body" id="body">
     <div class="controls">
       <div class="seg" role="group" id="by"></div>
+      <label class="check"><input type="checkbox" id="kond"> <span id="kondLabel"></span></label>
       <div class="find"><input type="search" id="q" autocomplete="off" spellcheck="false"><ul id="hits" hidden></ul></div>
     </div>
     <div id="side" aria-live="polite"></div>
@@ -126,17 +129,17 @@ const G = {
   },
 };
 const T = {
-  az: { doc: '1886: kəndlər · Azad Bilik', title: '1886: kəndlər', sub: 'Ailə siyahılarında hər kənd', people: 'Xalqlar', faith: 'Dinlər', estate: 'Silklər', find: 'Kənd axtar…',
+  az: { doc: '1886: kəndlər · Azad Bilik', title: '1886: kəndlər', sub: 'Ailə siyahılarında hər kənd', people: 'Xalqlar', faith: 'Dinlər', estate: 'Silklər', find: 'Kənd axtar…', kond: 'Kondratenkonun etnoqrafik xəritəsi (1886 siyahılarından)',
     area: (v) => `${v} kənd və 9 şəhər · Bakı və Yelizavetpol quberniyaları`, persons: 'nəfər', households: 'tüstü', top: 'Ən böyük', share: 'payı', of: 'kəndin əhalisi',
     back: '← Hamısı', society: 'icma', uezd: 'qəza', town: 'şəhər', today: 'Bu gün', approx: 'Yeri təxminidir: icmasının ortasında göstərilib.', unplacedN: (n, p) => `Xəritədə yoxdur: ${n} kənd (${p} nəfər) — yerləri hələ tapılmayıb.`,
     src: 'Mənbə', spread: (n) => `«Свод», ${n}-ci səhifə cütü`, villages: 'kənd', where: 'Ən çox yaşadığı kəndlər', ringNote: 'halqa — yeri təxmini', sizeNote: 'ölçü — əhali',
     note: 'Rəqəmlər «Свод статистических данных о населении Закавказского края, извлечённых из посемейных списков 1886 г.» kitabındandır (Tiflis, 1893; RDK, 01005403186): hər kəndin tüstüsü, kişi və qadınları, xalqlara, dinlərə və silklərə görə. Cədvəllər bu sayt üçün səhifə-səhifə köçürülüb, hər sətir öz cəmi və icmasının cəmi ilə yoxlanılıb; kitabın öz hesab səhvləri olduğu kimi saxlanılıb. Kəndlərin yeri GeoNames, OpenStreetMap və Vikidata ilə adlarına görə, 1897-ci il qəza sərhədləri daxilində tapılıb; bəzi kəndlər bu gün başqa ad daşıyır və ya artıq yoxdur. «Tatarlar» o dövrün rəsmi adı ilə azərbaycanlılardır.' },
-  ru: { doc: '1886: селения · Azad Bilik', title: '1886: селения', sub: 'Каждое селение в посемейных списках', people: 'Народы', faith: 'Вероисп.', estate: 'Сословия', find: 'Найти селение…',
+  ru: { doc: '1886: селения · Azad Bilik', title: '1886: селения', sub: 'Каждое селение в посемейных списках', people: 'Народы', faith: 'Вероисп.', estate: 'Сословия', find: 'Найти селение…', kond: 'Этнографическая карта Кондратенко (по спискам 1886 г.)',
     area: (v) => `${v} селений и 9 городов · Бакинская и Елисаветпольская губернии`, persons: 'чел.', households: 'дымов', top: 'Крупнейший', share: 'доля', of: 'населения селения',
     back: '← Все', society: 'сельское общество', uezd: 'уезд', town: 'город', today: 'Сегодня', approx: 'Место приблизительное: показано в середине его сельского общества.', unplacedN: (n, p) => `Не на карте: ${n} селений (${p} чел.) — их место пока не найдено.`,
     src: 'Источник', spread: (n) => `«Свод», разворот ${n}`, villages: 'селений', where: 'Где их больше всего', ringNote: 'кольцо — место приблизительное', sizeNote: 'размер — население',
     note: 'Цифры — «Свод статистических данных о населении Закавказского края, извлечённых из посемейных списков 1886 г.» (Тифлис, 1893; РГБ, 01005403186): дымы, мужчины и женщины каждого селения по народностям, вероисповеданиям и сословиям. Таблицы переписаны для этого сайта разворот за разворотом, каждая строка проверена по своим итогам и итогам общества; арифметические ошибки самой книги оставлены как напечатано. Селения найдены по названию в GeoNames, OpenStreetMap и Викиданных внутри уездов 1897 г.; часть селений сегодня называется иначе или исчезла. «Татары» — официальное название азербайджанцев того времени.' },
-  en: { doc: 'Villages, 1886 · Azad Bilik', title: 'Villages, 1886', sub: 'Every village in the family lists', people: 'Peoples', faith: 'Faiths', estate: 'Estates', find: 'Find a village…',
+  en: { doc: 'Villages, 1886 · Azad Bilik', title: 'Villages, 1886', sub: 'Every village in the family lists', people: 'Peoples', faith: 'Faiths', estate: 'Estates', find: 'Find a village…', kond: "Kondratenko's ethnographic map (from the 1886 lists)",
     area: (v) => `${v} villages and 9 towns · the Baku and Elisabethpol governorates`, persons: 'people', households: 'households', top: 'Largest', share: 'share', of: 'of the village',
     back: '← All', society: 'rural society', uezd: 'uezd', town: 'town', today: 'Today', approx: 'Approximate place: shown in the middle of its rural society.', unplacedN: (n, p) => `Not on the map: ${n} villages (${p} people) whose place is not yet found.`,
     src: 'Source', spread: (n) => `«Svod», spread ${n}`, villages: 'villages', where: 'Where most lived', ringNote: 'ring: approximate place', sizeNote: 'size: population',
@@ -148,6 +151,7 @@ const gcol = (by, k) => (G[by][k] ?? G[by].other)[0];
 const KEY = { people: 'p', faith: 'f', estate: 'e' }, TOP = { people: 'tp', faith: 'tf', estate: 'te' };
 const pct = (n, d) => { const v = n / d * 100; return `${v < 10 ? v.toFixed(1) : Math.round(v)}%`; };
 const params = new URLSearchParams(location.search);
+let kond = params.get('k') === '1';
 let by = ['faith', 'estate'].includes(params.get('by')) ? params.get('by') : 'people', one = params.get('g'), sel = null, feats = [], summary = null, uezds = null;
 const BOUNDS = [[44.7, 38.3], [50.5, 41.95]];
 const SEQ = () => dark ? ['#4A2C24', '#6B3129', '#8E3430', '#B33A37', '#D45A55', '#F08A80'] : ['#EACAB6', '#E0A88E', '#D2836A', '#BF5C48', '#A6362E', '#7A1B1E'];
@@ -180,6 +184,11 @@ map.on('load', async () => {
   const firstSymbol = map.getStyle().layers.find((l) => l.type === 'symbol')?.id;
   map.addSource('uezds', { type: 'geojson', data: uezds });
   map.addSource('v', { type: 'geojson', data: geo });
+  const KJ = await fetch('data/kondratenko.json').then((r) => r.json());
+  for (const [k, v] of Object.entries(KJ)) {
+    map.addSource(`k-${k}`, { type: 'image', url: `data/${v.image}`, coordinates: v.coordinates });
+    map.addLayer({ id: `k-${k}`, type: 'raster', source: `k-${k}`, layout: { visibility: kond ? 'visible' : 'none' }, paint: { 'raster-opacity': .8, 'raster-fade-duration': 0 } }, firstSymbol);
+  }
   map.addLayer({ id: 'uezds', type: 'line', source: 'uezds', paint: { 'line-color': css('--ink'), 'line-width': .8, 'line-opacity': .35 } }, firstSymbol);
   const r = ['interpolate', ['exponential', 1.6], ['zoom'], 6, ['max', 1.2, ['*', .06, ['sqrt', ['get', 't']]]], 9, ['max', 2.5, ['*', .2, ['sqrt', ['get', 't']]]], 12, ['max', 5, ['*', .5, ['sqrt', ['get', 't']]]]];
   map.addLayer({ id: 'v', type: 'circle', source: 'v', layout: { 'circle-sort-key': ['-', ['get', 't']] }, paint: {
@@ -226,6 +235,8 @@ function drawControls() {
   el.innerHTML = ['people', 'faith', 'estate'].map((m) => `<button type="button" data-by="${m}" aria-pressed="${m === by}">${t(m)}</button>`).join('');
   el.querySelectorAll('button').forEach((b) => b.onclick = () => { by = b.dataset.by; one = null; draw(); });
   document.getElementById('q').placeholder = t('find');
+  document.getElementById('kondLabel').textContent = t('kond');
+  document.getElementById('kond').checked = kond;
 }
 function drawLegend() {
   const el = document.getElementById('legend');
@@ -272,6 +283,11 @@ function drawSide() {
   el.querySelectorAll('[data-g]').forEach((b) => b.onclick = () => { one = one === b.dataset.g ? null : b.dataset.g; draw(); });
   el.querySelectorAll('[data-v]').forEach((b) => b.onclick = () => { const f = feats[+b.dataset.v]; select(f.id); fly(f); });
 }
+document.getElementById('kond').onchange = (e) => {
+  kond = e.target.checked;
+  for (const id of ['k-baku', 'k-elisavetpol']) if (map.getLayer(id)) map.setLayoutProperty(id, 'visibility', kond ? 'visible' : 'none');
+  keepUrl();
+};
 const q = document.getElementById('q'), hits = document.getElementById('hits');
 const fold = (s) => s.toLowerCase().replace(/ъ(?=\b|$)/g, '').replace(/[ъ]/g, '').replace(/і/g, 'и').replace(/ѣ/g, 'е').replace(/ё/g, 'е');
 q.oninput = () => {
@@ -287,6 +303,7 @@ function keepUrl() {
   if (lang !== 'az') u.set('lang', lang);
   if (by !== 'people') u.set('by', by);
   if (one) u.set('g', one);
+  if (kond) u.set('k', '1');
   if (sel != null) u.set('v', feats[sel].properties.n);
   history.replaceState(null, '', `${location.pathname}${u.size ? '?' + u : ''}`);
 }

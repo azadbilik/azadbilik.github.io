@@ -31,6 +31,12 @@ Result: 1,815 of 2,700 villages placed by name or by their society (67%), 577 ap
 
 Placements were spot-checked, not checked one by one. Where a village shares its name with another nearby, the society rule usually picks right but not always; corrections are welcome.
 
+## Kondratenko's maps
+
+The page can show, under the dots, E. Kondratenko's ethnographic maps of the Baku and Elisabethpol governorates (supplement to the Zapiski of the Caucasus Section of the Russian Geographical Society, vol. XVIII; drawn from the same 1886 family lists; Presidential Library, [item 768136](https://www.prlib.ru/item/768136), sheets 12 and 14; public domain). Rural societies are coloured by people in the map's own colours; its legend and bar charts are left out (the full sheets are in the archive).
+
+They were placed by village dots on the sheets read against villages already placed by name (`data/raw/kondratenko-gcp-<sheet>.json`): Baku 55 points, Elisabethpol 59; a second-order polynomial; left out one at a time a point misses by 1.4 km (Baku) and 2.1 km (Elisabethpol) at the median, up to ~5 km in the eastern Elisabethpol lowland. The Baku sheet is drawn with north to the left. `python3 scripts/kondratenko.py` writes `data/kondratenko-<sheet>.webp`, `data/kondratenko.json` (corners) and `data/raw/kondratenko-gcps.json` (the fit, each point's error, the points dropped).
+
 ## Licences
 
 The book is public domain; the transcription and the CSVs are CC0. Place candidates: GeoNames (CC BY 4.0), OpenStreetMap (ODbL — the coordinates in `geocode-1886.csv` taken from OSM are under ODbL), Wikidata (CC0). Uezd boundaries: RISTAT (CC0, cite RISTAT).
