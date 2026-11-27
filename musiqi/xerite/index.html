@@ -173,6 +173,7 @@
   .plist .more a { color: var(--muted); text-decoration: none; }
   .plist .more button { color: var(--accent); }
   .plist .more a:hover { color: var(--accent); }
+  .plist .more a.go { color: var(--ink); font-weight: 600; }
   .plist .on .n { color: var(--accent); }
   .pulse { width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--accent); animation: pulse 1.4s ease-out infinite; pointer-events: none; }
   @keyframes pulse { from { transform: scale(.6); opacity: 1; } to { transform: scale(2.2); opacity: 0; } }
@@ -307,7 +308,7 @@ const still = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 const LANGS = ['az', 'ru', 'en'];
 let lang = LANGS.includes(document.documentElement.lang) ? document.documentElement.lang : 'az';
 const T = {
-  az: { doc: 'Musiqi xəritəsi · Azad Bilik', title: 'Musiqi', sub: 'İlk səs yazıları, 1902-dən', library: 'Kitabxana', gallery: 'Qalereya', maps: 'Ədəbi xəritələr', atlas: 'Atlas',
+  az: { doc: 'Musiqi xəritəsi · Azad Bilik', inPlayer: 'Pleyerdə →', title: 'Musiqi', sub: 'İlk səs yazıları, 1902-dən', library: 'Kitabxana', gallery: 'Qalereya', maps: 'Ədəbi xəritələr', atlas: 'Atlas',
     recs: 'Səs yazıları', people: 'Musiqiçilər', mughams: 'Muğamlar', all: 'Hamısı',
     mugham: 'Muğamlar', tesnif: 'Təsniflər', song: 'Mahnılar', instrumental: 'Alətlə', one: { mugham: 'muğam', tesnif: 'təsnif', song: 'mahnı', instrumental: 'alətlə' },
     khanende: 'xanəndə', tar: 'tarzən', ashik: 'aşıq', unknown: 'İfaçısı bilinmir', play: 'Dinlə', pause: 'Dayandır', prev: 'Əvvəlki', next: 'Sonrakı', position: 'Yer', toTop: 'Yuxarı, pleyerə',
@@ -318,7 +319,7 @@ const T = {
     listen: (n) => `▶ ${n} səs yazısı`, poems: 'şeirləri kitabxanada ↗', alsoLit: 'ədəbiyyat xəritəsində →', byHand: 'yer əl ilə', withRecs: 'səs yazısı var', mapLabel: 'Musiqiçilərin xəritəsi',
     discs: (n) => `${n} disk`, noPlace: 'Doğulduğu yer bilinmir',
     note: 'Səs yazıları Wikimedia Commons-dandır, hamısı ictimai mülkiyyətdədir: Azərbaycanda 1976-dan əvvəlki yazılar sərbəstdir. Mahnının sözləri hələ qəzəllərə bağlanmayıb. Musiqiçilər, doğulduqları yerlər və portretlər Wikidata-dandır.' },
-  ru: { doc: 'Карта музыки · Azad Bilik', title: 'Музыка', sub: 'Первые записи, с 1902 года', library: 'Библиотека', gallery: 'Галерея', maps: 'Литературные карты', atlas: 'Атлас',
+  ru: { doc: 'Карта музыки · Azad Bilik', inPlayer: 'В плеере →', title: 'Музыка', sub: 'Первые записи, с 1902 года', library: 'Библиотека', gallery: 'Галерея', maps: 'Литературные карты', atlas: 'Атлас',
     recs: 'Записи', people: 'Музыканты', mughams: 'Мугамы', all: 'Все',
     mugham: 'Мугамы', tesnif: 'Теснифы', song: 'Песни', instrumental: 'Инструментальные', one: { mugham: 'мугам', tesnif: 'тесниф', song: 'песня', instrumental: 'инструментальная' },
     khanende: 'ханенде', tar: 'тарист', ashik: 'ашуг', unknown: 'Исполнитель неизвестен', play: 'Слушать', pause: 'Пауза', prev: 'Предыдущая', next: 'Следующая', position: 'Позиция', toTop: 'Наверх, к плееру',
@@ -329,7 +330,7 @@ const T = {
     listen: (n) => `▶ записей: ${n}`, poems: 'стихи в библиотеке ↗', alsoLit: 'на литературной карте →', byHand: 'место указано вручную', withRecs: 'есть записи', mapLabel: 'Карта музыкантов',
     discs: (n) => `пластинок: ${n}`, noPlace: 'Место рождения неизвестно',
     note: 'Записи — с Викисклада, все в общественном достоянии: в Азербайджане записи до 1976 года свободны. Тексты песен ещё не связаны с газелями. Музыканты, места рождения и портреты — по Викиданным.' },
-  en: { doc: 'Music map · Azad Bilik', title: 'Music', sub: 'The first recordings, from 1902', library: 'Library', gallery: 'Gallery', maps: 'Literary maps', atlas: 'Atlas',
+  en: { doc: 'Music map · Azad Bilik', inPlayer: 'In the player →', title: 'Music', sub: 'The first recordings, from 1902', library: 'Library', gallery: 'Gallery', maps: 'Literary maps', atlas: 'Atlas',
     recs: 'Recordings', people: 'Musicians', mughams: 'Mughams', all: 'All',
     mugham: 'Mughams', tesnif: 'Tasnifs', song: 'Songs', instrumental: 'Instrumental', one: { mugham: 'mugham', tesnif: 'tasnif', song: 'song', instrumental: 'instrumental' },
     khanende: 'khanende', tar: 'tar player', ashik: 'ashik', unknown: 'Performer unknown', play: 'Play', pause: 'Pause', prev: 'Previous', next: 'Next', position: 'Position', toTop: 'Back to the player',
@@ -407,7 +408,7 @@ const miniPulse = pulseOn(), bigPulse = pulseOn();
 const tip = new maplibregl.Popup({ closeButton: false, closeOnClick: false, offset: 10 });
 
 const ready = (m) => new Promise((ok) => m.loaded() ? ok() : m.once('load', ok));
-Promise.all([...['recordings.json', 'musicians.json', 'mugham.json'].map((f) => fetch(`../data/${f}`).then((r) => r.json())), ready(mini), ready(map), MQL.load()]).then(([r, p, m]) => {
+Promise.all([...['recordings.json', 'musicians.json', 'mugham.json'].map((f) => fetch(`../data/${f}`).then((r) => r.json())), ready(mini), ready(map), MQL.load(), fetch('../data/playable.json').then((r) => r.json()).then((q) => { q.forEach((x) => playable.add(x)); }).catch(() => {})]).then(([r, p, m]) => {
   recs = r; people = p; mugham = m;
   byQid = new Map(people.map((x) => [x.qid, x]));
   for (const x of people) {
@@ -602,6 +603,8 @@ function showPlace(id, qid, scroll) {
   map.easeTo({ center: [pl.lng, pl.lat], zoom: Math.max(map.getZoom(), 7), duration: still() ? 0 : 700 });
   drawPeople(qid);
 }
+// musicians with a page in the player (../, data/playable.json from scripts/listen-build.mjs)
+const playable = new Set();
 function drawPeople(qid) {
   if (!people.length) return;
   const recd = people.filter((p) => recsOf(p.qid).length).length;
@@ -613,7 +616,7 @@ function drawPeople(qid) {
   back.onclick = () => { place = null; mark(); drawPeople(); map.fitBounds(BOUNDS, { padding: 40, duration: still() ? 0 : 700 }); };
   document.getElementById('plist').innerHTML = list.map((p) => {
     const n = recsOf(p.qid).length;
-    const more = [n ? `<button type="button" data-listen="${p.qid}">${t('listen')(n)}</button>` : '', p.kitabxana ? `<a href="${KX()}/authors/${p.kitabxana}">${t('poems')}</a>` : '', litSlug.has(p.qid) ? `<a href="/xerite/?author=${litSlug.get(p.qid)}${lang === 'az' ? '' : '&lang=' + lang}">${t('alsoLit')}</a>` : '', MQL.links(p.qid)].filter(Boolean).join('');
+    const more = [playable.has(p.qid) ? `<a class="go" href="../${lang === 'az' ? '' : '?lang=' + lang}#/a/${p.qid}">${t('inPlayer')}</a>` : '', n ? `<button type="button" data-listen="${p.qid}">${t('listen')(n)}</button>` : '', p.kitabxana ? `<a href="${KX()}/authors/${p.kitabxana}">${t('poems')}</a>` : '', litSlug.has(p.qid) ? `<a href="/xerite/?author=${litSlug.get(p.qid)}${lang === 'az' ? '' : '&lang=' + lang}">${t('alsoLit')}</a>` : '', MQL.links(p.qid)].filter(Boolean).join('');
     const pv = MQL.A[p.qid]?.pv?.length ? `<details class="lsn-rec"><summary>${MQL.T[lang].listen} <span class="lsn-mark">Apple Music</span></summary>${MQL.previews(p.qid)}</details>` : '';
     return `<li${p.qid === qid ? ' class="on"' : ''}><button type="button" class="p" data-p="${p.qid}"><span class="n">${esc(L(p))}</span><span class="y">${years(p)}</span><span class="r">${p.roles.map((x) => t(x)).join(', ')}${pl ? '' : ` · ${esc(L(p.place))}`}${p.byHand ? ` (${t('byHand')})` : ''}</span></button>${more ? `<div class="more">${more}</div>` : ''}${pv}</li>`;
   }).join('');

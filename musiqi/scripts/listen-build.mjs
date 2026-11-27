@@ -200,6 +200,8 @@ const out = { built: new Date().toISOString().slice(0, 10), artists: A, works: W
 const PRE = [[/https:\/\/audio-ssl\.itunes\.apple\.com\/itunes-assets\//g, '~a/'], [/https:\/\/is(\d)-ssl\.mzstatic\.com\/image\/thumb\//g, '~i$1/'], [/https:\/\/music\.apple\.com\//g, '~m/'], [/https:\/\/upload\.wikimedia\.org\/wikipedia\/commons\//g, '~u/'], [/https:\/\/commons\.wikimedia\.org\/wiki\//g, '~c/']];
 let json = JSON.stringify(out); for (const [re, t] of PRE) json = json.replace(re, t);
 await writeFile(R('../data/catalog.json'), json);
+// who has a page in the player, for the map's cards (xerite/), so it need not load the whole catalogue
+await writeFile(R('../data/playable.json'), JSON.stringify(A.map((a) => a.q)));
 console.log(Math.round(json.length / 1024), 'KB');
 const st = (f) => A.filter(f).length;
 console.log('artists', A.length, 'tracks', A.reduce((s, a) => s + a.t.length, 0), 'free', A.reduce((s, a) => s + a.t.filter((t) => t[6] === 1).length, 0), 'albums', albums.length,
