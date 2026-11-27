@@ -12,7 +12,6 @@ MQ.lang = (() => {
 // boot(T, render): T = { az: {...}, ru: {...}, en: {...} }; [data-i18n] gets T[lang][key] as text, [data-i18n-html] as HTML; render() runs after every language change
 MQ.boot = (T, render) => {
   MQ.T = T;
-  const topEl = document.getElementById('top'); if (topEl) topEl.innerHTML = MQ.top();
   MQ.t = (k, ...a) => { const v = T[MQ.lang][k] ?? T.az[k]; return typeof v === 'function' ? v(...a) : v; };
   const apply = () => {
     const lang = MQ.lang;
@@ -41,7 +40,6 @@ MQ.audio = (items, tt) => items.map((r) => `<div class="card"><h3>${esc(r.title[
 MQ.YT = {};
 MQ.ytRow = (q) => { const y = MQ.YT[q]; return y ? `<dt>YouTube</dt><dd><a href="${esc(y.url)}" rel="noopener">YouTube</a><span class="tag">${y.src === 'wikidata' ? 'Wikidata P2397' : '?'}</span></dd>` : ''; };
 MQ.loadYT = () => fetch('/musiqi/data/youtube.json').then((r) => r.json()).then((d) => { MQ.YT = d; }).catch(() => {});
-MQ.top = (here) => `<div class="top"><a class="brand" href="/" data-keep-lang><svg viewBox="0 0 512 512" aria-hidden="true"><g class="star"><rect x="126" y="126" width="260" height="260"/><polygon points="256,72 440,256 256,440 72,256"/></g><polygon class="gem" points="256,196 316,256 256,316 196,256"/></svg>Azad Bilik</a><nav><a href="/musiqi/" data-keep-lang data-i18n="music">Musiqi</a><span class="langs" role="group" aria-label="Dil · Язык · Language"><button type="button" data-lang="az">AZ</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="en">EN</button></span></nav></div>`;
 
 // Timeline: items on lanes along a year axis. item = { id, lane, x0, x1?, label, sub?, color, dim? }; x1 makes a bar. Labels are packed into tracks so they do not overlap.
 MQ.timeline = (el, o) => {

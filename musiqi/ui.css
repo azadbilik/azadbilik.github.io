@@ -10,13 +10,6 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
 [hidden] { display: none !important; }
 .wrap { max-width: 64rem; margin: 0 auto; padding: 0 1.5rem; }
-.top { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1.25rem 0 0; }
-.top nav { display: flex; align-items: center; gap: 1rem; font-size: .8125rem; color: var(--muted); flex-wrap: wrap; justify-content: flex-end; }
-.brand { display: inline-flex; align-items: center; gap: .5rem; font-size: .8125rem; font-weight: 600; text-decoration: none; white-space: nowrap; }
-.brand svg { width: 1rem; height: 1rem; } .star { fill: currentColor; } .gem { fill: var(--accent); }
-.langs { display: inline-flex; align-items: center; gap: .15rem; }
-.langs button[data-lang] { font-size: .6875rem; letter-spacing: .04em; padding: .1rem .3rem; border-radius: 2px; }
-.langs button[aria-pressed="true"] { color: var(--ink); box-shadow: inset 0 -1px currentColor; }
 header.head { padding-bottom: 1.5rem; border-bottom: 1px solid var(--rule); }
 h1 { margin-top: 1.25rem; font: 400 clamp(2rem, 6vw, 3rem)/1.1 var(--serif); letter-spacing: -.02em; }
 .sub { margin-top: .35rem; font: italic 300 1.0625rem/1.35 var(--serif); }

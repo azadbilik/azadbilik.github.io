@@ -16,12 +16,16 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="/fonts/fonts.css">
 <link rel="stylesheet" href="/shared/core.css">
+<link rel="stylesheet" href="/shared/hub.css">
+<script>
+  (() => { const L = ['az', 'ru', 'en']; let l = new URLSearchParams(location.search).get('lang'); if (!L.includes(l)) { try { l = localStorage.getItem('lang'); } catch {} } if (L.includes(l)) document.documentElement.lang = l; })();
+</script>
 <link rel="stylesheet" href="../ui.css">
 </head>
 <body>
+<header class="hub-header"></header><script src="/shared/header.js"></script>
 <div class="wrap">
   <header class="head">
-    <div id="top"></div>
     <h1 data-i18n="title">Estrada</h1>
     <p class="sub" data-i18n="sub">Sovet dövrü müğənniləri</p>
     <p class="lede" id="lede"></p>
