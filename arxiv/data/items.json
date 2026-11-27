@@ -537,6 +537,48 @@
    "ratio": 0.705
   },
   {
+   "id": "xemse-tehran-1845",
+   "c": "kitab",
+   "ia": true,
+   "az": "Nizami Gəncəvi, «Xəmsə» (daşbasma, əl ilə rənglənmiş miniatürlərlə)",
+   "ru": "Низами Гянджеви, «Хамсе» (литография, с раскрашенными от руки миниатюрами)",
+   "en": "Nizami Ganjavi, «Khamsa» (lithograph, with hand-coloured miniatures)",
+   "date": "1845",
+   "place": {
+    "az": "Tehran",
+    "ru": "Тегеран",
+    "en": "Tehran"
+   },
+   "lang": "fa",
+   "holder": "rgb",
+   "cipher": "ЗВ 17-14/125",
+   "url": "https://kp.rusneb.ru/item/material/khmsh-nzmy-khtybh-nsrllh-tfrshy",
+   "n": 0,
+   "total": 597,
+   "ratio": 0.667
+  },
+  {
+   "id": "xemse-tehran-1848",
+   "c": "kitab",
+   "ia": true,
+   "az": "Nizami Gəncəvi, «Xəmsə» (daşbasma)",
+   "ru": "Низами Гянджеви, «Хамсе» (литография)",
+   "en": "Nizami Ganjavi, «Khamsa» (lithograph)",
+   "date": "1848",
+   "place": {
+    "az": "Tehran",
+    "ru": "Тегеран",
+    "en": "Tehran"
+   },
+   "lang": "fa",
+   "holder": "rgb",
+   "cipher": "ЗВ 17-2/74",
+   "url": "https://kp.rusneb.ru/item/material/khmsh-nzmy",
+   "n": 0,
+   "total": 337,
+   "ratio": 0.633
+  },
+  {
    "id": "sahname-tebriz-1858",
    "c": "kitab",
    "ia": true,
@@ -582,6 +624,35 @@
    "n": 0,
    "total": 487,
    "ratio": 1.45
+  },
+  {
+   "id": "siyahiyaalma-1926-zsfsr",
+   "c": "statistika",
+   "ia": true,
+   "az": "1926-cı il Ümumittifaq siyahıyaalması, c. 14: Zaqafqaziya SFSR",
+   "ru": "Всесоюзная перепись населения 1926 года. Т. 14. Закавказская СФСР",
+   "en": "All-Union census of 1926, vol. 14: Transcaucasian SFSR",
+   "lang": "ru",
+   "holder": "prlib",
+   "url": "https://www.prlib.ru/item/1638904",
+   "n": 0,
+   "total": 259,
+   "ratio": 0.825
+  },
+  {
+   "id": "siyahiyaalma-1897-yelizavetpol",
+   "c": "statistika",
+   "ia": true,
+   "az": "1897-ci il Ümumi siyahıyaalma: Yelizavetpol quberniyası",
+   "ru": "Первая всеобщая перепись населения 1897 г.: Елисаветпольская губерния",
+   "en": "The 1897 census: Elisavetpol governorate",
+   "date": "1899–1905",
+   "lang": "ru",
+   "holder": "prlib",
+   "url": "https://www.prlib.ru/item/436598",
+   "n": 0,
+   "total": 204,
+   "ratio": 0.809
   }
  ]
 }

@@ -70,6 +70,16 @@
   .azv-info dl { display: grid; grid-template-columns: auto 1fr; gap: .2rem .75rem; font-size: .8125rem; }
   .azv-info dt { color: var(--muted); }
   .azv-info .src { display: flex; flex-direction: column; gap: .35rem; }
+  .card .ia.on { left: auto; right: .5rem; top: auto; bottom: .5rem; border-radius: 999px; background: rgb(0 0 0 / .55); color: #fff; font-size: .75rem; padding: .1rem .5rem; }
+  dialog.iab { width: min(100vw - 2rem, 72rem); height: min(100dvh - 2rem, 56rem); max-width: none; max-height: none; margin: auto; padding: 0; border: 1px solid var(--rule); border-radius: 4px; background: var(--paper); color: var(--ink); display: none; grid-template-rows: auto 1fr; }
+  dialog.iab[open] { display: grid; }
+  dialog.iab::backdrop { background: rgb(0 0 0 / .7); }
+  .iab header { display: flex; gap: 1rem; align-items: baseline; padding: .75rem 1rem; border-bottom: 1px solid var(--rule); }
+  .iab h2 { flex: 1; font: 400 1.0625rem/1.3 var(--serif); }
+  .iab header a, .iab header button { font-size: .8125rem; color: var(--muted); white-space: nowrap; }
+  .iab header a:hover, .iab header button:hover { color: var(--ink); }
+  .iab iframe { width: 100%; height: 100%; border: 0; background: #000; }
+  @media (max-width: 40rem) { dialog.iab { width: 100vw; height: 100dvh; border: 0; border-radius: 0; } .iab header { flex-wrap: wrap; } .iab h2 { flex-basis: 100%; } }
   @media (prefers-reduced-motion: reduce) { .card img { transition: none; } .card:hover img { transform: none; } }
 </style>
 </head>
@@ -88,6 +98,7 @@
     <p data-i18n="about2"></p>
   </div>
 </main>
+<dialog class="iab" aria-labelledby="iab-h"><header><h2 id="iab-h"></h2><a id="iab-src" target="_blank" rel="noopener"></a><a id="iab-ia" target="_blank" rel="noopener">archive.org ↗</a><button type="button" id="iab-x"></button></header><iframe title="Internet Archive BookReader" allowfullscreen></iframe></dialog>
 
 <script src="/shared/viewer.js"></script>
 <script>
@@ -100,17 +111,17 @@ const T = {
     sub: 'Azərbaycanla bağlı köhnə plakatlar, xəritələr, əlyazmalar və kitablar: ictimai mülkiyyətdəki skanlar, hər biri saxlandığı kitabxana və arxivlə.',
     about1: 'Burada yalnız müəllif hüququ bitmiş materiallar var. Hər skan onu saxlayan kitabxananın və ya arxivin adı və şifri ilə verilir; mənbəyə keçid aşağıdadır. Skanları mənbəni göstərməklə istifadə edin.',
     about2: 'Böyük kitablar (Nizaminin «Xəmsə»si, Firdovsinin «Şahnamə»si, 1886-cı il siyahıları) Internet Archive-ə yüklənir; o vaxta qədər onların kartında mənbəyə keçid var.',
-    pages: (n) => `${n} səh.`, ia: 'Internet Archive-də tezliklə', date: 'Tarix', place: 'Yer', lng: 'Dil', holder: 'Saxlanılır', cipher: 'Şifr', open: 'Mənbədə bax', via: 'skan', pd: 'İctimai mülkiyyət', close: 'Bağla', prev: 'Əvvəlki', next: 'Növbəti', loading: 'Yüklənir…', of: 'səhifə' },
+    pages: (n) => `${n} səh.`, ia: 'Internet Archive-də tezliklə', iaOn: 'Internet Archive', date: 'Tarix', place: 'Yer', lng: 'Dil', holder: 'Saxlanılır', cipher: 'Şifr', open: 'Mənbədə bax', via: 'skan', pd: 'İctimai mülkiyyət', close: 'Bağla', prev: 'Əvvəlki', next: 'Növbəti', loading: 'Yüklənir…', of: 'səhifə' },
   ru: { doc: 'Архив · Azad Bilik', title: 'Архив', all: 'Все',
     sub: 'Старые плакаты, карты, рукописи и книги об Азербайджане: сканы общественного достояния, у каждого — библиотека или архив, где он хранится.',
     about1: 'Здесь только материалы, вышедшие из-под авторского права. У каждого скана указаны хранящая его библиотека или архив и шифр; ссылка на источник — в карточке. Используйте сканы со ссылкой на источник.',
     about2: 'Большие книги («Хамсе» Низами, «Шахнаме» Фирдоуси, свод 1886 года) загружаются в Internet Archive; пока в их карточке — ссылка на источник.',
-    pages: (n) => `${n} с.`, ia: 'Скоро в Internet Archive', date: 'Дата', place: 'Место', lng: 'Язык', holder: 'Хранение', cipher: 'Шифр', open: 'Смотреть в источнике', via: 'скан', pd: 'Общественное достояние', close: 'Закрыть', prev: 'Назад', next: 'Вперёд', loading: 'Загрузка…', of: 'страница' },
+    pages: (n) => `${n} с.`, ia: 'Скоро в Internet Archive', iaOn: 'Internet Archive', date: 'Дата', place: 'Место', lng: 'Язык', holder: 'Хранение', cipher: 'Шифр', open: 'Смотреть в источнике', via: 'скан', pd: 'Общественное достояние', close: 'Закрыть', prev: 'Назад', next: 'Вперёд', loading: 'Загрузка…', of: 'страница' },
   en: { doc: 'Archive · Azad Bilik', title: 'Archive', all: 'All',
     sub: 'Old posters, maps, manuscripts and books about Azerbaijan: public-domain scans, each credited to the library or archive that holds it.',
     about1: 'Only material out of copyright is here. Every scan names the library or archive that holds it and its call number, with a link to the source. Please credit the source when you reuse a scan.',
     about2: "The big books (Nizami's «Khamsa», Ferdowsi's «Shahnameh», the 1886 tables) are going up on the Internet Archive; until then their cards link to the source.",
-    pages: (n) => `${n} pp.`, ia: 'Coming to the Internet Archive', date: 'Date', place: 'Place', lng: 'Language', holder: 'Held by', cipher: 'Call no.', open: 'View at the source', via: 'scan', pd: 'Public domain', close: 'Close', prev: 'Previous', next: 'Next', loading: 'Loading…', of: 'page' },
+    pages: (n) => `${n} pp.`, ia: 'Coming to the Internet Archive', iaOn: 'Internet Archive', date: 'Date', place: 'Place', lng: 'Language', holder: 'Held by', cipher: 'Call no.', open: 'View at the source', via: 'scan', pd: 'Public domain', close: 'Close', prev: 'Previous', next: 'Next', loading: 'Loading…', of: 'page' },
 };
 const LANGS = {
   ru: { az: 'rus', ru: 'русский', en: 'Russian' }, fa: { az: 'fars', ru: 'персидский', en: 'Persian' }, az: { az: 'Azərbaycan', ru: 'азербайджанский', en: 'Azerbaijani' },
@@ -138,7 +149,21 @@ function info(it, i, n) {
     `<p class="m">${t('pd')}</p>`;
 }
 
+const iab = document.querySelector('dialog.iab');
+iab.querySelector('#iab-x').onclick = () => iab.close();
+iab.addEventListener('close', () => { iab.querySelector('iframe').src = 'about:blank'; const q = new URLSearchParams(location.search); q.delete('i'); history.replaceState(null, '', q.size ? `?${q}` : location.pathname); });
+function openBook(it) {
+  const q = new URLSearchParams(location.search); q.set('i', it.id); history.replaceState(null, '', `?${q}`);
+  iab.querySelector('h2').textContent = it[lang] || it.az;
+  Object.assign(iab.querySelector('#iab-src'), { href: it.url, textContent: `${loc(data.holders[it.holder])} ↗` });
+  iab.querySelector('#iab-ia').href = `https://archive.org/details/${encodeURIComponent(it.ia)}`;
+  iab.querySelector('#iab-x').textContent = t('close');
+  iab.querySelector('iframe').src = `https://archive.org/embed/${encodeURIComponent(it.ia)}`;
+  iab.showModal();
+}
+
 function openItem(it, page = 0) {
+  if (typeof it.ia === 'string') { openBook(it); return; }
   if (!it.n) { window.open(it.url, '_blank', 'noopener'); return; }
   const list = Array.from({ length: it.n }, (_, k) => ({ it, k }));
   const q = new URLSearchParams(location.search); q.set('i', it.id); history.replaceState(null, '', `?${q}`);
@@ -161,7 +186,7 @@ function draw() {
     `<section class="col" aria-labelledby="h-${c.id}"><h2 id="h-${c.id}">${esc(c[lang])}</h2><div class="grid">` +
     items.filter((x) => x.c === c.id).map((it) =>
       `<button type="button" class="card" data-id="${it.id}"><span class="pic${it.ratio > 1.15 ? ' wide' : ''}"><img src="img/${it.id}/t.webp" alt="" loading="lazy" decoding="async">` +
-      (it.n > 1 ? `<span class="n">${t('pages')(it.n)}</span>` : '') + (it.ia ? `<span class="ia">${t('ia')}</span>` : '') +
+      (it.n > 1 ? `<span class="n">${t('pages')(it.n)}</span>` : '') + (typeof it.ia === 'string' ? `<span class="ia on">${t('iaOn')} · ${t('pages')(it.total)}</span>` : it.ia ? `<span class="ia">${t('ia')}</span>` : '') +
       `</span><h3>${esc(it[lang] || it.az)}</h3><span class="m">${esc(meta(it))}<br>${esc(loc(data.holders[it.holder]))}</span></button>`).join('') +
     `</div></section>`).join('');
 }
