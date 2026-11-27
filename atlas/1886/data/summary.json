@@ -1,0 +1,359 @@
+{
+ "people": {
+  "tatar": 784603,
+  "armenian": 313755,
+  "tat": 121038,
+  "russian": 50191,
+  "talysh": 47296,
+  "lezgin": 45855,
+  "kurd": 34212,
+  "shahdag": 14649,
+  "jew": 10213,
+  "udi": 7273,
+  "other": 5672,
+  "german": 3617,
+  "polish": 1116,
+  "roma": 227,
+  "georgian": 196,
+  "persian": 135
+ },
+ "faith": {
+  "shia": 589973,
+  "sunni": 417245,
+  "armenian": 322630,
+  "muslim": 37530,
+  "sectarian": 25754,
+  "orthodox": 25427,
+  "jewish": 10213,
+  "other": 5493,
+  "protestant": 3617,
+  "ahl-e haqq": 3078,
+  "catholic": 17
+ },
+ "uezd": {
+  "Елисаветпольский": {
+   "villages": 166,
+   "placed": 142,
+   "approx": 26,
+   "pop": 102608,
+   "people": {
+    "tatar": 68684,
+    "persian": 94,
+    "armenian": 26802,
+    "russian": 5261,
+    "german": 1894,
+    "georgian": 7
+   },
+   "faith": {
+    "shia": 59926,
+    "sunni": 8715,
+    "armenian": 26802,
+    "orthodox": 42,
+    "protestant": 1894,
+    "sectarian": 5226
+   },
+   "unplaced": 24,
+   "unplacedPop": 23338
+  },
+  "Арешский": {
+   "villages": 131,
+   "placed": 125,
+   "approx": 19,
+   "pop": 51835,
+   "people": {
+    "tatar": 37577,
+    "armenian": 12278,
+    "russian": 3,
+    "georgian": 18,
+    "shahdag": 1383,
+    "kurd": 359,
+    "roma": 227
+   },
+   "faith": {
+    "sunni": 35224,
+    "shia": 4321,
+    "armenian": 12278,
+    "orthodox": 21
+   },
+   "unplaced": 6,
+   "unplacedPop": 6620
+  },
+  "Джебраильский": {
+   "villages": 169,
+   "placed": 160,
+   "approx": 27,
+   "pop": 46911,
+   "people": {
+    "tatar": 33385,
+    "russian": 213,
+    "armenian": 11669,
+    "kurd": 1452
+   },
+   "faith": {
+    "shia": 19960,
+    "sunni": 12061,
+    "sectarian": 213,
+    "armenian": 11669,
+    "ahl-e haqq": 2815
+   },
+   "unplaced": 9,
+   "unplacedPop": 3708
+  },
+  "Джеванширский": {
+   "villages": 216,
+   "placed": 206,
+   "approx": 55,
+   "pop": 54957,
+   "people": {
+    "tatar": 33354,
+    "armenian": 16173,
+    "kurd": 5527
+   },
+   "faith": {
+    "shia": 29410,
+    "sunni": 9473,
+    "armenian": 16173
+   },
+   "unplaced": 10,
+   "unplacedPop": 4363
+  },
+  "Зангезурский": {
+   "villages": 326,
+   "placed": 308,
+   "approx": 68,
+   "pop": 123997,
+   "people": {
+    "armenian": 57425,
+    "tatar": 37646,
+    "russian": 469,
+    "kurd": 26874,
+    "persian": 41,
+    "tat": 1585
+   },
+   "faith": {
+    "armenian": 57525,
+    "shia": 55353,
+    "sunni": 10364,
+    "sectarian": 465,
+    "orthodox": 4,
+    "other": 78,
+    "ahl-e haqq": 263
+   },
+   "unplaced": 18,
+   "unplacedPop": 14184
+  },
+  "Казахский": {
+   "villages": 129,
+   "placed": 119,
+   "approx": 17,
+   "pop": 85049,
+   "people": {
+    "tatar": 48693,
+    "armenian": 33118,
+    "other": 102,
+    "georgian": 16,
+    "russian": 1687,
+    "jew": 7,
+    "german": 2,
+    "polish": 1,
+    "udi": 160,
+    "tat": 1324
+   },
+   "faith": {
+    "shia": 29227,
+    "sunni": 20726,
+    "armenian": 33278,
+    "orthodox": 178,
+    "sectarian": 1632,
+    "jewish": 7,
+    "catholic": 1,
+    "protestant": 2
+   },
+   "unplaced": 10,
+   "unplacedPop": 12387
+  },
+  "Нухинский": {
+   "villages": 134,
+   "placed": 118,
+   "approx": 28,
+   "pop": 91120,
+   "people": {
+    "tatar": 63607,
+    "armenian": 14325,
+    "lezgin": 4191,
+    "shahdag": 138,
+    "georgian": 2,
+    "udi": 7113,
+    "jew": 1744
+   },
+   "faith": {
+    "sunni": 61903,
+    "armenian": 20683,
+    "shia": 724,
+    "other": 5307,
+    "orthodox": 757,
+    "jewish": 1744
+   },
+   "unplaced": 16,
+   "unplacedPop": 12799
+  },
+  "Шушинский": {
+   "villages": 251,
+   "placed": 237,
+   "approx": 57,
+   "pop": 99552,
+   "people": {
+    "tatar": 41292,
+    "armenian": 57893,
+    "russian": 278
+   },
+   "faith": {
+    "shia": 38226,
+    "armenian": 57893,
+    "orthodox": 278,
+    "sunni": 3066
+   },
+   "unplaced": 14,
+   "unplacedPop": 13129
+  },
+  "Бакинский": {
+   "villages": 46,
+   "placed": 39,
+   "approx": 2,
+   "pop": 54801,
+   "people": {
+    "tat": 44989,
+    "tatar": 9812
+   },
+   "faith": {
+    "shia": 54801
+   },
+   "unplaced": 7,
+   "unplacedPop": 11671
+  },
+  "Геокчайский": {
+   "villages": 143,
+   "placed": 112,
+   "approx": 14,
+   "pop": 76002,
+   "people": {
+    "tatar": 45673,
+    "tat": 14555,
+    "shahdag": 1078,
+    "armenian": 12790,
+    "jew": 699,
+    "russian": 1206,
+    "polish": 1
+   },
+   "faith": {
+    "shia": 26134,
+    "sunni": 35171,
+    "orthodox": 6,
+    "armenian": 13976,
+    "jewish": 699,
+    "sectarian": 1201,
+    "catholic": 1
+   },
+   "unplaced": 31,
+   "unplacedPop": 15669
+  },
+  "Джеватский": {
+   "villages": 158,
+   "placed": 110,
+   "approx": 23,
+   "pop": 82566,
+   "people": {
+    "tatar": 82306,
+    "russian": 260
+   },
+   "faith": {
+    "shia": 68526,
+    "sectarian": 260,
+    "sunni": 13775
+   },
+   "unplaced": 48,
+   "unplacedPop": 35718
+  },
+  "Кубинский": {
+   "villages": 325,
+   "placed": 312,
+   "approx": 53,
+   "pop": 158442,
+   "people": {
+    "lezgin": 41664,
+    "tatar": 41710,
+    "russian": 1295,
+    "jew": 91,
+    "polish": 15,
+    "tat": 58585,
+    "shahdag": 12050,
+    "other": 2167,
+    "armenian": 865
+   },
+   "faith": {
+    "sunni": 128946,
+    "orthodox": 1141,
+    "jewish": 91,
+    "catholic": 15,
+    "shia": 27170,
+    "armenian": 865,
+    "sectarian": 154
+   },
+   "unplaced": 13,
+   "unplacedPop": 12467
+  },
+  "Ленкоранский": {
+   "villages": 298,
+   "placed": 284,
+   "approx": 54,
+   "pop": 105118,
+   "people": {
+    "talysh": 47296,
+    "russian": 6911,
+    "tatar": 50887,
+    "jew": 24
+   },
+   "faith": {
+    "shia": 98183,
+    "sectarian": 6416,
+    "orthodox": 495,
+    "jewish": 24
+   },
+   "unplaced": 14,
+   "unplacedPop": 11966
+  },
+  "Шемахинский": {
+   "villages": 208,
+   "placed": 141,
+   "approx": 28,
+   "pop": 94380,
+   "people": {
+    "tatar": 72220,
+    "armenian": 11902,
+    "russian": 9300,
+    "jew": 958
+   },
+   "faith": {
+    "shia": 19406,
+    "sunni": 52814,
+    "armenian": 11902,
+    "sectarian": 8416,
+    "orthodox": 878,
+    "jewish": 958
+   },
+   "unplaced": 67,
+   "unplacedPop": 32837
+  }
+ },
+ "towns": {
+  "Елисаветополь": 20294,
+  "Нуха": 25894,
+  "Шуша": 26806,
+  "Баку": 86611,
+  "Куба": 13917,
+  "Ленкорань": 4222,
+  "Шемаха": 22139,
+  "Гёкчай": 642,
+  "Сальяны": 12121
+ }
+}

@@ -20,9 +20,10 @@ PEOPLE = {
     'кюринцы': 'lezgin', 'русскіе': 'russian', 'евреи': 'jew', 'гапутлинцы': 'shahdag', 'джекцы': 'shahdag',
     'крызцы': 'shahdag', 'будугцы': 'shahdag', 'персіяне': 'persian', 'грузины': 'georgian', 'удины': 'udi',
     'нѣмцы': 'german', 'поляки': 'polish', 'цыгане': 'roma',
+    'талышины и татары': 'tatar',   # the Baku towns' table counts them together; the towns' Talysh are few
 }
 FAITH = [  # first match wins; matched against the footnote meaning if any, else the heading
-    ('шіит', 'shia'), ('суннит', 'sunni'), ('армяно', 'armenian'), ('григор', 'armenian'), ('правосл', 'orthodox'),
+    ('incl. shia', 'muslim'), ('и шіит', 'muslim'), ('арм', 'armenian'), ('шіит', 'shia'), ('суннит', 'sunni'), ('армяно', 'armenian'), ('григор', 'armenian'), ('правосл', 'orthodox'),
     ('старообр', 'sectarian'), ('молокан', 'sectarian'), ('суббот', 'sectarian'), ('прыгун', 'sectarian'),
     ('пригун', 'sectarian'), ('духобор', 'sectarian'), ('баптист', 'sectarian'), ('сектант', 'sectarian'),
     ('іуде', 'jewish'), ('католик', 'catholic'), ('лютеран', 'protestant'), ('протест', 'protestant'),
@@ -53,25 +54,45 @@ def nums(v, n):
     v = (list(v) + [None] * n)[:n] if isinstance(v, list) else [None] * n
     return [int(x) if isinstance(x, (int, float)) else 0 for x in v]
 
-rows, totals = [], []
-gov = uezd = uch = society = None
+objs = []
 for f in sorted(RAW.glob('p*.jsonl'), key=lambda f: int(f.stem[1:])):
     for line in f.read_text().splitlines():
-        if not line.strip(): continue
-        o = json.loads(line)
-        if 'header' in o: continue
+        if line.strip():
+            o = json.loads(line)
+            if 'header' not in o: objs.append({**o, 'spread': o.get('p') or int(f.stem[1:])})
+
+# A «Прочія …» cell is often footnoted only on its society's line ("3) Удины"); the villages under it
+# print the bare heading. Such a village cell takes the society's meaning.
+marks = defaultdict(set)
+for o in objs:
+    if o.get('kind') == 'society':
+        for grp in ('people', 'faith'):
+            for key in (o.get(grp) or {}):
+                head, fn = split(key)
+                if fn: marks[(o.get('uezd'), o.get('society'), grp, head)].add(key)
+def explain(o, grp, key):
+    head, fn = split(key)
+    if fn or not head.lower().startswith(('проч', 'сектант')): return key
+    m = marks.get((o.get('uezd'), o.get('society'), grp, head), set())
+    return next(iter(m)) if len(m) == 1 else key
+
+rows, totals = [], []
+for o in objs:
         k = o.get('kind')
         if k in ('village', 'town'):
             ppl, fth = defaultdict(lambda: [0, 0, 0]), defaultdict(lambda: [0, 0])
             for key, v in (o.get('people') or {}).items():
-                a = nums(v, 3); p = ppl[people_of(key)]
+                key = explain(o, 'people', key)
+                a = nums(v, 3) if not (isinstance(v, list) and len(v) == 2) else [0] + nums(v, 2)   # towns' tables: [m, f]
+                p = ppl[people_of(key)]
                 for i in range(3): p[i] += a[i]
             for key, v in (o.get('faith') or {}).items():
+                key = explain(o, 'faith', key)
                 a = nums(v, 2); p = fth[faith_of(key)]
                 for i in range(2): p[i] += a[i]
-            rows.append({**o, 'spread': o.get('p') or int(f.stem[1:]), 'people_n': dict(ppl), 'faith_n': dict(fth)})
+            rows.append({**o, 'people_n': dict(ppl), 'faith_n': dict(fth)})
         elif k in ('society', 'uch', 'uezd'):
-            totals.append({**o, 'spread': o.get('p') or int(f.stem[1:])})
+            totals.append(o)
 
 # Rows split across spreads: a village whose society came on the previous spread
 last = None
@@ -81,12 +102,12 @@ for r in rows:
     last = r
 
 PEOPLE_COLS = ['tatar', 'armenian', 'talysh', 'tat', 'kurd', 'lezgin', 'russian', 'jew', 'shahdag', 'persian', 'georgian', 'udi', 'german', 'polish', 'roma', 'other']
-FAITH_COLS = ['shia', 'sunni', 'armenian', 'orthodox', 'sectarian', 'jewish', 'catholic', 'protestant', 'ahl-e haqq', 'other']
+FAITH_COLS = ['shia', 'sunni', 'muslim', 'armenian', 'orthodox', 'sectarian', 'jewish', 'catholic', 'protestant', 'ahl-e haqq', 'other']
 out = HERE / 'data' / 'villages-1886.csv'
 with open(out, 'w', newline='') as fh:
     w = csv.writer(fh)
     w.writerow(['gov', 'uezd', 'uch', 'society', 'no', 'name', 'kind', 'seat', 'd_uezd', 'd_prist', 'hh', 'm', 'f', 'total']
-               + [f'{p}_{x}' for p in PEOPLE_COLS for x in ('hh', 'm', 'f')] + [f'{p}_{x}' for p in FAITH_COLS for x in ('m', 'f')]
+               + [f'pp_{p}_{x}' for p in PEOPLE_COLS for x in ('hh', 'm', 'f')] + [f'fa_{p}_{x}' for p in FAITH_COLS for x in ('m', 'f')]
                + ['spread', 'note'])
     for r in rows:
         w.writerow([r.get('gov'), r.get('uezd'), r.get('uch'), r.get('society'), r.get('no'), r.get('name'), r['kind'],

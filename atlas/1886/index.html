@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="/shared/theme.js"></script>
+<title>1886: kəndlər · Azad Bilik</title>
+<meta name="description" content="1886-cı il ailə siyahıları: Bakı və Yelizavetpol quberniyalarının 2700 kəndi — əhalisi, xalqları və dinləri, kənd-kənd. Every village of the Baku and Elisabethpol governorates in the 1886 family lists.">
+<meta name="theme-color" content="#F4EFE6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14100D" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://azadbilik.org/atlas/1886/">
+<meta property="og:title" content="1886: kəndlər · Villages, 1886">
+<meta property="og:description" content="Bakı və Yelizavetpol quberniyalarının kəndləri, 1886-cı il ailə siyahılarına görə: əhali, xalqlar, dinlər.">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+<link rel="stylesheet" href="/shared/story-map.css">
+<style>
+  .controls { padding: 1rem 1.5rem; border-bottom: 1px solid var(--rule); display: grid; gap: .9rem; }
+  .seg { display: grid; grid-template-columns: repeat(2, 1fr); border: 1px solid var(--rule); border-radius: 3px; padding: 2px; }
+  .seg button { padding: .35rem .4rem; border-radius: 2px; font-size: .8125rem; color: var(--muted); }
+  .seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+  .find { position: relative; }
+  .find input { width: 100%; padding: .45rem .6rem; border: 1px solid var(--rule); border-radius: 3px; background: transparent; color: var(--ink); font: inherit; font-size: .875rem; }
+  .find ul { list-style: none; position: absolute; z-index: 3; left: 0; right: 0; top: calc(100% + 2px); background: var(--paper); border: 1px solid var(--rule); border-radius: 3px; max-height: 16rem; overflow: auto; }
+  .find li button { display: block; width: 100%; text-align: left; padding: .35rem .6rem; font-size: .8125rem; }
+  .find li button:hover, .find li button:focus-visible { background: var(--rule); }
+  .find small { color: var(--muted); }
+  .totals { padding: 1rem 1.5rem 0; display: grid; gap: .25rem; }
+  .totals b { font: 400 1.5rem/1.1 var(--serif); font-variant-numeric: tabular-nums; }
+  .totals small { font-size: .8125rem; color: var(--muted); }
+  .rank h2, .unit h3 { padding: .75rem 1.5rem .35rem; font: 500 .75rem var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .grouplist { list-style: none; padding: .25rem 0 .5rem; }
+  .grouplist button { display: grid; grid-template-columns: .65rem 1fr auto; gap: .5rem; align-items: center; width: 100%; text-align: left; padding: .35rem 1.5rem; font-size: .875rem; }
+  .grouplist button:hover { background: var(--rule); }
+  .grouplist button[aria-pressed="true"] { background: var(--rule); box-shadow: inset 2px 0 var(--accent); font-weight: 500; }
+  .grouplist i, .unit td i, .legend i.sw { width: .65rem; height: .65rem; border-radius: 50%; display: inline-block; }
+  .grouplist .v { font-size: .75rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .unit { padding: 1rem 0; }
+  .unit .back { display: block; padding: 0 1.5rem .75rem; font-size: .8125rem; color: var(--muted); }
+  .unit .back:hover { color: var(--ink); }
+  .unit .title { padding: 0 1.5rem; font: 400 1.5rem/1.15 var(--serif); }
+  .unit .where { padding: .15rem 1.5rem 0; font-size: .8125rem; color: var(--muted); }
+  .unit table { width: calc(100% - 3rem); margin: .5rem 1.5rem 0; border-collapse: collapse; font-size: .875rem; font-variant-numeric: tabular-nums; }
+  .unit td { padding: .3rem 0; border-bottom: 1px solid var(--rule); }
+  .unit td:not(:first-child) { text-align: right; padding-left: .75rem; white-space: nowrap; }
+  .unit td i { margin-right: .4rem; }
+  .unit .src { padding: .5rem 1.5rem 0; font-size: .75rem; color: var(--muted); }
+  .unit .src a { color: inherit; }
+  .bar { display: flex; height: .5rem; margin: .6rem 1.5rem 0; border-radius: 2px; overflow: hidden; }
+  .legend { min-width: 12rem; }
+  .legend div { display: flex; align-items: center; gap: .4rem; }
+  .legend .ring { width: .65rem; height: .65rem; border-radius: 50%; border: 1.5px solid var(--muted); }
+  .legend .ramp { display: flex; } .legend .ramp span { flex: 1; height: .6rem; }
+  .legend .ticks { display: flex; justify-content: space-between; font-size: .625rem; color: var(--muted); }
+  @media (max-width: 48rem) { .controls, .totals { padding-inline: 1rem; } .rank h2, .grouplist button, .unit h3, .unit .title, .unit .where, .unit .back, .unit .src { padding-inline: 1rem; } .unit table { margin-inline: 1rem; width: calc(100% - 2rem); } .bar { margin-inline: 1rem; } .legend { min-width: 0; } }
+</style>
+</head>
+<body>
+<div id="map" role="region" aria-label="Xəritə"></div>
+
+<aside class="panel">
+  <div class="head">
+    <div class="top"><a class="brand" href="/" data-keep-lang><svg viewBox="0 0 512 512" aria-hidden="true"><g class="star"><rect x="126" y="126" width="260" height="260"/><polygon points="256,72 440,256 256,440 72,256"/></g><polygon class="gem" points="256,196 316,256 256,316 196,256"/></svg>Azad Bilik</a><nav><a href="/atlas/" data-keep-lang>Atlas</a><span class="langs" role="group" aria-label="Dil · Язык · Language"><button type="button" data-lang="az">AZ</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="en">EN</button></span></nav></div>
+    <h1 data-i18n="title">1886: kəndlər</h1>
+    <p class="sub" data-i18n="sub">Ailə siyahılarında hər kənd</p>
+  </div>
+  <div class="body" id="body">
+    <div class="controls">
+      <div class="seg" role="group" id="by"></div>
+      <div class="find"><input type="search" id="q" autocomplete="off" spellcheck="false"><ul id="hits" hidden></ul></div>
+    </div>
+    <div id="side" aria-live="polite"></div>
+  </div>
+</aside>
+
+<div class="legend" id="legend"></div>
+
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script>
+(() => {
+let dark = window.abTheme ? abTheme.dark() : matchMedia('(prefers-color-scheme: dark)').matches;
+addEventListener('themechange', (e) => { dark = e.detail === 'dark'; setTimeout(() => { try { draw(); } catch {} }); });
+const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+const still = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+const LANGS = ['az', 'ru', 'en'];
+let lang = (() => {
+  const q = new URLSearchParams(location.search).get('lang');
+  if (LANGS.includes(q)) return q;
+  try { const s = localStorage.getItem('lang'); if (LANGS.includes(s)) return s; } catch {}
+  return 'az';
+})();
+const LI = { az: 0, ru: 1, en: 2 };
+const nf = () => new Intl.NumberFormat({ az: 'ru-RU', ru: 'ru-RU', en: 'en-GB' }[lang]);
+// Peoples and faiths as the 1886 table names them; colours follow the 1897 map's languages
+const G = {
+  people: {
+    tatar: ['#D9A62E', 'Azərbaycan türkləri («tatarlar»)', 'Азербайджанцы («татары»)', 'Azerbaijanis (“Tatars”)'],
+    armenian: ['#8A6A5A', 'Ermənilər', 'Армяне', 'Armenians'], tat: ['#2E7D6B', 'Tatlar', 'Таты', 'Tats'],
+    russian: ['#5A6B7A', 'Ruslar', 'Русские', 'Russians'], talysh: ['#3E8E41', 'Talışlar', 'Талыши', 'Talysh'],
+    lezgin: ['#1F6F8B', 'Ləzgilər («kürələr»)', 'Лезгины («кюринцы»)', 'Lezgins (“Kürə”)'], kurd: ['#6B8E23', 'Kürdlər', 'Курды', 'Kurds'],
+    shahdag: ['#4F8FA6', 'Şahdağ xalqları (qrız, buduq, cək, haputlu)', 'Шахдагские народы (крызы, будухи, джекцы, гапутлинцы)', 'Shahdag peoples (Kryz, Budukh, Jek, Haputli)'],
+    jew: ['#3B5BA2', 'Yəhudilər', 'Евреи', 'Jews'], udi: ['#7A3E8E', 'Udinlər', 'Удины', 'Udi'],
+    german: ['#7D8894', 'Almanlar', 'Немцы', 'Germans'], polish: ['#9AA3AD', 'Polyaklar', 'Поляки', 'Poles'],
+    roma: ['#A89A5A', 'Qaraçılar', 'Цыгане', 'Roma'], georgian: ['#A23B3B', 'Gürcülər', 'Грузины', 'Georgians'],
+    persian: ['#5B4BA0', 'Farslar', 'Персы', 'Persians'], other: ['#B8B0A4', 'Digər / göstərilməyib', 'Прочие / не указано', 'Other / not stated'],
+  },
+  faith: {
+    shia: ['#3E8E41', 'Şiələr', 'Шииты', 'Shia Muslims'], sunni: ['#1F6F8B', 'Sünnilər', 'Сунниты', 'Sunni Muslims'],
+    muslim: ['#7FA89A', 'Müsəlmanlar (bölünməyib)', 'Мусульмане (без разделения)', 'Muslims (not divided)'],
+    armenian: ['#8A6A5A', 'Erməni-qriqorianlar', 'Армяно-григориане', 'Armenian Apostolic'],
+    orthodox: ['#5A6B7A', 'Pravoslavlar', 'Православные', 'Orthodox'],
+    sectarian: ['#9E3B5B', 'Sektantlar (malakanlar, subbotniklər, duxoborlar…)', 'Сектанты (молокане, субботники, духоборы…)', 'Sectarians (Molokans, Subbotniks, Dukhobors…)'],
+    jewish: ['#3B5BA2', 'İudeylər', 'Иудеи', 'Jewish'], protestant: ['#7D8894', 'Protestantlar', 'Протестанты', 'Protestants'],
+    catholic: ['#9AA3AD', 'Katoliklər', 'Католики', 'Catholics'], 'ahl-e haqq': ['#C79A5A', 'Əliallahilər', 'Али-аллахи', 'Ahl-e Haqq'],
+    other: ['#B8B0A4', 'Digər / göstərilməyib', 'Прочие / не указано', 'Other / not stated'],
+  },
+};
+const T = {
+  az: { doc: '1886: kəndlər · Azad Bilik', title: '1886: kəndlər', sub: 'Ailə siyahılarında hər kənd', people: 'Xalqlar', faith: 'Dinlər', find: 'Kənd axtar…',
+    area: (v, s) => `${v} kənd və 9 şəhər · Bakı və Yelizavetpol quberniyaları, ${s}`, persons: 'nəfər', households: 'tüstü', top: 'Ən böyük', share: 'payı', of: 'kəndin əhalisi',
+    back: '← Hamısı', society: 'icma', uezd: 'qəza', town: 'şəhər', today: 'Bu gün', approx: 'Yeri təxminidir: icmasının ortasında göstərilib.', unplacedN: (n, p) => `Xəritədə yoxdur: ${n} kənd (${p} nəfər) — yerləri hələ tapılmayıb.`,
+    src: 'Mənbə', spread: (n) => `«Свод», ${n}-ci səhifə cütü`, villages: 'kənd', where: 'Ən çox yaşadığı kəndlər', ringNote: 'halqa — yeri təxmini', sizeNote: 'ölçü — əhali',
+    note: 'Rəqəmlər «Свод статистических данных о населении Закавказского края, извлечённых из посемейных списков 1886 г.» kitabındandır (Tiflis, 1893; RDK, 01005403186): hər kəndin tüstüsü, kişi və qadınları, xalqlara və dinlərə görə. Cədvəllər bu sayt üçün səhifə-səhifə köçürülüb, hər sətir öz cəmi və icmasının cəmi ilə yoxlanılıb; kitabın öz hesab səhvləri olduğu kimi saxlanılıb. Kəndlərin yeri GeoNames, OpenStreetMap və Vikidata ilə adlarına görə, 1897-ci il qəza sərhədləri daxilində tapılıb; bəzi kəndlər bu gün başqa ad daşıyır və ya artıq yoxdur. «Tatarlar» o dövrün rəsmi adı ilə azərbaycanlılardır.' },
+  ru: { doc: '1886: селения · Azad Bilik', title: '1886: селения', sub: 'Каждое селение в посемейных списках', people: 'Народы', faith: 'Вероисповедания', find: 'Найти селение…',
+    area: (v, s) => `${v} селений и 9 городов · Бакинская и Елисаветпольская губернии, ${s}`, persons: 'чел.', households: 'дымов', top: 'Крупнейший', share: 'доля', of: 'населения селения',
+    back: '← Все', society: 'сельское общество', uezd: 'уезд', town: 'город', today: 'Сегодня', approx: 'Место приблизительное: показано в середине его сельского общества.', unplacedN: (n, p) => `Не на карте: ${n} селений (${p} чел.) — их место пока не найдено.`,
+    src: 'Источник', spread: (n) => `«Свод», разворот ${n}`, villages: 'селений', where: 'Где их больше всего', ringNote: 'кольцо — место приблизительное', sizeNote: 'размер — население',
+    note: 'Цифры — «Свод статистических данных о населении Закавказского края, извлечённых из посемейных списков 1886 г.» (Тифлис, 1893; РГБ, 01005403186): дымы, мужчины и женщины каждого селения по народностям и вероисповеданиям. Таблицы переписаны для этого сайта разворот за разворотом, каждая строка проверена по своим итогам и итогам общества; арифметические ошибки самой книги оставлены как напечатано. Селения найдены по названию в GeoNames, OpenStreetMap и Викиданных внутри уездов 1897 г.; часть селений сегодня называется иначе или исчезла. «Татары» — официальное название азербайджанцев того времени.' },
+  en: { doc: 'Villages, 1886 · Azad Bilik', title: 'Villages, 1886', sub: 'Every village in the family lists', people: 'Peoples', faith: 'Faiths', find: 'Find a village…',
+    area: (v, s) => `${v} villages and 9 towns · the Baku and Elisabethpol governorates, ${s}`, persons: 'people', households: 'households', top: 'Largest', share: 'share', of: 'of the village',
+    back: '← All', society: 'rural society', uezd: 'uezd', town: 'town', today: 'Today', approx: 'Approximate place: shown in the middle of its rural society.', unplacedN: (n, p) => `Not on the map: ${n} villages (${p} people) whose place is not yet found.`,
+    src: 'Source', spread: (n) => `«Svod», spread ${n}`, villages: 'villages', where: 'Where most lived', ringNote: 'ring: approximate place', sizeNote: 'size: population',
+    note: "The figures are from «Svod of statistics on the population of Transcaucasia from the family lists of 1886» (Tiflis, 1893; Russian State Library, 01005403186): each village's households, men and women by people and faith. The tables were transcribed for this site spread by spread, each row checked against its own and its society's totals; the book's own arithmetic slips are kept as printed. Villages were placed by name using GeoNames, OpenStreetMap and Wikidata within their 1897 uezds; some are called differently today or no longer exist. «Tatars» was the official name for Azerbaijanis at the time." },
+};
+const t = (k) => T[lang][k];
+const gname = (by, k) => (G[by][k] ?? G[by].other)[1 + LI[lang]];
+const gcol = (by, k) => (G[by][k] ?? G[by].other)[0];
+const pct = (n, d) => { const v = n / d * 100; return `${v < 10 ? v.toFixed(1) : Math.round(v)}%`; };
+const params = new URLSearchParams(location.search);
+let by = params.get('by') === 'faith' ? 'faith' : 'people', one = params.get('g'), sel = null, feats = [], summary = null, uezds = null;
+const BOUNDS = [[44.7, 38.3], [50.5, 41.95]];
+const SEQ = () => dark ? ['#4A2C24', '#6B3129', '#8E3430', '#B33A37', '#D45A55', '#F08A80'] : ['#EACAB6', '#E0A88E', '#D2836A', '#BF5C48', '#A6362E', '#7A1B1E'];
+
+const map = new maplibregl.Map({
+  container: 'map', style: `https://tiles.openfreemap.org/styles/${dark ? 'dark' : 'positron'}`,
+  bounds: BOUNDS, minZoom: 5, maxZoom: 12,
+  attributionControl: { compact: true, customAttribution: '«Свод… 1886 г.» (Tiflis 1893) · <a href="https://www.geonames.org/">GeoNames</a> · <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> · <a href="https://www.wikidata.org/">Wikidata</a> · <a href="https://ristat.org/">RISTAT</a>' },
+});
+map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-right');
+const tip = new maplibregl.Popup({ closeButton: false, closeOnClick: false, offset: 8 });
+const phone = () => matchMedia('(max-width: 48rem)').matches;
+const pad = () => phone() ? { top: 60, right: 16, left: 16, bottom: document.querySelector('.panel').offsetHeight + 16 } : { top: 32, right: 32, bottom: 32, left: 27 * 16 + 32 };
+map.on('style.load', () => {
+  for (const l of map.getStyle().layers) {
+    if (l.type === 'background') map.setPaintProperty(l.id, 'background-color', css('--land'));
+    if (l.type === 'fill' && /water|ocean|lake/.test(l.id)) map.setPaintProperty(l.id, 'fill-color', css('--water'));
+    if (l.type === 'symbol' && /^(label_(other|village|town|city|city_capital|state)|airport|highway-shield|road_shield|place_(other|suburb|village|town|city|city_large|state))$/.test(l.id)) map.setLayoutProperty(l.id, 'visibility', 'none');   // today's names would mislead
+  }
+});
+map.on('load', async () => {
+  const [geo, sum, units] = await Promise.all(['data/villages.geojson', 'data/summary.json', '../1897/data/units.geojson'].map((f) => fetch(f).then((r) => r.json())));
+  summary = sum;
+  geo.features.forEach((f, i) => { f.id = i; });
+  feats = geo.features;
+  const keys = new Set(Object.keys(sum.uezd));
+  uezds = { type: 'FeatureCollection', features: units.features.filter((f) => keys.has(f.properties.key)) };
+  map.fitBounds(BOUNDS, { padding: pad(), duration: 0 });
+  document.querySelector('.maplibregl-ctrl-attrib')?.classList.remove('maplibregl-compact-show');
+  const firstSymbol = map.getStyle().layers.find((l) => l.type === 'symbol')?.id;
+  map.addSource('uezds', { type: 'geojson', data: uezds });
+  map.addSource('v', { type: 'geojson', data: geo });
+  map.addLayer({ id: 'uezds', type: 'line', source: 'uezds', paint: { 'line-color': css('--ink'), 'line-width': .8, 'line-opacity': .35 } }, firstSymbol);
+  const r = ['interpolate', ['exponential', 1.6], ['zoom'], 6, ['max', 1.2, ['*', .06, ['sqrt', ['get', 't']]]], 9, ['max', 2.5, ['*', .2, ['sqrt', ['get', 't']]]], 12, ['max', 5, ['*', .5, ['sqrt', ['get', 't']]]]];
+  map.addLayer({ id: 'v', type: 'circle', source: 'v', layout: { 'circle-sort-key': ['-', ['get', 't']] }, paint: {
+    'circle-radius': r,
+    'circle-color': ['coalesce', ['feature-state', 'c'], '#999'],
+    'circle-opacity': ['case', ['has', 'a'], 0, .88],
+    'circle-stroke-color': ['case', ['boolean', ['feature-state', 'sel'], false], css('--ink'), ['has', 'a'], ['coalesce', ['feature-state', 'c'], '#999'], css('--paper')],
+    'circle-stroke-width': ['case', ['boolean', ['feature-state', 'sel'], false], 2.5, ['has', 'a'], 1.6, .5],
+  } });
+  map.addLayer({ id: 'towns', type: 'symbol', source: 'v', filter: ['has', 'town'], layout: { 'text-field': ['coalesce', ['get', `n_${lang}`], ['get', 'n']], 'text-font': ['Noto Sans Regular'], 'text-size': 12, 'text-offset': [0, 1.2], 'text-anchor': 'top' },
+    paint: { 'text-color': css('--ink'), 'text-halo-color': css('--paper'), 'text-halo-width': 1.5 } });
+  map.on('mousemove', 'v', (e) => {
+    map.getCanvas().style.cursor = 'pointer';
+    const p = feats[e.features[0].id].properties;
+    const g = p[by === 'people' ? 'p' : 'f'];
+    const k = one ?? (by === 'people' ? p.tp : p.tf);
+    tip.setLngLat(e.lngLat).setHTML(`<strong>${esc(p.n)}</strong> · ${nf().format(p.t)} ${t('persons')}${k && g[k] ? ` · ${esc(gname(by, k))} ${pct(g[k], p.t)}` : ''}`).addTo(map);
+  });
+  map.on('mouseleave', 'v', () => { map.getCanvas().style.cursor = ''; tip.remove(); });
+  map.on('click', 'v', (e) => select(e.features[0].id));
+  if (params.get('v')) { const f = feats.find((x) => x.properties.n === params.get('v')); if (f) { select(f.id); fly(f); } }
+  draw();
+});
+function fly(f) { map.flyTo({ center: f.geometry.coordinates, zoom: Math.max(map.getZoom(), 10), padding: pad(), duration: still() ? 0 : 800 }); }
+function select(id) {
+  if (sel != null) map.setFeatureState({ source: 'v', id: sel }, { sel: false });
+  sel = id;
+  if (id != null) map.setFeatureState({ source: 'v', id }, { sel: true });
+  draw();
+  document.getElementById('body').scrollTop = 0;
+}
+function paint() {
+  const seq = SEQ();
+  for (const f of feats) {
+    const p = f.properties, g = p[by === 'people' ? 'p' : 'f'];
+    let c;
+    if (one) { const s = (g[one] ?? 0) / p.t; c = s <= 0 ? (dark ? 'rgba(255,255,255,.12)' : 'rgba(26,20,16,.12)') : seq[Math.min(5, Math.floor(s * 6 - 1e-9))]; }
+    else c = gcol(by, by === 'people' ? p.tp : p.tf);
+    map.setFeatureState({ source: 'v', id: f.id }, { c });
+  }
+}
+function drawControls() {
+  const el = document.getElementById('by');
+  el.innerHTML = ['people', 'faith'].map((m) => `<button type="button" data-by="${m}" aria-pressed="${m === by}">${t(m)}</button>`).join('');
+  el.querySelectorAll('button').forEach((b) => b.onclick = () => { by = b.dataset.by; one = null; draw(); });
+  document.getElementById('q').placeholder = t('find');
+}
+function drawLegend() {
+  const el = document.getElementById('legend');
+  const extra = `<div><span class="ring"></span>${t('ringNote')}</div><div style="color:var(--muted)">${t('sizeNote')}</div>`;
+  if (one) {
+    el.innerHTML = `<span>${esc(gname(by, one))} · ${t('share')}</span><div class="ramp">${SEQ().map((x) => `<span style="background:${x}"></span>`).join('')}</div><div class="ticks"><span>0</span><span>50%</span><span>100%</span></div>` + extra;
+    return;
+  }
+  const tot = summary[by];
+  const shown = Object.keys(tot).filter((k) => feats.some((f) => (by === 'people' ? f.properties.tp : f.properties.tf) === k));
+  el.innerHTML = `<span>${t('top')}</span>` + shown.map((k) => `<div><i class="sw" style="background:${gcol(by, k)}"></i>${esc(gname(by, k))}</div>`).join('') + extra;
+}
+function groupTable(kind, g, total) {
+  const rows = Object.entries(g).sort((a, b) => b[1] - a[1]);
+  return `<div class="bar" aria-hidden="true">${rows.map(([k, n]) => `<span style="flex:${n};background:${gcol(kind, k)}"></span>`).join('')}</div>
+    <table><tbody>${rows.map(([k, n]) => `<tr><td><i style="background:${gcol(kind, k)}"></i>${esc(gname(kind, k))}</td><td>${nf().format(n)}</td><td>${pct(n, total)}</td></tr>`).join('')}</tbody></table>`;
+}
+function drawSide() {
+  const el = document.getElementById('side');
+  if (sel != null) {
+    const p = feats[sel].properties;
+    const U = uezds.features.find((f) => f.properties.key === p.u)?.properties;
+    const where = p.town ? t('town') : [p.s && `${p.s} ${t('society')}`, U && U[lang]].filter(Boolean).join(' · ');
+    el.innerHTML = `<section class="unit"><button type="button" class="back">${t('back')}</button>
+      <h2 class="title">${esc(p[`n_${lang}`] ?? p.n)}</h2><p class="where">${esc(where)}</p>
+      <p class="where">${nf().format(p.t)} ${t('persons')}${p.h ? ` · ${nf().format(p.h)} ${t('households')}` : ''}${p.today ? ` · ${t('today')}: ${esc(p.today)}` : ''}</p>
+      ${p.a ? `<p class="where">${t('approx')}</p>` : ''}
+      <h3>${t('people')}</h3>${groupTable('people', p.p, p.t)}
+      <h3>${t('faith')}</h3>${groupTable('faith', p.f, p.t)}
+      <p class="src">${t('src')}: <a href="/arxiv/?i=svod-1886" data-keep-lang>${t('spread')(p.sp)}</a>${p.no ? ` · № ${p.no}` : ''}</p>
+      <p class="note">${t('note')}</p></section>`;
+    el.querySelector('.back').onclick = () => select(null);
+    return;
+  }
+  const tot = summary[by], all = Object.values(summary.people).reduce((a, b) => a + b, 0);
+  const villages = Object.values(summary.uezd).reduce((a, u) => a + u.villages, 0);
+  const unpl = Object.values(summary.uezd).reduce((a, u) => a + u.unplaced, 0);
+  const ranked = one ? `<section class="rank"><h2>${esc(gname(by, one))} · ${t('where')}</h2><ul class="grouplist">${feats.filter((f) => f.properties[by === 'people' ? 'p' : 'f'][one]).sort((a, b) => b.properties[by === 'people' ? 'p' : 'f'][one] - a.properties[by === 'people' ? 'p' : 'f'][one]).slice(0, 10).map((f) => `<li><button type="button" data-v="${f.id}"><i style="background:${gcol(by, one)}"></i><span>${esc(f.properties.n)}</span><span class="v">${nf().format(f.properties[by === 'people' ? 'p' : 'f'][one])}</span></button></li>`).join('')}</ul></section>` : '';
+  el.innerHTML = `<div class="totals"><b>${nf().format(all)}</b><small>${t('area')(nf().format(villages), t('persons'))}</small></div>${ranked}
+    <section class="rank"><h2>${t(by)}</h2><ul class="grouplist">${Object.entries(tot).map(([k, n]) => `<li><button type="button" data-g="${k}" aria-pressed="${k === one}"><i style="background:${gcol(by, k)}"></i><span>${esc(gname(by, k))}</span><span class="v">${nf().format(n)} · ${pct(n, all)}</span></button></li>`).join('')}</ul></section>
+    <p class="note">${t('unplacedN')(nf().format(unpl), nf().format(Object.values(summary.uezd).reduce((a, u) => a + u.unplacedPop, 0)))}</p>
+    <p class="note">${t('note')}</p>`;
+  el.querySelectorAll('[data-g]').forEach((b) => b.onclick = () => { one = one === b.dataset.g ? null : b.dataset.g; draw(); });
+  el.querySelectorAll('[data-v]').forEach((b) => b.onclick = () => { const f = feats[+b.dataset.v]; select(f.id); fly(f); });
+}
+const q = document.getElementById('q'), hits = document.getElementById('hits');
+const fold = (s) => s.toLowerCase().replace(/ъ(?=\b|$)/g, '').replace(/[ъ]/g, '').replace(/і/g, 'и').replace(/ѣ/g, 'е').replace(/ё/g, 'е');
+q.oninput = () => {
+  const s = fold(q.value.trim());
+  if (s.length < 2) { hits.hidden = true; return; }
+  const m = feats.filter((f) => fold(f.properties.n).includes(s) || (f.properties.today && f.properties.today.toLowerCase().includes(q.value.trim().toLowerCase()))).slice(0, 30);
+  hits.innerHTML = m.map((f) => `<li><button type="button" data-v="${f.id}">${esc(f.properties.n)} <small>${esc(f.properties.today ?? '')} · ${nf().format(f.properties.t)}</small></button></li>`).join('');
+  hits.hidden = !m.length;
+  hits.querySelectorAll('button').forEach((b) => b.onclick = () => { const f = feats[+b.dataset.v]; hits.hidden = true; q.value = ''; select(f.id); fly(f); });
+};
+function keepUrl() {
+  const u = new URLSearchParams();
+  if (lang !== 'az') u.set('lang', lang);
+  if (by === 'faith') u.set('by', 'faith');
+  if (one) u.set('g', one);
+  if (sel != null) u.set('v', feats[sel].properties.n);
+  history.replaceState(null, '', `${location.pathname}${u.size ? '?' + u : ''}`);
+}
+function draw() { drawControls(); if (!feats.length) return; drawLegend(); drawSide(); paint(); keepUrl(); applyKeep(); }
+function applyKeep() { document.querySelectorAll('[data-keep-lang]').forEach((a) => { const u = new URL(a.getAttribute('href'), location.href); if (lang === 'az') u.searchParams.delete('lang'); else u.searchParams.set('lang', lang); a.href = u.pathname + u.search; }); }
+function applyLang() {
+  document.documentElement.lang = lang;
+  document.title = t('doc');
+  document.querySelectorAll('[data-i18n]').forEach((el) => el.textContent = t(el.dataset.i18n));
+  document.querySelectorAll('[data-lang]').forEach((b) => b.setAttribute('aria-pressed', b.dataset.lang === lang));
+  applyKeep();
+}
+applyLang();
+draw();
+document.querySelectorAll('[data-lang]').forEach((b) => b.onclick = () => {
+  lang = b.dataset.lang;
+  try { localStorage.setItem('lang', lang); } catch {}
+  applyLang(); draw();
+  if (map.getLayer('towns')) map.setLayoutProperty('towns', 'text-field', ['coalesce', ['get', `n_${lang}`], ['get', 'n']]);
+});
+})();
+</script>
+</body>
+</html>
