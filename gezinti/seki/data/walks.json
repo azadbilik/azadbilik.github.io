@@ -1,0 +1,73 @@
+[
+  {
+    "id": "bazar",
+    "color": "accent",
+    "name": {
+      "az": "Bazardan Xan sarayına",
+      "ru": "От базара к Ханскому дворцу",
+      "en": "From the bazaar to the Khan's Palace"
+    },
+    "text": {
+      "az": "Şəkinin əsas yolu: çayın yanındakı karvansaralardan və məscidlərdən yuxarı, qala qapısından içəri, Xan sarayına və onun qarşısındakı qoca çinarlara qədər.",
+      "ru": "Главная дорога Шеки: от караван-сараев и мечетей у реки вверх, через ворота крепости, к Ханскому дворцу и старым чинарам перед ним.",
+      "en": "Şəki's main road: from the caravanserais and mosques by the river, uphill, in through the fortress gate, to the Khan's Palace and the old plane trees in front of it."
+    },
+    "stops": [
+      "sekixanovlar-evi",
+      "xan-mescidi",
+      "asagi-karvansara",
+      "tagli-korpuler",
+      "yuxari-karvansara",
+      "imam-eli-mescidi",
+      "seki-qalasi",
+      "tarix-muzeyi",
+      "dairevi-mebed",
+      "xan-sarayi",
+      "xan-cinari"
+    ]
+  },
+  {
+    "id": "mehelle",
+    "color": "second",
+    "name": {
+      "az": "Məhəllələrin hamamları və məscidləri",
+      "ru": "Бани и мечети кварталов",
+      "en": "The quarters' baths and mosques"
+    },
+    "text": {
+      "az": "Bazardan qərbə, məhəllələrin içi ilə: hər məhəllənin öz məscidi və hamamı vardı. Bu gün hamamların çoxu işləmir, amma binaları qalıb.",
+      "ru": "От базара на запад, через кварталы: у каждого квартала были своя мечеть и своя баня. Сегодня большинство бань не работает, но здания стоят.",
+      "en": "West from the bazaar through the old quarters, each of which had its own mosque and bathhouse. Most of the baths no longer work, but the buildings still stand."
+    },
+    "stops": [
+      "sabit-rehman-ev-muzeyi",
+      "agvanlar-hamami",
+      "omer-efendi-mescidi",
+      "godek-minare",
+      "cume-mescidi",
+      "yeralti-hamam",
+      "dere-hamami"
+    ]
+  },
+  {
+    "id": "serq",
+    "color": "third",
+    "name": {
+      "az": "Qaladan şərqə",
+      "ru": "От крепости на восток",
+      "en": "East of the fortress"
+    },
+    "text": {
+      "az": "Xan sarayından yuxarı məhəllələrə: Axundovun doğulduğu ev, Hacı Çələbi xanın məscidi və tək qalmış səkkizüzlü minarə.",
+      "ru": "От Ханского дворца в верхние кварталы: дом, где родился Ахундов, мечеть Гаджи Челеби-хана и одинокий восьмигранный минарет.",
+      "en": "From the Khan's Palace into the upper quarters: the house where Akhundov was born, Haji Chalabi Khan's mosque and a lone eight-sided minaret."
+    },
+    "stops": [
+      "xan-sarayi",
+      "axundov-ev-muzeyi",
+      "gilehli-mescidi",
+      "sekkizuzlu-minare",
+      "vahabzade-ev-muzeyi"
+    ]
+  }
+]

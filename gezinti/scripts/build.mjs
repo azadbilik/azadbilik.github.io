@@ -1,7 +1,9 @@
-// İçərişəhər walking map: data/places.json + data/walks.json (by hand) → data/site.json (the page reads it).
+// Gəzinti walking maps: a city's data/places.json + data/walks.json + data/about.json (by hand)
+// → its data/site.json (the page reads it). data/city.json gives the area to fetch streets in
+// (bbox: s,w,n,e) and the OSM way drawn as the walls (outlineWay; optional).
 //
-//   node scripts/build.mjs            uses the downloads cached in data/raw/
-//   node scripts/build.mjs --refresh  downloads Wikidata, Wikipedia, Commons and OpenStreetMap again
+//   node gezinti/scripts/build.mjs <city>            e.g. icerisheher, seki; uses the downloads cached in <city>/data/raw/
+//   node gezinti/scripts/build.mjs <city> --refresh  downloads Wikidata, Wikipedia, Commons and OpenStreetMap again
 //
 // No dates of our own: Wikidata's inception years often disagree with the articles (rebuilds, rough
 // centuries), so the article's opening carries the date.
@@ -13,13 +15,13 @@
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 
-const ROOT = new URL('..', import.meta.url).pathname;
+const CITY = process.argv.slice(2).find((a) => !a.startsWith('-'));
+if (!CITY) throw new Error('usage: node gezinti/scripts/build.mjs <city> [--refresh]');
+const ROOT = new URL(`../${CITY}/`, import.meta.url).pathname;
 const RAW = ROOT + 'data/raw/';
 const REFRESH = process.argv.includes('--refresh');
 const UA = { 'User-Agent': 'azadbilik.org map builder (https://azadbilik.org)' };
 const LANGS = ['az', 'ru', 'en'];
-const BBOX = '40.3615,49.8270,40.3715,49.8420'; // s,w,n,e: the walls with a street's margin
-const OUTLINE_WAY = 152190481; // OSM «İçəri Şəhər», place=neighbourhood: the line of the walls
 
 const json = async (f) => JSON.parse(await readFile(f, 'utf8'));
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -43,6 +45,7 @@ async function fetchJSON(url, opts = {}) {
 const overpass = (q) => fetchJSON('https://overpass-api.de/api/interpreter', { method: 'POST', body: new URLSearchParams({ data: q }) });
 
 await mkdir(RAW, { recursive: true });
+const { bbox: BBOX, outlineWay: OUTLINE_WAY } = await json(ROOT + 'data/city.json');
 const places = await json(ROOT + 'data/places.json');
 const walks = await json(ROOT + 'data/walks.json');
 // our own short texts (by hand, from the articles), for the walks' stops first; where a place has
@@ -125,8 +128,8 @@ for (const e of osmPlaces.elements) {
   const c = e.center ?? e;
   if (c.lat && !osmAt[e.tags.wikidata]) osmAt[e.tags.wikidata] = [c.lon, c.lat];
 }
-const osm = await cached('osm.json', () => overpass(`[out:json][timeout:90];(way["highway"](${BBOX});way(${OUTLINE_WAY}););out tags geom;`));
-const outline = osm.elements.find((e) => e.id === OUTLINE_WAY).geometry.map((p) => [+p.lon.toFixed(6), +p.lat.toFixed(6)]);
+const osm = await cached('osm.json', () => overpass(`[out:json][timeout:90];(way["highway"](${BBOX});${OUTLINE_WAY ? `way(${OUTLINE_WAY});` : ''});out tags geom;`));
+const outline = OUTLINE_WAY ? osm.elements.find((e) => e.id === OUTLINE_WAY).geometry.map((p) => [+p.lon.toFixed(6), +p.lat.toFixed(6)]) : null;
 
 const R = 6371008.8, rad = Math.PI / 180;
 const dist = (a, b) => {
@@ -203,7 +206,11 @@ const walksOut = walks.map((w) => {
   for (let i = 1; i < w.stops.length; i++) {
     // "direct": a walk inside one complex (the palace courts) whose paths OSM doesn't hold; stop to stop
     const a = byId[w.stops[i - 1]].at, b = byId[w.stops[i]].at;
-    const seg = w.direct ? [a, b] : route(a, b);
+    let seg = w.direct ? [a, b] : route(a, b);
+    // OSM sometimes lacks the lane between two neighbours, and the shortest street way goes round
+    // the block and back: past two and a half times the straight line, take the straight line instead
+    const len = seg.slice(1).reduce((s, p, i) => s + dist(seg[i], p), 0);
+    if (len > 2.5 * dist(a, b) && dist(a, b) < 400) seg = [a, b];
     path.push(...(i === 1 ? seg : seg.slice(1)));
   }
   const m = path.slice(1).reduce((s, p, i) => s + dist(path[i], p), 0);
