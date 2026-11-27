@@ -45,6 +45,10 @@ const overpass = (q) => fetchJSON('https://overpass-api.de/api/interpreter', { m
 await mkdir(RAW, { recursive: true });
 const places = await json(ROOT + 'data/places.json');
 const walks = await json(ROOT + 'data/walks.json');
+// our own short texts (by hand, from the articles), for the walks' stops first; where a place has
+// one, the card shows it instead of the Wikipedia opening
+const about = existsSync(ROOT + 'data/about.json') ? await json(ROOT + 'data/about.json') : {};
+for (const id of Object.keys(about)) if (!places.some((p) => p.id === id)) throw new Error('about.json: no place ' + id);
 const qids = places.map((p) => p.qid);
 
 // ---- Wikidata
@@ -188,6 +192,7 @@ const out = places.map((p) => {
     // Wikidata labels carry their disambiguation: «Cümə məscidi (Köhnə Bakı)»
     name: Object.fromEntries(Object.entries({ ...w.name, ...p.name }).map(([l, n]) => [l, n.replace(/\s*\([^)]*\)\s*$/, '')])),
     text, wiki: title, img,
+    ...(about[p.id] ? { about: about[p.id] } : {}),
   };
 });
 if (missing.length) throw new Error('no position: ' + missing.join(', '));

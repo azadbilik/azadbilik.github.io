@@ -118,26 +118,26 @@ const T = {
     kind1: { fort: 'Qala', palace: 'Saray', mosque: 'Məscid', bath: 'Hamam', caravanserai: 'Karvansara', church: 'Kilsə', museum: 'Muzey', house: 'Ev, meydan' },
     stops: (n) => `${n} dayanacaq`, km: (m, min) => `${(m / 1000).toFixed(1).replace('.', ',')} km, təxminən ${min} dəq. yol`,
     start: 'Başla', back: 'Geri', all: 'Bütün gəzintilər', prev: 'Əvvəlki', next: 'Növbəti', of: (i, n) => `${i} / ${n}`,
-    wiki: 'Vikipediya', wikidata: 'Vikidata', route: 'Ora necə getmək', photo: 'Foto', from: (l) => `${{ ru: 'Rusca', en: 'İngiliscə', az: 'Azərbaycanca' }[l]} məqalədən`,
+    wiki: 'Vikipediya', wikidata: 'Vikidata', route: 'Ora necə getmək', photo: 'Foto', from: (l) => `Vikipediya, ${{ ru: 'rusca', en: 'ingiliscə', az: 'azərbaycanca' }[l]} məqalədən`, fromWiki: 'Vikipediyadan',
     plan1806: '1806-cı il planı', walls: 'Qala divarları', me: 'Mən haradayam',
-    note: 'Yerlərin mətni Vikipediya məqalələrinin girişidir (CC BY-SA), fotolar Wikimedia Commons-dandır, adlar Vikidatadan, küçələr və yerlər OpenStreetMap-dən. Gəzintilər küçələrlə gedir; vaxt saatda 4,5 km piyada sürətilə, dayanmadan hesablanıb.' },
+    note: 'Gəzintilərin dayanacaqları haqqında mətnləri Vikipediya məqalələri əsasında biz yazmışıq; başqa yerlərdə Vikipediya məqaləsinin girişi verilir (CC BY-SA), fotolar Wikimedia Commons-dandır, adlar Vikidatadan, küçələr və yerlər OpenStreetMap-dən. Gəzintilər küçələrlə gedir; vaxt saatda 4,5 km piyada sürətilə, dayanmadan hesablanıb.' },
   ru: { title: 'Ичеришехер', sub: 'Старый город Баку: памятники и прогулки', walks: 'Прогулки', places: 'Все места', section: 'Прогулки',
     kinds: { fort: 'Крепость, ворота, башни', palace: 'Дворцы', mosque: 'Мечети', bath: 'Бани', caravanserai: 'Караван-сараи', church: 'Церковь', museum: 'Музеи', house: 'Дома, площадь' },
     kind1: { fort: 'Крепость', palace: 'Дворец', mosque: 'Мечеть', bath: 'Баня', caravanserai: 'Караван-сарай', church: 'Церковь', museum: 'Музей', house: 'Дом, площадь' },
     stops: (n) => `${n} ${new Intl.PluralRules('ru').select(n) === 'one' ? 'остановка' : new Intl.PluralRules('ru').select(n) === 'few' ? 'остановки' : 'остановок'}`,
     km: (m, min) => `${(m / 1000).toFixed(1).replace('.', ',')} км, около ${min} мин пешком`,
     start: 'Начать', back: 'Назад', all: 'Все прогулки', prev: 'Назад', next: 'Дальше', of: (i, n) => `${i} из ${n}`,
-    wiki: 'Википедия', wikidata: 'Викиданные', route: 'Как дойти', photo: 'Фото', from: (l) => `из статьи на ${{ az: 'азербайджанском', en: 'английском', ru: 'русском' }[l]}`,
+    wiki: 'Википедия', wikidata: 'Викиданные', route: 'Как дойти', photo: 'Фото', from: (l) => `Википедия, из статьи на ${{ az: 'азербайджанском', en: 'английском', ru: 'русском' }[l]}`, fromWiki: 'Из Википедии',
     plan1806: 'План 1806 года', walls: 'Крепостные стены', me: 'Где я',
-    note: 'Тексты мест — начало статей Википедии (CC BY-SA), фото — с Wikimedia Commons, названия — из Викиданных, улицы и места — из OpenStreetMap. Прогулки идут по улицам; время — при 4,5 км/ч, без остановок.' },
+    note: 'Тексты об остановках прогулок написаны нами по статьям Википедии; у остальных мест — начало статьи Википедии (CC BY-SA), фото — с Wikimedia Commons, названия — из Викиданных, улицы и места — из OpenStreetMap. Прогулки идут по улицам; время — при 4,5 км/ч, без остановок.' },
   en: { title: 'İçərişəhər', sub: 'The Old City of Baku: its monuments and three walks', walks: 'Walks', places: 'All places', section: 'Walks',
     kinds: { fort: 'Walls, gates, towers', palace: 'Palaces', mosque: 'Mosques', bath: 'Bathhouses', caravanserai: 'Caravanserais', church: 'Church', museum: 'Museums', house: 'Houses, a square' },
     kind1: { fort: 'Fortress', palace: 'Palace', mosque: 'Mosque', bath: 'Bathhouse', caravanserai: 'Caravanserai', church: 'Church', museum: 'Museum', house: 'House, square' },
     stops: (n) => `${n} stops`, km: (m, min) => `${(m / 1000).toFixed(1)} km, about ${min} min on foot`,
     start: 'Start', back: 'Back', all: 'All walks', prev: 'Previous', next: 'Next', of: (i, n) => `${i} of ${n}`,
-    wiki: 'Wikipedia', wikidata: 'Wikidata', route: 'Directions', photo: 'Photo', from: (l) => `from the ${{ az: 'Azerbaijani', ru: 'Russian', en: 'English' }[l]} article`,
+    wiki: 'Wikipedia', wikidata: 'Wikidata', route: 'Directions', photo: 'Photo', from: (l) => `Wikipedia, from the ${{ az: 'Azerbaijani', ru: 'Russian', en: 'English' }[l]} article`, fromWiki: 'From Wikipedia',
     plan1806: 'The 1806 plan', walls: 'The walls', me: 'Where am I',
-    note: 'Place texts are the openings of Wikipedia articles (CC BY-SA); photos are from Wikimedia Commons, names from Wikidata, streets and positions from OpenStreetMap. Walks follow the streets; times assume 4.5 km/h without stops.' },
+    note: 'The texts on the walks\' stops are our own, written from the Wikipedia articles; other places show the opening of their Wikipedia article (CC BY-SA); photos are from Wikimedia Commons, names from Wikidata, streets and positions from OpenStreetMap. Walks follow the streets; times assume 4.5 km/h without stops.' },
 };
 const t = (k) => T[lang][k];
 const L = (o) => o?.[lang] ?? o?.az ?? o?.en ?? o?.ru ?? '';
@@ -285,7 +285,9 @@ const walkView = (w) =>
   `<ol>${w.stops.map((id, i) => `<li><button type="button" data-stop="${i}"><span class="n">${i + 1}</span><span>${esc(L(byId[id].name))}</span></button></li>`).join('')}</ol></div>`;
 
 function placeCard(p, w = null, i = null) {
-  const textLang = p.text[lang] ? lang : ['az', 'en', 'ru'].find((l) => p.text[l]);
+  // our own text where there is one, else the opening of the Wikipedia article (another language's if need be)
+  const own = p.about?.[lang];
+  const textLang = own ? lang : p.text[lang] ? lang : ['az', 'en', 'ru'].find((l) => p.text[l]);
   const wikiLang = p.wiki[lang] ? lang : textLang;
   const nav = w
     ? `<div class="back"><button type="button" data-walk="${w.id}">← ${esc(L(w.name))}</button><span>` +
@@ -296,7 +298,8 @@ function placeCard(p, w = null, i = null) {
   const [lng, lat] = p.at;
   return nav + img + `<article class="place" style="--c: var(--k-${p.kind})"><div class="in">` +
     `<div class="k"><i class="dot"></i>${esc(t('kind1')[p.kind])}</div><h2>${esc(L(p.name))}</h2>` +
-    (textLang ? `<p class="text" lang="${textLang}">${esc(p.text[textLang])}</p>${textLang !== lang ? `<p class="other">${esc(t('from')(textLang))}</p>` : ''}` : '') +
+    (own ? `<p class="text">${esc(own)}</p>`
+      : textLang ? `<p class="text" lang="${textLang}">${esc(p.text[textLang])}</p><p class="other">${esc(textLang !== lang ? t('from')(textLang) : t('fromWiki'))}</p>` : '') +
     (w && i < w.stops.length - 1 ? `<div style="margin-top:1rem"><button type="button" class="btn" data-stop="${i + 1}">${t('next')}: ${esc(L(byId[w.stops[i + 1]].name))} →</button></div>` : '') +
     `<div class="reads">` +
     (wikiLang ? `<a href="https://${wikiLang}.wikipedia.org/wiki/${encodeURIComponent(p.wiki[wikiLang].replace(/ /g, '_'))}" target="_blank" rel="noopener">${t('wiki')}</a>` : '') +

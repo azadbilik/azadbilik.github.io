@@ -5,6 +5,7 @@
 | File | What | By |
 |---|---|---|
 | `data/places.json` | which places, their Wikidata id and kind (`fort`, `palace`, `mosque`, `bath`, `caravanserai`, `church`, `museum`, `house`); `at` overrides a position | hand |
+| `data/about.json` | our own 3–4 sentence texts in az/ru/en, written from the articles' leads; the card shows them instead of the Wikipedia opening. All the walks' stops but Zəncirli ev (its article says nothing yet) | hand |
 | `data/walks.json` | walks: names and intro in az/ru/en, ordered stops, colour; `direct` joins stops in straight lines | hand |
 | `data/site.json` | everything the page needs | `node scripts/build.mjs` |
 
