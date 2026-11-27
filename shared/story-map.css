@@ -1,17 +1,12 @@
 /* Story maps (/xeriteler/<story>/): the page around shared/story-map.js. Colours: --accent,
    --second and --third are the stories' travellers or parts, as route.json names them. */
-  :root {
-    --paper: #F4EFE6; --ink: #1A1410; --muted: #675E55; --rule: rgb(26 20 16 / .14); --frame: #E9E2D6;
-    --accent: #A81E28; --second: #1F5C73; --third: #5B6B2E; --panel: rgb(244 239 230 / .96); --water: #E4DCCF; --land: #F4EFE6;
-    --serif: 'Literata', Georgia, serif; --sans: 'Inter', system-ui, sans-serif;
+  :root { --panel: rgb(244 239 230 / .96); --water: #E4DCCF; --land: #F4EFE6;
     color-scheme: light dark;
   }
   @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) { --paper: #14100D; --ink: #F1EBE1; --muted: #A0968B; --rule: rgb(241 235 225 / .14); --frame: #1F1914;
-      --accent: #DA5A61; --second: #6FB3CC; --third: #A9BC6A; --panel: rgb(20 16 13 / .95); --water: #0C0A08; --land: #1C1713; }
+    :root:not([data-theme="light"]) { --panel: rgb(20 16 13 / .95); --water: #0C0A08; --land: #1C1713; }
   }
-  :root[data-theme="dark"] { --paper: #14100D; --ink: #F1EBE1; --muted: #A0968B; --rule: rgb(241 235 225 / .14); --frame: #1F1914;
-      --accent: #DA5A61; --second: #6FB3CC; --third: #A9BC6A; --panel: rgb(20 16 13 / .95); --water: #0C0A08; --land: #1C1713; }
+  :root[data-theme="dark"] { --panel: rgb(20 16 13 / .95); --water: #0C0A08; --land: #1C1713; }
 
   * { box-sizing: border-box; margin: 0; }
   html, body { height: 100%; }

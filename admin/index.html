@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Admin · Azad Bilik</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script>
+  // light or dark: the reader's choice on azadbilik.org (localStorage.theme), set before paint
+  try { const t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t; } catch {}
+</script>
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="stylesheet" href="/shared/core.css">
+</head>
+<body>
+<!-- A local tool: `cd admin && npm install && npm run dev`. On azadbilik.org this page has no server behind it. -->
+<div id="app"></div>
+<script type="module" src="/src/main.js"></script>
+</body>
+</html>

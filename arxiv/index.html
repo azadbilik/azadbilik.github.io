@@ -14,22 +14,19 @@
 <meta property="og:description" content="Plakatlar, xəritələr, əlyazmalar, kitablar: 1720-ci illərdən 1920-ci illərə.">
 <meta property="og:image" content="https://azadbilik.org/arxiv/img/bakinskaya-yarmarka-1924/t.webp">
 <link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="stylesheet" href="/shared/core.css">
 <link rel="stylesheet" href="/shared/hub.css">
 <script>
   (() => { const L = ['az', 'ru', 'en']; let l = new URLSearchParams(location.search).get('lang'); if (!L.includes(l)) { try { l = localStorage.getItem('lang'); } catch {} } if (L.includes(l)) document.documentElement.lang = l; })();
 </script>
 <style>
-  :root {
-    --paper: #F4EFE6; --ink: #1A1410; --muted: #675E55; --rule: rgb(26 20 16 / .14); --frame: #E9E2D6; --card: #EDE6DA;
-    --accent: #A81E28;
-    --serif: 'Literata', Georgia, serif; --sans: 'Inter', system-ui, sans-serif;
-    --gutter: clamp(1rem, 4vw, 3rem);
+  :root { --card: #EDE6DA;
     color-scheme: light dark;
   }
   @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) { --paper: #14100D; --ink: #F1EBE1; --muted: #A0968B; --rule: rgb(241 235 225 / .14); --frame: #1F1914; --card: #1C1713; --accent: #DA5A61; }
+    :root:not([data-theme="light"]) { --card: #1C1713; }
   }
-  :root[data-theme="dark"] { --paper: #14100D; --ink: #F1EBE1; --muted: #A0968B; --rule: rgb(241 235 225 / .14); --frame: #1F1914; --card: #1C1713; --accent: #DA5A61; }
+  :root[data-theme="dark"] { --card: #1C1713; }
 
   * { box-sizing: border-box; margin: 0; }
   body { background: var(--paper); color: var(--ink); font: 400 1rem/1.55 var(--sans); -webkit-font-smoothing: antialiased; }

@@ -1,0 +1,28 @@
+/* The admin's own few rules on top of /shared/core.css. Anything reusable belongs in core.css instead. */
+body { min-height: 100vh; }
+h1, h2, h3, p { margin: 0; }
+
+/* A section of a tab: a serif heading, then its content */
+.section { display: flex; flex-direction: column; gap: var(--s-3); }
+.section + .section { margin-top: var(--s-6); }
+.section > header { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: var(--s-2) var(--s-4); }
+
+/* A list beside its detail, stacked on a phone */
+.split { display: grid; grid-template-columns: minmax(16rem, 22rem) minmax(0, 1fr); gap: var(--s-5); align-items: start; }
+.split > :first-child { position: sticky; top: var(--s-4); max-height: calc(100vh - 2rem); overflow: auto; }
+@media (max-width: 52rem) {
+  .split { grid-template-columns: minmax(0, 1fr); }
+  .split > :first-child { position: static; max-height: 22rem; }
+}
+
+/* A plain list of buttons, one selected */
+.pick { margin: 0; padding: 0; list-style: none; }
+.pick button {
+  display: flex; justify-content: space-between; align-items: baseline; gap: var(--s-2); width: 100%;
+  padding: .45rem var(--s-2); border: 0; border-radius: var(--r-2); background: none; color: var(--ink);
+  font: 400 var(--t-sm)/1.35 var(--sans); text-align: left; cursor: pointer; overflow-wrap: anywhere;
+}
+.pick button:hover { background: var(--hover); }
+.pick button[aria-current="true"] { background: color-mix(in srgb, var(--accent) 12%, transparent); }
+.pick small { flex: none; color: var(--muted); font-size: var(--t-xs); font-variant-numeric: tabular-nums; }
+.pick .group { padding: var(--s-4) var(--s-2) var(--s-1); }

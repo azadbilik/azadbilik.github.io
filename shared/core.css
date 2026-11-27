@@ -1,0 +1,270 @@
+/* shared/core.css: the design core of azadbilik.org. Tokens (colour, type, space, shape, motion), a minimal
+   base, and the components every new page and the admin are built from. One file, no build.
+
+   Load it on every page right after the fonts, before any other stylesheet:
+     <link rel="stylesheet" href="/fonts/fonts.css">
+     <link rel="stylesheet" href="/shared/core.css">
+
+   Everything here sits in cascade layers, and a page's own (unlayered) CSS always wins over a layer. So a
+   page can override any token or component without !important, and the core never fights a bespoke map.
+   Components are prefixed `ui-` so they never collide with a page's own class names (.panel, .rows, .wrap…).
+
+   Dark colours are written twice, as on every page of the hub (see shared/theme.js): for the system's dark
+   mode unless the reader chose light, and for the reader's explicit dark choice.
+
+   The living reference of every token and component, in both themes: admin → Design system (admin/README.md). */
+
+@layer core.tokens, core.base, core.components;
+
+/* ---------------------------------------------------------------- Tokens */
+@layer core.tokens {
+  :root {
+    color-scheme: light dark;
+
+    /* Surfaces and text: warm paper, near-black ink */
+    --paper: #F4EFE6;          /* the page */
+    --frame: #E9E2D6;          /* a sunk surface: image wells, code, table heads */
+    --raised: #FBF8F2;         /* a lifted surface: cards, inputs, popovers */
+    --ink: #1A1410;            /* text */
+    --muted: #675E55;          /* secondary text, captions, idle controls */
+    --rule: rgb(26 20 16 / .14);   /* hairlines and borders */
+    --hover: rgb(26 20 16 / .06);  /* a row or button under the pointer */
+
+    /* The one accent: madder red, from the brand's gem */
+    --accent: #A81E28;
+    --on-accent: #FBF8F2;
+
+    /* Series, for maps and charts (a story's travellers, a network's groups), in this order */
+    --second: #1F5C73;
+    --third: #5B6B2E;
+    --fourth: #8A5A12;
+    --fifth: #6B3F7A;
+    --sixth: #B0487F;
+
+    /* States: the admin's statuses, notes in pages */
+    --ok: #3F6B2E;
+    --warn: #8A5A12;
+    --bad: #A81E28;
+    --info: #1F5C73;
+
+    /* Type: Literata for reading and titles, Inter for interface */
+    --serif: 'Literata', Georgia, serif;
+    --sans: 'Inter', system-ui, sans-serif;
+    --mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    --t-xs: .75rem;            /* 12: labels, lozenges */
+    --t-sm: .8125rem;          /* 13: controls, captions, tables */
+    --t-md: .9375rem;          /* 15: interface text */
+    --t-lg: 1.0625rem;         /* 17: reading text, ledes */
+    --t-xl: 1.375rem;          /* 22: section titles (serif) */
+    --t-2xl: clamp(1.75rem, 1.2rem + 2.2vw, 2.5rem);    /* page titles in panels and tools */
+    --t-3xl: clamp(2.25rem, 1.3rem + 3.4vw, 4.25rem);   /* page titles on document pages */
+
+    /* Space: a 4px step */
+    --s-1: .25rem;
+    --s-2: .5rem;
+    --s-3: .75rem;
+    --s-4: 1rem;
+    --s-5: 1.5rem;
+    --s-6: 2rem;
+    --s-7: 3rem;
+    --gutter: clamp(1rem, 4vw, 3rem);   /* the page's side margin */
+    --measure: 42rem;                   /* the longest comfortable line of reading text */
+
+    /* Shape: small radii, the hub is paper not plastic */
+    --r-1: 2px;
+    --r-2: 3px;
+    --r-3: 4px;
+    --r-pill: 999px;
+    --shadow-1: 0 1px 2px rgb(0 0 0 / .04), 0 1px 6px rgb(0 0 0 / .05);
+    --shadow-2: 0 1px 2px rgb(0 0 0 / .04), 0 8px 32px rgb(0 0 0 / .08);
+
+    /* Motion */
+    --ease: cubic-bezier(.2, .7, .2, 1);
+    --fast: .15s;
+    --slow: .3s;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #14100D; --frame: #1F1914; --raised: #1C1713;
+      --ink: #F1EBE1; --muted: #A0968B; --rule: rgb(241 235 225 / .14); --hover: rgb(241 235 225 / .07);
+      --accent: #DA5A61; --on-accent: #14100D;
+      --second: #6FB3CC; --third: #A9BC6A; --fourth: #D9A44A; --fifth: #B98BCB; --sixth: #E08AB8;
+      --ok: #9CC27A; --warn: #D9A44A; --bad: #DA5A61; --info: #6FB3CC;
+      --shadow-1: 0 1px 2px rgb(0 0 0 / .3), 0 1px 6px rgb(0 0 0 / .25);
+      --shadow-2: 0 1px 2px rgb(0 0 0 / .3), 0 8px 32px rgb(0 0 0 / .4);
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #14100D; --frame: #1F1914; --raised: #1C1713;
+    --ink: #F1EBE1; --muted: #A0968B; --rule: rgb(241 235 225 / .14); --hover: rgb(241 235 225 / .07);
+    --accent: #DA5A61; --on-accent: #14100D;
+    --second: #6FB3CC; --third: #A9BC6A; --fourth: #D9A44A; --fifth: #B98BCB; --sixth: #E08AB8;
+    --ok: #9CC27A; --warn: #D9A44A; --bad: #DA5A61; --info: #6FB3CC;
+    --shadow-1: 0 1px 2px rgb(0 0 0 / .3), 0 1px 6px rgb(0 0 0 / .25);
+    --shadow-2: 0 1px 2px rgb(0 0 0 / .3), 0 8px 32px rgb(0 0 0 / .4);
+  }
+}
+
+/* ---------------------------------------------------------------- Base: only what every page already agrees on */
+@layer core.base {
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--paper); color: var(--ink);
+    font: 400 1rem/1.55 var(--sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-underline-offset: .2em; text-decoration-thickness: 1px; text-decoration-color: var(--rule); }
+  a:hover { text-decoration-color: currentColor; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: var(--r-1); }
+  [hidden] { display: none !important; }
+  /* Every text is written three times; the page's language shows (shared/hub.js sets <html lang>) */
+  html:not([lang="az"]) [data-l="az"], html:not([lang="ru"]) [data-l="ru"], html:not([lang="en"]) [data-l="en"] { display: none !important; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: 0s !important; animation-duration: 0s !important; } }
+}
+
+/* ---------------------------------------------------------------- Components */
+@layer core.components {
+
+  /* Layout: a centred column, a vertical stack, a wrapping row */
+  .ui-wrap { max-width: 76rem; margin-inline: auto; padding-inline: var(--gutter); }
+  .ui-stack { display: flex; flex-direction: column; gap: var(--gap, var(--s-4)); }
+  .ui-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--gap, var(--s-2)); }
+  .ui-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(var(--min, 16rem), 1fr)); gap: var(--gap, var(--s-4)); }
+
+  /* Type */
+  .ui-title { margin: 0; font: 300 var(--t-3xl)/1.04 var(--serif); letter-spacing: -.025em; text-wrap: balance; }
+  .ui-title.is-small { font-size: var(--t-2xl); line-height: 1.1; letter-spacing: -.02em; }
+  .ui-sub { margin: 0; font: italic 300 var(--t-lg)/1.4 var(--serif); color: var(--muted); }
+  .ui-h { margin: 0; font: 400 var(--t-xl)/1.2 var(--serif); letter-spacing: -.01em; }
+  .ui-lede { margin: 0; max-width: var(--measure); font: 400 var(--t-lg)/1.55 var(--serif); }
+  .ui-label { font-size: var(--t-xs); font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+  .ui-muted { color: var(--muted); }
+  .ui-num { font-variant-numeric: tabular-nums; }
+  .ui-code, .ui-pre { font: 400 var(--t-sm)/1.5 var(--mono); }
+  .ui-code { padding: .05em .3em; border-radius: var(--r-1); background: var(--frame); }
+  .ui-pre { margin: 0; padding: var(--s-3) var(--s-4); overflow: auto; border-radius: var(--r-2); background: var(--frame); white-space: pre-wrap; word-break: break-word; }
+
+  /* Button: quiet by default, .is-primary for the one main action, .is-ghost inside toolbars */
+  .ui-btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: var(--s-2);
+    min-height: 2.25rem; padding: 0 var(--s-4);
+    border: 1px solid var(--rule); border-radius: var(--r-2); background: var(--raised); color: var(--ink);
+    font: 500 var(--t-sm)/1 var(--sans); text-decoration: none; white-space: nowrap; cursor: pointer;
+    transition: border-color var(--fast), background var(--fast);
+  }
+  .ui-btn:hover { border-color: var(--muted); }
+  .ui-btn:disabled { opacity: .45; cursor: default; border-color: var(--rule); }
+  .ui-btn.is-primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+  .ui-btn.is-primary:hover { background: color-mix(in srgb, var(--accent) 88%, var(--ink)); }
+  .ui-btn.is-ghost { background: none; border-color: transparent; color: var(--muted); }
+  .ui-btn.is-ghost:hover { color: var(--ink); background: var(--hover); }
+  .ui-btn.is-danger { color: var(--bad); }
+  .ui-btn.is-small { min-height: 1.75rem; padding: 0 var(--s-3); font-size: var(--t-xs); }
+  .ui-btn svg { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* Chip: a toggle in a filter row. aria-pressed="true" when on */
+  .ui-chip {
+    display: inline-flex; align-items: center; gap: var(--s-1);
+    min-height: 1.875rem; padding: 0 var(--s-3);
+    border: 1px solid var(--rule); border-radius: var(--r-pill); background: none; color: var(--muted);
+    font: 400 var(--t-sm)/1 var(--sans); cursor: pointer; white-space: nowrap;
+    transition: color var(--fast), border-color var(--fast), background var(--fast);
+  }
+  .ui-chip:hover { color: var(--ink); border-color: var(--muted); }
+  .ui-chip[aria-pressed="true"] { color: var(--paper); background: var(--ink); border-color: var(--ink); }
+  .ui-chip .n { font-variant-numeric: tabular-nums; opacity: .7; }
+
+  /* Status lozenge: .is-ok .is-warn .is-bad .is-info, grey when none */
+  .ui-badge {
+    --tone: var(--muted);
+    display: inline-flex; align-items: center; gap: .35em;
+    padding: .2em .55em; border-radius: var(--r-1);
+    background: color-mix(in srgb, var(--tone) 14%, transparent); color: var(--tone);
+    font: 500 var(--t-xs)/1.2 var(--sans); letter-spacing: .02em; white-space: nowrap;
+  }
+  .ui-badge.is-ok { --tone: var(--ok); }
+  .ui-badge.is-warn { --tone: var(--warn); }
+  .ui-badge.is-bad { --tone: var(--bad); }
+  .ui-badge.is-info { --tone: var(--info); }
+  .ui-badge.is-dot::before { content: ''; width: .5em; height: .5em; border-radius: 50%; background: currentColor; }
+
+  /* Card: a raised block; a link card lifts its title on hover */
+  .ui-card { padding: var(--s-4) var(--s-5); border: 1px solid var(--rule); border-radius: var(--r-3); background: var(--raised); }
+  a.ui-card { display: block; text-decoration: none; transition: border-color var(--fast); }
+  a.ui-card:hover { border-color: var(--muted); }
+  a.ui-card:hover .ui-h { color: var(--accent); }
+
+  /* Stat: a number and what it counts */
+  .ui-stat { display: flex; flex-direction: column; gap: var(--s-1); }
+  .ui-stat b { font: 300 var(--t-2xl)/1 var(--serif); letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+  .ui-stat span { font-size: var(--t-sm); color: var(--muted); }
+
+  /* Note: a short callout. .is-warn .is-bad .is-ok */
+  .ui-note { --tone: var(--info); padding: var(--s-3) var(--s-4); border: 1px solid color-mix(in srgb, var(--tone) 30%, transparent); border-radius: var(--r-3); background: color-mix(in srgb, var(--tone) 8%, transparent); font-size: var(--t-sm); }
+  .ui-note.is-warn { --tone: var(--warn); }
+  .ui-note.is-bad { --tone: var(--bad); }
+  .ui-note.is-ok { --tone: var(--ok); }
+
+  /* Fields: a label over its control, a hint under it */
+  .ui-field { display: flex; flex-direction: column; gap: var(--s-1); font-size: var(--t-sm); }
+  .ui-field > span:first-child { color: var(--muted); }
+  .ui-field small { color: var(--muted); font-size: var(--t-xs); }
+  .ui-input, .ui-select, .ui-textarea {
+    width: 100%; min-height: 2.25rem; padding: .45rem var(--s-3);
+    border: 1px solid var(--rule); border-radius: var(--r-2); background: var(--raised); color: var(--ink);
+    font: 400 var(--t-sm)/1.4 var(--sans);
+  }
+  .ui-textarea { min-height: 5rem; resize: vertical; }
+  .ui-textarea.is-code { font-family: var(--mono); }
+  .ui-input::placeholder, .ui-textarea::placeholder { color: var(--muted); }
+  .ui-input:focus, .ui-select:focus, .ui-textarea:focus { outline: 2px solid var(--accent); outline-offset: -1px; border-color: transparent; }
+  .ui-input[aria-invalid="true"], .ui-textarea[aria-invalid="true"] { border-color: var(--bad); }
+  .ui-check { display: inline-flex; align-items: center; gap: var(--s-2); font-size: var(--t-sm); cursor: pointer; }
+  .ui-check input { accent-color: var(--accent); width: 1rem; height: 1rem; margin: 0; }
+
+  /* Table: hairline rows, sticky head, numbers right-aligned with .ui-num */
+  .ui-table-wrap { overflow: auto; border: 1px solid var(--rule); border-radius: var(--r-3); }
+  .ui-table { width: 100%; border-collapse: collapse; font-size: var(--t-sm); }
+  .ui-table th, .ui-table td { padding: .55rem var(--s-3); text-align: left; vertical-align: top; border-bottom: 1px solid var(--rule); }
+  .ui-table th { position: sticky; top: 0; z-index: 1; background: var(--frame); font-weight: 500; color: var(--muted); white-space: nowrap; }
+  .ui-table tr:last-child td { border-bottom: 0; }
+  .ui-table tbody tr:hover td { background: var(--hover); }
+  .ui-table tr[aria-selected="true"] td { background: color-mix(in srgb, var(--accent) 10%, transparent); }
+  .ui-table .ui-num { text-align: right; }
+  .ui-table.is-clickable tbody tr { cursor: pointer; }
+
+  /* Tabs: a row of buttons with role="tab" and aria-selected */
+  .ui-tabs { display: flex; gap: var(--s-5); overflow-x: auto; border-bottom: 1px solid var(--rule); scrollbar-width: none; }
+  .ui-tabs [role="tab"] {
+    padding: var(--s-3) 0; border: 0; background: none; color: var(--muted); cursor: pointer;
+    font: 400 var(--t-md)/1 var(--sans); white-space: nowrap; box-shadow: inset 0 -1px transparent;
+  }
+  .ui-tabs [role="tab"]:hover { color: var(--ink); }
+  .ui-tabs [role="tab"][aria-selected="true"] { color: var(--ink); box-shadow: inset 0 -2px var(--accent); }
+
+  /* Panel: a floating sheet over a map or a stage */
+  .ui-panel { border: 1px solid var(--rule); border-radius: var(--r-3); background: color-mix(in srgb, var(--paper) 95%, transparent); backdrop-filter: blur(8px); box-shadow: var(--shadow-2); }
+
+  /* Rows: the hub's list of places, a name and one line each, the whole row a link */
+  .ui-rows { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--rule); }
+  .ui-rows li { border-bottom: 1px solid var(--rule); }
+  .ui-rows a { display: grid; grid-template-columns: minmax(9rem, 13rem) 1fr auto; align-items: baseline; gap: var(--s-1) var(--s-5); padding: .9rem 0; text-decoration: none; }
+  .ui-rows b { font: 400 var(--t-xl)/1.2 var(--serif); letter-spacing: -.01em; transition: color var(--fast); }
+  .ui-rows a > span { color: var(--muted); font-size: var(--t-md); }
+  .ui-rows a::after { content: '→'; color: var(--muted); transition: transform var(--slow) var(--ease), color var(--fast); }
+  .ui-rows a:hover b, .ui-rows a:hover::after { color: var(--accent); }
+  .ui-rows a:hover::after { transform: translateX(.2rem); }
+  @media (max-width: 40rem) {
+    .ui-rows a { grid-template-columns: 1fr auto; }
+    .ui-rows a > span { grid-column: 1; grid-row: 2; }
+    .ui-rows a::after { grid-row: 1 / 3; align-self: center; }
+  }
+
+  /* Swatch: a colour and its token name (the design reference) */
+  .ui-swatch { display: flex; flex-direction: column; gap: var(--s-1); font-size: var(--t-xs); }
+  .ui-swatch i { display: block; height: 3rem; border: 1px solid var(--rule); border-radius: var(--r-2); background: var(--c); }
+}

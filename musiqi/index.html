@@ -15,26 +15,21 @@
 <meta property="og:image" content="https://azadbilik.org/musiqi/og.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="stylesheet" href="/shared/core.css">
 <link rel="stylesheet" href="/shared/hub.css">
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
 <script>
   (() => { const L = ['az', 'ru', 'en']; let l = new URLSearchParams(location.search).get('lang'); if (!L.includes(l)) { try { l = localStorage.getItem('lang'); } catch {} } if (L.includes(l)) document.documentElement.lang = l; })();
 </script>
 <style>
-  :root {
-    --paper: #F4EFE6; --ink: #1A1410; --muted: #675E55; --rule: rgb(26 20 16 / .14); --frame: #E9E2D6;
-    --accent: #A81E28; --second: #1F5C73; --third: #5B6B2E; --fourth: #8A6A3B; --water: #E4DCCF; --land: #F4EFE6;
+  :root { --fourth: #8A6A3B; --water: #E4DCCF; --land: #F4EFE6;
     --vinyl: #171310; --groove: rgb(255 255 255 / .07); --rim: transparent;
-    --serif: 'Literata', Georgia, serif; --sans: 'Inter', system-ui, sans-serif;
-    --gutter: clamp(1rem, 4vw, 3rem);
     color-scheme: light dark;
   }
   @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) { --paper: #14100D; --ink: #F1EBE1; --muted: #A0968B; --rule: rgb(241 235 225 / .14); --frame: #1F1914;
-      --accent: #DA5A61; --second: #6FB3CC; --third: #A9BC6A; --fourth: #CDA56A; --water: #0C0A08; --land: #1C1713; --vinyl: #050403; --groove: rgb(255 255 255 / .06); --rim: rgb(241 235 225 / .18); }
+    :root:not([data-theme="light"]) { --fourth: #CDA56A; --water: #0C0A08; --land: #1C1713; --vinyl: #050403; --groove: rgb(255 255 255 / .06); --rim: rgb(241 235 225 / .18); }
   }
-  :root[data-theme="dark"] { --paper: #14100D; --ink: #F1EBE1; --muted: #A0968B; --rule: rgb(241 235 225 / .14); --frame: #1F1914;
-      --accent: #DA5A61; --second: #6FB3CC; --third: #A9BC6A; --fourth: #CDA56A; --water: #0C0A08; --land: #1C1713; --vinyl: #050403; --groove: rgb(255 255 255 / .06); --rim: rgb(241 235 225 / .18); }
+  :root[data-theme="dark"] { --fourth: #CDA56A; --water: #0C0A08; --land: #1C1713; --vinyl: #050403; --groove: rgb(255 255 255 / .06); --rim: rgb(241 235 225 / .18); }
 
   * { box-sizing: border-box; margin: 0; }
   html { scroll-behavior: smooth; }
