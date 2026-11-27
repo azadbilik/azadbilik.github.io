@@ -1,5 +1,6 @@
 # Fits a 2nd-order polynomial per Kondratenko sheet from gcp-<sheet>.json, drops LOO outliers (>3x median),
-# warps the sheet to web-Mercator lon/lat, masks it to the governorate (1897 outline, buffered) minus the
+# warps the sheet to web-Mercator lon/lat, masks it to the governorate (1897 outline, buffered, or drawn) plus the
+# seams between neighbouring sheets, minus the
 # legend/title blocks, writes the webp + kondratenko.json + kondratenko-gcps.json (+ check PNGs in the temp dir).
 # Control points: data/raw/kondratenko-gcp-<sheet>.json (village dots read on the sheet, matched to geocode-1886.csv).
 #   python3 scripts/kondratenko.py      (numpy, scipy, Pillow, shapely; scans in ~/kitabxana-scans/prlib)
@@ -40,6 +41,17 @@ def make_design_ll(lon0, lat0):
         return np.stack([np.ones_like(x), x, y, x * x, x * y, y * y], 1)
     return D
 
+def pxpoly_ll(Cfwd, rects):
+    """pixel rectangles on the scan -> their lon/lat outline (edges sampled, since the fit is curved)"""
+    from shapely.geometry import Polygon
+    out = []
+    for x0, y0, x1, y1 in rects:
+        t = np.linspace(0, 1, 25)
+        ring = np.concatenate([np.stack([x0 + (x1 - x0) * t, np.full_like(t, y0)], 1), np.stack([np.full_like(t, x1), y0 + (y1 - y0) * t], 1),
+                               np.stack([x1 - (x1 - x0) * t, np.full_like(t, y1)], 1), np.stack([np.full_like(t, x0), y1 - (y1 - y0) * t], 1)])
+        out.append(Polygon(design_px(ring) @ Cfwd).buffer(0))
+    return unary_union(out)
+
 def km(lon, lat, lon2, lat2):
     return math.hypot((lon - lon2) * 111.32 * math.cos(math.radians(lat2)), (lat - lat2) * 110.57)
 
@@ -53,7 +65,7 @@ def loo(pts):
         res[n] = km(lon, lat, ll[i, 0], ll[i, 1])
     return res
 
-result, corners = {}, {}
+result, corners, fits, areas = {}, {}, {}, {}
 for sheet, cfg in SHEETS.items():
     g = json.load(open(K / f'kondratenko-gcp-{sheet}.json'))
     pts = {n: v for n, v in g.items()}
@@ -76,13 +88,36 @@ for sheet, cfg in SHEETS.items():
                      'looKm': {n: round(d, 2) for n, d in sorted(r.items(), key=lambda t: -t[1])},
                      'dropped': dropped, 'looKmMedian': round(med, 2), 'looKmMax': round(max(r.values()), 2)}
 
+    fits[sheet] = (DL, Cinv, Cfwd)
+
     # mask polygon: 1897 governorate outline, buffered, into pixel space
     if 'mask_px' in cfg:   # governorates the 1897 frame doesn't hold: an outline drawn on the sheet (pixels)
         from shapely.geometry import Polygon
-        area = Polygon([tuple(q) for q in (design_px(np.array(cfg['mask_px'], float)) @ Cfwd)])
+        area = Polygon([tuple(q) for q in (design_px(np.array(cfg['mask_px'], float)) @ Cfwd)]).buffer(0)
     else:
         gov = unary_union([shape(f['geometry']) for f in UNITS['features'] if f['properties']['govKey'] == cfg['gov']])
         area = gov.buffer(BUF).simplify(0.005)
+    # what of the sheet can be shown at all: the scan minus legend/title blocks, in lon/lat
+    sw, sh = Image.open(SCANS / cfg['file']).size
+    fits[sheet] += (pxpoly_ll(Cfwd, [(0, 0, sw, sh)]).difference(pxpoly_ll(Cfwd, cfg['exclude'])),)
+    areas[sheet] = area.difference(pxpoly_ll(Cfwd, cfg['exclude']))
+
+# seams: where two neighbouring sheets' outlines leave a thin strip that neither covers, the strip goes to
+# the sheet(s) whose scan holds it (they print the neighbour's land uncoloured), so the mosaic has no holes
+SEAM = 0.15   # degrees: closes strips up to ~30 km wide; outer bays touching only one sheet are left alone
+U = unary_union(list(areas.values()))
+closed = U.buffer(SEAM, join_style=2).buffer(-SEAM, join_style=2)
+gaps = closed.difference(U)
+seams = [g for g in (gaps.geoms if hasattr(gaps, 'geoms') else [gaps]) if g.area > 1e-6
+         and sum(g.buffer(0.01).intersects(a) for a in areas.values()) >= 2]
+print('seams', len(seams), 'filled, sq deg', round(sum(g.area for g in seams), 4))
+for sheet in SHEETS:
+    add = [g.intersection(fits[sheet][3]) for g in seams if g.buffer(0.01).intersects(areas[sheet])]
+    if add: areas[sheet] = unary_union([areas[sheet]] + add).buffer(0.002).buffer(-0.002)
+
+for sheet, cfg in SHEETS.items():
+    DL, Cinv, Cfwd, _ = fits[sheet]; area = areas[sheet]
+    pts = result[sheet]['points']; med = result[sheet]['looKmMedian']
     W, S, E, N = area.bounds
     scan = Image.open(SCANS / cfg['file']).convert('RGB'); sw, sh = scan.size
     mask = Image.new('L', (sw, sh), 0); d = ImageDraw.Draw(mask)
@@ -123,7 +158,7 @@ for sheet, cfg in SHEETS.items():
             dd.line([toImg(*c) for c in p.exterior.coords], fill=(220, 0, 0), width=3)
     for n, v in pts.items():
         X, Y = toImg(v[3], v[2]); dd.ellipse([X - 6, Y - 6, X + 6, Y + 6], outline=(0, 90, 255), width=3)
-    for dr in dropped:
+    for dr in result[sheet]['dropped']:
         X, Y = toImg(dr['latlon'][1], dr['latlon'][0]); dd.ellipse([X - 7, Y - 7, X + 7, Y + 7], outline=(255, 0, 255), width=3)
     ck.save(SC / f'kond-check-{sheet}.png')
 

@@ -8,7 +8,7 @@
 | `data/villages-1886.csv` | One row per village and town: uezd, участок, rural society, number, name as printed, distances, households, men, women, and men/women by people (`pp_*`), faith (`fa_*`) and estate (`es_*`), normalised; built by `scripts/merge.py` |
 | `data/checks-1886.txt` | Every printed society, участок and uezd total against the sum of its villages |
 | `data/raw/places.tsv` | Candidate places: GeoNames (AZ, AM, GE), OpenStreetMap place nodes, Wikidata settlements, with all their names |
-| `data/geocode-1886.csv` | Each village's place: coordinates, the place and name matched, score, how it was decided (`name`, `society`, `approx`), runners-up; built by `scripts/geocode.py` |
+| `data/geocode-1886.csv` | Each village's place: coordinates, the place and name matched, score, how it was decided (`name`, `society`, `hand`, `map`, `map-society`, `named`, `approx`), runners-up; built by `scripts/geocode.py` |
 | `data/villages.geojson`, `data/summary.json` | What the page reads, built by `scripts/build.py` |
 
 Rebuild: `python3 scripts/merge.py && python3 scripts/geocode.py && python3 scripts/build.py` (geocode needs `shapely`).
@@ -27,9 +27,9 @@ The 116 spreads were transcribed with Claude reading the scans (each page at ful
 
 Names are compared as a rough phonetic skeleton shared by pre-reform Russian, modern Russian and Azerbaijani Latin (Карадаглу ≈ Qaradağlı ≈ Карадаглы), against every name of every candidate place inside the village's uezd (RISTAT's 1897 boundaries, `../1897/data/units.geojson`, buffered by ~8 km; a place inside the uezd proper scores a little higher). A clear best match is taken; between close or same-named candidates the rural society decides: the one nearest the society's other villages. A placed village far (> 25 km) from the rest of its society is re-decided or let go. «Ашага/нижний» and «юхари/верхний» (and «беюк/малое») must agree with the place's own Aşağı/Yuxarı/Böyük/Kiçik. One place takes one village: where several matched the same place (within 300 m), the best match keeps it and the others take their next candidate near their society, or go approximate. Villages still unplaced but in a society with placed villages are shown at the society's middle and marked approximate (hollow on the map).
 
-Result: 1,815 of 2,700 villages placed by name or by their society (67%). Of the rest, 122 were found by their own dot on Kondratenko's maps (below; `how` = `map`, within ~2 km) and 136 at their rural society's printed number there (`map-society`); 577 are shown approximately at the middle of their society; 50 (about 29,000 people) are not on the map — 38 of them in the 22 societies Kondratenko lists as «не показаныя на картѣ». Their people are still in the totals.
+Result: 1,815 of 2,700 villages placed by name or by their society (67%). Of the rest, 122 were found by their own dot on Kondratenko's maps (below; `how` = `map`, within ~2 km) and 136 at their rural society's printed number there (`map-society`); 577 are shown approximately at the middle of their society; 14 that no 1886 source places, most of them nomad groups of the Shirvan plain, are shown approximately at the village that carries their name today (`named`, `data/raw/geocode-named.csv`; many nomads settled where they wintered); 36 (about 20,000 people) are not on the map, nearly all nomad groups in the societies Kondratenko lists as «не показаныя на картѣ». Their people are still in the totals.
 
-Placements were spot-checked, not checked one by one. Where a village shares its name with another nearby, the society rule usually picks right but not always; corrections are welcome.
+Placements were spot-checked, not checked one by one, except for the close calls: the 66 villages whose place had a same-named rival that the society rule could not clearly rule out were each compared with the labels on Kondratenko's map, and 14 were moved to the place the map supports (`how` = `hand`, `data/raw/geocode-hand.csv`, with what was read). Corrections are welcome.
 
 ## Kondratenko's maps
 
@@ -45,7 +45,7 @@ The page can show, under the dots, E. Kondratenko's seven ethnographic maps of t
 | Kutais (with Sukhum and Batum) | p10 | 45 | 2.2 / 5.3 km |
 | Dagestan | p16 | 41 | 1.8 / 5.2 km |
 
-Control points are settlement dots read on each sheet: for Baku and Elisabethpol, villages already placed by name here; for the others, towns and villages found in GeoNames (AZ, AM, GE, RU, TR) by their old Russian names (`data/raw/kondratenko-gcp-<sheet>.json`). A second-order polynomial per sheet; points that miss by more than 3× the median are dropped. Baku and Elisabethpol are cut to their 1897 outlines; the others to an outline drawn along the map's own border (`data/raw/kondratenko-sheets.json`, with the blocks of legend and charts left out). `python3 scripts/kondratenko.py` writes `data/kondratenko-<sheet>.webp`, `data/kondratenko.json` (corners) and `data/raw/kondratenko-gcps.json` (the fit, each point's error, the points dropped).
+Control points are settlement dots read on each sheet: for Baku and Elisabethpol, villages already placed by name here; for the others, towns and villages found in GeoNames (AZ, AM, GE, RU, TR) by their old Russian names (`data/raw/kondratenko-gcp-<sheet>.json`). A second-order polynomial per sheet; points that miss by more than 3× the median are dropped. Baku and Elisabethpol are cut to their 1897 outlines; the others to an outline drawn along the map's own border (`data/raw/kondratenko-sheets.json`, with the blocks of legend and charts left out). Where two neighbouring outlines leave a thin strip between them (up to ~30 km), the strip is filled from the sheet(s) whose scan holds it, so the mosaic has no holes. `python3 scripts/kondratenko.py` writes `data/kondratenko-<sheet>.webp`, `data/kondratenko.json` (corners) and `data/raw/kondratenko-gcps.json` (the fit, each point's error, the points dropped).
 
 ## Licences
 

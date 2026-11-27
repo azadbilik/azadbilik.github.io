@@ -52,10 +52,11 @@ for r in rows:
     if not g or not g['lat']:
         unplaced[u][0] += 1; unplaced[u][1] += pop
         continue
-    approx = g['how'] in ('approx', 'map-society')
+    approx = g['how'] in ('approx', 'map-society', 'named')
     U['placed'] += 1; U['approx'] += approx
     props = {'n': r['name'], 's': r['society'], 'u': u, 'no': n(r['no']) or None, 't': pop, 'h': n(r['hh']), 'p': p, 'f': f, 'e': e, 'sp': n(r['spread'])}
-    if approx: props['a'] = 1
+    if g['how'] == 'named': props['a'] = 1; props['nm'] = g['place']
+    elif approx: props['a'] = 1
     elif g['how'] == 'map': props['m'] = 1
     elif g['place']: props['today'] = g['place']
     feats.append({'type': 'Feature', 'geometry': {'type': 'Point', 'coordinates': [float(g['lon']), float(g['lat'])]}, 'properties': props})

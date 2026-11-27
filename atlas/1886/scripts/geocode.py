@@ -143,6 +143,17 @@ for _ in range(3):
             kept.append(i)
     if not moved: break
 
+# pass 3b': placements checked by hand against Kondratenko's 1886 maps (data/raw/geocode-hand.csv: the place
+# the map supports where two same-named places were close calls; 'why' says what was read)
+hand = {(r['uezd'], r['society'], r['no'], r['name']): r for r in csv.DictReader(open(HERE / 'data' / 'raw' / 'geocode-hand.csv'))}
+for i, v in enumerate(vill):
+    h = hand.get((v['uezd'], v['society'], v['no'], v['name']))
+    if not h: continue
+    pick = [(s, p) for s, p in cands[i] if km(p[2:4], (float(h['lat']), float(h['lon']))) < .5]
+    assert pick, f'hand placement not among candidates: {v["name"]}'
+    res[i] = (pick[0], 'hand')
+assert len(hand) == sum(1 for r in res if r and r[1] == 'hand'), 'a hand placement matched no village'
+
 # pass 3c: villages no gazetteer knows, read on Kondratenko's 1886 maps (data/raw/kondratenko-placed.csv):
 # the village's own dot ('map', within ~2 km), or its rural society's printed number ('map-society', approximate)
 onmap = {}
@@ -151,6 +162,15 @@ for i, v in enumerate(vill):
     k = kp.get((v['uezd'], v['society'], v['no'], v['name']))
     if res[i] or not k or k['kind'] not in ('village', 'society') or not k['lat']: continue
     onmap[i] = (float(k['lat']), float(k['lon']), 'map' if k['kind'] == 'village' else 'map-society', k['label_read'])
+
+# pass 3d: nomad groups (and a few villages) no 1886 source places, shown at the village that carries
+# their name today (data/raw/geocode-named.csv): many of the Shirvan nomads settled where they wintered
+named = {}
+for r in csv.DictReader(open(HERE / 'data' / 'raw' / 'geocode-named.csv')):
+    named[(r['uezd'], r['society'], r['no'], r['name'])] = r
+for i, v in enumerate(vill):
+    r = named.get((v['uezd'], v['society'], v['no'], v['name']))
+    if r and not res[i] and i not in onmap: onmap[i] = (float(r['lat']), float(r['lon']), 'named', r['place'])
 
 # pass 4: what is still unplaced goes to its society's middle, marked approximate
 approx = {}
@@ -170,14 +190,15 @@ with open(HERE / 'data' / 'geocode-1886.csv', 'w', newline='') as fh:
             w.writerow([v['uezd'], v['society'], v['no'], v['name'], round(p[2], 5), round(p[3], 5), p[4], p[0], p[1], s, how, p[6], alt])
         elif i in onmap:
             la, lo, how, lab = onmap[i]
-            w.writerow([v['uezd'], v['society'], v['no'], v['name'], round(la, 5), round(lo, 5), lab, 'kondratenko', '', '', how, '', alt])
+            w.writerow([v['uezd'], v['society'], v['no'], v['name'], round(la, 5), round(lo, 5), lab, 'kondratenko' if how != 'named' else 'today', '', '', how, '', alt])
         elif i in approx:
             w.writerow([v['uezd'], v['society'], v['no'], v['name'], round(approx[i][0], 5), round(approx[i][1], 5), '', '', '', '', 'approx', '', alt])
         else:
             w.writerow([v['uezd'], v['society'], v['no'], v['name'], '', '', '', '', '', '', '', '', alt])
 n = sum(1 for r in res if r)
 print(f'{len(approx)} more approximately, at their society; on Kondratenko\'s maps {sum(1 for x in onmap.values() if x[2] == "map")} by their dot, {sum(1 for x in onmap.values() if x[2] == "map-society")} at their society;', end=' ')
-print(f'{n} of {len(vill)} placed ({sum(1 for r in res if r and r[1] == "name")} by name, {sum(1 for r in res if r and r[1] == "society")} by society)')
+print(f'{sum(1 for x in onmap.values() if x[2] == "named")} at today\'s namesake;', end=' ')
+print(f'{n} of {len(vill)} placed ({sum(1 for r in res if r and r[1] == "name")} by name, {sum(1 for r in res if r and r[1] == "society")} by society, {sum(1 for r in res if r and r[1] == "hand")} checked by hand)')
 per = defaultdict(lambda: [0, 0])
 for v, r in zip(vill, res): per[v['uezd']][0] += 1; per[v['uezd']][1] += bool(r)
 for k, (a, b) in sorted(per.items()): print(f'  {k}: {b}/{a}')
