@@ -1,6 +1,6 @@
 # Silsilə · Master–student lineages
 
-[azadbilik.org/musiqi/silsile](https://azadbilik.org/musiqi/silsile/): who learned from whom among the khanendes, tar players and ashiks of the [music map](../), az/ru/en. Generations run left to right; a click lights a musician's masters, students and whole line; the same lines are listed below as trees.
+[azadbilik.org/musiqi/silsile](https://azadbilik.org/musiqi/silsile/): who learned from whom among the khanendes, tar players and ashiks of the [music map](../xerite/), az/ru/en. Generations run left to right; a click lights a musician's masters, students and whole line; the same lines are listed below as trees.
 
 | File | What |
 |---|---|

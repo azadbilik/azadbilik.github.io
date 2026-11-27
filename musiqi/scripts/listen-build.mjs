@@ -1,6 +1,6 @@
-// Catalogue of /musiqi/dinle/ (the listening page): every musician of the music pages who has something to play, sorted by period,
+// Catalogue of /musiqi/ (the listening page): every musician of the music pages who has something to play, sorted by period,
 // genre and school, plus the stage and symphonic works with recordings in the Apple Music catalogue.
-//   node scripts/listen-build.mjs   (cache only, no requests) -> dinle/data/catalog.json
+//   node scripts/listen-build.mjs   (cache only, no requests) -> data/catalog.json
 // Reads: data/apple.json (who is matched, and how), data/.cache/apple-match.json (their albums and tracks), data/.cache/apple-works.json
 // (scripts/apple-works.mjs), data/.cache/itunes/ (album artwork), data/recordings.json + the sub-pages' recordings.json (public-domain,
 // full length), musicians.json, composers.json, jazz.json, estrada.raw.json, lineage.json (names, dates, roles, teachers).
@@ -196,11 +196,10 @@ for (const w of COMP.works) {
 
 const albums = [...ALB.values()].map(([, n, y, u, a]) => [n, y, u, a]);
 const out = { built: new Date().toISOString().slice(0, 10), artists: A, works: W, schools: schools.map(({ k, n, m }) => ({ k, n, m })), albums };
-await mkdir(R('../dinle/data/'), { recursive: true });
-// long shared URL prefixes as short tokens; the page expands them (X in dinle/index.html)
+// long shared URL prefixes as short tokens; the page expands them (X in index.html)
 const PRE = [[/https:\/\/audio-ssl\.itunes\.apple\.com\/itunes-assets\//g, '~a/'], [/https:\/\/is(\d)-ssl\.mzstatic\.com\/image\/thumb\//g, '~i$1/'], [/https:\/\/music\.apple\.com\//g, '~m/'], [/https:\/\/upload\.wikimedia\.org\/wikipedia\/commons\//g, '~u/'], [/https:\/\/commons\.wikimedia\.org\/wiki\//g, '~c/']];
 let json = JSON.stringify(out); for (const [re, t] of PRE) json = json.replace(re, t);
-await writeFile(R('../dinle/data/catalog.json'), json);
+await writeFile(R('../data/catalog.json'), json);
 console.log(Math.round(json.length / 1024), 'KB');
 const st = (f) => A.filter(f).length;
 console.log('artists', A.length, 'tracks', A.reduce((s, a) => s + a.t.length, 0), 'free', A.reduce((s, a) => s + a.t.filter((t) => t[6] === 1).length, 0), 'albums', albums.length,

@@ -35,7 +35,7 @@ const yt = async (q) => {
   return out;
 };
 
-const CAT = await J('../dinle/data/catalog.json'), COMP = await J('../bestekarlar/data/composers.json'), EST = await J('../estrada/data/estrada.raw.json');
+const CAT = await J('../data/catalog.json'), COMP = await J('../bestekarlar/data/composers.json'), EST = await J('../estrada/data/estrada.raw.json');
 const qs = new Map(); // query -> { kind, key }
 const ruShort = (s) => s ? s.replace(/,.*$/, '').split(/\s+/).filter((_, i, a) => i === 0 || i === a.length - 1).join(' ') : '';
 // Musicians at work in the Soviet era (in the catalogue or not: the estrada list's ensembles and the composers with a stage work have none on Apple)

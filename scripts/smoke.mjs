@@ -38,7 +38,8 @@ console.log('Hub pages');
 for (const [path, musts] of [
   ['/', ['href="/xeriteler/"', 'href="/qalereya/"', 'href="/atlas/"', 'id="culture"', 'id="atlas"', '/shared/header.js']],
   ['/atlas/', ['href="/atlas/ehali/"', 'href="/xeriteler/"']],
-  ['/musiqi/', ['maplibre-gl', 'recordings.json']],
+  ['/musiqi/', ['data/catalog.json', '/shared/header.js']],
+  ['/musiqi/xerite/', ['maplibre-gl', 'recordings.json']],
   ['/arxiv/', ['viewer.js', 'items.json']],
   ['/atlas/icmalar/', ['maplibre-gl', 'extras.json']],
   ['/atlas/xalqlar/', ['maplibre-gl', 'peoples.out.json', 'data/dots-']],
@@ -61,7 +62,6 @@ for (const [path, musts] of [
   ['/musiqi/bestekarlar/', ['href="/shared/graph.css"', 'data/composers.json']],
   ['/musiqi/caz/', ['href="/shared/graph.css"', 'data/jazz.json']],
   ['/musiqi/estrada/', ['data/estrada.raw.json', 'data/recordings.json']],
-  ['/musiqi/dinle/', ['data/catalog.json', '/shared/header.js']],
   ['/atlas/caylar/', ['/atlas/hovze/']],
   ['/atlas/1897/', ['maplibre-gl', 'census.out.json']],
   ['/atlas/xanliqlar/', ['maplibre-gl', 'data/khanates.geojson']],
