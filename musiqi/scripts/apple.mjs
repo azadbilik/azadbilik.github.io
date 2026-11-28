@@ -29,14 +29,15 @@ const DROP = {
   Q16378524: 'Ədalət Nəsibov: matched «Aşıq Adalet», not the same name', Q4216454: 'Qaryağdıoğlu: only «Music of Azerbaijan I: Selection of Iran», origin of the artist unclear',
   Q1189603: 'one single titled in Persian, doubtful', Q134286966: 'only a feature credit', Q107926164: 'Bengt Johansson: namesake (Swedish pop)',
   Q12850037: 'Əli Quliyev: rap namesake', Q16368221: 'two Gülyaz Məmmədovas, unclear', Q12838981: 'Ehtiram Hüseynov: breakbeat namesake',
-  Q12846316: 'Sakhavat Mammadov (1953–1991): the Apple artist is the Wikidata-linked one born 1993 (Q140127954)', Q25543577: 'Səbuhi Cəfərov: spoken-word namesake',
+  Q25543577: 'Səbuhi Cəfərov: spoken-word namesake',
   Q16370169: 'Mirza Mansur Mansurov (d. 1967): only two 2024 singles, no historical release and no title naming him',
   Q1959615: 'Ilyinsky (d. 1920): no album or title carries his name, only others\' performances of one piece',
   Q12838356: 'only a feature credit', Q19715058: 'only a feature credit',
   Q1483971: 'Fərqanə Qasımova: the name search found her father Alim Qasımov\'s artist page (shared id)', Q4223720: 'Aleksandr Klimov (conductor, 1898–1974): the Apple artist is a pop singer of the 2020s',
 };
-// Apple ids checked by hand (the name search missed them): Niyazi's artist page is «Niyazi Hajibeyov»; Behbudov is «Рашид Бейбутов» on the ru storefront
-const FORCE = { Q714526: 838358820, Q714776: 1660753163 };
+// Apple ids checked by hand (the name search missed them): Niyazi's artist page is «Niyazi Hajibeyov»; Behbudov is «Рашид Бейбутов» on the ru storefront;
+// Səxavət Məmmədov the xanəndə (1953–1991) is «Səxavət Məmmədov» (Azad bir quşdum, Zabul Segah, Ay Çiçək), not «Sakhavat Mammadov», the tar player born 1993 (Q140127954)
+const FORCE = { Q714526: 838358820, Q714776: 1660753163, Q12846316: 1708058861 };
 // Apple splits some artists over several ids: other ids of the same artist, merged in (hand-checked, same name and repertoire)
 const ALSO = { Q317397: [1748748666] }; // «Üzeyir Hacıbəyov» (az storefront) beside «Uzeyir Hajibeyov»
 // Notes shown with a person's previews

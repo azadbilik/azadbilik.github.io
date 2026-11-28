@@ -83,10 +83,12 @@ const yr = (d) => (d || '').slice(0, 4);
 const ALB = new Map(); // album table: id -> [name, year, url, art]
 const alb = (id, name, date, url) => { if (!id) return -1; if (!ALB.has(id)) ALB.set(id, [ALB.size, name, yr(date), url ?? '', art(id)]); return ALB.get(id)[0]; };
 // track: [title, by, albumIndex, previewUrl | fullUrl, page, seconds, kind] kind 0 = Apple preview, 1 = public domain full length
+// label-made remixes of old recordings are not the musician's («Azad Bir Quşdum (Slowed & Reverb)»)
+const REMIX = /slowed|reverb|sped up|nightcore/i;
 const appleTracks = (q, max) => {
   const m = MATCH[q]; if (!m) return [];
   const seen = new Set(), out = [];
-  const pool = [...(m.songs ?? []), ...(m.extra ?? [])].filter((x) => x.preview && x.url && (x.ms ?? 99999) > 40000);
+  const pool = [...(m.songs ?? []), ...(m.extra ?? [])].filter((x) => x.preview && x.url && (x.ms ?? 99999) > 40000 && !REMIX.test(x.name));
   const used = new Set();
   for (const pass of [0, 1]) for (const x of pool) {
     if (out.length >= max) break; const k = norm(x.name); if (!k || seen.has(k)) continue;
@@ -121,7 +123,7 @@ const CHANNELS = {
 // channels that are one musician's own: their videos need not carry the name (Arslan Növrəsli's «Mozalan Uçuşu»)
 const OWN = { 'UChmn_-dt0yEykjiZTMTnYjA': 'Q117750849', 'UCtcZLsPgLJNS91fH_pQXymg': 'Q135210316' };
 // channels that are a namesake's, not this musician's: «Səxavət Məmmədov - Topic» carries the xanəndə (1953–1991), not the tar player (b. 1993, «Sakhavat Mammadov» on Apple)
-const NOT_CH = { Q140127954: ['UCYi9_7Pem4-Xq9zdWPvAg3g'] };
+const NOT_CH = { Q140127954: ['UCYi9_7Pem4-Xq9zdWPvAg3g'], Q12846316: ['UCpuRoVWWbUaZHHsAPuqX71g'] }; // …and the other way round: the tar player's verified channel is not the singer's
 // own-channel videos that are not music (a pickup sound test)
 const SKIP_V = new Set(['PLuC4sZwZog']);
 const official = (v, o) => (CHANNELS[v.cid] ?? null) || (/ - Topic$/.test(v.ch) ? v.ch : null)
@@ -154,7 +156,7 @@ for (const o of P.values()) {
   const g = genresOf(o); if (!g.length) continue;
   const tracks = [...pd.map((r) => pdTrack(r, o.az)), ...(ap ? appleTracks(o.q, 10) : [])];
   // albums only of a match apple.mjs kept: the raw cache also holds the namesakes it dropped (Bülbül's «Bulbul» of the 2020s)
-  const albums = (ap ? MATCH[o.q]?.albums ?? [] : []).filter((a) => a.url && a.date).sort((x, y) => x.date.localeCompare(y.date));
+  const albums = (ap ? MATCH[o.q]?.albums ?? [] : []).filter((a) => a.url && a.date && !REMIX.test(a.name)).sort((x, y) => x.date.localeCompare(y.date));
   const seenA = new Set(), al = [];
   for (const a of albums) { const k = norm(a.name); if (!k || seenA.has(k)) continue; seenA.add(k); al.push(alb(a.id, a.name, a.date, a.url)); }
   if (!tracks.length && !al.length && !yv.length) continue;
