@@ -29,6 +29,12 @@
    "az": "Statistika",
    "ru": "Статистика",
    "en": "Statistics"
+  },
+  {
+   "id": "foto",
+   "az": "Fotoşəkillər",
+   "ru": "Фотографии",
+   "en": "Photographs"
   }
  ],
  "holders": {
@@ -61,6 +67,11 @@
    "az": "Internet Archive",
    "ru": "Internet Archive",
    "en": "Internet Archive"
+  },
+  "nplg": {
+   "az": "Gürcüstan Milli Kitabxanası",
+   "ru": "Национальная библиотека Грузии",
+   "en": "National Library of Georgia"
   }
  },
  "items": [
@@ -1088,6 +1099,122 @@
     "az": "Qafqaz canişinliyi arxivindən sənədlər: fərmanlar, reskriptlər, raportlar, xanlarla yazışma, müqavilələr. Internet Archive-də (russian-online-libraries) tam mətn.",
     "ru": "Документы архива Главного управления наместника кавказского: грамоты, рескрипты, рапорты, переписка с ханами, трактаты. Полностью на Internet Archive (russian-online-libraries).",
     "en": "Papers from the archive of the Caucasus viceroyalty: grants, rescripts, reports, correspondence with the khans, treaties. In full on the Internet Archive (russian-online-libraries)."
+   }
+  },
+  {
+   "id": "ermakov-baki",
+   "c": "foto",
+   "src": "ermakov/baki",
+   "pages": "all",
+   "az": "Dmitri Yermakovun fotoşəkilləri: Bakı və neft mədənləri",
+   "ru": "Фотографии Дмитрия Ермакова: Баку и нефтяные промыслы",
+   "en": "Dmitri Ermakov's photographs: Baku and its oil fields",
+   "date": "1870–1916",
+   "place": {
+    "az": "Tiflis",
+    "ru": "Тифлис",
+    "en": "Tiflis"
+   },
+   "lang": "—",
+   "holder": "nplg",
+   "url": "https://dspace.nplg.gov.ge/",
+   "note": {
+    "az": "237 fotoşəkil, adlarına görə sıralanıb; hər birinin adı və kitabxanadakı yeri qalereyadadır. Yermakov 1916-da vəfat edib; ictimai mülkiyyət.",
+    "ru": "237 фотографий, по алфавиту названий; название каждой и ссылка на запись библиотеки — в галерее. Ермаков умер в 1916 г.; общественное достояние.",
+    "en": "237 photographs, in order of their titles; each one's title and the library's record are in the gallery. Ermakov died in 1916; public domain."
+   },
+   "also": {
+    "href": "/qalereya/tarix/",
+    "az": "Qalereyada adları ilə",
+    "ru": "В галерее, с названиями",
+    "en": "In the gallery, with titles"
+   }
+  },
+  {
+   "id": "ermakov-samaxi",
+   "c": "foto",
+   "src": "ermakov/samaxi",
+   "pages": "all",
+   "az": "Dmitri Yermakovun fotoşəkilləri: Şamaxı",
+   "ru": "Фотографии Дмитрия Ермакова: Шемаха",
+   "en": "Dmitri Ermakov's photographs: Shamakhi",
+   "date": "1870–1916",
+   "place": {
+    "az": "Tiflis",
+    "ru": "Тифлис",
+    "en": "Tiflis"
+   },
+   "lang": "—",
+   "holder": "nplg",
+   "url": "https://dspace.nplg.gov.ge/",
+   "note": {
+    "az": "42 fotoşəkil, adlarına görə sıralanıb; hər birinin adı və kitabxanadakı yeri qalereyadadır. Yermakov 1916-da vəfat edib; ictimai mülkiyyət.",
+    "ru": "42 фотографий, по алфавиту названий; название каждой и ссылка на запись библиотеки — в галерее. Ермаков умер в 1916 г.; общественное достояние.",
+    "en": "42 photographs, in order of their titles; each one's title and the library's record are in the gallery. Ermakov died in 1916; public domain."
+   },
+   "also": {
+    "href": "/qalereya/tarix/",
+    "az": "Qalereyada adları ilə",
+    "ru": "В галерее, с названиями",
+    "en": "In the gallery, with titles"
+   }
+  },
+  {
+   "id": "ermakov-derbend",
+   "c": "foto",
+   "src": "ermakov/derbend",
+   "pages": "all",
+   "az": "Dmitri Yermakovun fotoşəkilləri: Dərbənd",
+   "ru": "Фотографии Дмитрия Ермакова: Дербент",
+   "en": "Dmitri Ermakov's photographs: Derbent",
+   "date": "1870–1916",
+   "place": {
+    "az": "Tiflis",
+    "ru": "Тифлис",
+    "en": "Tiflis"
+   },
+   "lang": "—",
+   "holder": "nplg",
+   "url": "https://dspace.nplg.gov.ge/",
+   "note": {
+    "az": "28 fotoşəkil, adlarına görə sıralanıb; hər birinin adı və kitabxanadakı yeri qalereyadadır. Yermakov 1916-da vəfat edib; ictimai mülkiyyət.",
+    "ru": "28 фотографий, по алфавиту названий; название каждой и ссылка на запись библиотеки — в галерее. Ермаков умер в 1916 г.; общественное достояние.",
+    "en": "28 photographs, in order of their titles; each one's title and the library's record are in the gallery. Ermakov died in 1916; public domain."
+   },
+   "also": {
+    "href": "/qalereya/tarix/",
+    "az": "Qalereyada adları ilə",
+    "ru": "В галерее, с названиями",
+    "en": "In the gallery, with titles"
+   }
+  },
+  {
+   "id": "ermakov-diger",
+   "c": "foto",
+   "src": "ermakov/diger",
+   "pages": "all",
+   "az": "Dmitri Yermakovun fotoşəkilləri: Gəncə, Şəki, Şuşa, Culfa, Təbriz, Borçalı və başqaları",
+   "ru": "Фотографии Дмитрия Ермакова: Гянджа, Шеки, Шуша, Джульфа, Тебриз, Борчало и другие",
+   "en": "Dmitri Ermakov's photographs: Ganja, Shaki, Shusha, Julfa, Tabriz, Borchali and others",
+   "date": "1870–1916",
+   "place": {
+    "az": "Tiflis",
+    "ru": "Тифлис",
+    "en": "Tiflis"
+   },
+   "lang": "—",
+   "holder": "nplg",
+   "url": "https://dspace.nplg.gov.ge/",
+   "note": {
+    "az": "26 fotoşəkil, adlarına görə sıralanıb; hər birinin adı və kitabxanadakı yeri qalereyadadır. Yermakov 1916-da vəfat edib; ictimai mülkiyyət.",
+    "ru": "26 фотографий, по алфавиту названий; название каждой и ссылка на запись библиотеки — в галерее. Ермаков умер в 1916 г.; общественное достояние.",
+    "en": "26 photographs, in order of their titles; each one's title and the library's record are in the gallery. Ermakov died in 1916; public domain."
+   },
+   "also": {
+    "href": "/qalereya/tarix/",
+    "az": "Qalereyada adları ilə",
+    "ru": "В галерее, с названиями",
+    "en": "In the gallery, with titles"
    }
   }
  ]
