@@ -48,6 +48,9 @@ for (const p of people.values()) {
   const main = p.az || p.en || ruShort(p.ru); if (main) qs.set(main, { kind: 'a', key: p.q });
   const ru = ruShort(p.ru); if (ru && ru !== p.az) qs.set(ru, { kind: 'a', key: p.q });
 }
+// more precise searches where the name alone finds namesakes or nothing official (by hand)
+const EXTRA_Q = { Q123174860: ['Kamran Kərimov nağara', 'Kamran Karimov nagara'], Q117750849: ['Arslan Novrasli tar'] };
+for (const [q, list] of Object.entries(EXTRA_Q)) for (const t of list) qs.set(t, { kind: 'a', key: q });
 for (const w of COMP.works) {
   const c = COMP.people.find((p) => p.qid === w.composers[0]);
   qs.set(`${w.az.replace(/\(.*?\)/g, '').trim()} ${c?.az?.split(' ').pop() ?? ''} ${({ opera: 'operası', ballet: 'baleti', musical: '', orchestral: '' })[w.type] ?? ''}`.trim(), { kind: 'w', key: w.qid });

@@ -111,9 +111,14 @@ const CHANNELS = {
   'UCqtTk35tEY4EyJGq7bOUGEQ': 'Azərbaycanfilm', 'UCYBRECI7vtfsY-7CKuwYWoQ': 'Heydər Əliyev Fondu', 'UCm28E3X-Fssx6PNkKi5IVig': 'Naxçıvan Mədəniyyət Nazirliyi',
   'UCiVZttFkdEwMi3QXpRqFTzQ': 'Gosteleradiofond', 'UC7QX724vt3YwVnkMwtmdqNA': 'Gosteleradiofond (Музыка на советском ТВ)', 'UC7FDlGcSUqeSZHh1LRMM1OQ': 'Gosteleradiofond (фильмы, спектакли)',
   'UCxy25YRKhbBkMGsB3L0HS1w': 'Fikrət Əmirov (rəsmi)',
+  // added 2026-11-28: a musician's own channel without YouTube's badge, checked by its content; a concert series filming its own concerts
+  'UChmn_-dt0yEykjiZTMTnYjA': 'Arslan Növrəsli (rəsmi)', 'UCbeeHSjo4JTW-zcUSarPztA': 'Transcordancias · Global Music Live',
+  'UCe54DqT48ciGag8kQWSQBbA': null, // ARB TV: tried, left out: its clips with musicians are talk-show chatter and news, not music
 };
 // …plus YouTube's own «X - Topic» channels (generated from licensed releases). An official artist channel (the note badge) counts only
 // for that artist's own videos: many such channels also carry other people's operas and covers.
+// channels that are one musician's own: their videos need not carry the name (Arslan Növrəsli's «Mozalan Uçuşu»)
+const OWN = { 'UChmn_-dt0yEykjiZTMTnYjA': 'Q117750849' };
 const official = (v, o) => (CHANNELS[v.cid] ?? null) || (/ - Topic$/.test(v.ch) ? v.ch : null)
   || (v.badges.includes('BADGE_STYLE_TYPE_VERIFIED_ARTIST') && o && [o.az, o.ru && ruName(o.ru), o.en].filter(Boolean).some((n) => nameFits(v.ch.replace(/\s+(official|rəsmi)$/i, ''), n)) ? v.ch : null);
 // Namesakes: Bülbül is not his son Polad Bülbüloğlu; Müslüm Maqomayev the composer (1885–1937) is not his grandson the singer, so only his operas
@@ -125,7 +130,10 @@ const names = (o, title) => { const T = toks(title); return nameToks(o).some((N)
 const ytFor = (kind, key, fits, max = 8, owner = null) => {
   const seen = new Set(), out = [];
   for (const r of Object.values(YTS)) if (r.kind === kind && r.key === key) for (const v of r.v) {
-    if (seen.has(v.id) || !v.len || secs(v.len) < 60) continue; const ch = official(v, owner); if (!ch || !fits(v)) continue;
+    if (seen.has(v.id) || !v.len || secs(v.len) < 60) continue; const ch = official(v, owner); if (!ch) continue;
+    // on the musician's own channel (their Topic channel, their official artist channel, or OWN) the channel says who it is
+    const own = owner && (OWN[v.cid] === owner.q || (/ - Topic$/.test(v.ch) || v.badges.includes('BADGE_STYLE_TYPE_VERIFIED_ARTIST')) && [owner.az, owner.ru && ruName(owner.ru), owner.en].filter(Boolean).some((n) => nameFits(v.ch.replace(/\s+(- Topic|official|rəsmi)$/i, ''), n)));
+    if (!own && !fits(v)) continue;
     seen.add(v.id); out.push([v.id, v.t, ch, secs(v.len)]);
   }
   return out.slice(0, max);
