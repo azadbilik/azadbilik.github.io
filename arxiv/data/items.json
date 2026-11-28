@@ -753,6 +753,31 @@
    "n": 5,
    "total": 5,
    "ratio": 0.782
+  },
+  {
+   "id": "ilimov-1886",
+   "c": "kitab",
+   "az": "İ. P. İlimov. Rus bakuolları və Amerika üsulu ilə Bakı kerosinləri",
+   "ru": "И. П. Илимов. Русские бакуоли и бакинские керосины на американский лад",
+   "en": "I. P. Ilimov. Russian bakuols and Baku kerosenes the American way",
+   "date": "1886",
+   "place": {
+    "az": "Sankt-Peterburq",
+    "ru": "Санкт-Петербург",
+    "en": "St Petersburg"
+   },
+   "lang": "ru",
+   "holder": "loc",
+   "cipher": "LCCN ltf89006918",
+   "url": "https://www.loc.gov/item/ltf89006918/",
+   "note": {
+    "az": "Bakı neft məhsulları — «bakuollar» və kerosin — haqqında broşür. F. S. Suşinskinin mətbəəsi, senzuradan 2 iyul 1886-da keçib.",
+    "ru": "Брошюра о бакинских нефтепродуктах — «бакуолях» и керосине. Типография Ф. С. Сущинского, дозволено цензурою 2 июля 1886 г.",
+    "en": "A pamphlet on Baku petroleum products, «bakuols» and kerosene. Printed by F. S. Sushchinsky; passed by the censor on 2 July 1886."
+   },
+   "n": 20,
+   "total": 20,
+   "ratio": 0.672
   }
  ]
 }
