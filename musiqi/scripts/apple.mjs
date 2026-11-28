@@ -27,8 +27,7 @@ const DROP = {
   Q1979936: 'Jivani: one track credited on an Armenian anthology, no album of his own',
   Q4073559: 'Aşıq Əli: the catalogue artist is a living ashik of the 2020s', Q16365360: 'same, Aşıq Əli (living namesake)',
   Q16378524: 'Ədalət Nəsibov: matched «Aşıq Adalet», not the same name', Q4216454: 'Qaryağdıoğlu: only «Music of Azerbaijan I: Selection of Iran», origin of the artist unclear',
-  Q1189603: 'one single titled in Persian, doubtful', Q134286966: 'only a feature credit', Q107926164: 'Bengt Johansson: namesake (Swedish pop)',
-  Q12850037: 'Əli Quliyev: rap namesake', Q12838981: 'Ehtiram Hüseynov: breakbeat namesake',
+  Q1189603: 'one single titled in Persian, doubtful', Q134286966: 'only a feature credit', Q107926164: 'Bengt Johansson: namesake (Swedish pop)', Q12838981: 'Ehtiram Hüseynov: breakbeat namesake',
   Q25543577: 'Səbuhi Cəfərov: spoken-word namesake',
   Q16370169: 'Mirza Mansur Mansurov (d. 1967): only two 2024 singles, no historical release and no title naming him',
   Q1959615: 'Ilyinsky (d. 1920): no album or title carries his name, only others\' performances of one piece',
@@ -40,9 +39,11 @@ const DROP = {
 const FORCE = { Q714526: 838358820, Q714776: 1660753163, Q12846316: 1708058861,
   Q6741182: 1598811090, Q1483971: 1542861130, Q16372672: 1754095397, Q4054565: 924170205, Q373520: 1454596435, Q16368221: 1567875383,
   // on Apple only on the anthology «Great Singers of the Republic of Azerbaijan»: Yaqub Məmmədov (Mansuriyyə, Rast), Zülfü Adıgözəlov (Üşşaq); a hand-checked id is kept however thin
-  Q16376261: 924170197, Q4057575: 924170241 };
+  Q16376261: 924170197, Q4057575: 924170241,
+  // aşıqlar on Ocora's «Azerbaïdjan, Anthologie des Ashiq» (2008) and in ORED's archive: Fəzail Miskinli, Mahmud Məmmədov, Gülarə Azaflı, Əli Quliyev, Altay Məmmədov
+  Q16368043: 294748281, Q12837122: 294748233, Q16368115: 294748242, Q12850037: 294748238, Q61122556: 1574511163 };
 // Apple splits some artists over several ids: other ids of the same artist, merged in (hand-checked, same name and repertoire)
-const ALSO = { Q317397: [1748748666] }; // «Üzeyir Hacıbəyov» (az storefront) beside «Uzeyir Hajibeyov»
+const ALSO = { Q317397: [1748748666], Q61122556: [294748247] }; // …and «Altay Mamedli» on the Ocora anthology // «Üzeyir Hacıbəyov» (az storefront) beside «Uzeyir Hajibeyov»
 // Notes shown with a person's previews
 const NOTES = { Q714526: { az: 'Bu fraqmentlər Niyazinin dirijorluq etdiyi yazılardır (Xaçaturyan, Qarayev), onun bəstələri deyil.', ru: 'Это записи, которыми дирижировал Ниязи (Хачатурян, Караев), а не его собственные сочинения.', en: 'These are recordings Niyazi conducted (Khachaturian, Karayev), not his own compositions.' } };
 const COUNTRIES = ['az', 'us', 'ru', 'tr']; // storefronts tried for a P2850 id

@@ -130,6 +130,10 @@ const official = (v, o) => (CHANNELS[v.cid] ?? null) || (/ - Topic$/.test(v.ch) 
   || (v.badges.includes('BADGE_STYLE_TYPE_VERIFIED_ARTIST') && o && [o.az, o.ru && ruName(o.ru), o.en].filter(Boolean).some((n) => nameFits(v.ch.replace(/\s+(official|rəsmi)$/i, ''), n)) ? v.ch : null);
 // Namesakes: Bülbül is not his son Polad Bülbüloğlu, nor the song «Bülbül» (Mələkxanım Əyyubova on «Nanəli»); Səttar is not the painter Səttar Bəhlulzadə; Müslüm Maqomayev the composer (1885–1937) is not his grandson the singer, so only his operas
 const NOT = { Q1131312: /pola[dt]|полад|o[gğ]l[uı]|огл|nanəli/i, Q16374758: /bəhlulzadə|bahlulzade/i }, ONLY = { Q2499809: /şah ismay|shah ismay|шах[- ]исмаил|nərgiz|nargiz|наргиз/i };
+// musicians whose name on YouTube finds only others (checked 2026-11-28): the three older Aşıq Əlis get the living Aşıq Əli's Topic channel and ATV shows;
+// Aşıq Murad Ulduz gets Aşıq Ulduz Sönməz, Aşıq Ağayar the writer Şərif Ağayar, Aşıq Abbasəli Abbasəli Qafarov, Aşıq Novruz the Novruz holiday,
+// Aşıq Tural Bağırov a pop namesake's Topic channel; Cahan Talışinskaya only a radio clip whose subject could not be confirmed
+const NO_YT = new Set(['Q135457772', 'Q16365360', 'Q16365363', 'Q16365278', 'Q124043162', 'Q12837106', 'Q12837127', 'Q97216783', 'Q6123065']);
 const secs = (l) => l.split(':').reduce((s, x) => s * 60 + +x, 0);
 const nameToks = (o) => [o.az, o.ru && ruName(o.ru), o.en].filter(Boolean).map((n) => toks(n.replace(/\(.*?\)/g, ' ')));
 // the title names the musician: their surname, and their first name too unless they go by one name
@@ -151,7 +155,7 @@ const A = [];
 const pdBy = new Map(); for (const r of PD) { const q = r.performer?.qid; if (/^Q\d+$/.test(q ?? '')) (pdBy.get(q) ?? pdBy.set(q, []).get(q)).push(r); }
 for (const o of P.values()) {
   if (ABROAD.has(o.q)) continue;
-  const ap = APPLE[o.q], pd = pdBy.get(o.q) ?? [], yv = ytFor('a', o.q, (v) => names(o, v.t) && !NOT[o.q]?.test(v.t) && (!ONLY[o.q] || ONLY[o.q].test(v.t)), 8, o);
+  const ap = APPLE[o.q], pd = pdBy.get(o.q) ?? [], yv = NO_YT.has(o.q) ? [] : ytFor('a', o.q, (v) => names(o, v.t) && !NOT[o.q]?.test(v.t) && (!ONLY[o.q] || ONLY[o.q].test(v.t)), 8, o);
   if (!ap && !pd.length && !yv.length) continue;
   const g = genresOf(o); if (!g.length) continue;
   const tracks = [...pd.map((r) => pdTrack(r, o.az)), ...(ap ? appleTracks(o.q, 10) : [])];
