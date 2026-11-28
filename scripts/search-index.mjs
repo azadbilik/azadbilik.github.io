@@ -33,7 +33,6 @@ add('/gezinti/', ['Gəzinti', 'Прогулки', 'Walks'], ['Tarixi yerlərdə 
 add('/atlas/', ['Atlas', 'Атлас', 'Atlas'], ['Tarixi Azərbaycan rəqəmlərdə və xəritələrdə', 'Исторический Азербайджан в цифрах и картах', 'Historical Azerbaijan in numbers and maps']);
 add('/atlas/serhedler/hekaye/', ['Sərhədlər necə dəyişdi', 'Как менялись границы', 'How the borders moved'], ['Hekayə, 1800–1991', 'История, 1800–1991', 'A story, 1800–1991']);
 add('/musiqi/', ['Musiqi', 'Музыка', 'Music'], ['Dövr, janr və məktəb üzrə: muğam, aşıq, klassika, Sovet estradası, caz', 'По эпохам, жанрам и школам: мугам, ашуги, классика, советская эстрада, джаз', 'By period, genre and school: mugham, ashiq, classical, Soviet estrada, jazz']);
-add('/musiqi/xerite/', ['Musiqi xəritəsi', 'Карта музыки', 'Music map'], ['Musiqiçilər haradan, ilk səs yazıları 1902-dən, muğamlar', 'Откуда музыканты, первые записи с 1902 года, мугамы', 'Where musicians came from, the first recordings from 1902, the mughams']);
 add('/sebeke/', ['Şəbəkələr', 'Сети', 'Networks'], ['Kim kimə bağlıdır: şairlər, alimlər, insanlar, məhsullar', 'Кто с кем связан: поэты, учёные, люди, товары', 'Who connects to whom: poets, scientists, people, products']);
 add('/arxiv/', ['Arxiv', 'Архив', 'Archive'], ['Plakatlar, xəritələr, əlyazmalar, kitablar', 'Плакаты, карты, рукописи, книги', 'Posters, maps, manuscripts, books']);
 add('/soz/', ['Söz ehtiyatı', 'Словарь поэтов', 'Poets’ vocabulary'], ['Şair neçə söz işlədir?', 'Сколько слов у поэта?', 'How many words does a poet use?']);
@@ -46,7 +45,6 @@ const dataOf = {
   '/atlas/1897/': DATA + 'atlas/languages-1897', '/atlas/rayonlar/': DATA + 'atlas/soviet-raions',
   '/xerite/': DATA + 'culture/kitabxana', '/qalereya/': DATA + 'culture/qalereya', '/qalereya/emalatxana/': DATA + 'culture/qalereya',
 };
-dataOf['/musiqi/xerite/'] = SITE + 'musiqi/data'; // the map reads the music section's shared data folder
 for (const p of pages) {
   if (dataOf[p.u]) p.d = dataOf[p.u];
   else if (p.u.startsWith('/atlas/') || p.u.startsWith('/sebeke/') || p.u.startsWith('/xeriteler/') || p.u.startsWith('/gezinti/') || p.u === '/musiqi/' || p.u === '/soz/') {
@@ -63,10 +61,16 @@ const years = (a, b) => (a || b ? `${a ?? '?'}–${b ?? ''}` : '');
 // Authors on the literary map
 for (const a of await json(sib('xerite'), 'data/authors.json'))
   push('author', [a.az, a.ru, a.en], [a.birth?.az, a.birth?.ru, a.birth?.en].map((pl) => [years(a.born, a.died), pl].filter(Boolean).join(' · ')), `/xerite/?author=${a.slug}`);
-// Musicians
-const playable = new Set((await json(here, 'musiqi/data/catalog.json')).artists.map((a) => a.q));
-for (const m of await json(here, 'musiqi/data/musicians.json'))
-  push('musician', [m.az, m.ru ?? m.az, m.en ?? m.az], [m.place?.az, m.place?.ru, m.place?.en].map((pl) => [years(m.born, m.died), pl].filter(Boolean).join(' · ')), playable.has(m.qid) ? `/musiqi/#/a/${m.qid}` : `/musiqi/xerite/?person=${m.qid}`);
+// Musicians: those with a page in the player link there; the others of the music list (khanendes, tar players, ashiqs without a
+// recording) link to their Wikipedia article, since the old map page is gone
+const CAT = await json(here, 'musiqi/data/catalog.json'), playable = new Map(CAT.artists.map((a) => [a.q, a]));
+const listed = new Set();
+for (const m of await json(here, 'musiqi/data/musicians.json')) {
+  const u = playable.has(m.qid) ? `/musiqi/#/a/${m.qid}` : m.wiki; if (!u) continue; listed.add(m.qid);
+  push('musician', [m.az, m.ru ?? m.az, m.en ?? m.az], [m.place?.az, m.place?.ru, m.place?.en].map((pl) => [years(m.born, m.died), pl].filter(Boolean).join(' · ')), u);
+}
+// …and the player's composers, jazz and estrada musicians, who are not on that list
+for (const a of CAT.artists) if (!listed.has(a.q)) push('musician', [a.az, a.ru || a.az, a.en || a.az], [years(a.b, a.d), years(a.b, a.d), years(a.b, a.d)], `/musiqi/#/a/${a.q}`);
 // Poets of the answer-poem network (who also have a page there)
 for (const p of (await json(here, 'sebeke/nezire/data/nezire.json')).poets)
   push('poet', [p.az, p.ru, p.en], [years(p.born, p.died)] .concat([years(p.born, p.died), years(p.born, p.died)]), `/sebeke/nezire/?poet=${p.slug}`);

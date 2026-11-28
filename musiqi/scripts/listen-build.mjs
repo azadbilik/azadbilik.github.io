@@ -52,7 +52,7 @@ for (const r of PD) if (r.performer?.qid) put(r.performer);
 // Teachers from abroad on the composers' network (Shostakovich taught Garayev…) are not Azerbaijani music: not in the catalogue
 const ABROAD = new Set(COMP.people.filter((p) => !p.place && !/[əıöüşçğ]/i.test(p.az ?? '')).map((p) => p.qid).concat(['Q80135', 'Q348282']));
 // Genre by hand where the role misleads: Aygün Kazımova is a pop singer (on Wikidata also a composer)
-const GENRE_FIX = { Q2361757: ['pop'] };
+const GENRE_FIX = { Q2361757: ['pop'], Q4060829: ['jazz', 'mugham'] }; // Sevda Ələkbərzadə sings jazz, folk and mugham (az.wikipedia)
 
 // ---- genres (the first is the main one)
 const GORDER = ['mugham', 'instr', 'ashiq', 'classic', 'estrada', 'pop', 'jazz'];
@@ -146,8 +146,9 @@ for (const o of P.values()) {
   for (const a of albums) { const k = norm(a.name); if (!k || seenA.has(k)) continue; seenA.add(k); al.push(alb(a.id, a.name, a.date, a.url)); }
   if (!tracks.length && !al.length && !yv.length) continue;
   const img = o.img ? o.img.replace(/\?width=\d+$/, '') : '';
+  // genres in fixed order, except a hand-set list (GENRE_FIX), which keeps its own (main genre first)
   A.push({
-    q: o.q, az: o.az, ru: o.ru, en: o.en, b: o.born, d: o.died, g: g.sort((x, y) => GORDER.indexOf(x) - GORDER.indexOf(y)), p: periodsOf(o, pd.length > 0),
+    q: o.q, az: o.az, ru: o.ru, en: o.en, b: o.born, d: o.died, g: GENRE_FIX[o.q] ? g : g.sort((x, y) => GORDER.indexOf(x) - GORDER.indexOf(y)), p: periodsOf(o, pd.length > 0),
     img, art: tracks.find((t) => t[2] >= 0 && ALB.get([...ALB.keys()][t[2]])?.[4])?.[2] ?? al[0] ?? -1,
     ...(ap ? { am: ap.url } : {}), ...(SPOT[o.q]?.a ? { sp: SPOT[o.q].a } : {}), ...(YT[o.q]?.url ? { yt: YT[o.q].url } : {}),
     ...(ap?.note ? { note: ap.note } : {}),
@@ -157,7 +158,9 @@ for (const o of P.values()) {
 const has = new Set(A.map((a) => a.q));
 
 // ---- schools: a master and the students the teacher links name (Silsilə, Bəstəkarlar, Caz), with at least two who can be played
-const links = [...LIN.links, ...COMP.links, ...JAZZ.links.filter((l) => (l.kind ?? 'teacher') === 'teacher')];
+// …plus the links data/genres.json adds by hand, each with its sentence (Alim Qasımov → Sevda Ələkbərzadə)
+const GEN = await J('../data/genres.json');
+const links = [...LIN.links, ...COMP.links, ...JAZZ.links.filter((l) => (l.kind ?? 'teacher') === 'teacher'), ...(GEN.links ?? []).map((l) => ({ ...l, src: 'text' }))];
 const kids = new Map(); for (const l of links) { if (l.t === l.s) continue; (kids.get(l.t) ?? kids.set(l.t, new Set()).get(l.t)).add(l.s); }
 const desc = (q, seen = new Set()) => { for (const s of kids.get(q) ?? []) if (!seen.has(s)) { seen.add(s); desc(s, seen); } return seen; };
 const name = (q) => { const o = P.get(q) ?? LIN.people.find((p) => p.qid === q); return o ? { az: o.az, ru: o.ru ? ruName(o.ru) : o.az, en: o.en ?? o.az } : null; };
@@ -175,7 +178,6 @@ for (const a of A) a.s = schools.filter((s) => s.m.includes(a.q)).map((s) => s.k
 
 // ---- the tree view (#/tree): the genre family tree of data/genres.json, and every teacher → student link (Silsilə, Bəstəkarlar, Caz) with
 // names for the masters the player has no page for (teachers abroad flagged: Shostakovich → Garayev is part of the line)
-const GEN = await J('../data/genres.json');
 const TXT = await J('../silsile/data/lineage.text.json', { extra: [] });
 const inA = new Set(A.map((a) => a.q)), TL = [], TP = {}, seenTL = new Set();
 const who = (q) => P.get(q) ?? LIN.people.find((p) => p.qid === q) ?? TXT.extra.find((x) => (x.id ?? x.qid) === q);
@@ -355,8 +357,7 @@ const out = { built: new Date().toISOString().slice(0, 10), artists: A, works: W
 const PRE = [[/https:\/\/audio-ssl\.itunes\.apple\.com\/itunes-assets\//g, '~a/'], [/https:\/\/is(\d)-ssl\.mzstatic\.com\/image\/thumb\//g, '~i$1/'], [/https:\/\/music\.apple\.com\//g, '~m/'], [/https:\/\/upload\.wikimedia\.org\/wikipedia\/commons\//g, '~u/'], [/https:\/\/commons\.wikimedia\.org\/wiki\//g, '~c/']];
 let json = JSON.stringify(out); for (const [re, t] of PRE) json = json.replace(re, t);
 await writeFile(R('../data/catalog.json'), json);
-// who has a page in the player, for the map's cards (xerite/), so it need not load the whole catalogue
-await writeFile(R('../data/playable.json'), JSON.stringify(A.map((a) => a.q)));
+
 console.log(Math.round(json.length / 1024), 'KB');
 const st = (f) => A.filter(f).length;
 console.log('artists', A.length, 'tracks', A.reduce((s, a) => s + a.t.length, 0), 'free', A.reduce((s, a) => s + a.t.filter((t) => t[6] === 1).length, 0), 'albums', albums.length,

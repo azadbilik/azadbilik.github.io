@@ -39,7 +39,6 @@ for (const [path, musts] of [
   ['/', ['href="/xeriteler/"', 'href="/qalereya/"', 'href="/atlas/"', 'id="culture"', 'id="atlas"', '/shared/header.js']],
   ['/atlas/', ['href="/atlas/ehali/"', 'href="/xeriteler/"']],
   ['/musiqi/', ['data/catalog.json', '/shared/header.js']],
-  ['/musiqi/xerite/', ['maplibre-gl', 'recordings.json']],
   ['/arxiv/', ['viewer.js', 'items.json']],
   ['/atlas/icmalar/', ['maplibre-gl', 'extras.json']],
   ['/atlas/xalqlar/', ['maplibre-gl', 'peoples.out.json', 'data/dots-']],

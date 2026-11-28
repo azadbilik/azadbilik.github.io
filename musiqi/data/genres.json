@@ -1,5 +1,5 @@
 {
- "about": "The genre tree of /musiqi/#/tree: what came from what. Hand-written; every date is from the data of the music pages (premieres on Wikidata via bestekarlar/data/composers.json, recordings) or from the Wikipedia article given in src. lane: trad | classic | popular | jazz; root: an outside source, drawn dashed; year: where the genre starts on the time axis (null = before recordings, the tradition column); when: the words shown for it; from: the genres it came from; genre: the player's genre key(s) whose musicians it lists; people: an explicit list instead; works: Wikidata ids of works on the works list.",
+ "about": "The genre tree of /musiqi/#/tree: what came from what. Hand-written; every date is from the data of the music pages (premieres on Wikidata via bestekarlar/data/composers.json, recordings) or from the Wikipedia article given in src. lane: trad | classic | popular | jazz; root: an outside source, drawn dashed; year: where the genre starts on the time axis (null = before recordings, the tradition column); when: the words shown for it; from: the genres it came from; genre: the player's genre key(s) whose musicians it lists; people: an explicit list instead; works: Wikidata ids of works on the works list. links: teacher → student links by hand, with the sentence they rest on.",
  "nodes": [
   {
    "id": "mugham",
@@ -399,7 +399,8 @@
     "Q234304",
     "Q2072216",
     "Q2072597",
-    "Q2061803"
+    "Q2061803",
+    "Q4060829"
    ]
   },
   {
@@ -429,6 +430,46 @@
    "src": [
     "https://en.wikipedia.org/wiki/Azerbaijani_pop_music"
    ]
+  },
+  {
+   "id": "ethnojazz",
+   "lane": "jazz",
+   "year": 1993,
+   "from": [
+    "jazz",
+    "folk",
+    "mugham"
+   ],
+   "people": [
+    "Q4060829"
+   ],
+   "name": {
+    "az": "Etno-caz",
+    "ru": "Этно-джаз",
+    "en": "Ethno-jazz"
+   },
+   "when": {
+    "az": "1990-lar",
+    "ru": "1990-е",
+    "en": "1990s"
+   },
+   "text": {
+    "az": "Caz xalq musiqisi ilə: 1993-dən «Rast» qrupu milli xalq musiqisini dünya musiqisi ilə birləşdirdi, solisti Sevda Ələkbərzadə idi; o, caz, xalq musiqisi və muğam oxuyur, muğamı Alim Qasımovdan öyrənib.",
+    "ru": "Джаз с народной музыкой: с 1993 года группа «Rast» соединяла национальную народную музыку с мировой, солисткой была Севда Алекперзаде; она поёт джаз, народную музыку и мугам, мугаму училась у Алима Гасымова.",
+    "en": "Jazz with folk music: from 1993 the group Rast joined national folk music to world music, with Sevda Alakbarzadeh as soloist; she sings jazz, folk and mugham, and learned mugham from Alim Gasimov."
+   },
+   "src": [
+    "https://az.wikipedia.org/wiki/Sevda_Ələkbərzadə",
+    "https://en.wikipedia.org/wiki/Ethno_jazz"
+   ]
+  }
+ ],
+ "links": [
+  {
+   "t": "Q936538",
+   "s": "Q4060829",
+   "src": "https://az.wikipedia.org/wiki/Sevda_Ələkbərzadə",
+   "sentence": "S. Ələkbərzadə həmin ildə görkəmli muğam ustası Alim Qasımovdan fərdi muğam dərsləri almışdır."
   }
  ]
 }
