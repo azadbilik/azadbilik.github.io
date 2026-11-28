@@ -35,6 +35,12 @@
    "az": "Fotoşəkillər",
    "ru": "Фотографии",
    "en": "Photographs"
+  },
+  {
+   "id": "dovri",
+   "az": "Dövri mətbuat",
+   "ru": "Периодика",
+   "en": "Periodicals"
   }
  ],
  "holders": {
@@ -72,6 +78,11 @@
    "az": "Gürcüstan Milli Kitabxanası",
    "ru": "Национальная библиотека Грузии",
    "en": "National Library of Georgia"
+  },
+  "anl": {
+   "az": "Azərbaycan Milli Kitabxanası",
+   "ru": "Национальная библиотека Азербайджана",
+   "en": "National Library of Azerbaijan"
   }
  },
  "items": [
@@ -1215,6 +1226,358 @@
     "az": "Qalereyada adları ilə",
     "ru": "В галерее, с названиями",
     "en": "In the gallery, with titles"
+   }
+  },
+  {
+   "id": "molla-nesreddin-1906",
+   "c": "dovri",
+   "ia": true,
+   "iaId": "azadbilik-molla-nesreddin-1906",
+   "src": "mn-arxiv/1906",
+   "thumb": 1,
+   "total": 304,
+   "az": "«Molla Nəsrəddin», 1906 (№ 1–39)",
+   "ru": "«Молла Насреддин», 1906 (№ 1–39)",
+   "en": "«Molla Nasreddin», 1906 (nos. 1–39)",
+   "date": "1906",
+   "place": {
+    "az": "Tiflis",
+    "ru": "Тифлис",
+    "en": "Tiflis"
+   },
+   "lang": "az (ərəb əlifbası)",
+   "holder": "anl",
+   "url": "https://www.millikitabxana.az/journals/search?name=Molla+N%C9%99sr%C9%99ddin&date=1906",
+   "note": {
+    "az": "Kitabxanada saxlanılan 39 nömrə, nömrə sırası ilə bir yerdə, 304 səhifə. Rəngli karikaturaları qalereyadadır.",
+    "ru": "39 номеров из фонда библиотеки, по порядку, 304 страниц. Цветные карикатуры — в галерее.",
+    "en": "The 39 issues the library holds, in order, 304 pages. The coloured caricatures are in the gallery."
+   },
+   "also": {
+    "href": "/qalereya/tarix/",
+    "az": "Karikaturaları qalereyada",
+    "ru": "Карикатуры в галерее",
+    "en": "The caricatures in the gallery"
+   }
+  },
+  {
+   "id": "molla-nesreddin-1907",
+   "c": "dovri",
+   "ia": true,
+   "iaId": "azadbilik-molla-nesreddin-1907",
+   "src": "mn-arxiv/1907",
+   "thumb": 1,
+   "total": 62,
+   "az": "«Molla Nəsrəddin», 1907 (№ 6–7, 9, 15, 18–19, 24–25, 29–30, 33, 36)",
+   "ru": "«Молла Насреддин», 1907 (№ 6–7, 9, 15, 18–19, 24–25, 29–30, 33, 36)",
+   "en": "«Molla Nasreddin», 1907 (nos. 6–7, 9, 15, 18–19, 24–25, 29–30, 33, 36)",
+   "date": "1907",
+   "place": {
+    "az": "Tiflis",
+    "ru": "Тифлис",
+    "en": "Tiflis"
+   },
+   "lang": "az (ərəb əlifbası)",
+   "holder": "anl",
+   "url": "https://www.millikitabxana.az/journals/search?name=Molla+N%C9%99sr%C9%99ddin&date=1907",
+   "note": {
+    "az": "Kitabxanada saxlanılan 12 nömrə, nömrə sırası ilə bir yerdə, 62 səhifə. Rəngli karikaturaları qalereyadadır.",
+    "ru": "12 номеров из фонда библиотеки, по порядку, 62 страниц. Цветные карикатуры — в галерее.",
+    "en": "The 12 issues the library holds, in order, 62 pages. The coloured caricatures are in the gallery."
+   },
+   "also": {
+    "href": "/qalereya/tarix/",
+    "az": "Karikaturaları qalereyada",
+    "ru": "Карикатуры в галерее",
+    "en": "The caricatures in the gallery"
+   }
+  },
+  {
+   "id": "molla-nesreddin-1908",
+   "c": "dovri",
+   "ia": true,
+   "iaId": "azadbilik-molla-nesreddin-1908",
+   "src": "mn-arxiv/1908",
+   "thumb": 1,
+   "total": 273,
+   "az": "«Molla Nəsrəddin», 1908 (№ 1–52)",
+   "ru": "«Молла Насреддин», 1908 (№ 1–52)",
+   "en": "«Molla Nasreddin», 1908 (nos. 1–52)",
+   "date": "1908",
+   "place": {
+    "az": "Tiflis",
+    "ru": "Тифлис",
+    "en": "Tiflis"
+   },
+   "lang": "az (ərəb əlifbası)",
+   "holder": "anl",
+   "url": "https://www.millikitabxana.az/journals/search?name=Molla+N%C9%99sr%C9%99ddin&date=1908",
+   "note": {
+    "az": "Kitabxanada saxlanılan 52 nömrə, nömrə sırası ilə bir yerdə, 273 səhifə. Rəngli karikaturaları qalereyadadır.",
+    "ru": "52 номеров из фонда библиотеки, по порядку, 273 страниц. Цветные карикатуры — в галерее.",
+    "en": "The 52 issues the library holds, in order, 273 pages. The coloured caricatures are in the gallery."
+   },
+   "also": {
+    "href": "/qalereya/tarix/",
+    "az": "Karikaturaları qalereyada",
+    "ru": "Карикатуры в галерее",
+    "en": "The caricatures in the gallery"
+   }
+  },
+  {
+   "id": "molla-nesreddin-1909",
+   "c": "dovri",
+   "ia": true,
+   "iaId": "azadbilik-molla-nesreddin-1909",
+   "src": "mn-arxiv/1909",
+   "thumb": 1,
+   "total": 356,
+   "az": "«Molla Nəsrəddin», 1909 (№ 1–33, 35–52)",
+   "ru": "«Молла Насреддин», 1909 (№ 1–33, 35–52)",
+   "en": "«Molla Nasreddin», 1909 (nos. 1–33, 35–52)",
+   "date": "1909",
+   "place": {
+    "az": "Tiflis",
+    "ru": "Тифлис",
+    "en": "Tiflis"
+   },
+   "lang": "az (ərəb əlifbası)",
+   "holder": "anl",
+   "url": "https://www.millikitabxana.az/journals/search?name=Molla+N%C9%99sr%C9%99ddin&date=1909",
+   "note": {
+    "az": "Kitabxanada saxlanılan 51 nömrə, nömrə sırası ilə bir yerdə, 356 səhifə. Rəngli karikaturaları qalereyadadır.",
+    "ru": "51 номеров из фонда библиотеки, по порядку, 356 страниц. Цветные карикатуры — в галерее.",
+    "en": "The 51 issues the library holds, in order, 356 pages. The coloured caricatures are in the gallery."
+   },
+   "also": {
+    "href": "/qalereya/tarix/",
+    "az": "Karikaturaları qalereyada",
+    "ru": "Карикатуры в галерее",
+    "en": "The caricatures in the gallery"
+   }
+  },
+  {
+   "id": "molla-nesreddin-1910",
+   "c": "dovri",
+   "ia": true,
+   "iaId": "azadbilik-molla-nesreddin-1910",
+   "src": "mn-arxiv/1910",
+   "thumb": 1,
+   "total": 320,
+   "az": "«Molla Nəsrəddin», 1910 (№ 1–10, 12–42)",
+   "ru": "«Молла Насреддин», 1910 (№ 1–10, 12–42)",
+   "en": "«Molla Nasreddin», 1910 (nos. 1–10, 12–42)",
+   "date": "1910",
+   "place": {
+    "az": "Tiflis",
+    "ru": "Тифлис",
+    "en": "Tiflis"
+   },
+   "lang": "az (ərəb əlifbası)",
+   "holder": "anl",
+   "url": "https://www.millikitabxana.az/journals/search?name=Molla+N%C9%99sr%C9%99ddin&date=1910",
+   "note": {
+    "az": "Kitabxanada saxlanılan 41 nömrə, nömrə sırası ilə bir yerdə, 320 səhifə. Rəngli karikaturaları qalereyadadır.",
+    "ru": "41 номеров из фонда библиотеки, по порядку, 320 страниц. Цветные карикатуры — в галерее.",
+    "en": "The 41 issues the library holds, in order, 320 pages. The coloured caricatures are in the gallery."
+   },
+   "also": {
+    "href": "/qalereya/tarix/",
+    "az": "Karikaturaları qalereyada",
+    "ru": "Карикатуры в галерее",
+    "en": "The caricatures in the gallery"
+   }
+  },
+  {
+   "id": "molla-nesreddin-1911",
+   "c": "dovri",
+   "ia": true,
+   "iaId": "azadbilik-molla-nesreddin-1911",
+   "src": "mn-arxiv/1911",
+   "thumb": 1,
+   "total": 356,
+   "az": "«Molla Nəsrəddin», 1911 (№ 1–10, 12–47)",
+   "ru": "«Молла Насреддин», 1911 (№ 1–10, 12–47)",
+   "en": "«Molla Nasreddin», 1911 (nos. 1–10, 12–47)",
+   "date": "1911",
+   "place": {
+    "az": "Tiflis",
+    "ru": "Тифлис",
+    "en": "Tiflis"
+   },
+   "lang": "az (ərəb əlifbası)",
+   "holder": "anl",
+   "url": "https://www.millikitabxana.az/journals/search?name=Molla+N%C9%99sr%C9%99ddin&date=1911",
+   "note": {
+    "az": "Kitabxanada saxlanılan 46 nömrə, nömrə sırası ilə bir yerdə, 356 səhifə. Rəngli karikaturaları qalereyadadır.",
+    "ru": "46 номеров из фонда библиотеки, по порядку, 356 страниц. Цветные карикатуры — в галерее.",
+    "en": "The 46 issues the library holds, in order, 356 pages. The coloured caricatures are in the gallery."
+   },
+   "also": {
+    "href": "/qalereya/tarix/",
+    "az": "Karikaturaları qalereyada",
+    "ru": "Карикатуры в галерее",
+    "en": "The caricatures in the gallery"
+   }
+  },
+  {
+   "id": "molla-nesreddin-1912",
+   "c": "dovri",
+   "ia": true,
+   "iaId": "azadbilik-molla-nesreddin-1912",
+   "src": "mn-arxiv/1912",
+   "thumb": 1,
+   "total": 72,
+   "az": "«Molla Nəsrəddin», 1912 (№ 1–9)",
+   "ru": "«Молла Насреддин», 1912 (№ 1–9)",
+   "en": "«Molla Nasreddin», 1912 (nos. 1–9)",
+   "date": "1912",
+   "place": {
+    "az": "Tiflis",
+    "ru": "Тифлис",
+    "en": "Tiflis"
+   },
+   "lang": "az (ərəb əlifbası)",
+   "holder": "anl",
+   "url": "https://www.millikitabxana.az/journals/search?name=Molla+N%C9%99sr%C9%99ddin&date=1912",
+   "note": {
+    "az": "Kitabxanada saxlanılan 9 nömrə, nömrə sırası ilə bir yerdə, 72 səhifə. Rəngli karikaturaları qalereyadadır.",
+    "ru": "9 номеров из фонда библиотеки, по порядку, 72 страниц. Цветные карикатуры — в галерее.",
+    "en": "The 9 issues the library holds, in order, 72 pages. The coloured caricatures are in the gallery."
+   },
+   "also": {
+    "href": "/qalereya/tarix/",
+    "az": "Karikaturaları qalereyada",
+    "ru": "Карикатуры в галерее",
+    "en": "The caricatures in the gallery"
+   }
+  },
+  {
+   "id": "molla-nesreddin-1913",
+   "c": "dovri",
+   "ia": true,
+   "iaId": "azadbilik-molla-nesreddin-1913",
+   "src": "mn-arxiv/1913",
+   "thumb": 1,
+   "total": 223,
+   "az": "«Molla Nəsrəddin», 1913 (№ 1–15, 17–29)",
+   "ru": "«Молла Насреддин», 1913 (№ 1–15, 17–29)",
+   "en": "«Molla Nasreddin», 1913 (nos. 1–15, 17–29)",
+   "date": "1913",
+   "place": {
+    "az": "Tiflis",
+    "ru": "Тифлис",
+    "en": "Tiflis"
+   },
+   "lang": "az (ərəb əlifbası)",
+   "holder": "anl",
+   "url": "https://www.millikitabxana.az/journals/search?name=Molla+N%C9%99sr%C9%99ddin&date=1913",
+   "note": {
+    "az": "Kitabxanada saxlanılan 28 nömrə, nömrə sırası ilə bir yerdə, 223 səhifə. Rəngli karikaturaları qalereyadadır.",
+    "ru": "28 номеров из фонда библиотеки, по порядку, 223 страниц. Цветные карикатуры — в галерее.",
+    "en": "The 28 issues the library holds, in order, 223 pages. The coloured caricatures are in the gallery."
+   },
+   "also": {
+    "href": "/qalereya/tarix/",
+    "az": "Karikaturaları qalereyada",
+    "ru": "Карикатуры в галерее",
+    "en": "The caricatures in the gallery"
+   }
+  },
+  {
+   "id": "molla-nesreddin-1914",
+   "c": "dovri",
+   "ia": true,
+   "iaId": "azadbilik-molla-nesreddin-1914",
+   "src": "mn-arxiv/1914",
+   "thumb": 1,
+   "total": 182,
+   "az": "«Molla Nəsrəddin», 1914 (№ 2–10, 12–25)",
+   "ru": "«Молла Насреддин», 1914 (№ 2–10, 12–25)",
+   "en": "«Molla Nasreddin», 1914 (nos. 2–10, 12–25)",
+   "date": "1914",
+   "place": {
+    "az": "Tiflis",
+    "ru": "Тифлис",
+    "en": "Tiflis"
+   },
+   "lang": "az (ərəb əlifbası)",
+   "holder": "anl",
+   "url": "https://www.millikitabxana.az/journals/search?name=Molla+N%C9%99sr%C9%99ddin&date=1914",
+   "note": {
+    "az": "Kitabxanada saxlanılan 23 nömrə, nömrə sırası ilə bir yerdə, 182 səhifə. Rəngli karikaturaları qalereyadadır.",
+    "ru": "23 номеров из фонда библиотеки, по порядку, 182 страниц. Цветные карикатуры — в галерее.",
+    "en": "The 23 issues the library holds, in order, 182 pages. The coloured caricatures are in the gallery."
+   },
+   "also": {
+    "href": "/qalereya/tarix/",
+    "az": "Karikaturaları qalereyada",
+    "ru": "Карикатуры в галерее",
+    "en": "The caricatures in the gallery"
+   }
+  },
+  {
+   "id": "molla-nesreddin-1922",
+   "c": "dovri",
+   "ia": true,
+   "iaId": "azadbilik-molla-nesreddin-1922",
+   "src": "mn-arxiv/1922",
+   "thumb": 1,
+   "total": 66,
+   "az": "«Molla Nəsrəddin», 1922 (№ 1–8)",
+   "ru": "«Молла Насреддин», 1922 (№ 1–8)",
+   "en": "«Molla Nasreddin», 1922 (nos. 1–8)",
+   "date": "1922",
+   "place": {
+    "az": "Bakı",
+    "ru": "Баку",
+    "en": "Baku"
+   },
+   "lang": "az (ərəb əlifbası)",
+   "holder": "anl",
+   "url": "https://www.millikitabxana.az/journals/search?name=Molla+N%C9%99sr%C9%99ddin&date=1922",
+   "note": {
+    "az": "Kitabxanada saxlanılan 8 nömrə, nömrə sırası ilə bir yerdə, 66 səhifə. Rəngli karikaturaları qalereyadadır.",
+    "ru": "8 номеров из фонда библиотеки, по порядку, 66 страниц. Цветные карикатуры — в галерее.",
+    "en": "The 8 issues the library holds, in order, 66 pages. The coloured caricatures are in the gallery."
+   },
+   "also": {
+    "href": "/qalereya/tarix/",
+    "az": "Karikaturaları qalereyada",
+    "ru": "Карикатуры в галерее",
+    "en": "The caricatures in the gallery"
+   }
+  },
+  {
+   "id": "molla-nesreddin-1923",
+   "c": "dovri",
+   "ia": true,
+   "iaId": "azadbilik-molla-nesreddin-1923",
+   "src": "mn-arxiv/1923",
+   "thumb": 1,
+   "total": 248,
+   "az": "«Molla Nəsrəddin», 1923 (№ 9–22, 24–40)",
+   "ru": "«Молла Насреддин», 1923 (№ 9–22, 24–40)",
+   "en": "«Molla Nasreddin», 1923 (nos. 9–22, 24–40)",
+   "date": "1923",
+   "place": {
+    "az": "Bakı",
+    "ru": "Баку",
+    "en": "Baku"
+   },
+   "lang": "az (ərəb əlifbası)",
+   "holder": "anl",
+   "url": "https://www.millikitabxana.az/journals/search?name=Molla+N%C9%99sr%C9%99ddin&date=1923",
+   "note": {
+    "az": "Kitabxanada saxlanılan 31 nömrə, nömrə sırası ilə bir yerdə, 248 səhifə. Rəngli karikaturaları qalereyadadır.",
+    "ru": "31 номеров из фонда библиотеки, по порядку, 248 страниц. Цветные карикатуры — в галерее.",
+    "en": "The 31 issues the library holds, in order, 248 pages. The coloured caricatures are in the gallery."
+   },
+   "also": {
+    "href": "/qalereya/tarix/",
+    "az": "Karikaturaları qalereyada",
+    "ru": "Карикатуры в галерее",
+    "en": "The caricatures in the gallery"
    }
   }
  ]
