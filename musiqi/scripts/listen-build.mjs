@@ -124,12 +124,12 @@ const CHANNELS = {
 const OWN = { 'UChmn_-dt0yEykjiZTMTnYjA': 'Q117750849', 'UCtcZLsPgLJNS91fH_pQXymg': 'Q135210316' };
 // channels that are a namesake's, not this musician's: «Səxavət Məmmədov - Topic» carries the xanəndə (1953–1991), not the tar player (b. 1993, «Sakhavat Mammadov» on Apple)
 const NOT_CH = { Q140127954: ['UCYi9_7Pem4-Xq9zdWPvAg3g'], Q12846316: ['UCpuRoVWWbUaZHHsAPuqX71g'] }; // …and the other way round: the tar player's verified channel is not the singer's
-// own-channel videos that are not music (a pickup sound test)
-const SKIP_V = new Set(['PLuC4sZwZog']);
+// videos left out by hand: a pickup sound test on an own channel; two whose subject could not be confirmed (Azərbaycanfilm's «Bülbül (1968)», İctimai Radio's «Tanış olun - Mirzə Muxtar»)
+const SKIP_V = new Set(['PLuC4sZwZog', '8IcRwDE0zRM', 'uRxSZSbQIRc']);
 const official = (v, o) => (CHANNELS[v.cid] ?? null) || (/ - Topic$/.test(v.ch) ? v.ch : null)
   || (v.badges.includes('BADGE_STYLE_TYPE_VERIFIED_ARTIST') && o && [o.az, o.ru && ruName(o.ru), o.en].filter(Boolean).some((n) => nameFits(v.ch.replace(/\s+(official|rəsmi)$/i, ''), n)) ? v.ch : null);
-// Namesakes: Bülbül is not his son Polad Bülbüloğlu; Müslüm Maqomayev the composer (1885–1937) is not his grandson the singer, so only his operas
-const NOT = { Q1131312: /pola[dt]|полад|o[gğ]l[uı]|огл/i }, ONLY = { Q2499809: /şah ismay|shah ismay|шах[- ]исмаил|nərgiz|nargiz|наргиз/i };
+// Namesakes: Bülbül is not his son Polad Bülbüloğlu, nor the song «Bülbül» (Mələkxanım Əyyubova on «Nanəli»); Səttar is not the painter Səttar Bəhlulzadə; Müslüm Maqomayev the composer (1885–1937) is not his grandson the singer, so only his operas
+const NOT = { Q1131312: /pola[dt]|полад|o[gğ]l[uı]|огл|nanəli/i, Q16374758: /bəhlulzadə|bahlulzade/i }, ONLY = { Q2499809: /şah ismay|shah ismay|шах[- ]исмаил|nərgiz|nargiz|наргиз/i };
 const secs = (l) => l.split(':').reduce((s, x) => s * 60 + +x, 0);
 const nameToks = (o) => [o.az, o.ru && ruName(o.ru), o.en].filter(Boolean).map((n) => toks(n.replace(/\(.*?\)/g, ' ')));
 // the title names the musician: their surname, and their first name too unless they go by one name

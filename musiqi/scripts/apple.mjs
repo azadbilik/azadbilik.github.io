@@ -24,20 +24,23 @@ const DROP = {
   Q2499809: 'Müslüm Maqomayev Sr. (1885–1937): the name only finds his grandson, the singer (Q558799)',
   Q1131312: 'Bülbül: only namesakes (pop acts of the 2010s–20s)',
   Q16374758: 'Sattar: namesakes (Iranian pop)', Q13053058: 'Lisani: matched «Gabriel», no', Q16380365: 'Zargar: a 2026 pop single, namesake',
-  Q1979936: 'Jivani: one track credited on an Armenian anthology, no album of his own', Q4054565: 'matched Islama Abdullayeva, a different person',
+  Q1979936: 'Jivani: one track credited on an Armenian anthology, no album of his own',
   Q4073559: 'Aşıq Əli: the catalogue artist is a living ashik of the 2020s', Q16365360: 'same, Aşıq Əli (living namesake)',
   Q16378524: 'Ədalət Nəsibov: matched «Aşıq Adalet», not the same name', Q4216454: 'Qaryağdıoğlu: only «Music of Azerbaijan I: Selection of Iran», origin of the artist unclear',
   Q1189603: 'one single titled in Persian, doubtful', Q134286966: 'only a feature credit', Q107926164: 'Bengt Johansson: namesake (Swedish pop)',
-  Q12850037: 'Əli Quliyev: rap namesake', Q16368221: 'two Gülyaz Məmmədovas, unclear', Q12838981: 'Ehtiram Hüseynov: breakbeat namesake',
+  Q12850037: 'Əli Quliyev: rap namesake', Q12838981: 'Ehtiram Hüseynov: breakbeat namesake',
   Q25543577: 'Səbuhi Cəfərov: spoken-word namesake',
   Q16370169: 'Mirza Mansur Mansurov (d. 1967): only two 2024 singles, no historical release and no title naming him',
   Q1959615: 'Ilyinsky (d. 1920): no album or title carries his name, only others\' performances of one piece',
-  Q12838356: 'only a feature credit', Q19715058: 'only a feature credit',
-  Q1483971: 'Fərqanə Qasımova: the name search found her father Alim Qasımov\'s artist page (shared id)', Q4223720: 'Aleksandr Klimov (conductor, 1898–1974): the Apple artist is a pop singer of the 2020s',
+  Q12838356: 'only a feature credit', Q19715058: 'only a feature credit', Q4223720: 'Aleksandr Klimov (conductor, 1898–1974): the Apple artist is a pop singer of the 2020s',
 };
 // Apple ids checked by hand (the name search missed them): Niyazi's artist page is «Niyazi Hajibeyov»; Behbudov is «Рашид Бейбутов» on the ru storefront;
 // Səxavət Məmmədov the xanəndə (1953–1991) is «Səxavət Məmmədov» (Azad bir quşdum, Zabul Segah, Ay Çiçək), not «Sakhavat Mammadov», the tar player born 1993 (Q140127954)
-const FORCE = { Q714526: 838358820, Q714776: 1660753163, Q12846316: 1708058861 };
+// the xanəndələr found by their az name (2026-11-28; the Latin search had missed them or taken a namesake): each checked by repertoire and dates
+const FORCE = { Q714526: 838358820, Q714776: 1660753163, Q12846316: 1708058861,
+  Q6741182: 1598811090, Q1483971: 1542861130, Q16372672: 1754095397, Q4054565: 924170205, Q373520: 1454596435, Q16368221: 1567875383,
+  // on Apple only on the anthology «Great Singers of the Republic of Azerbaijan»: Yaqub Məmmədov (Mansuriyyə, Rast), Zülfü Adıgözəlov (Üşşaq); a hand-checked id is kept however thin
+  Q16376261: 924170197, Q4057575: 924170241 };
 // Apple splits some artists over several ids: other ids of the same artist, merged in (hand-checked, same name and repertoire)
 const ALSO = { Q317397: [1748748666] }; // «Üzeyir Hacıbəyov» (az storefront) beside «Uzeyir Hajibeyov»
 // Notes shown with a person's previews
@@ -153,7 +156,7 @@ for (const [q, m] of Object.entries(match)) {
   const same = Object.entries(match).filter(([q2, m2]) => q2 !== q && !DROP[q2] && m2.cand?.[0]?.id === c.id);
   if (same.length && c.src !== 'wikidata') { console.log('shared id, dropped', q, m.name, c.id); continue; }
   const own0 = (m.songs ?? []).filter((x) => x.preview).length;
-  if (c.src !== 'wikidata' && !(m.albums?.length || own0 >= 3 || m.extra?.length >= 2)) { console.log('thin, dropped', q, m.name, c.name); continue; }
+  if (c.src !== 'wikidata' && c.src !== 'hand' && !(m.albums?.length || own0 >= 3 || m.extra?.length >= 2)) { console.log('thin, dropped', q, m.name, c.name); continue; }
   const seen = new Set(), rec = [];
   for (const a of [...(m.albums ?? [])].sort((x, y) => (x.date || '9').localeCompare(y.date || '9'))) { const k = norm(a.name); if (!k || seen.has(k) || !a.url || !a.date) continue; seen.add(k); rec.push([a.name, yr(a.date), a.url]); }
   const sk = new Set(), pv = [];

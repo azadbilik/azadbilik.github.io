@@ -42,11 +42,15 @@ const ruShort = (s) => s ? s.replace(/,.*$/, '').split(/\s+/).filter((_, i, a) =
 const people = new Map();
 for (const a of CAT.artists) people.set(a.q, a); // every musician of the player (first the Soviet era only; post-Soviet added 2026-11-28)
 for (const p of EST.people) if (!people.has(p.qid)) people.set(p.qid, { q: p.qid, az: p.az, ru: p.ru, en: p.en });
+// every xanəndə of the musicians list (added 2026-11-28: most of them have no Apple page), also searched as «… xanəndə»
+const MUS = await J('../data/musicians.json'), XAN = new Set();
+for (const p of MUS) if (p.roles?.includes('khanende') && /^Q\d+$/.test(p.qid)) { XAN.add(p.qid); if (!people.has(p.qid)) people.set(p.qid, { q: p.qid, az: p.az?.replace(/\s*\(.*?\)/g, ''), ru: p.ru, en: p.en }); }
 const staged = new Set(COMP.works.flatMap((w) => w.composers));
 for (const p of COMP.people) if (staged.has(p.qid) && p.az && !people.has(p.qid) && (p.died ?? 2026) > 1920) people.set(p.qid, { q: p.qid, az: p.az, ru: p.ru, en: p.en });
 for (const p of people.values()) {
   const main = p.az || p.en || ruShort(p.ru); if (main) qs.set(main, { kind: 'a', key: p.q });
   const ru = ruShort(p.ru); if (ru && ru !== p.az) qs.set(ru, { kind: 'a', key: p.q });
+  if (XAN.has(p.q) && p.az) qs.set(`${p.az} xanəndə`, { kind: 'a', key: p.q });
 }
 // more precise searches where the name alone finds namesakes or nothing official (by hand)
 const EXTRA_Q = { Q123174860: ['Kamran Kərimov nağara', 'Kamran Karimov nagara'], Q117750849: ['Arslan Novrasli tar'], Q140127954: ['Səxavət Məmmədov gitara', 'Sakhavat Mammadov guitar', 'Sahavat Mammadov', 'Сахават Мамедов гитара'], Q135210316: ['Ali Arshi tar', 'Ali Arshi music'], Q12846316: ['Səxavət Məmmədov xanəndə', 'Sexavet Memmedov muğam', 'Сахавет Мамедов ханенде', 'Səxavət Məmmədov - Topic'] };
