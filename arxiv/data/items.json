@@ -56,6 +56,11 @@
    "az": "ABŞ Konqres Kitabxanası",
    "ru": "Библиотека Конгресса США",
    "en": "Library of Congress"
+  },
+  "ia": {
+   "az": "Internet Archive",
+   "ru": "Internet Archive",
+   "en": "Internet Archive"
   }
  },
  "items": [
@@ -778,6 +783,306 @@
    "n": 20,
    "total": 20,
    "ratio": 0.672
+  },
+  {
+   "id": "akak-i",
+   "c": "elyazma",
+   "ia": "aktysobrannyekavkazskojarheografichesko2",
+   "total": 838,
+   "az": "Qafqaz Arxeoqrafiya Komissiyasının topladığı aktlar, cild I: Gurcü, ərəb, fars və türk dillərində fərmanlar və aktlar, 1398–1799",
+   "ru": "Акты, собранные Кавказскою археографическою коммиссиею. Т. I: Грамоты и другие акты на грузинском, арабском, персидском и турецком языках, 1398–1799",
+   "en": "Acts collected by the Caucasus Archaeographic Commission, vol. I: Grants and other acts in Georgian, Arabic, Persian and Turkish, 1398–1799",
+   "date": "1866",
+   "place": {
+    "az": "Tiflis",
+    "ru": "Тифлис",
+    "en": "Tiflis"
+   },
+   "lang": "ru, ka, ar, fa, tr",
+   "holder": "ia",
+   "url": "https://archive.org/details/aktysobrannyekavkazskojarheografichesko2",
+   "note": {
+    "az": "Qafqaz canişinliyi arxivindən sənədlər: fərmanlar, reskriptlər, raportlar, xanlarla yazışma, müqavilələr. Internet Archive-də (russian-online-libraries) tam mətn.",
+    "ru": "Документы архива Главного управления наместника кавказского: грамоты, рескрипты, рапорты, переписка с ханами, трактаты. Полностью на Internet Archive (russian-online-libraries).",
+    "en": "Papers from the archive of the Caucasus viceroyalty: grants, rescripts, reports, correspondence with the khans, treaties. In full on the Internet Archive (russian-online-libraries)."
+   },
+   "n": 0,
+   "ratio": 0.691
+  },
+  {
+   "id": "akak-ii",
+   "c": "elyazma",
+   "ia": "aktysobrannyekavkazskojarheografichesko51",
+   "total": 1254,
+   "az": "Qafqaz Arxeoqrafiya Komissiyasının topladığı aktlar, cild II: knyaz P. D. Sisianovun idarəsi dövründə Qafqaz və Cənubi Qafqaz, 1802–1806",
+   "ru": "Акты, собранные Кавказскою археографическою коммиссиею. Т. II: Кавказ и Закавказье за время управления князя П. Д. Цицианова, 1802–1806",
+   "en": "Acts collected by the Caucasus Archaeographic Commission, vol. II: The Caucasus and Transcaucasia under Prince P. D. Tsitsianov, 1802–1806",
+   "date": "1868",
+   "place": {
+    "az": "Tiflis",
+    "ru": "Тифлис",
+    "en": "Tiflis"
+   },
+   "lang": "ru",
+   "holder": "ia",
+   "url": "https://archive.org/details/aktysobrannyekavkazskojarheografichesko51",
+   "note": {
+    "az": "Qafqaz canişinliyi arxivindən sənədlər: fərmanlar, reskriptlər, raportlar, xanlarla yazışma, müqavilələr. Internet Archive-də (russian-online-libraries) tam mətn.",
+    "ru": "Документы архива Главного управления наместника кавказского: грамоты, рескрипты, рапорты, переписка с ханами, трактаты. Полностью на Internet Archive (russian-online-libraries).",
+    "en": "Papers from the archive of the Caucasus viceroyalty: grants, rescripts, reports, correspondence with the khans, treaties. In full on the Internet Archive (russian-online-libraries)."
+   },
+   "n": 0,
+   "ratio": 0.691
+  },
+  {
+   "id": "akak-iv",
+   "c": "elyazma",
+   "ia": "aktysobrannyekavkazskojarheografichesko54",
+   "total": 1044,
+   "az": "Qafqaz Arxeoqrafiya Komissiyasının topladığı aktlar, cild IV: A. P. Tormasovun idarəsi dövründə, 1809–1811",
+   "ru": "Акты, собранные Кавказскою археографическою коммиссиею. Т. IV: …за время управления А. П. Тормасова, 1809–1811",
+   "en": "Acts collected by the Caucasus Archaeographic Commission, vol. IV: …under A. P. Tormasov, 1809–1811",
+   "date": "1870",
+   "place": {
+    "az": "Tiflis",
+    "ru": "Тифлис",
+    "en": "Tiflis"
+   },
+   "lang": "ru",
+   "holder": "ia",
+   "url": "https://archive.org/details/aktysobrannyekavkazskojarheografichesko54",
+   "note": {
+    "az": "Qafqaz canişinliyi arxivindən sənədlər: fərmanlar, reskriptlər, raportlar, xanlarla yazışma, müqavilələr. Internet Archive-də (russian-online-libraries) tam mətn.",
+    "ru": "Документы архива Главного управления наместника кавказского: грамоты, рескрипты, рапорты, переписка с ханами, трактаты. Полностью на Internet Archive (russian-online-libraries).",
+    "en": "Papers from the archive of the Caucasus viceroyalty: grants, rescripts, reports, correspondence with the khans, treaties. In full on the Internet Archive (russian-online-libraries)."
+   },
+   "n": 0,
+   "ratio": 0.678
+  },
+  {
+   "id": "akak-v",
+   "c": "elyazma",
+   "ia": "aktysobrannyekavkazskojarheografichesko43",
+   "total": 1210,
+   "az": "Qafqaz Arxeoqrafiya Komissiyasının topladığı aktlar, cild V: markiz F. O. Paulluççinin idarəsi dövründə",
+   "ru": "Акты, собранные Кавказскою археографическою коммиссиею. Т. V: …за время управления маркиза Ф. О. Паулуччи",
+   "en": "Acts collected by the Caucasus Archaeographic Commission, vol. V: …under the Marquis F. O. Paulucci",
+   "date": "1873",
+   "place": {
+    "az": "Tiflis",
+    "ru": "Тифлис",
+    "en": "Tiflis"
+   },
+   "lang": "ru",
+   "holder": "ia",
+   "url": "https://archive.org/details/aktysobrannyekavkazskojarheografichesko43",
+   "note": {
+    "az": "Qafqaz canişinliyi arxivindən sənədlər: fərmanlar, reskriptlər, raportlar, xanlarla yazışma, müqavilələr. Internet Archive-də (russian-online-libraries) tam mətn.",
+    "ru": "Документы архива Главного управления наместника кавказского: грамоты, рескрипты, рапорты, переписка с ханами, трактаты. Полностью на Internet Archive (russian-online-libraries).",
+    "en": "Papers from the archive of the Caucasus viceroyalty: grants, rescripts, reports, correspondence with the khans, treaties. In full on the Internet Archive (russian-online-libraries)."
+   },
+   "n": 0,
+   "ratio": 0.692
+  },
+  {
+   "id": "akak-vi-1",
+   "c": "elyazma",
+   "ia": "aktysobrannyekavkazskojarheografichesko87",
+   "total": 972,
+   "az": "Qafqaz Arxeoqrafiya Komissiyasının topladığı aktlar, cild VI, 1: A. P. Yermolovun idarəsi dövründə, 1816–1827 (1-ci hissə)",
+   "ru": "Акты, собранные Кавказскою археографическою коммиссиею. Т. VI, 1: …за время управления А. П. Ермолова, 1816–1827 (часть 1)",
+   "en": "Acts collected by the Caucasus Archaeographic Commission, vol. VI, 1: …under A. P. Yermolov, 1816–1827 (part 1)",
+   "date": "1874",
+   "place": {
+    "az": "Tiflis",
+    "ru": "Тифлис",
+    "en": "Tiflis"
+   },
+   "lang": "ru",
+   "holder": "ia",
+   "url": "https://archive.org/details/aktysobrannyekavkazskojarheografichesko87",
+   "note": {
+    "az": "Qafqaz canişinliyi arxivindən sənədlər: fərmanlar, reskriptlər, raportlar, xanlarla yazışma, müqavilələr. Internet Archive-də (russian-online-libraries) tam mətn.",
+    "ru": "Документы архива Главного управления наместника кавказского: грамоты, рескрипты, рапорты, переписка с ханами, трактаты. Полностью на Internet Archive (russian-online-libraries).",
+    "en": "Papers from the archive of the Caucasus viceroyalty: grants, rescripts, reports, correspondence with the khans, treaties. In full on the Internet Archive (russian-online-libraries)."
+   },
+   "n": 0,
+   "ratio": 0.677
+  },
+  {
+   "id": "akak-vi-2",
+   "c": "elyazma",
+   "ia": "aktysobrannyekavkazskojarheografichesko56",
+   "total": 970,
+   "az": "Qafqaz Arxeoqrafiya Komissiyasının topladığı aktlar, cild VI, 2: A. P. Yermolovun idarəsi dövründə, 1816–1827 (2-ci hissə)",
+   "ru": "Акты, собранные Кавказскою археографическою коммиссиею. Т. VI, 2: …за время управления А. П. Ермолова, 1816–1827 (часть 2)",
+   "en": "Acts collected by the Caucasus Archaeographic Commission, vol. VI, 2: …under A. P. Yermolov, 1816–1827 (part 2)",
+   "date": "1875",
+   "place": {
+    "az": "Tiflis",
+    "ru": "Тифлис",
+    "en": "Tiflis"
+   },
+   "lang": "ru",
+   "holder": "ia",
+   "url": "https://archive.org/details/aktysobrannyekavkazskojarheografichesko56",
+   "note": {
+    "az": "Qafqaz canişinliyi arxivindən sənədlər: fərmanlar, reskriptlər, raportlar, xanlarla yazışma, müqavilələr. Internet Archive-də (russian-online-libraries) tam mətn.",
+    "ru": "Документы архива Главного управления наместника кавказского: грамоты, рескрипты, рапорты, переписка с ханами, трактаты. Полностью на Internet Archive (russian-online-libraries).",
+    "en": "Papers from the archive of the Caucasus viceroyalty: grants, rescripts, reports, correspondence with the khans, treaties. In full on the Internet Archive (russian-online-libraries)."
+   },
+   "n": 0,
+   "ratio": 0.672
+  },
+  {
+   "id": "akak-vii",
+   "c": "elyazma",
+   "ia": "aktysobrannyekavkazskojarheografichesko21",
+   "total": 1026,
+   "az": "Qafqaz Arxeoqrafiya Komissiyasının topladığı aktlar, cild VII: qraf İ. F. Paskeviçin idarəsi dövründə, 1827–1831",
+   "ru": "Акты, собранные Кавказскою археографическою коммиссиею. Т. VII: …за время управления графа И. Ф. Паскевича, 1827–1831",
+   "en": "Acts collected by the Caucasus Archaeographic Commission, vol. VII: …under Count I. F. Paskevich, 1827–1831",
+   "date": "1878",
+   "place": {
+    "az": "Tiflis",
+    "ru": "Тифлис",
+    "en": "Tiflis"
+   },
+   "lang": "ru",
+   "holder": "ia",
+   "url": "https://archive.org/details/aktysobrannyekavkazskojarheografichesko21",
+   "note": {
+    "az": "Qafqaz canişinliyi arxivindən sənədlər: fərmanlar, reskriptlər, raportlar, xanlarla yazışma, müqavilələr. Internet Archive-də (russian-online-libraries) tam mətn.",
+    "ru": "Документы архива Главного управления наместника кавказского: грамоты, рескрипты, рапорты, переписка с ханами, трактаты. Полностью на Internet Archive (russian-online-libraries).",
+    "en": "Papers from the archive of the Caucasus viceroyalty: grants, rescripts, reports, correspondence with the khans, treaties. In full on the Internet Archive (russian-online-libraries)."
+   },
+   "n": 0,
+   "ratio": 0.675
+  },
+  {
+   "id": "akak-viii",
+   "c": "elyazma",
+   "ia": "aktysobrannyekavkazskojarheografichesko15",
+   "total": 1044,
+   "az": "Qafqaz Arxeoqrafiya Komissiyasının topladığı aktlar, cild VIII: baron Q. V. Rozenin idarəsi dövründə, 1831–1837",
+   "ru": "Акты, собранные Кавказскою археографическою коммиссиею. Т. VIII: …за время управления барона Г. В. Розена, 1831–1837",
+   "en": "Acts collected by the Caucasus Archaeographic Commission, vol. VIII: …under Baron G. V. Rosen, 1831–1837",
+   "date": "1881",
+   "place": {
+    "az": "Tiflis",
+    "ru": "Тифлис",
+    "en": "Tiflis"
+   },
+   "lang": "ru",
+   "holder": "ia",
+   "url": "https://archive.org/details/aktysobrannyekavkazskojarheografichesko15",
+   "note": {
+    "az": "Qafqaz canişinliyi arxivindən sənədlər: fərmanlar, reskriptlər, raportlar, xanlarla yazışma, müqavilələr. Internet Archive-də (russian-online-libraries) tam mətn.",
+    "ru": "Документы архива Главного управления наместника кавказского: грамоты, рескрипты, рапорты, переписка с ханами, трактаты. Полностью на Internet Archive (russian-online-libraries).",
+    "en": "Papers from the archive of the Caucasus viceroyalty: grants, rescripts, reports, correspondence with the khans, treaties. In full on the Internet Archive (russian-online-libraries)."
+   },
+   "n": 0,
+   "ratio": 0.695
+  },
+  {
+   "id": "akak-ix",
+   "c": "elyazma",
+   "ia": "aktysobrannyekavkazskojarheografichesko24",
+   "total": 998,
+   "az": "Qafqaz Arxeoqrafiya Komissiyasının topladığı aktlar, cild IX: Y. A. Qolovinin idarəsi dövründə, 1837–1842",
+   "ru": "Акты, собранные Кавказскою археографическою коммиссиею. Т. IX: …за время управления Е. А. Головина, 1837–1842",
+   "en": "Acts collected by the Caucasus Archaeographic Commission, vol. IX: …under E. A. Golovin, 1837–1842",
+   "date": "1884",
+   "place": {
+    "az": "Tiflis",
+    "ru": "Тифлис",
+    "en": "Tiflis"
+   },
+   "lang": "ru",
+   "holder": "ia",
+   "url": "https://archive.org/details/aktysobrannyekavkazskojarheografichesko24",
+   "note": {
+    "az": "Qafqaz canişinliyi arxivindən sənədlər: fərmanlar, reskriptlər, raportlar, xanlarla yazışma, müqavilələr. Internet Archive-də (russian-online-libraries) tam mətn.",
+    "ru": "Документы архива Главного управления наместника кавказского: грамоты, рескрипты, рапорты, переписка с ханами, трактаты. Полностью на Internet Archive (russian-online-libraries).",
+    "en": "Papers from the archive of the Caucasus viceroyalty: grants, rescripts, reports, correspondence with the khans, treaties. In full on the Internet Archive (russian-online-libraries)."
+   },
+   "n": 0,
+   "ratio": 0.669
+  },
+  {
+   "id": "akak-x",
+   "c": "elyazma",
+   "ia": "aktysobrannyekavkazskojarheografichesko6",
+   "total": 1002,
+   "az": "Qafqaz Arxeoqrafiya Komissiyasının topladığı aktlar, cild X: knyaz M. S. Vorontsovun idarəsi dövründə, 1844–1854",
+   "ru": "Акты, собранные Кавказскою археографическою коммиссиею. Т. X: …за время управления князя М. С. Воронцова, 1844–1854",
+   "en": "Acts collected by the Caucasus Archaeographic Commission, vol. X: …under Prince M. S. Vorontsov, 1844–1854",
+   "date": "1885",
+   "place": {
+    "az": "Tiflis",
+    "ru": "Тифлис",
+    "en": "Tiflis"
+   },
+   "lang": "ru",
+   "holder": "ia",
+   "url": "https://archive.org/details/aktysobrannyekavkazskojarheografichesko6",
+   "note": {
+    "az": "Qafqaz canişinliyi arxivindən sənədlər: fərmanlar, reskriptlər, raportlar, xanlarla yazışma, müqavilələr. Internet Archive-də (russian-online-libraries) tam mətn.",
+    "ru": "Документы архива Главного управления наместника кавказского: грамоты, рескрипты, рапорты, переписка с ханами, трактаты. Полностью на Internet Archive (russian-online-libraries).",
+    "en": "Papers from the archive of the Caucasus viceroyalty: grants, rescripts, reports, correspondence with the khans, treaties. In full on the Internet Archive (russian-online-libraries)."
+   },
+   "n": 0,
+   "ratio": 0.698
+  },
+  {
+   "id": "akak-xi",
+   "c": "elyazma",
+   "ia": "aktysobrannyekavkazskojarheografichesko18",
+   "total": 1050,
+   "az": "Qafqaz Arxeoqrafiya Komissiyasının topladığı aktlar, cild XI: N. N. Muravyovun idarəsi dövründə, 1854–1856",
+   "ru": "Акты, собранные Кавказскою археографическою коммиссиею. Т. XI: …за время управления Н. Н. Муравьёва, 1854–1856",
+   "en": "Acts collected by the Caucasus Archaeographic Commission, vol. XI: …under N. N. Muravyov, 1854–1856",
+   "date": "1888",
+   "place": {
+    "az": "Tiflis",
+    "ru": "Тифлис",
+    "en": "Tiflis"
+   },
+   "lang": "ru",
+   "holder": "ia",
+   "url": "https://archive.org/details/aktysobrannyekavkazskojarheografichesko18",
+   "note": {
+    "az": "Qafqaz canişinliyi arxivindən sənədlər: fərmanlar, reskriptlər, raportlar, xanlarla yazışma, müqavilələr. Internet Archive-də (russian-online-libraries) tam mətn.",
+    "ru": "Документы архива Главного управления наместника кавказского: грамоты, рескрипты, рапорты, переписка с ханами, трактаты. Полностью на Internet Archive (russian-online-libraries).",
+    "en": "Papers from the archive of the Caucasus viceroyalty: grants, rescripts, reports, correspondence with the khans, treaties. In full on the Internet Archive (russian-online-libraries)."
+   },
+   "n": 0,
+   "ratio": 0.678
+  },
+  {
+   "id": "akak-xii",
+   "c": "elyazma",
+   "ia": "aktysobrannyekavkazskojarheografichesko0",
+   "total": 1576,
+   "az": "Qafqaz Arxeoqrafiya Komissiyasının topladığı aktlar, cild XII: knyaz A. İ. Baryatinskinin idarəsi dövründə, 1856–1862",
+   "ru": "Акты, собранные Кавказскою археографическою коммиссиею. Т. XII: …за время управления князя А. И. Барятинского, 1856–1862",
+   "en": "Acts collected by the Caucasus Archaeographic Commission, vol. XII: …under Prince A. I. Baryatinsky, 1856–1862",
+   "date": "1904",
+   "place": {
+    "az": "Tiflis",
+    "ru": "Тифлис",
+    "en": "Tiflis"
+   },
+   "lang": "ru",
+   "holder": "ia",
+   "url": "https://archive.org/details/aktysobrannyekavkazskojarheografichesko0",
+   "note": {
+    "az": "Qafqaz canişinliyi arxivindən sənədlər: fərmanlar, reskriptlər, raportlar, xanlarla yazışma, müqavilələr. Internet Archive-də (russian-online-libraries) tam mətn.",
+    "ru": "Документы архива Главного управления наместника кавказского: грамоты, рескрипты, рапорты, переписка с ханами, трактаты. Полностью на Internet Archive (russian-online-libraries).",
+    "en": "Papers from the archive of the Caucasus viceroyalty: grants, rescripts, reports, correspondence with the khans, treaties. In full on the Internet Archive (russian-online-libraries)."
+   },
+   "n": 0,
+   "ratio": 0.675
   }
  ]
 }

@@ -46,7 +46,7 @@ for it in cat['items']:
     else: pick = [fs[i - 1] for i in sel]
     rec = {k: v for k, v in it.items() if k not in ('src', 'pages', 'thumb')}
     rec['n'] = 0 if it.get('ia') else len(pick)
-    rec['total'] = len(fs)
+    rec['total'] = it.get('total') or len(fs)   # a book read on the Internet Archive states its own page count
     if not only or it['id'] in only:
         d.mkdir(parents=True, exist_ok=True)
         for old in d.glob('*.webp'): old.unlink()
