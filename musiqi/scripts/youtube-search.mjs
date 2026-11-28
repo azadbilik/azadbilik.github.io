@@ -1,4 +1,4 @@
-// YouTube search for the Soviet-era musicians and the stage/symphonic works of the music pages: most Melodiya-era recordings are only there.
+// YouTube search for the player's musicians and the stage/symphonic works of the music pages: most Melodiya-era recordings are only there.
 //   node scripts/youtube-search.mjs          search (one request every 4 s, answers cached in data/.cache/youtube/, git-ignored) -> data/.cache/youtube-search.json
 //   node scripts/youtube-search.mjs --build  from the cache only
 // Reads the public results page (ytInitialData) and keeps, per video: id, title, channel name and id, length, the channel's badges.
@@ -40,12 +40,12 @@ const qs = new Map(); // query -> { kind, key }
 const ruShort = (s) => s ? s.replace(/,.*$/, '').split(/\s+/).filter((_, i, a) => i === 0 || i === a.length - 1).join(' ') : '';
 // Musicians at work in the Soviet era (in the catalogue or not: the estrada list's ensembles and the composers with a stage work have none on Apple)
 const people = new Map();
-for (const a of CAT.artists) if (a.p.includes('soviet') || a.p.includes('early')) people.set(a.q, a);
+for (const a of CAT.artists) people.set(a.q, a); // every musician of the player (first the Soviet era only; post-Soviet added 2026-11-28)
 for (const p of EST.people) if (!people.has(p.qid)) people.set(p.qid, { q: p.qid, az: p.az, ru: p.ru, en: p.en });
 const staged = new Set(COMP.works.flatMap((w) => w.composers));
 for (const p of COMP.people) if (staged.has(p.qid) && p.az && !people.has(p.qid) && (p.died ?? 2026) > 1920) people.set(p.qid, { q: p.qid, az: p.az, ru: p.ru, en: p.en });
 for (const p of people.values()) {
-  qs.set(p.az, { kind: 'a', key: p.q });
+  const main = p.az || p.en || ruShort(p.ru); if (main) qs.set(main, { kind: 'a', key: p.q });
   const ru = ruShort(p.ru); if (ru && ru !== p.az) qs.set(ru, { kind: 'a', key: p.q });
 }
 for (const w of COMP.works) {
