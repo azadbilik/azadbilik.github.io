@@ -173,6 +173,22 @@ schools.sort((a, b) => b.size - a.size);
 schools = schools.filter((s, i) => !schools.slice(0, i).some((o) => o.m.includes(s.master) && s.m.every((q) => o.m.includes(q)) && s.size < 4)).slice(0, 12);
 for (const a of A) a.s = schools.filter((s) => s.m.includes(a.q)).map((s) => s.k);
 
+// ---- the tree view (#/tree): the genre family tree of data/genres.json, and every teacher → student link (Silsilə, Bəstəkarlar, Caz) with
+// names for the masters the player has no page for (teachers abroad flagged: Shostakovich → Garayev is part of the line)
+const GEN = await J('../data/genres.json');
+const TXT = await J('../silsile/data/lineage.text.json', { extra: [] });
+const inA = new Set(A.map((a) => a.q)), TL = [], TP = {}, seenTL = new Set();
+const who = (q) => P.get(q) ?? LIN.people.find((p) => p.qid === q) ?? TXT.extra.find((x) => (x.id ?? x.qid) === q);
+for (const l of links) {
+  if (!l.t || !l.s || l.t === l.s || seenTL.has(l.t + '>' + l.s)) continue; seenTL.add(l.t + '>' + l.s);
+  for (const q of [l.t, l.s]) if (!inA.has(q) && !TP[q]) {
+    const o = who(q); if (!o?.az) continue;
+    const g = genresOf({ q, roles: o.roles instanceof Set ? o.roles : new Set(o.roles ?? []) });
+    TP[q] = [o.az, o.ru ? ruName(o.ru) : '', o.en ?? '', o.born ?? null, o.died ?? null, g, ABROAD.has(q) ? 1 : 0];
+  }
+  if ((inA.has(l.t) || TP[l.t]) && (inA.has(l.s) || TP[l.s])) TL.push([l.t, l.s, l.src === 'wikidata' ? 0 : 1]);
+}
+
 // ---- works
 const W = [];
 for (const w of COMP.works) {
@@ -334,7 +350,7 @@ for (const w of W) {
 }
 
 const albums = [...ALB.values()].map(([, n, y, u, a]) => [n, y, u, a]);
-const out = { built: new Date().toISOString().slice(0, 10), artists: A, works: W, mughams: M, schools: schools.map(({ k, n, m }) => ({ k, n, m })), albums };
+const out = { built: new Date().toISOString().slice(0, 10), artists: A, works: W, mughams: M, tree: { genres: GEN.nodes, links: TL, people: TP }, schools: schools.map(({ k, n, m }) => ({ k, n, m })), albums };
 // long shared URL prefixes as short tokens; the page expands them (X in index.html)
 const PRE = [[/https:\/\/audio-ssl\.itunes\.apple\.com\/itunes-assets\//g, '~a/'], [/https:\/\/is(\d)-ssl\.mzstatic\.com\/image\/thumb\//g, '~i$1/'], [/https:\/\/music\.apple\.com\//g, '~m/'], [/https:\/\/upload\.wikimedia\.org\/wikipedia\/commons\//g, '~u/'], [/https:\/\/commons\.wikimedia\.org\/wiki\//g, '~c/']];
 let json = JSON.stringify(out); for (const [re, t] of PRE) json = json.replace(re, t);
@@ -346,5 +362,6 @@ const st = (f) => A.filter(f).length;
 console.log('artists', A.length, 'tracks', A.reduce((s, a) => s + a.t.length, 0), 'free', A.reduce((s, a) => s + a.t.filter((t) => t[6] === 1).length, 0), 'albums', albums.length,
   '| works', W.length, 'tracks', W.reduce((s, w) => s + w.t.length, 0), '| schools', schools.length, schools.map((s) => s.n.az + ' ' + s.m.length).join(', '));
 console.log('youtube: artists', A.filter((a) => a.v).length, 'videos', A.reduce((s, a) => s + (a.v?.length ?? 0), 0), '| only on youtube', A.filter((a) => a.v && !a.t.length).map((a) => a.az).join(', '), '| works', W.filter((w) => w.v).length, 'videos', W.reduce((s, w) => s + (w.v?.length ?? 0), 0), '| works only on youtube', W.filter((w) => !w.t.length).length);
+console.log('tree', GEN.nodes.length, 'genres,', TL.length, 'links,', Object.keys(TP).length, 'people without a page');
 console.log('mughams', M.map((m) => `${m.n.az} ${m.t.length}+${m.x.length}x+${m.v.length}v`).join(', '));
 console.log('genres', Object.fromEntries(GORDER.map((g) => [g, st((a) => a.g.includes(g))])), 'periods', Object.fromEntries(PERIODS.map(([k]) => [k, st((a) => a.p.includes(k))])));

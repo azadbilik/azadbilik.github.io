@@ -1,0 +1,434 @@
+{
+ "about": "The genre tree of /musiqi/#/tree: what came from what. Hand-written; every date is from the data of the music pages (premieres on Wikidata via bestekarlar/data/composers.json, recordings) or from the Wikipedia article given in src. lane: trad | classic | popular | jazz; root: an outside source, drawn dashed; year: where the genre starts on the time axis (null = before recordings, the tradition column); when: the words shown for it; from: the genres it came from; genre: the player's genre key(s) whose musicians it lists; people: an explicit list instead; works: Wikidata ids of works on the works list.",
+ "nodes": [
+  {
+   "id": "mugham",
+   "lane": "trad",
+   "year": null,
+   "genre": [
+    "mugham",
+    "instr"
+   ],
+   "link": "#/mughams",
+   "name": {
+    "az": "Muğam",
+    "ru": "Мугам",
+    "en": "Mugham"
+   },
+   "when": {
+    "az": "əsrlərlə",
+    "ru": "веками",
+    "en": "for centuries"
+   },
+   "text": {
+    "az": "Dəstgahlar və onların şöbələri üzrə improvizə: xanəndə, tar və kamança. Yeddi əsas dəstgah.",
+    "ru": "Импровизация по дастгяхам и их шёбе: ханенде, тар и кяманча. Семь основных дастгяхов.",
+    "en": "Improvisation through the dastgahs and their sections: a khanende with tar and kamancha. Seven main dastgahs."
+   },
+   "src": [
+    "https://az.wikipedia.org/wiki/Muğam",
+    "https://en.wikipedia.org/wiki/Mugham"
+   ]
+  },
+  {
+   "id": "ashiq",
+   "lane": "trad",
+   "year": null,
+   "genre": "ashiq",
+   "name": {
+    "az": "Aşıq sənəti",
+    "ru": "Искусство ашугов",
+    "en": "Ashiq art"
+   },
+   "when": {
+    "az": "əsrlərlə",
+    "ru": "веками",
+    "en": "for centuries"
+   },
+   "text": {
+    "az": "Sazla oxunan dastanlar və havalar. «Koroğlu», «Aşıq Qərib», «Əsli və Kərəm» dastanları sonra operaya keçdi.",
+    "ru": "Дастаны и напевы под саз. Дастаны «Кёроглу», «Ашуг Гариб», «Асли и Керем» потом перешли в оперу.",
+    "en": "Dastans and tunes sung to the saz. The dastans Koroghlu, Ashiq Garib and Asli and Karam later went into opera."
+   },
+   "src": [
+    "https://az.wikipedia.org/wiki/Aşıq_sənəti"
+   ]
+  },
+  {
+   "id": "folk",
+   "lane": "trad",
+   "year": null,
+   "genre": null,
+   "link": "#/c/free/all",
+   "name": {
+    "az": "Xalq mahnısı və təsnif",
+    "ru": "Народная песня и тесниф",
+    "en": "Folk song and tasnif"
+   },
+   "when": {
+    "az": "əsrlərlə",
+    "ru": "веками",
+    "en": "for centuries"
+   },
+   "text": {
+    "az": "Mahnılar və muğam içində oxunan təsniflər; estrada və pop öz kökünü buradan alır.",
+    "ru": "Песни и теснифы, исполняемые внутри мугама; эстрада и поп растут отсюда.",
+    "en": "Songs, and the tasnifs sung inside a mugham; estrada and pop grow from here."
+   },
+   "src": [
+    "https://en.wikipedia.org/wiki/Azerbaijani_pop_music"
+   ]
+  },
+  {
+   "id": "europe",
+   "lane": "classic",
+   "year": null,
+   "root": true,
+   "name": {
+    "az": "Avropa klassik musiqisi",
+    "ru": "Европейская классика",
+    "en": "European classical music"
+   },
+   "when": {
+    "az": "kənardan",
+    "ru": "извне",
+    "en": "from outside"
+   },
+   "text": {
+    "az": "Opera, balet, simfoniya: Azərbaycan bəstəkarları bu formaları muğamla birləşdirdi; çoxu Moskva və Leninqradda oxudu (Qarayev Şostakoviçin tələbəsi idi).",
+    "ru": "Опера, балет, симфония: азербайджанские композиторы соединили эти формы с мугамом; многие учились в Москве и Ленинграде (Караев — ученик Шостаковича).",
+    "en": "Opera, ballet, the symphony: Azerbaijani composers joined these forms to mugham; many studied in Moscow and Leningrad (Garayev was Shostakovich's student)."
+   },
+   "src": [
+    "https://en.wikipedia.org/wiki/Gara_Garayev"
+   ]
+  },
+  {
+   "id": "america",
+   "lane": "jazz",
+   "year": null,
+   "root": true,
+   "name": {
+    "az": "Amerika cazı",
+    "ru": "Американский джаз",
+    "en": "American jazz"
+   },
+   "when": {
+    "az": "kənardan",
+    "ru": "извне",
+    "en": "from outside"
+   },
+   "text": {
+    "az": "Caz Azərbaycana XX əsrin əvvəlində gəldi; Sovet dövründə Bakı Leninqrad və Riqa ilə yanaşı cazın üç məşhur şəhərindən biri idi.",
+    "ru": "Джаз пришёл в Азербайджан в начале XX века; в советское время Баку был одним из трёх известных джазовых городов наряду с Ленинградом и Ригой.",
+    "en": "Jazz reached Azerbaijan early in the 20th century; in Soviet times Baku was one of the three best-known jazz cities, with Leningrad and Riga."
+   },
+   "src": [
+    "https://en.wikipedia.org/wiki/Azerbaijani_jazz"
+   ]
+  },
+  {
+   "id": "records",
+   "lane": "trad",
+   "year": 1902,
+   "from": [
+    "mugham",
+    "folk"
+   ],
+   "genre": null,
+   "link": "#/c/free/all",
+   "event": true,
+   "name": {
+    "az": "İlk səs yazıları",
+    "ru": "Первые записи",
+    "en": "First recordings"
+   },
+   "when": {
+    "az": "1902-dən",
+    "ru": "с 1902",
+    "en": "from 1902"
+   },
+   "text": {
+    "az": "Qrammofon valları: Cabbar Qaryağdıoğlu, Seyid Şuşinski, Bülbül. Burada tam və azad çalınır.",
+    "ru": "Граммофонные пластинки: Джаббар Карягдыоглы, Сеид Шушинский, Бюльбюль. Здесь звучат целиком и свободно.",
+    "en": "Gramophone discs: Jabbar Garyaghdioglu, Seyid Shushinski, Bulbul. They play here in full, free."
+   },
+   "src": [
+    "https://commons.wikimedia.org/wiki/Category:Music_of_Azerbaijan"
+   ]
+  },
+  {
+   "id": "opera",
+   "lane": "classic",
+   "year": 1908,
+   "from": [
+    "mugham",
+    "ashiq",
+    "europe"
+   ],
+   "genre": "classic",
+   "works": [
+    "Q1822437",
+    "Q2985139"
+   ],
+   "name": {
+    "az": "Muğam operası və opera",
+    "ru": "Мугамная опера и опера",
+    "en": "Mugham opera and opera"
+   },
+   "when": {
+    "az": "1908",
+    "ru": "1908",
+    "en": "1908"
+   },
+   "text": {
+    "az": "Üzeyir Hacıbəyovun «Leyli və Məcnun»u (1908): muğam Avropa opera səhnəsində. Sonra dastanlardan «Aşıq Qərib», «Koroğlu».",
+    "ru": "«Лейли и Меджнун» Узеира Гаджибекова (1908): мугам на европейской оперной сцене. Потом по дастанам — «Ашуг Гариб», «Кёроглу».",
+    "en": "Uzeyir Hajibeyov's Leyli and Majnun (1908): mugham on a European opera stage. Then, from the dastans, Ashiq Garib and Koroghlu."
+   },
+   "src": [
+    "https://www.wikidata.org/wiki/Q1822437"
+   ]
+  },
+  {
+   "id": "musical",
+   "lane": "classic",
+   "year": 1910,
+   "from": [
+    "opera",
+    "folk"
+   ],
+   "genre": null,
+   "works": [
+    "Q4305798"
+   ],
+   "name": {
+    "az": "Musiqili komediya",
+    "ru": "Музыкальная комедия",
+    "en": "Musical comedy"
+   },
+   "when": {
+    "az": "1910",
+    "ru": "1910",
+    "en": "1910"
+   },
+   "text": {
+    "az": "Hacıbəyovun «Ər və arvad»ı (1910), «O olmasın, bu olsun», «Arşın mal alan» (1913): mahnı ilə danışıq səhnəsi.",
+    "ru": "«Муж и жена» Гаджибекова (1910), «Не та, так эта», «Аршин мал алан» (1913): песня и разговорная сцена.",
+    "en": "Hajibeyov's Husband and Wife (1910), If Not That One, Then This One, Arshin Mal Alan (1913): songs and spoken scenes."
+   },
+   "src": [
+    "https://www.wikidata.org/wiki/Q4305798"
+   ]
+  },
+  {
+   "id": "ballet",
+   "lane": "classic",
+   "year": 1939,
+   "from": [
+    "europe",
+    "folk"
+   ],
+   "genre": "classic",
+   "works": [
+    "Q6543240"
+   ],
+   "name": {
+    "az": "Balet",
+    "ru": "Балет",
+    "en": "Ballet"
+   },
+   "when": {
+    "az": "1939",
+    "ru": "1939",
+    "en": "1939"
+   },
+   "text": {
+    "az": "Əfrasiyab Bədəlbəylinin «Tərlan»ı (1939) və «Qız qalası» (1940); Qara Qarayevin «Yeddi gözəl»i (1952).",
+    "ru": "«Тарлан» (1939) и «Девичья башня» (1940) Афрасияба Бадалбейли; «Семь красавиц» Кара Караева (1952).",
+    "en": "Afrasiyab Badalbeyli's Tarlan (1939) and Maiden Tower (1940); Gara Garayev's Seven Beauties (1952)."
+   },
+   "src": [
+    "https://az.wikipedia.org/wiki/Əfrasiyab_Bədəlbəyli"
+   ]
+  },
+  {
+   "id": "symph",
+   "lane": "classic",
+   "year": 1947,
+   "from": [
+    "europe"
+   ],
+   "genre": "classic",
+   "name": {
+    "az": "Simfonik musiqi",
+    "ru": "Симфоническая музыка",
+    "en": "Symphonic music"
+   },
+   "when": {
+    "az": "1940-lar",
+    "ru": "1940-е",
+    "en": "1940s"
+   },
+   "text": {
+    "az": "Simfoniya, poema, kantata: Fikrət Əmirov, Qara Qarayev, Cahangir Cahangirov.",
+    "ru": "Симфония, поэма, кантата: Фикрет Амиров, Кара Караев, Джахангир Джахангиров.",
+    "en": "Symphonies, poems, cantatas: Fikret Amirov, Gara Garayev, Jahangir Jahangirov."
+   },
+   "src": [
+    "https://az.wikipedia.org/wiki/Azərbaycan_klassik_musiqisi"
+   ]
+  },
+  {
+   "id": "symmugham",
+   "lane": "classic",
+   "year": 1948,
+   "from": [
+    "mugham",
+    "symph"
+   ],
+   "genre": null,
+   "works": [
+    "Q12849627",
+    "Q199352"
+   ],
+   "name": {
+    "az": "Simfonik muğam",
+    "ru": "Симфонический мугам",
+    "en": "Symphonic mugham"
+   },
+   "when": {
+    "az": "1948",
+    "ru": "1948",
+    "en": "1948"
+   },
+   "text": {
+    "az": "Fikrət Əmirovun 1948-ci ildə yaratdığı janr: «Şur», «Kürd ovşarı», sonra «Gülüstan-Bayatı-Şiraz».",
+    "ru": "Жанр, созданный Фикретом Амировым в 1948 году: «Шур», «Кюрд-овшары», потом «Гюлистан-Баяты-Шираз».",
+    "en": "A genre Fikret Amirov created in 1948: Shur, Kurd Ovshari, later Gulustan-Bayati-Shiraz."
+   },
+   "src": [
+    "https://az.wikipedia.org/wiki/Simfonik_muğam"
+   ]
+  },
+  {
+   "id": "jazz",
+   "lane": "jazz",
+   "year": 1926,
+   "from": [
+    "america"
+   ],
+   "genre": "jazz",
+   "name": {
+    "az": "Azərbaycan cazı",
+    "ru": "Азербайджанский джаз",
+    "en": "Azerbaijani jazz"
+   },
+   "when": {
+    "az": "1926; 1930-lar",
+    "ru": "1926; 1930-е",
+    "en": "1926; 1930s"
+   },
+   "text": {
+    "az": "1926-da Moskvada Hüseynqulu Sarabskinin solist olduğu Eastern Jazz Band; 1930-larda Niyazi və Tofiq Quliyev ilk yerli caz orkestrini yaratdı. 1969-da Bakıda ilk caz festivalı.",
+    "ru": "В 1926 году в Москве — Eastern Jazz Band с солистом Гусейнкули Сарабским; в 1930-е Ниязи и Тофик Кулиев создали первый местный джаз-оркестр. В 1969 году в Баку — первый джазовый фестиваль.",
+    "en": "In 1926, the Eastern Jazz Band in Moscow with Huseyngulu Sarabski as soloist; in the 1930s Niyazi and Tofig Guliyev formed the first local jazz band. In 1969, Baku's first jazz festival."
+   },
+   "src": [
+    "https://en.wikipedia.org/wiki/Azerbaijani_jazz"
+   ]
+  },
+  {
+   "id": "estrada",
+   "lane": "popular",
+   "year": 1950,
+   "from": [
+    "folk",
+    "jazz"
+   ],
+   "genre": "estrada",
+   "name": {
+    "az": "Estrada",
+    "ru": "Эстрада",
+    "en": "Estrada"
+   },
+   "when": {
+    "az": "XX əsrin ortası",
+    "ru": "середина XX века",
+    "en": "mid-20th century"
+   },
+   "text": {
+    "az": "Sovet dövrünün mahnısı və müğənniləri: Rəşid Behbudov, Müslüm Maqomayev, Şövkət Ələkbərova, «Qaya»; mahnı bəstəkarları Tofiq Quliyev, Polad Bülbüloğlu.",
+    "ru": "Песня и певцы советского времени: Рашид Бейбутов, Муслим Магомаев, Шовкет Алекперова, «Гая»; песенники Тофик Кулиев, Полад Бюльбюль-оглы.",
+    "en": "The songs and singers of the Soviet years: Rashid Behbudov, Muslim Magomayev, Shovkat Alakbarova, Gaya; songwriters Tofig Guliyev, Polad Bulbuloglu."
+   },
+   "src": [
+    "https://en.wikipedia.org/wiki/Azerbaijani_pop_music"
+   ]
+  },
+  {
+   "id": "jazzmugham",
+   "lane": "jazz",
+   "year": 1965,
+   "from": [
+    "jazz",
+    "mugham"
+   ],
+   "genre": "jazz",
+   "name": {
+    "az": "Caz-muğam",
+    "ru": "Джаз-мугам",
+    "en": "Jazz-mugham"
+   },
+   "when": {
+    "az": "1960-lar",
+    "ru": "1960-е",
+    "en": "1960s"
+   },
+   "text": {
+    "az": "Vaqif Mustafazadə muğamı caz harmoniyası ilə birləşdirdi; 1969-da Tbilisidə «Qızıl payız» festivalında üç dəfə laureat oldu. Əzizə Mustafazadə, Şahin Növrəsli, İsfar Sarabski davam etdirir.",
+    "ru": "Вагиф Мустафазаде соединил мугам с джазовой гармонией; в 1969 году трижды стал лауреатом фестиваля «Золотая осень» в Тбилиси. Продолжают Азиза Мустафазаде, Шахин Новрасли, Исфар Сарабский.",
+    "en": "Vagif Mustafazadeh joined mugham to jazz harmony; in 1969 he was a three-time laureate of the Golden Autumn festival in Tbilisi. Aziza Mustafazadeh, Shahin Novrasli and Isfar Sarabski carry it on."
+   },
+   "src": [
+    "https://en.wikipedia.org/wiki/Jazz_mugham",
+    "https://en.wikipedia.org/wiki/Golden_Autumn-69"
+   ],
+   "people": [
+    "Q935982",
+    "Q234304",
+    "Q2072216",
+    "Q2072597",
+    "Q2061803"
+   ]
+  },
+  {
+   "id": "pop",
+   "lane": "popular",
+   "year": 1970,
+   "from": [
+    "estrada",
+    "folk"
+   ],
+   "genre": "pop",
+   "name": {
+    "az": "Pop",
+    "ru": "Поп",
+    "en": "Pop"
+   },
+   "when": {
+    "az": "1970-lər; bu gün",
+    "ru": "1970-е; сегодня",
+    "en": "1970s; today"
+   },
+   "text": {
+    "az": "1970-lər «qızıl dövr»: Flora Kərimova, Şövkət Ələkbərova; sonra 1980-lərin rəqs və elektron popu, 2011-də Avroviziya qələbəsi.",
+    "ru": "1970-е — «золотой век»: Флора Керимова, Шовкет Алекперова; потом танцевальный и электронный поп 1980-х, в 2011 году — победа на «Евровидении».",
+    "en": "The 1970s 'golden age': Flora Karimova, Shovkat Alakbarova; then the dance and electronic pop of the 1980s, and a Eurovision win in 2011."
+   },
+   "src": [
+    "https://en.wikipedia.org/wiki/Azerbaijani_pop_music"
+   ]
+  }
+ ]
+}
