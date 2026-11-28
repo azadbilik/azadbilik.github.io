@@ -740,6 +740,25 @@
    "holder": "loc",
    "cipher": "G7142.A6C5 s4 .G6",
    "url": "https://www.loc.gov/resource/g7142am.gct00388/"
+  },
+  {
+   "id": "geo-kartlar-kavkaz",
+   "c": "xerite",
+   "src": "loc/geo-cards",
+   "pages": "all",
+   "az": "Coğrafi kartlar: Qafqaz diyarı, Tiflis, İrəvan və Şamaxı quberniyaları (№ 75, 76, 78, 79)",
+   "ru": "Географические карточки: Кавказский край, губернии Тифлисская, Эриванская и Шемахинская (№ 75, 76, 78, 79)",
+   "en": "Geographic cards: the Caucasus krai and the Tiflis, Erivan and Shemakha governorates (nos. 75, 76, 78, 79)",
+   "date": "[1846–1859]",
+   "lang": "ru",
+   "holder": "loc",
+   "cipher": "LCCN 2018689292, 2018689288, 2018689290, 2018689291",
+   "url": "https://www.loc.gov/item/2018689292/",
+   "note": {
+    "az": "Rusiya imperiyasının quberniyalarına aid əl ilə rənglənmiş kart dəstindən dörd kart: bir üzündə xəritə və gerb, o birində şəhərlər, çaylar, əhali, məşğuliyyətlər və geyim. Tarix kartlarda yoxdur; Şamaxı quberniyası yalnız 1846–1859-cu illərdə mövcud olub.",
+    "ru": "Четыре карточки из раскрашенного от руки набора по губерниям Российской империи: на одной стороне карта и герб, на другой — города, реки, население, промыслы и костюм. Дата на карточках не указана; Шемахинская губерния существовала только в 1846–1859 гг.",
+    "en": "Four cards from a hand-coloured set on the governorates of the Russian Empire: a map and arms on one side; towns, rivers, population, trades and dress on the other. The cards carry no date; the Shemakha governorate existed only in 1846–1859."
+   }
   }
  ]
 }
