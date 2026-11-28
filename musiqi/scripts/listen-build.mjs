@@ -211,7 +211,7 @@ const NOT_MUGHAM = /rəşt|resht/i;
 // the Persian spellings the catalogue uses for some (Malik Mansurov's sets: «Homayun: Bidad»)
 const D_ALIAS = { humayun: ['Homayun'], 'bayati-shiraz': ['Bayat-e Shiraz'], shushtar: ['Shushtar'] };
 // sections every mugham has (opening, closing, the base, the high register), though mugham.json lists some under one dəstgah only
-const GENERIC_SOBE = new Set(nameT('maye mayə bərdaşt dəraməd ayaq rəng zil təsnif'));
+const GENERIC_SOBE = new Set(nameT('maye mayə bərdaşt dəraməd ayaq rəng təsnif')); // zil (high register) is matched only zil to zil, below
 const secOwners = new Map();
 for (const d of MUG.dastgahs) for (const x of d.sections) { const k = nameT(x.az).join(' '); (secOwners.get(k) ?? secOwners.set(k, new Set()).get(k)).add(d.id); }
 const keys = MUG.dastgahs.map((d) => {
@@ -226,6 +226,19 @@ const keys = MUG.dastgahs.map((d) => {
 const others = MUG.pieces.filter((pc) => pc.kind === 'dastgah' && !pc.dastgah).map((pc) => nameT(pc.name));
 // «X: Y» (a set's dəstgah, then its part): X decides, and it must be one of the seven by name; «Qatar: Ayaq» is not Bayatı-Şiraz's Ayaq
 const dName = (T) => keys.filter(({ ks }) => ks.some((k) => k.sobe === null && k.t.every((w) => T.some((x) => tokEqM(x, w))))).map(({ d }) => d.id);
+// A consonant skeleton for Persian-style spellings: lowercase, Latin digraphs to one letter, the ezafe connectors (-e, -ye, -o) and all
+// vowels and y/w dropped, kh/x/h one sound, k/q/g(h) one, j/c one, doubled letters once: «Shekast-e Fars» and «Şikəsteyi-fars» both read şqstfrs
+const skel = (s) => String(s).toLowerCase().replace(/\s+(i|ii|iii|iv|v|vi|vii|viii|ix|x|cont\.?)\b/g, ' ').replace(/[-‌\s](y?e|o)(?=[-‌\s])/g, ' ')
+  .replace(/sh/g, 'ş').replace(/ch/g, 'ç').replace(/kh/g, 'h').replace(/gh/g, 'q').replace(/zh/g, 'j').replace(/x/g, 'h').replace(/[kg]/g, 'q').replace(/ğ/g, 'q').replace(/j/g, 'c')
+  .replace(/[^a-zəıüöşçğ]/g, '').replace(/[aeiouəıüöyw]/g, '').replace(/(.)\1+/g, '$1');
+// the skeleton word by word («|mnd|hsr|»); a şöbə's skeleton must start and end on a word boundary of it, though it may run over one
+// (Bastenegar = Bəstə-nigar), so «Manad-e Hesar» is not «Yədi-hasar» (…d|hsr)
+const skelWords = (s) => '|' + String(s).replace(/[-‌,.;:()]/g, ' ').split(/\s+/).filter((w) => w && !/^(y?e|o)$/i.test(w)).map(skel).filter(Boolean).join('|') + '|';
+// word by word, then joined, so «Bayatı-Türk» keeps both t's (bt+trq) and meets «|bt|trq|»
+const skelJoin = (s) => skelWords(s).replace(/\|/g, '');
+const skelAt = (ts, k) => new RegExp('\\|' + [...k].map((c) => c.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('\\|?') + '\\|').test(ts);
+// a şöbə's names: «Bayatı-Qacar (Bayatı-Türk)» is both
+const secNames = (n) => [n.replace(/\s*\(.*?\)\s*/g, ' ').trim(), ...[...n.matchAll(/\((.*?)\)/g)].map((m) => m[1])].filter(Boolean);
 const mughamOf = (title) => {
   const ci = String(title).indexOf(':');
   if (ci > 0) {
@@ -234,7 +247,15 @@ const mughamOf = (title) => {
     // the dəstgah is known, so the part names any of its şöbələr, shared or not (Persian spellings: Feyli = Feili, Mowlavi = Mövləvi)
     const tl = (w) => w.replace(/y/g, 'i').replace(/ow/g, 'öv').replace(/ou/g, 'u').replace(/j/g, 'c').replace(/ğ/g, 'q');
     const tail = nameT(title.slice(ci + 1)).map(tl), d = MUG.dastgahs.find((x) => x.id === ds[0]);
-    const sec = d.sections.find((x) => { const T = nameT(x.az).map(tl); return !GENERIC_SOBE.has(T[0]) && T.every((w) => tail.some((y) => tokEqM(y, w))); });
+    const zil = /^\s*zil\b/i.test(title.slice(ci + 1));
+    let sec = d.sections.find((x) => { if (GENERIC_SOBE.has(nameT(x.az)[0]) || zil !== /^zil\b/i.test(x.az)) return false; const T = nameT(x.az).map(tl); return T.every((w) => tail.some((y) => tokEqM(y, w))); });
+    // Persian transliterations (Hejaz = Hicaz, Shekaste-ye Fars = Şikəsteyi-fars, Bayat-e Tork = Bayatı-Türk): the consonant skeletons agree;
+    // the longest şöbə whose skeleton stands in the part's wins (a skeleton under 3 letters, Üşşaq = şq, must be the whole part)
+    if (!sec) {
+      const part = title.slice(ci + 1), ts = skelWords(part);
+      sec = d.sections.flatMap((x) => secNames(x.az).map((n) => [x, skelJoin(n), n])).filter(([x, k, n]) => k.length >= 2 && !GENERIC_SOBE.has(nameT(x.az)[0]) && zil === /^zil\b/i.test(n)
+        && (k.length >= 3 ? skelAt(ts, k) : ts === `|${k}|`)).sort((p, q) => q[1].length - p[1].length)[0]?.[0];
+    }
     const k = sec ? null : keys.find((k) => k.d.id === ds[0]).ks.find((k) => k.sobe && k.t.every((w) => tail.some((x) => tokEqM(x, tl(w)))));
     return [ds[0], sec?.az ?? k?.sobe ?? null];
   }
