@@ -233,7 +233,9 @@ const skel = (s) => String(s).toLowerCase().replace(/\s+(i|ii|iii|iv|v|vi|vii|vi
   .replace(/[^a-zəıüöşçğ]/g, '').replace(/[aeiouəıüöyw]/g, '').replace(/(.)\1+/g, '$1');
 // the skeleton word by word («|mnd|hsr|»); a şöbə's skeleton must start and end on a word boundary of it, though it may run over one
 // (Bastenegar = Bəstə-nigar), so «Manad-e Hesar» is not «Yədi-hasar» (…d|hsr)
-const skelWords = (s) => '|' + String(s).replace(/[-‌,.;:()]/g, ' ').split(/\s+/).filter((w) => w && !/^(y?e|o)$/i.test(w)).map(skel).filter(Boolean).join('|') + '|';
+const skelWords = (s) => '|' + String(s).replace(/[-‌,.;:()]/g, ' ').split(/\s+/).filter((w) => w && !/^(y?e|o|cont|[ivx]+)$/i.test(w)).map(skel).filter(Boolean).join('|') + '|';
+// Persian words that are translated, not transliterated, in the şöbə names
+const FA_AZ = { kuchak: 'kiçik', kuchek: 'kiçik', kochak: 'kiçik', bozorg: 'böyük', bozorgh: 'böyük' };
 // word by word, then joined, so «Bayatı-Türk» keeps both t's (bt+trq) and meets «|bt|trq|»
 const skelJoin = (s) => skelWords(s).replace(/\|/g, '');
 const skelAt = (ts, k) => new RegExp('\\|' + [...k].map((c) => c.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('\\|?') + '\\|').test(ts);
@@ -255,6 +257,24 @@ const mughamOf = (title) => {
       const part = title.slice(ci + 1), ts = skelWords(part);
       sec = d.sections.flatMap((x) => secNames(x.az).map((n) => [x, skelJoin(n), n])).filter(([x, k, n]) => k.length >= 2 && !GENERIC_SOBE.has(nameT(x.az)[0]) && zil === /^zil\b/i.test(n)
         && (k.length >= 3 ? skelAt(ts, k) : ts === `|${k}|`)).sort((p, q) => q[1].length - p[1].length)[0]?.[0];
+    }
+    // with the dəstgah known, the sections every mugham has count where this dəstgah lists them (Çahargah's Bərdaşt, Bayatı-Şiraz's Ayaq),
+    // and «Maye» or the dəstgah's own name as the part («Homayun: Homayun») is its base section, «Mayeyi-…»
+    if (!sec) {
+      const pw = skelWords(title.slice(ci + 1)).split('|').filter(Boolean);
+      if (pw.length === 1) {
+        const own = skelJoin(d.name.az), ownAlt = [d.name.en, ...(D_ALIAS[d.id] ?? [])].map(skelJoin);
+        sec = d.sections.find((x) => skelWords(x.az).split('|').filter(Boolean).join('') === pw[0] && GENERIC_SOBE.has(nameT(x.az)[0]))
+          ?? ((pw[0] === skel('maye') || pw[0] === own || ownAlt.includes(pw[0])) ? d.sections.find((x) => /^mayeyi/i.test(x.az)) : undefined);
+      }
+    }
+    // translated names: Persian words put into Azerbaijani (kuchak = kiçik, bozorg = böyük), in any order (Persian puts the adjective last:
+    // «Masnavi-ye Kuchak» = «Kiçik məsnəvi»); or the part is the distinctive last word of one şöbə only («Mokhalef» = Manənd-Müxalif)
+    if (!sec) {
+      const part = title.slice(ci + 1).replace(/\b[a-zəıüöşçğ]+\b/gi, (w) => FA_AZ[w.toLowerCase()] ?? w), words = skelWords(part).split('|').filter(Boolean);
+      const cands = d.sections.filter((x) => !GENERIC_SOBE.has(nameT(x.az)[0]) && zil === /^zil\b/i.test(x.az));
+      sec = cands.find((x) => { const ws = skelWords(x.az).split('|').filter(Boolean); return ws.length > 1 && ws.every((w) => w.length >= 2 && words.includes(w)) && words.length <= ws.length + 1; });
+      if (!sec && words.length === 1 && words[0].length >= 4) { const hit = cands.filter((x) => skelWords(x.az).split('|').filter(Boolean).at(-1) === words[0]); if (hit.length === 1) sec = hit[0]; }
     }
     const k = sec ? null : keys.find((k) => k.d.id === ds[0]).ks.find((k) => k.sobe && k.t.every((w) => tail.some((x) => tokEqM(x, tl(w)))));
     return [ds[0], sec?.az ?? k?.sobe ?? null];
