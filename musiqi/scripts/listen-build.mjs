@@ -234,6 +234,8 @@ const skel = (s) => String(s).toLowerCase().replace(/\s+(i|ii|iii|iv|v|vi|vii|vi
 // the skeleton word by word («|mnd|hsr|»); a şöbə's skeleton must start and end on a word boundary of it, though it may run over one
 // (Bastenegar = Bəstə-nigar), so «Manad-e Hesar» is not «Yədi-hasar» (…d|hsr)
 const skelWords = (s) => '|' + String(s).replace(/[-‌,.;:()]/g, ' ').split(/\s+/).filter((w) => w && !/^(y?e|o|cont|[ivx]+)$/i.test(w)).map(skel).filter(Boolean).join('|') + '|';
+// Malik Mansurov's «Mobarqa» is the şöbə Mugham data spells Mürəbbiqə (letters transposed, so no rule catches it)
+const SOBE_ALIAS = { Mobarqa: 'Mürəbbiqə' };
 // Persian words that are translated, not transliterated, in the şöbə names
 const FA_AZ = { kuchak: 'kiçik', kuchek: 'kiçik', kochak: 'kiçik', bozorg: 'böyük', bozorgh: 'böyük' };
 // word by word, then joined, so «Bayatı-Türk» keeps both t's (bt+trq) and meets «|bt|trq|»
@@ -250,6 +252,9 @@ const mughamOf = (title) => {
     const tl = (w) => w.replace(/y/g, 'i').replace(/ow/g, 'öv').replace(/ou/g, 'u').replace(/j/g, 'c').replace(/ğ/g, 'q');
     const tail = nameT(title.slice(ci + 1)).map(tl), d = MUG.dastgahs.find((x) => x.id === ds[0]);
     const zil = /^\s*zil\b/i.test(title.slice(ci + 1));
+    // names the catalogue spells too differently for the rules below, by hand; used only where this dəstgah lists the şöbə
+    const alias = Object.entries(SOBE_ALIAS).find(([k]) => skelWords(title.slice(ci + 1)).split('|').filter(Boolean).join('') === skelJoin(k))?.[1];
+    if (alias && d.sections.some((x) => x.az === alias)) return [ds[0], alias];
     let sec = d.sections.find((x) => { if (GENERIC_SOBE.has(nameT(x.az)[0]) || zil !== /^zil\b/i.test(x.az)) return false; const T = nameT(x.az).map(tl); return T.every((w) => tail.some((y) => tokEqM(y, w))); });
     // Persian transliterations (Hejaz = Hicaz, Shekaste-ye Fars = Şikəsteyi-fars, Bayat-e Tork = Bayatı-Türk): the consonant skeletons agree;
     // the longest şöbə whose skeleton stands in the part's wins (a skeleton under 3 letters, Üşşaq = şq, must be the whole part)
