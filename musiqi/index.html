@@ -285,6 +285,11 @@ const t = (k, ...a) => { const v = T[lang][k] ?? T.az[k]; return typeof v === 'f
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
 const X = (s) => typeof s !== 'string' ? s : s.replace(/^~a\//, 'https://audio-ssl.itunes.apple.com/itunes-assets/').replace(/^~i(\d)\//, 'https://is$1-ssl.mzstatic.com/image/thumb/').replace(/^~m\//, 'https://music.apple.com/').replace(/^~u\//, 'https://upload.wikimedia.org/wikipedia/commons/').replace(/^~c\//, 'https://commons.wikimedia.org/wiki/');
 const fold = (s) => String(s ?? '').toLowerCase().replace(/ı/g, 'i').replace(/ə/g, 'e').normalize('NFD').replace(/[̀-ͯ]/g, '');
+// search tolerant of spelling: Cyrillic to Latin, vowels dropped, b/p, d/t, k/q/g, c/j/ç, x/h one each («alekperzade» finds Ələkbərzadə,
+// «gambarov» Qəmbərov); used for queries of 4 letters or more, beside the plain match
+const CYR = { а: 'a', б: 'b', в: 'v', г: 'g', д: 'd', е: 'e', ё: 'e', ж: 'j', з: 'z', и: 'i', й: 'i', к: 'k', л: 'l', м: 'm', н: 'n', о: 'o', п: 'p', р: 'r', с: 's', т: 't', у: 'u', ф: 'f', х: 'h', ц: 's', ч: 'ç', ш: 'ş', щ: 'ş', ъ: '', ы: 'i', ь: '', э: 'e', ю: 'u', я: 'a' };
+const loose = (s) => fold(String(s ?? '').toLowerCase().replace(/[а-яё]/g, (c) => CYR[c] ?? c)).replace(/sh/g, 'ş').replace(/ch/g, 'ç').replace(/kh|gh/g, 'h')
+  .replace(/[^a-zşçğ]/g, '').replace(/[aeiouyw]/g, '').replace(/p/g, 'b').replace(/t/g, 'd').replace(/[kgğ]/g, 'q').replace(/[jç]/g, 'c').replace(/x/g, 'h').replace(/[sş]/g, 's').replace(/(.)\1+/g, '$1');
 const fmt = (s) => { s = Math.max(0, Math.round(s || 0)); const h = Math.floor(s / 3600), m = Math.floor(s / 60) % 60, ss = String(s % 60).padStart(2, '0'); return h ? `${h}:${String(m).padStart(2, '0')}:${ss}` : `${m}:${ss}`; };
 const I = {
   play: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>',
@@ -572,7 +577,8 @@ const views = {
 const hits = (q) => {
   const f = fold(q).trim();
   if (!f) return views.browse().replace(/^<div class="pad">/, '<div>');
-  const m = (s) => fold(s).includes(f);
+  const lq = f.replace(/\s+/g, '').length >= 4 ? loose(q) : '';
+  const m = (s) => fold(s).includes(f) || (lq.length >= 3 && loose(s).includes(lq));
   const A = D.artists.filter((a) => [a.az, a.ru, a.en].some(m));
   const W = D.works.filter((w) => [w.az, w.ru, w.en].some(m));
   const TR = []; for (const a of D.artists) for (const x of a.t) if (m(trTitle(x)) && TR.length < 30) TR.push({ x, a });
