@@ -694,54 +694,6 @@
    }
   },
   {
-   "id": "bibiheybat-quyular-1914",
-   "c": "xerite",
-   "src": "loc/bibiheybat-wells",
-   "pages": "all",
-   "az": "Bibiheybət: əsas quyuların kəsikləri, istismar horizontları ilə (D. V. Qolubyatnikov, F–G vərəqləri)",
-   "ru": "Биби-Эйбат. Разрезы руководящих скважин с показанием эксплоатационных горизонтов (сост. Д. В. Голубятников, листы F–G)",
-   "en": "Bibi-Heybat: sections of the key wells, with their producing horizons (D. V. Golubyatnikov, sheets F–G)",
-   "note": {
-    "az": "«Abşeron yarımadasının ətraflı geoloji xəritəsi»nin Bibiheybət buraxılışından (Geologiya Komitəsi, 1914): doqquz quyunun (I–IX) lay-lay kəsiyi. Xəritələri «Bakı necə böyüdü» səhifəsindədir.",
-    "ru": "Из выпуска «Биби-Эйбат» «Детальной геологической карты Апшеронского полуострова» (Геологический комитет, 1914): пласт за пластом девяти скважин (I–IX). Карты выпуска — на странице «Как рос Баку».",
-    "en": "From the Bibi-Heybat issue of the «Detailed geological map of the Absheron peninsula» (Geological Committee, 1914): nine wells (I–IX), stratum by stratum. The issue's maps are on the «How Baku grew» page."
-   },
-   "date": "1914",
-   "place": {
-    "az": "Sankt-Peterburq",
-    "ru": "Санкт-Петербург",
-    "en": "St Petersburg"
-   },
-   "lang": "ru",
-   "holder": "loc",
-   "cipher": "G7142.A6C5 s4 .G6",
-   "url": "https://www.loc.gov/resource/g7142am.gct00388/"
-  },
-  {
-   "id": "bibiheybat-kesikler-1914",
-   "c": "xerite",
-   "src": "loc/bibiheybat-sections",
-   "pages": "all",
-   "az": "Bibiheybət: geoloji kəsiklər (D. V. Qolubyatnikov, H–I vərəqləri)",
-   "ru": "Биби-Эйбат. Геологические разрезы (сост. Д. В. Голубятников, листы H–I)",
-   "en": "Bibi-Heybat: geological cross-sections (D. V. Golubyatnikov, sheets H–I)",
-   "note": {
-    "az": "Eyni buraxılışdan: Bibiheybət antiklinalının eninə kəsikləri, layların tağı quyularla birlikdə.",
-    "ru": "Из того же выпуска: поперечные разрезы Биби-Эйбатской антиклинали, свод пластов вместе со скважинами.",
-    "en": "From the same issue: cross-sections through the Bibi-Heybat anticline, the arch of the strata with the wells."
-   },
-   "date": "1914",
-   "place": {
-    "az": "Sankt-Peterburq",
-    "ru": "Санкт-Петербург",
-    "en": "St Petersburg"
-   },
-   "lang": "ru",
-   "holder": "loc",
-   "cipher": "G7142.A6C5 s4 .G6",
-   "url": "https://www.loc.gov/resource/g7142am.gct00388/"
-  },
-  {
    "id": "geo-kartlar-kavkaz",
    "c": "xerite",
    "src": "loc/geo-cards",
@@ -758,6 +710,55 @@
     "az": "Rusiya imperiyasının quberniyalarına aid əl ilə rənglənmiş kart dəstindən dörd kart: bir üzündə xəritə və gerb, o birində şəhərlər, çaylar, əhali, məşğuliyyətlər və geyim. Tarix kartlarda yoxdur; Şamaxı quberniyası yalnız 1846–1859-cu illərdə mövcud olub.",
     "ru": "Четыре карточки из раскрашенного от руки набора по губерниям Российской империи: на одной стороне карта и герб, на другой — города, реки, население, промыслы и костюм. Дата на карточках не указана; Шемахинская губерния существовала только в 1846–1859 гг.",
     "en": "Four cards from a hand-coloured set on the governorates of the Russian Empire: a map and arms on one side; towns, rivers, population, trades and dress on the other. The cards carry no date; the Shemakha governorate existed only in 1846–1859."
+   }
+  },
+  {
+   "id": "bibiheybat-1914",
+   "c": "xerite",
+   "src": "loc/bibiheybat-1914-all",
+   "pages": "all",
+   "az": "Abşeron yarımadasının ətraflı geoloji xəritəsi. Bibiheybət (D. V. Qolubyatnikov; 12 vərəq)",
+   "ru": "Детальная геологическая карта Апшеронского полуострова. Биби-Эйбат (сост. Д. В. Голубятников; 12 листов)",
+   "en": "Detailed geological map of the Absheron peninsula: Bibi-Heybat (D. V. Golubyatnikov; 12 sheets)",
+   "lang": "ru, de",
+   "note": {
+    "az": "Geologiya Komitəsinin buraxılışı (çöl işləri 1912, çapı 1914) bütöv halda: üz vərəqi və bütün yarımadanın vərəq bölgüsü, hipsometrik xəritə, geoloji xəritə (A–C, I–III hissələr), mədən planı (D–E), lay xəritəsi, əsas quyuların kəsikləri (F–G) və geoloji kəsiklər (H–I).",
+    "ru": "Выпуск Геологического комитета (съёмка 1912, издание 1914) целиком: обложка со сборным листом всего полуострова, гипсометрическая карта, геологическая карта (листы A–C, части I–III), пластовая карта промысла (D–E), пластовая карта Биби-Эйбата, разрезы руководящих скважин (F–G) и геологические разрезы (H–I).",
+    "en": "The Geological Committee's issue (surveyed 1912, published 1914) whole: the cover with the index of the peninsula's sheets, the hypsometric map, the geological map (sheets A–C, parts I–III), the field plan (D–E), the strata map, sections of the key wells (F–G) and geological cross-sections (H–I)."
+   },
+   "also": {
+    "href": "/atlas/baki/?y=bibiheybat-1912",
+    "az": "Xəritələri bugünkü Bakının üstündə",
+    "ru": "Карты поверх нынешнего Баку",
+    "en": "Its maps over today's Baku"
+   },
+   "date": "1914",
+   "place": {
+    "az": "Sankt-Peterburq",
+    "ru": "Санкт-Петербург",
+    "en": "St Petersburg"
+   },
+   "holder": "loc",
+   "cipher": "G7142.A6C5 s4 .G6",
+   "url": "https://www.loc.gov/resource/g7142am.gct00388/"
+  },
+  {
+   "id": "senaye-atlasi-1933",
+   "c": "xerite",
+   "src": "loc/industry-1933",
+   "pages": "all",
+   "az": "SSRİ-nin Avropa hissəsinin xəritələri: neft sənayesi və başqa sahələr, 1 yanvar 1933 (5 vərəq)",
+   "ru": "Карты Европейской части СССР: нефтяная промышленность и другие отрасли на 1 января 1933 г. (5 листов)",
+   "en": "Maps of the European USSR: the oil industry and other branches on 1 January 1933 (5 sheets)",
+   "date": "1933",
+   "lang": "ru",
+   "holder": "loc",
+   "cipher": "LCCN 2018693756, 2018693761, 2018693773, 2018693806, 2018693815",
+   "url": "https://www.loc.gov/item/2018693756/",
+   "note": {
+    "az": "Ağır Sənaye Xalq Komissarlığının sənayenin xəritələşdirilməsi üzrə redaksiya şurası: neft sənayesi (1:7 000 000), ümumi maşınqayırma, divar tikinti materialları, qənnadı və makaron sənayesi, fabrik-mətbəxlər.",
+    "ru": "Редакционный совет по картографированию промышленности НКТП: нефтяная промышленность (1:7 000 000), общее машиностроение, производство стеновых строительных материалов, кондитерская и макаронная промышленность, фабрики-кухни.",
+    "en": "The editorial board for mapping industry of the People's Commissariat of Heavy Industry: the oil industry (1:7,000,000), general machine-building, wall building materials, the confectionery and macaroni industry, factory-kitchens."
    }
   }
  ]
