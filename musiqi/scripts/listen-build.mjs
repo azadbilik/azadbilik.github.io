@@ -18,6 +18,7 @@ const MUG = await J('../data/mugham.json');
 const AMUG = await J('../data/.cache/apple-mugham.json', { byArtist: {}, search: [] });
 const MUS = await J('../data/musicians.json'), COMP = await J('../bestekarlar/data/composers.json'), JAZZ = await J('../caz/data/jazz.json');
 const EST = await J('../estrada/data/estrada.raw.json'), LIN = await J('../silsile/data/lineage.json');
+const INS = await J('../data/instrumentalists.json'); // tar and kamança players by instrument (scripts/instrumentalists.mjs)
 const PD = [...await J('../data/recordings.json'), ...await J('../bestekarlar/data/recordings.json'), ...await J('../estrada/data/recordings.json')];
 
 // Album artwork by collection id, from every cached iTunes answer
@@ -47,6 +48,7 @@ LIN.people.forEach((p) => put({ ...p, ru: ruName(p.ru) }));
 COMP.people.forEach((p) => put({ ...p, ru: ruName(p.ru) }, 'composer'));
 JAZZ.people.forEach((p) => put(p, 'jazz'));
 EST.people.forEach((p) => put(p, p.kind === 'composer' ? 'songwriter' : p.kind === 'ensemble' ? 'estrada' : 'estrada'));
+INS.forEach((p) => put(p));
 for (const r of PD) if (r.performer?.qid) put(r.performer);
 
 // Teachers from abroad on the composers' network (Shostakovich taught Garayev…) are not Azerbaijani music: not in the catalogue
@@ -63,7 +65,7 @@ const genresOf = (o) => {
   if (o.roles.has('singer') || o.roles.has('estrada') || o.roles.has('songwriter')) g.add('estrada');
   if (o.roles.has('composer')) g.add('classic');
   if (o.roles.has('khanende')) g.add('mugham');
-  if (o.roles.has('tar')) g.add('instr');
+  if (o.roles.has('tar') || o.roles.has('kamancha')) g.add('instr');
   if (o.roles.has('ashik')) g.add('ashiq');
   return [...g];
 };
@@ -125,7 +127,8 @@ const OWN = { 'UChmn_-dt0yEykjiZTMTnYjA': 'Q117750849', 'UCtcZLsPgLJNS91fH_pQXym
 // channels that are a namesake's, not this musician's: «Səxavət Məmmədov - Topic» carries the xanəndə (1953–1991), not the tar player (b. 1993, «Sakhavat Mammadov» on Apple)
 const NOT_CH = { Q140127954: ['UCYi9_7Pem4-Xq9zdWPvAg3g'], Q12846316: ['UCpuRoVWWbUaZHHsAPuqX71g'] }; // …and the other way round: the tar player's verified channel is not the singer's
 // videos left out by hand: a pickup sound test on an own channel; two whose subject could not be confirmed (Azərbaycanfilm's «Bülbül (1968)», İctimai Radio's «Tanış olun - Mirzə Muxtar»)
-const SKIP_V = new Set(['PLuC4sZwZog', '8IcRwDE0zRM', 'uRxSZSbQIRc']);
+// …and news clips that are not music (Ceyran Haşımova keeping to the quarantine, Faiq Sadıqov's obituary), and İctimai Radio's «Tanış olun - Əhsən Dadaşov» like the other two
+const SKIP_V = new Set(['PLuC4sZwZog', '8IcRwDE0zRM', 'uRxSZSbQIRc', 'ksrLWU2tv40', '_ytNsG9Lofc', 'qzxc7_mZCzc']);
 const official = (v, o) => (CHANNELS[v.cid] ?? null) || (/ - Topic$/.test(v.ch) ? v.ch : null)
   || (v.badges.includes('BADGE_STYLE_TYPE_VERIFIED_ARTIST') && o && [o.az, o.ru && ruName(o.ru), o.en].filter(Boolean).some((n) => nameFits(v.ch.replace(/\s+(official|rəsmi)$/i, ''), n)) ? v.ch : null);
 // Namesakes: Bülbül is not his son Polad Bülbüloğlu, nor the song «Bülbül» (Mələkxanım Əyyubova on «Nanəli»); Səttar is not the painter Səttar Bəhlulzadə; Müslüm Maqomayev the composer (1885–1937) is not his grandson the singer, so only his operas

@@ -47,12 +47,16 @@ for (const p of EST.people) if (!people.has(p.qid)) people.set(p.qid, { q: p.qid
 const MUS = await J('../data/musicians.json'), XAN = new Set(), ASH = new Set();
 for (const p of MUS) if (p.roles?.includes('ashik') && /^Q\d+$/.test(p.qid) && p.az && (p.died ?? 2026) >= 1930) { ASH.add(p.qid); if (!people.has(p.qid)) people.set(p.qid, { q: p.qid, az: p.az.replace(/\s*\(.*?\)/g, ''), ru: p.ru, en: p.en }); }
 for (const p of MUS) if (p.roles?.includes('khanende') && /^Q\d+$/.test(p.qid)) { XAN.add(p.qid); if (!people.has(p.qid)) people.set(p.qid, { q: p.qid, az: p.az?.replace(/\s*\(.*?\)/g, ''), ru: p.ru, en: p.en }); }
+// every tar and kamança player (musicians list and data/instrumentalists.json; added 2026-11-28), also searched as «… tar» / «… kamança»
+const INS = await J('../data/instrumentalists.json'), PLAY = new Map();
+for (const p of [...MUS, ...INS]) for (const r of p.roles ?? []) if ((r === 'tar' || r === 'kamancha') && /^Q\d+$/.test(p.qid) && p.az) { PLAY.set(p.qid, r === 'tar' ? 'tar' : 'kamança'); if (!people.has(p.qid)) people.set(p.qid, { q: p.qid, az: p.az.replace(/\s*\(.*?\)/g, ''), ru: p.ru, en: p.en }); }
 const staged = new Set(COMP.works.flatMap((w) => w.composers));
 for (const p of COMP.people) if (staged.has(p.qid) && p.az && !people.has(p.qid) && (p.died ?? 2026) > 1920) people.set(p.qid, { q: p.qid, az: p.az, ru: p.ru, en: p.en });
 for (const p of people.values()) {
   const main = p.az || p.en || ruShort(p.ru); if (main) qs.set(main, { kind: 'a', key: p.q });
   const ru = ruShort(p.ru); if (ru && ru !== p.az) qs.set(ru, { kind: 'a', key: p.q });
   if (XAN.has(p.q) && p.az) qs.set(`${p.az} xanəndə`, { kind: 'a', key: p.q });
+  if (PLAY.has(p.q) && p.az) qs.set(`${p.az.replace(/\s*\(.*?\)/g, '')} ${PLAY.get(p.q)}`, { kind: 'a', key: p.q });
   if (ASH.has(p.q) && p.az) qs.set(/aşıq/i.test(p.az) ? `${p.az} saz` : `Aşıq ${p.az}`, { kind: 'a', key: p.q });
 }
 // more precise searches where the name alone finds namesakes or nothing official (by hand)

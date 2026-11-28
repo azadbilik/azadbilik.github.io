@@ -1,0 +1,729 @@
+[
+ {
+  "qid": "Q16370169",
+  "az": "Mirzə Mansur Mansurov",
+  "en": "Mirza Mansur bey Mansurov",
+  "roles": [
+   "tar"
+  ],
+  "born": 1887,
+  "died": 1967,
+  "place": {
+   "id": "Q9248",
+   "az": "Bakı",
+   "ru": "Баку",
+   "en": "Baku"
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Mirza%20Mansur%20Mansurov.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/Mirz%C9%99_Mansur_Mansurov"
+ },
+ {
+  "qid": "Q4695282",
+  "az": "Əhməd Bakıxanov",
+  "ru": "Бакиханов, Ахмед Мамедрза оглы",
+  "en": "Ahmad Bakikhanov",
+  "roles": [
+   "tar"
+  ],
+  "born": 1892,
+  "died": 1973,
+  "place": {
+   "id": "Q9248",
+   "az": "Bakı",
+   "ru": "Баку",
+   "en": "Baku"
+  },
+  "wiki": "https://az.wikipedia.org/wiki/%C6%8Fhm%C9%99d_Bak%C4%B1xanov"
+ },
+ {
+  "qid": "Q12850077",
+  "az": "Əliağa Quliyev",
+  "ru": "АлиАга Кулиев",
+  "en": "Aliaga Guliyev",
+  "roles": [
+   "tar"
+  ],
+  "born": 1917,
+  "died": 1998,
+  "place": {
+   "id": "Q9248",
+   "az": "Bakı",
+   "ru": "Баку",
+   "en": "Baku"
+  },
+  "wiki": "https://az.wikipedia.org/wiki/%C6%8Flia%C4%9Fa_Quliyev"
+ },
+ {
+  "qid": "Q16368427",
+  "az": "Hacı Məmmədov",
+  "ru": "Мамедов, Гаджи Мамед оглы",
+  "en": "Haji Mammadov",
+  "roles": [
+   "tar"
+  ],
+  "born": 1920,
+  "died": 1981,
+  "place": {
+   "id": "Q388224",
+   "az": "Şamaxı",
+   "ru": "Шемахы",
+   "en": "Shamakhi"
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Haji%20Mammadov.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/Hac%C4%B1_M%C9%99mm%C9%99dov_(tarz%C9%99n)"
+ },
+ {
+  "qid": "Q131581615",
+  "az": "Şövkət Babayeva",
+  "en": "Shovkat Babayeva",
+  "roles": [
+   "tar"
+  ],
+  "born": 1924,
+  "died": 1993,
+  "place": {
+   "id": "Q9248",
+   "az": "Bakı",
+   "ru": "Баку",
+   "en": "Baku"
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Shovket%20Babayeva.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/%C5%9E%C3%B6vk%C9%99t_Babayeva"
+ },
+ {
+  "qid": "Q111048998",
+  "az": "Əlikram Hüseynov",
+  "ru": "Гусейнов, Аликрам Гасан оглы",
+  "roles": [
+   "tar"
+  ],
+  "born": 1926,
+  "died": 2006,
+  "place": {
+   "id": "Q9248",
+   "az": "Bakı",
+   "ru": "Баку",
+   "en": "Baku"
+  },
+  "wiki": "https://az.wikipedia.org/wiki/%C6%8Flikram_H%C3%BCseynov"
+ },
+ {
+  "qid": "Q16368908",
+  "az": "Həbib Bayramov",
+  "ru": "Габиб Байрамов",
+  "en": "Habib Bayramov",
+  "roles": [
+   "tar"
+  ],
+  "born": 1926,
+  "died": 1994,
+  "place": {
+   "id": "Q9248",
+   "az": "Bakı",
+   "ru": "Баку",
+   "en": "Baku"
+  },
+  "wiki": "https://az.wikipedia.org/wiki/H%C9%99bib_Bayramov"
+ },
+ {
+  "qid": "Q4075944",
+  "az": "Tələt Bakıxanov",
+  "ru": "Бакиханов, Талат Солтан оглы",
+  "en": "Talat Bakikhanov",
+  "roles": [
+   "kamancha"
+  ],
+  "born": 1927,
+  "died": 2000,
+  "place": {
+   "id": "Q9248",
+   "az": "Bakı",
+   "ru": "Баку",
+   "en": "Baku"
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Talat%20Bakikhanov%20%28crop%29.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/T%C9%99l%C9%99t_Bak%C4%B1xanov"
+ },
+ {
+  "qid": "Q2063373",
+  "az": "Habil Əliyev",
+  "ru": "Габиль Алиев",
+  "en": "Habil Aliyev",
+  "roles": [
+   "kamancha"
+  ],
+  "born": 1927,
+  "died": 2015,
+  "place": {
+   "id": "Q1983932",
+   "az": "Ağdaş",
+   "ru": "Агдаш",
+   "en": "Agdash"
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Habil_%C6%8Fliyev"
+ },
+ {
+  "qid": "Q89415025",
+  "az": "Davud Məmmədbəyov",
+  "roles": [
+   "tar"
+  ],
+  "born": 1933,
+  "died": null,
+  "place": {
+   "id": "Q8082442",
+   "az": "Şağan",
+   "ru": "Шаган",
+   "en": "Şağan"
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Davud_M%C9%99mm%C9%99db%C9%99yov"
+ },
+ {
+  "qid": "Q12838183",
+  "az": "Ceyran Haşımova",
+  "ru": "Гашимова, Джейран Асад кызы",
+  "en": "Ceyran Haşımova",
+  "roles": [
+   "tar"
+  ],
+  "born": 1934,
+  "died": null,
+  "place": {
+   "id": "Q9248",
+   "az": "Bakı",
+   "ru": "Баку",
+   "en": "Baku"
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Ceyran_Ha%C5%9F%C4%B1mova"
+ },
+ {
+  "qid": "Q39394656",
+  "az": "Adil Bağırov",
+  "ru": "Адиль Кямиль оглы Багиров",
+  "en": "Adil Baghirov",
+  "roles": [
+   "tar"
+  ],
+  "born": 1937,
+  "died": null,
+  "place": {
+   "id": "Q9248",
+   "az": "Bakı",
+   "ru": "Баку",
+   "en": "Baku"
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Adil_Ba%C4%9F%C4%B1rov_(tarz%C9%99n)"
+ },
+ {
+  "qid": "Q61122097",
+  "az": "Oqtay Quliyev",
+  "en": "Oqtay Quliyev",
+  "roles": [
+   "tar"
+  ],
+  "born": 1938,
+  "died": null,
+  "place": {
+   "id": "Q540844",
+   "az": "Ağdam",
+   "ru": "Агдам",
+   "en": "Aghdam"
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Oqtay_Quliyev"
+ },
+ {
+  "qid": "Q16365697",
+  "az": "Bəhram Nəsibov",
+  "ru": "Насибов, Бахрам Паша оглы",
+  "en": "Bahram Nasibov",
+  "roles": [
+   "tar"
+  ],
+  "born": 1942,
+  "died": 1998,
+  "place": {
+   "id": "Q4656125",
+   "az": "Aşağı Rəfədinli",
+   "en": "Aşağı Rəfədinli"
+  },
+  "wiki": "https://az.wikipedia.org/wiki/B%C9%99hram_N%C9%99sibov"
+ },
+ {
+  "qid": "Q16375479",
+  "az": "Vamiq Məmmədəliyev",
+  "ru": "Вамиг Мамедалиев",
+  "en": "Vamig Mammadaliyev",
+  "roles": [
+   "tar"
+  ],
+  "born": 1946,
+  "died": null,
+  "place": {
+   "id": "Q4026908",
+   "az": "Kürdəxanı",
+   "ru": "Кюрдаханы",
+   "en": "Kürdəxanı"
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Elkhan%20Mansurov%20%26%20Vamig%20Mammadaliyev.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/Vamiq_M%C9%99mm%C9%99d%C9%99liyev"
+ },
+ {
+  "qid": "Q12844929",
+  "az": "Ramiz Quliyev",
+  "ru": "Кулиев, Рамиз Эйюб оглы",
+  "en": "Ramiz Guliyev",
+  "roles": [
+   "tar"
+  ],
+  "born": 1947,
+  "died": 2025,
+  "place": {
+   "id": "Q540844",
+   "az": "Ağdam",
+   "ru": "Агдам",
+   "en": "Aghdam"
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Ramiz%20Guliyev%20%282007%29.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/Ramiz_Quliyev"
+ },
+ {
+  "qid": "Q12849700",
+  "az": "Şəfiqə Eyvazova",
+  "ru": "Эйвазова, Шафига Алхас кызы",
+  "en": "Shafiga Eyvazova",
+  "roles": [
+   "kamancha"
+  ],
+  "born": 1947,
+  "died": null,
+  "place": {
+   "id": "Q9248",
+   "az": "Bakı",
+   "ru": "Баку",
+   "en": "Baku"
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Shafiga%20Eyvazova%20%28cropped%29.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/%C5%9E%C9%99fiq%C9%99_Eyvazova"
+ },
+ {
+  "qid": "Q136386897",
+  "az": "Faiq Sadıqov",
+  "roles": [
+   "tar"
+  ],
+  "born": 1948,
+  "died": 2024,
+  "place": {
+   "id": "Q131290",
+   "az": "Gəncə",
+   "ru": "Гянджа",
+   "en": "Ganja"
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Faiq_Sad%C4%B1qov_(dirijor)"
+ },
+ {
+  "qid": "Q55203795",
+  "az": "Həmid Vəkilov",
+  "ru": "Хамид Векилов",
+  "en": "Khamid Vakilov",
+  "roles": [
+   "tar"
+  ],
+  "born": 1949,
+  "died": 2020,
+  "place": {
+   "id": "Q9248",
+   "az": "Bakı",
+   "ru": "Баку",
+   "en": "Baku"
+  },
+  "wiki": "https://az.wikipedia.org/wiki/H%C9%99mid_V%C9%99kilov"
+ },
+ {
+  "qid": "Q39382400",
+  "az": "Firuz Əliyev",
+  "ru": "Фируз Али Аббас оглы Алиев",
+  "en": "Firuz Aliyev",
+  "roles": [
+   "tar"
+  ],
+  "born": 1950,
+  "died": null,
+  "place": {
+   "id": "Q2671322",
+   "az": "Buzovna",
+   "ru": "Бузовна",
+   "en": "Buzovna"
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Firuz_%C6%8Fliyev"
+ },
+ {
+  "qid": "Q16368005",
+  "az": "Fəxrəddin Dadaşov",
+  "ru": "Дадашев, Фахраддин Алисаиб оглы",
+  "en": "Fakhraddin Dadashov",
+  "roles": [
+   "kamancha"
+  ],
+  "born": 1950,
+  "died": null,
+  "place": {
+   "id": "Q9248",
+   "az": "Bakı",
+   "ru": "Баку",
+   "en": "Baku"
+  },
+  "wiki": "https://az.wikipedia.org/wiki/F%C9%99xr%C9%99ddin_Dada%C5%9Fov"
+ },
+ {
+  "qid": "Q16376664",
+  "az": "Zamiq Əliyev",
+  "ru": "Замик Баларза оглы Алиев",
+  "en": "Zamiq Əliyev",
+  "roles": [
+   "tar"
+  ],
+  "born": 1950,
+  "died": null,
+  "place": {
+   "id": "Q9248",
+   "az": "Bakı",
+   "ru": "Баку",
+   "en": "Baku"
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Zamiq_%C6%8Fliyev"
+ },
+ {
+  "qid": "Q12849863",
+  "az": "Ədalət Vəzirov",
+  "ru": "Везиров, Адалят Сафарали оглы",
+  "en": "Adalat Vazirov",
+  "roles": [
+   "kamancha"
+  ],
+  "born": 1951,
+  "died": 2002,
+  "place": {
+   "id": "Q5285146",
+   "az": "Divəzər",
+   "ru": "Дизевер",
+   "en": "Dizəvər"
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/AdaletVezirov.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/%C6%8Fdal%C9%99t_V%C9%99zirov"
+ },
+ {
+  "qid": "Q12842389",
+  "az": "Möhlət Müslümov",
+  "ru": "Муслимов, Мохлат Ханали оглы",
+  "en": "Mohlat Muslumov",
+  "roles": [
+   "tar"
+  ],
+  "born": 1954,
+  "died": null,
+  "wiki": "https://az.wikipedia.org/wiki/M%C3%B6hl%C9%99t_M%C3%BCsl%C3%BCmov"
+ },
+ {
+  "qid": "Q23683306",
+  "az": "Ağacəbrayıl Abasəliyev",
+  "ru": "Абасалиев, Ага Джебраил Ага Салех оглы",
+  "roles": [
+   "kamancha"
+  ],
+  "born": 1955,
+  "died": null,
+  "place": {
+   "id": "Q9248",
+   "az": "Bakı",
+   "ru": "Баку",
+   "en": "Baku"
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Original-8A07877E-6EB9-43A3-A83A-DC5E3384B56B.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/A%C4%9Fac%C9%99bray%C4%B1l_Abas%C9%99liyev"
+ },
+ {
+  "qid": "Q16366916",
+  "az": "Elxan Mansurov",
+  "en": "Elkhan Mansurov",
+  "roles": [
+   "tar"
+  ],
+  "born": 1955,
+  "died": null,
+  "place": {
+   "id": "Q9248",
+   "az": "Bakı",
+   "ru": "Баку",
+   "en": "Baku"
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Elkhan%20Mansurov.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/Elxan_Mansurov"
+ },
+ {
+  "qid": "Q60693682",
+  "az": "Gülağa Zeynalov",
+  "en": "Gulaga Zeynalov",
+  "roles": [
+   "tar"
+  ],
+  "born": 1956,
+  "died": 2015,
+  "place": {
+   "id": "Q158903",
+   "az": "Şuşa",
+   "ru": "Шуша",
+   "en": "Shusha"
+  },
+  "wiki": "https://az.wikipedia.org/wiki/G%C3%BCla%C4%9Fa_Zeynalov"
+ },
+ {
+  "qid": "Q16418246",
+  "az": "Munis Şərifov",
+  "ru": "Шарифов, Мунис Мамед Исмаил оглы",
+  "en": "Munis Şərifov",
+  "roles": [
+   "kamancha"
+  ],
+  "born": 1962,
+  "died": null,
+  "place": {
+   "id": "Q4542649",
+   "az": "Ərəbocağı",
+   "ru": "Арабоджагы",
+   "en": "Ərəbocağı"
+  },
+  "wiki": "https://az.wikipedia.org/wiki/Munis_%C5%9E%C9%99rifov"
+ },
+ {
+  "qid": "Q12839179",
+  "az": "Elçin Həşimov",
+  "ru": "Гашимов, Эльчин Лезги оглы",
+  "en": "Elçin Həşimov",
+  "roles": [
+   "tar"
+  ],
+  "born": 1973,
+  "died": null,
+  "place": {
+   "id": "Q9248",
+   "az": "Bakı",
+   "ru": "Баку",
+   "en": "Baku"
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Elchin%20Hashimov.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/El%C3%A7in_H%C9%99%C5%9Fimov"
+ },
+ {
+  "qid": "Q56881139",
+  "az": "İmamyar Həsənov",
+  "ru": "Гасанов, Имамъяр Фикрет оглы",
+  "en": "Imamyar Hasanov",
+  "roles": [
+   "kamancha"
+  ],
+  "born": 1975,
+  "died": null,
+  "place": {
+   "id": "Q1026043",
+   "az": "Mərdəkan",
+   "ru": "Мардакян",
+   "en": "Mardakan"
+  },
+  "wiki": "https://az.wikipedia.org/wiki/%C4%B0mamyar_H%C9%99s%C9%99nov"
+ },
+ {
+  "qid": "Q106179729",
+  "az": "Sahib Paşazadə",
+  "en": "Sahib Pashazade",
+  "roles": [
+   "tar"
+  ],
+  "born": 1980,
+  "died": null,
+  "place": {
+   "id": "Q9248",
+   "az": "Bakı",
+   "ru": "Баку",
+   "en": "Baku"
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/%D0%A1%D0%B0%D1%85%D0%B8%D0%B1%20%D0%9F%D0%B0%D1%88%D0%B0%D0%B7%D0%B0%D0%B4%D0%B5.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/Sahib_Pa%C5%9Fazad%C9%99"
+ },
+ {
+  "qid": "Q117750849",
+  "az": "Arslan Növrəsli",
+  "roles": [
+   "tar"
+  ],
+  "born": 1981,
+  "died": null,
+  "place": {
+   "id": "Q9248",
+   "az": "Bakı",
+   "ru": "Баку",
+   "en": "Baku"
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Arslan%20Novrasli.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/Arslan_N%C3%B6vr%C9%99sli"
+ },
+ {
+  "qid": "Q23685220",
+  "az": "Toğrul Əsədullayev",
+  "en": "Toğrul Əsədullayev",
+  "roles": [
+   "kamancha"
+  ],
+  "born": 1982,
+  "died": null,
+  "place": {
+   "id": "Q9248",
+   "az": "Bakı",
+   "ru": "Баку",
+   "en": "Baku"
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Togrul%20Asadullayev.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/To%C4%9Frul_%C6%8Fs%C9%99dullayev"
+ },
+ {
+  "qid": "Q122223115",
+  "az": "Rövşən Qurbanov",
+  "ru": "Rövşən Qurbanov",
+  "en": "Rövşən Qurbanov",
+  "roles": [
+   "tar"
+  ],
+  "born": 1982,
+  "died": null,
+  "place": {
+   "id": "Q9248",
+   "az": "Bakı",
+   "ru": "Баку",
+   "en": "Baku"
+  },
+  "wiki": "https://az.wikipedia.org/wiki/R%C3%B6v%C5%9F%C9%99n_Qurbanov"
+ },
+ {
+  "qid": "Q103357305",
+  "az": "Humay Qədimova",
+  "en": "Humay Qədimova",
+  "roles": [
+   "tar"
+  ],
+  "born": 1986,
+  "died": null,
+  "place": {
+   "id": "Q9248",
+   "az": "Bakı",
+   "ru": "Баку",
+   "en": "Baku"
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Humay%20Q%C9%99dimova.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/Humay_Q%C9%99dimova"
+ },
+ {
+  "qid": "Q113331795",
+  "az": "Şəhriyar Musayev",
+  "en": "Shahriyar Musayev",
+  "roles": [
+   "kamancha"
+  ],
+  "born": 1988,
+  "died": null,
+  "place": {
+   "id": "Q179833",
+   "az": "Sumqayıt",
+   "ru": "Сумгаит",
+   "en": "Sumgait"
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Shahriyar%20Musayev.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/%C5%9E%C9%99hriyar_Musayev"
+ },
+ {
+  "qid": "Q108740587",
+  "az": "Anar Yusub",
+  "roles": [
+   "kamancha"
+  ],
+  "born": 1989,
+  "died": null,
+  "place": {
+   "id": "Q9248",
+   "az": "Bakı",
+   "ru": "Баку",
+   "en": "Baku"
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Anar%20Yusub.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/Anar_Yusub"
+ },
+ {
+  "qid": "Q106674895",
+  "az": "Pərviz Fərhadov",
+  "en": "Parviz Farhadov",
+  "roles": [
+   "kamancha"
+  ],
+  "born": 1989,
+  "died": null,
+  "place": {
+   "id": "Q4594050",
+   "az": "Bala Bəhmənli",
+   "en": "Bala Bəhmənli"
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Farhadov%20Parviz.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/P%C9%99rviz_F%C9%99rhadov"
+ },
+ {
+  "qid": "Q110105823",
+  "az": "Şəhriyar İmanov",
+  "en": "Shahriyar Imanov",
+  "roles": [
+   "tar"
+  ],
+  "born": 1989,
+  "died": null,
+  "place": {
+   "id": "Q9248",
+   "az": "Bakı",
+   "ru": "Баку",
+   "en": "Baku"
+  },
+  "wiki": "https://az.wikipedia.org/wiki/%C5%9E%C9%99hriyar_%C4%B0manov"
+ },
+ {
+  "qid": "Q140127954",
+  "az": "Səxavət Məmmədov",
+  "en": "Sakhavat Mammadov",
+  "roles": [
+   "tar"
+  ],
+  "born": 1993,
+  "died": null,
+  "place": {
+   "id": "Q9248",
+   "az": "Bakı",
+   "ru": "Баку",
+   "en": "Baku"
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Sakhavat%20mammadov.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/S%C9%99xav%C9%99t_M%C9%99mm%C9%99dov_(tarz%C9%99n)"
+ },
+ {
+  "qid": "Q116598267",
+  "az": "Rəhman Abdullayev (tarzən)",
+  "en": "Rəhman Abdullayev",
+  "roles": [
+   "tar"
+  ],
+  "born": 1998,
+  "died": null,
+  "place": {
+   "id": "Q9248",
+   "az": "Bakı",
+   "ru": "Баку",
+   "en": "Baku"
+  },
+  "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Rehman%20Abdullayev%20-%202022.jpg?width=240",
+  "wiki": "https://az.wikipedia.org/wiki/R%C9%99hman_Abdullayev"
+ }
+]

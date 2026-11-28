@@ -16,6 +16,7 @@ const people = new Map();
 const add = (p) => { if (!/^Q\d+$/.test(p.qid)) return; const o = people.get(p.qid) ?? { qid: p.qid, names: new Set(), roles: new Set() }; for (const k of ['az', 'ru', 'en']) if (p[k]) o.names.add(p[k]); o.born ??= p.born; o.died ??= p.died; people.set(p.qid, o); };
 (await J('../data/musicians.json')).forEach(add); (await J('../bestekarlar/data/composers.json')).people.forEach((p) => { add(p); people.get(p.qid)?.roles.add('composer'); });
 (await J('../caz/data/jazz.json')).people.forEach((p) => { add(p); people.get(p.qid)?.roles.add('jazz'); }); (await J('../estrada/data/estrada.raw.json')).people.forEach((p) => { add(p); people.get(p.qid)?.roles.add(p.kind); });
+(await J('../data/instrumentalists.json')).forEach(add);
 const WD = await J('../data/.cache/wd-music.json');
 for (const [q, w] of Object.entries(WD)) for (const n of w.names) people.get(q)?.names.add(n);
 
@@ -29,9 +30,8 @@ const DROP = {
   Q16378524: 'Ədalət Nəsibov: matched «Aşıq Adalet», not the same name', Q4216454: 'Qaryağdıoğlu: only «Music of Azerbaijan I: Selection of Iran», origin of the artist unclear',
   Q1189603: 'one single titled in Persian, doubtful', Q134286966: 'only a feature credit', Q107926164: 'Bengt Johansson: namesake (Swedish pop)', Q12838981: 'Ehtiram Hüseynov: breakbeat namesake',
   Q25543577: 'Səbuhi Cəfərov: spoken-word namesake',
-  Q16370169: 'Mirza Mansur Mansurov (d. 1967): only two 2024 singles, no historical release and no title naming him',
   Q1959615: 'Ilyinsky (d. 1920): no album or title carries his name, only others\' performances of one piece',
-  Q12838356: 'only a feature credit', Q19715058: 'only a feature credit', Q4223720: 'Aleksandr Klimov (conductor, 1898–1974): the Apple artist is a pop singer of the 2020s',
+  Q12838356: 'only a feature credit', Q116598267: 'Rəhman Abdullayev (tar): only a feature credit on an electronic single', Q19715058: 'only a feature credit', Q4223720: 'Aleksandr Klimov (conductor, 1898–1974): the Apple artist is a pop singer of the 2020s',
 };
 // Apple ids checked by hand (the name search missed them): Niyazi's artist page is «Niyazi Hajibeyov»; Behbudov is «Рашид Бейбутов» on the ru storefront;
 // Səxavət Məmmədov the xanəndə (1953–1991) is «Səxavət Məmmədov» (Azad bir quşdum, Zabul Segah, Ay Çiçək), not «Sakhavat Mammadov», the tar player born 1993 (Q140127954)
@@ -41,9 +41,13 @@ const FORCE = { Q714526: 838358820, Q714776: 1660753163, Q12846316: 1708058861,
   // on Apple only on the anthology «Great Singers of the Republic of Azerbaijan»: Yaqub Məmmədov (Mansuriyyə, Rast), Zülfü Adıgözəlov (Üşşaq); a hand-checked id is kept however thin
   Q16376261: 924170197, Q4057575: 924170241,
   // aşıqlar on Ocora's «Azerbaïdjan, Anthologie des Ashiq» (2008) and in ORED's archive: Fəzail Miskinli, Mahmud Məmmədov, Gülarə Azaflı, Əli Quliyev, Altay Məmmədov
-  Q16368043: 294748281, Q12837122: 294748233, Q16368115: 294748242, Q12850037: 294748238, Q61122556: 1574511163 };
+  Q16368043: 294748281, Q12837122: 294748233, Q16368115: 294748242, Q12850037: 294748238, Q61122556: 1574511163,
+  // tar and kamança players (2026-11-28): Habil Əliyev, Ramiz Quliyev («Dialogues with the Tar»), Elxan Mansurov, Vamiq Məmmədəliyev, Ədalət Vəzirov, İmamyar Həsənov,
+  // Toğrul Əsədullayev, Humay Qədimova, Anar Yusub; Mirzə Mansur Mansurov's two mugham singles (Mahur-hindi, Xocəstə) under his own name
+  Q2063373: 1651262088, Q12844929: 586407559, Q16366916: 1545950852, Q16375479: 1826838637, Q12849863: 1747721500, Q56881139: 272430943,
+  Q23685220: 1558261225, Q103357305: 1691682193, Q108740587: 1468355475, Q16370169: 1724095968 };
 // Apple splits some artists over several ids: other ids of the same artist, merged in (hand-checked, same name and repertoire)
-const ALSO = { Q317397: [1748748666], Q61122556: [294748247] }; // …and «Altay Mamedli» on the Ocora anthology // «Üzeyir Hacıbəyov» (az storefront) beside «Uzeyir Hajibeyov»
+const ALSO = { Q317397: [1748748666], Q61122556: [294748247], Q2063373: [4660800] }; // …«Habil Aliyev» (the 2002 album of mughams) beside «Habil Əliyev» // …and «Altay Mamedli» on the Ocora anthology // «Üzeyir Hacıbəyov» (az storefront) beside «Uzeyir Hajibeyov»
 // Notes shown with a person's previews
 const NOTES = { Q714526: { az: 'Bu fraqmentlər Niyazinin dirijorluq etdiyi yazılardır (Xaçaturyan, Qarayev), onun bəstələri deyil.', ru: 'Это записи, которыми дирижировал Ниязи (Хачатурян, Караев), а не его собственные сочинения.', en: 'These are recordings Niyazi conducted (Khachaturian, Karayev), not his own compositions.' } };
 const COUNTRIES = ['az', 'us', 'ru', 'tr']; // storefronts tried for a P2850 id
